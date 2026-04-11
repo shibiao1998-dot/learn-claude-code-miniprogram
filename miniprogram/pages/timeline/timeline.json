@@ -1,0 +1,8 @@
+{
+  "navigationBarTitleText": "学习时间线",
+  "navigationBarBackgroundColor": "#0F172A",
+  "navigationBarTextStyle": "white",
+  "backgroundColor": "#0F172A",
+  "backgroundTextStyle": "dark",
+  "usingComponents": {}
+}

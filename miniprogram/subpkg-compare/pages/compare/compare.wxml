@@ -1,0 +1,232 @@
+<!-- subpkg-compare/pages/compare/compare.wxml -->
+<scroll-view scroll-y class="page">
+
+  <!-- ══════════════════════════════════════
+       头部
+  ══════════════════════════════════════ -->
+  <view class="header">
+    <view class="header-top">
+      <view>
+        <text class="header-title">{{t.compare.title}}</text>
+        <text class="header-subtitle">{{t.compare.subtitle}}</text>
+      </view>
+      <!-- 语言切换 -->
+      <view class="locale-switcher">
+        <text class="locale-btn {{locale==='zh'?'locale-active':''}}"
+              bindtap="switchLocale" data-locale="zh">ZH</text>
+        <text class="locale-sep">|</text>
+        <text class="locale-btn {{locale==='en'?'locale-active':''}}"
+              bindtap="switchLocale" data-locale="en">EN</text>
+        <text class="locale-sep">|</text>
+        <text class="locale-btn {{locale==='ja'?'locale-active':''}}"
+              bindtap="switchLocale" data-locale="ja">JA</text>
+      </view>
+    </view>
+  </view>
+
+  <!-- ══════════════════════════════════════
+       选择器区域
+  ══════════════════════════════════════ -->
+  <view class="section selector-section">
+    <text class="section-label">{{t.compare.selector_title}}</text>
+    <text class="selector-note">{{t.compare.selector_note}}</text>
+
+    <view class="selector-row">
+      <!-- 选择器 A -->
+      <view class="selector-col">
+        <text class="selector-tag tag-a">A</text>
+        <picker mode="selector"
+                range="{{versionOptions}}"
+                range-key="label"
+                value="{{selectedAIndex}}"
+                bindchange="onSelectA">
+          <view class="picker-btn {{selectedA?'picker-btn--selected':''}}">
+            <text class="picker-text">{{selectedA || t.compare.select_a}}</text>
+            <text class="picker-arrow">▼</text>
+          </view>
+        </picker>
+      </view>
+
+      <!-- 交换按钮 -->
+      <view class="swap-btn {{(!aId||!bId)?'swap-btn--disabled':''}}" bindtap="swapAB">
+        <text class="swap-icon">⇄</text>
+      </view>
+
+      <!-- 选择器 B -->
+      <view class="selector-col">
+        <text class="selector-tag tag-b">B</text>
+        <picker mode="selector"
+                range="{{versionOptions}}"
+                range-key="label"
+                value="{{selectedBIndex}}"
+                bindchange="onSelectB">
+          <view class="picker-btn {{selectedB?'picker-btn--selected':''}}">
+            <text class="picker-text">{{selectedB || t.compare.select_b}}</text>
+            <text class="picker-arrow">▼</text>
+          </view>
+        </picker>
+      </view>
+    </view>
+  </view>
+
+  <!-- ══════════════════════════════════════
+       空状态
+  ══════════════════════════════════════ -->
+  <view wx:if="{{!compareResult}}" class="empty-state">
+    <text class="empty-icon">⚡</text>
+    <text class="empty-text">{{t.compare.empty_hint}}</text>
+  </view>
+
+  <!-- ══════════════════════════════════════
+       对比结果
+  ══════════════════════════════════════ -->
+  <block wx:else>
+
+    <!-- ── 跃迁诊断 ─────────────────────── -->
+    <view class="section">
+      <view class="progression-card">
+        <view class="progression-badge progression-badge--{{compareResult.progressionKey}}">
+          <text class="progression-label">{{compareResult.progressionLabel}}</text>
+        </view>
+
+        <!-- 三项统计 -->
+        <view class="stats-row">
+          <view class="stat-item">
+            <text class="stat-value">{{compareResult.distance}}</text>
+            <text class="stat-label">{{t.compare.chapter_distance}}</text>
+          </view>
+          <view class="stat-divider"></view>
+          <view class="stat-item">
+            <text class="stat-value">{{compareResult.sharedToolsCount}}</text>
+            <text class="stat-label">{{t.compare.shared_tools_count}}</text>
+          </view>
+          <view class="stat-divider"></view>
+          <view class="stat-item">
+            <text class="stat-value stat-value--delta">{{compareResult.locDeltaSign}}{{compareResult.locDelta}}</text>
+            <text class="stat-label">{{t.compare.loc_delta}} ({{t.compare.lines}})</text>
+          </view>
+        </view>
+      </view>
+    </view>
+
+    <!-- ── A vs B 卡片 ──────────────────── -->
+    <view class="section">
+      <view class="ab-cards">
+        <!-- 卡片 A -->
+        <view class="chapter-card" bindtap="goToChapter" data-id="{{compareResult.aId}}">
+          <view class="card-stripe" style="background:{{compareResult.aLayerColor}}"></view>
+          <view class="card-body">
+            <view class="card-header-row">
+              <text class="card-id-badge" style="color:{{compareResult.aLayerColor}};border-color:{{compareResult.aLayerColor}}">{{compareResult.aId}}</text>
+              <text class="card-layer-label" style="color:{{compareResult.aLayerColor}}">{{compareResult.aLayerLabel}}</text>
+            </view>
+            <text class="card-title">{{compareResult.aTitle}}</text>
+            <text wx:if="{{compareResult.aSubtitle}}" class="card-subtitle">{{compareResult.aSubtitle}}</text>
+            <text wx:if="{{compareResult.aCoreAddition}}" class="card-addition">{{compareResult.aCoreAddition}}</text>
+            <text wx:if="{{compareResult.aKeyInsight}}" class="card-insight">"{{compareResult.aKeyInsight}}"</text>
+            <text class="card-loc">{{compareResult.aLoc}} LOC</text>
+          </view>
+        </view>
+
+        <!-- 箭头 -->
+        <view class="arrow-divider">
+          <view class="arrow-line"></view>
+          <text class="arrow-icon {{compareResult.isReverse?'arrow-icon--reverse':''}}">→</text>
+          <view class="arrow-line"></view>
+        </view>
+
+        <!-- 卡片 B -->
+        <view class="chapter-card" bindtap="goToChapter" data-id="{{compareResult.bId}}">
+          <view class="card-stripe" style="background:{{compareResult.bLayerColor}}"></view>
+          <view class="card-body">
+            <view class="card-header-row">
+              <text class="card-id-badge" style="color:{{compareResult.bLayerColor}};border-color:{{compareResult.bLayerColor}}">{{compareResult.bId}}</text>
+              <text class="card-layer-label" style="color:{{compareResult.bLayerColor}}">{{compareResult.bLayerLabel}}</text>
+            </view>
+            <text class="card-title">{{compareResult.bTitle}}</text>
+            <text wx:if="{{compareResult.bSubtitle}}" class="card-subtitle">{{compareResult.bSubtitle}}</text>
+            <text wx:if="{{compareResult.bCoreAddition}}" class="card-addition">{{compareResult.bCoreAddition}}</text>
+            <text wx:if="{{compareResult.bKeyInsight}}" class="card-insight">"{{compareResult.bKeyInsight}}"</text>
+            <text class="card-loc">{{compareResult.bLoc}} LOC</text>
+          </view>
+        </view>
+      </view>
+    </view>
+
+    <!-- ── B 新增内容 ────────────────────── -->
+    <view wx:if="{{compareResult.hasNewContent}}" class="section">
+      <text class="section-title">{{t.compare.new_in_b}}</text>
+
+      <view wx:if="{{compareResult.newTools.length}}" class="new-group">
+        <text class="new-group-label">{{t.compare.new_tools_in_b}}</text>
+        <view class="tag-list">
+          <text wx:for="{{compareResult.newTools}}" wx:key="*this" class="tag tag--tool">{{item}}</text>
+        </view>
+      </view>
+
+      <view wx:if="{{compareResult.newClasses.length}}" class="new-group">
+        <text class="new-group-label">{{t.compare.new_classes_in_b}}</text>
+        <view class="tag-list">
+          <text wx:for="{{compareResult.newClasses}}" wx:key="*this" class="tag tag--class">{{item}}</text>
+        </view>
+      </view>
+
+      <view wx:if="{{compareResult.newFunctions.length}}" class="new-group">
+        <text class="new-group-label">{{t.compare.new_functions_in_b}}</text>
+        <view class="tag-list">
+          <text wx:for="{{compareResult.newFunctions}}" wx:key="*this" class="tag tag--func">{{item}}</text>
+        </view>
+      </view>
+    </view>
+
+    <!-- ── 工具对比三列 ──────────────────── -->
+    <view class="section">
+      <text class="section-title">{{t.compare.tool_comparison}}</text>
+      <view class="tool-grid">
+
+        <!-- 只在 A -->
+        <view class="tool-col">
+          <view class="tool-col-header tool-col-header--a">
+            <text class="tool-col-title">{{t.compare.only_in}} A</text>
+          </view>
+          <view class="tool-col-body">
+            <block wx:if="{{compareResult.onlyInA.length}}">
+              <text wx:for="{{compareResult.onlyInA}}" wx:key="*this" class="tool-chip tool-chip--old">{{item}}</text>
+            </block>
+            <text wx:else class="none-text">{{t.compare.none}}</text>
+          </view>
+        </view>
+
+        <!-- 共有 -->
+        <view class="tool-col">
+          <view class="tool-col-header tool-col-header--shared">
+            <text class="tool-col-title">{{t.compare.shared}}</text>
+          </view>
+          <view class="tool-col-body">
+            <block wx:if="{{compareResult.shared.length}}">
+              <text wx:for="{{compareResult.shared}}" wx:key="*this" class="tool-chip tool-chip--shared">{{item}}</text>
+            </block>
+            <text wx:else class="none-text">{{t.compare.none}}</text>
+          </view>
+        </view>
+
+        <!-- 只在 B -->
+        <view class="tool-col">
+          <view class="tool-col-header tool-col-header--b">
+            <text class="tool-col-title">{{t.compare.only_in}} B</text>
+          </view>
+          <view class="tool-col-body">
+            <block wx:if="{{compareResult.onlyInB.length}}">
+              <text wx:for="{{compareResult.onlyInB}}" wx:key="*this" class="tool-chip tool-chip--new">{{item}}</text>
+            </block>
+            <text wx:else class="none-text">{{t.compare.none}}</text>
+          </view>
+        </view>
+
+      </view>
+    </view>
+
+  </block>
+
+  <view class="page-bottom-pad"></view>
+</scroll-view>

@@ -1,0 +1,65 @@
+{
+  "pages": [
+    "pages/home/home",
+    "pages/timeline/timeline",
+    "pages/layers/layers",
+    "pages/reference/reference"
+  ],
+  "subpackages": [
+    {
+      "root": "subpkg-chapters",
+      "pages": [
+        "pages/chapter/chapter",
+        "pages/bridge-doc/bridge-doc"
+      ]
+    },
+    {
+      "root": "subpkg-compare",
+      "pages": [
+        "pages/compare/compare"
+      ]
+    }
+  ],
+  "window": {
+    "backgroundTextStyle": "dark",
+    "navigationBarBackgroundColor": "#0F172A",
+    "navigationBarTitleText": "Learn Claude Code",
+    "navigationBarTextStyle": "white",
+    "backgroundColor": "#0F172A"
+  },
+  "tabBar": {
+    "color": "#64748B",
+    "selectedColor": "#38BDF8",
+    "backgroundColor": "#1E293B",
+    "borderStyle": "black",
+    "list": [
+      {
+        "pagePath": "pages/home/home",
+        "text": "首页",
+        "iconPath": "assets/icons/home.png",
+        "selectedIconPath": "assets/icons/home-active.png"
+      },
+      {
+        "pagePath": "pages/timeline/timeline",
+        "text": "时间线",
+        "iconPath": "assets/icons/timeline.png",
+        "selectedIconPath": "assets/icons/timeline-active.png"
+      },
+      {
+        "pagePath": "pages/layers/layers",
+        "text": "架构层",
+        "iconPath": "assets/icons/layers.png",
+        "selectedIconPath": "assets/icons/layers-active.png"
+      },
+      {
+        "pagePath": "pages/reference/reference",
+        "text": "参考",
+        "iconPath": "assets/icons/reference.png",
+        "selectedIconPath": "assets/icons/reference-active.png"
+      }
+    ]
+  },
+  "style": "v2",
+  "sitemapLocation": "sitemap.json",
+  "lazyCodeLoading": "requiredComponents"
+}

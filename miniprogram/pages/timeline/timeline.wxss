@@ -1,0 +1,537 @@
+/* pages/timeline/timeline.wxss */
+
+/* ========== 页面容器 ========== */
+.page {
+  height: 100vh;
+  background: var(--color-bg);
+}
+
+/* ========== 页头 ========== */
+.page-header {
+  padding: var(--spacing-xl) var(--spacing-lg) var(--spacing-md);
+  background: var(--color-bg-card);
+  border-bottom: 1rpx solid var(--color-border);
+}
+
+.header-content {
+  margin-bottom: var(--spacing-md);
+}
+
+.page-title {
+  display: block;
+  font-size: var(--font-2xl);
+  font-weight: 700;
+  color: var(--color-text-primary);
+  line-height: 1.2;
+  margin-bottom: var(--spacing-xs);
+}
+
+.page-subtitle {
+  display: block;
+  font-size: var(--font-sm);
+  color: var(--color-text-secondary);
+  line-height: 1.6;
+}
+
+/* 语言切换 */
+.locale-switcher {
+  display: flex;
+  flex-direction: row;
+  margin-bottom: var(--spacing-md);
+}
+
+.locale-btn {
+  padding: var(--spacing-xs) var(--spacing-sm);
+  margin-right: var(--spacing-xs);
+  border-radius: var(--radius-sm);
+  background: var(--color-bg-muted);
+  font-size: var(--font-xs);
+  color: var(--color-text-muted);
+}
+
+.locale-btn.active {
+  background: var(--color-accent);
+  color: #0F172A;
+  font-weight: 600;
+}
+
+/* 进度条 */
+.progress-row {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: var(--spacing-sm);
+}
+
+.progress-bar-bg {
+  flex: 1;
+  height: 6rpx;
+  background: var(--color-bg-muted);
+  border-radius: 3rpx;
+  overflow: hidden;
+}
+
+.progress-bar-fill {
+  height: 100%;
+  background: var(--color-accent);
+  border-radius: 3rpx;
+  transition: width 0.3s;
+}
+
+.progress-text {
+  font-size: var(--font-xs);
+  color: var(--color-text-muted);
+  white-space: nowrap;
+}
+
+/* ========== 通用 section ========== */
+.section {
+  padding: var(--spacing-lg) var(--spacing-lg) 0;
+}
+
+.section-last {
+  padding-bottom: 0;
+}
+
+.section-title {
+  display: block;
+  font-size: var(--font-md);
+  font-weight: 600;
+  color: var(--color-text-primary);
+  margin-bottom: var(--spacing-xs);
+}
+
+.section-desc {
+  display: block;
+  font-size: var(--font-xs);
+  color: var(--color-text-muted);
+  line-height: 1.5;
+  margin-bottom: var(--spacing-md);
+}
+
+/* ========== 通用卡片 ========== */
+.card {
+  background: var(--color-bg-card);
+  border-radius: var(--radius-md);
+  border: 1rpx solid var(--color-border);
+  padding: var(--spacing-md);
+}
+
+/* ========== 使用指南卡片 ========== */
+.guide-cards {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-sm);
+  margin-bottom: var(--spacing-md);
+}
+
+.guide-card {
+  display: flex;
+  flex-direction: column;
+  gap: 4rpx;
+}
+
+.guide-icon {
+  font-size: var(--font-lg);
+  margin-bottom: 4rpx;
+}
+
+.guide-card-title {
+  font-size: var(--font-base);
+  font-weight: 600;
+  color: var(--color-text-primary);
+}
+
+.guide-card-desc {
+  font-size: var(--font-sm);
+  color: var(--color-text-secondary);
+  line-height: 1.6;
+}
+
+/* ========== 桥接文档 pills ========== */
+.bridge-pills {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: var(--spacing-xs);
+  margin-bottom: var(--spacing-md);
+}
+
+.bridge-pill {
+  padding: var(--spacing-xs) var(--spacing-sm);
+  background: var(--color-bg-muted);
+  border-radius: 100rpx;
+  border: 1rpx solid var(--color-border);
+}
+
+.bridge-pill text {
+  font-size: var(--font-xs);
+  color: var(--color-accent);
+}
+
+/* ========== 阶段检查点卡片 ========== */
+.checkpoint-cards {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-sm);
+  margin-bottom: var(--spacing-md);
+}
+
+.checkpoint-card {
+  border-left: 4rpx solid transparent;
+  padding-left: var(--spacing-md);
+}
+
+.checkpoint-header {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin-bottom: var(--spacing-xs);
+  gap: var(--spacing-xs);
+}
+
+.checkpoint-layer-badge {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding: 4rpx 12rpx;
+  border-radius: 100rpx;
+  border: 1rpx solid transparent;
+  gap: var(--spacing-xs);
+}
+
+.checkpoint-layer-dot {
+  width: 10rpx;
+  height: 10rpx;
+  border-radius: 50%;
+  display: block;
+  flex-shrink: 0;
+}
+
+.checkpoint-layer-label {
+  font-size: var(--font-xs);
+  font-weight: 600;
+}
+
+.checkpoint-range {
+  flex: 1;
+}
+
+.checkpoint-range-text {
+  font-size: var(--font-xs);
+  color: var(--color-text-muted);
+  font-family: monospace;
+}
+
+.checkpoint-toggle-icon {
+  font-size: 36rpx;
+  color: var(--color-text-muted);
+  line-height: 1;
+  transition: transform 0.2s;
+}
+
+.checkpoint-toggle-icon.expanded {
+  transform: rotate(90deg);
+}
+
+.checkpoint-title {
+  display: block;
+  font-size: var(--font-sm);
+  font-weight: 600;
+  color: var(--color-text-primary);
+  line-height: 1.5;
+  margin-bottom: var(--spacing-xs);
+}
+
+.checkpoint-body {
+  margin-top: var(--spacing-xs);
+}
+
+.checkpoint-body-text {
+  display: block;
+  font-size: var(--font-xs);
+  color: var(--color-text-secondary);
+  line-height: 1.6;
+  margin-bottom: var(--spacing-sm);
+}
+
+.checkpoint-rebuild {
+  background: var(--color-bg-muted);
+  border-radius: var(--radius-sm);
+  padding: var(--spacing-sm) var(--spacing-md);
+}
+
+.checkpoint-rebuild-label {
+  display: block;
+  font-size: var(--font-xs);
+  color: var(--color-text-muted);
+  margin-bottom: 4rpx;
+}
+
+.checkpoint-rebuild-text {
+  display: block;
+  font-size: var(--font-xs);
+  color: var(--color-text-secondary);
+  line-height: 1.6;
+}
+
+.checkpoint-collapsed-hint {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 4rpx;
+}
+
+.checkpoint-hint-text {
+  font-size: var(--font-xs);
+  color: var(--color-text-muted);
+}
+
+.checkpoint-hint-arrow {
+  font-size: var(--font-xs);
+  color: var(--color-text-muted);
+}
+
+/* ========== 主时间线 ========== */
+.timeline {
+  display: flex;
+  flex-direction: column;
+  padding-bottom: var(--spacing-lg);
+}
+
+/* Layer 阶段分隔符 */
+.layer-divider {
+  display: flex;
+  flex-direction: column;
+  margin: var(--spacing-md) 0 var(--spacing-sm);
+  position: relative;
+}
+
+.layer-divider-line {
+  position: absolute;
+  left: 28rpx;
+  top: 0;
+  bottom: 0;
+  width: 2rpx;
+  opacity: 0.3;
+}
+
+.layer-divider-content {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding-left: 0;
+  gap: var(--spacing-sm);
+  position: relative;
+  z-index: 1;
+}
+
+.layer-divider-dot {
+  width: 20rpx;
+  height: 20rpx;
+  border-radius: 50%;
+  flex-shrink: 0;
+  margin-left: 18rpx;
+}
+
+.layer-divider-label {
+  font-size: var(--font-sm);
+  font-weight: 700;
+  letter-spacing: 1rpx;
+  text-transform: uppercase;
+}
+
+/* 时间线章节条目 */
+.timeline-item {
+  display: flex;
+  flex-direction: row;
+  align-items: stretch;
+  padding: var(--spacing-xs) 0;
+}
+
+.timeline-line-wrapper {
+  width: 56rpx;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  flex-shrink: 0;
+  padding-top: 4rpx;
+}
+
+.timeline-line {
+  width: 3rpx;
+  flex: 1;
+  min-height: 100%;
+  border-radius: 2rpx;
+  opacity: 0.7;
+}
+
+/* 章节卡片 */
+.timeline-card {
+  flex: 1;
+  min-width: 0;
+  margin-left: var(--spacing-xs);
+  transition: opacity 0.2s;
+}
+
+.timeline-card.card-read {
+  opacity: 0.75;
+}
+
+.chapter-header {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: var(--spacing-xs);
+  margin-bottom: var(--spacing-xs);
+  flex-wrap: wrap;
+}
+
+.chapter-id-badge {
+  padding: 4rpx 14rpx;
+  border-radius: 100rpx;
+  border: 1rpx solid transparent;
+  flex-shrink: 0;
+}
+
+.chapter-id {
+  font-size: var(--font-xs);
+  font-weight: 700;
+  font-family: monospace;
+}
+
+.chapter-title {
+  flex: 1;
+  font-size: var(--font-base);
+  font-weight: 600;
+  color: var(--color-text-primary);
+  min-width: 0;
+}
+
+.read-badge {
+  width: 36rpx;
+  height: 36rpx;
+  border-radius: 50%;
+  background: var(--color-core);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.read-check {
+  font-size: var(--font-xs);
+  color: #0F172A;
+  font-weight: 700;
+}
+
+.chapter-subtitle {
+  display: block;
+  font-size: var(--font-xs);
+  color: var(--color-accent);
+  margin-bottom: 6rpx;
+}
+
+.chapter-insight {
+  display: block;
+  font-size: var(--font-xs);
+  color: var(--color-text-secondary);
+  line-height: 1.6;
+  margin-bottom: var(--spacing-xs);
+}
+
+.chapter-meta {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: var(--spacing-xs);
+}
+
+.chapter-loc {
+  font-size: var(--font-xs);
+  color: var(--color-text-muted);
+  font-family: monospace;
+}
+
+.chapter-layer-dot {
+  width: 8rpx;
+  height: 8rpx;
+  border-radius: 50%;
+  opacity: 0.6;
+}
+
+/* ========== inline checkpoint（阶段末尾的检查点提示） ========== */
+.inline-checkpoint {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  background: var(--color-bg-card);
+  border-radius: var(--radius-md);
+  border: 1rpx solid var(--color-border);
+  border-left: 4rpx solid transparent;
+  padding: var(--spacing-md);
+  margin: var(--spacing-sm) 0 var(--spacing-md);
+  gap: var(--spacing-sm);
+}
+
+.inline-checkpoint-icon {
+  width: 48rpx;
+  height: 48rpx;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  opacity: 0.9;
+}
+
+.inline-checkpoint-icon-text {
+  font-size: var(--font-sm);
+  color: #0F172A;
+  font-weight: 700;
+}
+
+.inline-checkpoint-content {
+  flex: 1;
+  min-width: 0;
+}
+
+.inline-checkpoint-title {
+  display: block;
+  font-size: var(--font-xs);
+  font-weight: 600;
+  color: var(--color-text-primary);
+  line-height: 1.5;
+  margin-bottom: 4rpx;
+}
+
+.inline-checkpoint-rebuild {
+  margin-top: var(--spacing-xs);
+  padding: var(--spacing-xs) var(--spacing-sm);
+  background: var(--color-bg-muted);
+  border-radius: var(--radius-sm);
+}
+
+.inline-checkpoint-rebuild-text {
+  display: block;
+  font-size: var(--font-xs);
+  color: var(--color-text-secondary);
+  line-height: 1.6;
+}
+
+.inline-checkpoint-arrow {
+  font-size: 36rpx;
+  color: var(--color-text-muted);
+  line-height: 1;
+  padding-top: 4rpx;
+  transition: transform 0.2s;
+}
+
+.inline-checkpoint-arrow.expanded {
+  transform: rotate(90deg);
+}
+
+/* ========== 底部留白 ========== */
+.page-footer {
+  height: 80rpx;
+}

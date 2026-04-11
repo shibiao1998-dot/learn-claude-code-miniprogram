@@ -1,0 +1,183 @@
+<!-- pages/timeline/timeline.wxml -->
+<scroll-view class="page" scroll-y enhanced show-scrollbar="{{false}}">
+
+  <!-- ========== 头部 ========== -->
+  <view class="page-header">
+    <view class="header-content">
+      <text class="page-title">{{pageTitle}}</text>
+      <text class="page-subtitle">{{pageSubtitle}}</text>
+    </view>
+
+    <!-- 语言切换 -->
+    <view class="locale-switcher">
+      <view
+        wx:for="{{['zh','en','ja']}}"
+        wx:key="*this"
+        class="locale-btn {{locale === item ? 'active' : ''}}"
+        bindtap="switchLocale"
+        data-locale="{{item}}"
+      >
+        <text>{{item}}</text>
+      </view>
+    </view>
+
+    <!-- 阅读进度 -->
+    <view class="progress-row">
+      <view class="progress-bar-bg">
+        <view class="progress-bar-fill" style="width: {{totalChapters > 0 ? readCount / totalChapters * 100 : 0}}%"></view>
+      </view>
+      <text class="progress-text">{{t_readCountLabel}} {{readCount}} / {{totalChapters}} {{t_chaptersUnit}}</text>
+    </view>
+  </view>
+
+  <!-- ========== 使用指南 ========== -->
+  <view class="section">
+    <text class="section-title">{{t_guideSectionTitle}}</text>
+    <view class="guide-cards">
+      <view wx:for="{{usageGuides}}" wx:key="title" class="guide-card card">
+        <text class="guide-icon">{{item.icon}}</text>
+        <text class="guide-card-title">{{item.title}}</text>
+        <text class="guide-card-desc">{{item.desc}}</text>
+      </view>
+    </view>
+  </view>
+
+  <!-- ========== 桥接文档快速入口 ========== -->
+  <view class="section">
+    <text class="section-title">{{t_bridgeSectionTitle}}</text>
+    <text class="section-desc">{{t_bridgeSectionDesc}}</text>
+    <view class="bridge-pills">
+      <view
+        wx:for="{{bridgeLinks}}"
+        wx:key="slug"
+        class="bridge-pill"
+        bindtap="openBridgeDoc"
+        data-slug="{{item.slug}}"
+      >
+        <text>{{item.label}}</text>
+      </view>
+    </view>
+  </view>
+
+  <!-- ========== 阶段检查点 ========== -->
+  <view class="section">
+    <text class="section-title">{{t_checkpointSectionTitle}}</text>
+    <text class="section-desc">{{t_checkpointSectionDesc}}</text>
+
+    <view class="checkpoint-cards">
+      <view
+        wx:for="{{checkpoints}}"
+        wx:key="layer"
+        class="checkpoint-card card"
+        style="border-left-color: {{item.layerColor}}"
+      >
+        <!-- 检查点头部 -->
+        <view class="checkpoint-header" bindtap="toggleCheckpoint" data-layer="{{item.layer}}">
+          <view class="checkpoint-layer-badge" style="background: {{item.layerColor}}20; border-color: {{item.layerColor}}40">
+            <view class="checkpoint-layer-dot" style="background: {{item.layerColor}}"></view>
+            <text class="checkpoint-layer-label" style="color: {{item.layerColor}}">{{item.layerLabel}}</text>
+          </view>
+          <view class="checkpoint-range">
+            <text class="checkpoint-range-text">{{item.entryVersion}} → {{item.endVersion}}</text>
+          </view>
+          <view class="checkpoint-toggle-icon {{expandedCheckpoints[item.layer] ? 'expanded' : ''}}">
+            <text>›</text>
+          </view>
+        </view>
+
+        <!-- 检查点标题 -->
+        <text class="checkpoint-title">{{item.titleText}}</text>
+
+        <!-- 可折叠：重建目标 -->
+        <view wx:if="{{expandedCheckpoints[item.layer]}}" class="checkpoint-body">
+          <text class="checkpoint-body-text">{{item.bodyText}}</text>
+          <view class="checkpoint-rebuild">
+            <text class="checkpoint-rebuild-label">{{t_checkpointRebuildLabel}}</text>
+            <text class="checkpoint-rebuild-text">{{item.rebuildText}}</text>
+          </view>
+        </view>
+
+        <!-- 折叠时显示提示 -->
+        <view wx:else class="checkpoint-collapsed-hint" bindtap="toggleCheckpoint" data-layer="{{item.layer}}">
+          <text class="checkpoint-hint-text">{{t_checkpointToggleShow}}</text>
+          <text class="checkpoint-hint-arrow">›</text>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <!-- ========== 主时间线 ========== -->
+  <view class="section section-last">
+    <text class="section-title">{{t_timelineSectionTitle}}</text>
+
+    <view class="timeline">
+      <block wx:for="{{timelineItems}}" wx:key="id">
+
+        <!-- Layer 阶段分隔符 -->
+        <view wx:if="{{item.isLayerStart}}" class="layer-divider">
+          <view class="layer-divider-line" style="background: {{item.layerColor}}"></view>
+          <view class="layer-divider-content">
+            <view class="layer-divider-dot" style="background: {{item.layerColor}}; box-shadow: 0 0 12rpx {{item.layerColor}}80"></view>
+            <text class="layer-divider-label" style="color: {{item.layerColor}}">{{item.layerLabel}}</text>
+          </view>
+        </view>
+
+        <!-- 章节卡片 -->
+        <view class="timeline-item" bindtap="goToChapter" data-id="{{item.id}}">
+          <!-- 左侧彩色竖线 -->
+          <view class="timeline-line-wrapper">
+            <view class="timeline-line" style="background: {{item.layerColor}}"></view>
+          </view>
+
+          <!-- 章节内容卡片 -->
+          <view class="timeline-card card {{item.isRead ? 'card-read' : ''}}">
+            <view class="chapter-header">
+              <view class="chapter-id-badge" style="background: {{item.layerColor}}20; border-color: {{item.layerColor}}40">
+                <text class="chapter-id" style="color: {{item.layerColor}}">{{item.id}}</text>
+              </view>
+              <text class="chapter-title">{{item.title}}</text>
+              <view wx:if="{{item.isRead}}" class="read-badge">
+                <text class="read-check">✓</text>
+              </view>
+            </view>
+
+            <text wx:if="{{item.subtitle}}" class="chapter-subtitle">{{item.subtitle}}</text>
+            <text wx:if="{{item.keyInsight}}" class="chapter-insight">{{item.keyInsight}}</text>
+
+            <view class="chapter-meta">
+              <text class="chapter-loc">{{item.loc}} {{t_locUnit}}</text>
+              <view class="chapter-layer-dot" style="background: {{item.layerColor}}"></view>
+            </view>
+          </view>
+        </view>
+
+        <!-- Layer 末尾插入 checkpoint 提示条 -->
+        <view
+          wx:if="{{item.isLayerEnd && item.checkpointData}}"
+          class="inline-checkpoint"
+          style="border-left-color: {{item.layerColor}}"
+          bindtap="toggleCheckpoint"
+          data-layer="{{item.checkpointData.layer}}"
+        >
+          <view class="inline-checkpoint-icon" style="background: {{item.layerColor}}">
+            <text class="inline-checkpoint-icon-text">✦</text>
+          </view>
+          <view class="inline-checkpoint-content">
+            <text class="inline-checkpoint-title">{{item.checkpointData.titleText}}</text>
+            <view wx:if="{{expandedCheckpoints[item.checkpointData.layer]}}" class="inline-checkpoint-rebuild">
+              <text class="inline-checkpoint-rebuild-text">{{item.checkpointData.rebuildText}}</text>
+            </view>
+          </view>
+          <view class="inline-checkpoint-arrow {{expandedCheckpoints[item.checkpointData.layer] ? 'expanded' : ''}}">
+            <text>›</text>
+          </view>
+        </view>
+
+      </block>
+    </view>
+  </view>
+
+  <!-- 底部留白 -->
+  <view class="page-footer"></view>
+
+</scroll-view>

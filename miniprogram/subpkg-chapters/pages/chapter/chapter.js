@@ -1,0 +1,524 @@
+// subpkg-chapters/pages/chapter/chapter.js
+
+const i18n = require('../../../utils/i18n');
+const progress = require('../../../utils/progress');
+const eventBus = require('../../../utils/event-bus');
+const highlight = require('../../../utils/highlight');
+const markdownParser = require('../../../utils/markdown-parser');
+const dataLoader = require('../../data-loader');
+const meta = require('../../../data/meta.json');
+
+// ─── Deep Dive：章节 → 关联 Bridge Docs 映射 ───────────────────────────────
+const CHAPTER_BRIDGE_DOCS = {
+  s01: ['s00-architecture-overview', 's00b-one-request-lifecycle', 'data-structures'],
+  s02: ['s02a-tool-control-plane', 's02b-tool-execution-runtime', 's00-architecture-overview'],
+  s03: ['data-structures', 'entity-map', 's00-architecture-overview'],
+  s04: ['data-structures', 's00-architecture-overview', 's00b-one-request-lifecycle'],
+  s05: ['data-structures', 's00-architecture-overview'],
+  s06: ['s00-architecture-overview', 's00b-one-request-lifecycle', 's00c-query-transition-model'],
+  s07: ['s02a-tool-control-plane', 's00a-query-control-plane', 'entity-map'],
+  s08: ['s02a-tool-control-plane', 's00a-query-control-plane', 'entity-map'],
+  s09: ['data-structures', 's00-architecture-overview', 'entity-map'],
+  s10: ['s10a-message-prompt-pipeline', 's00a-query-control-plane', 's00b-one-request-lifecycle'],
+  s11: ['s00c-query-transition-model', 's00b-one-request-lifecycle', 'data-structures'],
+  s12: ['data-structures', 's00-architecture-overview', 's00b-one-request-lifecycle'],
+  s13: ['s13a-runtime-task-model', 'data-structures', 'entity-map'],
+  s14: ['s13a-runtime-task-model', 's00-architecture-overview'],
+  s15: ['team-task-lane-model', 'entity-map', 's00-architecture-overview'],
+  s16: ['team-task-lane-model', 'data-structures'],
+  s17: ['team-task-lane-model', 's00-architecture-overview'],
+  s18: ['team-task-lane-model', 'data-structures'],
+  s19: ['s19a-mcp-capability-layers', 's02a-tool-control-plane', 's00-architecture-overview'],
+};
+
+// slice 名称 i18n
+const SLICE_LABELS = {
+  mainline: { zh: '主线流程', en: 'Mainline', ja: 'メインライン' },
+  control:  { zh: '控制层',   en: 'Control',  ja: 'コントロール' },
+  state:    { zh: '状态管理', en: 'State',     ja: '状態管理' },
+  lanes:    { zh: '执行车道', en: 'Lanes',     ja: 'レーン' },
+};
+
+function _getSliceLabel(sliceId, locale) {
+  const entry = SLICE_LABELS[sliceId];
+  if (!entry) return sliceId;
+  return entry[locale] || entry.en || sliceId;
+}
+
+// 将 flow nodes/edges 构建成顺序展示列表
+// 策略：拓扑排序 → 按 y 坐标排序后顺序展示，并附加出边 label
+function _buildFlowList(nodes, edges) {
+  if (!nodes || !nodes.length) return [];
+
+  // 以 y 坐标升序排列节点（流程图从上到下）
+  const sorted = [...nodes].sort((a, b) => (a.y || 0) - (b.y || 0));
+
+  // 建立从 id → 出边 label 的映射
+  const outLabels = {};
+  (edges || []).forEach(e => {
+    if (e.label) {
+      if (!outLabels[e.from]) outLabels[e.from] = [];
+      outLabels[e.from].push({ to: e.to, label: e.label });
+    }
+  });
+
+  return sorted.map((node, idx) => {
+    const edgeLabels = outLabels[node.id] || [];
+    const edgeSummary = edgeLabels.map(e => e.label).join(' / ');
+    return {
+      id: node.id,
+      label: node.label.replace(/\n/g, ' '),
+      type: node.type,
+      edgeSummary,
+      isLast: idx === sorted.length - 1,
+    };
+  });
+}
+
+// 图层颜色映射（覆盖 meta.json 中的颜色，使用设计系统色值）
+const LAYER_COLORS = {
+  core: '#34D399',
+  hardening: '#60A5FA',
+  runtime: '#A78BFA',
+  platform: '#F472B6',
+};
+
+// 语法高亮 token 颜色映射（VS Code Dark+ 风格）
+const TOKEN_COLORS = {
+  comment: '#6A9955',
+  string: '#CE9178',
+  keyword: '#569CD6',
+  builtin: '#4EC9B0',
+  decorator: '#DCDCAA',
+  number: '#B5CEA8',
+  plain: '#D4D4D4',
+};
+
+// 最大渲染行数（避免 WXML 节点过多）
+const MAX_CODE_LINES = 300;
+
+Page({
+  data: {
+    // 章节基本信息
+    id: '',
+    locale: 'zh',
+    t: {},
+    chapterId: '',
+    chapterTitle: '',
+    chapterSubtitle: '',
+    chapterKeyInsight: '',
+    chapterCoreAddition: '',
+    chapterLayer: '',
+    chapterLayerColor: '',
+    chapterLayerLabel: '',
+    chapterLoc: 0,
+    chapterTools: [],
+    chapterNewTools: [],
+    prevId: null,
+    nextId: null,
+    guide: null,
+    isGuideExpanded: false,
+    isRead: false,
+
+    // Tab 状态
+    activeTab: 'learn',
+    tabs: [],
+
+    // Learn Tab
+    docNodes: [],
+
+    // Code Tab
+    codeLines: [],        // [[{color, value}], ...]
+    codeLoaded: false,
+    filename: '',
+    totalLoc: 0,
+    displayLoc: 0,        // 实际显示行数
+    isTruncated: false,   // 是否被截断
+    functions: [],        // [{name, signature, startLine}]
+    classes: [],          // [{name, startLine}]
+
+    // diff 信息
+    diff: null,
+
+    // Deep Dive Tab
+    deepDiveLoaded: false,
+    flowItems: [],          // [{id, label, type, edgeSummary, isLast}]
+    blueprintData: null,    // {summary, slices, records, handoff}
+    simulatorSteps: [],     // [{type, content, toolName, annotation, index, isActive}]
+    simCurrentStep: 0,
+    bridgeDocLinks: [],     // [{slug, title, summary, kind}]
+  },
+
+  onLoad(options) {
+    const id = options.id || 's01';
+    this._buildPageData(id);
+
+    // 监听语言切换事件
+    this._localeListener = () => {
+      this._buildPageData(this.data.id);
+    };
+    eventBus.on('locale:change', this._localeListener);
+  },
+
+  onUnload() {
+    if (this._localeListener) {
+      eventBus.off('locale:change', this._localeListener);
+    }
+  },
+
+  onShow() {
+    // 每次显示时刷新已读状态（可能在其他页面被修改）
+    const id = this.data.id;
+    if (id) {
+      this.setData({ isRead: progress.isRead(id) });
+    }
+  },
+
+  /**
+   * 根据 locale 静态加载 i18n 消息包（绕过动态 require 限制）
+   */
+  _getMessages(locale) {
+    // 微信小程序不支持动态 require，用 switch 静态映射
+    switch (locale) {
+      case 'en': return require('../../../i18n/en.json');
+      case 'ja': return require('../../../i18n/ja.json');
+      default:   return require('../../../i18n/zh.json');
+    }
+  },
+
+  /**
+   * 构建页面所有数据
+   */
+  _buildPageData(id) {
+    const locale = i18n.getLocale();
+    let messages = {};
+    try {
+      messages = this._getMessages(locale);
+    } catch (e) {
+      try { messages = require('../../../i18n/zh.json'); } catch (e2) { messages = {}; }
+    }
+
+    const v = meta.versions[id];
+    if (!v) {
+      console.error('[chapter] version not found:', id);
+      return;
+    }
+
+    const content = v.content[locale] || v.content.zh || v.content.en || {};
+    const guide = v.guide[locale] || v.guide.zh || v.guide.en || {};
+    const diff = meta.diffs ? meta.diffs.find(d => d.to === id) || null : null;
+
+    // 章节标题（优先 i18n sessions）
+    const chapterTitle = (messages.sessions && messages.sessions[id]) || v.title;
+    const layerLabels = messages.layer_labels || {};
+
+    // 加载 Markdown 文档并解析
+    let docNodes = [];
+    try {
+      const doc = dataLoader.loadChapterDoc(id, locale);
+      if (doc && doc.content) {
+        docNodes = markdownParser.parse(doc.content);
+      } else {
+        docNodes = [{ type: 'paragraph', content: '文档内容暂未加载。' }];
+      }
+    } catch (e) {
+      console.error('[chapter] doc load error:', e);
+      docNodes = [{ type: 'paragraph', content: '文档加载失败，请重试。' }];
+    }
+
+    // 构建文件名
+    const safeTitle = v.title.toLowerCase().replace(/\s+/g, '_').replace(/[^a-z0-9_]/g, '');
+    const filename = `${id}_${safeTitle}.py`;
+
+    // Tab 配置
+    const vt = messages.version || {};
+    const tabs = [
+      { id: 'learn', label: vt.tab_learn || '学习' },
+      { id: 'code', label: vt.tab_code || '源码' },
+      { id: 'deep-dive', label: vt.tab_deep_dive || '深入探索' },
+    ];
+
+    this.setData({
+      id,
+      locale,
+      t: messages,
+      chapterId: id,
+      chapterTitle,
+      chapterSubtitle: content.subtitle || '',
+      chapterKeyInsight: content.keyInsight || '',
+      chapterCoreAddition: content.coreAddition || '',
+      chapterLayer: v.layer || 'core',
+      chapterLayerColor: LAYER_COLORS[v.layer] || '#94A3B8',
+      chapterLayerLabel: layerLabels[v.layer] || v.layer,
+      chapterLoc: v.loc || 0,
+      chapterTools: v.tools || [],
+      chapterNewTools: v.newTools || [],
+      prevId: v.prevVersion || null,
+      nextId: v.nextVersion || null,
+      guide,
+      isGuideExpanded: false,
+      isRead: progress.isRead(id),
+      activeTab: 'learn',
+      tabs,
+      docNodes,
+      diff,
+      filename,
+      totalLoc: v.loc || 0,
+      displayLoc: 0,
+      functions: v.functions || [],
+      classes: v.classes || [],
+      codeLines: [],
+      codeLoaded: false,
+      // 重置 Deep Dive 状态
+      deepDiveLoaded: false,
+      flowItems: [],
+      blueprintData: null,
+      simulatorSteps: [],
+      simCurrentStep: 0,
+      bridgeDocLinks: [],
+    });
+
+    // 标记已读
+    progress.markRead(id);
+  },
+
+  /**
+   * 懒加载 Code Tab 的语法高亮数据
+   */
+  _loadCodeTab() {
+    if (this.data.codeLoaded) return;
+    const id = this.data.id;
+
+    try {
+      const sources = require('../../../data/versions-source.json');
+      const source = sources[id] || '';
+      const allLines = source.split('\n');
+      const totalLoc = allLines.length;
+      const isTruncated = totalLoc > MAX_CODE_LINES;
+      const lines = allLines.slice(0, MAX_CODE_LINES);
+
+      const codeLines = lines.map((line) => {
+        // 空行给一个空格保持行高
+        const tokens = highlight.tokenize(line.length > 0 ? line : ' ');
+        return tokens.map(tk => ({
+          color: TOKEN_COLORS[tk.type] || TOKEN_COLORS.plain,
+          value: tk.value,
+        }));
+      });
+
+      this.setData({
+        codeLines,
+        totalLoc,
+        displayLoc: lines.length,
+        isTruncated,
+        codeLoaded: true,
+      });
+    } catch (e) {
+      console.error('[chapter] source load error:', e);
+      this.setData({
+        codeLines: [[{ color: TOKEN_COLORS.comment, value: '# 源码加载失败' }]],
+        codeLoaded: true,
+      });
+    }
+  },
+
+  // ─── Tab 切换 ───────────────────────────────────────────
+  switchTab(e) {
+    const tab = e.currentTarget.dataset.tab;
+    if (tab === this.data.activeTab) return;
+    this.setData({ activeTab: tab });
+    if (tab === 'code' && !this.data.codeLoaded) {
+      this._loadCodeTab();
+    }
+    if (tab === 'deep-dive' && !this.data.deepDiveLoaded) {
+      this._loadDeepDiveTab();
+    }
+  },
+
+  // ─── 导读折叠/展开 ──────────────────────────────────────
+  toggleGuide() {
+    this.setData({ isGuideExpanded: !this.data.isGuideExpanded });
+  },
+
+  // ─── 前后章节导航 ────────────────────────────────────────
+  goToPrev() {
+    const { prevId } = this.data;
+    if (!prevId) return;
+    wx.redirectTo({
+      url: `/subpkg-chapters/pages/chapter/chapter?id=${prevId}`,
+    });
+  },
+
+  goToNext() {
+    const { nextId } = this.data;
+    if (!nextId) return;
+    wx.redirectTo({
+      url: `/subpkg-chapters/pages/chapter/chapter?id=${nextId}`,
+    });
+  },
+
+  goBack() {
+    wx.navigateBack({ delta: 1 });
+  },
+
+  // ─── 复制源码 ────────────────────────────────────────────
+  copySource() {
+    try {
+      const sources = require('../../../data/versions-source.json');
+      const source = sources[this.data.id] || '';
+      wx.setClipboardData({
+        data: source,
+        success() {
+          wx.showToast({ title: '已复制源码', icon: 'success', duration: 1500 });
+        },
+        fail() {
+          wx.showToast({ title: '复制失败', icon: 'none' });
+        },
+      });
+    } catch (e) {
+      wx.showToast({ title: '获取源码失败', icon: 'none' });
+    }
+  },
+
+  // ─── 跳转到指定函数行（scroll-into-view） ────────────────
+  scrollToFunc(e) {
+    const lineIndex = e.currentTarget.dataset.line;
+    if (lineIndex === undefined) return;
+    // scroll-into-view 用 id="line-{index}"
+    this.setData({ scrollToLineId: `line-${lineIndex - 1}` });
+  },
+
+  // ─── Deep Dive Tab ──────────────────────────────────────
+  _loadDeepDiveTab() {
+    const id = this.data.id;
+    const locale = this.data.locale;
+    const pick = (obj) => (obj && (obj[locale] || obj.en || obj.zh)) || '';
+
+    // 流程图数据
+    let flowItems = [];
+    try {
+      const flows = require('../../../data/flows.json');
+      const flow = flows[id] || null;
+      if (flow) {
+        flowItems = _buildFlowList(flow.nodes, flow.edges);
+      }
+    } catch (e) {
+      console.error('[deep-dive] flows load error:', e);
+    }
+
+    // 架构蓝图
+    let blueprintData = null;
+    try {
+      const blueprints = require('../../../data/blueprints.json');
+      const blueprint = blueprints[id] || null;
+      if (blueprint) {
+        blueprintData = {
+          summary: pick(blueprint.summary),
+          slices: Object.entries(blueprint.slices || {}).map(([sliceId, items]) => ({
+            id: sliceId,
+            label: _getSliceLabel(sliceId, locale),
+            items: (Array.isArray(items) ? items : []).map(item => ({
+              name: pick(item.name),
+              detail: pick(item.detail),
+              fresh: !!item.fresh,
+            })),
+          })),
+          records: (blueprint.records || []).map(r => ({
+            name: typeof r.name === 'object' ? pick(r.name) : (r.name || ''),
+            detail: typeof r.detail === 'object' ? pick(r.detail) : (r.detail || ''),
+            fresh: !!r.fresh,
+          })),
+          handoff: (blueprint.handoff || []).map(h => typeof h === 'object' ? pick(h) : h),
+        };
+      }
+    } catch (e) {
+      console.error('[deep-dive] blueprints load error:', e);
+    }
+
+    // 模拟器数据
+    let simulatorSteps = [];
+    try {
+      const scenarios = require('../../../data/scenarios-all.json');
+      const scenario = scenarios[id] || null;
+      if (scenario && scenario.steps) {
+        simulatorSteps = scenario.steps.map((s, i) => ({
+          type: s.type,
+          content: s.content || '',
+          toolName: s.toolName || '',
+          annotation: s.annotation || '',
+          index: i,
+          isActive: i === 0,
+        }));
+      }
+    } catch (e) {
+      console.error('[deep-dive] scenarios load error:', e);
+    }
+
+    // Bridge Doc 链接
+    let bridgeDocLinks = [];
+    try {
+      const bridgeDocsMeta = require('../../../data/bridge-docs-meta.json');
+      const slugs = CHAPTER_BRIDGE_DOCS[id] || ['data-structures', 'entity-map', 's00-architecture-overview'];
+      bridgeDocLinks = slugs
+        .filter(slug => bridgeDocsMeta[slug])
+        .map(slug => {
+          const m = bridgeDocsMeta[slug];
+          return {
+            slug,
+            title: pick(m.title),
+            summary: pick(m.summary),
+            kind: m.kind || 'map',
+          };
+        });
+    } catch (e) {
+      console.error('[deep-dive] bridge-docs-meta load error:', e);
+    }
+
+    this.setData({
+      flowItems,
+      blueprintData,
+      simulatorSteps,
+      simCurrentStep: 0,
+      bridgeDocLinks,
+      deepDiveLoaded: true,
+    });
+  },
+
+  simNext() {
+    const { simCurrentStep, simulatorSteps } = this.data;
+    if (simCurrentStep >= simulatorSteps.length - 1) return;
+    const next = simCurrentStep + 1;
+    const steps = simulatorSteps.map((s, i) => ({ ...s, isActive: i === next }));
+    this.setData({ simCurrentStep: next, simulatorSteps: steps });
+  },
+
+  simPrev() {
+    const { simCurrentStep, simulatorSteps } = this.data;
+    if (simCurrentStep <= 0) return;
+    const prev = simCurrentStep - 1;
+    const steps = simulatorSteps.map((s, i) => ({ ...s, isActive: i === prev }));
+    this.setData({ simCurrentStep: prev, simulatorSteps: steps });
+  },
+
+  simReset() {
+    const steps = this.data.simulatorSteps.map((s, i) => ({ ...s, isActive: i === 0 }));
+    this.setData({ simCurrentStep: 0, simulatorSteps: steps });
+  },
+
+  // 跳转到 Bridge Doc 页面
+  openBridgeDoc(e) {
+    const slug = e.currentTarget.dataset.slug;
+    if (!slug) return;
+    wx.navigateTo({
+      url: `/subpkg-chapters/pages/bridge-doc/bridge-doc?slug=${slug}`,
+    });
+  },
+
+  // ─── 跳转到指定函数行（scroll-into-view） ────────────────
+  scrollToFunc(e) {
+    const lineIndex = e.currentTarget.dataset.line;
+    if (lineIndex === undefined) return;
+    // scroll-into-view 用 id="line-{index}"
+    this.setData({ scrollToLineId: `line-${lineIndex - 1}` });
+  },
+});

@@ -1,0 +1,220 @@
+/* pages/reference/reference.wxss */
+
+/* ========== 页面容器 ========== */
+.page {
+  height: 100vh;
+  background: var(--color-bg);
+}
+
+/* ========== 头部区域 ========== */
+.header {
+  background: var(--color-bg-card);
+  border-bottom: 1rpx solid var(--color-border);
+}
+
+.header-inner {
+  padding: var(--spacing-xl) var(--spacing-lg) var(--spacing-lg);
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.header-badge {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin-bottom: var(--spacing-sm);
+}
+
+.header-badge-dot {
+  width: 12rpx;
+  height: 12rpx;
+  border-radius: 50%;
+  background: var(--color-accent);
+  margin-right: var(--spacing-xs);
+  display: block;
+}
+
+.header-badge-text {
+  font-size: var(--font-xs);
+  color: var(--color-accent);
+  letter-spacing: 2rpx;
+}
+
+.header-title {
+  font-size: var(--font-2xl);
+  font-weight: 700;
+  color: var(--color-text-primary);
+  line-height: 1.2;
+  margin-bottom: var(--spacing-xs);
+}
+
+.header-subtitle {
+  font-size: var(--font-sm);
+  color: var(--color-text-secondary);
+  line-height: 1.6;
+  margin-bottom: var(--spacing-md);
+}
+
+/* ========== 语言切换 ========== */
+.locale-switcher {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 0;
+}
+
+.locale-btn {
+  font-size: var(--font-sm);
+  color: var(--color-text-muted);
+  padding: 4rpx 12rpx;
+  border-radius: var(--radius-sm);
+  transition: color 0.2s;
+}
+
+.locale-btn--active {
+  color: var(--color-accent);
+  font-weight: 600;
+}
+
+.locale-sep {
+  font-size: var(--font-sm);
+  color: var(--color-border);
+}
+
+/* ========== 区块（Section）========== */
+.section {
+  padding: var(--spacing-lg) var(--spacing-lg) 0;
+}
+
+.section--last {
+  padding-bottom: var(--spacing-xl);
+}
+
+.section-header {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin-bottom: var(--spacing-md);
+}
+
+.section-indicator {
+  width: 6rpx;
+  height: 32rpx;
+  border-radius: 3rpx;
+  margin-right: var(--spacing-sm);
+  flex-shrink: 0;
+}
+
+.section-indicator--map {
+  background: var(--color-accent);
+}
+
+.section-indicator--mechanism {
+  background: var(--color-runtime);
+}
+
+.section-title {
+  font-size: var(--font-md);
+  font-weight: 600;
+  color: var(--color-text-primary);
+}
+
+/* ========== 文档列表 ========== */
+.doc-list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-sm);
+}
+
+/* ========== 文档卡片 ========== */
+.doc-card {
+  background: var(--color-bg-card);
+  border-radius: var(--radius-md);
+  border: 1rpx solid var(--color-border);
+  padding: var(--spacing-md);
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-sm);
+  position: relative;
+  overflow: hidden;
+}
+
+/* map 卡片：accent 色左边框 */
+.doc-card--map {
+  border-left: 6rpx solid var(--color-accent);
+}
+
+/* mechanism 卡片：runtime 紫色左边框 */
+.doc-card--mechanism {
+  border-left: 6rpx solid var(--color-runtime);
+}
+
+/* 点击态 */
+.card-hover {
+  opacity: 0.75;
+  background: var(--color-bg-muted);
+}
+
+/* ========== 卡片内容 ========== */
+.doc-card-body {
+  display: flex;
+  flex-direction: column;
+  gap: 8rpx;
+}
+
+.doc-title {
+  font-size: var(--font-base);
+  font-weight: 600;
+  color: var(--color-text-primary);
+  line-height: 1.4;
+}
+
+.doc-summary {
+  font-size: var(--font-sm);
+  color: var(--color-text-secondary);
+  line-height: 1.6;
+}
+
+/* ========== 卡片底部（badge + 箭头）========== */
+.doc-footer {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 4rpx;
+}
+
+.doc-badge {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding: 4rpx 16rpx;
+  border-radius: 100rpx;
+}
+
+.doc-badge--map {
+  background: rgba(56, 189, 248, 0.12);
+}
+
+.doc-badge--mechanism {
+  background: rgba(167, 139, 250, 0.12);
+}
+
+.doc-badge-text {
+  font-size: var(--font-xs);
+  font-weight: 500;
+}
+
+.doc-badge--map .doc-badge-text {
+  color: var(--color-accent);
+}
+
+.doc-badge--mechanism .doc-badge-text {
+  color: var(--color-runtime);
+}
+
+.doc-arrow {
+  font-size: var(--font-sm);
+  color: var(--color-text-muted);
+}
