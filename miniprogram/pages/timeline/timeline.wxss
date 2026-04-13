@@ -308,15 +308,16 @@
   border-radius: 3rpx;
 }
 
-/* 换乘站的轨道 */
+/* 换乘站的轨道：延伸穿过 margin 以消除间隙 */
 .metro-rail-transfer {
-  top: 0;
-  bottom: 0;
+  top: -20rpx;
+  bottom: -20rpx;
 }
 
 /* 第一个换乘站：轨道从节点中心开始（上方无线） */
 .metro-rail-first {
   top: 50%;
+  bottom: -20rpx;
 }
 
 /* 终点段的轨道：只到圆点中心位置 */

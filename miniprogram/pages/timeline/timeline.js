@@ -91,17 +91,6 @@ function _buildLayerStartMap() {
   return map;
 }
 
-// 构建 layerEnd 映射：哪个 version 是 layer 的最后一个
-function _buildLayerEndMap() {
-  const map = {};
-  meta.layers.forEach(layer => {
-    if (layer.versions && layer.versions.length > 0) {
-      map[layer.versions[layer.versions.length - 1]] = layer.id;
-    }
-  });
-  return map;
-}
-
 // 构建 layerStart 的版本范围文本映射
 function _buildLayerRangeMap() {
   var map = {};
@@ -177,7 +166,6 @@ Page({
     }
 
     const layerStartMap = _buildLayerStartMap();
-    const layerEndMap = _buildLayerEndMap();
 
     const layerRangeMap = _buildLayerRangeMap();
 
