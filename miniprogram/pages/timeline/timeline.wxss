@@ -314,6 +314,11 @@
   bottom: 0;
 }
 
+/* 第一个换乘站：轨道从节点中心开始（上方无线） */
+.metro-rail-first {
+  top: 50%;
+}
+
 /* 终点段的轨道：只到圆点中心位置 */
 .metro-rail-end {
   bottom: auto;

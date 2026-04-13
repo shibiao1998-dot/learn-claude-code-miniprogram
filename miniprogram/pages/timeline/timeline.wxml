@@ -116,7 +116,9 @@
         <!-- 换乘站（阶段起始） -->
         <view wx:if="{{item.isLayerStart}}" class="metro-transfer"
               bindtap="toggleCheckpoint" data-layer="{{item.layer}}">
-          <view class="metro-rail metro-rail-transfer" style="background: {{item.layerColor}}"></view>
+          <!-- 第一个换乘站不画上方轨道 -->
+          <view wx:if="{{index > 0}}" class="metro-rail metro-rail-transfer" style="background: {{item.layerColor}}"></view>
+          <view wx:else class="metro-rail metro-rail-transfer metro-rail-first" style="background: {{item.layerColor}}"></view>
           <view class="transfer-node" style="border-color: {{item.layerColor}}">
             <view class="transfer-dot" style="background: {{item.layerColor}}"></view>
           </view>
@@ -126,7 +128,7 @@
           </view>
         </view>
 
-        <!-- 普通站点 -->
+        <!-- 普通站点（所有章节都渲染，包括换乘站章节） -->
         <view class="metro-station {{item.isRead ? 'read' : ''}}"
               bindtap="goToChapter" data-id="{{item.id}}"
               hover-class="station-hover">
