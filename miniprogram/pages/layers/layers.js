@@ -2,8 +2,8 @@
 const i18n = require('../../utils/i18n');
 const eventBus = require('../../utils/event-bus');
 const progress = require('../../utils/progress');
-const meta = require('../../data/meta.json');
-const bridgeDocsMeta = require('../../data/bridge-docs-meta.json');
+const meta = require('../../data/meta.js');
+const bridgeDocsMeta = require('../../data/bridge-docs-meta.js');
 
 const LAYER_SUPPORT_DOCS = {
   core: ['s00-architecture-overview', 's00b-one-request-lifecycle', 's02a-tool-control-plane', 'data-structures'],
@@ -13,10 +13,10 @@ const LAYER_SUPPORT_DOCS = {
 };
 
 const LAYER_CSS_COLORS = {
-  core: '#34D399',
-  hardening: '#60A5FA',
-  runtime: '#A78BFA',
-  platform: '#F472B6',
+  core: '#059669',
+  hardening: '#2563EB',
+  runtime: '#7C3AED',
+  platform: '#DB2777',
 };
 
 Page({
@@ -49,13 +49,13 @@ Page({
 
     let messages = {};
     try {
-      messages = require(`../../i18n/${locale}.json`);
-    } catch (e) {
-      try {
-        messages = require('../../i18n/zh.json');
-      } catch (e2) {
-        console.warn('[layers] failed to load i18n messages');
+      switch (locale) {
+        case 'en': messages = require('../../i18n/en.js'); break;
+        case 'ja': messages = require('../../i18n/ja.js'); break;
+        default:   messages = require('../../i18n/zh.js'); break;
       }
+    } catch (e) {
+      console.warn('[layers] failed to load i18n messages');
     }
 
     const layerSections = meta.layers.map((layer, index) => {
@@ -121,15 +121,15 @@ Page({
 
   _refreshProgress() {
     if (!this.data.layerSections || !this.data.layerSections.length) return;
-    const layerSections = this.data.layerSections.map(section => ({
-      ...section,
-      readCount: progress.getReadCount(section.versions.map(v => v.id)),
-      versions: section.versions.map(v => ({
-        ...v,
-        isRead: progress.isRead(v.id),
-      })),
-    }));
-    this.setData({ layerSections });
+    const layerSections = this.data.layerSections.map(function(section) {
+      return Object.assign({}, section, {
+        readCount: progress.getReadCount(section.versions.map(function(v) { return v.id; })),
+        versions: section.versions.map(function(v) {
+          return Object.assign({}, v, { isRead: progress.isRead(v.id) });
+        }),
+      });
+    });
+    this.setData({ layerSections: layerSections });
   },
 
   toggleCheckpoint(e) {

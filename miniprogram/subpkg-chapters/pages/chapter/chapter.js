@@ -6,7 +6,7 @@ const eventBus = require('../../../utils/event-bus');
 const highlight = require('../../../utils/highlight');
 const markdownParser = require('../../../utils/markdown-parser');
 const dataLoader = require('../../data-loader');
-const meta = require('../../../data/meta.json');
+const meta = require('../../../data/meta.js');
 
 // ─── Deep Dive：章节 → 关联 Bridge Docs 映射 ───────────────────────────────
 const CHAPTER_BRIDGE_DOCS = {
@@ -51,7 +51,7 @@ function _buildFlowList(nodes, edges) {
   if (!nodes || !nodes.length) return [];
 
   // 以 y 坐标升序排列节点（流程图从上到下）
-  const sorted = [...nodes].sort((a, b) => (a.y || 0) - (b.y || 0));
+  const sorted = nodes.slice().sort((a, b) => (a.y || 0) - (b.y || 0));
 
   // 建立从 id → 出边 label 的映射
   const outLabels = {};
@@ -77,10 +77,10 @@ function _buildFlowList(nodes, edges) {
 
 // 图层颜色映射（覆盖 meta.json 中的颜色，使用设计系统色值）
 const LAYER_COLORS = {
-  core: '#34D399',
-  hardening: '#60A5FA',
-  runtime: '#A78BFA',
-  platform: '#F472B6',
+  core: '#059669',
+  hardening: '#2563EB',
+  runtime: '#7C3AED',
+  platform: '#DB2777',
 };
 
 // 语法高亮 token 颜色映射（VS Code Dark+ 风格）
@@ -180,9 +180,9 @@ Page({
   _getMessages(locale) {
     // 微信小程序不支持动态 require，用 switch 静态映射
     switch (locale) {
-      case 'en': return require('../../../i18n/en.json');
-      case 'ja': return require('../../../i18n/ja.json');
-      default:   return require('../../../i18n/zh.json');
+      case 'en': return require('../../../i18n/en.js');
+      case 'ja': return require('../../../i18n/ja.js');
+      default:   return require('../../../i18n/zh.js');
     }
   },
 
@@ -195,7 +195,7 @@ Page({
     try {
       messages = this._getMessages(locale);
     } catch (e) {
-      try { messages = require('../../../i18n/zh.json'); } catch (e2) { messages = {}; }
+      try { messages = require('../../../i18n/zh.js'); } catch (e2) { messages = {}; }
     }
 
     const v = meta.versions[id];
@@ -290,7 +290,7 @@ Page({
     const id = this.data.id;
 
     try {
-      const sources = require('../../../data/versions-source.json');
+      const sources = require('../../../data/versions-source.js');
       const source = sources[id] || '';
       const allLines = source.split('\n');
       const totalLoc = allLines.length;
@@ -364,7 +364,7 @@ Page({
   // ─── 复制源码 ────────────────────────────────────────────
   copySource() {
     try {
-      const sources = require('../../../data/versions-source.json');
+      const sources = require('../../../data/versions-source.js');
       const source = sources[this.data.id] || '';
       wx.setClipboardData({
         data: source,
@@ -397,7 +397,7 @@ Page({
     // 流程图数据
     let flowItems = [];
     try {
-      const flows = require('../../../data/flows.json');
+      const flows = require('../../../data/flows.js');
       const flow = flows[id] || null;
       if (flow) {
         flowItems = _buildFlowList(flow.nodes, flow.edges);
@@ -409,7 +409,7 @@ Page({
     // 架构蓝图
     let blueprintData = null;
     try {
-      const blueprints = require('../../../data/blueprints.json');
+      const blueprints = require('../../../data/blueprints.js');
       const blueprint = blueprints[id] || null;
       if (blueprint) {
         blueprintData = {
@@ -438,7 +438,7 @@ Page({
     // 模拟器数据
     let simulatorSteps = [];
     try {
-      const scenarios = require('../../../data/scenarios-all.json');
+      const scenarios = require('../../../data/scenarios-all.js');
       const scenario = scenarios[id] || null;
       if (scenario && scenario.steps) {
         simulatorSteps = scenario.steps.map((s, i) => ({
@@ -457,7 +457,7 @@ Page({
     // Bridge Doc 链接
     let bridgeDocLinks = [];
     try {
-      const bridgeDocsMeta = require('../../../data/bridge-docs-meta.json');
+      const bridgeDocsMeta = require('../../../data/bridge-docs-meta.js');
       const slugs = CHAPTER_BRIDGE_DOCS[id] || ['data-structures', 'entity-map', 's00-architecture-overview'];
       bridgeDocLinks = slugs
         .filter(slug => bridgeDocsMeta[slug])
@@ -488,7 +488,7 @@ Page({
     const { simCurrentStep, simulatorSteps } = this.data;
     if (simCurrentStep >= simulatorSteps.length - 1) return;
     const next = simCurrentStep + 1;
-    const steps = simulatorSteps.map((s, i) => ({ ...s, isActive: i === next }));
+    const steps = simulatorSteps.map(function(s, i) { return Object.assign({}, s, { isActive: i === next }); });
     this.setData({ simCurrentStep: next, simulatorSteps: steps });
   },
 
@@ -496,12 +496,12 @@ Page({
     const { simCurrentStep, simulatorSteps } = this.data;
     if (simCurrentStep <= 0) return;
     const prev = simCurrentStep - 1;
-    const steps = simulatorSteps.map((s, i) => ({ ...s, isActive: i === prev }));
+    const steps = simulatorSteps.map(function(s, i) { return Object.assign({}, s, { isActive: i === prev }); });
     this.setData({ simCurrentStep: prev, simulatorSteps: steps });
   },
 
   simReset() {
-    const steps = this.data.simulatorSteps.map((s, i) => ({ ...s, isActive: i === 0 }));
+    const steps = this.data.simulatorSteps.map(function(s, i) { return Object.assign({}, s, { isActive: i === 0 }); });
     this.setData({ simCurrentStep: 0, simulatorSteps: steps });
   },
 

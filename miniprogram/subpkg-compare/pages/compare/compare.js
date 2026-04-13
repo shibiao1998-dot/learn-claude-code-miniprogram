@@ -1,14 +1,14 @@
 // subpkg-compare/pages/compare/compare.js
-const i18n = require('../../../../utils/i18n');
-const eventBus = require('../../../../utils/event-bus');
-const meta = require('../../../../data/meta.json');
+const i18n = require('../../../utils/i18n');
+const eventBus = require('../../../utils/event-bus');
+const meta = require('../../../data/meta.js');
 
 // 根据阶段(layer)给出对应颜色
 const LAYER_COLORS = {
-  core: '#34D399',
-  hardening: '#60A5FA',
-  runtime: '#A78BFA',
-  platform: '#F472B6',
+  core: '#059669',
+  hardening: '#2563EB',
+  runtime: '#7C3AED',
+  platform: '#DB2777',
 };
 
 Page({
@@ -51,9 +51,13 @@ Page({
     const locale = i18n.getLocale();
     let messages = {};
     try {
-      messages = require(`../../../../i18n/${locale}.json`);
+      switch (locale) {
+        case 'en': messages = require('../../../i18n/en.js'); break;
+        case 'ja': messages = require('../../../i18n/ja.js'); break;
+        default:   messages = require('../../../i18n/zh.js'); break;
+      }
     } catch (e) {
-      messages = require('../../../../i18n/zh.json');
+      messages = require('../../../i18n/zh.js');
     }
 
     const versionOptions = meta.versionOrder.map(id => ({
@@ -136,9 +140,9 @@ Page({
     // ── 工具集合对比 ──────────────────────────
     const aTools = new Set(vA.tools || []);
     const bTools = new Set(vB.tools || []);
-    const onlyInA = [...aTools].filter(t => !bTools.has(t));
-    const onlyInB = [...bTools].filter(t => !aTools.has(t));
-    const shared = [...aTools].filter(t => bTools.has(t));
+    const onlyInA = (vA.tools || []).filter(function(t) { return !bTools.has(t); });
+    const onlyInB = (vB.tools || []).filter(function(t) { return !aTools.has(t); });
+    const shared = (vA.tools || []).filter(function(t) { return bTools.has(t); });
 
     // ── 累积 diff（从 A 到 B 之间所有章节的增量）──
     let newClasses = [], newFunctions = [], newTools = [];
@@ -149,9 +153,9 @@ Page({
         const vid = meta.versionOrder[i];
         const diff = meta.diffs.find(d => d.to === vid);
         if (diff) {
-          newClasses.push(...(diff.newClasses || []));
-          newFunctions.push(...(diff.newFunctions || []));
-          newTools.push(...(diff.newTools || []));
+          newClasses = newClasses.concat(diff.newClasses || []);
+          newFunctions = newFunctions.concat(diff.newFunctions || []);
+          newTools = newTools.concat(diff.newTools || []);
         }
       }
     }
@@ -189,9 +193,9 @@ Page({
         onlyInA,
         onlyInB,
         shared,
-        newClasses: [...new Set(newClasses)],
-        newFunctions: [...new Set(newFunctions)],
-        newTools: [...new Set(newTools)],
+        newClasses: Array.from(new Set(newClasses)),
+        newFunctions: Array.from(new Set(newFunctions)),
+        newTools: Array.from(new Set(newTools)),
         hasNewContent: newClasses.length > 0 || newFunctions.length > 0 || newTools.length > 0,
         aKeyInsight: contentA.keyInsight || '',
         bKeyInsight: contentB.keyInsight || '',

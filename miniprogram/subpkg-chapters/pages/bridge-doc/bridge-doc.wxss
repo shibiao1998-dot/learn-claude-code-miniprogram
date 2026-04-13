@@ -36,15 +36,15 @@
 }
 
 .bd-kind-badge--map {
-  background: #34D39918;
+  background: #05966918;
   color: var(--color-core);
-  border-color: #34D39944;
+  border-color: #05966944;
 }
 
 .bd-kind-badge--mechanism {
-  background: #60A5FA18;
+  background: #2563EB18;
   color: var(--color-hardening);
-  border-color: #60A5FA44;
+  border-color: #2563EB44;
 }
 
 .bd-title {

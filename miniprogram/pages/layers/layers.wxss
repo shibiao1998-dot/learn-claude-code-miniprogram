@@ -13,7 +13,7 @@
   align-items: flex-start;
   justify-content: space-between;
   padding: var(--spacing-xl) var(--spacing-md) var(--spacing-md);
-  background: linear-gradient(180deg, #1a2744 0%, var(--color-bg) 100%);
+  background: linear-gradient(180deg, #EFF6FF 0%, var(--color-bg) 100%);
 }
 
 .header-content {
@@ -58,7 +58,7 @@
 .locale-btn--active {
   color: var(--color-accent);
   border-color: var(--color-accent);
-  background: rgba(56, 189, 248, 0.1);
+  background: rgba(2, 132, 199, 0.1);
 }
 
 /* ====== 通用区块 ====== */
@@ -137,10 +137,10 @@
   padding: var(--spacing-md);
 }
 
-.layer-header--core     { background: linear-gradient(135deg, rgba(52,211,153,0.15) 0%, rgba(52,211,153,0.04) 100%); }
-.layer-header--hardening { background: linear-gradient(135deg, rgba(96,165,250,0.15) 0%, rgba(96,165,250,0.04) 100%); }
-.layer-header--runtime  { background: linear-gradient(135deg, rgba(167,139,250,0.15) 0%, rgba(167,139,250,0.04) 100%); }
-.layer-header--platform { background: linear-gradient(135deg, rgba(244,114,182,0.15) 0%, rgba(244,114,182,0.04) 100%); }
+.layer-header--core     { background: linear-gradient(135deg, rgba(5,150,105,0.15) 0%, rgba(5,150,105,0.04) 100%); }
+.layer-header--hardening { background: linear-gradient(135deg, rgba(37,99,235,0.15) 0%, rgba(37,99,235,0.04) 100%); }
+.layer-header--runtime  { background: linear-gradient(135deg, rgba(124,58,237,0.15) 0%, rgba(124,58,237,0.04) 100%); }
+.layer-header--platform { background: linear-gradient(135deg, rgba(219,39,119,0.15) 0%, rgba(219,39,119,0.04) 100%); }
 
 .layer-header-top {
   display: flex;
@@ -161,10 +161,10 @@
   flex-shrink: 0;
 }
 
-.layer-index-badge--core     { background: rgba(52,211,153,0.2); }
-.layer-index-badge--hardening { background: rgba(96,165,250,0.2); }
-.layer-index-badge--runtime  { background: rgba(167,139,250,0.2); }
-.layer-index-badge--platform { background: rgba(244,114,182,0.2); }
+.layer-index-badge--core     { background: rgba(5,150,105,0.2); }
+.layer-index-badge--hardening { background: rgba(37,99,235,0.2); }
+.layer-index-badge--runtime  { background: rgba(124,58,237,0.2); }
+.layer-index-badge--platform { background: rgba(219,39,119,0.2); }
 
 .layer-index-text {
   font-size: var(--font-sm);
@@ -228,7 +228,7 @@
   display: flex;
   flex-direction: row;
   gap: var(--spacing-xs);
-  background: rgba(0,0,0,0.2);
+  background: rgba(0,0,0,0.05);
   border-radius: var(--radius-sm);
   padding: var(--spacing-xs) var(--spacing-sm);
 }
@@ -278,10 +278,10 @@
   align-self: flex-start;
 }
 
-.checkpoint-tag--core     { background: rgba(52,211,153,0.15); color: var(--color-core); }
-.checkpoint-tag--hardening { background: rgba(96,165,250,0.15); color: var(--color-hardening); }
-.checkpoint-tag--runtime  { background: rgba(167,139,250,0.15); color: var(--color-runtime); }
-.checkpoint-tag--platform { background: rgba(244,114,182,0.15); color: var(--color-platform); }
+.checkpoint-tag--core     { background: rgba(5,150,105,0.15); color: var(--color-core); }
+.checkpoint-tag--hardening { background: rgba(37,99,235,0.15); color: var(--color-hardening); }
+.checkpoint-tag--runtime  { background: rgba(124,58,237,0.15); color: var(--color-runtime); }
+.checkpoint-tag--platform { background: rgba(219,39,119,0.15); color: var(--color-platform); }
 
 .checkpoint-title {
   font-size: var(--font-sm);
@@ -359,7 +359,7 @@
 
 /* 折叠展开：重建目标 */
 .checkpoint-rebuild {
-  background: rgba(0,0,0,0.2);
+  background: rgba(0,0,0,0.05);
   border-radius: var(--radius-sm);
   padding: var(--spacing-sm);
   margin-top: var(--spacing-xs);
@@ -474,7 +474,7 @@
 
 .version-read-text {
   font-size: 18rpx;
-  color: #fff;
+  color: var(--color-bg);
   font-weight: 700;
 }
 

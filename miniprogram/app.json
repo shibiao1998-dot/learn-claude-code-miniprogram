@@ -21,17 +21,17 @@
     }
   ],
   "window": {
-    "backgroundTextStyle": "dark",
-    "navigationBarBackgroundColor": "#0F172A",
+    "backgroundTextStyle": "light",
+    "navigationBarBackgroundColor": "#FFFFFF",
     "navigationBarTitleText": "Learn Claude Code",
-    "navigationBarTextStyle": "white",
-    "backgroundColor": "#0F172A"
+    "navigationBarTextStyle": "black",
+    "backgroundColor": "#F8FAFC"
   },
   "tabBar": {
-    "color": "#64748B",
-    "selectedColor": "#38BDF8",
-    "backgroundColor": "#1E293B",
-    "borderStyle": "black",
+    "color": "#94A3B8",
+    "selectedColor": "#0284C7",
+    "backgroundColor": "#FFFFFF",
+    "borderStyle": "white",
     "list": [
       {
         "pagePath": "pages/home/home",

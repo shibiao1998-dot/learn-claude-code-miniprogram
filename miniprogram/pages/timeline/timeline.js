@@ -6,10 +6,10 @@ const meta = require('../../data/meta.js');
 
 // 阶段颜色（对应 CSS 变量中的 layer 颜色）
 const LAYER_COLORS = {
-  core: '#34D399',
-  hardening: '#60A5FA',
-  runtime: '#A78BFA',
-  platform: '#F472B6',
+  core: '#059669',
+  hardening: '#2563EB',
+  runtime: '#7C3AED',
+  platform: '#DB2777',
 };
 
 // 常用桥接文档快速入口

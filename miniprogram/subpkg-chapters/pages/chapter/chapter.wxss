@@ -232,8 +232,8 @@
 
 .tool-tag--new {
   color: var(--color-core);
-  background: #34D39918;
-  border: 1rpx solid #34D39940;
+  background: #05966918;
+  border: 1rpx solid #05966940;
 }
 
 /* 已读徽章 */
@@ -319,7 +319,7 @@
 }
 
 .guide-item__dot--focus    { background: var(--color-accent); }
-.guide-item__dot--confusion { background: #F59E0B; }
+.guide-item__dot--confusion { background: var(--color-warning); }
 .guide-item__dot--goal     { background: var(--color-core); }
 
 .guide-item__label {
@@ -613,13 +613,13 @@
 /* 截断提示 */
 .truncate-tip {
   padding: var(--spacing-xs) var(--spacing-md);
-  background: #F59E0B18;
-  border-bottom: 1rpx solid #F59E0B30;
+  background: #D9770618;
+  border-bottom: 1rpx solid #D9770630;
 }
 
 .truncate-tip__text {
   font-size: var(--font-xs);
-  color: #F59E0B;
+  color: var(--color-warning);
 }
 
 /* 代码正文 */
@@ -866,8 +866,8 @@
 
 .dd-flow-node--decision .dd-flow-node__box {
   border-radius: var(--radius-sm);
-  background: #F59E0B18;
-  border-color: #F59E0B66;
+  background: #D9770618;
+  border-color: #D9770666;
   transform: skewX(-8deg);
 }
 
@@ -959,7 +959,7 @@
 
 .dd-blueprint-item--record {
   border-left-color: var(--color-core);
-  background: #34D39910;
+  background: #05966910;
 }
 
 .dd-blueprint-item__head {
@@ -993,8 +993,8 @@
 
 .dd-blueprint-item__badge--record {
   color: var(--color-core);
-  background: #34D39918;
-  border-color: #34D39955;
+  background: #05966918;
+  border-color: #05966955;
 }
 
 .dd-blueprint-item__detail {
@@ -1106,7 +1106,7 @@
 
 .dd-sim-step--user_message.dd-sim-step--active {
   border-left-color: var(--color-core);
-  background: #34D39910;
+  background: #05966910;
 }
 
 .dd-sim-step--assistant_text {
@@ -1114,15 +1114,15 @@
 }
 
 .dd-sim-step--assistant_text.dd-sim-step--active {
-  background: #60A5FA10;
+  background: #2563EB10;
 }
 
 .dd-sim-step--tool_call {
-  border-left: 4rpx solid #F59E0B;
+  border-left: 4rpx solid var(--color-warning);
 }
 
 .dd-sim-step--tool_call.dd-sim-step--active {
-  background: #F59E0B10;
+  background: #D9770610;
 }
 
 .dd-sim-step--tool_result {
@@ -1130,7 +1130,7 @@
 }
 
 .dd-sim-step--tool_result.dd-sim-step--active {
-  background: #A78BFA10;
+  background: #7C3AED10;
 }
 
 .dd-sim-step__header {
@@ -1153,7 +1153,7 @@
 
 .dd-sim-step__tool {
   font-size: var(--font-xs);
-  color: #F59E0B;
+  color: var(--color-warning);
   font-family: 'Courier New', monospace;
   font-weight: 600;
 }

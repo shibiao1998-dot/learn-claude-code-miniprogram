@@ -194,11 +194,11 @@
 }
 
 .doc-badge--map {
-  background: rgba(56, 189, 248, 0.12);
+  background: rgba(2, 132, 199, 0.08);
 }
 
 .doc-badge--mechanism {
-  background: rgba(167, 139, 250, 0.12);
+  background: rgba(124, 58, 237, 0.08);
 }
 
 .doc-badge-text {

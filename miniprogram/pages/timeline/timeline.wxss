@@ -51,7 +51,7 @@
 
 .locale-btn.active {
   background: var(--color-accent);
-  color: #0F172A;
+  color: var(--color-bg);
   font-weight: 600;
 }
 
@@ -346,7 +346,7 @@
 }
 
 .station-hover {
-  background: rgba(51, 65, 85, 0.3);
+  background: rgba(0, 0, 0, 0.05);
   border-radius: var(--radius-sm);
 }
 

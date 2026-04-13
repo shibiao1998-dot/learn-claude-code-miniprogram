@@ -1,18 +1,19 @@
-/* app.wxss */
+/* app.wxss — Light Theme */
 page {
-  --color-bg: #0F172A;
-  --color-bg-card: #1E293B;
-  --color-bg-muted: #334155;
-  --color-text-primary: #F1F5F9;
-  --color-text-secondary: #94A3B8;
-  --color-text-muted: #64748B;
-  --color-accent: #38BDF8;
-  --color-accent-hover: #7DD3FC;
-  --color-core: #34D399;
-  --color-hardening: #60A5FA;
-  --color-runtime: #A78BFA;
-  --color-platform: #F472B6;
-  --color-border: #334155;
+  --color-bg: #FFFFFF;
+  --color-bg-card: #F8FAFC;
+  --color-bg-muted: #E2E8F0;
+  --color-text-primary: #0F172A;
+  --color-text-secondary: #475569;
+  --color-text-muted: #94A3B8;
+  --color-accent: #0284C7;
+  --color-accent-hover: #0369A1;
+  --color-core: #059669;
+  --color-hardening: #2563EB;
+  --color-runtime: #7C3AED;
+  --color-platform: #DB2777;
+  --color-border: #E2E8F0;
+  --color-warning: #D97706;
   --radius-sm: 8rpx;
   --radius-md: 16rpx;
   --radius-lg: 24rpx;
@@ -36,10 +37,6 @@ page {
   box-sizing: border-box;
 }
 
-* {
-  box-sizing: border-box;
-}
-
 .card {
   background: var(--color-bg-card);
   border-radius: var(--radius-md);
@@ -56,7 +53,7 @@ page {
 .layer-runtime { color: var(--color-runtime); }
 .layer-platform { color: var(--color-platform); }
 
-.layer-bg-core { background-color: rgba(52, 211, 153, 0.12); }
-.layer-bg-hardening { background-color: rgba(96, 165, 250, 0.12); }
-.layer-bg-runtime { background-color: rgba(167, 139, 250, 0.12); }
-.layer-bg-platform { background-color: rgba(244, 114, 182, 0.12); }
+.layer-bg-core { background-color: rgba(5, 150, 105, 0.08); }
+.layer-bg-hardening { background-color: rgba(37, 99, 235, 0.08); }
+.layer-bg-runtime { background-color: rgba(124, 58, 237, 0.08); }
+.layer-bg-platform { background-color: rgba(219, 39, 119, 0.08); }
