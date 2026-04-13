@@ -118,7 +118,7 @@ Page.data → setData() → WXML 渲染
 
 - **Conventional Commits** 格式：`feat:` / `fix:` / `refactor:` / `chore:` / `docs:`
 - 可选 scope：`feat(timeline):` / `fix(chapter):` 等
-- 无 remote（纯本地仓库）
+- **GitHub remote**：`origin` → `https://github.com/shibiao1998-dot/learn-claude-code-miniprogram`
 - `data/` 目录的构建产物需一并提交（不在 .gitignore 中）
 
 ---
