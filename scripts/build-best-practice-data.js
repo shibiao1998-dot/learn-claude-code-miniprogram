@@ -18,6 +18,7 @@ const path = require('path');
 // 路径配置
 // ──────────────────────────────────────────────
 const BP_REPO = '/Users/bill_huang/claude-code-best-practice';
+const BP_ZH_DIR = path.resolve(__dirname, 'bp-content');
 const OUT_DIR = path.resolve(__dirname, '../miniprogram/data');
 const DOCS_DIR = path.join(OUT_DIR, 'docs');
 const META_FILE = path.join(OUT_DIR, 'meta.js');
@@ -704,8 +705,8 @@ function parseTipsFile(filePath) {
 
   for (var i = 0; i < lines.length; i++) {
     var line = lines[i];
-    // 匹配 ## 数字/ 标题 格式
-    var tipMatch = line.match(/^##\s+(\d+)\s*[/／]\s*(.*)/);
+    // 匹配 ## 数字/ 标题 或 ### 数字/ 标题 格式
+    var tipMatch = line.match(/^#{2,3}\s+(\d+)\s*[/／]\s*(.*)/);
     if (tipMatch) {
       if (currentTip) {
         currentTip.body = currentTip.body.trim();
@@ -736,24 +737,24 @@ function parseTipsFile(filePath) {
   return tips;
 }
 
-/** 将 tips 分类到预定义类别中 */
+/** 将 tips 分类到预定义类别中（支持中英文关键词） */
 function categorizeTip(tip) {
   var title = (tip.title || '').toLowerCase();
   var body = (tip.body || '').toLowerCase();
   var text = title + ' ' + body;
 
-  if (text.includes('parallel') || text.includes('5 claude') || text.includes('claude.ai/code')) return 'parallelism';
-  if (text.includes('claude.md') || text.includes('memory') || text.includes('claude md')) return 'claude-md';
-  if (text.includes('plan mode') || text.includes('planning') || text.includes('ultraplan') || text.includes('plan ')) return 'planning';
-  if (text.includes('prompt') || text.includes('opus') || text.includes('model') || text.includes('thinking')) return 'prompting';
-  if (text.includes('slash command') || text.includes('/command') || text.includes('commands')) return 'commands';
-  if (text.includes('skill')) return 'skills';
-  if (text.includes('hook')) return 'hooks';
-  if (text.includes('agent') || text.includes('subagent')) return 'agents';
-  if (text.includes('git') || text.includes('pr ') || text.includes('pull request') || text.includes('commit') || text.includes('squash')) return 'git-pr';
-  if (text.includes('debug') || text.includes('error') || text.includes('bug') || text.includes('doctor')) return 'debugging';
-  if (text.includes('workflow') || text.includes('auto mode') || text.includes('auto-accept')) return 'workflows';
-  if (text.includes('copy') || text.includes('export') || text.includes('voice') || text.includes('notification') || text.includes('terminal')) return 'utilities';
+  if (text.includes('parallel') || text.includes('5 claude') || text.includes('claude.ai/code') || text.includes('并行') || text.includes('5 个 claude')) return 'parallelism';
+  if (text.includes('claude.md') || text.includes('memory') || text.includes('claude md') || text.includes('记忆') || text.includes('CLAUDE.md')) return 'claude-md';
+  if (text.includes('plan mode') || text.includes('planning') || text.includes('ultraplan') || text.includes('plan ') || text.includes('规划') || text.includes('Plan 模式')) return 'planning';
+  if (text.includes('prompt') || text.includes('opus') || text.includes('model') || text.includes('thinking') || text.includes('提示') || text.includes('模型')) return 'prompting';
+  if (text.includes('slash command') || text.includes('/command') || text.includes('commands') || text.includes('斜杠命令') || text.includes('命令')) return 'commands';
+  if (text.includes('skill') || text.includes('技能')) return 'skills';
+  if (text.includes('hook') || text.includes('钩子')) return 'hooks';
+  if (text.includes('agent') || text.includes('subagent') || text.includes('子代理') || text.includes('代理')) return 'agents';
+  if (text.includes('git') || text.includes('pr ') || text.includes('pull request') || text.includes('commit') || text.includes('squash') || text.includes('提交') || text.includes('合并')) return 'git-pr';
+  if (text.includes('debug') || text.includes('error') || text.includes('bug') || text.includes('doctor') || text.includes('调试') || text.includes('错误')) return 'debugging';
+  if (text.includes('workflow') || text.includes('auto mode') || text.includes('auto-accept') || text.includes('工作流') || text.includes('自动')) return 'workflows';
+  if (text.includes('copy') || text.includes('export') || text.includes('voice') || text.includes('notification') || text.includes('terminal') || text.includes('复制') || text.includes('终端') || text.includes('语音')) return 'utilities';
 
   return 'daily';
 }
@@ -794,6 +795,17 @@ function main() {
     locales.forEach(function(locale) {
       var title = ch.title;
       var contentStr = combinedEn;
+
+      // 中文版：读取翻译后的 Markdown 文件
+      if (locale === 'zh') {
+        var zhFile = path.join(BP_ZH_DIR, ch.id + '-zh.md');
+        if (fs.existsSync(zhFile)) {
+          contentStr = fs.readFileSync(zhFile, 'utf-8').trim();
+          console.log('    [zh] 使用中文翻译: ' + ch.id + '-zh.md');
+        } else {
+          console.warn('    [zh] WARN: 中文翻译不存在，fallback 到英文: ' + zhFile);
+        }
+      }
 
       // 中文标题映射
       var zhTitles = {
@@ -865,6 +877,31 @@ function main() {
     }
   });
 
+  // ── Step 2b: 解析中文 Tips ──
+  var zhTipsFile = path.join(BP_ZH_DIR, 'tips-all-zh.md');
+  var allTipsZh = [];
+  if (fs.existsSync(zhTipsFile)) {
+    console.log('\n[2b/5] 解析中文 Tips 翻译...');
+    allTipsZh = parseTipsFile(zhTipsFile);
+    console.log('  中文 tips: ' + allTipsZh.length + ' 条');
+  } else {
+    console.warn('  WARN: 中文 Tips 翻译不存在，中文版将 fallback 到英文');
+  }
+
+  // 分类中文 tips
+  var categorizedTipsZh = {};
+  TIPS_CATEGORIES.forEach(function(cat) {
+    categorizedTipsZh[cat.id] = [];
+  });
+  allTipsZh.forEach(function(tip) {
+    var catId = categorizeTip(tip);
+    if (categorizedTipsZh[catId]) {
+      categorizedTipsZh[catId].push(tip);
+    } else {
+      categorizedTipsZh['daily'].push(tip);
+    }
+  });
+
   // 更新 BP_CHAPTERS 的 tipsCount
   var bpTipsMapping = {
     bp01: 'claude-md',
@@ -926,14 +963,31 @@ function main() {
     };
     writeModuleExports(path.join(DOCS_DIR, 'tips-' + cat.id + '-en.js'), docData);
 
-    // 中文版（标题翻译，内容保留英文原文）
+    // 中文版（使用翻译后的内容）
+    var zhTips = categorizedTipsZh[cat.id] || [];
+    var zhMdContent = '';
+    if (zhTips.length > 0) {
+      zhMdContent = '# ' + cat.label.zh + '\n\n';
+      zhMdContent += '> 本分类共 ' + zhTips.length + ' 条技巧\n\n';
+      zhTips.forEach(function(tip, idx) {
+        zhMdContent += '## ' + (idx + 1) + '. ' + tip.title + '\n\n';
+        if (tip.body) {
+          zhMdContent += tip.body + '\n\n';
+        }
+        zhMdContent += '---\n\n';
+      });
+    } else {
+      // fallback 到英文
+      zhMdContent = mdContent;
+    }
+
     var zhDocData = {
       version: 'tips',
       slug: 'tips-' + cat.id,
       locale: 'zh',
       title: cat.label.zh + ' 实用技巧',
       kind: 'tips',
-      content: mdContent.trim()
+      content: zhMdContent.trim()
     };
     writeModuleExports(path.join(DOCS_DIR, 'tips-' + cat.id + '-zh.js'), zhDocData);
 

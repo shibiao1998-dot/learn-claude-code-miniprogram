@@ -2143,7 +2143,7 @@ module.exports = {
       "functions": [],
       "isBestPractice": true,
       "configFields": 0,
-      "tipsCount": 4,
+      "tipsCount": 5,
       "relatedChapters": [
         "s09"
       ],
@@ -2247,7 +2247,7 @@ module.exports = {
       "functions": [],
       "isBestPractice": true,
       "configFields": 13,
-      "tipsCount": 4,
+      "tipsCount": 11,
       "relatedChapters": [
         "s05"
       ],

@@ -6,7 +6,7 @@ module.exports = [
       "en": "Prompting",
       "ja": "プロンプト技巧"
     },
-    "count": 17,
+    "count": 18,
     "slug": "tips-prompting"
   },
   {
@@ -26,7 +26,7 @@ module.exports = [
       "en": "CLAUDE.md",
       "ja": "CLAUDE.md"
     },
-    "count": 4,
+    "count": 5,
     "slug": "tips-claude-md"
   },
   {
@@ -56,7 +56,7 @@ module.exports = [
       "en": "Skills",
       "ja": "スキル技巧"
     },
-    "count": 4,
+    "count": 11,
     "slug": "tips-skills"
   },
   {

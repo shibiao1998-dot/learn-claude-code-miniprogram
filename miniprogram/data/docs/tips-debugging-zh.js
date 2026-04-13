@@ -4,5 +4,5 @@ module.exports = {
   "locale": "zh",
   "title": "调试技巧 实用技巧",
   "kind": "tips",
-  "content": "# Debugging\n\n> 2 tips in this category\n\n## 1. Claude Fixes Most Bugs by Itself\n\nHere's how the team does it:\n\nEnable the Slack MCP, then paste a Slack bug thread into Claude and just say \"fix.\" Zero context switching required.\n\nOr, just say \"Go fix the failing CI tests.\" Don't micromanage how.\n\nPoint Claude at docker logs to troubleshoot distributed systems — it's surprisingly capable at this.\n\n*Source: boris 10 tips 01 feb 26*\n\n---\n\n## 2. Let Claude Use All Your Tools via MCP\n\nClaude Code uses all your tools. It often searches and posts to Slack (via the MCP server), runs BigQuery queries to answer analytics questions (using `bq` CLI), grabs error logs from Sentry, etc. The Slack MCP configuration is checked into `.mcp.json` and shared with the team.\n\n*Source: boris 13 tips 03 jan 26*\n\n---"
+  "content": "# 调试技巧\n\n> 本分类共 1 条技巧\n\n## 1. Claude 自己就能修复大多数 Bug\n\n团队是这样做的：\n\n启用 Slack MCP，然后把一个 Slack bug 讨论帖粘贴给 Claude，只说\"修复\"。完全不需要切换上下文。\n\n或者直接说\"去修复失败的 CI 测试\"。不要微观管理怎么做。\n\n让 Claude 查看 docker 日志来排查分布式系统问题——它在这方面的能力出人意料地强。\n\n---"
 };
