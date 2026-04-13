@@ -106,74 +106,43 @@
     </view>
   </view>
 
-  <!-- ========== 主时间线 ========== -->
+  <!-- ========== 主时间线（地铁线路图） ========== -->
   <view class="section section-last">
     <text class="section-title">{{t_timelineSectionTitle}}</text>
 
-    <view class="timeline">
+    <view class="metro-line">
       <block wx:for="{{timelineItems}}" wx:key="id">
 
-        <!-- Layer 阶段分隔符 -->
-        <view wx:if="{{item.isLayerStart}}" class="layer-divider">
-          <view class="layer-divider-line" style="background: {{item.layerColor}}"></view>
-          <view class="layer-divider-content">
-            <view class="layer-divider-dot" style="background: {{item.layerColor}}; box-shadow: 0 0 12rpx {{item.layerColor}}80"></view>
-            <text class="layer-divider-label" style="color: {{item.layerColor}}">{{item.layerLabel}}</text>
+        <!-- 换乘站（阶段起始） -->
+        <view wx:if="{{item.isLayerStart}}" class="metro-transfer"
+              bindtap="toggleCheckpoint" data-layer="{{item.layer}}">
+          <view class="metro-rail metro-rail-transfer" style="background: {{item.layerColor}}"></view>
+          <view class="transfer-node" style="border-color: {{item.layerColor}}">
+            <view class="transfer-dot" style="background: {{item.layerColor}}"></view>
+          </view>
+          <view class="transfer-text">
+            <text class="transfer-label" style="color: {{item.layerColor}}">{{item.layerLabel}}</text>
+            <text class="transfer-range">{{item.rangeText}}</text>
           </view>
         </view>
 
-        <!-- 章节卡片 -->
-        <view class="timeline-item" bindtap="goToChapter" data-id="{{item.id}}">
-          <!-- 左侧彩色竖线 -->
-          <view class="timeline-line-wrapper">
-            <view class="timeline-line" style="background: {{item.layerColor}}"></view>
-          </view>
-
-          <!-- 章节内容卡片 -->
-          <view class="timeline-card card {{item.isRead ? 'card-read' : ''}}">
-            <view class="chapter-header">
-              <view class="chapter-id-badge" style="background: {{item.layerColor}}20; border-color: {{item.layerColor}}40">
-                <text class="chapter-id" style="color: {{item.layerColor}}">{{item.id}}</text>
-              </view>
-              <text class="chapter-title">{{item.title}}</text>
-              <view wx:if="{{item.isRead}}" class="read-badge">
-                <text class="read-check">✓</text>
-              </view>
-            </view>
-
-            <text wx:if="{{item.subtitle}}" class="chapter-subtitle">{{item.subtitle}}</text>
-            <text wx:if="{{item.keyInsight}}" class="chapter-insight">{{item.keyInsight}}</text>
-
-            <view class="chapter-meta">
-              <text class="chapter-loc">{{item.loc}} {{t_locUnit}}</text>
-              <view class="chapter-layer-dot" style="background: {{item.layerColor}}"></view>
-            </view>
-          </view>
-        </view>
-
-        <!-- Layer 末尾插入 checkpoint 提示条 -->
-        <view
-          wx:if="{{item.isLayerEnd && item.checkpointData}}"
-          class="inline-checkpoint"
-          style="border-left-color: {{item.layerColor}}"
-          bindtap="toggleCheckpoint"
-          data-layer="{{item.checkpointData.layer}}"
-        >
-          <view class="inline-checkpoint-icon" style="background: {{item.layerColor}}">
-            <text class="inline-checkpoint-icon-text">✦</text>
-          </view>
-          <view class="inline-checkpoint-content">
-            <text class="inline-checkpoint-title">{{item.checkpointData.titleText}}</text>
-            <view wx:if="{{expandedCheckpoints[item.checkpointData.layer]}}" class="inline-checkpoint-rebuild">
-              <text class="inline-checkpoint-rebuild-text">{{item.checkpointData.rebuildText}}</text>
-            </view>
-          </view>
-          <view class="inline-checkpoint-arrow {{expandedCheckpoints[item.checkpointData.layer] ? 'expanded' : ''}}">
-            <text>›</text>
-          </view>
+        <!-- 普通站点 -->
+        <view class="metro-station {{item.isRead ? 'read' : ''}}"
+              bindtap="goToChapter" data-id="{{item.id}}"
+              hover-class="station-hover">
+          <view class="metro-rail" style="background: {{item.layerColor}}"></view>
+          <view class="station-dot" style="background: {{item.layerColor}}"></view>
+          <text class="station-id" style="color: {{item.layerColor}}">{{item.id}}</text>
+          <text class="station-name">{{item.title}}</text>
         </view>
 
       </block>
+
+      <!-- 终点标记 -->
+      <view class="metro-end">
+        <view class="metro-rail metro-rail-end" style="background: {{lastLayerColor}}"></view>
+        <view class="end-dot" style="background: {{lastLayerColor}}"></view>
+      </view>
     </view>
   </view>
 

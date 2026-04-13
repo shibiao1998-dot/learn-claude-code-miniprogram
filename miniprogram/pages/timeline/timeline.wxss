@@ -292,243 +292,156 @@
   color: var(--color-text-muted);
 }
 
-/* ========== 主时间线 ========== */
-.timeline {
-  display: flex;
-  flex-direction: column;
-  padding-bottom: var(--spacing-lg);
-}
-
-/* Layer 阶段分隔符 */
-.layer-divider {
-  display: flex;
-  flex-direction: column;
-  margin: var(--spacing-md) 0 var(--spacing-sm);
+/* ========== 地铁线路图 ========== */
+.metro-line {
   position: relative;
+  padding: var(--spacing-sm) 0 var(--spacing-lg);
 }
 
-.layer-divider-line {
+/* ---- 连续轨道线 ---- */
+.metro-rail {
   position: absolute;
-  left: 28rpx;
+  left: 45rpx;
   top: 0;
   bottom: 0;
-  width: 2rpx;
-  opacity: 0.3;
+  width: 6rpx;
+  border-radius: 3rpx;
 }
 
-.layer-divider-content {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  padding-left: 0;
-  gap: var(--spacing-sm);
+/* 换乘站的轨道 */
+.metro-rail-transfer {
+  top: 0;
+  bottom: 0;
+}
+
+/* 终点段的轨道：只到圆点中心位置 */
+.metro-rail-end {
+  bottom: auto;
+  height: 24rpx;
+}
+
+/* ---- 普通站点行 ---- */
+.metro-station {
   position: relative;
-  z-index: 1;
-}
-
-.layer-divider-dot {
-  width: 20rpx;
-  height: 20rpx;
-  border-radius: 50%;
-  flex-shrink: 0;
-  margin-left: 18rpx;
-}
-
-.layer-divider-label {
-  font-size: var(--font-sm);
-  font-weight: 700;
-  letter-spacing: 1rpx;
-  text-transform: uppercase;
-}
-
-/* 时间线章节条目 */
-.timeline-item {
-  display: flex;
-  flex-direction: row;
-  align-items: stretch;
-  padding: var(--spacing-xs) 0;
-}
-
-.timeline-line-wrapper {
-  width: 56rpx;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  flex-shrink: 0;
-  padding-top: 4rpx;
-}
-
-.timeline-line {
-  width: 3rpx;
-  flex: 1;
-  min-height: 100%;
-  border-radius: 2rpx;
-  opacity: 0.7;
-}
-
-/* 章节卡片 */
-.timeline-card {
-  flex: 1;
-  min-width: 0;
-  margin-left: var(--spacing-xs);
-  transition: opacity 0.2s;
-}
-
-.timeline-card.card-read {
-  opacity: 0.75;
-}
-
-.chapter-header {
   display: flex;
   flex-direction: row;
   align-items: center;
-  gap: var(--spacing-xs);
-  margin-bottom: var(--spacing-xs);
-  flex-wrap: wrap;
+  height: 80rpx;
+  padding-left: 80rpx;
 }
 
-.chapter-id-badge {
-  padding: 4rpx 14rpx;
-  border-radius: 100rpx;
-  border: 1rpx solid transparent;
-  flex-shrink: 0;
+.metro-station.read .station-dot {
+  opacity: 0.4;
 }
 
-.chapter-id {
-  font-size: var(--font-xs);
-  font-weight: 700;
-  font-family: monospace;
+.metro-station.read .station-id,
+.metro-station.read .station-name {
+  opacity: 0.4;
 }
 
-.chapter-title {
-  flex: 1;
-  font-size: var(--font-base);
-  font-weight: 600;
-  color: var(--color-text-primary);
-  min-width: 0;
-}
-
-.read-badge {
-  width: 36rpx;
-  height: 36rpx;
-  border-radius: 50%;
-  background: var(--color-core);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-shrink: 0;
-}
-
-.read-check {
-  font-size: var(--font-xs);
-  color: #0F172A;
-  font-weight: 700;
-}
-
-.chapter-subtitle {
-  display: block;
-  font-size: var(--font-xs);
-  color: var(--color-accent);
-  margin-bottom: 6rpx;
-}
-
-.chapter-insight {
-  display: block;
-  font-size: var(--font-xs);
-  color: var(--color-text-secondary);
-  line-height: 1.6;
-  margin-bottom: var(--spacing-xs);
-}
-
-.chapter-meta {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  gap: var(--spacing-xs);
-}
-
-.chapter-loc {
-  font-size: var(--font-xs);
-  color: var(--color-text-muted);
-  font-family: monospace;
-}
-
-.chapter-layer-dot {
-  width: 8rpx;
-  height: 8rpx;
-  border-radius: 50%;
-  opacity: 0.6;
-}
-
-/* ========== inline checkpoint（阶段末尾的检查点提示） ========== */
-.inline-checkpoint {
-  display: flex;
-  flex-direction: row;
-  align-items: flex-start;
-  background: var(--color-bg-card);
-  border-radius: var(--radius-md);
-  border: 1rpx solid var(--color-border);
-  border-left: 4rpx solid transparent;
-  padding: var(--spacing-md);
-  margin: var(--spacing-sm) 0 var(--spacing-md);
-  gap: var(--spacing-sm);
-}
-
-.inline-checkpoint-icon {
-  width: 48rpx;
-  height: 48rpx;
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-shrink: 0;
-  opacity: 0.9;
-}
-
-.inline-checkpoint-icon-text {
-  font-size: var(--font-sm);
-  color: #0F172A;
-  font-weight: 700;
-}
-
-.inline-checkpoint-content {
-  flex: 1;
-  min-width: 0;
-}
-
-.inline-checkpoint-title {
-  display: block;
-  font-size: var(--font-xs);
-  font-weight: 600;
-  color: var(--color-text-primary);
-  line-height: 1.5;
-  margin-bottom: 4rpx;
-}
-
-.inline-checkpoint-rebuild {
-  margin-top: var(--spacing-xs);
-  padding: var(--spacing-xs) var(--spacing-sm);
-  background: var(--color-bg-muted);
+.station-hover {
+  background: rgba(51, 65, 85, 0.3);
   border-radius: var(--radius-sm);
 }
 
-.inline-checkpoint-rebuild-text {
-  display: block;
+.station-dot {
+  position: absolute;
+  left: 40rpx;
+  top: 50%;
+  width: 16rpx;
+  height: 16rpx;
+  margin-top: -8rpx;
+  border-radius: 50%;
+}
+
+.station-id {
   font-size: var(--font-xs);
-  color: var(--color-text-secondary);
-  line-height: 1.6;
+  font-weight: 700;
+  font-family: monospace;
+  width: 60rpx;
+  flex-shrink: 0;
 }
 
-.inline-checkpoint-arrow {
-  font-size: 36rpx;
+.station-name {
+  font-size: var(--font-sm);
+  color: var(--color-text-primary);
+  margin-left: var(--spacing-sm);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* ---- 换乘站行 ---- */
+.metro-transfer {
+  position: relative;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  height: 120rpx;
+  padding-left: 80rpx;
+  margin-top: 20rpx;
+  margin-bottom: 20rpx;
+}
+
+/* 第一个换乘站不需要顶部额外间距 */
+.metro-transfer:first-child {
+  margin-top: 0;
+}
+
+.transfer-node {
+  position: absolute;
+  left: 32rpx;
+  top: 50%;
+  width: 32rpx;
+  height: 32rpx;
+  margin-top: -16rpx;
+  border-radius: 50%;
+  border: 4rpx solid;
+  background: var(--color-bg);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.transfer-dot {
+  width: 10rpx;
+  height: 10rpx;
+  border-radius: 50%;
+}
+
+.transfer-text {
+  display: flex;
+  flex-direction: row;
+  align-items: baseline;
+  gap: var(--spacing-sm);
+}
+
+.transfer-label {
+  font-size: var(--font-sm);
+  font-weight: 700;
+  letter-spacing: 1rpx;
+}
+
+.transfer-range {
+  font-size: var(--font-xs);
   color: var(--color-text-muted);
-  line-height: 1;
-  padding-top: 4rpx;
-  transition: transform 0.2s;
+  font-family: monospace;
 }
 
-.inline-checkpoint-arrow.expanded {
-  transform: rotate(90deg);
+/* ---- 终点标记 ---- */
+.metro-end {
+  position: relative;
+  height: 32rpx;
+}
+
+.end-dot {
+  position: absolute;
+  left: 44rpx;
+  top: 24rpx;
+  width: 8rpx;
+  height: 8rpx;
+  border-radius: 50%;
+  opacity: 0.5;
 }
 
 /* ========== 底部留白 ========== */
