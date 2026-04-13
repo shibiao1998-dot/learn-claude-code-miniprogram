@@ -9,6 +9,7 @@ var LAYER_CSS_COLORS = {
   hardening: '#2563EB',
   runtime: '#7C3AED',
   platform: '#DB2777',
+  'best-practice': '#EA580C',
 };
 
 var I18N_PAGE_TITLE = {
@@ -18,9 +19,9 @@ var I18N_PAGE_TITLE = {
 };
 
 var I18N_PAGE_SUBTITLE = {
-  zh: 'Claude Code 的四层架构',
-  en: 'The Four Layers of Claude Code',
-  ja: 'Claude Code の4層アーキテクチャ',
+  zh: 'Claude Code 的架构与最佳实践',
+  en: 'Architecture & Best Practices of Claude Code',
+  ja: 'Claude Code のアーキテクチャとベストプラクティス',
 };
 
 var I18N_CHECKPOINT_LABEL = {

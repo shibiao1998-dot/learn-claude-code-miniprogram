@@ -13,7 +13,9 @@ module.exports = {
     "title": "リファレンス",
     "subtitle": "用語集、アーキテクチャ地図、深掘り補助ドキュメント。",
     "foundation_title": "基礎ドキュメント",
-    "deep_dive_title": "深掘りドキュメント"
+    "deep_dive_title": "深掘りドキュメント",
+    "tips_title": "実用テクニック",
+    "tips_subtitle": "Claude Code チームからの実戦経験"
   },
   "home": {
     "hero_title": "Learn Claude Code",
@@ -192,13 +194,21 @@ module.exports = {
     "s16": "チームプロトコル",
     "s17": "自律エージェント",
     "s18": "Worktree 分離",
-    "s19": "MCP とプラグイン"
+    "s19": "MCP とプラグイン",
+    "bp01": "CLAUDE.md とメモリ",
+    "bp02": "Commands",
+    "bp03": "Skills",
+    "bp04": "Hooks",
+    "bp05": "Subagents",
+    "bp06": "MCP とツール",
+    "bp07": "Settings とワークフロー"
   },
   "layer_labels": {
     "core": "コアループ",
     "hardening": "システム強化",
     "runtime": "タスクランタイム",
-    "platform": "マルチエージェント基盤"
+    "platform": "マルチエージェント基盤",
+    "best-practice": "ベストプラクティス"
   },
   "viz": {
     "s01": "Agent 主ループ",
@@ -221,5 +231,4 @@ module.exports = {
     "s18": "Worktree タスク分離",
     "s19": "外部 capability bus"
   }
-}
-;
+};

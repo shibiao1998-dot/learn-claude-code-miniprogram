@@ -60,6 +60,29 @@ const DOCS = {
   's19-zh': require('../data/docs/chapter-s19-zh.js'),
   's19-en': require('../data/docs/chapter-s19-en.js'),
   's19-ja': require('../data/docs/chapter-s19-ja.js'),
+
+  // ── Best Practice 章节 ──
+  'bp01-zh': require('../data/docs/chapter-bp01-zh.js'),
+  'bp01-en': require('../data/docs/chapter-bp01-en.js'),
+  'bp01-ja': require('../data/docs/chapter-bp01-ja.js'),
+  'bp02-zh': require('../data/docs/chapter-bp02-zh.js'),
+  'bp02-en': require('../data/docs/chapter-bp02-en.js'),
+  'bp02-ja': require('../data/docs/chapter-bp02-ja.js'),
+  'bp03-zh': require('../data/docs/chapter-bp03-zh.js'),
+  'bp03-en': require('../data/docs/chapter-bp03-en.js'),
+  'bp03-ja': require('../data/docs/chapter-bp03-ja.js'),
+  'bp04-zh': require('../data/docs/chapter-bp04-zh.js'),
+  'bp04-en': require('../data/docs/chapter-bp04-en.js'),
+  'bp04-ja': require('../data/docs/chapter-bp04-ja.js'),
+  'bp05-zh': require('../data/docs/chapter-bp05-zh.js'),
+  'bp05-en': require('../data/docs/chapter-bp05-en.js'),
+  'bp05-ja': require('../data/docs/chapter-bp05-ja.js'),
+  'bp06-zh': require('../data/docs/chapter-bp06-zh.js'),
+  'bp06-en': require('../data/docs/chapter-bp06-en.js'),
+  'bp06-ja': require('../data/docs/chapter-bp06-ja.js'),
+  'bp07-zh': require('../data/docs/chapter-bp07-zh.js'),
+  'bp07-en': require('../data/docs/chapter-bp07-en.js'),
+  'bp07-ja': require('../data/docs/chapter-bp07-ja.js'),
 };
 
 /**

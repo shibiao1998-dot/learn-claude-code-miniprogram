@@ -58,5 +58,28 @@
     </view>
   </view>
 
+  <!-- Tips & Tricks 速查 -->
+  <view class="ref-section" wx:if="{{tipCategories.length > 0}}">
+    <view class="ref-section-header">
+      <view class="ref-indicator ref-indicator--tips"></view>
+      <text class="ref-section-title">{{t.reference.tips_title || '实用技巧'}}</text>
+      <text class="ref-section-count">{{tipCategories.length}} {{locale == 'zh' ? '分类' : locale == 'ja' ? 'カテゴリ' : 'categories'}}</text>
+    </view>
+    <text class="ref-section-subtitle">{{t.reference.tips_subtitle || '来自 Claude Code 团队的实战经验'}}</text>
+    <view class="ref-doc-list ref-tips-grid">
+      <view
+        wx:for="{{tipCategories}}"
+        wx:key="id"
+        class="ref-tip-card"
+        bindtap="openTipsCategory"
+        data-slug="{{item.slug}}"
+        hover-class="doc-hover"
+      >
+        <text class="ref-tip-card__label">{{item.label}}</text>
+        <text class="ref-tip-card__count">{{item.count}} tips</text>
+      </view>
+    </view>
+  </view>
+
   <view class="page-footer"></view>
 </scroll-view>

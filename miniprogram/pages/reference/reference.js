@@ -2,6 +2,7 @@
 const i18n = require('../../utils/i18n');
 const eventBus = require('../../utils/event-bus');
 const bridgeDocsMeta = require('../../data/bridge-docs-meta.js');
+const tipsIndex = require('../../data/tips-index.js');
 
 Page({
   data: {
@@ -9,6 +10,7 @@ Page({
     t: {},
     foundationDocs: [],   // kind=map
     mechanismDocs: [],    // kind=mechanism
+    tipCategories: [],    // Tips 分类列表
   },
 
   onLoad() {
@@ -41,11 +43,11 @@ Page({
     const foundationDocs = [];
     const mechanismDocs = [];
 
-    Object.values(bridgeDocsMeta).forEach(doc => {
+    Object.values(bridgeDocsMeta).forEach(function(doc) {
       const title = (doc.title && (doc.title[locale] || doc.title['en'])) || doc.slug;
       const summary = (doc.summary && (doc.summary[locale] || doc.summary['en'])) || '';
 
-      const entry = { slug: doc.slug, title, summary };
+      const entry = { slug: doc.slug, title: title, summary: summary };
 
       if (doc.kind === 'map') {
         foundationDocs.push(entry);
@@ -54,19 +56,42 @@ Page({
       }
     });
 
+    // 构建 Tips 分类数据
+    var tipCategories = [];
+    for (var i = 0; i < tipsIndex.length; i++) {
+      var cat = tipsIndex[i];
+      var label = (cat.label && (cat.label[locale] || cat.label['en'])) || cat.id;
+      tipCategories.push({
+        id: cat.id,
+        slug: cat.slug,
+        label: label,
+        count: cat.count,
+      });
+    }
+
     this.setData({
-      locale,
+      locale: locale,
       t: messages,
-      foundationDocs,
-      mechanismDocs,
+      foundationDocs: foundationDocs,
+      mechanismDocs: mechanismDocs,
+      tipCategories: tipCategories,
     });
   },
 
   openDoc(e) {
     const slug = e.currentTarget.dataset.slug;
     wx.navigateTo({
-      url: `/subpkg-chapters/pages/bridge-doc/bridge-doc?slug=${slug}`,
+      url: '/subpkg-chapters/pages/bridge-doc/bridge-doc?slug=' + slug,
     });
+  },
+
+  openTipsCategory: function(e) {
+    var slug = e.currentTarget.dataset.slug;
+    if (slug) {
+      wx.navigateTo({
+        url: '/subpkg-chapters/pages/bridge-doc/bridge-doc?slug=' + slug,
+      });
+    }
   },
 
   switchLocale(e) {

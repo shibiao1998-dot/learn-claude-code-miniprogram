@@ -54,8 +54,8 @@
         <text class="core-addition__text">{{chapterCoreAddition}}</text>
       </view>
 
-      <!-- 元信息行：LOC + tools -->
-      <view class="meta-row">
+      <!-- 元信息行：LOC + tools（普通章节） -->
+      <view class="meta-row" wx:if="{{!isBestPractice}}">
         <view class="meta-item">
           <text class="meta-value">{{chapterLoc}}</text>
           <text class="meta-unit">LOC</text>
@@ -425,8 +425,51 @@
             </view>
           </view>
 
+          <!-- ── BP: 相关 Tips ── -->
+          <view class="dd-section" wx:if="{{relatedTipsList.length > 0}}">
+            <view class="dd-section__head">
+              <view class="dd-section__bar" style="background:#EA580C"></view>
+              <text class="dd-section__title">相关实用技巧</text>
+            </view>
+            <view
+              wx:for="{{relatedTipsList}}"
+              wx:key="slug"
+              class="dd-bridge-card"
+              bindtap="openTipsCategory"
+              data-slug="{{item.slug}}"
+            >
+              <view class="dd-bridge-card__top">
+                <text class="dd-bridge-card__kind" style="background:#EA580C22;color:#EA580C">Tips</text>
+                <text class="dd-bridge-card__title">{{item.title}}</text>
+                <text class="dd-bridge-card__arrow">›</text>
+              </view>
+              <text class="dd-bridge-card__summary">{{item.count}} 条实用技巧</text>
+            </view>
+          </view>
+
+          <!-- ── BP: 关联架构章节 ── -->
+          <view class="dd-section" wx:if="{{relatedChapterLinks.length > 0}}">
+            <view class="dd-section__head">
+              <view class="dd-section__bar" style="background:#2563EB"></view>
+              <text class="dd-section__title">关联架构章节</text>
+            </view>
+            <view
+              wx:for="{{relatedChapterLinks}}"
+              wx:key="id"
+              class="dd-bridge-card"
+              bindtap="goToRelatedChapter"
+              data-id="{{item.id}}"
+            >
+              <view class="dd-bridge-card__top">
+                <text class="dd-bridge-card__kind" style="background:{{item.layerColor}}22;color:{{item.layerColor}}">{{item.id}}</text>
+                <text class="dd-bridge-card__title">{{item.title}}</text>
+                <text class="dd-bridge-card__arrow">›</text>
+              </view>
+            </view>
+          </view>
+
           <!-- 无数据时占位 -->
-          <view class="coming-soon" wx:if="{{flowItems.length === 0 && !blueprintData && simulatorSteps.length === 0}}">
+          <view class="coming-soon" wx:if="{{flowItems.length === 0 && !blueprintData && simulatorSteps.length === 0 && relatedTipsList.length === 0 && relatedChapterLinks.length === 0}}">
             <text class="coming-soon__icon">🔭</text>
             <text class="coming-soon__title">暂无深度内容</text>
             <text class="coming-soon__desc">当前章节暂无可视化数据</text>

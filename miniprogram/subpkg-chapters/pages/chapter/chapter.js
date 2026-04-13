@@ -89,6 +89,7 @@ const LAYER_COLORS = {
   hardening: '#2563EB',
   runtime: '#7C3AED',
   platform: '#DB2777',
+  'best-practice': '#EA580C',
 };
 
 // 语法高亮 token 颜色映射（VS Code Dark+ 风格）
@@ -96,6 +97,17 @@ const TOKEN_COLORS = {
   comment: '#6A9955',
   string: '#CE9178',
   keyword: '#569CD6',
+  builtin: '#4EC9B0',
+  decorator: '#DCDCAA',
+  number: '#B5CEA8',
+  plain: '#D4D4D4',
+};
+
+// YAML token 颜色映射
+var YAML_TOKEN_COLORS = {
+  comment: '#6A9955',
+  string: '#CE9178',
+  keyword: '#9CDCFE',
   builtin: '#4EC9B0',
   decorator: '#DCDCAA',
   number: '#B5CEA8',
@@ -111,6 +123,7 @@ Page({
     id: '',
     locale: 'zh',
     t: {},
+    isBestPractice: false,
     chapterId: '',
     chapterTitle: '',
     chapterSubtitle: '',
@@ -159,6 +172,10 @@ Page({
     simNextStep: null,         // 下一步摘要
     simProgressPercent: 0,     // 进度百分比
     bridgeDocLinks: [],     // [{slug, title, summary, kind}]
+
+    // Best Practice 专用
+    relatedTipsList: [],       // [{slug, title, count}]
+    relatedChapterLinks: [],   // [{id, title, layer, layerColor}]
   },
 
   onLoad(options) {
@@ -247,20 +264,28 @@ Page({
 
     // 构建文件名
     const safeTitle = v.title.toLowerCase().replace(/\s+/g, '_').replace(/[^a-z0-9_]/g, '');
-    const filename = `${id}_${safeTitle}.py`;
+    const filename = isBP ? safeTitle + '.yaml' : (id + '_' + safeTitle + '.py');
 
     // Tab 配置
     const vt = messages.version || {};
-    const tabs = [
-      { id: 'learn', label: vt.tab_learn || '学习' },
-      { id: 'code', label: vt.tab_code || '源码' },
-      { id: 'deep-dive', label: vt.tab_deep_dive || '深入探索' },
-    ];
+    const isBP = !!(v.isBestPractice);
+    const tabs = isBP
+      ? [
+          { id: 'learn', label: vt.tab_learn || '学习' },
+          { id: 'code', label: vt.tab_config || '配置示例' },
+          { id: 'deep-dive', label: vt.tab_deep_dive || '深入探索' },
+        ]
+      : [
+          { id: 'learn', label: vt.tab_learn || '学习' },
+          { id: 'code', label: vt.tab_code || '源码' },
+          { id: 'deep-dive', label: vt.tab_deep_dive || '深入探索' },
+        ];
 
     this.setData({
       id,
       locale,
       t: messages,
+      isBestPractice: isBP,
       chapterId: id,
       chapterTitle,
       chapterSubtitle: content.subtitle || '',
@@ -311,35 +336,78 @@ Page({
   _loadCodeTab() {
     if (this.data.codeLoaded) return;
     const id = this.data.id;
+    const isBP = this.data.isBestPractice;
 
     try {
-      const sources = require('../../../data/versions-source.js');
-      const source = sources[id] || '';
+      var source = '';
+      var colorMap = TOKEN_COLORS;
+      var tokenizeFn = highlight.tokenize;
+
+      if (isBP) {
+        // Best Practice 章节：加载 YAML 配置示例
+        var configExamples = require('../../../data/bp-config-examples.js');
+        source = configExamples[id] || '# No config example available';
+        colorMap = YAML_TOKEN_COLORS;
+        tokenizeFn = highlight.tokenizeYaml;
+      } else {
+        // 普通章节：加载 Python 源码
+        var sources = require('../../../data/versions-source.js');
+        source = sources[id] || '';
+      }
+
       const allLines = source.split('\n');
       const totalLoc = allLines.length;
       const isTruncated = totalLoc > MAX_CODE_LINES;
       const lines = allLines.slice(0, MAX_CODE_LINES);
 
-      const codeLines = lines.map((line) => {
-        // 空行给一个空格保持行高
-        const tokens = highlight.tokenize(line.length > 0 ? line : ' ');
-        return tokens.map(tk => ({
-          color: TOKEN_COLORS[tk.type] || TOKEN_COLORS.plain,
-          value: tk.value,
-        }));
-      });
+      var codeLines;
+      if (isBP) {
+        // YAML: 整体 tokenize 后按行拆分
+        var allTokens = tokenizeFn(source);
+        codeLines = [[]];
+        for (var ti = 0; ti < allTokens.length; ti++) {
+          var tk = allTokens[ti];
+          if (tk.value === '\n') {
+            if (codeLines.length < MAX_CODE_LINES) {
+              codeLines.push([]);
+            }
+          } else {
+            codeLines[codeLines.length - 1].push({
+              color: colorMap[tk.type] || colorMap.plain,
+              value: tk.value
+            });
+          }
+        }
+        // 确保空行有内容
+        for (var ci = 0; ci < codeLines.length; ci++) {
+          if (codeLines[ci].length === 0) {
+            codeLines[ci].push({ color: colorMap.plain, value: ' ' });
+          }
+        }
+      } else {
+        // Python: 逐行 tokenize
+        codeLines = lines.map(function(line) {
+          var tokens = tokenizeFn(line.length > 0 ? line : ' ');
+          return tokens.map(function(tk) {
+            return {
+              color: colorMap[tk.type] || colorMap.plain,
+              value: tk.value,
+            };
+          });
+        });
+      }
 
       this.setData({
-        codeLines,
-        totalLoc,
-        displayLoc: lines.length,
-        isTruncated,
+        codeLines: codeLines,
+        totalLoc: totalLoc,
+        displayLoc: isBP ? codeLines.length : lines.length,
+        isTruncated: isTruncated,
         codeLoaded: true,
       });
     } catch (e) {
       console.error('[chapter] source load error:', e);
       this.setData({
-        codeLines: [[{ color: TOKEN_COLORS.comment, value: '# 源码加载失败' }]],
+        codeLines: [[{ color: TOKEN_COLORS.comment, value: isBP ? '# 配置示例加载失败' : '# 源码加载失败' }]],
         codeLoaded: true,
       });
     }
@@ -386,20 +454,47 @@ Page({
 
   // ─── 复制源码 ────────────────────────────────────────────
   copySource() {
+    var isBP = this.data.isBestPractice;
     try {
-      const sources = require('../../../data/versions-source.js');
-      const source = sources[this.data.id] || '';
+      var source = '';
+      if (isBP) {
+        var configExamples = require('../../../data/bp-config-examples.js');
+        source = configExamples[this.data.id] || '';
+      } else {
+        var sources = require('../../../data/versions-source.js');
+        source = sources[this.data.id] || '';
+      }
       wx.setClipboardData({
         data: source,
-        success() {
-          wx.showToast({ title: '已复制源码', icon: 'success', duration: 1500 });
+        success: function() {
+          wx.showToast({ title: isBP ? '已复制配置' : '已复制源码', icon: 'success', duration: 1500 });
         },
-        fail() {
+        fail: function() {
           wx.showToast({ title: '复制失败', icon: 'none' });
         },
       });
     } catch (e) {
-      wx.showToast({ title: '获取源码失败', icon: 'none' });
+      wx.showToast({ title: '获取内容失败', icon: 'none' });
+    }
+  },
+
+  // ─── BP: 跳转到 Tips 分类 ──────────────────────────────
+  openTipsCategory: function(e) {
+    var slug = e.currentTarget.dataset.slug;
+    if (slug) {
+      wx.navigateTo({
+        url: '/subpkg-chapters/pages/bridge-doc/bridge-doc?slug=' + slug,
+      });
+    }
+  },
+
+  // ─── BP: 跳转到关联架构章节 ────────────────────────────
+  goToRelatedChapter: function(e) {
+    var chapterId = e.currentTarget.dataset.id;
+    if (chapterId) {
+      wx.redirectTo({
+        url: '/subpkg-chapters/pages/chapter/chapter?id=' + chapterId,
+      });
     }
   },
 
@@ -415,8 +510,85 @@ Page({
   _loadDeepDiveTab() {
     const id = this.data.id;
     const locale = this.data.locale;
+    const isBP = this.data.isBestPractice;
     const pick = (obj) => (obj && (obj[locale] || obj.en || obj.zh)) || '';
 
+    if (isBP) {
+      // Best Practice 章节：显示关联 Tips 和关联架构章节
+      var relatedTipsList = [];
+      var relatedChapterLinks = [];
+
+      // 加载关联的 Tips 分类
+      try {
+        var tipsIndex = require('../../../data/tips-index.js');
+        var bpTipsMap = {
+          bp01: 'claude-md',
+          bp02: 'commands',
+          bp03: 'skills',
+          bp04: 'hooks',
+          bp05: 'agents',
+          bp06: 'utilities',
+          bp07: 'workflows',
+        };
+        var catId = bpTipsMap[id];
+        if (catId) {
+          for (var ti = 0; ti < tipsIndex.length; ti++) {
+            if (tipsIndex[ti].id === catId) {
+              relatedTipsList.push({
+                slug: 'tips-' + catId,
+                title: pick(tipsIndex[ti].label),
+                count: tipsIndex[ti].count,
+              });
+              break;
+            }
+          }
+        }
+        // 也添加通用分类
+        for (var tti = 0; tti < tipsIndex.length; tti++) {
+          var cat = tipsIndex[tti];
+          if (cat.id !== catId && (cat.id === 'prompting' || cat.id === 'planning' || cat.id === 'workflows' || cat.id === 'daily')) {
+            relatedTipsList.push({
+              slug: 'tips-' + cat.id,
+              title: pick(cat.label),
+              count: cat.count,
+            });
+          }
+        }
+      } catch (e) {
+        console.error('[deep-dive] tips-index load error:', e);
+      }
+
+      // 加载关联架构章节
+      var v = meta.versions[id];
+      var relatedIds = (v && v.relatedChapters) || [];
+      for (var ri = 0; ri < relatedIds.length; ri++) {
+        var rv = meta.versions[relatedIds[ri]];
+        if (rv) {
+          var messages = {};
+          try { messages = this._getMessages(locale); } catch (e) { /* noop */ }
+          relatedChapterLinks.push({
+            id: rv.id,
+            title: (messages.sessions && messages.sessions[rv.id]) || rv.title,
+            layer: rv.layer,
+            layerColor: LAYER_COLORS[rv.layer] || '#94A3B8',
+          });
+        }
+      }
+
+      this.setData({
+        flowItems: [],
+        blueprintData: null,
+        simulatorSteps: [],
+        simCurrentStep: 0,
+        bridgeDocLinks: [],
+        relatedTipsList: relatedTipsList,
+        relatedChapterLinks: relatedChapterLinks,
+        deepDiveLoaded: true,
+      });
+      return;
+    }
+
+    // 普通章节：原有逻辑
     // 流程图数据
     let flowItems = [];
     try {

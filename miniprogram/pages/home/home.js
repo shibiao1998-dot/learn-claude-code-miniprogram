@@ -86,7 +86,7 @@ Page({
     });
 
     // 统计总已读数
-    const allIds = meta.versionOrder || [];
+    const allIds = (meta.versionOrder || []).concat(meta.bpOrder || []);
     const readCount = progress.getReadCount(allIds);
 
     this.setData({
@@ -99,7 +99,7 @@ Page({
   },
 
   _refreshProgress() {
-    const allIds = meta.versionOrder || [];
+    const allIds = (meta.versionOrder || []).concat(meta.bpOrder || []);
     const readCount = progress.getReadCount(allIds);
 
     // 更新每章 isRead/isNext 状态（避免对象展开语法，兼容小程序编译）

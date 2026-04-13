@@ -39,4 +39,89 @@ function tokenize(code) {
   return tokens;
 }
 
-module.exports = { tokenize };
+// ── YAML/JSON 配置文件语法高亮 ──
+
+const YAML_RULES = [
+  { type: 'comment',  re: /(#[^\n]*)/ },
+  { type: 'string',   re: /("(?:[^"\\]|\\.)*"|'[^']*')/ },
+  { type: 'keyword',  re: /^(\s*[\w][\w\s-]*?)(?=\s*:)/ },
+  { type: 'builtin',  re: /\b(true|false|null|yes|no|on|off)\b/ },
+  { type: 'number',   re: /\b(\d+(?:\.\d+)?)\b/ },
+  { type: 'decorator', re: /(---|\.\.\.)/ },
+];
+
+/**
+ * 将 YAML/JSON 配置代码解析成 token 数组
+ * @param {string} code
+ * @returns {Array<{type: string, value: string}>}
+ */
+function tokenizeYaml(code) {
+  // 按行处理，每行独立解析
+  var lines = code.split('\n');
+  var allTokens = [];
+
+  for (var li = 0; li < lines.length; li++) {
+    if (li > 0) allTokens.push({ type: 'plain', value: '\n' });
+
+    var line = lines[li];
+    if (!line) continue;
+
+    // 注释行
+    var commentMatch = line.match(/^(\s*)(#.*)$/);
+    if (commentMatch) {
+      if (commentMatch[1]) allTokens.push({ type: 'plain', value: commentMatch[1] });
+      allTokens.push({ type: 'comment', value: commentMatch[2] });
+      continue;
+    }
+
+    // --- 分隔符
+    if (line.match(/^\s*---\s*$/)) {
+      allTokens.push({ type: 'decorator', value: line });
+      continue;
+    }
+
+    // key: value 格式
+    var kvMatch = line.match(/^(\s*)([\w][\w\s.@/*-]*?)(\s*:\s*)(.*)?$/);
+    if (kvMatch) {
+      if (kvMatch[1]) allTokens.push({ type: 'plain', value: kvMatch[1] });
+      allTokens.push({ type: 'keyword', value: kvMatch[2] });
+      allTokens.push({ type: 'plain', value: kvMatch[3] });
+      var val = kvMatch[4] || '';
+      if (val) {
+        // 解析值部分
+        if (val.match(/^["']/) ) {
+          allTokens.push({ type: 'string', value: val });
+        } else if (val.match(/^(true|false|null|yes|no)$/i)) {
+          allTokens.push({ type: 'builtin', value: val });
+        } else if (val.match(/^\d+(?:\.\d+)?$/)) {
+          allTokens.push({ type: 'number', value: val });
+        } else if (val.match(/^#/)) {
+          allTokens.push({ type: 'comment', value: val });
+        } else {
+          allTokens.push({ type: 'string', value: val });
+        }
+      }
+      continue;
+    }
+
+    // 列表项 - value
+    var listMatch = line.match(/^(\s*-\s+)(.*)$/);
+    if (listMatch) {
+      allTokens.push({ type: 'decorator', value: listMatch[1] });
+      var lval = listMatch[2];
+      if (lval.match(/^["']/)) {
+        allTokens.push({ type: 'string', value: lval });
+      } else {
+        allTokens.push({ type: 'plain', value: lval });
+      }
+      continue;
+    }
+
+    // 其他行
+    allTokens.push({ type: 'plain', value: line });
+  }
+
+  return allTokens;
+}
+
+module.exports = { tokenize: tokenize, tokenizeYaml: tokenizeYaml };

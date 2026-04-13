@@ -79,6 +79,44 @@ function _loadBridgeDocContent(slug, locale) {
     'team-task-lane-model-zh': () => require('../../../data/docs/bridge-team-task-lane-model-zh.js'),
     'team-task-lane-model-en': () => require('../../../data/docs/bridge-team-task-lane-model-en.js'),
     'team-task-lane-model-ja': () => require('../../../data/docs/bridge-team-task-lane-model-ja.js'),
+
+    // ── Tips 分类文档 ──
+    'tips-prompting-zh': () => require('../../../data/docs/tips-prompting-zh.js'),
+    'tips-prompting-en': () => require('../../../data/docs/tips-prompting-en.js'),
+    'tips-prompting-ja': () => require('../../../data/docs/tips-prompting-ja.js'),
+    'tips-planning-zh': () => require('../../../data/docs/tips-planning-zh.js'),
+    'tips-planning-en': () => require('../../../data/docs/tips-planning-en.js'),
+    'tips-planning-ja': () => require('../../../data/docs/tips-planning-ja.js'),
+    'tips-claude-md-zh': () => require('../../../data/docs/tips-claude-md-zh.js'),
+    'tips-claude-md-en': () => require('../../../data/docs/tips-claude-md-en.js'),
+    'tips-claude-md-ja': () => require('../../../data/docs/tips-claude-md-ja.js'),
+    'tips-agents-zh': () => require('../../../data/docs/tips-agents-zh.js'),
+    'tips-agents-en': () => require('../../../data/docs/tips-agents-en.js'),
+    'tips-agents-ja': () => require('../../../data/docs/tips-agents-ja.js'),
+    'tips-commands-zh': () => require('../../../data/docs/tips-commands-zh.js'),
+    'tips-commands-en': () => require('../../../data/docs/tips-commands-en.js'),
+    'tips-commands-ja': () => require('../../../data/docs/tips-commands-ja.js'),
+    'tips-skills-zh': () => require('../../../data/docs/tips-skills-zh.js'),
+    'tips-skills-en': () => require('../../../data/docs/tips-skills-en.js'),
+    'tips-skills-ja': () => require('../../../data/docs/tips-skills-ja.js'),
+    'tips-hooks-zh': () => require('../../../data/docs/tips-hooks-zh.js'),
+    'tips-hooks-en': () => require('../../../data/docs/tips-hooks-en.js'),
+    'tips-hooks-ja': () => require('../../../data/docs/tips-hooks-ja.js'),
+    'tips-git-pr-zh': () => require('../../../data/docs/tips-git-pr-zh.js'),
+    'tips-git-pr-en': () => require('../../../data/docs/tips-git-pr-en.js'),
+    'tips-git-pr-ja': () => require('../../../data/docs/tips-git-pr-ja.js'),
+    'tips-debugging-zh': () => require('../../../data/docs/tips-debugging-zh.js'),
+    'tips-debugging-en': () => require('../../../data/docs/tips-debugging-en.js'),
+    'tips-debugging-ja': () => require('../../../data/docs/tips-debugging-ja.js'),
+    'tips-utilities-zh': () => require('../../../data/docs/tips-utilities-zh.js'),
+    'tips-utilities-en': () => require('../../../data/docs/tips-utilities-en.js'),
+    'tips-utilities-ja': () => require('../../../data/docs/tips-utilities-ja.js'),
+    'tips-daily-zh': () => require('../../../data/docs/tips-daily-zh.js'),
+    'tips-daily-en': () => require('../../../data/docs/tips-daily-en.js'),
+    'tips-daily-ja': () => require('../../../data/docs/tips-daily-ja.js'),
+    'tips-parallelism-zh': () => require('../../../data/docs/tips-parallelism-zh.js'),
+    'tips-parallelism-en': () => require('../../../data/docs/tips-parallelism-en.js'),
+    'tips-parallelism-ja': () => require('../../../data/docs/tips-parallelism-ja.js'),
   };
 
   const key = `${slug}-${locale}`;
@@ -128,24 +166,35 @@ Page({
 
     const locale = i18n.getLocale();
     const meta = bridgeDocsMeta[slug];
+    var isTipsDoc = slug.indexOf('tips-') === 0;
 
-    if (!meta) {
-      this.setData({ slug, notFound: true, loaded: true });
+    if (!meta && !isTipsDoc) {
+      this.setData({ slug: slug, notFound: true, loaded: true });
       wx.setNavigationBarTitle({ title: '文档未找到' });
       return;
     }
 
-    const pick = (obj) => (obj && (obj[locale] || obj.en || obj.zh)) || '';
-    const title = pick(meta.title);
-    const summary = pick(meta.summary);
-    const kind = meta.kind || 'map';
+    var pick = function(obj) { return (obj && (obj[locale] || obj.en || obj.zh)) || ''; };
+    var title = '';
+    var summary = '';
+    var kind = 'map';
 
-    wx.setNavigationBarTitle({ title: title || slug });
+    if (meta) {
+      title = pick(meta.title);
+      summary = pick(meta.summary);
+      kind = meta.kind || 'map';
+    } else if (isTipsDoc) {
+      // Tips 文档：从加载的内容中获取标题
+      kind = 'tips';
+    }
 
     // 加载文档内容
     let docNodes = [];
     const docData = _loadBridgeDocContent(slug, locale);
     if (docData && docData.content) {
+      if (!title && docData.title) {
+        title = docData.title;
+      }
       try {
         docNodes = markdownParser.parse(docData.content);
       } catch (e) {
@@ -156,13 +205,15 @@ Page({
       docNodes = [{ type: 'paragraph', content: '文档内容暂未加载。' }];
     }
 
+    wx.setNavigationBarTitle({ title: title || slug });
+
     this.setData({
-      slug,
-      locale,
-      kind,
-      title,
-      summary,
-      docNodes,
+      slug: slug,
+      locale: locale,
+      kind: kind,
+      title: title,
+      summary: summary,
+      docNodes: docNodes,
       loaded: true,
       notFound: false,
     });

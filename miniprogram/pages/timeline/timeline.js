@@ -10,6 +10,7 @@ const LAYER_COLORS = {
   hardening: '#2563EB',
   runtime: '#7C3AED',
   platform: '#DB2777',
+  'best-practice': '#EA580C',
 };
 
 // 常用桥接文档快速入口
@@ -114,7 +115,8 @@ Page({
     // 构建 timelineItems（地铁图模式：仅保留 id/title/layer/isRead/layerStart 信息）
     var prevLayerColor = '';
     var foundCurrent = false;
-    var timelineItems = meta.versionOrder.map(function(id) {
+    var allVersionOrder = (meta.versionOrder || []).concat(meta.bpOrder || []);
+    var timelineItems = allVersionOrder.map(function(id) {
       var v = meta.versions[id];
       if (!v) return null;
 
@@ -179,7 +181,8 @@ Page({
     }));
 
     // 统计
-    const readCount = progress.getReadCount(meta.versionOrder);
+    var allIdsForCount = (meta.versionOrder || []).concat(meta.bpOrder || []);
+    const readCount = progress.getReadCount(allIdsForCount);
 
     // 页面文字
     const t = messages.timeline || {};
@@ -193,7 +196,7 @@ Page({
       checkpoints: checkpoints,
       expandedCheckpoints: this.data.expandedCheckpoints,
       timelineItems: timelineItems,
-      totalChapters: meta.versionOrder.length,
+      totalChapters: allIdsForCount.length,
       readCount: readCount,
       t_currentLabel: locale === 'zh' ? '当前' : locale === 'ja' ? '現在' : 'Current',
       t_checkpointSectionTitle: locale === 'zh'
@@ -223,7 +226,7 @@ Page({
         isLast: idx === arr.length - 1,
       });
     });
-    var readCount = progress.getReadCount(meta.versionOrder);
+    var readCount = progress.getReadCount((meta.versionOrder || []).concat(meta.bpOrder || []));
     this.setData({ timelineItems: updated, readCount: readCount });
   },
 
