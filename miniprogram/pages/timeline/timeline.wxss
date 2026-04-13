@@ -117,44 +117,13 @@
   padding: var(--spacing-md);
 }
 
-/* ========== 使用指南卡片 ========== */
-.guide-cards {
-  display: flex;
-  flex-direction: column;
-  gap: var(--spacing-sm);
-  margin-bottom: var(--spacing-md);
-}
-
-.guide-card {
-  display: flex;
-  flex-direction: column;
-  gap: 4rpx;
-}
-
-.guide-icon {
-  font-size: var(--font-lg);
-  margin-bottom: 4rpx;
-}
-
-.guide-card-title {
-  font-size: var(--font-base);
-  font-weight: 600;
-  color: var(--color-text-primary);
-}
-
-.guide-card-desc {
-  font-size: var(--font-sm);
-  color: var(--color-text-secondary);
-  line-height: 1.6;
-}
-
 /* ========== 桥接文档 pills ========== */
 .bridge-pills {
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
   gap: var(--spacing-xs);
-  margin-bottom: var(--spacing-md);
+  margin-top: var(--spacing-sm);
 }
 
 .bridge-pill {

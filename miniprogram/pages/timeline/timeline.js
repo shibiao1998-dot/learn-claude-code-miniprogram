@@ -21,61 +21,6 @@ const BRIDGE_LINKS = [
   { slug: 's19a-mcp-capability-layers', labelZh: 'MCP 能力层地图', labelEn: 'MCP Capability Layers', labelJa: 'MCP 能力層マップ' },
 ];
 
-// 使用指南内容（三语言硬编码）
-const USAGE_GUIDES = {
-  zh: [
-    {
-      icon: '📖',
-      title: '第一次完整读',
-      desc: '从上往下顺序读，不要急着横跳。前六章是主闭环，后面都建立在它上面。',
-    },
-    {
-      icon: '🔀',
-      title: '中途开始混',
-      desc: '不要死盯源码。先看这章落在哪个阶段，再回桥接资料校正边界。',
-    },
-    {
-      icon: '✍️',
-      title: '准备自己实现',
-      desc: '每走完一个阶段，就停下来自己手写一版最小实现。',
-    },
-  ],
-  en: [
-    {
-      icon: '📖',
-      title: 'First full read',
-      desc: 'Read top to bottom in order. Don\'t skip ahead. The first six chapters form the core loop — everything else builds on it.',
-    },
-    {
-      icon: '🔀',
-      title: 'Getting lost midway',
-      desc: 'Don\'t fixate on source code. First locate which stage this chapter belongs to, then use bridge docs to re-establish boundaries.',
-    },
-    {
-      icon: '✍️',
-      title: 'Ready to implement',
-      desc: 'After completing each stage, stop and hand-write a minimal implementation of it.',
-    },
-  ],
-  ja: [
-    {
-      icon: '📖',
-      title: '初めて通して読む',
-      desc: '上から順番に読む。飛ばし読みはしない。最初の 6 章が主閉ループで、後はすべてその上に積まれる。',
-    },
-    {
-      icon: '🔀',
-      title: '途中で混乱したとき',
-      desc: 'ソースコードを凝視するのをやめる。まずこの章がどのステージに属するかを確認し、橋接資料で境界を修正する。',
-    },
-    {
-      icon: '✍️',
-      title: '自分で実装するとき',
-      desc: '各ステージを終えたら立ち止まり、最小実装を自分の手で書く。',
-    },
-  ],
-};
-
 function _getLayerColor(layer) {
   return LAYER_COLORS[layer] || '#94A3B8';
 }
@@ -110,8 +55,6 @@ Page({
     // 页头
     pageTitle: '',
     pageSubtitle: '',
-    // 使用指南
-    usageGuides: [],
     // 桥接文档链接（label 已按 locale 处理）
     bridgeLinks: [],
     // 阶段检查点
@@ -121,7 +64,6 @@ Page({
     timelineItems: [],
     // 阶段标签（用于检查点 section 标题翻译）
     t_checkpointSectionTitle: '',
-    t_checkpointSectionDesc: '',
     t_bridgeSectionTitle: '',
     t_bridgeSectionDesc: '',
     t_guideSectionTitle: '',
@@ -213,9 +155,6 @@ Page({
       label: locale === 'zh' ? b.labelZh : locale === 'ja' ? b.labelJa : b.labelEn,
     }));
 
-    // 使用指南
-    const usageGuides = USAGE_GUIDES[locale] || USAGE_GUIDES.zh;
-
     // 统计
     const readCount = progress.getReadCount(meta.versionOrder);
 
@@ -227,7 +166,6 @@ Page({
       locale,
       pageTitle: t.title || '学习时间线',
       pageSubtitle: t.subtitle || '',
-      usageGuides,
       bridgeLinks,
       checkpoints,
       expandedCheckpoints: this.data.expandedCheckpoints,
@@ -240,26 +178,6 @@ Page({
         : locale === 'ja'
           ? '各ステージを終えたら、自分で再構築してから次へ進む'
           : 'Rebuild each stage before moving to the next',
-      t_checkpointSectionDesc: locale === 'zh'
-        ? '这是整套学习路径里最重要的一个习惯。'
-        : locale === 'ja'
-          ? 'これがこの学習パス全体で最も大切な習慣です。'
-          : 'This is the single most important habit in the whole learning path.',
-      t_bridgeSectionTitle: locale === 'zh'
-        ? '常用桥接文档'
-        : locale === 'ja'
-          ? 'よく使う橋接ドキュメント'
-          : 'Frequently Used Bridge Docs',
-      t_bridgeSectionDesc: locale === 'zh'
-        ? '卡住时最常跳回来看的五篇参考文档'
-        : locale === 'ja'
-          ? '詰まったときによく参照する 5 つのドキュメント'
-          : 'The five reference docs you\'ll most often return to when stuck',
-      t_guideSectionTitle: locale === 'zh'
-        ? '使用指南'
-        : locale === 'ja'
-          ? '使い方ガイド'
-          : 'How to Use This Page',
       t_timelineSectionTitle: locale === 'zh'
         ? '章节时间线'
         : locale === 'ja'

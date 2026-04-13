@@ -28,24 +28,8 @@
       </view>
       <text class="progress-text">{{t_readCountLabel}} {{readCount}} / {{totalChapters}} {{t_chaptersUnit}}</text>
     </view>
-  </view>
 
-  <!-- ========== 使用指南 ========== -->
-  <view class="section">
-    <text class="section-title">{{t_guideSectionTitle}}</text>
-    <view class="guide-cards">
-      <view wx:for="{{usageGuides}}" wx:key="title" class="guide-card card">
-        <text class="guide-icon">{{item.icon}}</text>
-        <text class="guide-card-title">{{item.title}}</text>
-        <text class="guide-card-desc">{{item.desc}}</text>
-      </view>
-    </view>
-  </view>
-
-  <!-- ========== 桥接文档快速入口 ========== -->
-  <view class="section">
-    <text class="section-title">{{t_bridgeSectionTitle}}</text>
-    <text class="section-desc">{{t_bridgeSectionDesc}}</text>
+    <!-- 桥接文档快速入口（紧凑） -->
     <view class="bridge-pills">
       <view
         wx:for="{{bridgeLinks}}"
@@ -59,10 +43,9 @@
     </view>
   </view>
 
-  <!-- ========== 阶段检查点 ========== -->
+  <!-- ========== 阶段检查点（紧凑） ========== -->
   <view class="section">
     <text class="section-title">{{t_checkpointSectionTitle}}</text>
-    <text class="section-desc">{{t_checkpointSectionDesc}}</text>
 
     <view class="checkpoint-cards">
       <view
