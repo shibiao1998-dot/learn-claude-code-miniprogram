@@ -277,12 +277,9 @@ Page({
         : locale === 'ja'
           ? '章節タイムライン'
           : 'Chapter Timeline',
-      t_readLabel: locale === 'zh' ? '已读' : locale === 'ja' ? '読了' : 'Read',
-      t_locUnit: locale === 'zh' ? '行' : 'LOC',
       t_chaptersUnit: locale === 'zh' ? '章' : locale === 'ja' ? '章' : 'chapters',
       t_readCountLabel: locale === 'zh' ? '已读' : locale === 'ja' ? '読了' : 'read',
       t_checkpointToggleShow: locale === 'zh' ? '查看重建目标' : locale === 'ja' ? '再構築目標を見る' : 'View rebuild target',
-      t_checkpointToggleHide: locale === 'zh' ? '收起' : locale === 'ja' ? '閉じる' : 'Hide',
       t_checkpointRebuildLabel: locale === 'zh' ? '重建目标：' : locale === 'ja' ? '再構築目標：' : 'Rebuild target:',
     });
   },
