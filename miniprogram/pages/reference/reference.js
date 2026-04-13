@@ -1,7 +1,7 @@
 // pages/reference/reference.js
 const i18n = require('../../utils/i18n');
 const eventBus = require('../../utils/event-bus');
-const bridgeDocsMeta = require('../../data/bridge-docs-meta.json');
+const bridgeDocsMeta = require('../../data/bridge-docs-meta.js');
 
 Page({
   data: {
@@ -29,13 +29,13 @@ Page({
 
     let messages = {};
     try {
-      messages = require(`../../i18n/${locale}.json`);
-    } catch (e) {
-      try {
-        messages = require('../../i18n/zh.json');
-      } catch (e2) {
-        console.warn('[reference] failed to load i18n messages');
+      switch (locale) {
+        case 'en': messages = require('../../i18n/en.js'); break;
+        case 'ja': messages = require('../../i18n/ja.js'); break;
+        default:   messages = require('../../i18n/zh.js'); break;
       }
+    } catch (e) {
+      console.warn('[reference] failed to load i18n messages');
     }
 
     const foundationDocs = [];

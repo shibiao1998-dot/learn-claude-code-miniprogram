@@ -48,7 +48,7 @@
 }
 
 .tab-item--active .tab-label {
-  color: var(--color-accent);
+  color: var(--color-accent-blue);
   font-weight: 600;
 }
 
@@ -58,7 +58,7 @@
   left: 20%;
   right: 20%;
   height: 3rpx;
-  background: var(--color-accent);
+  background: var(--color-accent-blue);
   border-radius: 3rpx 3rpx 0 0;
 }
 
@@ -135,7 +135,7 @@
   display: flex;
   flex-direction: row;
   gap: var(--spacing-sm);
-  background: var(--color-accent)11;
+  background: var(--color-accent-blue)11;
   border-radius: var(--radius-sm);
   padding: var(--spacing-sm) var(--spacing-md);
   margin: var(--spacing-sm) 0;
@@ -143,7 +143,7 @@
 
 .insight-bar {
   width: 4rpx;
-  background: var(--color-accent);
+  background: var(--color-accent-blue);
   border-radius: 2rpx;
   flex-shrink: 0;
 }
@@ -318,7 +318,7 @@
   flex-shrink: 0;
 }
 
-.guide-item__dot--focus    { background: var(--color-accent); }
+.guide-item__dot--focus    { background: var(--color-accent-blue); }
 .guide-item__dot--confusion { background: var(--color-warning); }
 .guide-item__dot--goal     { background: var(--color-core); }
 
@@ -360,24 +360,24 @@
   font-size: var(--font-md);
   font-weight: 700;
   color: var(--color-text-primary);
-  margin: var(--spacing-xl) 0 var(--spacing-sm);
-  padding-bottom: var(--spacing-xs);
-  border-bottom: 1rpx solid var(--color-border);
+  margin: 64rpx 0 var(--spacing-md);
+  padding-bottom: var(--spacing-sm);
+  border-bottom: 2rpx solid var(--color-border);
 }
 
 .md-h2__bar {
   width: 6rpx;
   height: 32rpx;
-  background: var(--color-accent);
+  background: var(--color-accent-blue);
   border-radius: 3rpx;
   flex-shrink: 0;
 }
 
 .md-h3 {
   font-size: var(--font-base);
-  font-weight: 600;
-  color: var(--color-text-secondary);
-  margin: var(--spacing-md) 0 var(--spacing-xs);
+  font-weight: 700;
+  color: var(--color-text-primary);
+  margin: var(--spacing-lg) 0 var(--spacing-sm);
 }
 
 /* blockquote */
@@ -385,24 +385,24 @@
   display: flex;
   flex-direction: row;
   gap: var(--spacing-sm);
-  background: var(--color-bg-muted);
-  border-radius: var(--radius-sm);
-  padding: var(--spacing-sm) var(--spacing-md);
-  margin: var(--spacing-sm) 0;
+  background: #2563EB0D;
+  border-radius: var(--radius-md);
+  padding: var(--spacing-md);
+  margin: var(--spacing-md) 0;
+  border: 1rpx solid #2563EB1A;
 }
 
 .md-blockquote__bar {
-  width: 4rpx;
-  background: var(--color-accent);
-  border-radius: 2rpx;
+  width: 6rpx;
+  background: var(--color-accent-blue);
+  border-radius: 3rpx;
   flex-shrink: 0;
 }
 
 .md-blockquote__text {
   font-size: var(--font-sm);
-  color: var(--color-text-secondary);
-  line-height: 1.6;
-  font-style: italic;
+  color: var(--color-text-primary);
+  line-height: 1.7;
 }
 
 /* hr */
@@ -417,12 +417,12 @@
   display: flex;
   flex-direction: row;
   gap: var(--spacing-xs);
-  margin: var(--spacing-xs) 0;
-  padding-left: var(--spacing-xs);
+  margin: var(--spacing-sm) 0;
+  padding-left: var(--spacing-sm);
 }
 
 .md-li__dot {
-  color: var(--color-accent);
+  color: var(--color-accent-blue);
   font-size: var(--font-base);
   line-height: 1.6;
   flex-shrink: 0;
@@ -474,13 +474,13 @@
 
 /* 段落 */
 .md-paragraph {
-  margin: var(--spacing-sm) 0;
+  margin: var(--spacing-md) 0;
 }
 
 .md-paragraph__text {
   font-size: var(--font-sm);
   color: var(--color-text-secondary);
-  line-height: 1.7;
+  line-height: 1.8;
 }
 
 /* 空状态 */
@@ -599,9 +599,9 @@
 }
 
 .func-tag--func {
-  background: var(--color-accent)18;
-  color: var(--color-accent);
-  border: 1rpx solid var(--color-accent)40;
+  background: var(--color-accent-blue)18;
+  color: var(--color-accent-blue);
+  border: 1rpx solid var(--color-accent-blue)40;
 }
 
 .func-tag__prefix {
@@ -753,7 +753,7 @@
 
 .nav-btn__arrow {
   font-size: var(--font-md);
-  color: var(--color-accent);
+  color: var(--color-accent-blue);
   flex-shrink: 0;
 }
 
@@ -785,7 +785,7 @@
   padding: var(--spacing-md);
   display: flex;
   flex-direction: column;
-  gap: var(--spacing-lg);
+  gap: var(--spacing-2xl);
 }
 
 .deep-dive__loading {
@@ -817,7 +817,7 @@
 .dd-section__bar {
   width: 6rpx;
   height: 32rpx;
-  background: var(--color-accent);
+  background: var(--color-accent-blue);
   border-radius: 3rpx;
   flex-shrink: 0;
 }
@@ -848,27 +848,30 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: var(--spacing-xs) var(--spacing-md);
-  min-width: 240rpx;
-  max-width: 500rpx;
+  padding: var(--spacing-sm) var(--spacing-lg);
+  min-width: 360rpx;
+  max-width: 620rpx;
   border: 2rpx solid var(--color-border);
   background: var(--color-bg-card);
   text-align: center;
+  box-shadow: 0 2rpx 8rpx rgba(0,0,0,0.06);
 }
 
 /* 节点类型变体 */
 .dd-flow-node--start .dd-flow-node__box,
 .dd-flow-node--end .dd-flow-node__box {
   border-radius: 100rpx;
-  background: var(--color-accent)1A;
-  border-color: var(--color-accent)66;
+  background: #2563EB15;
+  border-color: #2563EB55;
+  box-shadow: 0 2rpx 12rpx rgba(37,99,235,0.1);
 }
 
 .dd-flow-node--decision .dd-flow-node__box {
-  border-radius: var(--radius-sm);
-  background: #D9770618;
-  border-color: #D9770666;
+  border-radius: var(--radius-md);
+  background: #D9770615;
+  border-color: #D9770655;
   transform: skewX(-8deg);
+  box-shadow: 0 2rpx 12rpx rgba(217,119,6,0.1);
 }
 
 .dd-flow-node--decision .dd-flow-node__label {
@@ -877,7 +880,7 @@
 }
 
 .dd-flow-node--process .dd-flow-node__box {
-  border-radius: var(--radius-sm);
+  border-radius: var(--radius-md);
 }
 
 .dd-flow-node--subprocess .dd-flow-node__box {
@@ -900,19 +903,35 @@
   flex-direction: column;
   align-items: center;
   gap: 0;
-  padding: 4rpx 0;
+  padding: 0;
+  position: relative;
 }
 
 .dd-flow-arrow__line {
-  font-size: var(--font-md);
-  color: var(--color-text-muted);
-  line-height: 1;
+  width: 2rpx;
+  height: 48rpx;
+  background: var(--color-text-muted);
+  position: relative;
+}
+
+/* 箭头三角形 */
+.dd-flow-arrow__line::after {
+  content: '';
+  position: absolute;
+  bottom: -8rpx;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 0;
+  height: 0;
+  border-left: 8rpx solid transparent;
+  border-right: 8rpx solid transparent;
+  border-top: 10rpx solid var(--color-text-muted);
 }
 
 .dd-flow-arrow__label {
   font-size: var(--font-xs);
-  color: var(--color-accent);
-  background: var(--color-accent)18;
+  color: var(--color-accent-blue);
+  background: var(--color-accent-blue)18;
   border-radius: var(--radius-sm);
   padding: 2rpx 10rpx;
   max-width: 300rpx;
@@ -941,25 +960,28 @@
 
 .dd-blueprint-slice__label {
   font-size: var(--font-xs);
-  color: var(--color-text-muted);
+  color: var(--color-accent-blue);
   font-weight: 600;
   letter-spacing: 1rpx;
   text-transform: uppercase;
-  padding: var(--spacing-xs) 0 4rpx;
-  border-bottom: 1rpx solid var(--color-border);
-  display: block;
+  padding: 6rpx 16rpx;
+  background: #2563EB12;
+  border-radius: var(--radius-pill);
+  display: inline-block;
+  margin-bottom: var(--spacing-xs);
 }
 
 .dd-blueprint-item {
   background: var(--color-bg-card);
-  border-radius: var(--radius-sm);
-  padding: var(--spacing-sm) var(--spacing-md);
-  border-left: 3rpx solid var(--color-border);
+  border-radius: var(--radius-md);
+  padding: var(--spacing-md);
+  border: 1rpx solid var(--color-border);
+  box-shadow: 0 1rpx 4rpx rgba(0,0,0,0.04);
 }
 
 .dd-blueprint-item--record {
-  border-left-color: var(--color-core);
-  background: #05966910;
+  border-color: #05966933;
+  background: #05966908;
 }
 
 .dd-blueprint-item__head {
@@ -983,9 +1005,9 @@
 
 .dd-blueprint-item__badge {
   font-size: var(--font-xs);
-  color: var(--color-accent);
-  background: var(--color-accent)1A;
-  border: 1rpx solid var(--color-accent)55;
+  color: var(--color-accent-blue);
+  background: var(--color-accent-blue)1A;
+  border: 1rpx solid var(--color-accent-blue)55;
   border-radius: var(--radius-sm);
   padding: 2rpx 10rpx;
   flex-shrink: 0;
@@ -1018,7 +1040,7 @@
   height: 40rpx;
   min-width: 40rpx;
   border-radius: 50%;
-  background: var(--color-accent);
+  background: var(--color-accent-blue);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -1036,155 +1058,169 @@
   flex: 1;
 }
 
-/* ── Agent Loop 模拟器 ── */
-.dd-sim-controls {
+/* ── Agent Loop 模拟器（聚焦模式） ── */
+.dd-sim {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-sm);
+}
+
+/* 进度条 */
+.dd-sim-progress-bar {
+  height: 4rpx;
+  background: var(--color-bg-muted);
+  border-radius: 2rpx;
+  overflow: hidden;
+}
+
+.dd-sim-progress-bar__fill {
+  height: 100%;
+  background: var(--color-accent-blue);
+  border-radius: 2rpx;
+  transition: width 0.3s;
+}
+
+/* 上一步/下一步预览 */
+.dd-sim-peek {
+  padding: var(--spacing-sm) var(--spacing-md);
+  background: var(--color-bg-card);
+  border-radius: var(--radius-sm);
+  opacity: 0.5;
   display: flex;
   flex-direction: row;
   align-items: center;
   gap: var(--spacing-sm);
-  padding: var(--spacing-sm) 0;
 }
 
-.dd-sim-btn {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: var(--spacing-xs) var(--spacing-sm);
-  background: var(--color-bg-muted);
-  border-radius: var(--radius-sm);
-  border: 1rpx solid var(--color-border);
-}
-
-.dd-sim-btn--reset {
-  background: transparent;
-  border-color: var(--color-text-muted);
-}
-
-.dd-sim-btn__text {
+.dd-sim-peek__label {
   font-size: var(--font-xs);
-  color: var(--color-accent);
-  font-weight: 500;
-}
-
-.dd-sim-btn--reset .dd-sim-btn__text {
   color: var(--color-text-muted);
+  font-weight: 600;
+  flex-shrink: 0;
 }
 
-.dd-sim-progress {
+.dd-sim-peek__text {
+  font-size: var(--font-xs);
+  color: var(--color-text-muted);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
   flex: 1;
-  text-align: center;
-  font-size: var(--font-xs);
-  color: var(--color-text-muted);
-  font-family: 'Courier New', monospace;
 }
 
-.dd-sim-steps {
-  display: flex;
-  flex-direction: column;
-  gap: var(--spacing-xs);
-}
-
-.dd-sim-step {
-  border-radius: var(--radius-sm);
-  padding: var(--spacing-sm) var(--spacing-md);
-  border: 1rpx solid var(--color-border);
+/* 当前步骤 */
+.dd-sim-current {
+  padding: var(--spacing-lg) var(--spacing-md);
   background: var(--color-bg-card);
-  opacity: 0.5;
-  transition: opacity 0.2s;
+  border-radius: var(--radius-md);
+  border: 2rpx solid #2563EB44;
+  box-shadow: 0 4rpx 16rpx rgba(37,99,235,0.08);
 }
 
-.dd-sim-step--active {
-  opacity: 1;
-  border-color: var(--color-accent)66;
-  background: var(--color-bg-muted);
-}
-
-/* 步骤类型颜色 */
-.dd-sim-step--user_message {
-  border-left: 4rpx solid var(--color-core);
-}
-
-.dd-sim-step--user_message.dd-sim-step--active {
-  border-left-color: var(--color-core);
-  background: #05966910;
-}
-
-.dd-sim-step--assistant_text {
-  border-left: 4rpx solid var(--color-hardening);
-}
-
-.dd-sim-step--assistant_text.dd-sim-step--active {
-  background: #2563EB10;
-}
-
-.dd-sim-step--tool_call {
-  border-left: 4rpx solid var(--color-warning);
-}
-
-.dd-sim-step--tool_call.dd-sim-step--active {
-  background: #D9770610;
-}
-
-.dd-sim-step--tool_result {
-  border-left: 4rpx solid var(--color-runtime);
-}
-
-.dd-sim-step--tool_result.dd-sim-step--active {
-  background: #7C3AED10;
-}
-
-.dd-sim-step__header {
+.dd-sim-current__header {
   display: flex;
   flex-direction: row;
   align-items: center;
   gap: var(--spacing-xs);
-  margin-bottom: 6rpx;
+  margin-bottom: var(--spacing-sm);
 }
 
-.dd-sim-step__type-tag {
+.dd-sim-current__type {
   font-size: var(--font-xs);
-  color: var(--color-text-muted);
-  font-family: 'Courier New', monospace;
-  background: var(--color-bg);
-  padding: 2rpx 8rpx;
+  font-weight: 700;
+  padding: 4rpx 12rpx;
   border-radius: var(--radius-sm);
-  border: 1rpx solid var(--color-border);
+  background: var(--color-bg-muted);
+  color: var(--color-text-secondary);
 }
 
-.dd-sim-step__tool {
+.dd-sim-current__tool {
   font-size: var(--font-xs);
   color: var(--color-warning);
   font-family: 'Courier New', monospace;
   font-weight: 600;
 }
 
-.dd-sim-step__content {
-  font-size: var(--font-sm);
-  color: var(--color-text-secondary);
-  line-height: 1.5;
-  display: block;
+.dd-sim-current__counter {
+  margin-left: auto;
+  font-size: var(--font-xs);
+  color: var(--color-text-muted);
   font-family: 'Courier New', monospace;
 }
 
-.dd-sim-step__annotation {
+.dd-sim-current__content {
+  font-size: var(--font-sm);
+  color: var(--color-text-primary);
+  line-height: 1.7;
+  display: block;
+}
+
+.dd-sim-current__annotation {
   display: block;
   font-size: var(--font-xs);
   color: #6A9955;
   font-style: italic;
-  margin-top: 6rpx;
+  margin-top: var(--spacing-sm);
   line-height: 1.5;
+}
+
+/* 当前步骤类型变体 */
+.dd-sim-current--user_message { border-left: 6rpx solid var(--color-core); }
+.dd-sim-current--assistant_text { border-left: 6rpx solid var(--color-hardening); }
+.dd-sim-current--tool_call { border-left: 6rpx solid var(--color-warning); }
+.dd-sim-current--tool_result { border-left: 6rpx solid var(--color-runtime); }
+
+/* 控制按钮 */
+.dd-sim-controls {
+  display: flex;
+  flex-direction: row;
+  gap: var(--spacing-sm);
+  margin-top: var(--spacing-xs);
+}
+
+.dd-sim-btn {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--spacing-md) 0;
+  background: var(--color-bg-muted);
+  border-radius: var(--radius-md);
+  border: 1rpx solid var(--color-border);
+}
+
+.dd-sim-btn--next {
+  background: var(--color-accent-blue);
+  border-color: var(--color-accent-blue);
+}
+
+.dd-sim-btn--next .dd-sim-btn__text {
+  color: #FFFFFF;
+  font-weight: 600;
+}
+
+.dd-sim-btn--disabled {
+  opacity: 0.35;
+}
+
+.dd-sim-btn__text {
+  font-size: var(--font-sm);
+  color: var(--color-text-secondary);
+  font-weight: 500;
 }
 
 /* ── Bridge Doc 链接卡片 ── */
 .dd-bridge-card {
   background: var(--color-bg-card);
   border-radius: var(--radius-md);
-  padding: var(--spacing-sm) var(--spacing-md);
+  padding: var(--spacing-md);
   border: 1rpx solid var(--color-border);
   margin-bottom: var(--spacing-xs);
   display: flex;
   flex-direction: column;
   gap: 6rpx;
+  box-shadow: 0 1rpx 4rpx rgba(0,0,0,0.04);
+  transition: background 0.15s;
 }
 
 .dd-bridge-card__top {
@@ -1223,7 +1259,7 @@
 
 .dd-bridge-card__arrow {
   font-size: var(--font-lg);
-  color: var(--color-text-muted);
+  color: var(--color-accent-blue);
   flex-shrink: 0;
 }
 
@@ -1232,4 +1268,24 @@
   color: var(--color-text-secondary);
   line-height: 1.6;
   display: block;
+}
+
+/* ══════════════════════════════════════════
+   交互反馈（:active tap 状态）
+══════════════════════════════════════════ */
+.dd-bridge-card:active {
+  background: var(--color-bg-muted);
+  transform: scale(0.98);
+}
+
+.dd-sim-btn:active {
+  opacity: 0.7;
+}
+
+.dd-sim-peek:active {
+  opacity: 0.8;
+}
+
+.nav-btn:active {
+  background: var(--color-border);
 }

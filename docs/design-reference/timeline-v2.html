@@ -1,0 +1,1147 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=375, initial-scale=1, maximum-scale=1, user-scalable=no">
+<title>Learn Claude Code — V2 Design Reference</title>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&family=Noto+Sans+SC:wght@300;400;500;600;700;900&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+
+  :root {
+    --bg: #F5F3EF;
+    --bg-card: #FFFFFF;
+    --bg-warm: #FAF8F5;
+    --text-hero: #1A1A2E;
+    --text-primary: #2D2D3F;
+    --text-secondary: #5C5C72;
+    --text-muted: #9E9EB0;
+    --text-faint: #C4C4D4;
+    --border: rgba(0,0,0,0.06);
+
+    --core: #10B981;
+    --core-soft: #ECFDF5;
+    --core-glow: rgba(16,185,129,0.15);
+    --hardening: #3B82F6;
+    --hardening-soft: #EFF6FF;
+    --hardening-glow: rgba(59,130,246,0.15);
+    --runtime: #8B5CF6;
+    --runtime-soft: #F5F3FF;
+    --runtime-glow: rgba(139,92,246,0.15);
+    --platform: #F43F5E;
+    --platform-soft: #FFF1F2;
+    --platform-glow: rgba(244,63,94,0.15);
+  }
+
+  body {
+    font-family: 'Noto Sans SC', 'Space Grotesk', sans-serif;
+    background: var(--bg);
+    color: var(--text-primary);
+    width: 375px;
+    margin: 0 auto;
+    min-height: 100vh;
+    -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
+  }
+
+  /* ===================================================================
+     HERO HEADER — Bold, editorial, memorable
+     =================================================================== */
+  .hero-header {
+    position: relative;
+    padding: 52px 24px 28px;
+    background: var(--bg-card);
+    overflow: hidden;
+  }
+
+  /* Subtle grain texture overlay */
+  .hero-header::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");
+    pointer-events: none;
+  }
+
+  /* Decorative gradient blob */
+  .hero-header::after {
+    content: '';
+    position: absolute;
+    top: -40px;
+    right: -30px;
+    width: 180px;
+    height: 180px;
+    background: radial-gradient(circle, rgba(16,185,129,0.08) 0%, rgba(59,130,246,0.06) 40%, rgba(139,92,246,0.04) 70%, transparent 100%);
+    border-radius: 50%;
+    pointer-events: none;
+  }
+
+  .hero-top-bar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+    position: relative;
+    z-index: 1;
+  }
+
+  .hero-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 4px 12px 4px 8px;
+    background: rgba(16,185,129,0.08);
+    border: 1px solid rgba(16,185,129,0.15);
+    border-radius: 100px;
+    font-size: 10px;
+    color: var(--core);
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+  }
+
+  .hero-badge-dot {
+    width: 6px;
+    height: 6px;
+    background: var(--core);
+    border-radius: 50%;
+    animation: pulse 2s ease infinite;
+  }
+
+  @keyframes pulse {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.5; transform: scale(0.8); }
+  }
+
+  .locale-group {
+    display: flex;
+    gap: 1px;
+    background: rgba(0,0,0,0.04);
+    border-radius: 10px;
+    padding: 3px;
+  }
+
+  .locale-pill {
+    font-size: 11px;
+    font-weight: 500;
+    padding: 5px 12px;
+    border-radius: 8px;
+    color: var(--text-muted);
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+
+  .locale-pill.active {
+    background: var(--bg-card);
+    color: var(--text-hero);
+    font-weight: 700;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.08);
+  }
+
+  .hero-title {
+    font-size: 32px;
+    font-weight: 900;
+    line-height: 1.15;
+    color: var(--text-hero);
+    letter-spacing: -1px;
+    position: relative;
+    z-index: 1;
+    margin-bottom: 6px;
+  }
+
+  .hero-subtitle {
+    font-size: 14px;
+    color: var(--text-secondary);
+    line-height: 1.5;
+    position: relative;
+    z-index: 1;
+    margin-bottom: 20px;
+  }
+
+  /* Progress — big, confident */
+  .progress-container {
+    position: relative;
+    z-index: 1;
+    background: var(--bg);
+    border-radius: 16px;
+    padding: 16px;
+  }
+
+  .progress-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    margin-bottom: 10px;
+  }
+
+  .progress-fraction {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 28px;
+    font-weight: 700;
+    color: var(--text-hero);
+    letter-spacing: -1px;
+  }
+
+  .progress-fraction span {
+    font-size: 14px;
+    color: var(--text-muted);
+    font-weight: 500;
+    letter-spacing: 0;
+  }
+
+  .progress-pct {
+    font-size: 12px;
+    color: var(--text-muted);
+    font-weight: 500;
+  }
+
+  .progress-track {
+    height: 8px;
+    background: rgba(0,0,0,0.04);
+    border-radius: 4px;
+    overflow: hidden;
+  }
+
+  .progress-fill {
+    height: 100%;
+    border-radius: 4px;
+    background: linear-gradient(90deg, var(--core), var(--hardening), var(--runtime));
+    background-size: 300% 100%;
+    animation: shimmer 3s ease infinite;
+    transition: width 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  @keyframes shimmer {
+    0% { background-position: 100% 0; }
+    100% { background-position: 0 0; }
+  }
+
+  .progress-layers {
+    display: flex;
+    gap: 4px;
+    margin-top: 10px;
+  }
+
+  .progress-layer-chip {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    font-size: 10px;
+    color: var(--text-muted);
+    font-weight: 500;
+  }
+
+  .progress-layer-chip .dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 2px;
+  }
+
+  /* ===================================================================
+     JOURNEY PATH — S-curve, Duolingo-inspired, not a straight line
+     =================================================================== */
+  .journey-section {
+    padding: 24px 0 32px;
+  }
+
+  .section-header {
+    padding: 0 24px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+  }
+
+  .section-title {
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--text-hero);
+    letter-spacing: -0.3px;
+  }
+
+  .section-count {
+    font-size: 11px;
+    color: var(--text-faint);
+    font-family: 'JetBrains Mono', monospace;
+  }
+
+  /* The S-curve path container */
+  .path-container {
+    position: relative;
+    padding: 0 16px;
+  }
+
+  /* SVG curve connecting all nodes */
+  .path-svg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  .path-svg path {
+    fill: none;
+    stroke-width: 3;
+    stroke-linecap: round;
+  }
+
+  /* Layer section with label */
+  .layer-section {
+    position: relative;
+    z-index: 1;
+    margin-bottom: 8px;
+  }
+
+  .layer-label-row {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 12px 8px;
+    margin-bottom: 4px;
+  }
+
+  .layer-line {
+    flex: 1;
+    height: 1px;
+    opacity: 0.15;
+  }
+
+  .layer-chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 5px 14px 5px 10px;
+    border-radius: 100px;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.6px;
+    text-transform: uppercase;
+    white-space: nowrap;
+    border: 1.5px solid;
+  }
+
+  .layer-chip .chip-dot {
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+  }
+
+  .layer-range {
+    font-size: 10px;
+    font-family: 'JetBrains Mono', monospace;
+    color: var(--text-faint);
+    font-weight: 500;
+  }
+
+  /* Chapter node — the heart of the path */
+  .node-row {
+    display: flex;
+    align-items: center;
+    padding: 0 8px;
+    cursor: pointer;
+    position: relative;
+    transition: transform 0.15s ease;
+  }
+
+  .node-row:active {
+    transform: scale(0.98);
+  }
+
+  /* Alternating alignment for S-curve feel */
+  .node-row.align-left {
+    justify-content: flex-start;
+  }
+
+  .node-row.align-right {
+    justify-content: flex-end;
+  }
+
+  .node-card {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 12px 16px;
+    background: var(--bg-card);
+    border-radius: 16px;
+    border: 1px solid var(--border);
+    width: 280px;
+    transition: all 0.2s ease;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .node-card::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 4px;
+    border-radius: 0 4px 4px 0;
+  }
+
+  .node-card:hover {
+    border-color: rgba(0,0,0,0.1);
+    box-shadow: 0 4px 20px rgba(0,0,0,0.06);
+    transform: translateY(-1px);
+  }
+
+  .node-bullet {
+    width: 40px;
+    height: 40px;
+    border-radius: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px;
+    font-weight: 700;
+    color: white;
+    flex-shrink: 0;
+    position: relative;
+  }
+
+  .node-bullet.done::after {
+    content: '✓';
+    position: absolute;
+    bottom: -3px;
+    right: -3px;
+    width: 16px;
+    height: 16px;
+    background: var(--bg-card);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 9px;
+    color: var(--core);
+    font-weight: 900;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+  }
+
+  .node-info {
+    flex: 1;
+    min-width: 0;
+  }
+
+  .node-name {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--text-primary);
+    line-height: 1.3;
+    margin-bottom: 2px;
+  }
+
+  .node-hint {
+    font-size: 11px;
+    color: var(--text-muted);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .node-arrow {
+    font-size: 18px;
+    color: var(--text-faint);
+    flex-shrink: 0;
+    transition: transform 0.2s ease;
+  }
+
+  .node-card:hover .node-arrow {
+    transform: translateX(3px);
+    color: var(--text-muted);
+  }
+
+  /* Read state */
+  .node-row.read .node-card {
+    opacity: 0.65;
+  }
+
+  .node-row.read .node-name {
+    color: var(--text-muted);
+  }
+
+  /* === Layer-specific colors === */
+  .node-core .node-card::before { background: var(--core); }
+  .node-core .node-bullet { background: var(--core); }
+  .node-hardening .node-card::before { background: var(--hardening); }
+  .node-hardening .node-bullet { background: var(--hardening); }
+  .node-runtime .node-card::before { background: var(--runtime); }
+  .node-runtime .node-bullet { background: var(--runtime); }
+  .node-platform .node-card::before { background: var(--platform); }
+  .node-platform .node-bullet { background: var(--platform); }
+
+  .chip-core { color: var(--core); border-color: rgba(16,185,129,0.25); background: var(--core-soft); }
+  .chip-core .chip-dot { background: var(--core); }
+  .chip-hardening { color: var(--hardening); border-color: rgba(59,130,246,0.25); background: var(--hardening-soft); }
+  .chip-hardening .chip-dot { background: var(--hardening); }
+  .chip-runtime { color: var(--runtime); border-color: rgba(139,92,246,0.25); background: var(--runtime-soft); }
+  .chip-runtime .chip-dot { background: var(--runtime); }
+  .chip-platform { color: var(--platform); border-color: rgba(244,63,94,0.25); background: var(--platform-soft); }
+  .chip-platform .chip-dot { background: var(--platform); }
+
+  /* ===================================================================
+     BRIDGE DOCS — elegant floating pills
+     =================================================================== */
+  .bridge-section {
+    padding: 0 24px 20px;
+  }
+
+  .bridge-title {
+    font-size: 11px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: var(--text-faint);
+    margin-bottom: 10px;
+  }
+
+  .bridge-pills {
+    display: flex;
+    gap: 6px;
+    flex-wrap: wrap;
+  }
+
+  .bridge-pill {
+    font-size: 12px;
+    padding: 7px 14px;
+    border-radius: 12px;
+    background: var(--bg-card);
+    color: var(--text-secondary);
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s;
+    border: 1px solid var(--border);
+    box-shadow: 0 1px 2px rgba(0,0,0,0.03);
+  }
+
+  .bridge-pill:hover {
+    box-shadow: 0 4px 12px rgba(0,0,0,0.06);
+    transform: translateY(-1px);
+    border-color: rgba(0,0,0,0.1);
+  }
+
+  /* ===================================================================
+     CHECKPOINT CARDS — glassmorphism horizontal scroll
+     =================================================================== */
+  .checkpoint-section {
+    padding: 0 0 24px;
+  }
+
+  .checkpoint-section .section-header {
+    padding-bottom: 12px;
+  }
+
+  .checkpoint-scroll {
+    display: flex;
+    gap: 12px;
+    overflow-x: auto;
+    padding: 0 24px 8px;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+  }
+
+  .checkpoint-scroll::-webkit-scrollbar { display: none; }
+
+  .cp-card {
+    flex-shrink: 0;
+    width: 260px;
+    scroll-snap-align: start;
+    border-radius: 20px;
+    padding: 20px;
+    position: relative;
+    overflow: hidden;
+    cursor: pointer;
+    transition: transform 0.2s ease;
+    border: 1px solid rgba(255,255,255,0.2);
+  }
+
+  .cp-card:active {
+    transform: scale(0.97);
+  }
+
+  /* Glassmorphism cards with colored backgrounds */
+  .cp-core {
+    background: linear-gradient(135deg, rgba(16,185,129,0.12) 0%, rgba(16,185,129,0.04) 100%);
+    backdrop-filter: blur(20px);
+  }
+
+  .cp-hardening {
+    background: linear-gradient(135deg, rgba(59,130,246,0.12) 0%, rgba(59,130,246,0.04) 100%);
+    backdrop-filter: blur(20px);
+  }
+
+  .cp-runtime {
+    background: linear-gradient(135deg, rgba(139,92,246,0.12) 0%, rgba(139,92,246,0.04) 100%);
+    backdrop-filter: blur(20px);
+  }
+
+  .cp-platform {
+    background: linear-gradient(135deg, rgba(244,63,94,0.12) 0%, rgba(244,63,94,0.04) 100%);
+    backdrop-filter: blur(20px);
+  }
+
+  .cp-card::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    right: -30%;
+    width: 140px;
+    height: 140px;
+    border-radius: 50%;
+    opacity: 0.08;
+  }
+
+  .cp-core::before { background: var(--core); }
+  .cp-hardening::before { background: var(--hardening); }
+  .cp-runtime::before { background: var(--runtime); }
+  .cp-platform::before { background: var(--platform); }
+
+  .cp-header {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 12px;
+  }
+
+  .cp-icon {
+    width: 32px;
+    height: 32px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 16px;
+    color: white;
+  }
+
+  .cp-core .cp-icon { background: var(--core); }
+  .cp-hardening .cp-icon { background: var(--hardening); }
+  .cp-runtime .cp-icon { background: var(--runtime); }
+  .cp-platform .cp-icon { background: var(--platform); }
+
+  .cp-meta {
+    flex: 1;
+  }
+
+  .cp-layer-name {
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+  }
+
+  .cp-core .cp-layer-name { color: var(--core); }
+  .cp-hardening .cp-layer-name { color: var(--hardening); }
+  .cp-runtime .cp-layer-name { color: var(--runtime); }
+  .cp-platform .cp-layer-name { color: var(--platform); }
+
+  .cp-range {
+    font-size: 10px;
+    color: var(--text-muted);
+    font-family: 'JetBrains Mono', monospace;
+  }
+
+  .cp-title {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--text-primary);
+    line-height: 1.5;
+    margin-bottom: 12px;
+  }
+
+  .cp-cta {
+    font-size: 11px;
+    font-weight: 600;
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    padding: 6px 12px;
+    border-radius: 8px;
+    background: rgba(255,255,255,0.6);
+    border: 1px solid rgba(0,0,0,0.06);
+    color: var(--text-secondary);
+    transition: all 0.15s;
+  }
+
+  .cp-cta:hover {
+    background: rgba(255,255,255,0.9);
+  }
+
+  /* ===================================================================
+     TABBAR — refined, with proper SVG icons
+     =================================================================== */
+  .tabbar {
+    position: fixed;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 375px;
+    background: rgba(255,255,255,0.85);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border-top: 1px solid rgba(0,0,0,0.06);
+    display: flex;
+    padding: 8px 0 24px;
+    z-index: 100;
+  }
+
+  .tab-item {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 3px;
+    padding-top: 4px;
+    cursor: pointer;
+    transition: transform 0.15s;
+  }
+
+  .tab-item:active {
+    transform: scale(0.92);
+  }
+
+  .tab-icon {
+    width: 24px;
+    height: 24px;
+  }
+
+  .tab-icon svg {
+    width: 24px;
+    height: 24px;
+  }
+
+  .tab-label {
+    font-size: 10px;
+    font-weight: 500;
+    color: var(--text-faint);
+  }
+
+  .tab-item.active .tab-label {
+    color: var(--text-hero);
+    font-weight: 700;
+  }
+
+  /* Bottom spacer */
+  .spacer-bottom { height: 90px; }
+
+  /* ===================================================================
+     ANIMATIONS — staggered reveal
+     =================================================================== */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(12px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .layer-section {
+    animation: fadeUp 0.4s ease both;
+  }
+
+  .node-row {
+    animation: fadeUp 0.35s ease both;
+  }
+
+</style>
+</head>
+<body>
+
+  <!-- ===== HERO HEADER ===== -->
+  <div class="hero-header">
+    <div class="hero-top-bar">
+      <div class="hero-badge">
+        <span class="hero-badge-dot"></span>
+        Claude Code
+      </div>
+      <div class="locale-group">
+        <span class="locale-pill active">中</span>
+        <span class="locale-pill">EN</span>
+        <span class="locale-pill">日</span>
+      </div>
+    </div>
+
+    <div class="hero-title">学习时间线</div>
+    <div class="hero-subtitle">从零构建 Claude Code 的完整架构</div>
+
+    <div class="progress-container">
+      <div class="progress-top">
+        <div class="progress-fraction">6 <span>/ 19 章</span></div>
+        <div class="progress-pct">32% 完成</div>
+      </div>
+      <div class="progress-track">
+        <div class="progress-fill" style="width: 32%"></div>
+      </div>
+      <div class="progress-layers">
+        <span class="progress-layer-chip"><span class="dot" style="background:var(--core);border-radius:2px"></span>Core</span>
+        <span class="progress-layer-chip"><span class="dot" style="background:var(--hardening);border-radius:2px"></span>Hardening</span>
+        <span class="progress-layer-chip"><span class="dot" style="background:var(--runtime);border-radius:2px"></span>Runtime</span>
+        <span class="progress-layer-chip"><span class="dot" style="background:var(--platform);border-radius:2px"></span>Platform</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== CHECKPOINT CARDS ===== -->
+  <div class="checkpoint-section">
+    <div class="section-header">
+      <div class="section-title">阶段里程碑</div>
+    </div>
+    <div class="checkpoint-scroll">
+      <div class="cp-card cp-core">
+        <div class="cp-header">
+          <div class="cp-icon">⚡</div>
+          <div class="cp-meta">
+            <div class="cp-layer-name">Core</div>
+            <div class="cp-range">s01 → s06</div>
+          </div>
+        </div>
+        <div class="cp-title">完成核心层后，手写最小 Agent 循环</div>
+        <span class="cp-cta">查看重建目标 →</span>
+      </div>
+      <div class="cp-card cp-hardening">
+        <div class="cp-header">
+          <div class="cp-icon">🔧</div>
+          <div class="cp-meta">
+            <div class="cp-layer-name">Hardening</div>
+            <div class="cp-range">s07 → s11</div>
+          </div>
+        </div>
+        <div class="cp-title">补齐工具系统与提示管理</div>
+        <span class="cp-cta">查看重建目标 →</span>
+      </div>
+      <div class="cp-card cp-runtime">
+        <div class="cp-header">
+          <div class="cp-icon">🚀</div>
+          <div class="cp-meta">
+            <div class="cp-layer-name">Runtime</div>
+            <div class="cp-range">s12 → s14</div>
+          </div>
+        </div>
+        <div class="cp-title">构建任务和子代理运行时</div>
+        <span class="cp-cta">查看重建目标 →</span>
+      </div>
+      <div class="cp-card cp-platform">
+        <div class="cp-header">
+          <div class="cp-icon">🌐</div>
+          <div class="cp-meta">
+            <div class="cp-layer-name">Platform</div>
+            <div class="cp-range">s15 → s19</div>
+          </div>
+        </div>
+        <div class="cp-title">实现 MCP 网关和团队协作</div>
+        <span class="cp-cta">查看重建目标 →</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== BRIDGE DOCS ===== -->
+  <div class="bridge-section">
+    <div class="bridge-title">常用桥接文档</div>
+    <div class="bridge-pills">
+      <span class="bridge-pill">查询控制平面</span>
+      <span class="bridge-pill">工具执行运行时</span>
+      <span class="bridge-pill">运行时任务模型</span>
+      <span class="bridge-pill">队友-任务-车道</span>
+      <span class="bridge-pill">MCP 能力层</span>
+    </div>
+  </div>
+
+  <!-- ===== JOURNEY PATH ===== -->
+  <div class="journey-section">
+    <div class="section-header">
+      <div class="section-title">学习路径</div>
+      <div class="section-count">19 CHAPTERS</div>
+    </div>
+
+    <div class="path-container">
+
+      <!-- ==== CORE ==== -->
+      <div class="layer-section" style="animation-delay: 0.05s">
+        <div class="layer-label-row">
+          <span class="layer-chip chip-core"><span class="chip-dot"></span>核心层 Core</span>
+          <div class="layer-line" style="background:var(--core)"></div>
+          <span class="layer-range">s01 → s06</span>
+        </div>
+
+        <div class="node-row align-left read node-core" style="animation-delay:0.08s">
+          <div class="node-card">
+            <div class="node-bullet done" style="background:var(--core)">01</div>
+            <div class="node-info">
+              <div class="node-name">启动骨架</div>
+              <div class="node-hint">CLI 入口 → main() → 参数解析</div>
+            </div>
+            <span class="node-arrow">›</span>
+          </div>
+        </div>
+
+        <div class="node-row align-right read node-core" style="animation-delay:0.11s">
+          <div class="node-card">
+            <div class="node-bullet done" style="background:var(--core)">02</div>
+            <div class="node-info">
+              <div class="node-name">会话加载器</div>
+              <div class="node-hint">ConversationManager · 持久化</div>
+            </div>
+            <span class="node-arrow">›</span>
+          </div>
+        </div>
+
+        <div class="node-row align-left read node-core" style="animation-delay:0.14s">
+          <div class="node-card">
+            <div class="node-bullet done" style="background:var(--core)">03</div>
+            <div class="node-info">
+              <div class="node-name">首条消息</div>
+              <div class="node-hint">StreamManager · 首次交互流</div>
+            </div>
+            <span class="node-arrow">›</span>
+          </div>
+        </div>
+
+        <div class="node-row align-right read node-core" style="animation-delay:0.17s">
+          <div class="node-card">
+            <div class="node-bullet done" style="background:var(--core)">04</div>
+            <div class="node-info">
+              <div class="node-name">Agent 主循环</div>
+              <div class="node-hint">核心闭环 · 消息 → 工具 → 响应</div>
+            </div>
+            <span class="node-arrow">›</span>
+          </div>
+        </div>
+
+        <div class="node-row align-left read node-core" style="animation-delay:0.20s">
+          <div class="node-card">
+            <div class="node-bullet done" style="background:var(--core)">05</div>
+            <div class="node-info">
+              <div class="node-name">工具调用</div>
+              <div class="node-hint">ToolUseBlock · 工具分发</div>
+            </div>
+            <span class="node-arrow">›</span>
+          </div>
+        </div>
+
+        <div class="node-row align-right read node-core" style="animation-delay:0.23s">
+          <div class="node-card">
+            <div class="node-bullet done" style="background:var(--core)">06</div>
+            <div class="node-info">
+              <div class="node-name">权限门控</div>
+              <div class="node-hint">PermissionGuard · 安全边界</div>
+            </div>
+            <span class="node-arrow">›</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- ==== HARDENING ==== -->
+      <div class="layer-section" style="animation-delay: 0.26s">
+        <div class="layer-label-row">
+          <span class="layer-chip chip-hardening"><span class="chip-dot"></span>硬化层 Hardening</span>
+          <div class="layer-line" style="background:var(--hardening)"></div>
+          <span class="layer-range">s07 → s11</span>
+        </div>
+
+        <div class="node-row align-left node-hardening" style="animation-delay:0.29s">
+          <div class="node-card">
+            <div class="node-bullet" style="background:var(--hardening)">07</div>
+            <div class="node-info">
+              <div class="node-name">工具注册</div>
+              <div class="node-hint">ToolRegistry · 动态注册系统</div>
+            </div>
+            <span class="node-arrow">›</span>
+          </div>
+        </div>
+
+        <div class="node-row align-right node-hardening" style="animation-delay:0.32s">
+          <div class="node-card">
+            <div class="node-bullet" style="background:var(--hardening)">08</div>
+            <div class="node-info">
+              <div class="node-name">Bash 工具</div>
+              <div class="node-hint">BashTool · 沙箱执行环境</div>
+            </div>
+            <span class="node-arrow">›</span>
+          </div>
+        </div>
+
+        <div class="node-row align-left node-hardening" style="animation-delay:0.35s">
+          <div class="node-card">
+            <div class="node-bullet" style="background:var(--hardening)">09</div>
+            <div class="node-info">
+              <div class="node-name">文件编辑</div>
+              <div class="node-hint">FileEditor · diff 算法</div>
+            </div>
+            <span class="node-arrow">›</span>
+          </div>
+        </div>
+
+        <div class="node-row align-right node-hardening" style="animation-delay:0.38s">
+          <div class="node-card">
+            <div class="node-bullet" style="background:var(--hardening)">10</div>
+            <div class="node-info">
+              <div class="node-name">提示管理器</div>
+              <div class="node-hint">PromptManager · 上下文构建</div>
+            </div>
+            <span class="node-arrow">›</span>
+          </div>
+        </div>
+
+        <div class="node-row align-left node-hardening" style="animation-delay:0.41s">
+          <div class="node-card">
+            <div class="node-bullet" style="background:var(--hardening)">11</div>
+            <div class="node-info">
+              <div class="node-name">上下文窗口</div>
+              <div class="node-hint">ContextWindow · Token 管理</div>
+            </div>
+            <span class="node-arrow">›</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- ==== RUNTIME ==== -->
+      <div class="layer-section" style="animation-delay: 0.44s">
+        <div class="layer-label-row">
+          <span class="layer-chip chip-runtime"><span class="chip-dot"></span>运行时层 Runtime</span>
+          <div class="layer-line" style="background:var(--runtime)"></div>
+          <span class="layer-range">s12 → s14</span>
+        </div>
+
+        <div class="node-row align-left node-runtime" style="animation-delay:0.47s">
+          <div class="node-card">
+            <div class="node-bullet" style="background:var(--runtime)">12</div>
+            <div class="node-info">
+              <div class="node-name">任务运行时</div>
+              <div class="node-hint">TaskRuntime · 状态机</div>
+            </div>
+            <span class="node-arrow">›</span>
+          </div>
+        </div>
+
+        <div class="node-row align-right node-runtime" style="animation-delay:0.50s">
+          <div class="node-card">
+            <div class="node-bullet" style="background:var(--runtime)">13</div>
+            <div class="node-info">
+              <div class="node-name">子代理调度</div>
+              <div class="node-hint">SubAgentDispatcher · 上下文隔离</div>
+            </div>
+            <span class="node-arrow">›</span>
+          </div>
+        </div>
+
+        <div class="node-row align-left node-runtime" style="animation-delay:0.53s">
+          <div class="node-card">
+            <div class="node-bullet" style="background:var(--runtime)">14</div>
+            <div class="node-info">
+              <div class="node-name">并行执行</div>
+              <div class="node-hint">ParallelRunner · 并发模型</div>
+            </div>
+            <span class="node-arrow">›</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- ==== PLATFORM ==== -->
+      <div class="layer-section" style="animation-delay: 0.56s">
+        <div class="layer-label-row">
+          <span class="layer-chip chip-platform"><span class="chip-dot"></span>平台层 Platform</span>
+          <div class="layer-line" style="background:var(--platform)"></div>
+          <span class="layer-range">s15 → s19</span>
+        </div>
+
+        <div class="node-row align-left node-platform" style="animation-delay:0.59s">
+          <div class="node-card">
+            <div class="node-bullet" style="background:var(--platform)">15</div>
+            <div class="node-info">
+              <div class="node-name">MCP 客户端</div>
+              <div class="node-hint">McpClient · 协议实现</div>
+            </div>
+            <span class="node-arrow">›</span>
+          </div>
+        </div>
+
+        <div class="node-row align-right node-platform" style="animation-delay:0.62s">
+          <div class="node-card">
+            <div class="node-bullet" style="background:var(--platform)">16</div>
+            <div class="node-info">
+              <div class="node-name">MCP 服务端</div>
+              <div class="node-hint">McpServer · 能力暴露</div>
+            </div>
+            <span class="node-arrow">›</span>
+          </div>
+        </div>
+
+        <div class="node-row align-left node-platform" style="animation-delay:0.65s">
+          <div class="node-card">
+            <div class="node-bullet" style="background:var(--platform)">17</div>
+            <div class="node-info">
+              <div class="node-name">团队协作</div>
+              <div class="node-hint">TeamManager · 多人协同</div>
+            </div>
+            <span class="node-arrow">›</span>
+          </div>
+        </div>
+
+        <div class="node-row align-right node-platform" style="animation-delay:0.68s">
+          <div class="node-card">
+            <div class="node-bullet" style="background:var(--platform)">18</div>
+            <div class="node-info">
+              <div class="node-name">扩展系统</div>
+              <div class="node-hint">ExtensionHost · 插件架构</div>
+            </div>
+            <span class="node-arrow">›</span>
+          </div>
+        </div>
+
+        <div class="node-row align-left node-platform" style="animation-delay:0.71s">
+          <div class="node-card">
+            <div class="node-bullet" style="background:var(--platform)">19</div>
+            <div class="node-info">
+              <div class="node-name">MCP 网关</div>
+              <div class="node-hint">McpGateway · 统一入口</div>
+            </div>
+            <span class="node-arrow">›</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <div class="spacer-bottom"></div>
+
+  <!-- ===== TABBAR ===== -->
+  <div class="tabbar">
+    <div class="tab-item">
+      <span class="tab-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="#B0BDD0" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/>
+        </svg>
+      </span>
+      <span class="tab-label">首页</span>
+    </div>
+    <div class="tab-item active">
+      <span class="tab-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="#1A1A2E" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="12" cy="5" r="2.5" fill="#1A1A2E"/><circle cx="12" cy="12" r="2.5" fill="#1A1A2E"/><circle cx="12" cy="19" r="2" fill="#1A1A2E"/><line x1="12" y1="7.5" x2="12" y2="9.5"/><line x1="12" y1="14.5" x2="12" y2="17"/>
+        </svg>
+      </span>
+      <span class="tab-label">时间线</span>
+    </div>
+    <div class="tab-item">
+      <span class="tab-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="#B0BDD0" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+          <rect x="3" y="3" width="18" height="5" rx="1.5"/><rect x="3" y="10" width="18" height="5" rx="1.5"/><rect x="3" y="17" width="18" height="5" rx="1.5"/>
+        </svg>
+      </span>
+      <span class="tab-label">架构层</span>
+    </div>
+    <div class="tab-item">
+      <span class="tab-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="#B0BDD0" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/><line x1="9" y1="7" x2="17" y2="7"/><line x1="9" y1="11" x2="14" y2="11"/>
+        </svg>
+      </span>
+      <span class="tab-label">参考</span>
+    </div>
+  </div>
+
+</body>
+</html>

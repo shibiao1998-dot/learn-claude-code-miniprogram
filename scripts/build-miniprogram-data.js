@@ -262,11 +262,16 @@ function extractMultipleTSExports(filePath, exportNames) {
 // 工具函数：文件写入 & 统计
 // ──────────────────────────────────────────────
 
-function writeJSON(filePath, data) {
+/**
+ * 输出为 JS 模块文件（module.exports = ...），微信小程序 require() 只支持 .js
+ * filePath 应以 .js 结尾
+ */
+function writeJSModule(filePath, data) {
   fs.mkdirSync(path.dirname(filePath), { recursive: true });
   const json = JSON.stringify(data, null, 2);
-  fs.writeFileSync(filePath, json, "utf-8");
-  const sizeKB = (Buffer.byteLength(json, "utf-8") / 1024).toFixed(1);
+  const jsContent = `module.exports = ${json};\n`;
+  fs.writeFileSync(filePath, jsContent, "utf-8");
+  const sizeKB = (Buffer.byteLength(jsContent, "utf-8") / 1024).toFixed(1);
   console.log(`  ✓ ${path.relative(process.cwd(), filePath)}  (${sizeKB} KB)`);
   return sizeKB;
 }
@@ -429,7 +434,7 @@ const meta = {
   diffs: versionsJson.diffs || [],
 };
 
-writeJSON(path.join(OUT_DIR, "meta.json"), meta);
+writeJSModule(path.join(OUT_DIR, "meta.js"), meta);
 
 // ──────────────────────────────────────────────
 // 3. 构建 docs-index.json 和 docs/ 子目录
@@ -447,8 +452,8 @@ for (const doc of docsJson) {
     chaptersIndex[version][locale] = { slug, title };
 
     // 写单独文件
-    writeJSON(
-      path.join(OUT_DIR, "docs", `chapter-${version}-${locale}.json`),
+    writeJSModule(
+      path.join(OUT_DIR, "docs", `chapter-${version}-${locale}.js`),
       { version, slug, locale, title, kind, content }
     );
   } else if (kind === "bridge") {
@@ -456,14 +461,14 @@ for (const doc of docsJson) {
     bridgesIndex[slug][locale] = { slug, title };
 
     // 写单独文件
-    writeJSON(
-      path.join(OUT_DIR, "docs", `bridge-${slug}-${locale}.json`),
+    writeJSModule(
+      path.join(OUT_DIR, "docs", `bridge-${slug}-${locale}.js`),
       { version: version || null, slug, locale, title, kind, content }
     );
   }
 }
 
-writeJSON(path.join(OUT_DIR, "docs-index.json"), {
+writeJSModule(path.join(OUT_DIR, "docs-index.js"), {
   chapters: chaptersIndex,
   bridges: bridgesIndex,
 });
@@ -477,7 +482,7 @@ const versionsSource = {};
 for (const v of versionsJson.versions) {
   versionsSource[v.id] = v.source || "";
 }
-writeJSON(path.join(OUT_DIR, "versions-source.json"), versionsSource);
+writeJSModule(path.join(OUT_DIR, "versions-source.js"), versionsSource);
 
 // ──────────────────────────────────────────────
 // 5. 构建 scenarios-all.json
@@ -494,14 +499,14 @@ for (const file of scenarioFiles) {
   scenariosAll[versionId] = data;
 }
 
-writeJSON(path.join(OUT_DIR, "scenarios-all.json"), scenariosAll);
+writeJSModule(path.join(OUT_DIR, "scenarios-all.js"), scenariosAll);
 
 // ──────────────────────────────────────────────
 // 6. 构建 bridge-docs-meta.json
 // ──────────────────────────────────────────────
 console.log("📦 Building bridge-docs-meta.json...");
 
-writeJSON(path.join(OUT_DIR, "bridge-docs-meta.json"), BRIDGE_DOCS);
+writeJSModule(path.join(OUT_DIR, "bridge-docs-meta.js"), BRIDGE_DOCS);
 
 // ──────────────────────────────────────────────
 // 7. 构建 flows.json
@@ -526,14 +531,14 @@ if (EXECUTION_FLOWS) {
   }
 }
 
-writeJSON(path.join(OUT_DIR, "flows.json"), flowsAll);
+writeJSModule(path.join(OUT_DIR, "flows.js"), flowsAll);
 
 // ──────────────────────────────────────────────
 // 8. 构建 blueprints.json
 // ──────────────────────────────────────────────
 console.log("📦 Building blueprints.json...");
 
-writeJSON(path.join(OUT_DIR, "blueprints.json"), ARCHITECTURE_BLUEPRINTS);
+writeJSModule(path.join(OUT_DIR, "blueprints.js"), ARCHITECTURE_BLUEPRINTS);
 
 // ──────────────────────────────────────────────
 // 9. 复制 i18n 文件
@@ -542,11 +547,13 @@ console.log("📦 Copying i18n files...");
 
 for (const locale of ["zh", "en", "ja"]) {
   const src = path.join(I18N_SRC, `${locale}.json`);
-  const dst = path.join(I18N_OUT, `${locale}.json`);
+  const dst = path.join(I18N_OUT, `${locale}.js`);
   if (fs.existsSync(src)) {
-    fs.copyFileSync(src, dst);
-    const sizeKB = (fs.statSync(dst).size / 1024).toFixed(1);
-    console.log(`  ✓ miniprogram/i18n/${locale}.json  (${sizeKB} KB)`);
+    const jsonData = JSON.parse(fs.readFileSync(src, "utf-8"));
+    const jsContent = `module.exports = ${JSON.stringify(jsonData, null, 2)};\n`;
+    fs.writeFileSync(dst, jsContent, "utf-8");
+    const sizeKB = (Buffer.byteLength(jsContent, "utf-8") / 1024).toFixed(1);
+    console.log(`  ✓ miniprogram/i18n/${locale}.js  (${sizeKB} KB)`);
   } else {
     console.warn(`  ⚠ i18n source not found: ${src}`);
   }

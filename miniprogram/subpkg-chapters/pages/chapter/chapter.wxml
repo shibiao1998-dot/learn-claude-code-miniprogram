@@ -140,7 +140,7 @@
           <!-- blockquote -->
           <view wx:elif="{{item.type === 'blockquote'}}" class="md-blockquote">
             <view class="md-blockquote__bar"></view>
-            <text class="md-blockquote__text">{{item.content}}</text>
+            <rich-text nodes="{{item.htmlContent || item.content}}" class="md-blockquote__text"></rich-text>
           </view>
 
           <!-- hr -->
@@ -149,7 +149,7 @@
           <!-- list_item -->
           <view wx:elif="{{item.type === 'list_item'}}" class="md-li">
             <text class="md-li__dot">•</text>
-            <text class="md-li__text">{{item.content}}</text>
+            <rich-text nodes="{{item.htmlContent || item.content}}" class="md-li__text"></rich-text>
           </view>
 
           <!-- code_block -->
@@ -164,7 +164,7 @@
 
           <!-- paragraph（默认） -->
           <view wx:else class="md-paragraph">
-            <text class="md-paragraph__text">{{item.content}}</text>
+            <rich-text nodes="{{item.htmlContent || item.content}}" class="md-paragraph__text"></rich-text>
           </view>
 
         </block>
@@ -283,7 +283,7 @@
                   <text class="dd-flow-node__label">{{item.label}}</text>
                 </view>
                 <view class="dd-flow-arrow" wx:if="{{!item.isLast}}">
-                  <text class="dd-flow-arrow__line">↓</text>
+                  <view class="dd-flow-arrow__line"></view>
                   <text class="dd-flow-arrow__label" wx:if="{{item.edgeSummary}}">{{item.edgeSummary}}</text>
                 </view>
               </view>
@@ -362,33 +362,43 @@
               <text class="dd-section__title">Agent Loop 模拟器</text>
             </view>
 
-            <!-- 控制按钮 -->
-            <view class="dd-sim-controls">
-              <view class="dd-sim-btn" bindtap="simPrev">
-                <text class="dd-sim-btn__text">← 上一步</text>
+            <view class="dd-sim">
+              <!-- 进度条 -->
+              <view class="dd-sim-progress-bar">
+                <view class="dd-sim-progress-bar__fill" style="width:{{simProgressPercent}}%"></view>
               </view>
-              <text class="dd-sim-progress">{{simCurrentStep + 1}} / {{simulatorSteps.length}}</text>
-              <view class="dd-sim-btn" bindtap="simNext">
-                <text class="dd-sim-btn__text">下一步 →</text>
-              </view>
-              <view class="dd-sim-btn dd-sim-btn--reset" bindtap="simReset">
-                <text class="dd-sim-btn__text">重置</text>
-              </view>
-            </view>
 
-            <!-- 步骤列表 -->
-            <view class="dd-sim-steps">
-              <view
-                wx:for="{{simulatorSteps}}"
-                wx:key="index"
-                class="dd-sim-step dd-sim-step--{{item.type}} {{item.isActive ? 'dd-sim-step--active' : ''}}"
-              >
-                <view class="dd-sim-step__header">
-                  <text class="dd-sim-step__type-tag">{{item.type}}</text>
-                  <text class="dd-sim-step__tool" wx:if="{{item.toolName}}">{{item.toolName}}</text>
+              <!-- 上一步摘要 -->
+              <view class="dd-sim-peek" wx:if="{{simPrevStep}}" bindtap="simPrev">
+                <text class="dd-sim-peek__label">{{simPrevStep.typeLabel}}</text>
+                <text class="dd-sim-peek__text">{{simPrevStep.contentPreview}}</text>
+              </view>
+
+              <!-- 当前步骤（全尺寸高亮） -->
+              <view class="dd-sim-current dd-sim-current--{{simCurrentStepData.type}}" wx:if="{{simCurrentStepData}}">
+                <view class="dd-sim-current__header">
+                  <text class="dd-sim-current__type">{{simCurrentStepData.typeLabel}}</text>
+                  <text class="dd-sim-current__tool" wx:if="{{simCurrentStepData.toolName}}">{{simCurrentStepData.toolName}}</text>
+                  <text class="dd-sim-current__counter">{{simCurrentStep + 1}}/{{simulatorSteps.length}}</text>
                 </view>
-                <text class="dd-sim-step__content">{{item.content}}</text>
-                <text class="dd-sim-step__annotation" wx:if="{{item.isActive && item.annotation}}">// {{item.annotation}}</text>
+                <text class="dd-sim-current__content">{{simCurrentStepData.content}}</text>
+                <text class="dd-sim-current__annotation" wx:if="{{simCurrentStepData.annotation}}">{{simCurrentStepData.annotation}}</text>
+              </view>
+
+              <!-- 下一步提示 -->
+              <view class="dd-sim-peek dd-sim-peek--next" wx:if="{{simNextStep}}" bindtap="simNext">
+                <text class="dd-sim-peek__label">{{simNextStep.typeLabel}}</text>
+                <text class="dd-sim-peek__text">{{simNextStep.contentPreview}}</text>
+              </view>
+
+              <!-- 控制按钮 -->
+              <view class="dd-sim-controls">
+                <view class="dd-sim-btn dd-sim-btn--prev {{simCurrentStep <= 0 ? 'dd-sim-btn--disabled' : ''}}" bindtap="simPrev">
+                  <text class="dd-sim-btn__text">← 上一步</text>
+                </view>
+                <view class="dd-sim-btn dd-sim-btn--next {{simCurrentStep >= simulatorSteps.length - 1 ? 'dd-sim-btn--disabled' : ''}}" bindtap="simNext">
+                  <text class="dd-sim-btn__text">下一步 →</text>
+                </view>
               </view>
             </view>
           </view>

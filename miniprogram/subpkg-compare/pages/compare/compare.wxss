@@ -76,7 +76,7 @@
 }
 
 .locale-btn.locale-active {
-  color: var(--color-accent);
+  color: var(--color-accent-blue);
   font-weight: 700;
 }
 
@@ -148,7 +148,7 @@
 }
 
 .picker-btn--selected {
-  border-color: var(--color-accent);
+  border-color: var(--color-accent-blue);
 }
 
 .picker-text {
@@ -193,7 +193,7 @@
 
 .swap-icon {
   font-size: var(--font-md);
-  color: var(--color-accent);
+  color: var(--color-accent-blue);
 }
 
 /* ── 空状态 ────────────────────────────────── */
@@ -426,7 +426,7 @@
 
 .arrow-icon {
   font-size: var(--font-lg);
-  color: var(--color-accent);
+  color: var(--color-accent-blue);
   padding: 0 var(--spacing-sm);
   flex-shrink: 0;
 }
@@ -470,7 +470,7 @@
 
 .tag--tool {
   background: rgba(2, 132, 199, 0.15);
-  color: var(--color-accent);
+  color: var(--color-accent-blue);
   border: 1rpx solid rgba(2, 132, 199, 0.3);
 }
 

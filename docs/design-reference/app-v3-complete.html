@@ -1,0 +1,1626 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Learn Claude Code — V3 Complete Design Reference</title>
+<style>
+  /* ─────────────────────────────────────────────
+     Design Tokens
+     ───────────────────────────────────────────── */
+  :root {
+    /* Palette */
+    --bg: #FFFFFF;
+    --surface: #F8FAFC;
+    --text-primary: #0F172A;
+    --text-secondary: #475569;
+    --text-muted: #94A3B8;
+    --text-faint: #CBD5E1;
+    --border: #E2E8F0;
+    --accent: #0F172A;
+
+    /* Layer colors */
+    --core: #059669;
+    --hardening: #2563EB;
+    --runtime: #7C3AED;
+    --platform: #DB2777;
+
+    /* Typography */
+    --sans: -apple-system, 'SF Pro Display', 'Noto Sans SC', sans-serif;
+    --mono: 'SF Mono', 'JetBrains Mono', monospace;
+
+    /* Spacing */
+    --sp-1: 4px;
+    --sp-2: 8px;
+    --sp-3: 12px;
+    --sp-4: 16px;
+    --sp-5: 20px;
+    --sp-6: 24px;
+    --sp-8: 32px;
+    --sp-10: 40px;
+    --sp-12: 48px;
+
+    /* Radius */
+    --r-0: 0px;
+    --r-s: 6px;
+    --r-m: 12px;
+    --r-pill: 100px;
+
+    /* Shadow */
+    --shadow-sm: 0 1px 2px rgba(0,0,0,0.04);
+    --shadow-md: 0 1px 3px rgba(0,0,0,0.06);
+  }
+
+  /* ─────────────────────────────────────────────
+     Page Chrome
+     ───────────────────────────────────────────── */
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: var(--sans);
+    background: #F1F3F5;
+    color: var(--text-primary);
+    -webkit-font-smoothing: antialiased;
+    padding: 40px 20px 80px;
+  }
+
+  .page-label {
+    max-width: 420px;
+    margin: 0 auto 12px;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: #64748B;
+  }
+
+  .device-frame {
+    width: 375px;
+    margin: 0 auto 64px;
+    background: var(--bg);
+    border-radius: 20px;
+    box-shadow: 0 2px 24px rgba(0,0,0,0.08), 0 0 0 0.5px rgba(0,0,0,0.06);
+    overflow: hidden;
+    position: relative;
+  }
+
+  /* Status bar */
+  .status-bar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 14px 20px 10px;
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--text-primary);
+  }
+  .status-bar .time { font-variant-numeric: tabular-nums; }
+  .status-bar .icons { display: flex; gap: 5px; align-items: center; }
+  .status-bar .icons svg { width: 16px; height: 12px; }
+
+  /* Page content area */
+  .page-content {
+    padding: 0 20px 100px;
+    overflow: hidden;
+  }
+
+  /* ─────────────────────────────────────────────
+     Tab Bar (shared)
+     ───────────────────────────────────────────── */
+  .tab-bar {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: var(--bg);
+    border-top: 0.5px solid var(--border);
+    display: flex;
+    padding: 8px 0 34px;
+    z-index: 10;
+  }
+  .tab-item {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 3px;
+    text-decoration: none;
+    color: var(--text-muted);
+    transition: color 0.15s;
+  }
+  .tab-item.active { color: var(--text-primary); }
+  .tab-item svg {
+    width: 22px;
+    height: 22px;
+    stroke: currentColor;
+    fill: none;
+    stroke-width: 1.5;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+  }
+  .tab-item span {
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: -0.01em;
+  }
+
+  /* ─────────────────────────────────────────────
+     Common elements
+     ───────────────────────────────────────────── */
+  .page-header {
+    padding-top: 4px;
+    margin-bottom: 20px;
+  }
+  .page-header-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+  }
+  .page-title {
+    font-size: 28px;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    line-height: 1.15;
+    color: var(--text-primary);
+  }
+  .lang-switcher {
+    display: flex;
+    gap: 0;
+    font-size: 12px;
+    font-weight: 500;
+    color: var(--text-muted);
+    border: 1px solid var(--border);
+    border-radius: var(--r-s);
+    overflow: hidden;
+  }
+  .lang-switcher .lang {
+    padding: 4px 8px;
+    cursor: pointer;
+    border-right: 1px solid var(--border);
+    transition: all 0.15s;
+  }
+  .lang-switcher .lang:last-child { border-right: none; }
+  .lang-switcher .lang.active {
+    background: var(--text-primary);
+    color: #fff;
+  }
+  .page-subtitle {
+    font-size: 13px;
+    color: var(--text-secondary);
+    margin-top: 4px;
+    line-height: 1.4;
+  }
+
+  /* Progress strip */
+  .progress-strip {
+    margin-bottom: 20px;
+  }
+  .progress-strip .bar-track {
+    width: 100%;
+    height: 3px;
+    background: var(--border);
+    border-radius: 2px;
+    overflow: hidden;
+  }
+  .progress-strip .bar-fill {
+    height: 100%;
+    border-radius: 2px;
+    background: var(--text-primary);
+    transition: width 0.3s;
+  }
+  .progress-strip .bar-label {
+    font-size: 11px;
+    font-weight: 500;
+    color: var(--text-muted);
+    margin-top: 6px;
+    text-align: right;
+    font-variant-numeric: tabular-nums;
+  }
+
+  /* ─────────────────────────────────────────────
+     PAGE 1: HOME
+     ───────────────────────────────────────────── */
+  .quick-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+    margin-bottom: 28px;
+  }
+  .quick-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--r-s);
+    padding: 14px 14px 12px;
+    cursor: pointer;
+    transition: background 0.15s;
+  }
+  .quick-card:hover { background: #F1F5F9; }
+  .quick-card .qc-icon {
+    width: 20px;
+    height: 20px;
+    margin-bottom: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--text-secondary);
+  }
+  .quick-card .qc-icon svg {
+    width: 18px;
+    height: 18px;
+    stroke: currentColor;
+    fill: none;
+    stroke-width: 1.5;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+  }
+  .quick-card .qc-title {
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--text-primary);
+    line-height: 1.3;
+  }
+  .quick-card .qc-desc {
+    font-size: 11px;
+    color: var(--text-muted);
+    margin-top: 2px;
+  }
+
+  /* Chapter list */
+  .layer-group {
+    margin-bottom: 24px;
+    position: relative;
+  }
+  .layer-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 10px;
+    padding-bottom: 0;
+  }
+  .layer-header-left {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .layer-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+  .layer-name {
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.02em;
+    color: var(--text-secondary);
+  }
+  .layer-name-en {
+    font-size: 11px;
+    font-weight: 500;
+    color: var(--text-muted);
+    margin-left: 4px;
+  }
+  .layer-count {
+    font-size: 11px;
+    font-weight: 500;
+    color: var(--text-muted);
+    font-variant-numeric: tabular-nums;
+  }
+  .layer-count.complete { color: var(--core); }
+
+  .chapter-list {
+    border-left: 2px solid var(--border);
+    margin-left: 2px;
+    padding-left: 16px;
+  }
+  .chapter-list.core { border-color: var(--core); }
+  .chapter-list.hardening { border-color: var(--hardening); }
+  .chapter-list.runtime { border-color: var(--runtime); }
+  .chapter-list.platform { border-color: var(--platform); }
+
+  .chapter-row {
+    display: flex;
+    align-items: center;
+    padding: 7px 0;
+    gap: 8px;
+    cursor: pointer;
+  }
+  .chapter-row:hover .ch-title { color: var(--text-primary); }
+  .ch-id {
+    font-family: var(--mono);
+    font-size: 11px;
+    font-weight: 500;
+    color: var(--text-muted);
+    width: 26px;
+    flex-shrink: 0;
+  }
+  .ch-title {
+    font-size: 14px;
+    font-weight: 400;
+    color: var(--text-primary);
+    flex: 1;
+    line-height: 1.3;
+  }
+  .chapter-row.read .ch-title {
+    color: var(--text-muted);
+  }
+  .chapter-row.read .ch-id {
+    color: var(--text-faint);
+  }
+  .ch-status {
+    font-size: 12px;
+    color: var(--text-faint);
+    flex-shrink: 0;
+    width: 16px;
+    text-align: center;
+  }
+  .ch-status.done {
+    color: var(--core);
+  }
+  .ch-status.next {
+    color: var(--text-muted);
+    font-size: 11px;
+  }
+
+  /* ─────────────────────────────────────────────
+     PAGE 2: TIMELINE
+     ───────────────────────────────────────────── */
+  .metro-timeline {
+    position: relative;
+    padding-bottom: 12px;
+  }
+
+  .metro-section {
+    position: relative;
+    margin-bottom: 4px;
+  }
+
+  .metro-transfer {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 16px 0 10px;
+    position: relative;
+  }
+  .metro-transfer-dot {
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    border: 2px solid currentColor;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    position: relative;
+    z-index: 2;
+    background: var(--bg);
+  }
+  .metro-transfer-dot::after {
+    content: '';
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: currentColor;
+  }
+  .metro-transfer-label {
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.02em;
+    color: var(--text-secondary);
+  }
+  .metro-transfer-range {
+    font-size: 11px;
+    font-weight: 400;
+    color: var(--text-muted);
+    margin-left: 4px;
+  }
+
+  .metro-rail {
+    position: absolute;
+    left: 7px;
+    top: 0;
+    bottom: 0;
+    width: 2px;
+    z-index: 1;
+  }
+
+  .metro-station {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 6px 0;
+    position: relative;
+    z-index: 2;
+    cursor: pointer;
+  }
+  .metro-station-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    flex-shrink: 0;
+    margin-left: 4px;
+    position: relative;
+  }
+  .metro-station.current .metro-station-dot {
+    width: 10px;
+    height: 10px;
+    margin-left: 3px;
+    box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.12);
+  }
+  .metro-station .ms-id {
+    font-family: var(--mono);
+    font-size: 11px;
+    font-weight: 500;
+    color: var(--text-muted);
+    width: 24px;
+    flex-shrink: 0;
+  }
+  .metro-station .ms-title {
+    font-size: 14px;
+    font-weight: 400;
+    color: var(--text-primary);
+    flex: 1;
+  }
+  .metro-station.current .ms-title {
+    font-weight: 600;
+  }
+  .metro-station .ms-status {
+    font-size: 12px;
+    color: var(--text-faint);
+    flex-shrink: 0;
+  }
+  .metro-station.read .ms-title {
+    color: var(--text-muted);
+  }
+  .metro-station.read .ms-id {
+    color: var(--text-faint);
+  }
+  .metro-station .ms-status.done { color: var(--core); }
+  .metro-station .ms-status.current-marker {
+    font-size: 10px;
+    color: var(--text-secondary);
+    font-weight: 500;
+  }
+
+  /* Color transition connector */
+  .metro-connector {
+    height: 8px;
+    margin-left: 7px;
+    width: 2px;
+    position: relative;
+    z-index: 1;
+  }
+
+  /* Bridge docs */
+  .bridge-section {
+    margin-top: 28px;
+    padding-top: 20px;
+    border-top: 1px solid var(--border);
+  }
+  .bridge-section-title {
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--text-muted);
+    letter-spacing: 0.02em;
+    margin-bottom: 12px;
+  }
+  .bridge-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px 12px;
+  }
+  .bridge-tag {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 12px;
+    color: var(--text-secondary);
+    cursor: pointer;
+    padding: 3px 0;
+  }
+  .bridge-tag:hover { color: var(--text-primary); }
+  .bridge-tag::before {
+    content: '';
+    width: 3px;
+    height: 3px;
+    border-radius: 50%;
+    background: var(--text-faint);
+    flex-shrink: 0;
+  }
+
+  /* ─────────────────────────────────────────────
+     PAGE 3: LAYERS
+     ───────────────────────────────────────────── */
+  .layer-section {
+    margin-bottom: 28px;
+  }
+  .layer-section-header {
+    border-top: 2px solid var(--border);
+    padding-top: 14px;
+    margin-bottom: 6px;
+  }
+  .layer-section-header.core { border-top-color: var(--core); }
+  .layer-section-header.hardening { border-top-color: var(--hardening); }
+  .layer-section-header.runtime { border-top-color: var(--runtime); }
+  .layer-section-header.platform { border-top-color: var(--platform); }
+
+  .layer-section-top {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    margin-bottom: 2px;
+  }
+  .layer-section-name {
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--text-primary);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .layer-section-name .lsn-en {
+    font-size: 13px;
+    font-weight: 400;
+    color: var(--text-muted);
+  }
+  .layer-section-count {
+    font-size: 12px;
+    font-weight: 500;
+    color: var(--text-muted);
+    font-variant-numeric: tabular-nums;
+  }
+  .layer-section-count.complete { color: var(--core); }
+  .layer-section-desc {
+    font-size: 12px;
+    color: var(--text-muted);
+    line-height: 1.4;
+    margin-bottom: 14px;
+  }
+
+  .layer-chapter-row {
+    display: flex;
+    align-items: center;
+    padding: 8px 0;
+    border-bottom: 0.5px solid var(--surface);
+    cursor: pointer;
+  }
+  .layer-chapter-row:last-child { border-bottom: none; }
+  .layer-chapter-row .lc-id {
+    font-family: var(--mono);
+    font-size: 11px;
+    font-weight: 500;
+    color: var(--text-muted);
+    width: 28px;
+    flex-shrink: 0;
+  }
+  .layer-chapter-row .lc-title {
+    font-size: 14px;
+    font-weight: 400;
+    color: var(--text-primary);
+    flex: 1;
+  }
+  .layer-chapter-row .lc-loc {
+    font-size: 11px;
+    font-weight: 400;
+    color: var(--text-faint);
+    font-variant-numeric: tabular-nums;
+    margin-right: 10px;
+    font-family: var(--mono);
+  }
+  .layer-chapter-row .lc-status {
+    font-size: 12px;
+    color: var(--text-faint);
+    width: 16px;
+    text-align: center;
+  }
+  .layer-chapter-row .lc-status.done { color: var(--core); }
+  .layer-chapter-row.read .lc-title { color: var(--text-muted); }
+  .layer-chapter-row.read .lc-id { color: var(--text-faint); }
+
+  .checkpoint-row {
+    display: flex;
+    align-items: flex-start;
+    gap: 6px;
+    margin-top: 10px;
+    padding: 10px 12px;
+    background: var(--surface);
+    border-radius: var(--r-s);
+    cursor: pointer;
+  }
+  .checkpoint-row .cp-icon {
+    font-size: 11px;
+    color: var(--text-muted);
+    margin-top: 1px;
+    flex-shrink: 0;
+  }
+  .checkpoint-row .cp-label {
+    font-size: 12px;
+    font-weight: 500;
+    color: var(--text-secondary);
+  }
+  .checkpoint-row .cp-desc {
+    font-size: 11px;
+    color: var(--text-muted);
+    margin-top: 2px;
+  }
+
+  /* Collapsed layer */
+  .layer-section.collapsed .layer-section-desc {
+    margin-bottom: 0;
+  }
+
+  /* ─────────────────────────────────────────────
+     PAGE 4: REFERENCE
+     ───────────────────────────────────────────── */
+  .ref-section {
+    margin-bottom: 28px;
+  }
+  .ref-section-header {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 14px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid var(--border);
+  }
+  .ref-section-indicator {
+    width: 3px;
+    height: 14px;
+    border-radius: 2px;
+    flex-shrink: 0;
+  }
+  .ref-section-title {
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 0.03em;
+    color: var(--text-secondary);
+  }
+  .ref-section-count {
+    font-size: 11px;
+    color: var(--text-muted);
+    margin-left: auto;
+  }
+
+  .ref-doc-row {
+    padding: 10px 0;
+    border-bottom: 0.5px solid var(--surface);
+    cursor: pointer;
+    transition: background 0.1s;
+  }
+  .ref-doc-row:last-child { border-bottom: none; }
+  .ref-doc-row:hover { background: var(--surface); margin: 0 -8px; padding: 10px 8px; border-radius: var(--r-s); }
+  .ref-doc-title {
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--text-primary);
+    line-height: 1.3;
+  }
+  .ref-doc-summary {
+    font-size: 12px;
+    color: var(--text-muted);
+    margin-top: 2px;
+    line-height: 1.4;
+  }
+
+  /* ─────────────────────────────────────────────
+     Dividers between pages
+     ───────────────────────────────────────────── */
+  .page-divider {
+    max-width: 420px;
+    margin: 0 auto 8px;
+    height: 1px;
+  }
+</style>
+</head>
+<body>
+
+<!-- ═══════════════════════════════════════════════
+     PAGE 1: HOME
+     ═══════════════════════════════════════════════ -->
+<div class="page-label">Page 1: Home</div>
+<div class="device-frame">
+  <!-- Status bar -->
+  <div class="status-bar">
+    <span class="time">9:41</span>
+    <div class="icons">
+      <svg viewBox="0 0 16 12"><path d="M1 8.5C2.5 6.5 5 5 8 5s5.5 1.5 7 3.5" stroke="currentColor" stroke-width="1.2" fill="none"/><path d="M3.5 10.5C4.5 9 6 8 8 8s3.5 1 4.5 2.5" stroke="currentColor" stroke-width="1.2" fill="none"/><circle cx="8" cy="12" r="1" fill="currentColor"/></svg>
+      <svg viewBox="0 0 16 12"><rect x="1" y="1" width="12" height="10" rx="1.5" stroke="currentColor" stroke-width="1.2" fill="none"/><rect x="14" y="4" width="1.5" height="4" rx="0.5" fill="currentColor"/><rect x="3" y="3.5" width="6" height="5" rx="0.5" fill="currentColor" opacity="0.35"/></svg>
+    </div>
+  </div>
+
+  <div class="page-content">
+    <!-- Header -->
+    <div class="page-header">
+      <div class="page-header-row">
+        <div class="page-title">Learn Claude Code</div>
+        <div class="lang-switcher">
+          <span class="lang active">中</span>
+          <span class="lang">EN</span>
+          <span class="lang">日</span>
+        </div>
+      </div>
+      <div class="page-subtitle">从零构建 Claude Code 架构</div>
+    </div>
+
+    <!-- Progress strip -->
+    <div class="progress-strip">
+      <div class="bar-track"><div class="bar-fill" style="width: 31.6%"></div></div>
+      <div class="bar-label">6 / 19 章</div>
+    </div>
+
+    <!-- Quick entry grid -->
+    <div class="quick-grid">
+      <div class="quick-card">
+        <div class="qc-icon">
+          <svg viewBox="0 0 20 20"><path d="M10 3v6m0 0l3-3m-3 3L7 6" stroke="currentColor" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><path d="M4 13l6 4 6-4" stroke="currentColor" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </div>
+        <div class="qc-title">从最小闭环开始</div>
+        <div class="qc-desc">继续 s07</div>
+      </div>
+      <div class="quick-card">
+        <div class="qc-icon">
+          <svg viewBox="0 0 20 20"><line x1="10" y1="3" x2="10" y2="17" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><circle cx="10" cy="5" r="2" stroke="currentColor" stroke-width="1.2" fill="none"/><circle cx="10" cy="11" r="2" stroke="currentColor" stroke-width="1.2" fill="none"/><circle cx="10" cy="17" r="1" fill="currentColor"/></svg>
+        </div>
+        <div class="qc-title">学习时间线</div>
+        <div class="qc-desc">路径总览</div>
+      </div>
+      <div class="quick-card">
+        <div class="qc-icon">
+          <svg viewBox="0 0 20 20"><rect x="3" y="3" width="6" height="6" rx="1" stroke="currentColor" stroke-width="1.3" fill="none"/><rect x="11" y="3" width="6" height="6" rx="1" stroke="currentColor" stroke-width="1.3" fill="none"/><rect x="3" y="11" width="6" height="6" rx="1" stroke="currentColor" stroke-width="1.3" fill="none"/><rect x="11" y="11" width="6" height="6" rx="1" stroke="currentColor" stroke-width="1.3" fill="none"/></svg>
+        </div>
+        <div class="qc-title">架构层总览</div>
+        <div class="qc-desc">四层结构</div>
+      </div>
+      <div class="quick-card">
+        <div class="qc-icon">
+          <svg viewBox="0 0 20 20"><path d="M6 4v12M14 4v12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><path d="M6 8h8M6 12h8" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-dasharray="1.5 2"/></svg>
+        </div>
+        <div class="qc-title">版本对比</div>
+        <div class="qc-desc">差异分析</div>
+      </div>
+    </div>
+
+    <!-- Chapter list: Core -->
+    <div class="layer-group">
+      <div class="layer-header">
+        <div class="layer-header-left">
+          <div class="layer-dot" style="background: var(--core)"></div>
+          <span class="layer-name">核心层<span class="layer-name-en">Core</span></span>
+        </div>
+        <span class="layer-count complete">6/6</span>
+      </div>
+      <div class="chapter-list core">
+        <div class="chapter-row read">
+          <span class="ch-id">s01</span>
+          <span class="ch-title">启动骨架</span>
+          <span class="ch-status done">
+            <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2.5 6.5L5 9l4.5-6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </span>
+        </div>
+        <div class="chapter-row read">
+          <span class="ch-id">s02</span>
+          <span class="ch-title">会话加载器</span>
+          <span class="ch-status done">
+            <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2.5 6.5L5 9l4.5-6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </span>
+        </div>
+        <div class="chapter-row read">
+          <span class="ch-id">s03</span>
+          <span class="ch-title">首条消息</span>
+          <span class="ch-status done">
+            <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2.5 6.5L5 9l4.5-6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </span>
+        </div>
+        <div class="chapter-row read">
+          <span class="ch-id">s04</span>
+          <span class="ch-title">Agent 主循环</span>
+          <span class="ch-status done">
+            <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2.5 6.5L5 9l4.5-6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </span>
+        </div>
+        <div class="chapter-row read">
+          <span class="ch-id">s05</span>
+          <span class="ch-title">工具调用</span>
+          <span class="ch-status done">
+            <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2.5 6.5L5 9l4.5-6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </span>
+        </div>
+        <div class="chapter-row read">
+          <span class="ch-id">s06</span>
+          <span class="ch-title">权限门控</span>
+          <span class="ch-status done">
+            <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2.5 6.5L5 9l4.5-6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Chapter list: Hardening -->
+    <div class="layer-group">
+      <div class="layer-header">
+        <div class="layer-header-left">
+          <div class="layer-dot" style="background: var(--hardening)"></div>
+          <span class="layer-name">硬化层<span class="layer-name-en">Hardening</span></span>
+        </div>
+        <span class="layer-count">0/5</span>
+      </div>
+      <div class="chapter-list hardening">
+        <div class="chapter-row" style="font-weight: 400;">
+          <span class="ch-id" style="color: var(--text-secondary);">s07</span>
+          <span class="ch-title" style="font-weight: 500;">工具注册</span>
+          <span class="ch-status next" style="color: var(--text-muted);">
+            <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M4.5 2.5l5 3.5-5 3.5" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </span>
+        </div>
+        <div class="chapter-row">
+          <span class="ch-id">s08</span>
+          <span class="ch-title">Bash 工具</span>
+          <span class="ch-status"></span>
+        </div>
+        <div class="chapter-row">
+          <span class="ch-id">s09</span>
+          <span class="ch-title">文件编辑</span>
+          <span class="ch-status"></span>
+        </div>
+        <div class="chapter-row">
+          <span class="ch-id">s10</span>
+          <span class="ch-title">提示管理器</span>
+          <span class="ch-status"></span>
+        </div>
+        <div class="chapter-row">
+          <span class="ch-id">s11</span>
+          <span class="ch-title">上下文窗口</span>
+          <span class="ch-status"></span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Chapter list: Runtime -->
+    <div class="layer-group">
+      <div class="layer-header">
+        <div class="layer-header-left">
+          <div class="layer-dot" style="background: var(--runtime)"></div>
+          <span class="layer-name">运行时层<span class="layer-name-en">Runtime</span></span>
+        </div>
+        <span class="layer-count">0/3</span>
+      </div>
+      <div class="chapter-list runtime">
+        <div class="chapter-row">
+          <span class="ch-id">s12</span>
+          <span class="ch-title">任务运行时</span>
+          <span class="ch-status"></span>
+        </div>
+        <div class="chapter-row">
+          <span class="ch-id">s13</span>
+          <span class="ch-title">子代理调度</span>
+          <span class="ch-status"></span>
+        </div>
+        <div class="chapter-row">
+          <span class="ch-id">s14</span>
+          <span class="ch-title">并行执行</span>
+          <span class="ch-status"></span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Chapter list: Platform -->
+    <div class="layer-group">
+      <div class="layer-header">
+        <div class="layer-header-left">
+          <div class="layer-dot" style="background: var(--platform)"></div>
+          <span class="layer-name">平台层<span class="layer-name-en">Platform</span></span>
+        </div>
+        <span class="layer-count">0/5</span>
+      </div>
+      <div class="chapter-list platform">
+        <div class="chapter-row">
+          <span class="ch-id">s15</span>
+          <span class="ch-title">MCP 客户端</span>
+          <span class="ch-status"></span>
+        </div>
+        <div class="chapter-row">
+          <span class="ch-id">s16</span>
+          <span class="ch-title">MCP 服务端</span>
+          <span class="ch-status"></span>
+        </div>
+        <div class="chapter-row">
+          <span class="ch-id">s17</span>
+          <span class="ch-title">团队协作</span>
+          <span class="ch-status"></span>
+        </div>
+        <div class="chapter-row">
+          <span class="ch-id">s18</span>
+          <span class="ch-title">扩展系统</span>
+          <span class="ch-status"></span>
+        </div>
+        <div class="chapter-row">
+          <span class="ch-id">s19</span>
+          <span class="ch-title">MCP 网关</span>
+          <span class="ch-status"></span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Tab bar -->
+  <div class="tab-bar">
+    <a class="tab-item active">
+      <svg viewBox="0 0 24 24"><path d="M3 10.5L12 4l9 6.5"/><path d="M5 9.5V19a1 1 0 001 1h4v-5h4v5h4a1 1 0 001-1V9.5"/></svg>
+      <span>首页</span>
+    </a>
+    <a class="tab-item">
+      <svg viewBox="0 0 24 24"><line x1="12" y1="3" x2="12" y2="21"/><circle cx="12" cy="6" r="2.5"/><circle cx="12" cy="13" r="2.5"/><circle cx="12" cy="20" r="1.5"/></svg>
+      <span>时间线</span>
+    </a>
+    <a class="tab-item">
+      <svg viewBox="0 0 24 24"><rect x="3" y="3" width="7.5" height="7.5" rx="1.5"/><rect x="13.5" y="3" width="7.5" height="7.5" rx="1.5"/><rect x="3" y="13.5" width="7.5" height="7.5" rx="1.5"/><rect x="13.5" y="13.5" width="7.5" height="7.5" rx="1.5"/></svg>
+      <span>架构层</span>
+    </a>
+    <a class="tab-item">
+      <svg viewBox="0 0 24 24"><line x1="4" y1="7" x2="20" y2="7"/><line x1="4" y1="12" x2="20" y2="12"/><line x1="4" y1="17" x2="16" y2="17"/></svg>
+      <span>参考</span>
+    </a>
+  </div>
+</div>
+
+
+<!-- ═══════════════════════════════════════════════
+     PAGE 2: TIMELINE
+     ═══════════════════════════════════════════════ -->
+<div class="page-label">Page 2: Timeline</div>
+<div class="device-frame">
+  <!-- Status bar -->
+  <div class="status-bar">
+    <span class="time">9:41</span>
+    <div class="icons">
+      <svg viewBox="0 0 16 12"><path d="M1 8.5C2.5 6.5 5 5 8 5s5.5 1.5 7 3.5" stroke="currentColor" stroke-width="1.2" fill="none"/><path d="M3.5 10.5C4.5 9 6 8 8 8s3.5 1 4.5 2.5" stroke="currentColor" stroke-width="1.2" fill="none"/><circle cx="8" cy="12" r="1" fill="currentColor"/></svg>
+      <svg viewBox="0 0 16 12"><rect x="1" y="1" width="12" height="10" rx="1.5" stroke="currentColor" stroke-width="1.2" fill="none"/><rect x="14" y="4" width="1.5" height="4" rx="0.5" fill="currentColor"/><rect x="3" y="3.5" width="6" height="5" rx="0.5" fill="currentColor" opacity="0.35"/></svg>
+    </div>
+  </div>
+
+  <div class="page-content">
+    <!-- Header -->
+    <div class="page-header">
+      <div class="page-header-row">
+        <div class="page-title">学习时间线</div>
+        <div class="lang-switcher">
+          <span class="lang active">中</span>
+          <span class="lang">EN</span>
+          <span class="lang">日</span>
+        </div>
+      </div>
+      <div class="page-subtitle">从零构建 Claude Code 架构</div>
+    </div>
+
+    <!-- Progress strip -->
+    <div class="progress-strip">
+      <div class="bar-track"><div class="bar-fill" style="width: 31.6%"></div></div>
+      <div class="bar-label">6 / 19</div>
+    </div>
+
+    <!-- Metro timeline -->
+    <div class="metro-timeline">
+
+      <!-- === CORE === -->
+      <div class="metro-section" style="color: var(--core);">
+        <div class="metro-rail" style="background: var(--core);"></div>
+
+        <div class="metro-transfer">
+          <div class="metro-transfer-dot"></div>
+          <span class="metro-transfer-label">Core<span class="metro-transfer-range"> · s01–s06</span></span>
+        </div>
+
+        <div class="metro-station read">
+          <div class="metro-station-dot" style="background: var(--core);"></div>
+          <span class="ms-id">s01</span>
+          <span class="ms-title">启动骨架</span>
+          <span class="ms-status done">
+            <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2.5 6.5L5 9l4.5-6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </span>
+        </div>
+        <div class="metro-station read">
+          <div class="metro-station-dot" style="background: var(--core);"></div>
+          <span class="ms-id">s02</span>
+          <span class="ms-title">会话加载器</span>
+          <span class="ms-status done">
+            <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2.5 6.5L5 9l4.5-6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </span>
+        </div>
+        <div class="metro-station read">
+          <div class="metro-station-dot" style="background: var(--core);"></div>
+          <span class="ms-id">s03</span>
+          <span class="ms-title">首条消息</span>
+          <span class="ms-status done">
+            <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2.5 6.5L5 9l4.5-6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </span>
+        </div>
+        <div class="metro-station read">
+          <div class="metro-station-dot" style="background: var(--core);"></div>
+          <span class="ms-id">s04</span>
+          <span class="ms-title">Agent 主循环</span>
+          <span class="ms-status done">
+            <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2.5 6.5L5 9l4.5-6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </span>
+        </div>
+        <div class="metro-station read">
+          <div class="metro-station-dot" style="background: var(--core);"></div>
+          <span class="ms-id">s05</span>
+          <span class="ms-title">工具调用</span>
+          <span class="ms-status done">
+            <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2.5 6.5L5 9l4.5-6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </span>
+        </div>
+        <div class="metro-station read">
+          <div class="metro-station-dot" style="background: var(--core);"></div>
+          <span class="ms-id">s06</span>
+          <span class="ms-title">权限门控</span>
+          <span class="ms-status done">
+            <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2.5 6.5L5 9l4.5-6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </span>
+        </div>
+      </div>
+
+      <!-- Connector Core → Hardening -->
+      <div class="metro-connector" style="background: linear-gradient(to bottom, var(--core), var(--hardening));"></div>
+
+      <!-- === HARDENING === -->
+      <div class="metro-section" style="color: var(--hardening);">
+        <div class="metro-rail" style="background: var(--hardening);"></div>
+
+        <div class="metro-transfer">
+          <div class="metro-transfer-dot"></div>
+          <span class="metro-transfer-label">Hardening<span class="metro-transfer-range"> · s07–s11</span></span>
+        </div>
+
+        <div class="metro-station current">
+          <div class="metro-station-dot" style="background: var(--hardening);"></div>
+          <span class="ms-id" style="color: var(--text-secondary);">s07</span>
+          <span class="ms-title">工具注册</span>
+          <span class="ms-status current-marker" style="color: var(--hardening); font-size: 10px; font-weight: 500;">当前</span>
+        </div>
+        <div class="metro-station">
+          <div class="metro-station-dot" style="background: var(--hardening); opacity: 0.4;"></div>
+          <span class="ms-id">s08</span>
+          <span class="ms-title">Bash 工具</span>
+          <span class="ms-status"></span>
+        </div>
+        <div class="metro-station">
+          <div class="metro-station-dot" style="background: var(--hardening); opacity: 0.4;"></div>
+          <span class="ms-id">s09</span>
+          <span class="ms-title">文件编辑</span>
+          <span class="ms-status"></span>
+        </div>
+        <div class="metro-station">
+          <div class="metro-station-dot" style="background: var(--hardening); opacity: 0.4;"></div>
+          <span class="ms-id">s10</span>
+          <span class="ms-title">提示管理器</span>
+          <span class="ms-status"></span>
+        </div>
+        <div class="metro-station">
+          <div class="metro-station-dot" style="background: var(--hardening); opacity: 0.4;"></div>
+          <span class="ms-id">s11</span>
+          <span class="ms-title">上下文窗口</span>
+          <span class="ms-status"></span>
+        </div>
+      </div>
+
+      <!-- Connector Hardening → Runtime -->
+      <div class="metro-connector" style="background: linear-gradient(to bottom, var(--hardening), var(--runtime));"></div>
+
+      <!-- === RUNTIME === -->
+      <div class="metro-section" style="color: var(--runtime);">
+        <div class="metro-rail" style="background: var(--runtime);"></div>
+
+        <div class="metro-transfer">
+          <div class="metro-transfer-dot"></div>
+          <span class="metro-transfer-label">Runtime<span class="metro-transfer-range"> · s12–s14</span></span>
+        </div>
+
+        <div class="metro-station">
+          <div class="metro-station-dot" style="background: var(--runtime); opacity: 0.4;"></div>
+          <span class="ms-id">s12</span>
+          <span class="ms-title">任务运行时</span>
+          <span class="ms-status"></span>
+        </div>
+        <div class="metro-station">
+          <div class="metro-station-dot" style="background: var(--runtime); opacity: 0.4;"></div>
+          <span class="ms-id">s13</span>
+          <span class="ms-title">子代理调度</span>
+          <span class="ms-status"></span>
+        </div>
+        <div class="metro-station">
+          <div class="metro-station-dot" style="background: var(--runtime); opacity: 0.4;"></div>
+          <span class="ms-id">s14</span>
+          <span class="ms-title">并行执行</span>
+          <span class="ms-status"></span>
+        </div>
+      </div>
+
+      <!-- Connector Runtime → Platform -->
+      <div class="metro-connector" style="background: linear-gradient(to bottom, var(--runtime), var(--platform));"></div>
+
+      <!-- === PLATFORM === -->
+      <div class="metro-section" style="color: var(--platform);">
+        <div class="metro-rail" style="background: var(--platform);"></div>
+
+        <div class="metro-transfer">
+          <div class="metro-transfer-dot"></div>
+          <span class="metro-transfer-label">Platform<span class="metro-transfer-range"> · s15–s19</span></span>
+        </div>
+
+        <div class="metro-station">
+          <div class="metro-station-dot" style="background: var(--platform); opacity: 0.4;"></div>
+          <span class="ms-id">s15</span>
+          <span class="ms-title">MCP 客户端</span>
+          <span class="ms-status"></span>
+        </div>
+        <div class="metro-station">
+          <div class="metro-station-dot" style="background: var(--platform); opacity: 0.4;"></div>
+          <span class="ms-id">s16</span>
+          <span class="ms-title">MCP 服务端</span>
+          <span class="ms-status"></span>
+        </div>
+        <div class="metro-station">
+          <div class="metro-station-dot" style="background: var(--platform); opacity: 0.4;"></div>
+          <span class="ms-id">s17</span>
+          <span class="ms-title">团队协作</span>
+          <span class="ms-status"></span>
+        </div>
+        <div class="metro-station">
+          <div class="metro-station-dot" style="background: var(--platform); opacity: 0.4;"></div>
+          <span class="ms-id">s18</span>
+          <span class="ms-title">扩展系统</span>
+          <span class="ms-status"></span>
+        </div>
+        <div class="metro-station">
+          <div class="metro-station-dot" style="background: var(--platform); opacity: 0.4;"></div>
+          <span class="ms-id">s19</span>
+          <span class="ms-title">MCP 网关</span>
+          <span class="ms-status"></span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Bridge docs -->
+    <div class="bridge-section">
+      <div class="bridge-section-title">Bridge Docs</div>
+      <div class="bridge-tags">
+        <span class="bridge-tag">查询控制平面</span>
+        <span class="bridge-tag">工具执行运行时</span>
+        <span class="bridge-tag">运行时任务模型</span>
+        <span class="bridge-tag">团队-任务-车道</span>
+        <span class="bridge-tag">MCP 能力层</span>
+        <span class="bridge-tag">数据结构总览</span>
+        <span class="bridge-tag">实体关系图</span>
+        <span class="bridge-tag">架构总览</span>
+        <span class="bridge-tag">一次请求生命周期</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Tab bar -->
+  <div class="tab-bar">
+    <a class="tab-item">
+      <svg viewBox="0 0 24 24"><path d="M3 10.5L12 4l9 6.5"/><path d="M5 9.5V19a1 1 0 001 1h4v-5h4v5h4a1 1 0 001-1V9.5"/></svg>
+      <span>首页</span>
+    </a>
+    <a class="tab-item active">
+      <svg viewBox="0 0 24 24"><line x1="12" y1="3" x2="12" y2="21"/><circle cx="12" cy="6" r="2.5"/><circle cx="12" cy="13" r="2.5"/><circle cx="12" cy="20" r="1.5"/></svg>
+      <span>时间线</span>
+    </a>
+    <a class="tab-item">
+      <svg viewBox="0 0 24 24"><rect x="3" y="3" width="7.5" height="7.5" rx="1.5"/><rect x="13.5" y="3" width="7.5" height="7.5" rx="1.5"/><rect x="3" y="13.5" width="7.5" height="7.5" rx="1.5"/><rect x="13.5" y="13.5" width="7.5" height="7.5" rx="1.5"/></svg>
+      <span>架构层</span>
+    </a>
+    <a class="tab-item">
+      <svg viewBox="0 0 24 24"><line x1="4" y1="7" x2="20" y2="7"/><line x1="4" y1="12" x2="20" y2="12"/><line x1="4" y1="17" x2="16" y2="17"/></svg>
+      <span>参考</span>
+    </a>
+  </div>
+</div>
+
+
+<!-- ═══════════════════════════════════════════════
+     PAGE 3: LAYERS
+     ═══════════════════════════════════════════════ -->
+<div class="page-label">Page 3: Layers</div>
+<div class="device-frame">
+  <!-- Status bar -->
+  <div class="status-bar">
+    <span class="time">9:41</span>
+    <div class="icons">
+      <svg viewBox="0 0 16 12"><path d="M1 8.5C2.5 6.5 5 5 8 5s5.5 1.5 7 3.5" stroke="currentColor" stroke-width="1.2" fill="none"/><path d="M3.5 10.5C4.5 9 6 8 8 8s3.5 1 4.5 2.5" stroke="currentColor" stroke-width="1.2" fill="none"/><circle cx="8" cy="12" r="1" fill="currentColor"/></svg>
+      <svg viewBox="0 0 16 12"><rect x="1" y="1" width="12" height="10" rx="1.5" stroke="currentColor" stroke-width="1.2" fill="none"/><rect x="14" y="4" width="1.5" height="4" rx="0.5" fill="currentColor"/><rect x="3" y="3.5" width="6" height="5" rx="0.5" fill="currentColor" opacity="0.35"/></svg>
+    </div>
+  </div>
+
+  <div class="page-content">
+    <!-- Header -->
+    <div class="page-header">
+      <div class="page-header-row">
+        <div class="page-title">架构层总览</div>
+        <div class="lang-switcher">
+          <span class="lang active">中</span>
+          <span class="lang">EN</span>
+        </div>
+      </div>
+      <div class="page-subtitle">Claude Code 的四层架构</div>
+    </div>
+
+    <!-- Layer: Core -->
+    <div class="layer-section">
+      <div class="layer-section-header core">
+        <div class="layer-section-top">
+          <div class="layer-section-name">核心层 <span class="lsn-en">Core</span></div>
+          <span class="layer-section-count complete">6/6</span>
+        </div>
+      </div>
+      <div class="layer-section-desc">从零启动到完成 Agent 主循环闭环</div>
+
+      <div class="layer-chapter-row read">
+        <span class="lc-id">s01</span>
+        <span class="lc-title">启动骨架</span>
+        <span class="lc-loc">120 loc</span>
+        <span class="lc-status done">
+          <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2.5 6.5L5 9l4.5-6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </span>
+      </div>
+      <div class="layer-chapter-row read">
+        <span class="lc-id">s02</span>
+        <span class="lc-title">会话加载器</span>
+        <span class="lc-loc">180 loc</span>
+        <span class="lc-status done">
+          <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2.5 6.5L5 9l4.5-6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </span>
+      </div>
+      <div class="layer-chapter-row read">
+        <span class="lc-id">s03</span>
+        <span class="lc-title">首条消息</span>
+        <span class="lc-loc">95 loc</span>
+        <span class="lc-status done">
+          <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2.5 6.5L5 9l4.5-6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </span>
+      </div>
+      <div class="layer-chapter-row read">
+        <span class="lc-id">s04</span>
+        <span class="lc-title">Agent 主循环</span>
+        <span class="lc-loc">340 loc</span>
+        <span class="lc-status done">
+          <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2.5 6.5L5 9l4.5-6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </span>
+      </div>
+      <div class="layer-chapter-row read">
+        <span class="lc-id">s05</span>
+        <span class="lc-title">工具调用</span>
+        <span class="lc-loc">210 loc</span>
+        <span class="lc-status done">
+          <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2.5 6.5L5 9l4.5-6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </span>
+      </div>
+      <div class="layer-chapter-row read">
+        <span class="lc-id">s06</span>
+        <span class="lc-title">权限门控</span>
+        <span class="lc-loc">265 loc</span>
+        <span class="lc-status done">
+          <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2.5 6.5L5 9l4.5-6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </span>
+      </div>
+
+      <div class="checkpoint-row">
+        <span class="cp-icon">
+          <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2 6l3 3 5-6" stroke="var(--core)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </span>
+        <div>
+          <div class="cp-label">阶段收口</div>
+          <div class="cp-desc">手写最小 Agent 循环 — 从 CLI 启动到工具调用闭环</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Layer: Hardening -->
+    <div class="layer-section">
+      <div class="layer-section-header hardening">
+        <div class="layer-section-top">
+          <div class="layer-section-name">硬化层 <span class="lsn-en">Hardening</span></div>
+          <span class="layer-section-count">0/5</span>
+        </div>
+      </div>
+      <div class="layer-section-desc">补齐工具系统和提示管理</div>
+
+      <div class="layer-chapter-row">
+        <span class="lc-id">s07</span>
+        <span class="lc-title">工具注册</span>
+        <span class="lc-loc">285 loc</span>
+        <span class="lc-status"></span>
+      </div>
+      <div class="layer-chapter-row">
+        <span class="lc-id">s08</span>
+        <span class="lc-title">Bash 工具</span>
+        <span class="lc-loc">420 loc</span>
+        <span class="lc-status"></span>
+      </div>
+      <div class="layer-chapter-row">
+        <span class="lc-id">s09</span>
+        <span class="lc-title">文件编辑</span>
+        <span class="lc-loc">380 loc</span>
+        <span class="lc-status"></span>
+      </div>
+      <div class="layer-chapter-row">
+        <span class="lc-id">s10</span>
+        <span class="lc-title">提示管理器</span>
+        <span class="lc-loc">310 loc</span>
+        <span class="lc-status"></span>
+      </div>
+      <div class="layer-chapter-row">
+        <span class="lc-id">s11</span>
+        <span class="lc-title">上下文窗口</span>
+        <span class="lc-loc">260 loc</span>
+        <span class="lc-status"></span>
+      </div>
+
+      <div class="checkpoint-row">
+        <span class="cp-icon">
+          <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><circle cx="6" cy="6" r="4" stroke="var(--hardening)" stroke-width="1.2" fill="none"/><path d="M6 4v2.5l1.5 1" stroke="var(--hardening)" stroke-width="1.2" stroke-linecap="round"/></svg>
+        </span>
+        <div>
+          <div class="cp-label">阶段收口</div>
+          <div class="cp-desc">工具注册 + Prompt Pipeline — 完成工具系统闭环</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Layer: Runtime -->
+    <div class="layer-section">
+      <div class="layer-section-header runtime">
+        <div class="layer-section-top">
+          <div class="layer-section-name">运行时层 <span class="lsn-en">Runtime</span></div>
+          <span class="layer-section-count">0/3</span>
+        </div>
+      </div>
+      <div class="layer-section-desc">任务运行时与子代理调度系统</div>
+
+      <div class="layer-chapter-row">
+        <span class="lc-id">s12</span>
+        <span class="lc-title">任务运行时</span>
+        <span class="lc-loc">450 loc</span>
+        <span class="lc-status"></span>
+      </div>
+      <div class="layer-chapter-row">
+        <span class="lc-id">s13</span>
+        <span class="lc-title">子代理调度</span>
+        <span class="lc-loc">520 loc</span>
+        <span class="lc-status"></span>
+      </div>
+      <div class="layer-chapter-row">
+        <span class="lc-id">s14</span>
+        <span class="lc-title">并行执行</span>
+        <span class="lc-loc">390 loc</span>
+        <span class="lc-status"></span>
+      </div>
+
+      <div class="checkpoint-row">
+        <span class="cp-icon">
+          <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M3 3h6M3 6h6M3 9h4" stroke="var(--runtime)" stroke-width="1.2" stroke-linecap="round"/></svg>
+        </span>
+        <div>
+          <div class="cp-label">阶段收口</div>
+          <div class="cp-desc">实现子代理 fork/join — 多任务并行执行闭环</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Layer: Platform -->
+    <div class="layer-section">
+      <div class="layer-section-header platform">
+        <div class="layer-section-top">
+          <div class="layer-section-name">平台层 <span class="lsn-en">Platform</span></div>
+          <span class="layer-section-count">0/5</span>
+        </div>
+      </div>
+      <div class="layer-section-desc">MCP 协议与团队协作扩展</div>
+
+      <div class="layer-chapter-row">
+        <span class="lc-id">s15</span>
+        <span class="lc-title">MCP 客户端</span>
+        <span class="lc-loc">340 loc</span>
+        <span class="lc-status"></span>
+      </div>
+      <div class="layer-chapter-row">
+        <span class="lc-id">s16</span>
+        <span class="lc-title">MCP 服务端</span>
+        <span class="lc-loc">290 loc</span>
+        <span class="lc-status"></span>
+      </div>
+      <div class="layer-chapter-row">
+        <span class="lc-id">s17</span>
+        <span class="lc-title">团队协作</span>
+        <span class="lc-loc">410 loc</span>
+        <span class="lc-status"></span>
+      </div>
+      <div class="layer-chapter-row">
+        <span class="lc-id">s18</span>
+        <span class="lc-title">扩展系统</span>
+        <span class="lc-loc">360 loc</span>
+        <span class="lc-status"></span>
+      </div>
+      <div class="layer-chapter-row">
+        <span class="lc-id">s19</span>
+        <span class="lc-title">MCP 网关</span>
+        <span class="lc-loc">280 loc</span>
+        <span class="lc-status"></span>
+      </div>
+
+      <div class="checkpoint-row">
+        <span class="cp-icon">
+          <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><circle cx="6" cy="6" r="2" stroke="var(--platform)" stroke-width="1.2" fill="none"/><path d="M6 1v2M6 9v2M1 6h2M9 6h2" stroke="var(--platform)" stroke-width="1.2" stroke-linecap="round"/></svg>
+        </span>
+        <div>
+          <div class="cp-label">阶段收口</div>
+          <div class="cp-desc">MCP 端到端 — 从协议握手到工具暴露全链路</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Tab bar -->
+  <div class="tab-bar">
+    <a class="tab-item">
+      <svg viewBox="0 0 24 24"><path d="M3 10.5L12 4l9 6.5"/><path d="M5 9.5V19a1 1 0 001 1h4v-5h4v5h4a1 1 0 001-1V9.5"/></svg>
+      <span>首页</span>
+    </a>
+    <a class="tab-item">
+      <svg viewBox="0 0 24 24"><line x1="12" y1="3" x2="12" y2="21"/><circle cx="12" cy="6" r="2.5"/><circle cx="12" cy="13" r="2.5"/><circle cx="12" cy="20" r="1.5"/></svg>
+      <span>时间线</span>
+    </a>
+    <a class="tab-item active">
+      <svg viewBox="0 0 24 24"><rect x="3" y="3" width="7.5" height="7.5" rx="1.5"/><rect x="13.5" y="3" width="7.5" height="7.5" rx="1.5"/><rect x="3" y="13.5" width="7.5" height="7.5" rx="1.5"/><rect x="13.5" y="13.5" width="7.5" height="7.5" rx="1.5"/></svg>
+      <span>架构层</span>
+    </a>
+    <a class="tab-item">
+      <svg viewBox="0 0 24 24"><line x1="4" y1="7" x2="20" y2="7"/><line x1="4" y1="12" x2="20" y2="12"/><line x1="4" y1="17" x2="16" y2="17"/></svg>
+      <span>参考</span>
+    </a>
+  </div>
+</div>
+
+
+<!-- ═══════════════════════════════════════════════
+     PAGE 4: REFERENCE
+     ═══════════════════════════════════════════════ -->
+<div class="page-label">Page 4: Reference</div>
+<div class="device-frame">
+  <!-- Status bar -->
+  <div class="status-bar">
+    <span class="time">9:41</span>
+    <div class="icons">
+      <svg viewBox="0 0 16 12"><path d="M1 8.5C2.5 6.5 5 5 8 5s5.5 1.5 7 3.5" stroke="currentColor" stroke-width="1.2" fill="none"/><path d="M3.5 10.5C4.5 9 6 8 8 8s3.5 1 4.5 2.5" stroke="currentColor" stroke-width="1.2" fill="none"/><circle cx="8" cy="12" r="1" fill="currentColor"/></svg>
+      <svg viewBox="0 0 16 12"><rect x="1" y="1" width="12" height="10" rx="1.5" stroke="currentColor" stroke-width="1.2" fill="none"/><rect x="14" y="4" width="1.5" height="4" rx="0.5" fill="currentColor"/><rect x="3" y="3.5" width="6" height="5" rx="0.5" fill="currentColor" opacity="0.35"/></svg>
+    </div>
+  </div>
+
+  <div class="page-content">
+    <!-- Header -->
+    <div class="page-header">
+      <div class="page-header-row">
+        <div class="page-title">参考文档</div>
+        <div class="lang-switcher">
+          <span class="lang active">中</span>
+          <span class="lang">EN</span>
+          <span class="lang">日</span>
+        </div>
+      </div>
+      <div class="page-subtitle">架构图谱与机制详解</div>
+    </div>
+
+    <!-- Section: Map -->
+    <div class="ref-section">
+      <div class="ref-section-header">
+        <div class="ref-section-indicator" style="background: var(--core);"></div>
+        <span class="ref-section-title">基础图谱</span>
+        <span class="ref-section-count">9 篇</span>
+      </div>
+
+      <div class="ref-doc-row">
+        <div class="ref-doc-title">数据结构总览</div>
+        <div class="ref-doc-summary">Data structures across all chapters</div>
+      </div>
+      <div class="ref-doc-row">
+        <div class="ref-doc-title">实体关系图</div>
+        <div class="ref-doc-summary">Entity relationships in the codebase</div>
+      </div>
+      <div class="ref-doc-row">
+        <div class="ref-doc-title">架构总览</div>
+        <div class="ref-doc-summary">High-level architecture overview</div>
+      </div>
+      <div class="ref-doc-row">
+        <div class="ref-doc-title">一次请求生命周期</div>
+        <div class="ref-doc-summary">End-to-end request lifecycle walkthrough</div>
+      </div>
+      <div class="ref-doc-row">
+        <div class="ref-doc-title">查询流转模型</div>
+        <div class="ref-doc-summary">Query transition state model</div>
+      </div>
+      <div class="ref-doc-row">
+        <div class="ref-doc-title">模块参考图</div>
+        <div class="ref-doc-summary">Reference module map and dependencies</div>
+      </div>
+      <div class="ref-doc-row">
+        <div class="ref-doc-title">代码阅读顺序</div>
+        <div class="ref-doc-summary">Recommended reading order for the source</div>
+      </div>
+      <div class="ref-doc-row">
+        <div class="ref-doc-title">团队-任务-车道</div>
+        <div class="ref-doc-summary">Team task lane coordination model</div>
+      </div>
+      <div class="ref-doc-row">
+        <div class="ref-doc-title">教学范围</div>
+        <div class="ref-doc-summary">Teaching scope and boundaries</div>
+      </div>
+    </div>
+
+    <!-- Section: Mechanism -->
+    <div class="ref-section">
+      <div class="ref-section-header">
+        <div class="ref-section-indicator" style="background: var(--hardening);"></div>
+        <span class="ref-section-title">深入机制</span>
+        <span class="ref-section-count">8 篇</span>
+      </div>
+
+      <div class="ref-doc-row">
+        <div class="ref-doc-title">查询控制平面</div>
+        <div class="ref-doc-summary">Query control plane internals and state machine</div>
+      </div>
+      <div class="ref-doc-row">
+        <div class="ref-doc-title">章节排列逻辑</div>
+        <div class="ref-doc-summary">Chapter ordering rationale and dependencies</div>
+      </div>
+      <div class="ref-doc-row">
+        <div class="ref-doc-title">工具执行运行时</div>
+        <div class="ref-doc-summary">Tool execution runtime and sandbox model</div>
+      </div>
+      <div class="ref-doc-row">
+        <div class="ref-doc-title">运行时任务模型</div>
+        <div class="ref-doc-summary">Runtime task lifecycle and scheduling</div>
+      </div>
+      <div class="ref-doc-row">
+        <div class="ref-doc-title">权限与安全模型</div>
+        <div class="ref-doc-summary">Permission gates and security boundaries</div>
+      </div>
+      <div class="ref-doc-row">
+        <div class="ref-doc-title">Prompt Pipeline</div>
+        <div class="ref-doc-summary">System prompt assembly and context injection</div>
+      </div>
+      <div class="ref-doc-row">
+        <div class="ref-doc-title">MCP 能力层</div>
+        <div class="ref-doc-summary">MCP protocol capabilities and negotiation</div>
+      </div>
+      <div class="ref-doc-row">
+        <div class="ref-doc-title">子代理通信协议</div>
+        <div class="ref-doc-summary">Sub-agent message passing and coordination</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Tab bar -->
+  <div class="tab-bar">
+    <a class="tab-item">
+      <svg viewBox="0 0 24 24"><path d="M3 10.5L12 4l9 6.5"/><path d="M5 9.5V19a1 1 0 001 1h4v-5h4v5h4a1 1 0 001-1V9.5"/></svg>
+      <span>首页</span>
+    </a>
+    <a class="tab-item">
+      <svg viewBox="0 0 24 24"><line x1="12" y1="3" x2="12" y2="21"/><circle cx="12" cy="6" r="2.5"/><circle cx="12" cy="13" r="2.5"/><circle cx="12" cy="20" r="1.5"/></svg>
+      <span>时间线</span>
+    </a>
+    <a class="tab-item">
+      <svg viewBox="0 0 24 24"><rect x="3" y="3" width="7.5" height="7.5" rx="1.5"/><rect x="13.5" y="3" width="7.5" height="7.5" rx="1.5"/><rect x="3" y="13.5" width="7.5" height="7.5" rx="1.5"/><rect x="13.5" y="13.5" width="7.5" height="7.5" rx="1.5"/></svg>
+      <span>架构层</span>
+    </a>
+    <a class="tab-item active">
+      <svg viewBox="0 0 24 24"><line x1="4" y1="7" x2="20" y2="7"/><line x1="4" y1="12" x2="20" y2="12"/><line x1="4" y1="17" x2="16" y2="17"/></svg>
+      <span>参考</span>
+    </a>
+  </div>
+</div>
+
+</body>
+</html>

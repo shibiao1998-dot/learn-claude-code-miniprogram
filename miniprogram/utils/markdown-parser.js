@@ -95,6 +95,7 @@ function parse(markdown) {
 /**
  * 处理行内标记，返回 rich-text 兼容的 nodes 数组
  * 支持 **bold**, `code`, *italic*
+ * 浅色主题配色
  * @param {string} text
  * @returns {Array}
  */
@@ -126,35 +127,59 @@ function inlineToNodes(text) {
       break;
     }
 
-    const { match, type } = earliest;
-    if (match[1]) result.push({ type: 'text', text: match[1] });
+    const em = earliest.match;
+    const et = earliest.type;
+    if (em[1]) result.push({ type: 'text', text: em[1] });
 
-    if (type === 'bold') {
+    if (et === 'bold') {
       result.push({
         type: 'text',
-        text: match[2],
-        attrs: { style: 'font-weight:bold;color:#F1F5F9' },
+        text: em[2],
+        attrs: { style: 'font-weight:700;color:#0F172A' },
       });
-    } else if (type === 'code') {
+    } else if (et === 'code') {
       result.push({
         type: 'text',
-        text: match[2],
+        text: em[2],
         attrs: {
-          style: 'font-family:monospace;background:#334155;color:#38BDF8;padding:0 4px;border-radius:4px',
+          style: 'font-family:monospace;background:#F1F5F9;color:#2563EB;padding:0 6rpx;border-radius:4rpx;font-size:0.9em',
         },
       });
-    } else if (type === 'italic') {
+    } else if (et === 'italic') {
       result.push({
         type: 'text',
-        text: match[2],
-        attrs: { style: 'font-style:italic;color:#CBD5E1' },
+        text: em[2],
+        attrs: { style: 'font-style:italic;color:#475569' },
       });
     }
 
-    remaining = match[3];
+    remaining = em[3];
   }
 
   return result;
 }
 
-module.exports = { parse, inlineToNodes };
+/**
+ * 将行内 Markdown 标记转为 HTML 字符串，供 <rich-text> 组件使用
+ * 支持 **bold**, `code`, *italic*
+ * 处理顺序：先 code（防止内部 * 被误解析），再 bold，最后 italic
+ * @param {string} text
+ * @returns {string}
+ */
+function inlineToHtml(text) {
+  if (!text) return '';
+  // 先转义 HTML 特殊字符
+  let html = text
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;');
+  // 行内代码（先处理，防止内部 * 被后续规则匹配）
+  html = html.replace(/`([^`]+)`/g, '<span style="font-family:monospace;background:#F1F5F9;color:#2563EB;padding:0 4px;border-radius:4px;font-size:0.9em">$1</span>');
+  // 粗体
+  html = html.replace(/\*\*(.+?)\*\*/g, '<span style="font-weight:700;color:#0F172A">$1</span>');
+  // 斜体
+  html = html.replace(/\*(.+?)\*/g, '<span style="font-style:italic;color:#475569">$1</span>');
+  return html;
+}
+
+module.exports = { parse, inlineToNodes, inlineToHtml };

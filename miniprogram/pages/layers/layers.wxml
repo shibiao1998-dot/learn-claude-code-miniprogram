@@ -1,177 +1,75 @@
 <!-- pages/layers/layers.wxml -->
-<scroll-view class="page-scroll" scroll-y enhanced>
+<scroll-view scroll-y class="page">
 
-  <!-- ====== 头部 ====== -->
+  <!-- Page Header -->
   <view class="page-header">
-    <view class="header-content">
-      <text class="header-title">{{t.layers.title}}</text>
-      <text class="header-subtitle">{{t.layers.subtitle}}</text>
+    <view class="header-top">
+      <text class="page-title">{{t_pageTitle}}</text>
+      <view class="lang-switcher">
+        <text class="lang-btn {{locale=='zh'?'active':''}}" bindtap="switchLocale" data-locale="zh">中</text>
+        <text class="lang-btn {{locale=='en'?'active':''}}" bindtap="switchLocale" data-locale="en">EN</text>
+      </view>
     </view>
-    <!-- 语言切换 -->
-    <view class="locale-switcher">
-      <text
-        class="locale-btn {{locale === 'zh' ? 'locale-btn--active' : ''}}"
-        data-locale="zh"
-        bindtap="switchLocale"
-      >中</text>
-      <text
-        class="locale-btn {{locale === 'en' ? 'locale-btn--active' : ''}}"
-        data-locale="en"
-        bindtap="switchLocale"
-      >EN</text>
-    </view>
+    <text class="page-subtitle">{{t_pageSubtitle}}</text>
   </view>
 
-  <!-- ====== 阅读提示 ====== -->
-  <view class="section-block">
-    <view class="section-label-row">
-      <view class="section-label-dot"></view>
-      <text class="section-label-text">{{t.layers.guide_label}}</text>
-    </view>
-    <view class="guide-cards">
-      <view class="guide-card">
-        <text class="guide-card-title">{{t.layers.guide_start_title}}</text>
-        <text class="guide-card-desc">{{t.layers.guide_start_desc}}</text>
-      </view>
-      <view class="guide-card">
-        <text class="guide-card-title">{{t.layers.guide_middle_title}}</text>
-        <text class="guide-card-desc">{{t.layers.guide_middle_desc}}</text>
-      </view>
-      <view class="guide-card">
-        <text class="guide-card-title">{{t.layers.guide_finish_title}}</text>
-        <text class="guide-card-desc">{{t.layers.guide_finish_desc}}</text>
-      </view>
-    </view>
-  </view>
-
-  <!-- ====== 四个阶段 ====== -->
-  <block wx:for="{{layerSections}}" wx:key="id">
-    <view class="layer-block layer-block--{{item.id}}">
-
-      <!-- 阶段头部 -->
-      <view class="layer-header layer-header--{{item.id}}">
-        <view class="layer-header-top">
-          <view class="layer-index-badge layer-index-badge--{{item.id}}">
-            <text class="layer-index-text">P{{item.index}}</text>
-          </view>
-          <view class="layer-header-info">
-            <text class="layer-label">{{item.label}}</text>
-            <view class="layer-progress-row">
-              <text class="layer-progress-text">{{item.readCount}}/{{item.totalCount}}</text>
-              <view class="layer-progress-bar">
-                <view
-                  class="layer-progress-fill layer-progress-fill--{{item.id}}"
-                  style="width: {{item.totalCount > 0 ? (item.readCount / item.totalCount * 100) : 0}}%"
-                ></view>
-              </view>
+  <!-- Layer Sections -->
+  <view class="layers-content">
+    <block wx:for="{{layerSections}}" wx:key="id">
+      <view class="layer-section">
+        <!-- Layer header with colored top border -->
+        <view class="layer-section-header" style="border-top-color:{{item.cssColor}}">
+          <view class="layer-section-top">
+            <view class="layer-section-name">
+              <text class="lsn-zh">{{item.label}}</text>
+              <text class="lsn-en">{{item.id == 'core' ? 'Core' : item.id == 'hardening' ? 'Hardening' : item.id == 'runtime' ? 'Runtime' : 'Platform'}}</text>
             </view>
+            <text class="layer-section-count {{item.readCount >= item.totalCount ? 'complete' : ''}}">{{item.readCount}}/{{item.totalCount}}</text>
           </view>
         </view>
-        <text class="layer-desc">{{item.desc}}</text>
-        <view class="layer-outcome-row">
-          <text class="layer-outcome-label">目标</text>
-          <text class="layer-outcome-text">{{item.outcome}}</text>
-        </view>
-      </view>
+        <text class="layer-section-desc">{{item.desc}}</text>
 
-      <!-- 阶段收口提示 -->
-      <view class="checkpoint-block" wx:if="{{item.checkpoint}}">
-        <view class="checkpoint-header" bindtap="toggleCheckpoint" data-id="{{item.id}}">
-          <view class="checkpoint-header-left">
-            <view class="checkpoint-tag checkpoint-tag--{{item.id}}">阶段收口</view>
-            <text class="checkpoint-title">{{item.checkpoint.title}}</text>
-          </view>
-          <view class="checkpoint-toggle {{expandedCheckpoints[item.id] ? 'checkpoint-toggle--open' : ''}}">
-            <text class="checkpoint-toggle-icon">▾</text>
-          </view>
-        </view>
-
-        <view class="checkpoint-body">
-          <!-- 入口 / 收口 跳转按钮 -->
-          <view class="checkpoint-nav-row">
-            <view class="checkpoint-nav-btn" bindtap="goToChapterEntry" data-id="{{item.checkpoint.entryVersion}}">
-              <text class="checkpoint-nav-label">入口</text>
-              <text class="checkpoint-nav-id">{{item.checkpoint.entryVersion}}</text>
-            </view>
-            <view class="checkpoint-nav-arrow">→</view>
-            <view class="checkpoint-nav-btn" bindtap="goToChapterEntry" data-id="{{item.checkpoint.endVersion}}">
-              <text class="checkpoint-nav-label">收口</text>
-              <text class="checkpoint-nav-id">{{item.checkpoint.endVersion}}</text>
-            </view>
-          </view>
-
-          <!-- 说明文字 -->
-          <text class="checkpoint-body-text">{{item.checkpoint.body}}</text>
-
-          <!-- 可折叠：重建目标 -->
-          <view class="checkpoint-rebuild {{expandedCheckpoints[item.id] ? 'checkpoint-rebuild--visible' : ''}}" wx:if="{{expandedCheckpoints[item.id]}}">
-            <view class="checkpoint-rebuild-label-row">
-              <text class="checkpoint-rebuild-label">重建目标</text>
-            </view>
-            <text class="checkpoint-rebuild-text">{{item.checkpoint.rebuild}}</text>
-          </view>
-        </view>
-      </view>
-
-      <!-- 章节列表 -->
-      <view class="versions-block">
-        <view class="versions-list">
+        <!-- Chapter rows -->
+        <view class="layer-chapters">
           <view
-            class="version-item"
             wx:for="{{item.versions}}"
-            wx:for-item="ver"
+            wx:for-item="v"
             wx:key="id"
+            class="layer-chapter-row {{v.isRead ? 'read' : ''}}"
             bindtap="goToChapter"
-            data-id="{{ver.id}}"
+            data-id="{{v.id}}"
+            hover-class="row-hover"
           >
-            <view class="version-left-bar version-left-bar--{{ver.layer}}"></view>
-            <view class="version-content">
-              <view class="version-top-row">
-                <text class="version-id-tag">{{ver.id}}</text>
-                <text class="version-title">{{ver.title}}</text>
-                <view class="version-read-badge {{ver.isRead ? 'version-read-badge--read' : ''}}">
-                  <text class="version-read-text">{{ver.isRead ? '✓' : ''}}</text>
-                </view>
-              </view>
-              <text class="version-subtitle" wx:if="{{ver.subtitle}}">{{ver.subtitle}}</text>
-              <view class="version-meta-row">
-                <text class="version-loc">{{ver.loc}} 行</text>
-                <text class="version-insight" wx:if="{{ver.keyInsight}}">{{ver.keyInsight}}</text>
-              </view>
+            <text class="lc-id">{{v.id}}</text>
+            <text class="lc-title">{{v.title}}</text>
+            <text class="lc-loc" wx:if="{{v.loc > 0}}">{{v.loc}} loc</text>
+            <text class="lc-status" wx:if="{{v.isRead}}">✓</text>
+          </view>
+        </view>
+
+        <!-- Checkpoint -->
+        <view
+          wx:if="{{item.checkpoint}}"
+          class="checkpoint-row"
+          bindtap="toggleCheckpoint"
+          data-layer="{{item.id}}"
+        >
+          <view class="cp-header">
+            <text class="cp-label">{{t_checkpointLabel}}</text>
+            <text class="cp-toggle {{expandedCheckpoints[item.id] ? 'expanded' : ''}}">›</text>
+          </view>
+          <text class="cp-title">{{item.checkpoint.titleText}}</text>
+          <view wx:if="{{expandedCheckpoints[item.id]}}" class="cp-body">
+            <text class="cp-body-text">{{item.checkpoint.bodyText}}</text>
+            <view class="cp-rebuild" wx:if="{{item.checkpoint.rebuildText}}">
+              <text class="cp-rebuild-label">{{t_rebuildLabel}}</text>
+              <text class="cp-rebuild-text">{{item.checkpoint.rebuildText}}</text>
             </view>
-            <view class="version-arrow">›</view>
           </view>
         </view>
       </view>
+    </block>
+  </view>
 
-      <!-- 辅助文档 -->
-      <view class="support-docs-block" wx:if="{{item.supportDocs.length > 0}}">
-        <view class="support-docs-header">
-          <view class="support-docs-icon">📚</view>
-          <text class="support-docs-title">补课资料</text>
-        </view>
-        <view class="support-docs-list">
-          <view
-            class="support-doc-card"
-            wx:for="{{item.supportDocs}}"
-            wx:for-item="doc"
-            wx:key="slug"
-            bindtap="openBridgeDoc"
-            data-slug="{{doc.slug}}"
-          >
-            <view class="support-doc-content">
-              <text class="support-doc-title">{{doc.title}}</text>
-              <text class="support-doc-summary" wx:if="{{doc.summary}}">{{doc.summary}}</text>
-            </view>
-            <text class="support-doc-arrow">›</text>
-          </view>
-        </view>
-      </view>
-
-    </view>
-  </block>
-
-  <!-- 底部间距 -->
-  <view class="page-bottom"></view>
-
+  <view class="page-footer"></view>
 </scroll-view>

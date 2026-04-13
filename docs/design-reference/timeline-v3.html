@@ -1,0 +1,966 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=375, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>Timeline V3 — Design Reference</title>
+<style>
+  /* ========================================
+     RESET & BASE
+     ======================================== */
+  *, *::before, *::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  :root {
+    /* Background & Surface */
+    --bg: #FFFFFF;
+    --surface: #F8FAFC;
+
+    /* Text */
+    --text-primary: #0F172A;
+    --text-secondary: #475569;
+    --text-muted: #94A3B8;
+    --text-faint: #CBD5E1;
+
+    /* Border */
+    --border: #E2E8F0;
+
+    /* Layer Colors */
+    --color-core: #059669;
+    --color-hardening: #2563EB;
+    --color-runtime: #7C3AED;
+    --color-platform: #DB2777;
+
+    /* Spacing */
+    --page-px: 20px;
+
+    /* Typography */
+    --font-sans: 'SF Pro Display', 'SF Pro Text', 'Noto Sans SC', -apple-system, BlinkMacSystemFont, 'Helvetica Neue', sans-serif;
+    --font-mono: 'SF Mono', 'JetBrains Mono', 'Fira Code', 'Menlo', monospace;
+  }
+
+  html {
+    font-size: 16px;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  body {
+    font-family: var(--font-sans);
+    background: var(--bg);
+    color: var(--text-primary);
+    width: 375px;
+    margin: 0 auto;
+    min-height: 100vh;
+    overflow-x: hidden;
+    position: relative;
+  }
+
+  /* ========================================
+     SAFE AREA (status bar simulation)
+     ======================================== */
+  .status-bar {
+    height: 44px;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 var(--page-px);
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--text-primary);
+  }
+
+  .status-bar-left {
+    font-variant-numeric: tabular-nums;
+  }
+
+  .status-bar-right {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+
+  .status-bar-right svg {
+    width: 16px;
+    height: 16px;
+  }
+
+  /* ========================================
+     PAGE HEADER
+     ======================================== */
+  .page-header {
+    padding: 8px var(--page-px) 20px;
+  }
+
+  .header-top {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    margin-bottom: 16px;
+  }
+
+  .header-title-group {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+
+  .page-title {
+    font-size: 24px;
+    font-weight: 700;
+    letter-spacing: -0.5px;
+    line-height: 1.2;
+    color: var(--text-primary);
+  }
+
+  .page-subtitle {
+    font-size: 13px;
+    font-weight: 400;
+    color: var(--text-muted);
+    line-height: 1.4;
+  }
+
+  /* Language Toggle */
+  .lang-toggle {
+    display: flex;
+    align-items: center;
+    background: var(--surface);
+    border-radius: 8px;
+    padding: 2px;
+    gap: 0;
+    flex-shrink: 0;
+    margin-top: 4px;
+  }
+
+  .lang-btn {
+    font-size: 11px;
+    font-weight: 500;
+    color: var(--text-muted);
+    padding: 4px 10px;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    line-height: 1;
+    letter-spacing: 0.02em;
+    user-select: none;
+  }
+
+  .lang-btn.active {
+    background: var(--bg);
+    color: var(--text-primary);
+    box-shadow: 0 1px 3px rgba(0,0,0,0.06);
+    font-weight: 600;
+  }
+
+  /* Progress Bar */
+  .progress-row {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .progress-track {
+    flex: 1;
+    height: 3px;
+    background: var(--border);
+    border-radius: 2px;
+    overflow: hidden;
+  }
+
+  .progress-fill {
+    height: 100%;
+    width: 31.6%; /* 6/19 */
+    border-radius: 2px;
+    background: var(--text-primary);
+    transition: width 0.4s ease;
+  }
+
+  .progress-label {
+    font-size: 12px;
+    font-weight: 500;
+    color: var(--text-muted);
+    font-variant-numeric: tabular-nums;
+    flex-shrink: 0;
+    letter-spacing: 0.01em;
+  }
+
+  .progress-label strong {
+    color: var(--text-primary);
+    font-weight: 600;
+  }
+
+  /* ========================================
+     TIMELINE CONTAINER
+     ======================================== */
+  .timeline-container {
+    padding: 0 0 120px;
+  }
+
+  /* ========================================
+     LAYER SECTION
+     ======================================== */
+  .layer-section {
+    position: relative;
+  }
+
+  /* ========================================
+     TRANSFER STATION (Layer Boundary)
+     ======================================== */
+  .transfer-station {
+    display: flex;
+    align-items: center;
+    padding: 0 var(--page-px);
+    height: 52px;
+    position: relative;
+  }
+
+  /* The vertical rail line behind the transfer station */
+  .transfer-station::before {
+    content: '';
+    position: absolute;
+    left: calc(var(--page-px) + 15px);
+    top: 0;
+    bottom: 0;
+    width: 2px;
+    background: var(--current-layer-color);
+  }
+
+  /* First transfer station: rail starts from center */
+  .layer-section:first-child .transfer-station::before {
+    top: 50%;
+  }
+
+  .transfer-node {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    position: relative;
+    z-index: 2;
+  }
+
+  .transfer-node-outer {
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    border: 2px solid var(--current-layer-color);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--bg);
+  }
+
+  .transfer-node-inner {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--current-layer-color);
+  }
+
+  .transfer-info {
+    margin-left: 12px;
+    display: flex;
+    align-items: baseline;
+    gap: 8px;
+  }
+
+  .transfer-name {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--current-layer-color);
+    line-height: 1;
+  }
+
+  .transfer-range {
+    font-size: 11px;
+    font-weight: 400;
+    color: var(--text-muted);
+    font-family: var(--font-mono);
+    letter-spacing: 0.02em;
+  }
+
+  /* ========================================
+     STATION (Chapter)
+     ======================================== */
+  .station {
+    display: flex;
+    align-items: center;
+    padding: 0 var(--page-px);
+    height: 44px;
+    position: relative;
+    cursor: pointer;
+    transition: background 0.15s ease;
+  }
+
+  .station:active {
+    background: var(--surface);
+  }
+
+  /* Vertical rail */
+  .station::before {
+    content: '';
+    position: absolute;
+    left: calc(var(--page-px) + 15px);
+    top: 0;
+    bottom: 0;
+    width: 2px;
+    background: var(--current-layer-color);
+  }
+
+  /* Last station in last layer section: cut rail at center */
+  .layer-section:last-child .station:last-child::before {
+    bottom: 50%;
+  }
+
+  .station-dot-area {
+    width: 32px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    position: relative;
+    z-index: 2;
+  }
+
+  .station-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--current-layer-color);
+    transition: all 0.2s ease;
+  }
+
+  /* Read chapter: dimmed dot */
+  .station.read .station-dot {
+    background: var(--text-faint);
+  }
+
+  /* Current station: ring + pulse */
+  .station.current .station-dot {
+    width: 10px;
+    height: 10px;
+    background: var(--current-layer-color);
+    box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.12);
+  }
+
+  .station-content {
+    margin-left: 12px;
+    display: flex;
+    align-items: baseline;
+    gap: 8px;
+    flex: 1;
+    min-width: 0;
+  }
+
+  .station-id {
+    font-size: 11px;
+    font-weight: 500;
+    font-family: var(--font-mono);
+    color: var(--text-muted);
+    flex-shrink: 0;
+    letter-spacing: 0.02em;
+    width: 24px;
+  }
+
+  .station-title {
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--text-primary);
+    line-height: 1.3;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  /* Read state */
+  .station.read .station-id {
+    color: var(--text-faint);
+  }
+
+  .station.read .station-title {
+    color: var(--text-muted);
+    font-weight: 400;
+  }
+
+  /* Read checkmark */
+  .station-check {
+    flex-shrink: 0;
+    width: 16px;
+    height: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transition: opacity 0.2s ease;
+  }
+
+  .station.read .station-check {
+    opacity: 1;
+  }
+
+  .station-check svg {
+    width: 14px;
+    height: 14px;
+    color: var(--text-faint);
+  }
+
+  /* Current station title emphasis */
+  .station.current .station-title {
+    font-weight: 600;
+    color: var(--text-primary);
+  }
+
+  .station.current .station-id {
+    color: var(--current-layer-color);
+    font-weight: 600;
+  }
+
+  /* ========================================
+     LAYER CONNECTOR (between layer sections)
+     ======================================== */
+  .layer-connector {
+    height: 8px;
+    position: relative;
+  }
+
+  .layer-connector::before {
+    content: '';
+    position: absolute;
+    left: calc(var(--page-px) + 15px);
+    top: 0;
+    height: 50%;
+    width: 2px;
+    background: var(--from-color);
+  }
+
+  .layer-connector::after {
+    content: '';
+    position: absolute;
+    left: calc(var(--page-px) + 15px);
+    top: 50%;
+    height: 50%;
+    width: 2px;
+    background: var(--to-color);
+  }
+
+  /* ========================================
+     BRIDGE DOCS (subtle links)
+     ======================================== */
+  .bridge-section {
+    padding: 24px var(--page-px) 16px;
+    border-top: 1px solid var(--border);
+    margin-top: 8px;
+  }
+
+  .bridge-label {
+    font-size: 11px;
+    font-weight: 500;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    margin-bottom: 12px;
+  }
+
+  .bridge-links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px 16px;
+  }
+
+  .bridge-link {
+    font-size: 13px;
+    font-weight: 400;
+    color: var(--text-secondary);
+    text-decoration: none;
+    cursor: pointer;
+    transition: color 0.15s ease;
+    line-height: 1.6;
+  }
+
+  .bridge-link:hover {
+    color: var(--text-primary);
+  }
+
+  .bridge-link::before {
+    content: '';
+    display: inline-block;
+    width: 3px;
+    height: 3px;
+    border-radius: 50%;
+    background: var(--text-faint);
+    margin-right: 8px;
+    vertical-align: middle;
+    position: relative;
+    top: -1px;
+  }
+
+  /* ========================================
+     TAB BAR
+     ======================================== */
+  .tab-bar {
+    position: fixed;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 375px;
+    height: 83px; /* 49 + 34 safe area */
+    background: var(--bg);
+    border-top: 0.5px solid var(--border);
+    display: flex;
+    align-items: flex-start;
+    padding-top: 6px;
+    padding-bottom: 34px;
+    z-index: 100;
+  }
+
+  .tab-item {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2px;
+    cursor: pointer;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  .tab-icon {
+    width: 24px;
+    height: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .tab-icon svg {
+    width: 22px;
+    height: 22px;
+    color: var(--text-muted);
+    stroke-width: 1.5;
+    transition: color 0.2s ease;
+  }
+
+  .tab-item.active .tab-icon svg {
+    color: var(--text-primary);
+  }
+
+  .tab-label {
+    font-size: 10px;
+    font-weight: 400;
+    color: var(--text-muted);
+    line-height: 1;
+    letter-spacing: 0.01em;
+  }
+
+  .tab-item.active .tab-label {
+    color: var(--text-primary);
+    font-weight: 500;
+  }
+
+  /* ========================================
+     LAYER COLOR UTILITIES
+     ======================================== */
+  .layer-core { --current-layer-color: var(--color-core); }
+  .layer-hardening { --current-layer-color: var(--color-hardening); }
+  .layer-runtime { --current-layer-color: var(--color-runtime); }
+  .layer-platform { --current-layer-color: var(--color-platform); }
+
+  /* ========================================
+     DEVICE FRAME (design presentation only)
+     ======================================== */
+  @media (min-width: 500px) {
+    body {
+      margin-top: 40px;
+      margin-bottom: 40px;
+      border-radius: 40px;
+      overflow: hidden;
+      box-shadow:
+        0 0 0 1px rgba(0,0,0,0.06),
+        0 25px 60px rgba(0,0,0,0.12);
+      min-height: calc(100vh - 80px);
+      position: relative;
+    }
+
+    .tab-bar {
+      border-radius: 0 0 40px 40px;
+    }
+  }
+
+  /* ========================================
+     SUBTLE ANIMATION: fade-in on load
+     ======================================== */
+  @keyframes fadeInUp {
+    from {
+      opacity: 0;
+      transform: translateY(8px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  .timeline-container {
+    animation: fadeInUp 0.4s ease both;
+    animation-delay: 0.1s;
+  }
+
+  .page-header {
+    animation: fadeInUp 0.3s ease both;
+  }
+</style>
+</head>
+<body>
+
+  <!-- Status Bar -->
+  <div class="status-bar">
+    <span class="status-bar-left">9:41</span>
+    <span class="status-bar-right">
+      <svg viewBox="0 0 16 16" fill="currentColor"><path d="M1 12.5a.5.5 0 01.5-.5h1a.5.5 0 01.5.5v1a.5.5 0 01-.5.5h-1a.5.5 0 01-.5-.5v-1zm3.5-3a.5.5 0 01.5-.5h1a.5.5 0 01.5.5v4a.5.5 0 01-.5.5h-1a.5.5 0 01-.5-.5v-4zm3.5-2a.5.5 0 01.5-.5h1a.5.5 0 01.5.5v6a.5.5 0 01-.5.5h-1a.5.5 0 01-.5-.5v-6zm3.5-3a.5.5 0 01.5-.5h1a.5.5 0 01.5.5v9a.5.5 0 01-.5.5h-1a.5.5 0 01-.5-.5v-9z"/></svg>
+      <svg viewBox="0 0 16 16" fill="currentColor"><path d="M8 1.918l-.797.161A4.002 4.002 0 004 6c0 .628-.134 2.197-.459 3.742-.16.767-.376 1.566-.663 2.258h10.244c-.287-.692-.502-1.49-.663-2.258C12.134 8.197 12 6.628 12 6a4.002 4.002 0 00-3.203-3.92L8 1.917zM14.22 12c.223.447.481.801.78 1H1c.299-.199.557-.553.78-1C2.68 10.2 3 6.88 3 6c0-2.42 1.72-4.44 4.005-4.901a1 1 0 111.99 0A5.002 5.002 0 0113 6c0 .88.32 4.2 1.22 6z"/></svg>
+      <svg viewBox="0 0 24 12" fill="currentColor"><rect x="0" y="1" width="20" height="10" rx="2" stroke="currentColor" stroke-width="1" fill="none"/><rect x="21" y="3.5" width="2" height="5" rx="1"/><rect x="1.5" y="2.5" width="12" height="7" rx="1"/></svg>
+    </span>
+  </div>
+
+  <!-- Page Header -->
+  <header class="page-header">
+    <div class="header-top">
+      <div class="header-title-group">
+        <h1 class="page-title">学习时间线</h1>
+        <p class="page-subtitle">从零构建 Claude Code 架构</p>
+      </div>
+      <div class="lang-toggle">
+        <span class="lang-btn active">中</span>
+        <span class="lang-btn">EN</span>
+        <span class="lang-btn">日</span>
+      </div>
+    </div>
+    <div class="progress-row">
+      <div class="progress-track">
+        <div class="progress-fill"></div>
+      </div>
+      <span class="progress-label"><strong>6</strong> / 19</span>
+    </div>
+  </header>
+
+  <!-- Timeline -->
+  <div class="timeline-container">
+
+    <!-- ===== CORE LAYER ===== -->
+    <div class="layer-section layer-core">
+      <div class="transfer-station">
+        <div class="transfer-node">
+          <div class="transfer-node-outer">
+            <div class="transfer-node-inner"></div>
+          </div>
+        </div>
+        <div class="transfer-info">
+          <span class="transfer-name">Core</span>
+          <span class="transfer-range">s01 – s06</span>
+        </div>
+      </div>
+
+      <div class="station read">
+        <div class="station-dot-area"><div class="station-dot"></div></div>
+        <div class="station-content">
+          <span class="station-id">s01</span>
+          <span class="station-title">启动骨架</span>
+        </div>
+        <div class="station-check">
+          <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="3.5 8.5 6.5 11.5 12.5 5.5"/></svg>
+        </div>
+      </div>
+
+      <div class="station read">
+        <div class="station-dot-area"><div class="station-dot"></div></div>
+        <div class="station-content">
+          <span class="station-id">s02</span>
+          <span class="station-title">会话加载器</span>
+        </div>
+        <div class="station-check">
+          <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="3.5 8.5 6.5 11.5 12.5 5.5"/></svg>
+        </div>
+      </div>
+
+      <div class="station read">
+        <div class="station-dot-area"><div class="station-dot"></div></div>
+        <div class="station-content">
+          <span class="station-id">s03</span>
+          <span class="station-title">首条消息</span>
+        </div>
+        <div class="station-check">
+          <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="3.5 8.5 6.5 11.5 12.5 5.5"/></svg>
+        </div>
+      </div>
+
+      <div class="station read">
+        <div class="station-dot-area"><div class="station-dot"></div></div>
+        <div class="station-content">
+          <span class="station-id">s04</span>
+          <span class="station-title">Agent 主循环</span>
+        </div>
+        <div class="station-check">
+          <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="3.5 8.5 6.5 11.5 12.5 5.5"/></svg>
+        </div>
+      </div>
+
+      <div class="station read">
+        <div class="station-dot-area"><div class="station-dot"></div></div>
+        <div class="station-content">
+          <span class="station-id">s05</span>
+          <span class="station-title">工具调用</span>
+        </div>
+        <div class="station-check">
+          <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="3.5 8.5 6.5 11.5 12.5 5.5"/></svg>
+        </div>
+      </div>
+
+      <div class="station read">
+        <div class="station-dot-area"><div class="station-dot"></div></div>
+        <div class="station-content">
+          <span class="station-id">s06</span>
+          <span class="station-title">权限门控</span>
+        </div>
+        <div class="station-check">
+          <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="3.5 8.5 6.5 11.5 12.5 5.5"/></svg>
+        </div>
+      </div>
+    </div>
+
+    <!-- Connector: Core → Hardening -->
+    <div class="layer-connector" style="--from-color: var(--color-core); --to-color: var(--color-hardening);"></div>
+
+    <!-- ===== HARDENING LAYER ===== -->
+    <div class="layer-section layer-hardening">
+      <div class="transfer-station">
+        <div class="transfer-node">
+          <div class="transfer-node-outer">
+            <div class="transfer-node-inner"></div>
+          </div>
+        </div>
+        <div class="transfer-info">
+          <span class="transfer-name">Hardening</span>
+          <span class="transfer-range">s07 – s11</span>
+        </div>
+      </div>
+
+      <div class="station current">
+        <div class="station-dot-area"><div class="station-dot"></div></div>
+        <div class="station-content">
+          <span class="station-id">s07</span>
+          <span class="station-title">工具注册</span>
+        </div>
+        <div class="station-check"></div>
+      </div>
+
+      <div class="station">
+        <div class="station-dot-area"><div class="station-dot"></div></div>
+        <div class="station-content">
+          <span class="station-id">s08</span>
+          <span class="station-title">Bash 工具</span>
+        </div>
+        <div class="station-check"></div>
+      </div>
+
+      <div class="station">
+        <div class="station-dot-area"><div class="station-dot"></div></div>
+        <div class="station-content">
+          <span class="station-id">s09</span>
+          <span class="station-title">文件编辑</span>
+        </div>
+        <div class="station-check"></div>
+      </div>
+
+      <div class="station">
+        <div class="station-dot-area"><div class="station-dot"></div></div>
+        <div class="station-content">
+          <span class="station-id">s10</span>
+          <span class="station-title">提示管理器</span>
+        </div>
+        <div class="station-check"></div>
+      </div>
+
+      <div class="station">
+        <div class="station-dot-area"><div class="station-dot"></div></div>
+        <div class="station-content">
+          <span class="station-id">s11</span>
+          <span class="station-title">上下文窗口</span>
+        </div>
+        <div class="station-check"></div>
+      </div>
+    </div>
+
+    <!-- Connector: Hardening → Runtime -->
+    <div class="layer-connector" style="--from-color: var(--color-hardening); --to-color: var(--color-runtime);"></div>
+
+    <!-- ===== RUNTIME LAYER ===== -->
+    <div class="layer-section layer-runtime">
+      <div class="transfer-station">
+        <div class="transfer-node">
+          <div class="transfer-node-outer">
+            <div class="transfer-node-inner"></div>
+          </div>
+        </div>
+        <div class="transfer-info">
+          <span class="transfer-name">Runtime</span>
+          <span class="transfer-range">s12 – s14</span>
+        </div>
+      </div>
+
+      <div class="station">
+        <div class="station-dot-area"><div class="station-dot"></div></div>
+        <div class="station-content">
+          <span class="station-id">s12</span>
+          <span class="station-title">任务运行时</span>
+        </div>
+        <div class="station-check"></div>
+      </div>
+
+      <div class="station">
+        <div class="station-dot-area"><div class="station-dot"></div></div>
+        <div class="station-content">
+          <span class="station-id">s13</span>
+          <span class="station-title">子代理调度</span>
+        </div>
+        <div class="station-check"></div>
+      </div>
+
+      <div class="station">
+        <div class="station-dot-area"><div class="station-dot"></div></div>
+        <div class="station-content">
+          <span class="station-id">s14</span>
+          <span class="station-title">并行执行</span>
+        </div>
+        <div class="station-check"></div>
+      </div>
+    </div>
+
+    <!-- Connector: Runtime → Platform -->
+    <div class="layer-connector" style="--from-color: var(--color-runtime); --to-color: var(--color-platform);"></div>
+
+    <!-- ===== PLATFORM LAYER ===== -->
+    <div class="layer-section layer-platform">
+      <div class="transfer-station">
+        <div class="transfer-node">
+          <div class="transfer-node-outer">
+            <div class="transfer-node-inner"></div>
+          </div>
+        </div>
+        <div class="transfer-info">
+          <span class="transfer-name">Platform</span>
+          <span class="transfer-range">s15 – s19</span>
+        </div>
+      </div>
+
+      <div class="station">
+        <div class="station-dot-area"><div class="station-dot"></div></div>
+        <div class="station-content">
+          <span class="station-id">s15</span>
+          <span class="station-title">MCP 客户端</span>
+        </div>
+        <div class="station-check"></div>
+      </div>
+
+      <div class="station">
+        <div class="station-dot-area"><div class="station-dot"></div></div>
+        <div class="station-content">
+          <span class="station-id">s16</span>
+          <span class="station-title">MCP 服务端</span>
+        </div>
+        <div class="station-check"></div>
+      </div>
+
+      <div class="station">
+        <div class="station-dot-area"><div class="station-dot"></div></div>
+        <div class="station-content">
+          <span class="station-id">s17</span>
+          <span class="station-title">团队协作</span>
+        </div>
+        <div class="station-check"></div>
+      </div>
+
+      <div class="station">
+        <div class="station-dot-area"><div class="station-dot"></div></div>
+        <div class="station-content">
+          <span class="station-id">s18</span>
+          <span class="station-title">扩展系统</span>
+        </div>
+        <div class="station-check"></div>
+      </div>
+
+      <div class="station">
+        <div class="station-dot-area"><div class="station-dot"></div></div>
+        <div class="station-content">
+          <span class="station-id">s19</span>
+          <span class="station-title">MCP 网关</span>
+        </div>
+        <div class="station-check"></div>
+      </div>
+    </div>
+
+    <!-- Bridge Docs -->
+    <div class="bridge-section">
+      <div class="bridge-label">Bridge Docs</div>
+      <div class="bridge-links">
+        <a class="bridge-link">查询控制平面</a>
+        <a class="bridge-link">工具执行运行时</a>
+        <a class="bridge-link">运行时任务模型</a>
+        <a class="bridge-link">队友-任务-车道</a>
+        <a class="bridge-link">MCP 能力层</a>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Tab Bar -->
+  <nav class="tab-bar">
+    <div class="tab-item">
+      <div class="tab-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M3 9.5L12 4l9 5.5"/>
+          <path d="M19 13v6a1 1 0 01-1 1H6a1 1 0 01-1-1v-6"/>
+        </svg>
+      </div>
+      <span class="tab-label">首页</span>
+    </div>
+    <div class="tab-item active">
+      <div class="tab-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+          <line x1="12" y1="3" x2="12" y2="21"/>
+          <circle cx="12" cy="6" r="2"/>
+          <circle cx="12" cy="12" r="2"/>
+          <circle cx="12" cy="18" r="2"/>
+        </svg>
+      </div>
+      <span class="tab-label">时间线</span>
+    </div>
+    <div class="tab-item">
+      <div class="tab-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+          <rect x="4" y="4" width="16" height="16" rx="2"/>
+          <line x1="4" y1="10" x2="20" y2="10"/>
+          <line x1="12" y1="4" x2="12" y2="20"/>
+        </svg>
+      </div>
+      <span class="tab-label">架构层</span>
+    </div>
+    <div class="tab-item">
+      <div class="tab-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M4 6h16M4 12h16M4 18h10"/>
+        </svg>
+      </div>
+      <span class="tab-label">参考</span>
+    </div>
+  </nav>
+
+</body>
+</html>

@@ -2,7 +2,7 @@
 const i18n = require('../../utils/i18n');
 const progress = require('../../utils/progress');
 const eventBus = require('../../utils/event-bus');
-const meta = require('../../data/meta.json');
+const meta = require('../../data/meta.js');
 
 Page({
   data: {
@@ -36,16 +36,17 @@ Page({
     // 加载当前语言的全部文案
     let messages = {};
     try {
-      messages = require(`../../i18n/${locale}.json`);
-    } catch (e) {
-      try {
-        messages = require('../../i18n/zh.json');
-      } catch (e2) {
-        console.warn('[home] failed to load i18n messages');
+      switch (locale) {
+        case 'en': messages = require('../../i18n/en.js'); break;
+        case 'ja': messages = require('../../i18n/ja.js'); break;
+        default:   messages = require('../../i18n/zh.js'); break;
       }
+    } catch (e) {
+      console.warn('[home] failed to load i18n messages');
     }
 
     // 构建带翻译内容的 layers 数据
+    var foundNext = false;
     const layers = meta.layers.map(layer => {
       const versions = layer.versions.map(vid => {
         const v = meta.versions[vid];
@@ -53,6 +54,12 @@ Page({
 
         const contentLocale = (v.content && v.content[locale]) || (v.content && v.content['zh']) || {};
         const sessionLabel = (messages.sessions && messages.sessions[vid]) || vid;
+        const isRead = progress.isRead(v.id);
+        var isNext = false;
+        if (!isRead && !foundNext) {
+          isNext = true;
+          foundNext = true;
+        }
 
         return {
           id: v.id,
@@ -61,17 +68,20 @@ Page({
           keyInsight: contentLocale.keyInsight || '',
           loc: v.loc || 0,
           layer: v.layer,
-          isRead: progress.isRead(v.id),
+          isRead: isRead,
+          isNext: isNext,
         };
       }).filter(Boolean);
 
       const layerLabel = (messages.layer_labels && messages.layer_labels[layer.id]) || layer.label;
+      const layerReadCount = versions.filter(function(v) { return v.isRead; }).length;
 
       return {
         id: layer.id,
         label: layerLabel,
         color: layer.color,
-        versions,
+        versions: versions,
+        readCount: layerReadCount,
       };
     });
 
@@ -92,16 +102,29 @@ Page({
     const allIds = meta.versionOrder || [];
     const readCount = progress.getReadCount(allIds);
 
-    // 更新每章 isRead 状态
-    const layers = this.data.layers.map(layer => ({
-      ...layer,
-      versions: layer.versions.map(chapter => ({
-        ...chapter,
-        isRead: progress.isRead(chapter.id),
-      })),
-    }));
+    // 更新每章 isRead/isNext 状态（避免对象展开语法，兼容小程序编译）
+    var foundNext = false;
+    const layers = this.data.layers.map(function(layer) {
+      var versions = layer.versions.map(function(chapter) {
+        var isRead = progress.isRead(chapter.id);
+        var isNext = false;
+        if (!isRead && !foundNext) {
+          isNext = true;
+          foundNext = true;
+        }
+        return Object.assign({}, chapter, {
+          isRead: isRead,
+          isNext: isNext,
+        });
+      });
+      var layerReadCount = versions.filter(function(v) { return v.isRead; }).length;
+      return Object.assign({}, layer, {
+        versions: versions,
+        readCount: layerReadCount,
+      });
+    });
 
-    this.setData({ readCount, layers });
+    this.setData({ readCount: readCount, layers: layers });
   },
 
   goToChapter(e) {

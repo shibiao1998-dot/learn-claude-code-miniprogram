@@ -1,86 +1,62 @@
 <!-- pages/reference/reference.wxml -->
 <scroll-view scroll-y class="page">
 
-  <!-- ======= 头部 ======= -->
-  <view class="header">
-    <view class="header-inner">
-      <view class="header-badge">
-        <text class="header-badge-dot"></text>
-        <text class="header-badge-text">Reference Docs</text>
-      </view>
-      <text class="header-title">{{t.reference.title}}</text>
-      <text class="header-subtitle">{{t.reference.subtitle}}</text>
-
-      <!-- 语言切换 -->
-      <view class="locale-switcher">
-        <text class="locale-btn {{locale=='zh'?'locale-btn--active':''}}"
-              bindtap="switchLocale" data-locale="zh">中</text>
-        <text class="locale-sep">·</text>
-        <text class="locale-btn {{locale=='en'?'locale-btn--active':''}}"
-              bindtap="switchLocale" data-locale="en">EN</text>
-        <text class="locale-sep">·</text>
-        <text class="locale-btn {{locale=='ja'?'locale-btn--active':''}}"
-              bindtap="switchLocale" data-locale="ja">日</text>
+  <!-- Page Header -->
+  <view class="page-header">
+    <view class="header-top">
+      <text class="page-title">{{t.reference.title}}</text>
+      <view class="lang-switcher">
+        <text class="lang-btn {{locale=='zh'?'active':''}}" bindtap="switchLocale" data-locale="zh">中</text>
+        <text class="lang-btn {{locale=='en'?'active':''}}" bindtap="switchLocale" data-locale="en">EN</text>
+        <text class="lang-btn {{locale=='ja'?'active':''}}" bindtap="switchLocale" data-locale="ja">日</text>
       </view>
     </view>
+    <text class="page-subtitle">{{t.reference.subtitle}}</text>
   </view>
 
-  <!-- ======= 基础文档区块（kind=map）======= -->
-  <view class="section">
-    <view class="section-header">
-      <view class="section-indicator section-indicator--map"></view>
-      <text class="section-title">{{t.reference.foundation_title}}</text>
+  <!-- Foundation Docs (kind=map) -->
+  <view class="ref-section">
+    <view class="ref-section-header">
+      <view class="ref-indicator ref-indicator--map"></view>
+      <text class="ref-section-title">{{t.reference.foundation_title}}</text>
+      <text class="ref-section-count">{{foundationDocs.length}} {{locale == 'zh' ? '篇' : locale == 'ja' ? '件' : 'docs'}}</text>
     </view>
-    <view class="doc-list">
+    <view class="ref-doc-list">
       <view
         wx:for="{{foundationDocs}}"
         wx:key="slug"
-        class="doc-card doc-card--map"
-        hover-class="card-hover"
+        class="ref-doc-row"
         bindtap="openDoc"
         data-slug="{{item.slug}}"
+        hover-class="doc-hover"
       >
-        <view class="doc-card-body">
-          <text class="doc-title">{{item.title}}</text>
-          <text class="doc-summary">{{item.summary}}</text>
-        </view>
-        <view class="doc-footer">
-          <view class="doc-badge doc-badge--map">
-            <text class="doc-badge-text">地图</text>
-          </view>
-          <text class="doc-arrow">→</text>
-        </view>
+        <text class="ref-doc-title">{{item.title}}</text>
+        <text class="ref-doc-summary">{{item.summary}}</text>
       </view>
     </view>
   </view>
 
-  <!-- ======= 深入阅读区块（kind=mechanism）======= -->
-  <view class="section section--last">
-    <view class="section-header">
-      <view class="section-indicator section-indicator--mechanism"></view>
-      <text class="section-title">{{t.reference.deep_dive_title}}</text>
+  <!-- Mechanism Docs -->
+  <view class="ref-section">
+    <view class="ref-section-header">
+      <view class="ref-indicator ref-indicator--mechanism"></view>
+      <text class="ref-section-title">{{t.reference.deep_dive_title}}</text>
+      <text class="ref-section-count">{{mechanismDocs.length}} {{locale == 'zh' ? '篇' : locale == 'ja' ? '件' : 'docs'}}</text>
     </view>
-    <view class="doc-list">
+    <view class="ref-doc-list">
       <view
         wx:for="{{mechanismDocs}}"
         wx:key="slug"
-        class="doc-card doc-card--mechanism"
-        hover-class="card-hover"
+        class="ref-doc-row"
         bindtap="openDoc"
         data-slug="{{item.slug}}"
+        hover-class="doc-hover"
       >
-        <view class="doc-card-body">
-          <text class="doc-title">{{item.title}}</text>
-          <text class="doc-summary">{{item.summary}}</text>
-        </view>
-        <view class="doc-footer">
-          <view class="doc-badge doc-badge--mechanism">
-            <text class="doc-badge-text">机制</text>
-          </view>
-          <text class="doc-arrow">→</text>
-        </view>
+        <text class="ref-doc-title">{{item.title}}</text>
+        <text class="ref-doc-summary">{{item.summary}}</text>
       </view>
     </view>
   </view>
 
+  <view class="page-footer"></view>
 </scroll-view>

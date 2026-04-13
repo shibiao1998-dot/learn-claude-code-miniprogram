@@ -13,10 +13,10 @@ function _loadMessages(locale) {
   try {
     // 微信小程序不支持动态 require，使用 switch-case 静态加载
     switch (locale) {
-      case 'zh': _messages = require('../i18n/zh.json'); break;
-      case 'en': _messages = require('../i18n/en.json'); break;
-      case 'ja': _messages = require('../i18n/ja.json'); break;
-      default:   _messages = require('../i18n/zh.json'); break;
+      case 'zh': _messages = require('../i18n/zh.js'); break;
+      case 'en': _messages = require('../i18n/en.js'); break;
+      case 'ja': _messages = require('../i18n/ja.js'); break;
+      default:   _messages = require('../i18n/zh.js'); break;
     }
   } catch (e) {
     console.warn('[i18n] Failed to load messages for locale:', locale);

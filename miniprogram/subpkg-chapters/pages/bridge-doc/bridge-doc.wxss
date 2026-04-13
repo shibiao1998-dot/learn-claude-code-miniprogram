@@ -67,7 +67,7 @@
 
 .bd-summary-block__bar {
   width: 4rpx;
-  background: var(--color-accent);
+  background: var(--color-accent-blue);
   border-radius: 2rpx;
   flex-shrink: 0;
 }
@@ -151,7 +151,7 @@
 .md-h2__bar {
   width: 6rpx;
   height: 32rpx;
-  background: var(--color-accent);
+  background: var(--color-accent-blue);
   border-radius: 3rpx;
   flex-shrink: 0;
 }
@@ -176,7 +176,7 @@
 
 .md-blockquote__bar {
   width: 4rpx;
-  background: var(--color-accent);
+  background: var(--color-accent-blue);
   border-radius: 2rpx;
   flex-shrink: 0;
 }
@@ -205,7 +205,7 @@
 }
 
 .md-li__dot {
-  color: var(--color-accent);
+  color: var(--color-accent-blue);
   font-size: var(--font-base);
   line-height: 1.6;
   flex-shrink: 0;

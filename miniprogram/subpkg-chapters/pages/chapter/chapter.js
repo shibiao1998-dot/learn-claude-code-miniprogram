@@ -39,6 +39,14 @@ const SLICE_LABELS = {
   lanes:    { zh: '执行车道', en: 'Lanes',     ja: 'レーン' },
 };
 
+// 模拟器步骤类型 → 人类可读标签
+const SIM_TYPE_LABELS = {
+  user_message: 'User',
+  assistant_text: 'Assistant',
+  tool_call: 'Tool Call',
+  tool_result: 'Tool Result',
+};
+
 function _getSliceLabel(sliceId, locale) {
   const entry = SLICE_LABELS[sliceId];
   if (!entry) return sliceId;
@@ -146,6 +154,10 @@ Page({
     blueprintData: null,    // {summary, slices, records, handoff}
     simulatorSteps: [],     // [{type, content, toolName, annotation, index, isActive}]
     simCurrentStep: 0,
+    simCurrentStepData: null,  // 当前步骤完整数据（含 typeLabel）
+    simPrevStep: null,         // 上一步摘要
+    simNextStep: null,         // 下一步摘要
+    simProgressPercent: 0,     // 进度百分比
     bridgeDocLinks: [],     // [{slug, title, summary, kind}]
   },
 
@@ -226,6 +238,13 @@ Page({
       docNodes = [{ type: 'paragraph', content: '文档加载失败，请重试。' }];
     }
 
+    // 对 paragraph / list_item / blockquote 添加行内格式 HTML
+    docNodes.forEach(function(node) {
+      if (node.type === 'paragraph' || node.type === 'list_item' || node.type === 'blockquote') {
+        node.htmlContent = markdownParser.inlineToHtml(node.content);
+      }
+    });
+
     // 构建文件名
     const safeTitle = v.title.toLowerCase().replace(/\s+/g, '_').replace(/[^a-z0-9_]/g, '');
     const filename = `${id}_${safeTitle}.py`;
@@ -275,6 +294,10 @@ Page({
       blueprintData: null,
       simulatorSteps: [],
       simCurrentStep: 0,
+      simCurrentStepData: null,
+      simPrevStep: null,
+      simNextStep: null,
+      simProgressPercent: 0,
       bridgeDocLinks: [],
     });
 
@@ -482,27 +505,65 @@ Page({
       bridgeDocLinks,
       deepDiveLoaded: true,
     });
+
+    // 初始化模拟器焦点数据
+    if (simulatorSteps.length > 0) {
+      this._computeSimData();
+    }
+  },
+
+  /**
+   * 计算模拟器聚焦模式的数据：当前步骤 + 前后预览
+   */
+  _computeSimData() {
+    var steps = this.data.simulatorSteps;
+    var idx = this.data.simCurrentStep;
+    if (!steps || steps.length === 0) return;
+
+    var current = steps[idx];
+    var prev = idx > 0 ? steps[idx - 1] : null;
+    var next = idx < steps.length - 1 ? steps[idx + 1] : null;
+
+    this.setData({
+      simCurrentStepData: Object.assign({}, current, {
+        typeLabel: SIM_TYPE_LABELS[current.type] || current.type
+      }),
+      simPrevStep: prev ? {
+        typeLabel: SIM_TYPE_LABELS[prev.type] || prev.type,
+        contentPreview: (prev.content || '').slice(0, 40) + (prev.content && prev.content.length > 40 ? '...' : '')
+      } : null,
+      simNextStep: next ? {
+        typeLabel: SIM_TYPE_LABELS[next.type] || next.type,
+        contentPreview: (next.content || '').slice(0, 40) + (next.content && next.content.length > 40 ? '...' : '')
+      } : null,
+      simProgressPercent: Math.round((idx + 1) / steps.length * 100)
+    });
   },
 
   simNext() {
-    const { simCurrentStep, simulatorSteps } = this.data;
+    var simCurrentStep = this.data.simCurrentStep;
+    var simulatorSteps = this.data.simulatorSteps;
     if (simCurrentStep >= simulatorSteps.length - 1) return;
-    const next = simCurrentStep + 1;
-    const steps = simulatorSteps.map(function(s, i) { return Object.assign({}, s, { isActive: i === next }); });
+    var next = simCurrentStep + 1;
+    var steps = simulatorSteps.map(function(s, i) { return Object.assign({}, s, { isActive: i === next }); });
     this.setData({ simCurrentStep: next, simulatorSteps: steps });
+    this._computeSimData();
   },
 
   simPrev() {
-    const { simCurrentStep, simulatorSteps } = this.data;
+    var simCurrentStep = this.data.simCurrentStep;
+    var simulatorSteps = this.data.simulatorSteps;
     if (simCurrentStep <= 0) return;
-    const prev = simCurrentStep - 1;
-    const steps = simulatorSteps.map(function(s, i) { return Object.assign({}, s, { isActive: i === prev }); });
+    var prev = simCurrentStep - 1;
+    var steps = simulatorSteps.map(function(s, i) { return Object.assign({}, s, { isActive: i === prev }); });
     this.setData({ simCurrentStep: prev, simulatorSteps: steps });
+    this._computeSimData();
   },
 
   simReset() {
-    const steps = this.data.simulatorSteps.map(function(s, i) { return Object.assign({}, s, { isActive: i === 0 }); });
+    var steps = this.data.simulatorSteps.map(function(s, i) { return Object.assign({}, s, { isActive: i === 0 }); });
     this.setData({ simCurrentStep: 0, simulatorSteps: steps });
+    this._computeSimData();
   },
 
   // 跳转到 Bridge Doc 页面

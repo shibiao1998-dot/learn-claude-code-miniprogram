@@ -1,0 +1,1753 @@
+module.exports = {
+  "s01": {
+    "summary": {
+      "zh": "第一章先建立最小闭环：用户输入进入 messages[]，模型决定要不要调工具，结果再回写到同一条循环里。",
+      "en": "The first chapter establishes the smallest closed loop: user input enters messages[], the model decides whether to call a tool, and the result flows back into the same loop."
+    },
+    "slices": {
+      "mainline": [
+        {
+          "name": {
+            "zh": "Agent Loop",
+            "en": "Agent Loop"
+          },
+          "detail": {
+            "zh": "每轮都走一次调用模型 -> 处理输出 -> 再决定是否继续。",
+            "en": "Each turn calls the model, handles the output, then decides whether to continue."
+          },
+          "fresh": true
+        }
+      ],
+      "state": [
+        {
+          "name": {
+            "zh": "messages[]",
+            "en": "messages[]"
+          },
+          "detail": {
+            "zh": "所有用户、助手和工具结果都累积在这里。",
+            "en": "User, assistant, and tool result history accumulates here."
+          },
+          "fresh": true
+        },
+        {
+          "name": {
+            "zh": "tool_result 回流",
+            "en": "tool_result write-back"
+          },
+          "detail": {
+            "zh": "真正让 agent 能行动的是工具结果会回到下一轮推理。",
+            "en": "The agent becomes real when tool results return into the next reasoning step."
+          },
+          "fresh": true
+        }
+      ]
+    },
+    "records": [
+      {
+        "name": {
+          "zh": "LoopState",
+          "en": "LoopState"
+        },
+        "detail": {
+          "zh": "最小可运行会话状态。",
+          "en": "The smallest runnable session state."
+        },
+        "fresh": true
+      },
+      {
+        "name": {
+          "zh": "Assistant Content",
+          "en": "Assistant Content"
+        },
+        "detail": {
+          "zh": "模型本轮输出。",
+          "en": "The model output for the current turn."
+        },
+        "fresh": true
+      }
+    ],
+    "handoff": [
+      {
+        "zh": "用户消息进入 messages[]",
+        "en": "User message enters messages[]"
+      },
+      {
+        "zh": "模型产出 tool_use 或文本",
+        "en": "Model emits tool_use or text"
+      },
+      {
+        "zh": "工具结果回写到下一轮",
+        "en": "Tool result writes back into the next turn"
+      }
+    ]
+  },
+  "s02": {
+    "summary": {
+      "zh": "这一章把“会调一个工具”升级成“能稳定路由很多工具”，主循环不变，工具层长出来。",
+      "en": "This chapter upgrades one tool call into a stable multi-tool routing layer while keeping the main loop unchanged."
+    },
+    "slices": {
+      "mainline": [
+        {
+          "name": {
+            "zh": "稳定主循环",
+            "en": "Stable Main Loop"
+          },
+          "detail": {
+            "zh": "主循环继续只管模型调用与结果回写。",
+            "en": "The main loop still only owns model calls and write-back."
+          }
+        }
+      ],
+      "control": [
+        {
+          "name": {
+            "zh": "ToolSpec 目录",
+            "en": "ToolSpec Catalog"
+          },
+          "detail": {
+            "zh": "把工具能力描述给模型看。",
+            "en": "Describes tool capabilities to the model."
+          },
+          "fresh": true
+        },
+        {
+          "name": {
+            "zh": "Dispatch Map",
+            "en": "Dispatch Map"
+          },
+          "detail": {
+            "zh": "按工具名把调用路由到对应 handler。",
+            "en": "Routes a tool call to the correct handler by name."
+          },
+          "fresh": true
+        }
+      ],
+      "state": [
+        {
+          "name": {
+            "zh": "tool_input",
+            "en": "tool_input"
+          },
+          "detail": {
+            "zh": "模型传入的结构化工具参数。",
+            "en": "Structured tool arguments emitted by the model."
+          },
+          "fresh": true
+        }
+      ]
+    },
+    "records": [
+      {
+        "name": {
+          "zh": "ToolSpec",
+          "en": "ToolSpec"
+        },
+        "detail": {
+          "zh": "schema + 描述。",
+          "en": "Schema plus description."
+        },
+        "fresh": true
+      },
+      {
+        "name": {
+          "zh": "Dispatch Entry",
+          "en": "Dispatch Entry"
+        },
+        "detail": {
+          "zh": "工具名到函数的映射。",
+          "en": "Mapping from tool name to function."
+        },
+        "fresh": true
+      }
+    ],
+    "handoff": [
+      {
+        "zh": "模型说要调哪个工具",
+        "en": "The model selects a tool"
+      },
+      {
+        "zh": "dispatch map 找到 handler",
+        "en": "The dispatch map resolves the handler"
+      },
+      {
+        "zh": "handler 输出 tool_result",
+        "en": "The handler returns a tool_result"
+      }
+    ]
+  },
+  "s03": {
+    "summary": {
+      "zh": "第三章把会话内的工作拆解显式化，agent 开始有一块自己的 session planning 状态。",
+      "en": "The third chapter makes session planning explicit so the agent gains a dedicated session-planning state."
+    },
+    "slices": {
+      "mainline": [
+        {
+          "name": {
+            "zh": "计划先行",
+            "en": "Plan Before Execution"
+          },
+          "detail": {
+            "zh": "先把大目标拆成当前轮可追踪步骤，再去行动。",
+            "en": "Break the larger goal into trackable steps before acting."
+          },
+          "fresh": true
+        }
+      ],
+      "control": [
+        {
+          "name": {
+            "zh": "提醒回路",
+            "en": "Reminder Loop"
+          },
+          "detail": {
+            "zh": "每轮重新看到当前 todo，避免中途漂移。",
+            "en": "Each turn revisits the current todo list to avoid drift."
+          },
+          "fresh": true
+        }
+      ],
+      "state": [
+        {
+          "name": {
+            "zh": "TodoItem",
+            "en": "TodoItem"
+          },
+          "detail": {
+            "zh": "当前会话里的最小计划单位。",
+            "en": "The smallest planning unit inside one session."
+          },
+          "fresh": true
+        },
+        {
+          "name": {
+            "zh": "PlanState",
+            "en": "PlanState"
+          },
+          "detail": {
+            "zh": "记录有哪些步骤、做到了哪一步。",
+            "en": "Tracks what steps exist and which one is active."
+          },
+          "fresh": true
+        }
+      ]
+    },
+    "records": [
+      {
+        "name": {
+          "zh": "Todo List",
+          "en": "Todo List"
+        },
+        "detail": {
+          "zh": "会话级，不持久。",
+          "en": "Session-scoped, not durable."
+        },
+        "fresh": true
+      }
+    ],
+    "handoff": [
+      {
+        "zh": "目标先变成步骤",
+        "en": "The goal becomes steps first"
+      },
+      {
+        "zh": "当前步骤指导工具选择",
+        "en": "The current step guides tool choice"
+      },
+      {
+        "zh": "进展再回写计划状态",
+        "en": "Progress writes back into planning state"
+      }
+    ]
+  },
+  "s04": {
+    "summary": {
+      "zh": "这里开始把子任务从父上下文中隔离出来，系统第一次有了显式的多循环结构。",
+      "en": "This chapter isolates subtasks from the parent context and introduces the first explicit multi-loop structure."
+    },
+    "slices": {
+      "mainline": [
+        {
+          "name": {
+            "zh": "父循环",
+            "en": "Parent Loop"
+          },
+          "detail": {
+            "zh": "保持主线目标和最终整合责任。",
+            "en": "Keeps the main goal and the integration responsibility."
+          }
+        },
+        {
+          "name": {
+            "zh": "子循环",
+            "en": "Child Loop"
+          },
+          "detail": {
+            "zh": "为子任务提供一份干净上下文。",
+            "en": "Provides a clean context for the subtask."
+          },
+          "fresh": true
+        }
+      ],
+      "control": [
+        {
+          "name": {
+            "zh": "委派边界",
+            "en": "Delegation Boundary"
+          },
+          "detail": {
+            "zh": "什么时候把工作交给子 agent，什么时候留在父循环。",
+            "en": "Defines when work is delegated versus kept in the parent loop."
+          },
+          "fresh": true
+        }
+      ],
+      "state": [
+        {
+          "name": {
+            "zh": "Parent messages",
+            "en": "Parent messages"
+          },
+          "detail": {
+            "zh": "父 agent 的长期上下文。",
+            "en": "The parent agent's long-lived context."
+          }
+        },
+        {
+          "name": {
+            "zh": "Child messages",
+            "en": "Child messages"
+          },
+          "detail": {
+            "zh": "子任务一次性的独立上下文。",
+            "en": "An isolated one-shot context for the delegated subtask."
+          },
+          "fresh": true
+        }
+      ],
+      "lanes": [
+        {
+          "name": {
+            "zh": "一次性 Subagent",
+            "en": "One-shot Subagent"
+          },
+          "detail": {
+            "zh": "做完摘要后就退出，不承担长期身份。",
+            "en": "Exits after returning a summary and does not keep long-lived identity."
+          },
+          "fresh": true
+        }
+      ]
+    },
+    "records": [
+      {
+        "name": {
+          "zh": "Subtask Request",
+          "en": "Subtask Request"
+        },
+        "detail": {
+          "zh": "父循环交给子循环的边界对象。",
+          "en": "The boundary object handed from parent to child."
+        },
+        "fresh": true
+      }
+    ],
+    "handoff": [
+      {
+        "zh": "父循环定义子任务",
+        "en": "The parent loop defines a subtask"
+      },
+      {
+        "zh": "子循环在独立 messages 里执行",
+        "en": "The child loop runs in isolated messages"
+      },
+      {
+        "zh": "摘要回到父循环继续主线",
+        "en": "A summary returns to the parent loop"
+      }
+    ]
+  },
+  "s05": {
+    "summary": {
+      "zh": "技能系统把知识获取拆成发现层和按需加载层，避免把所有说明一开始全塞进 prompt。",
+      "en": "The skill system splits knowledge into a discovery layer and an on-demand loading layer so the prompt does not start bloated."
+    },
+    "slices": {
+      "control": [
+        {
+          "name": {
+            "zh": "Skill Discovery",
+            "en": "Skill Discovery"
+          },
+          "detail": {
+            "zh": "先用便宜方式知道有哪些技能可用。",
+            "en": "Learns which skills exist through a cheap discovery pass."
+          },
+          "fresh": true
+        },
+        {
+          "name": {
+            "zh": "Skill Load",
+            "en": "Skill Load"
+          },
+          "detail": {
+            "zh": "真正需要时再把深说明注入。",
+            "en": "Loads deep instructions only when they are actually needed."
+          },
+          "fresh": true
+        }
+      ],
+      "state": [
+        {
+          "name": {
+            "zh": "Skill Registry",
+            "en": "Skill Registry"
+          },
+          "detail": {
+            "zh": "保存技能名字、简介和路径。",
+            "en": "Stores skill names, summaries, and paths."
+          },
+          "fresh": true
+        }
+      ],
+      "mainline": [
+        {
+          "name": {
+            "zh": "主循环保持轻量",
+            "en": "Keep the Loop Lightweight"
+          },
+          "detail": {
+            "zh": "技能不是固定写进系统 prompt，而是按需补进当前轮。",
+            "en": "Skills are injected on demand instead of being permanently fused into the system prompt."
+          }
+        }
+      ]
+    },
+    "records": [
+      {
+        "name": {
+          "zh": "SKILL.md",
+          "en": "SKILL.md"
+        },
+        "detail": {
+          "zh": "技能的深说明载体。",
+          "en": "The deep instruction source for a skill."
+        },
+        "fresh": true
+      }
+    ],
+    "handoff": [
+      {
+        "zh": "先发现技能入口",
+        "en": "Discover the skill entry first"
+      },
+      {
+        "zh": "需要时读取 SKILL.md",
+        "en": "Read SKILL.md when needed"
+      },
+      {
+        "zh": "再把结果回注给主循环",
+        "en": "Feed the loaded result back into the main loop"
+      }
+    ]
+  },
+  "s06": {
+    "summary": {
+      "zh": "上下文压缩让系统第一次区分活跃窗口和被转移出去的细节，长会话开始变得可持续。",
+      "en": "Context compaction is where the system first separates the active window from offloaded detail so long sessions stay usable."
+    },
+    "slices": {
+      "control": [
+        {
+          "name": {
+            "zh": "压缩触发器",
+            "en": "Compaction Trigger"
+          },
+          "detail": {
+            "zh": "接近 token 上限时决定何时压缩。",
+            "en": "Decides when to compact as the token budget grows."
+          },
+          "fresh": true
+        },
+        {
+          "name": {
+            "zh": "微压缩与摘要压缩",
+            "en": "Micro and Summary Compaction"
+          },
+          "detail": {
+            "zh": "按损失程度分两层压缩。",
+            "en": "Compacts in layers with different levels of loss."
+          },
+          "fresh": true
+        }
+      ],
+      "state": [
+        {
+          "name": {
+            "zh": "活跃上下文",
+            "en": "Active Context"
+          },
+          "detail": {
+            "zh": "当前轮必须直接看到的内容。",
+            "en": "What the current turn must see directly."
+          }
+        },
+        {
+          "name": {
+            "zh": "Persisted Output",
+            "en": "Persisted Output"
+          },
+          "detail": {
+            "zh": "被移出活跃窗口但仍可再读的细节。",
+            "en": "Detail moved out of the active window but still readable later."
+          },
+          "fresh": true
+        },
+        {
+          "name": {
+            "zh": "Summary State",
+            "en": "Summary State"
+          },
+          "detail": {
+            "zh": "压缩后保留下来的主线。",
+            "en": "The retained storyline after compaction."
+          },
+          "fresh": true
+        }
+      ]
+    },
+    "records": [
+      {
+        "name": {
+          "zh": "Micro Compact Record",
+          "en": "Micro Compact Record"
+        },
+        "detail": {
+          "zh": "短期挪走细节。",
+          "en": "Moves recent detail out of the hot window."
+        },
+        "fresh": true
+      },
+      {
+        "name": {
+          "zh": "Summary Compact",
+          "en": "Summary Compact"
+        },
+        "detail": {
+          "zh": "保住主线连续性。",
+          "en": "Preserves continuity of the mainline."
+        },
+        "fresh": true
+      }
+    ],
+    "handoff": [
+      {
+        "zh": "细节先移出活跃窗口",
+        "en": "Detail leaves the active window first"
+      },
+      {
+        "zh": "主线被压成摘要",
+        "en": "The mainline is preserved as a summary"
+      },
+      {
+        "zh": "后续真需要时再读回原文",
+        "en": "Raw detail is read back only when needed"
+      }
+    ]
+  },
+  "s07": {
+    "summary": {
+      "zh": "从这一章开始，执行前出现了真正的控制面闸门：模型意图必须先变成可判断的权限请求。",
+      "en": "From this chapter onward, execution gets a real control-plane gate: model intent must become a permission request before it runs."
+    },
+    "slices": {
+      "control": [
+        {
+          "name": {
+            "zh": "Permission Gate",
+            "en": "Permission Gate"
+          },
+          "detail": {
+            "zh": "deny / ask / allow 决策发生在执行之前。",
+            "en": "deny / ask / allow happens before execution."
+          },
+          "fresh": true
+        },
+        {
+          "name": {
+            "zh": "模式控制",
+            "en": "Mode Control"
+          },
+          "detail": {
+            "zh": "default、plan、auto 等模式影响整条权限路径。",
+            "en": "Modes such as default, plan, and auto affect the whole permission path."
+          },
+          "fresh": true
+        }
+      ],
+      "state": [
+        {
+          "name": {
+            "zh": "PermissionRule",
+            "en": "PermissionRule"
+          },
+          "detail": {
+            "zh": "定义哪些工具或路径直接允许、拒绝或询问。",
+            "en": "Defines which tools or paths are allowed, denied, or sent for confirmation."
+          },
+          "fresh": true
+        },
+        {
+          "name": {
+            "zh": "PermissionDecision",
+            "en": "PermissionDecision"
+          },
+          "detail": {
+            "zh": "把 allow / ask / deny 结构化回写。",
+            "en": "Writes allow / ask / deny back in structured form."
+          },
+          "fresh": true
+        }
+      ],
+      "mainline": [
+        {
+          "name": {
+            "zh": "主循环不再直达工具",
+            "en": "The Loop No Longer Reaches Tools Directly"
+          },
+          "detail": {
+            "zh": "tool call 先过权限层，再决定是否真正执行。",
+            "en": "A tool call passes through the permission layer before actual execution."
+          }
+        }
+      ]
+    },
+    "records": [
+      {
+        "name": {
+          "zh": "Normalized Intent",
+          "en": "Normalized Intent"
+        },
+        "detail": {
+          "zh": "把原始工具调用翻译成可判断对象。",
+          "en": "Translates raw tool calls into a policy-checkable object."
+        },
+        "fresh": true
+      }
+    ],
+    "handoff": [
+      {
+        "zh": "模型提出动作",
+        "en": "The model proposes an action"
+      },
+      {
+        "zh": "权限层做出 allow / ask / deny",
+        "en": "The permission layer returns allow / ask / deny"
+      },
+      {
+        "zh": "结果回写给主循环继续推理",
+        "en": "That result writes back into the main loop"
+      }
+    ]
+  },
+  "s08": {
+    "summary": {
+      "zh": "Hook 让主循环第一次拥有稳定的旁路扩展点，日志、审计、追踪开始从核心逻辑中分离。",
+      "en": "Hooks give the loop stable sidecar extension points so logging, audit, and tracing separate from the core path."
+    },
+    "slices": {
+      "control": [
+        {
+          "name": {
+            "zh": "Lifecycle Events",
+            "en": "Lifecycle Events"
+          },
+          "detail": {
+            "zh": "主循环在 pre_tool / post_tool / on_error 等边界发出事件。",
+            "en": "The loop emits events at boundaries like pre_tool, post_tool, and on_error."
+          },
+          "fresh": true
+        },
+        {
+          "name": {
+            "zh": "Hook Registry",
+            "en": "Hook Registry"
+          },
+          "detail": {
+            "zh": "多个 hook 共享同一事件契约。",
+            "en": "Multiple hooks share one event contract."
+          },
+          "fresh": true
+        }
+      ],
+      "state": [
+        {
+          "name": {
+            "zh": "HookEvent",
+            "en": "HookEvent"
+          },
+          "detail": {
+            "zh": "tool、input、result、error 等结构化事件包。",
+            "en": "A structured event envelope carrying tool, input, result, error, and more."
+          },
+          "fresh": true
+        }
+      ],
+      "mainline": [
+        {
+          "name": {
+            "zh": "主线保持最小",
+            "en": "Keep the Mainline Small"
+          },
+          "detail": {
+            "zh": "副作用通过 hook 附着，不侵入每个工具 handler。",
+            "en": "Side effects attach through hooks instead of invading every handler."
+          }
+        }
+      ]
+    },
+    "records": [
+      {
+        "name": {
+          "zh": "Audit Sink",
+          "en": "Audit Sink"
+        },
+        "detail": {
+          "zh": "一个具体副作用落点。",
+          "en": "A concrete side-effect sink."
+        },
+        "fresh": true
+      }
+    ],
+    "handoff": [
+      {
+        "zh": "主循环发事件",
+        "en": "The loop emits an event"
+      },
+      {
+        "zh": "Hook 观察并产出副作用",
+        "en": "Hooks observe and produce side effects"
+      },
+      {
+        "zh": "主线继续推进不被重写",
+        "en": "The mainline continues without being rewritten"
+      }
+    ]
+  },
+  "s09": {
+    "summary": {
+      "zh": "长期记忆把跨会话事实从即时上下文里分层出来，系统第一次有了真正的 durable knowledge 容器。",
+      "en": "Long-term memory layers cross-session facts away from immediate context and introduces a real durable knowledge container."
+    },
+    "slices": {
+      "control": [
+        {
+          "name": {
+            "zh": "Memory Load/Write",
+            "en": "Memory Load/Write"
+          },
+          "detail": {
+            "zh": "模型调用前读取，任务结束后提炼并写回。",
+            "en": "Load before the model call, then extract and write after the work turn."
+          },
+          "fresh": true
+        }
+      ],
+      "state": [
+        {
+          "name": {
+            "zh": "messages[]",
+            "en": "messages[]"
+          },
+          "detail": {
+            "zh": "承载当前过程，不负责跨会话长期知识。",
+            "en": "Carries the live process, not long-term cross-session knowledge."
+          }
+        },
+        {
+          "name": {
+            "zh": "Memory Store",
+            "en": "Memory Store"
+          },
+          "detail": {
+            "zh": "只保存跨会话仍然有价值的事实。",
+            "en": "Stores only durable facts that still matter across sessions."
+          },
+          "fresh": true
+        }
+      ]
+    },
+    "records": [
+      {
+        "name": {
+          "zh": "MemoryEntry",
+          "en": "MemoryEntry"
+        },
+        "detail": {
+          "zh": "用户偏好、项目约束等长期事实。",
+          "en": "Long-lived facts such as preferences and project constraints."
+        },
+        "fresh": true
+      }
+    ],
+    "handoff": [
+      {
+        "zh": "先读取相关 memory",
+        "en": "Relevant memory is loaded first"
+      },
+      {
+        "zh": "主循环完成本轮工作",
+        "en": "The main loop completes the current turn"
+      },
+      {
+        "zh": "再把新事实提炼写回",
+        "en": "New durable facts are extracted and written back"
+      }
+    ]
+  },
+  "s10": {
+    "summary": {
+      "zh": "系统输入在这里变成装配流水线，模型看到的不再是一段神秘大 prompt，而是一组有边界的输入片段。",
+      "en": "System input becomes an assembly pipeline here: the model no longer sees one giant mysterious prompt, but a bounded set of input sections."
+    },
+    "slices": {
+      "control": [
+        {
+          "name": {
+            "zh": "Prompt Builder",
+            "en": "Prompt Builder"
+          },
+          "detail": {
+            "zh": "按顺序装配稳定规则、运行时状态、工具和记忆。",
+            "en": "Assembles stable policy, runtime state, tools, and memory in a visible order."
+          },
+          "fresh": true
+        }
+      ],
+      "state": [
+        {
+          "name": {
+            "zh": "Prompt Parts",
+            "en": "Prompt Parts"
+          },
+          "detail": {
+            "zh": "每一段输入都有单独边界。",
+            "en": "Each input fragment has its own explicit boundary."
+          },
+          "fresh": true
+        },
+        {
+          "name": {
+            "zh": "Runtime Context",
+            "en": "Runtime Context"
+          },
+          "detail": {
+            "zh": "工作目录、任务状态、记忆等运行时片段。",
+            "en": "Runtime fragments such as workspace state, task state, and memory."
+          },
+          "fresh": true
+        }
+      ],
+      "mainline": [
+        {
+          "name": {
+            "zh": "模型输入构建",
+            "en": "Model Input Construction"
+          },
+          "detail": {
+            "zh": "主循环在调用模型前先构建完整输入。",
+            "en": "The loop constructs the full input before calling the model."
+          }
+        }
+      ]
+    },
+    "records": [
+      {
+        "name": {
+          "zh": "Section Order",
+          "en": "Section Order"
+        },
+        "detail": {
+          "zh": "哪一段先拼、哪一段后拼。",
+          "en": "Which fragment is assembled first versus later."
+        },
+        "fresh": true
+      }
+    ],
+    "handoff": [
+      {
+        "zh": "稳定策略先装配",
+        "en": "Stable policy is assembled first"
+      },
+      {
+        "zh": "运行时片段再注入",
+        "en": "Runtime fragments are injected next"
+      },
+      {
+        "zh": "最终输入才交给模型",
+        "en": "Only then does the final input reach the model"
+      }
+    ]
+  },
+  "s11": {
+    "summary": {
+      "zh": "错误恢复把失败正式纳入状态机，系统开始显式记录为什么继续、为什么重试、为什么停止。",
+      "en": "Error recovery formally brings failure into the state machine so the system records why it continues, retries, or stops."
+    },
+    "slices": {
+      "control": [
+        {
+          "name": {
+            "zh": "Recovery Manager",
+            "en": "Recovery Manager"
+          },
+          "detail": {
+            "zh": "按失败类型选择 retry、fallback、ask 或 stop。",
+            "en": "Chooses retry, fallback, ask, or stop by failure type."
+          },
+          "fresh": true
+        }
+      ],
+      "state": [
+        {
+          "name": {
+            "zh": "Continuation Reason",
+            "en": "Continuation Reason"
+          },
+          "detail": {
+            "zh": "把“为什么继续”写成可见状态。",
+            "en": "Makes the reason for continuation visible state."
+          },
+          "fresh": true
+        },
+        {
+          "name": {
+            "zh": "Retry Bounds",
+            "en": "Retry Bounds"
+          },
+          "detail": {
+            "zh": "限制恢复分支不会无限循环。",
+            "en": "Prevents recovery branches from looping forever."
+          },
+          "fresh": true
+        }
+      ],
+      "mainline": [
+        {
+          "name": {
+            "zh": "失败仍回到主循环",
+            "en": "Failures Still Return to the Loop"
+          },
+          "detail": {
+            "zh": "失败不是丢掉，而是带着恢复语义回写。",
+            "en": "Failures are not discarded; they write back with recovery semantics."
+          }
+        }
+      ]
+    },
+    "records": [
+      {
+        "name": {
+          "zh": "RecoveryState",
+          "en": "RecoveryState"
+        },
+        "detail": {
+          "zh": "错误分类和恢复分支状态。",
+          "en": "The error classification and branch state."
+        },
+        "fresh": true
+      }
+    ],
+    "handoff": [
+      {
+        "zh": "工具失败先分类",
+        "en": "A tool failure is classified first"
+      },
+      {
+        "zh": "恢复层选择分支",
+        "en": "The recovery layer chooses a branch"
+      },
+      {
+        "zh": "继续原因写回主循环",
+        "en": "The continuation reason returns to the main loop"
+      }
+    ]
+  },
+  "s12": {
+    "summary": {
+      "zh": "任务系统第一次把会话步骤提升成 durable work graph，系统开始能跨轮次推进一组真正的工作节点。",
+      "en": "The task system is where session steps become a durable work graph that can progress real work nodes across turns."
+    },
+    "slices": {
+      "control": [
+        {
+          "name": {
+            "zh": "Unlock Rules",
+            "en": "Unlock Rules"
+          },
+          "detail": {
+            "zh": "完成一个任务后检查哪些后继节点可以开始。",
+            "en": "Checks which downstream nodes can start once one task completes."
+          },
+          "fresh": true
+        }
+      ],
+      "state": [
+        {
+          "name": {
+            "zh": "Task Board",
+            "en": "Task Board"
+          },
+          "detail": {
+            "zh": "所有工作节点的持久记录面。",
+            "en": "The durable record surface for all work nodes."
+          },
+          "fresh": true
+        },
+        {
+          "name": {
+            "zh": "Dependency Edges",
+            "en": "Dependency Edges"
+          },
+          "detail": {
+            "zh": "blockedBy / blocks 记录谁依赖谁。",
+            "en": "blockedBy / blocks record who depends on whom."
+          },
+          "fresh": true
+        }
+      ],
+      "mainline": [
+        {
+          "name": {
+            "zh": "任务与会话分层",
+            "en": "Tasks Layer Away From the Session"
+          },
+          "detail": {
+            "zh": "会话内的 todo 退到次要位置，durable task 进入主设计。",
+            "en": "Session-local todo becomes secondary while durable tasks enter the main architecture."
+          },
+          "fresh": true
+        }
+      ]
+    },
+    "records": [
+      {
+        "name": {
+          "zh": "TaskRecord",
+          "en": "TaskRecord"
+        },
+        "detail": {
+          "zh": "目标、状态、依赖、owner 等持久字段。",
+          "en": "Durable fields for goal, status, dependencies, owner, and more."
+        },
+        "fresh": true
+      }
+    ],
+    "handoff": [
+      {
+        "zh": "任务节点被创建",
+        "en": "A task node is created"
+      },
+      {
+        "zh": "依赖边决定何时 ready",
+        "en": "Dependency edges decide when work becomes ready"
+      },
+      {
+        "zh": "完成后解锁后继节点",
+        "en": "Completion unlocks downstream nodes"
+      }
+    ]
+  },
+  "s13": {
+    "summary": {
+      "zh": "后台任务把“这项工作存在”和“这次执行正在跑”两层彻底分开，runtime record 正式成立。",
+      "en": "Background tasks fully separate the existence of work from one live execution attempt, which is where runtime records become first-class."
+    },
+    "slices": {
+      "control": [
+        {
+          "name": {
+            "zh": "Notification Drain",
+            "en": "Notification Drain"
+          },
+          "detail": {
+            "zh": "下一轮调用模型前先把后台摘要带回。",
+            "en": "Drains background notifications before the next model call."
+          },
+          "fresh": true
+        }
+      ],
+      "state": [
+        {
+          "name": {
+            "zh": "Task Goal",
+            "en": "Task Goal"
+          },
+          "detail": {
+            "zh": "durable task 仍在任务板上。",
+            "en": "The durable task goal still lives on the task board."
+          }
+        },
+        {
+          "name": {
+            "zh": "RuntimeTaskRecord",
+            "en": "RuntimeTaskRecord"
+          },
+          "detail": {
+            "zh": "描述一条正在跑或跑完的执行槽位。",
+            "en": "Describes one running or completed execution slot."
+          },
+          "fresh": true
+        },
+        {
+          "name": {
+            "zh": "output_file",
+            "en": "output_file"
+          },
+          "detail": {
+            "zh": "完整产物落盘，通知只带 preview。",
+            "en": "The full artifact goes to disk while notifications carry only a preview."
+          },
+          "fresh": true
+        }
+      ],
+      "lanes": [
+        {
+          "name": {
+            "zh": "后台执行线",
+            "en": "Background Execution Slot"
+          },
+          "detail": {
+            "zh": "慢命令在旁路执行，主循环继续前进。",
+            "en": "Slow commands execute on a side path while the main loop keeps moving."
+          },
+          "fresh": true
+        }
+      ]
+    },
+    "records": [
+      {
+        "name": {
+          "zh": "Notification",
+          "en": "Notification"
+        },
+        "detail": {
+          "zh": "结果回流桥梁。",
+          "en": "The bridge back into the main loop."
+        },
+        "fresh": true
+      }
+    ],
+    "handoff": [
+      {
+        "zh": "主循环创建 runtime record",
+        "en": "The loop creates a runtime record"
+      },
+      {
+        "zh": "后台槽位执行慢命令",
+        "en": "A background slot runs the slow command"
+      },
+      {
+        "zh": "notification + output_file 回到主系统",
+        "en": "notification plus output_file returns to the main system"
+      }
+    ]
+  },
+  "s14": {
+    "summary": {
+      "zh": "Cron 调度把时间从“外部条件”变成系统内正式的触发源，但执行权仍然交给 runtime 层。",
+      "en": "The cron scheduler makes time a first-class trigger source while still handing execution off to the runtime layer."
+    },
+    "slices": {
+      "control": [
+        {
+          "name": {
+            "zh": "Schedule Matcher",
+            "en": "Schedule Matcher"
+          },
+          "detail": {
+            "zh": "只负责判断规则是否命中。",
+            "en": "Only decides whether a rule matches."
+          },
+          "fresh": true
+        }
+      ],
+      "state": [
+        {
+          "name": {
+            "zh": "ScheduleRecord",
+            "en": "ScheduleRecord"
+          },
+          "detail": {
+            "zh": "记录何时触发什么。",
+            "en": "Records what should trigger and when."
+          },
+          "fresh": true
+        },
+        {
+          "name": {
+            "zh": "RuntimeTaskRecord",
+            "en": "RuntimeTaskRecord"
+          },
+          "detail": {
+            "zh": "命中后生成的具体执行实例。",
+            "en": "The concrete runtime instance created after a match."
+          }
+        }
+      ],
+      "lanes": [
+        {
+          "name": {
+            "zh": "时间触发面",
+            "en": "Time Trigger Surface"
+          },
+          "detail": {
+            "zh": "cron tick 只是触发面，不直接执行业务。",
+            "en": "A cron tick is only a trigger surface, not the business execution itself."
+          },
+          "fresh": true
+        }
+      ]
+    },
+    "records": [
+      {
+        "name": {
+          "zh": "Trigger Event",
+          "en": "Trigger Event"
+        },
+        "detail": {
+          "zh": "一次规则命中。",
+          "en": "One rule-match occurrence."
+        },
+        "fresh": true
+      }
+    ],
+    "handoff": [
+      {
+        "zh": "cron 规则命中",
+        "en": "A cron rule matches"
+      },
+      {
+        "zh": "生成 runtime task",
+        "en": "A runtime task is created"
+      },
+      {
+        "zh": "后台运行时接管执行",
+        "en": "The background runtime takes over execution"
+      }
+    ]
+  },
+  "s15": {
+    "summary": {
+      "zh": "这里开始从单执行者迈向长期团队，persistent teammate、roster 和 inbox 成为新的平台骨架。",
+      "en": "This is where the system moves from one executor toward a long-lived team with persistent teammates, a roster, and inboxes."
+    },
+    "slices": {
+      "control": [
+        {
+          "name": {
+            "zh": "Lead Orchestrator",
+            "en": "Lead Orchestrator"
+          },
+          "detail": {
+            "zh": "维护 roster、分配职责、观察团队状态。",
+            "en": "Maintains the roster, assigns work, and watches team state."
+          },
+          "fresh": true
+        }
+      ],
+      "state": [
+        {
+          "name": {
+            "zh": "Team Roster",
+            "en": "Team Roster"
+          },
+          "detail": {
+            "zh": "记录每个队友的名字、角色和状态。",
+            "en": "Stores each teammate's name, role, and status."
+          },
+          "fresh": true
+        },
+        {
+          "name": {
+            "zh": "Inbox",
+            "en": "Inbox"
+          },
+          "detail": {
+            "zh": "每个队友独立的消息边界。",
+            "en": "A separate message boundary for each teammate."
+          },
+          "fresh": true
+        }
+      ],
+      "lanes": [
+        {
+          "name": {
+            "zh": "Persistent Teammate",
+            "en": "Persistent Teammate"
+          },
+          "detail": {
+            "zh": "长期存在、可反复接活的执行者。",
+            "en": "A long-lived worker that can take repeated assignments."
+          },
+          "fresh": true
+        }
+      ]
+    },
+    "records": [
+      {
+        "name": {
+          "zh": "TeamMember",
+          "en": "TeamMember"
+        },
+        "detail": {
+          "zh": "长期身份，不是一次性委派结果。",
+          "en": "A long-lived identity, not a one-shot delegation result."
+        },
+        "fresh": true
+      },
+      {
+        "name": {
+          "zh": "MessageEnvelope",
+          "en": "MessageEnvelope"
+        },
+        "detail": {
+          "zh": "邮箱里的结构化消息。",
+          "en": "A structured message carried through inboxes."
+        },
+        "fresh": true
+      }
+    ],
+    "handoff": [
+      {
+        "zh": "lead 指定职责",
+        "en": "The lead defines responsibility"
+      },
+      {
+        "zh": "消息进入队友 inbox",
+        "en": "Messages enter the teammate inbox"
+      },
+      {
+        "zh": "队友独立执行并回信",
+        "en": "The teammate runs independently and replies"
+      }
+    ]
+  },
+  "s16": {
+    "summary": {
+      "zh": "团队协议把协作从自由文本升级成结构化请求流，request_id 和 durable request record 成为新主线。",
+      "en": "Team protocols upgrade collaboration from free-form text into structured request flows centered on request_id and durable request records."
+    },
+    "slices": {
+      "control": [
+        {
+          "name": {
+            "zh": "Protocol Envelope",
+            "en": "Protocol Envelope"
+          },
+          "detail": {
+            "zh": "type、from、to、request_id、payload 这类固定外壳。",
+            "en": "A fixed envelope with type, from, to, request_id, and payload."
+          },
+          "fresh": true
+        },
+        {
+          "name": {
+            "zh": "Protocol State Machine",
+            "en": "Protocol State Machine"
+          },
+          "detail": {
+            "zh": "pending / approved / rejected / expired。",
+            "en": "pending / approved / rejected / expired."
+          },
+          "fresh": true
+        }
+      ],
+      "state": [
+        {
+          "name": {
+            "zh": "Request Store",
+            "en": "Request Store"
+          },
+          "detail": {
+            "zh": "把协议请求变成 durable request record。",
+            "en": "Turns protocol requests into durable request records."
+          },
+          "fresh": true
+        }
+      ],
+      "lanes": [
+        {
+          "name": {
+            "zh": "协议协作通道",
+            "en": "Protocol Collaboration Channel"
+          },
+          "detail": {
+            "zh": "审批、关机、交接这类协作都走同一种 request/response 模型。",
+            "en": "Approvals, shutdowns, and handoffs all use the same request/response model."
+          },
+          "fresh": true
+        }
+      ]
+    },
+    "records": [
+      {
+        "name": {
+          "zh": "RequestRecord",
+          "en": "RequestRecord"
+        },
+        "detail": {
+          "zh": "协议工作的真正状态中心。",
+          "en": "The real state center of a protocol workflow."
+        },
+        "fresh": true
+      }
+    ],
+    "handoff": [
+      {
+        "zh": "发出协议请求",
+        "en": "A protocol request is sent"
+      },
+      {
+        "zh": "request_id 绑定状态记录",
+        "en": "request_id binds the durable state record"
+      },
+      {
+        "zh": "明确响应回写状态机",
+        "en": "An explicit response writes back into the state machine"
+      }
+    ]
+  },
+  "s17": {
+    "summary": {
+      "zh": "自治章节把队友从“等待派活”推进到“按 claim policy 自己找活并恢复上下文”，平台开始真正自己运转。",
+      "en": "The autonomy chapter moves teammates from waiting for assignments to self-claiming eligible work under a claim policy and resuming with context."
+    },
+    "slices": {
+      "control": [
+        {
+          "name": {
+            "zh": "Idle Poll Loop",
+            "en": "Idle Poll Loop"
+          },
+          "detail": {
+            "zh": "空闲时按节奏检查 inbox 和 task board。",
+            "en": "Checks inboxes and the task board on a cadence during idle time."
+          },
+          "fresh": true
+        },
+        {
+          "name": {
+            "zh": "Claim Policy",
+            "en": "Claim Policy"
+          },
+          "detail": {
+            "zh": "只有满足角色与状态条件的任务才允许 auto-claim。",
+            "en": "Only tasks that satisfy role and state conditions may be auto-claimed."
+          },
+          "fresh": true
+        }
+      ],
+      "state": [
+        {
+          "name": {
+            "zh": "Claim Events",
+            "en": "Claim Events"
+          },
+          "detail": {
+            "zh": "记录是谁因什么来源认领了任务。",
+            "en": "Records who claimed a task and from which source."
+          },
+          "fresh": true
+        },
+        {
+          "name": {
+            "zh": "Durable Requests",
+            "en": "Durable Requests"
+          },
+          "detail": {
+            "zh": "自治队友继续继承上一章的协议请求状态。",
+            "en": "Autonomous teammates still inherit durable protocol request state from the previous chapter."
+          }
+        }
+      ],
+      "lanes": [
+        {
+          "name": {
+            "zh": "Autonomous Worker",
+            "en": "Autonomous Worker"
+          },
+          "detail": {
+            "zh": "空闲时自己发现可做工作，再恢复执行。",
+            "en": "Discovers eligible work while idle, then resumes execution."
+          },
+          "fresh": true
+        }
+      ]
+    },
+    "records": [
+      {
+        "name": {
+          "zh": "Claimable Predicate",
+          "en": "Claimable Predicate"
+        },
+        "detail": {
+          "zh": "判定任务是否可由当前角色认领。",
+          "en": "Decides whether the current role may claim a task."
+        },
+        "fresh": true
+      }
+    ],
+    "handoff": [
+      {
+        "zh": "队友进入 idle poll",
+        "en": "The teammate enters idle polling"
+      },
+      {
+        "zh": "claim policy 选出可认领工作",
+        "en": "The claim policy selects eligible work"
+      },
+      {
+        "zh": "身份块重注入后恢复执行",
+        "en": "Identity is re-injected and execution resumes"
+      }
+    ]
+  },
+  "s18": {
+    "summary": {
+      "zh": "Worktree 章节把执行环境从主目录里拆开，任务继续表达目标，而 worktree 成为独立、可观察、可 closeout 的执行车道。",
+      "en": "The worktree chapter pulls execution environments out of the main directory: tasks still express goals while worktrees become isolated, observable, closeout-capable lanes."
+    },
+    "slices": {
+      "control": [
+        {
+          "name": {
+            "zh": "Task-to-Lane Binding",
+            "en": "Task-to-Lane Binding"
+          },
+          "detail": {
+            "zh": "系统明确记录哪条任务用哪条执行车道。",
+            "en": "The system records which task is using which execution lane."
+          },
+          "fresh": true
+        },
+        {
+          "name": {
+            "zh": "Closeout Semantics",
+            "en": "Closeout Semantics"
+          },
+          "detail": {
+            "zh": "收尾时显式决定 keep 还是 remove。",
+            "en": "Closeout explicitly decides whether to keep or remove the lane."
+          },
+          "fresh": true
+        }
+      ],
+      "state": [
+        {
+          "name": {
+            "zh": "Worktree Index",
+            "en": "Worktree Index"
+          },
+          "detail": {
+            "zh": "注册每条隔离车道的路径、分支和 task_id。",
+            "en": "Registers each isolated lane's path, branch, and task_id."
+          },
+          "fresh": true
+        },
+        {
+          "name": {
+            "zh": "TaskRecord.worktree",
+            "en": "TaskRecord.worktree"
+          },
+          "detail": {
+            "zh": "任务记录里也能直接看到它当前在哪条 lane 上。",
+            "en": "The task record shows which lane it is currently using."
+          },
+          "fresh": true
+        },
+        {
+          "name": {
+            "zh": "Event Log",
+            "en": "Event Log"
+          },
+          "detail": {
+            "zh": "create / enter / run / closeout 等生命周期事件。",
+            "en": "Lifecycle events such as create, enter, run, and closeout."
+          },
+          "fresh": true
+        }
+      ],
+      "lanes": [
+        {
+          "name": {
+            "zh": "Isolated Directory Lane",
+            "en": "Isolated Directory Lane"
+          },
+          "detail": {
+            "zh": "不同任务默认不共享未提交改动。",
+            "en": "Different tasks do not share uncommitted changes by default."
+          },
+          "fresh": true
+        }
+      ]
+    },
+    "records": [
+      {
+        "name": {
+          "zh": "WorktreeRecord",
+          "en": "WorktreeRecord"
+        },
+        "detail": {
+          "zh": "车道级执行记录。",
+          "en": "The execution record for one lane."
+        },
+        "fresh": true
+      },
+      {
+        "name": {
+          "zh": "Closeout Record",
+          "en": "Closeout Record"
+        },
+        "detail": {
+          "zh": "保留或回收的显式结果。",
+          "en": "The explicit result of keep versus reclaim."
+        },
+        "fresh": true
+      }
+    ],
+    "handoff": [
+      {
+        "zh": "任务绑定到 worktree lane",
+        "en": "A task binds to a worktree lane"
+      },
+      {
+        "zh": "命令在隔离目录里执行",
+        "en": "Commands run inside the isolated directory"
+      },
+      {
+        "zh": "closeout 决定 lane 的最终去向",
+        "en": "Closeout decides the lane's final fate"
+      }
+    ]
+  },
+  "s19": {
+    "summary": {
+      "zh": "最后一章把本地工具、插件和 MCP server 重新统一到同一 capability bus 下，外部能力终于回到原有控制面里。",
+      "en": "The final chapter reunifies native tools, plugins, and MCP servers on one capability bus so external capability returns to the same control plane."
+    },
+    "slices": {
+      "control": [
+        {
+          "name": {
+            "zh": "Capability Router",
+            "en": "Capability Router"
+          },
+          "detail": {
+            "zh": "先发现能力，再决定本地、插件还是 MCP 路由。",
+            "en": "Discovers capability first, then routes to native, plugin, or MCP."
+          },
+          "fresh": true
+        },
+        {
+          "name": {
+            "zh": "Shared Permission Gate",
+            "en": "Shared Permission Gate"
+          },
+          "detail": {
+            "zh": "外部能力和本地工具共用同一权限语义。",
+            "en": "External capabilities and native tools share one permission contract."
+          },
+          "fresh": true
+        },
+        {
+          "name": {
+            "zh": "Result Normalizer",
+            "en": "Result Normalizer"
+          },
+          "detail": {
+            "zh": "远程结果也要转成主循环看得懂的标准 payload。",
+            "en": "Remote results are normalized into a payload the main loop already understands."
+          },
+          "fresh": true
+        }
+      ],
+      "state": [
+        {
+          "name": {
+            "zh": "Plugin Manifest",
+            "en": "Plugin Manifest"
+          },
+          "detail": {
+            "zh": "告诉系统有哪些外部 server 可用。",
+            "en": "Tells the system which external servers are available."
+          },
+          "fresh": true
+        },
+        {
+          "name": {
+            "zh": "Capability View",
+            "en": "Capability View"
+          },
+          "detail": {
+            "zh": "把 native / plugin / mcp 整理成一个可比较的能力面。",
+            "en": "Collects native, plugin, and MCP capability into one comparable view."
+          },
+          "fresh": true
+        }
+      ],
+      "lanes": [
+        {
+          "name": {
+            "zh": "Native Tool",
+            "en": "Native Tool"
+          },
+          "detail": {
+            "zh": "本地 handler。",
+            "en": "A local handler."
+          }
+        },
+        {
+          "name": {
+            "zh": "MCP / Plugin Lane",
+            "en": "MCP / Plugin Lane"
+          },
+          "detail": {
+            "zh": "外部 server 或插件提供的远程能力。",
+            "en": "Remote capability provided by an external server or plugin."
+          },
+          "fresh": true
+        }
+      ]
+    },
+    "records": [
+      {
+        "name": {
+          "zh": "Scoped Capability",
+          "en": "Scoped Capability"
+        },
+        "detail": {
+          "zh": "带 server / source / risk 信息的能力对象。",
+          "en": "A capability object carrying server, source, and risk information."
+        },
+        "fresh": true
+      }
+    ],
+    "handoff": [
+      {
+        "zh": "先做 capability discovery",
+        "en": "Capability discovery happens first"
+      },
+      {
+        "zh": "统一 permission + routing",
+        "en": "Routing and permission stay unified"
+      },
+      {
+        "zh": "标准化结果再回写主循环",
+        "en": "A normalized result writes back into the main loop"
+      }
+    ]
+  }
+};

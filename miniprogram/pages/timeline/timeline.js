@@ -112,7 +112,9 @@ Page({
     const layerRangeMap = _buildLayerRangeMap();
 
     // 构建 timelineItems（地铁图模式：仅保留 id/title/layer/isRead/layerStart 信息）
-    const timelineItems = meta.versionOrder.map(function(id) {
+    var prevLayerColor = '';
+    var foundCurrent = false;
+    var timelineItems = meta.versionOrder.map(function(id) {
       var v = meta.versions[id];
       if (!v) return null;
 
@@ -125,17 +127,38 @@ Page({
         layerLabel = (messages.layer_labels && messages.layer_labels[lid]) || lid;
       }
 
+      var isRead = progress.isRead(id);
+      var isCurrent = false;
+      if (!isRead && !foundCurrent) {
+        isCurrent = true;
+        foundCurrent = true;
+      }
+
+      var itemPrevLayerColor = prevLayerColor;
+      var currentLayerColor = _getLayerColor(v.layer);
+      if (isLayerStart) {
+        prevLayerColor = currentLayerColor;
+      }
+
       return {
         id: id,
         title: (messages.sessions && messages.sessions[id]) || v.title,
         layer: v.layer,
-        isRead: progress.isRead(id),
+        isRead: isRead,
+        isCurrent: isCurrent,
+        isLast: false,
         isLayerStart: isLayerStart,
         layerLabel: layerLabel,
-        layerColor: _getLayerColor(v.layer),
+        layerColor: currentLayerColor,
+        prevLayerColor: isLayerStart ? itemPrevLayerColor : '',
         rangeText: isLayerStart ? (layerRangeMap[id] || '') : '',
       };
     }).filter(Boolean);
+
+    // Mark the last item
+    if (timelineItems.length > 0) {
+      timelineItems[timelineItems.length - 1].isLast = true;
+    }
 
     // 构建 checkpoints（用于阶段检查点卡片 section）
     const checkpoints = meta.stageCheckpoints.map(cp => ({
@@ -163,26 +186,21 @@ Page({
     const tLayers = messages.layers || {};
 
     this.setData({
-      locale,
+      locale: locale,
       pageTitle: t.title || '学习时间线',
       pageSubtitle: t.subtitle || '',
-      bridgeLinks,
-      checkpoints,
+      bridgeLinks: bridgeLinks,
+      checkpoints: checkpoints,
       expandedCheckpoints: this.data.expandedCheckpoints,
-      timelineItems,
+      timelineItems: timelineItems,
       totalChapters: meta.versionOrder.length,
-      readCount,
-      lastLayerColor: timelineItems.length > 0 ? timelineItems[timelineItems.length - 1].layerColor : '#94A3B8',
+      readCount: readCount,
+      t_currentLabel: locale === 'zh' ? '当前' : locale === 'ja' ? '現在' : 'Current',
       t_checkpointSectionTitle: locale === 'zh'
         ? '每走完一个阶段，先自己重建一版，再进入下一阶段'
         : locale === 'ja'
           ? '各ステージを終えたら、自分で再構築してから次へ進む'
           : 'Rebuild each stage before moving to the next',
-      t_timelineSectionTitle: locale === 'zh'
-        ? '章节时间线'
-        : locale === 'ja'
-          ? '章節タイムライン'
-          : 'Chapter Timeline',
       t_chaptersUnit: locale === 'zh' ? '章' : locale === 'ja' ? '章' : 'chapters',
       t_readCountLabel: locale === 'zh' ? '已读' : locale === 'ja' ? '読了' : 'read',
       t_checkpointToggleShow: locale === 'zh' ? '查看重建目标' : locale === 'ja' ? '再構築目標を見る' : 'View rebuild target',
@@ -191,10 +209,21 @@ Page({
   },
 
   _refreshReadState() {
-    const updated = this.data.timelineItems.map(function(item) {
-      return Object.assign({}, item, { isRead: progress.isRead(item.id) });
+    var foundCurrent = false;
+    var updated = this.data.timelineItems.map(function(item, idx, arr) {
+      var isRead = progress.isRead(item.id);
+      var isCurrent = false;
+      if (!isRead && !foundCurrent) {
+        isCurrent = true;
+        foundCurrent = true;
+      }
+      return Object.assign({}, item, {
+        isRead: isRead,
+        isCurrent: isCurrent,
+        isLast: idx === arr.length - 1,
+      });
     });
-    const readCount = progress.getReadCount(meta.versionOrder);
+    var readCount = progress.getReadCount(meta.versionOrder);
     this.setData({ timelineItems: updated, readCount: readCount });
   },
 

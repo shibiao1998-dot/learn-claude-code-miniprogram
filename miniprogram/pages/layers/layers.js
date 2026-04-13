@@ -1,53 +1,73 @@
 // pages/layers/layers.js
-const i18n = require('../../utils/i18n');
-const eventBus = require('../../utils/event-bus');
-const progress = require('../../utils/progress');
-const meta = require('../../data/meta.js');
-const bridgeDocsMeta = require('../../data/bridge-docs-meta.js');
+var i18n = require('../../utils/i18n');
+var eventBus = require('../../utils/event-bus');
+var progress = require('../../utils/progress');
+var meta = require('../../data/meta.js');
 
-const LAYER_SUPPORT_DOCS = {
-  core: ['s00-architecture-overview', 's00b-one-request-lifecycle', 's02a-tool-control-plane', 'data-structures'],
-  hardening: ['s00a-query-control-plane', 's02b-tool-execution-runtime', 's10a-message-prompt-pipeline', 's00c-query-transition-model', 'data-structures'],
-  runtime: ['s13a-runtime-task-model', 'data-structures', 'entity-map'],
-  platform: ['team-task-lane-model', 's13a-runtime-task-model', 's19a-mcp-capability-layers', 'entity-map', 'data-structures'],
-};
-
-const LAYER_CSS_COLORS = {
+var LAYER_CSS_COLORS = {
   core: '#059669',
   hardening: '#2563EB',
   runtime: '#7C3AED',
   platform: '#DB2777',
 };
 
+var I18N_PAGE_TITLE = {
+  zh: '架构层总览',
+  en: 'Architecture Layers',
+  ja: 'アーキテクチャレイヤー',
+};
+
+var I18N_PAGE_SUBTITLE = {
+  zh: 'Claude Code 的四层架构',
+  en: 'The Four Layers of Claude Code',
+  ja: 'Claude Code の4層アーキテクチャ',
+};
+
+var I18N_CHECKPOINT_LABEL = {
+  zh: '阶段收口',
+  en: 'Stage Checkpoint',
+  ja: 'ステージチェックポイント',
+};
+
+var I18N_REBUILD_LABEL = {
+  zh: '重建目标：',
+  en: 'Rebuild target: ',
+  ja: '再構築目標：',
+};
+
 Page({
   data: {
     locale: 'zh',
-    t: {},
+    t_pageTitle: '',
+    t_pageSubtitle: '',
+    t_checkpointLabel: '',
+    t_rebuildLabel: '',
     layerSections: [],
     expandedCheckpoints: {},
   },
 
-  onLoad() {
+  onLoad: function () {
     this._buildPageData();
-    this._localeListener = (locale) => {
-      this.setData({ locale, expandedCheckpoints: {} });
-      this._buildPageData();
+    var self = this;
+    this._localeListener = function (locale) {
+      self.setData({ locale: locale, expandedCheckpoints: {} });
+      self._buildPageData();
     };
     eventBus.on('locale:change', this._localeListener);
   },
 
-  onUnload() {
+  onUnload: function () {
     eventBus.off('locale:change', this._localeListener);
   },
 
-  onShow() {
+  onShow: function () {
     this._refreshProgress();
   },
 
-  _buildPageData() {
-    const locale = i18n.getLocale();
+  _buildPageData: function () {
+    var locale = i18n.getLocale();
 
-    let messages = {};
+    var messages = {};
     try {
       switch (locale) {
         case 'en': messages = require('../../i18n/en.js'); break;
@@ -58,73 +78,64 @@ Page({
       console.warn('[layers] failed to load i18n messages');
     }
 
-    const layerSections = meta.layers.map((layer, index) => {
+    var t_pageTitle = I18N_PAGE_TITLE[locale] || I18N_PAGE_TITLE['zh'];
+    var t_pageSubtitle = I18N_PAGE_SUBTITLE[locale] || I18N_PAGE_SUBTITLE['zh'];
+    var t_checkpointLabel = I18N_CHECKPOINT_LABEL[locale] || I18N_CHECKPOINT_LABEL['zh'];
+    var t_rebuildLabel = I18N_REBUILD_LABEL[locale] || I18N_REBUILD_LABEL['zh'];
+
+    var layerSections = meta.layers.map(function (layer, index) {
       // 章节列表
-      const versions = layer.versions.map(id => {
-        const v = meta.versions[id];
+      var versions = layer.versions.map(function (id) {
+        var v = meta.versions[id];
         if (!v) return null;
-        const contentLocale = (v.content && v.content[locale]) || (v.content && v.content['zh']) || {};
         return {
-          id,
+          id: id,
           layer: v.layer,
           title: (messages.sessions && messages.sessions[id]) || v.title,
-          subtitle: contentLocale.subtitle || '',
-          keyInsight: contentLocale.keyInsight || '',
           loc: v.loc || 0,
           isRead: progress.isRead(id),
         };
       }).filter(Boolean);
 
       // stageCheckpoint
-      const cp = (meta.stageCheckpoints || []).find(c => c.layer === layer.id);
-      const checkpoint = cp ? {
-        entryVersion: cp.entryVersion,
-        endVersion: cp.endVersion,
-        title: (cp.title && (cp.title[locale] || cp.title['en'])) || '',
-        body: (cp.body && (cp.body[locale] || cp.body['en'])) || '',
-        rebuild: (cp.rebuild && (cp.rebuild[locale] || cp.rebuild['en'])) || '',
+      var cp = (meta.stageCheckpoints || []).find(function (c) { return c.layer === layer.id; });
+      var checkpoint = cp ? {
+        titleText: (cp.title && (cp.title[locale] || cp.title['en'])) || '',
+        bodyText: (cp.body && (cp.body[locale] || cp.body['en'])) || '',
+        rebuildText: (cp.rebuild && (cp.rebuild[locale] || cp.rebuild['en'])) || '',
       } : null;
 
-      // 辅助文档
-      const supportSlugs = LAYER_SUPPORT_DOCS[layer.id] || [];
-      const supportDocs = supportSlugs
-        .map(slug => {
-          const doc = bridgeDocsMeta[slug];
-          if (!doc) return null;
-          return {
-            slug,
-            title: (doc.title && (doc.title[locale] || doc.title['en'])) || slug,
-            summary: (doc.summary && (doc.summary[locale] || doc.summary['en'])) || '',
-          };
-        })
-        .filter(Boolean);
-
-      const readCount = progress.getReadCount(layer.versions);
+      var readCount = progress.getReadCount(layer.versions);
 
       return {
         id: layer.id,
         index: index + 1,
         label: (messages.layer_labels && messages.layer_labels[layer.id]) || layer.label,
-        color: LAYER_CSS_COLORS[layer.id] || layer.color,
+        cssColor: LAYER_CSS_COLORS[layer.id] || '#94A3B8',
         desc: (messages.layers && messages.layers[layer.id]) || '',
-        outcome: (messages.layers && messages.layers[`${layer.id}_outcome`]) || '',
-        versions,
-        checkpoint,
-        supportDocs,
-        readCount,
+        versions: versions,
+        checkpoint: checkpoint,
+        readCount: readCount,
         totalCount: layer.versions.length,
       };
     });
 
-    this.setData({ locale, t: messages, layerSections });
+    this.setData({
+      locale: locale,
+      t_pageTitle: t_pageTitle,
+      t_pageSubtitle: t_pageSubtitle,
+      t_checkpointLabel: t_checkpointLabel,
+      t_rebuildLabel: t_rebuildLabel,
+      layerSections: layerSections,
+    });
   },
 
-  _refreshProgress() {
+  _refreshProgress: function () {
     if (!this.data.layerSections || !this.data.layerSections.length) return;
-    const layerSections = this.data.layerSections.map(function(section) {
+    var layerSections = this.data.layerSections.map(function (section) {
       return Object.assign({}, section, {
-        readCount: progress.getReadCount(section.versions.map(function(v) { return v.id; })),
-        versions: section.versions.map(function(v) {
+        readCount: progress.getReadCount(section.versions.map(function (v) { return v.id; })),
+        versions: section.versions.map(function (v) {
           return Object.assign({}, v, { isRead: progress.isRead(v.id) });
         }),
       });
@@ -132,30 +143,32 @@ Page({
     this.setData({ layerSections: layerSections });
   },
 
-  toggleCheckpoint(e) {
-    const { id } = e.currentTarget.dataset;
-    const key = `expandedCheckpoints.${id}`;
-    this.setData({ [key]: !this.data.expandedCheckpoints[id] });
+  toggleCheckpoint: function (e) {
+    var layerId = e.currentTarget.dataset.layer;
+    var key = 'expandedCheckpoints.' + layerId;
+    var update = {};
+    update[key] = !this.data.expandedCheckpoints[layerId];
+    this.setData(update);
   },
 
-  goToChapter(e) {
-    const { id } = e.currentTarget.dataset;
-    wx.navigateTo({ url: `/subpkg-chapters/pages/chapter/chapter?id=${id}` });
+  goToChapter: function (e) {
+    var id = e.currentTarget.dataset.id;
+    wx.navigateTo({ url: '/subpkg-chapters/pages/chapter/chapter?id=' + id });
   },
 
-  goToChapterEntry(e) {
-    const { id } = e.currentTarget.dataset;
-    wx.navigateTo({ url: `/subpkg-chapters/pages/chapter/chapter?id=${id}` });
+  goToChapterEntry: function (e) {
+    var id = e.currentTarget.dataset.id;
+    wx.navigateTo({ url: '/subpkg-chapters/pages/chapter/chapter?id=' + id });
   },
 
-  openBridgeDoc(e) {
-    const { slug } = e.currentTarget.dataset;
-    wx.navigateTo({ url: `/subpkg-chapters/pages/bridge-doc/bridge-doc?slug=${slug}` });
+  openBridgeDoc: function (e) {
+    var slug = e.currentTarget.dataset.slug;
+    wx.navigateTo({ url: '/subpkg-chapters/pages/bridge-doc/bridge-doc?slug=' + slug });
   },
 
-  switchLocale(e) {
-    const locale = e.currentTarget.dataset.locale;
-    const app = getApp();
+  switchLocale: function (e) {
+    var locale = e.currentTarget.dataset.locale;
+    var app = getApp();
     if (app && app.setLocale) app.setLocale(locale);
   },
 });

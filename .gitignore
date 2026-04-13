@@ -1,0 +1,11 @@
+# macOS
+.DS_Store
+
+# WebUI
+.webui_secret_key
+
+# WeChat DevTools private config
+miniprogram/project.private.config.json
+
+# Node
+node_modules/
