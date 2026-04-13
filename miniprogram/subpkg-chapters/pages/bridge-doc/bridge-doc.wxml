@@ -71,6 +71,24 @@
         </scroll-view>
       </view>
 
+      <!-- table -->
+      <view wx:elif="{{item.type === 'table'}}" class="md-table-wrap">
+        <scroll-view scroll-x class="md-table-scroll">
+          <view class="md-table">
+            <view class="md-table__row md-table__row--header">
+              <view wx:for="{{item.headers}}" wx:for-item="cell" wx:key="index" class="md-table__cell md-table__cell--header">
+                <text>{{cell}}</text>
+              </view>
+            </view>
+            <view wx:for="{{item.rows}}" wx:for-item="row" wx:key="index" class="md-table__row">
+              <view wx:for="{{row}}" wx:for-item="cell" wx:key="index" class="md-table__cell">
+                <text>{{cell}}</text>
+              </view>
+            </view>
+          </view>
+        </scroll-view>
+      </view>
+
       <!-- paragraph（默认） -->
       <view wx:else class="md-paragraph">
         <text class="md-paragraph__text">{{item.content}}</text>

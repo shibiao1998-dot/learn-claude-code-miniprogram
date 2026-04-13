@@ -255,6 +255,60 @@
   white-space: pre;
 }
 
+/* ── 表格 ── */
+.md-table-wrap {
+  margin: var(--spacing-md) 0;
+  border-radius: 12rpx;
+  overflow: hidden;
+  border: 1rpx solid var(--color-border);
+}
+
+.md-table-scroll {
+  width: 100%;
+}
+
+.md-table {
+  display: flex;
+  flex-direction: column;
+  min-width: 100%;
+}
+
+.md-table__row {
+  display: flex;
+  flex-direction: row;
+  border-bottom: 1rpx solid var(--color-border);
+}
+
+.md-table__row:last-child {
+  border-bottom: none;
+}
+
+.md-table__row--header {
+  background: var(--color-bg-muted);
+}
+
+.md-table__cell {
+  flex: 1;
+  min-width: 160rpx;
+  padding: 16rpx 20rpx;
+  font-size: 24rpx;
+  color: var(--color-text-secondary);
+  line-height: 1.5;
+  border-right: 1rpx solid var(--color-border);
+  word-break: break-word;
+}
+
+.md-table__cell:last-child {
+  border-right: none;
+}
+
+.md-table__cell--header {
+  font-weight: 600;
+  color: var(--color-text-primary);
+  font-size: 24rpx;
+  background: var(--color-bg-muted);
+}
+
 /* 段落 */
 .md-paragraph {
   margin: var(--spacing-sm) 0;

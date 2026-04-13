@@ -2,6 +2,22 @@
 // 轻量 Markdown 解析器，用于微信小程序 WXML 渲染
 
 /**
+ * 解析表格行，返回单元格文本数组
+ */
+function _parseTableRow(line) {
+  var trimmed = line.trim();
+  // 去掉首尾 |
+  if (trimmed.charAt(0) === '|') trimmed = trimmed.substring(1);
+  if (trimmed.charAt(trimmed.length - 1) === '|') trimmed = trimmed.substring(0, trimmed.length - 1);
+  var cells = trimmed.split('|');
+  var result = [];
+  for (var ci = 0; ci < cells.length; ci++) {
+    result.push(cells[ci].trim());
+  }
+  return result;
+}
+
+/**
  * 将 Markdown 字符串解析为节点数组
  * @param {string} markdown
  * @returns {Array<{type: string, content?: string, lang?: string}>}
@@ -26,6 +42,39 @@ function parse(markdown) {
       }
       nodes.push({ type: 'code_block', lang, content: codeLines.join('\n') });
       i++; // 跳过结尾 ```
+      continue;
+    }
+
+    // 表格（检测 | 开头的行）
+    if (line.trim().indexOf('|') === 0 && line.trim().lastIndexOf('|') > 0) {
+      var tableLines = [];
+      while (i < lines.length && lines[i].trim().indexOf('|') === 0 && lines[i].trim().lastIndexOf('|') > 0) {
+        tableLines.push(lines[i]);
+        i++;
+      }
+      if (tableLines.length >= 2) {
+        // 解析表头
+        var headerCells = _parseTableRow(tableLines[0]);
+        // 跳过分隔行（|---|---|）
+        var startRow = 1;
+        if (tableLines.length > 1 && tableLines[1].match(/^\s*\|[\s\-:|]+\|\s*$/)) {
+          startRow = 2;
+        }
+        // 解析数据行
+        var bodyRows = [];
+        for (var ri = startRow; ri < tableLines.length; ri++) {
+          bodyRows.push(_parseTableRow(tableLines[ri]));
+        }
+        nodes.push({
+          type: 'table',
+          headers: headerCells,
+          rows: bodyRows,
+          colCount: headerCells.length,
+        });
+      } else {
+        // 不够构成表格，当段落处理
+        nodes.push({ type: 'paragraph', content: tableLines.join(' ') });
+      }
       continue;
     }
 
@@ -81,7 +130,8 @@ function parse(markdown) {
       !lines[i].startsWith('>') &&
       !lines[i].match(/^[-*]\s+/) &&
       !lines[i].match(/^\d+\.\s+/) &&
-      !lines[i].match(/^---+$/)
+      !lines[i].match(/^---+$/) &&
+      !(lines[i].trim().indexOf('|') === 0 && lines[i].trim().lastIndexOf('|') > 0)
     ) {
       paraLines.push(lines[i]);
       i++;
