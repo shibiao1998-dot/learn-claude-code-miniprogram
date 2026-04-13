@@ -2,7 +2,7 @@
 const i18n = require('../../utils/i18n');
 const eventBus = require('../../utils/event-bus');
 const progress = require('../../utils/progress');
-const meta = require('../../data/meta.json');
+const meta = require('../../data/meta.js');
 
 // 阶段颜色（对应 CSS 变量中的 layer 颜色）
 const LAYER_COLORS = {
@@ -102,6 +102,19 @@ function _buildLayerEndMap() {
   return map;
 }
 
+// 构建 layerStart 的版本范围文本映射
+function _buildLayerRangeMap() {
+  var map = {};
+  meta.layers.forEach(function(layer) {
+    if (layer.versions && layer.versions.length > 0) {
+      var first = layer.versions[0];
+      var last = layer.versions[layer.versions.length - 1];
+      map[first] = first + ' → ' + last;
+    }
+  });
+  return map;
+}
+
 Page({
   data: {
     locale: 'zh',
@@ -152,62 +165,45 @@ Page({
 
   _buildPageData() {
     const locale = i18n.getLocale();
-    let messages;
+    let messages = {};
     try {
-      messages = require(`../../i18n/${locale}.json`);
+      switch (locale) {
+        case 'en': messages = require('../../i18n/en.js'); break;
+        case 'ja': messages = require('../../i18n/ja.js'); break;
+        default:   messages = require('../../i18n/zh.js'); break;
+      }
     } catch (e) {
-      messages = require('../../i18n/zh.json');
+      messages = require('../../i18n/zh.js');
     }
 
     const layerStartMap = _buildLayerStartMap();
     const layerEndMap = _buildLayerEndMap();
 
-    // 构建 timelineItems
-    const timelineItems = meta.versionOrder.map((id) => {
-      const v = meta.versions[id];
+    const layerRangeMap = _buildLayerRangeMap();
+
+    // 构建 timelineItems（地铁图模式：仅保留 id/title/layer/isRead/layerStart 信息）
+    const timelineItems = meta.versionOrder.map(function(id) {
+      var v = meta.versions[id];
       if (!v) return null;
 
-      const content = v.content[locale] || v.content.en || {};
-      const isLayerStart = layerStartMap[id] !== undefined;
-      const isLayerEnd = layerEndMap[id] !== undefined;
+      var isLayerStart = layerStartMap[id] !== undefined;
 
       // layer 标题
-      let layerLabel = '';
+      var layerLabel = '';
       if (isLayerStart) {
-        const lid = layerStartMap[id];
+        var lid = layerStartMap[id];
         layerLabel = (messages.layer_labels && messages.layer_labels[lid]) || lid;
       }
 
-      // layer 对应的 stageCheckpoint
-      let checkpointData = null;
-      if (isLayerEnd) {
-        const layerId = layerEndMap[id];
-        const cp = meta.stageCheckpoints.find(c => c.layer === layerId);
-        if (cp) {
-          checkpointData = {
-            layer: cp.layer,
-            entryVersion: cp.entryVersion,
-            endVersion: cp.endVersion,
-            titleText: cp.title[locale] || cp.title.en,
-            rebuildText: cp.rebuild[locale] || cp.rebuild.en,
-            bodyText: cp.body[locale] || cp.body.en,
-          };
-        }
-      }
-
       return {
-        id,
+        id: id,
         title: (messages.sessions && messages.sessions[id]) || v.title,
-        subtitle: content.subtitle || '',
-        keyInsight: content.keyInsight || '',
         layer: v.layer,
-        loc: v.loc,
         isRead: progress.isRead(id),
-        isLayerStart,
-        isLayerEnd,
-        layerLabel,
+        isLayerStart: isLayerStart,
+        layerLabel: layerLabel,
         layerColor: _getLayerColor(v.layer),
-        checkpointData,
+        rangeText: isLayerStart ? (layerRangeMap[id] || '') : '',
       };
     }).filter(Boolean);
 
@@ -250,6 +246,7 @@ Page({
       timelineItems,
       totalChapters: meta.versionOrder.length,
       readCount,
+      lastLayerColor: timelineItems.length > 0 ? timelineItems[timelineItems.length - 1].layerColor : '#94A3B8',
       t_checkpointSectionTitle: locale === 'zh'
         ? '每走完一个阶段，先自己重建一版，再进入下一阶段'
         : locale === 'ja'
@@ -291,12 +288,11 @@ Page({
   },
 
   _refreshReadState() {
-    const updated = this.data.timelineItems.map(item => ({
-      ...item,
-      isRead: progress.isRead(item.id),
-    }));
+    const updated = this.data.timelineItems.map(function(item) {
+      return Object.assign({}, item, { isRead: progress.isRead(item.id) });
+    });
     const readCount = progress.getReadCount(meta.versionOrder);
-    this.setData({ timelineItems: updated, readCount });
+    this.setData({ timelineItems: updated, readCount: readCount });
   },
 
   switchLocale(e) {
