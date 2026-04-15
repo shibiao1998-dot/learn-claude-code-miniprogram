@@ -11,7 +11,9 @@
       "disablePlugins": [],
       "outputPath": ""
     },
-    "useCompilerPlugins": ["sass"],
+    "useCompilerPlugins": [
+      "sass"
+    ],
     "minifyWXML": true
   },
   "compileType": "miniprogram",
@@ -20,6 +22,6 @@
     "ignore": [],
     "include": []
   },
-  "appid": "wx0cde1651df4290c6",
+  "appid": "wx99d3e1be24241162",
   "editorSetting": {}
 }

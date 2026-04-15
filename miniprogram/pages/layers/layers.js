@@ -164,7 +164,7 @@ Page({
 
   openBridgeDoc: function (e) {
     var slug = e.currentTarget.dataset.slug;
-    wx.navigateTo({ url: '/subpkg-chapters/pages/bridge-doc/bridge-doc?slug=' + slug });
+    wx.navigateTo({ url: '/subpkg-bridge/pages/bridge-doc/bridge-doc?slug=' + slug });
   },
 
   switchLocale: function (e) {

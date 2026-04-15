@@ -9,7 +9,12 @@
     {
       "root": "subpkg-chapters",
       "pages": [
-        "pages/chapter/chapter",
+        "pages/chapter/chapter"
+      ]
+    },
+    {
+      "root": "subpkg-bridge",
+      "pages": [
         "pages/bridge-doc/bridge-doc"
       ]
     },

@@ -81,7 +81,7 @@ Page({
   openDoc(e) {
     const slug = e.currentTarget.dataset.slug;
     wx.navigateTo({
-      url: '/subpkg-chapters/pages/bridge-doc/bridge-doc?slug=' + slug,
+      url: '/subpkg-bridge/pages/bridge-doc/bridge-doc?slug=' + slug,
     });
   },
 
@@ -89,7 +89,7 @@ Page({
     var slug = e.currentTarget.dataset.slug;
     if (slug) {
       wx.navigateTo({
-        url: '/subpkg-chapters/pages/bridge-doc/bridge-doc?slug=' + slug,
+        url: '/subpkg-bridge/pages/bridge-doc/bridge-doc?slug=' + slug,
       });
     }
   },

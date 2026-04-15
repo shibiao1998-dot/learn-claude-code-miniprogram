@@ -256,7 +256,7 @@ Page({
   openBridgeDoc(e) {
     const slug = e.currentTarget.dataset.slug;
     wx.navigateTo({
-      url: `/subpkg-chapters/pages/bridge-doc/bridge-doc?slug=${slug}`,
+      url: `/subpkg-bridge/pages/bridge-doc/bridge-doc?slug=${slug}`,
       fail() {
         console.warn('[timeline] navigateTo bridge-doc failed, slug:', slug);
       },

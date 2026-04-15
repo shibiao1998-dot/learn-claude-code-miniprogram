@@ -3,8 +3,8 @@
 const i18n = require('../../../utils/i18n');
 const progress = require('../../../utils/progress');
 const eventBus = require('../../../utils/event-bus');
-const highlight = require('../../../utils/highlight');
-const markdownParser = require('../../../utils/markdown-parser');
+const highlight = require('../../utils/highlight');
+const markdownParser = require('../../utils/markdown-parser');
 const dataLoader = require('../../data-loader');
 const meta = require('../../../data/meta.js');
 
@@ -345,13 +345,13 @@ Page({
 
       if (isBP) {
         // Best Practice 章节：加载 YAML 配置示例
-        var configExamples = require('../../../data/bp-config-examples.js');
+        var configExamples = require('../../data/bp-config-examples.js');
         source = configExamples[id] || '# No config example available';
         colorMap = YAML_TOKEN_COLORS;
         tokenizeFn = highlight.tokenizeYaml;
       } else {
         // 普通章节：加载 Python 源码
-        var sources = require('../../../data/versions-source.js');
+        var sources = require('../../data/versions-source.js');
         source = sources[id] || '';
       }
 
@@ -458,10 +458,10 @@ Page({
     try {
       var source = '';
       if (isBP) {
-        var configExamples = require('../../../data/bp-config-examples.js');
+        var configExamples = require('../../data/bp-config-examples.js');
         source = configExamples[this.data.id] || '';
       } else {
-        var sources = require('../../../data/versions-source.js');
+        var sources = require('../../data/versions-source.js');
         source = sources[this.data.id] || '';
       }
       wx.setClipboardData({
@@ -483,7 +483,7 @@ Page({
     var slug = e.currentTarget.dataset.slug;
     if (slug) {
       wx.navigateTo({
-        url: '/subpkg-chapters/pages/bridge-doc/bridge-doc?slug=' + slug,
+        url: '/subpkg-bridge/pages/bridge-doc/bridge-doc?slug=' + slug,
       });
     }
   },
@@ -592,7 +592,7 @@ Page({
     // 流程图数据
     let flowItems = [];
     try {
-      const flows = require('../../../data/flows.js');
+      const flows = require('../../data/flows.js');
       const flow = flows[id] || null;
       if (flow) {
         flowItems = _buildFlowList(flow.nodes, flow.edges);
@@ -604,7 +604,7 @@ Page({
     // 架构蓝图
     let blueprintData = null;
     try {
-      const blueprints = require('../../../data/blueprints.js');
+      const blueprints = require('../../data/blueprints.js');
       const blueprint = blueprints[id] || null;
       if (blueprint) {
         blueprintData = {
@@ -633,7 +633,7 @@ Page({
     // 模拟器数据
     let simulatorSteps = [];
     try {
-      const scenarios = require('../../../data/scenarios-all.js');
+      const scenarios = require('../../data/scenarios-all.js');
       const scenario = scenarios[id] || null;
       if (scenario && scenario.steps) {
         simulatorSteps = scenario.steps.map((s, i) => ({
@@ -743,7 +743,7 @@ Page({
     const slug = e.currentTarget.dataset.slug;
     if (!slug) return;
     wx.navigateTo({
-      url: `/subpkg-chapters/pages/bridge-doc/bridge-doc?slug=${slug}`,
+      url: `/subpkg-bridge/pages/bridge-doc/bridge-doc?slug=${slug}`,
     });
   },
 
