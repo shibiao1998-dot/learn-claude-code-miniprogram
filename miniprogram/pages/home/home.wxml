@@ -1,80 +1,90 @@
-<!-- pages/home/home.wxml -->
-<scroll-view scroll-y class="page">
+<!-- pages/home/home.wxml — Terminal Console -->
+<scroll-view scroll-y class="terminal-page">
 
-  <!-- Page Header -->
-  <view class="page-header">
+  <!-- Terminal Header -->
+  <view class="terminal-header">
     <view class="header-top">
-      <text class="page-title">Learn Claude Code</text>
+      <text class="terminal-title font-mono">CLAUDE CODE TERMINAL</text>
       <view class="lang-switcher">
         <text class="lang-btn {{locale=='zh'?'active':''}}" bindtap="switchLocale" data-locale="zh">中</text>
         <text class="lang-btn {{locale=='en'?'active':''}}" bindtap="switchLocale" data-locale="en">EN</text>
         <text class="lang-btn {{locale=='ja'?'active':''}}" bindtap="switchLocale" data-locale="ja">日</text>
       </view>
     </view>
-    <text class="page-subtitle">{{t.home.hero_subtitle}}</text>
+    <text class="terminal-prompt font-mono">{{levelInfo.title || 'guest'}}@claude:~$</text>
   </view>
 
-  <!-- Progress Strip -->
-  <view class="progress-strip" wx:if="{{readCount > 0}}">
-    <view class="bar-track">
-      <view class="bar-fill" style="width:{{readCount / totalCount * 100}}%"></view>
+  <!-- Player Status -->
+  <view class="status-card">
+    <view class="status-row">
+      <text class="status-label font-mono">Level {{levelInfo.level || 1}}</text>
+      <text class="status-sep">·</text>
+      <text class="status-value font-mono">{{levelInfo.title || 'guest'}}</text>
+      <text class="status-sep">·</text>
+      <text class="status-value font-mono">{{levelInfo.exp || 0}} exp</text>
     </view>
-    <text class="bar-label">{{readCount}} / {{totalCount}} {{t.home.chapters_unit || '章'}}</text>
-  </view>
-
-  <!-- Quick Entry Grid -->
-  <view class="quick-grid">
-    <view class="quick-card" bindtap="goToStart">
-      <text class="qc-title">{{t.home.entry_start_title || '从最小闭环开始'}}</text>
-      <text class="qc-desc">{{t.home.entry_start_desc || '继续学习'}}</text>
+    <!-- Total progress bar -->
+    <view class="total-bar">
+      <view class="bar-track">
+        <view class="bar-fill" style="width:{{totalProgress}}%"></view>
+      </view>
+      <text class="bar-pct font-mono">{{totalProgress}}%</text>
     </view>
-    <view class="quick-card" bindtap="goToTimeline">
-      <text class="qc-title">{{t.home.entry_timeline_title || '学习时间线'}}</text>
-      <text class="qc-desc">{{t.home.entry_timeline_desc || '路径总览'}}</text>
-    </view>
-    <view class="quick-card" bindtap="goToLayers">
-      <text class="qc-title">{{t.home.entry_layers_title || '架构层总览'}}</text>
-      <text class="qc-desc">{{t.home.entry_layers_desc || '四层结构'}}</text>
-    </view>
-    <view class="quick-card" bindtap="goToCompare">
-      <text class="qc-title">{{t.home.entry_compare_title || '版本对比'}}</text>
-      <text class="qc-desc">{{t.home.entry_compare_desc || '差异分析'}}</text>
+    <view class="status-row status-row-sub">
+      <text class="status-mini font-mono">🔥 {{streakInfo.current || 0}} days</text>
+      <text class="status-mini font-mono">{{collectionStats.obtained || 0}}/{{collectionStats.total || 0}} cards</text>
     </view>
   </view>
 
-  <!-- Chapter List by Layer -->
-  <view class="chapters-section">
-    <block wx:for="{{layers}}" wx:key="id">
-      <view class="layer-group">
-        <!-- Layer Header -->
-        <view class="layer-header">
-          <view class="layer-header-left">
-            <view class="layer-dot" style="background:{{item.color}}"></view>
-            <text class="layer-name">{{item.label}}</text>
-            <text class="layer-name-en">{{item.id == 'core' ? 'Core' : item.id == 'hardening' ? 'Hardening' : item.id == 'runtime' ? 'Runtime' : 'Platform'}}</text>
+  <!-- Action Buttons -->
+  <view class="action-row">
+    <view class="action-btn action-daily {{dailyState.completed ? 'completed' : ''}}" bindtap="goToDailyChallenge">
+      <text class="action-icon font-mono">>_</text>
+      <text class="action-title">{{dailyState.completed ? '已完成' : '今日挑战'}}</text>
+      <text class="action-desc font-mono">3题/20exp</text>
+    </view>
+    <view class="action-btn action-continue" bindtap="goToContinue" wx:if="{{nextStageId}}">
+      <text class="action-icon font-mono">>>></text>
+      <text class="action-title">继续闯关</text>
+      <text class="action-desc font-mono">{{nextRegionLabel}}</text>
+    </view>
+    <view class="action-btn action-map" bindtap="goToMap" wx:else>
+      <text class="action-icon font-mono">◇◆</text>
+      <text class="action-title">查看地图</text>
+      <text class="action-desc font-mono">选择区域</text>
+    </view>
+  </view>
+
+  <!-- Region Progress -->
+  <view class="regions-section">
+    <text class="section-title font-mono">> status</text>
+    <view class="region-list">
+      <view wx:for="{{regions}}" wx:key="id" class="region-row {{item.unlocked ? '' : 'locked'}}">
+        <text class="region-symbol font-mono region-{{item.id}}">{{item.symbol}}</text>
+        <text class="region-label font-mono">{{item.label}}</text>
+        <view class="region-bar">
+          <view class="bar-track-sm">
+            <view class="bar-fill-sm region-bg-{{item.id}}" style="width:{{item.barWidth}}%"></view>
           </view>
-          <text class="layer-count {{item.readCount >= item.versions.length ? 'complete' : ''}}">{{item.readCount || 0}}/{{item.versions.length}}</text>
         </view>
+        <text class="region-pct font-mono" wx:if="{{item.unlocked}}">{{item.barWidth}}%</text>
+        <text class="region-stars font-mono" wx:if="{{item.unlocked && item.totalStars > 0}}">⭐{{item.totalStars}}</text>
+        <text class="region-lock font-mono" wx:if="{{!item.unlocked}}">🔒</text>
+      </view>
+    </view>
+  </view>
 
-        <!-- Chapter Rows with colored left border -->
-        <view class="chapter-list" style="border-left-color:{{item.color}}">
-          <view
-            wx:for="{{item.versions}}"
-            wx:for-item="chapter"
-            wx:key="id"
-            class="chapter-row {{chapter.isRead ? 'read' : ''}} {{chapter.isNext ? 'next' : ''}}"
-            bindtap="goToChapter"
-            data-id="{{chapter.id}}"
-            hover-class="chapter-hover"
-          >
-            <text class="ch-id">{{chapter.id}}</text>
-            <text class="ch-title">{{chapter.title}}</text>
-            <text class="ch-status" wx:if="{{chapter.isRead}}">✓</text>
-            <text class="ch-arrow" wx:elif="{{chapter.isNext}}">›</text>
-          </view>
+  <!-- Recent Cards -->
+  <view class="recent-section" wx:if="{{recentCards.length > 0}}">
+    <text class="section-title font-mono">> recent cards</text>
+    <scroll-view scroll-x class="recent-scroll">
+      <view class="recent-cards-row">
+        <view wx:for="{{recentCards}}" wx:key="id" class="mini-card rarity-{{item.rarity}}">
+          <text class="mini-card-rarity font-mono">{{item.rarity}}</text>
+          <text class="mini-card-name">{{item.name[locale] || item.name.zh}}</text>
         </view>
       </view>
-    </block>
+    </scroll-view>
   </view>
 
   <view class="page-footer"></view>
