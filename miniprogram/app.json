@@ -26,39 +26,39 @@
     }
   ],
   "window": {
-    "backgroundTextStyle": "light",
-    "navigationBarBackgroundColor": "#FFFFFF",
-    "navigationBarTitleText": "Learn Claude Code",
-    "navigationBarTextStyle": "black",
-    "backgroundColor": "#F8FAFC"
+    "backgroundTextStyle": "dark",
+    "navigationBarBackgroundColor": "#0D1117",
+    "navigationBarTitleText": "Claude Code Terminal",
+    "navigationBarTextStyle": "white",
+    "backgroundColor": "#0D1117"
   },
   "tabBar": {
-    "color": "#94A3B8",
-    "selectedColor": "#0F172A",
-    "backgroundColor": "#FFFFFF",
-    "borderStyle": "white",
+    "color": "#484F58",
+    "selectedColor": "#E6EDF3",
+    "backgroundColor": "#161B22",
+    "borderStyle": "black",
     "list": [
       {
         "pagePath": "pages/home/home",
-        "text": "首页",
+        "text": "终端",
         "iconPath": "assets/icons/home.png",
         "selectedIconPath": "assets/icons/home-active.png"
       },
       {
         "pagePath": "pages/timeline/timeline",
-        "text": "时间线",
+        "text": "地图",
         "iconPath": "assets/icons/timeline.png",
         "selectedIconPath": "assets/icons/timeline-active.png"
       },
       {
         "pagePath": "pages/layers/layers",
-        "text": "架构层",
+        "text": "图鉴",
         "iconPath": "assets/icons/layers.png",
         "selectedIconPath": "assets/icons/layers-active.png"
       },
       {
         "pagePath": "pages/reference/reference",
-        "text": "参考",
+        "text": "档案",
         "iconPath": "assets/icons/reference.png",
         "selectedIconPath": "assets/icons/reference-active.png"
       }

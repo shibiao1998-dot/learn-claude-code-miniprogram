@@ -1,21 +1,29 @@
 // app.js
 const i18n = require('./utils/i18n');
 const storage = require('./utils/storage');
+const gameSave = require('./utils/game-save');
+const gameAchievement = require('./utils/game-achievement');
 
 App({
   globalData: {
-    locale: 'zh',    // 默认语言
+    locale: 'zh',
     theme: 'dark',
   },
 
   onLaunch() {
-    // 读取已保存的语言设置
+    // Load saved locale
     const savedLocale = storage.getLocale();
     if (savedLocale) {
       this.globalData.locale = savedLocale;
     }
-    // 初始化 i18n
+    // Initialize i18n
     i18n.init(this.globalData.locale);
+
+    // Initialize game save (creates default if first launch)
+    gameSave.load();
+
+    // Check achievements on launch (e.g., first_login)
+    gameAchievement.checkAndUnlock();
   },
 
   setLocale(locale) {
