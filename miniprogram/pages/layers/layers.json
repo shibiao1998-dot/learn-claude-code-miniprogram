@@ -1,4 +1,7 @@
 {
-  "navigationBarTitleText": "架构阶段",
+  "navigationBarTitleText": "图鉴",
+  "navigationBarBackgroundColor": "#0D1117",
+  "navigationBarTextStyle": "white",
+  "backgroundColor": "#0D1117",
   "usingComponents": {}
 }
