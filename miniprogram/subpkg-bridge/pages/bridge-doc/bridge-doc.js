@@ -4,6 +4,7 @@ const i18n = require('../../../utils/i18n');
 const eventBus = require('../../../utils/event-bus');
 const markdownParser = require('../../utils/markdown-parser');
 const bridgeDocsMeta = require('../../../data/bridge-docs-meta.js');
+var gameCards = require('../../../utils/game-cards');
 
 /**
  * 静态映射所有 bridge doc 文件（绕过微信小程序动态 require 限制）
@@ -140,14 +141,26 @@ Page({
     docNodes: [],
     loaded: false,
     notFound: false,
+    cardMode: false,
+    cardId: '',
+    cardData: null,
   },
 
   onLoad(options) {
-    const slug = options.slug || '';
-    this._loadDoc(slug);
+    if (options.cardId) {
+      this._loadCard(options.cardId);
+    } else {
+      var slug = options.slug || '';
+      this._loadDoc(slug);
+    }
 
-    this._localeListener = () => {
-      this._loadDoc(this.data.slug);
+    var self = this;
+    this._localeListener = function() {
+      if (self.data.cardMode) {
+        self._loadCard(self.data.cardId);
+      } else {
+        self._loadDoc(self.data.slug);
+      }
     };
     eventBus.on('locale:change', this._localeListener);
   },
@@ -156,6 +169,48 @@ Page({
     if (this._localeListener) {
       eventBus.off('locale:change', this._localeListener);
     }
+  },
+
+  _loadCard: function(cardId) {
+    var locale = i18n.getLocale();
+    var card = gameCards.getCard(cardId);
+
+    if (!card) {
+      this.setData({ notFound: true, loaded: true, cardMode: true, cardId: cardId });
+      wx.setNavigationBarTitle({ title: '卡牌未找到' });
+      return;
+    }
+
+    var name = card.name;
+    var desc = card.desc;
+    var cardName = name[locale] || name.zh || name.en || cardId;
+    var cardDesc = desc[locale] || desc.zh || desc.en || '';
+    var obtained = gameCards.isObtained(cardId);
+    var regionLabels = { core: 'CORE/', tools: 'TOOLS/', runtime: 'RUNTIME/', network: 'NETWORK/', practice: 'PRACTICE/' };
+    var regionColors = { core: '#3FB950', tools: '#58A6FF', runtime: '#BC8CFF', network: '#F85149', practice: '#D29922' };
+
+    wx.setNavigationBarTitle({ title: cardName });
+
+    this.setData({
+      cardMode: true,
+      cardId: cardId,
+      cardData: {
+        id: card.id,
+        name: cardName,
+        desc: cardDesc,
+        rarity: card.rarity,
+        region: card.region,
+        regionLabel: regionLabels[card.region] || '',
+        regionColor: regionColors[card.region] || '#3FB950',
+        chapter: card.chapter,
+        tags: card.tags || [],
+        power: card.power,
+        defense: card.defense,
+        obtained: obtained
+      },
+      loaded: true,
+      notFound: false
+    });
   },
 
   _loadDoc(slug) {
@@ -221,5 +276,18 @@ Page({
 
   goBack() {
     wx.navigateBack({ delta: 1 });
+  },
+
+  onShareAppMessage() {
+    return {
+      title: 'CC学习工具 - Claude Code 架构学习',
+      path: '/pages/home/home'
+    };
+  },
+
+  onShareTimeline() {
+    return {
+      title: 'CC学习工具 - Claude Code 架构学习'
+    };
   },
 });

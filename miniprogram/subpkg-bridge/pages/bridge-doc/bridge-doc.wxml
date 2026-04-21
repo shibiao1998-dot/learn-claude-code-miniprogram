@@ -2,7 +2,7 @@
 <view class="page">
 
   <!-- 顶部 Header -->
-  <view class="bd-header">
+  <view class="bd-header" wx:if="{{!cardMode}}">
     <view class="bd-header__meta">
       <text class="bd-kind-badge bd-kind-badge--{{kind}}">{{kind === 'map' ? '地图' : '机制'}}</text>
     </view>
@@ -12,6 +12,44 @@
       <text class="bd-summary-block__text">{{summary}}</text>
     </view>
   </view>
+
+  <!-- ══════════ Card Detail Mode ══════════ -->
+  <block wx:if="{{cardMode && loaded && !notFound}}">
+    <view class="card-detail">
+      <view class="card-visual card-visual--{{cardData.rarity}}">
+        <view class="card-visual__header">
+          <text class="card-visual__rarity font-mono">{{cardData.rarity}}</text>
+          <text class="card-visual__region font-mono" style="color:{{cardData.regionColor}}">{{cardData.regionLabel}}</text>
+        </view>
+        <text class="card-visual__name">{{cardData.name}}</text>
+        <text class="card-visual__desc">{{cardData.desc}}</text>
+        <view class="card-visual__stats">
+          <text class="card-stat font-mono">PWR: {{cardData.power}}</text>
+          <text class="card-stat font-mono">DEF: {{cardData.defense}}</text>
+        </view>
+        <view class="card-visual__tags">
+          <text wx:for="{{cardData.tags}}" wx:key="*this" class="card-tag font-mono">#{{item}}</text>
+        </view>
+      </view>
+
+      <view class="card-meta">
+        <view class="card-meta__row">
+          <text class="card-meta__label font-mono">CHAPTER</text>
+          <text class="card-meta__value">{{cardData.chapter}}</text>
+        </view>
+        <view class="card-meta__row">
+          <text class="card-meta__label font-mono">STATUS</text>
+          <text class="card-meta__value font-mono" style="color:{{cardData.obtained ? 'var(--color-terminal-green)' : 'var(--color-terminal-red)'}}">{{cardData.obtained ? '✓ DECODED' : '✗ LOCKED'}}</text>
+        </view>
+      </view>
+
+      <view class="card-back-btn" bindtap="goBack">
+        <text class="card-back-btn__text font-mono">> BACK</text>
+      </view>
+    </view>
+  </block>
+
+  <block wx:if="{{!cardMode}}">
 
   <!-- 加载中 -->
   <view class="bd-loading" wx:if="{{!loaded}}">
@@ -96,6 +134,8 @@
 
     </block>
   </view>
+
+  </block>
 
   <!-- 底部安全距离 -->
   <view class="safe-bottom"></view>
