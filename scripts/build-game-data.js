@@ -244,6 +244,185 @@ function makeCardDescription(point) {
   return point.heading;
 }
 
+// --- Question Generation ---
+
+function generateQuestions(verId, zhPoints, enPoints, jaPoints, regionCards) {
+  var questions = [];
+  var questionIndex = 0;
+  var pointsToUse = zhPoints.slice(0, 5);
+
+  pointsToUse.forEach(function(zhPoint, pIdx) {
+    var enPoint = enPoints[pIdx] || null;
+    var jaPoint = jaPoints[pIdx] || null;
+
+    var difficulty;
+    if (zhPoint.hasCode && zhPoint.boldTerms.length > 2) {
+      difficulty = 3;
+    } else if (zhPoint.hasCode || zhPoint.boldTerms.length > 1) {
+      difficulty = 2;
+    } else {
+      difficulty = 1;
+    }
+
+    var question = makeChoiceQuestion(
+      verId, questionIndex, difficulty,
+      zhPoint, enPoint, jaPoint,
+      regionCards
+    );
+
+    if (question) {
+      questions.push(question);
+      questionIndex++;
+    }
+  });
+
+  var remaining = zhPoints.slice(5);
+  var rIdx = 0;
+  while (questions.length < 3 && rIdx < remaining.length) {
+    var extraPoint = remaining[rIdx];
+    var extraEn = enPoints[5 + rIdx] || null;
+    var extraJa = jaPoints[5 + rIdx] || null;
+    var q = makeChoiceQuestion(verId, questionIndex, 1, extraPoint, extraEn, extraJa, regionCards);
+    if (q) {
+      questions.push(q);
+      questionIndex++;
+    }
+    rIdx++;
+  }
+
+  var hasConcept = questions.some(function(q) { return q.difficulty === 1; });
+  if (!hasConcept && questions.length > 0) {
+    questions[0].difficulty = 1;
+  }
+
+  return questions;
+}
+
+function makeChoiceQuestion(verId, qIdx, difficulty, zhPoint, enPoint, jaPoint, regionCards) {
+  if (!zhPoint || !zhPoint.heading) return null;
+
+  var padded = String(qIdx + 1);
+  while (padded.length < 3) padded = '0' + padded;
+  var qId = 'q_' + verId + '_' + padded;
+
+  var correctText = {
+    zh: zhPoint.heading,
+    en: enPoint ? enPoint.heading : zhPoint.heading,
+    ja: jaPoint ? jaPoint.heading : zhPoint.heading
+  };
+
+  var stem = generateStem(difficulty, zhPoint, enPoint, jaPoint);
+  var distractors = pickDistractors(correctText, regionCards, 3);
+
+  var options = [{ id: 'a', text: correctText, correct: true }]
+    .concat(distractors.map(function(d, i) {
+      return { id: String.fromCharCode(98 + i), text: d, correct: false };
+    }));
+
+  for (var i = options.length - 1; i > 0; i--) {
+    var j = Math.floor(Math.random() * (i + 1));
+    var temp = options[i];
+    options[i] = options[j];
+    options[j] = temp;
+  }
+
+  var answerId = 'a';
+  for (var k = 0; k < options.length; k++) {
+    if (options[k].correct) {
+      answerId = options[k].id;
+      break;
+    }
+  }
+
+  var cleanOptions = options.map(function(o) {
+    return { id: o.id, text: o.text };
+  });
+
+  var explanation = {
+    zh: zhPoint.boldTerms.length > 0 ? zhPoint.boldTerms[0] : zhPoint.heading,
+    en: enPoint ? (enPoint.boldTerms.length > 0 ? enPoint.boldTerms[0] : enPoint.heading) : correctText.en,
+    ja: jaPoint ? (jaPoint.boldTerms.length > 0 ? jaPoint.boldTerms[0] : jaPoint.heading) : correctText.ja
+  };
+
+  var rewardCard = null;
+  for (var c = 0; c < regionCards.length; c++) {
+    if (regionCards[c].chapter === verId && regionCards[c].name.zh === zhPoint.heading) {
+      rewardCard = regionCards[c].id;
+      break;
+    }
+  }
+
+  return {
+    id: qId,
+    type: 'choice',
+    difficulty: difficulty,
+    stem: stem,
+    options: cleanOptions,
+    answer: answerId,
+    explanation: explanation,
+    reward_card: rewardCard
+  };
+}
+
+function generateStem(difficulty, zhPoint, enPoint, jaPoint) {
+  var heading = zhPoint.heading;
+
+  if (difficulty === 1) {
+    return {
+      zh: '以下哪个概念与「' + heading + '」直接相关？',
+      en: 'Which concept is directly related to "' + (enPoint ? enPoint.heading : heading) + '"?',
+      ja: '「' + (jaPoint ? jaPoint.heading : heading) + '」に直接関連する概念はどれですか？'
+    };
+  } else if (difficulty === 2) {
+    return {
+      zh: '在 Claude Code 中，关于「' + heading + '」的正确理解是？',
+      en: 'What is the correct understanding of "' + (enPoint ? enPoint.heading : heading) + '" in Claude Code?',
+      ja: 'Claude Code における「' + (jaPoint ? jaPoint.heading : heading) + '」の正しい理解はどれですか？'
+    };
+  } else {
+    return {
+      zh: '以下关于「' + heading + '」的说法，哪个是正确的？',
+      en: 'Which statement about "' + (enPoint ? enPoint.heading : heading) + '" is correct?',
+      ja: '「' + (jaPoint ? jaPoint.heading : heading) + '」について正しい説明はどれですか？'
+    };
+  }
+}
+
+function pickDistractors(correctText, regionCards, count) {
+  var distractors = [];
+  var used = {};
+  used[correctText.zh] = true;
+
+  var shuffled = regionCards.slice();
+  for (var i = shuffled.length - 1; i > 0; i--) {
+    var j = Math.floor(Math.random() * (i + 1));
+    var temp = shuffled[i];
+    shuffled[i] = shuffled[j];
+    shuffled[j] = temp;
+  }
+
+  for (var k = 0; k < shuffled.length && distractors.length < count; k++) {
+    var card = shuffled[k];
+    if (!used[card.name.zh]) {
+      used[card.name.zh] = true;
+      distractors.push(card.name);
+    }
+  }
+
+  var fallbacks = [
+    { zh: '以上都不对', en: 'None of the above', ja: '上記のいずれでもない' },
+    { zh: '这是一个无关的概念', en: 'This is an unrelated concept', ja: 'これは無関係な概念です' },
+    { zh: '此功能尚未实现', en: 'This feature is not yet implemented', ja: 'この機能はまだ実装されていません' }
+  ];
+  var fIdx = 0;
+  while (distractors.length < count && fIdx < fallbacks.length) {
+    distractors.push(fallbacks[fIdx]);
+    fIdx++;
+  }
+
+  return distractors;
+}
+
 // --- Load meta ---
 console.log('Loading meta.js...');
 var meta = loadJSModule(META_PATH);
