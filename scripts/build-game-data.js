@@ -31,6 +31,19 @@ function writeJSModule(filePath, data) {
   console.log('  -> ' + path.relative(ROOT, filePath) + ' (' + sizeKB + ' KB)');
 }
 
+// --- Seeded PRNG (Mulberry32) for deterministic output ---
+function createRng(seed) {
+  var state = seed | 0;
+  return function() {
+    state = (state + 0x6D2B79F5) | 0;
+    var t = Math.imul(state ^ (state >>> 15), 1 | state);
+    t = (t + Math.imul(t ^ (t >>> 7), 61 | t)) ^ t;
+    return ((t ^ (t >>> 14)) >>> 0) / 4294967296;
+  };
+}
+
+var rng = createRng(20260421);
+
 // --- Markdown Knowledge Extraction ---
 
 // Sections to skip (not knowledge content)
@@ -192,7 +205,7 @@ function assignRarity(score) {
 function generatePowerDefense(rarity) {
   var bases = { N: [30, 20], R: [50, 40], SR: [70, 60], SSR: [85, 75] };
   var base = bases[rarity] || bases.N;
-  var variance = Math.floor(Math.random() * 15);
+  var variance = Math.floor(rng() * 15);
   return { power: base[0] + variance, defense: base[1] + variance };
 }
 
@@ -320,7 +333,7 @@ function makeChoiceQuestion(verId, qIdx, difficulty, zhPoint, enPoint, jaPoint, 
     }));
 
   for (var i = options.length - 1; i > 0; i--) {
-    var j = Math.floor(Math.random() * (i + 1));
+    var j = Math.floor(rng() * (i + 1));
     var temp = options[i];
     options[i] = options[j];
     options[j] = temp;
@@ -395,7 +408,7 @@ function pickDistractors(correctText, regionCards, count) {
 
   var shuffled = regionCards.slice();
   for (var i = shuffled.length - 1; i > 0; i--) {
-    var j = Math.floor(Math.random() * (i + 1));
+    var j = Math.floor(rng() * (i + 1));
     var temp = shuffled[i];
     shuffled[i] = shuffled[j];
     shuffled[j] = temp;
@@ -602,6 +615,17 @@ function main() {
   console.log('\nWriting output files...');
   writeJSModule(CARDS_OUTPUT, { cards: allCards });
   writeJSModule(STAGES_OUTPUT, { stages: allStages });
+
+  // Summary
+  console.log('\n--- Summary ---');
+  console.log('Cards: ' + allCards.length + ' (SSR:' + ssrCount + ' SR:' + srCount + ' R:' + rCount + ' N:' + (total - ssrCount - srCount - rCount) + ')');
+  console.log('Stages: ' + allStages.length + ' (' + totalQ + ' questions)');
+  var regionSummary = Object.keys(REGION_MAP).map(function(r) {
+    var cards = (cardsByRegion[r] || []).length;
+    var stages = allStages.filter(function(s) { return s.region === r; }).length;
+    return r + ':' + cards + 'c/' + stages + 's';
+  }).join(' | ');
+  console.log('Regions: ' + regionSummary);
 
   console.log('\n=== Done! ===');
 }

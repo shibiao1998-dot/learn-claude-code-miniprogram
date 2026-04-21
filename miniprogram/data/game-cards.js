@@ -20,8 +20,8 @@ module.exports = {
         "tool",
         "task"
       ],
-      "power": 53,
-      "defense": 43
+      "power": 56,
+      "defense": 46
     },
     {
       "id": "card_s01_002",
@@ -41,8 +41,8 @@ module.exports = {
       "tags": [
         "concept"
       ],
-      "power": 41,
-      "defense": 31
+      "power": 37,
+      "defense": 27
     },
     {
       "id": "card_s01_003",
@@ -62,8 +62,8 @@ module.exports = {
       "tags": [
         "loop"
       ],
-      "power": 36,
-      "defense": 26
+      "power": 34,
+      "defense": 24
     },
     {
       "id": "card_s01_004",
@@ -83,8 +83,8 @@ module.exports = {
       "tags": [
         "concept"
       ],
-      "power": 36,
-      "defense": 26
+      "power": 38,
+      "defense": 28
     },
     {
       "id": "card_s01_005",
@@ -104,8 +104,8 @@ module.exports = {
       "tags": [
         "tool"
       ],
-      "power": 31,
-      "defense": 21
+      "power": 39,
+      "defense": 29
     },
     {
       "id": "card_s01_006",
@@ -125,8 +125,8 @@ module.exports = {
       "tags": [
         "concept"
       ],
-      "power": 42,
-      "defense": 32
+      "power": 36,
+      "defense": 26
     },
     {
       "id": "card_s01_007",
@@ -146,8 +146,8 @@ module.exports = {
       "tags": [
         "tool"
       ],
-      "power": 52,
-      "defense": 42
+      "power": 51,
+      "defense": 41
     },
     {
       "id": "card_s01_008",
@@ -167,8 +167,8 @@ module.exports = {
       "tags": [
         "concept"
       ],
-      "power": 35,
-      "defense": 25
+      "power": 39,
+      "defense": 29
     },
     {
       "id": "card_s01_009",
@@ -188,8 +188,8 @@ module.exports = {
       "tags": [
         "context"
       ],
-      "power": 60,
-      "defense": 50
+      "power": 52,
+      "defense": 42
     },
     {
       "id": "card_s01_010",
@@ -209,8 +209,8 @@ module.exports = {
       "tags": [
         "tool"
       ],
-      "power": 38,
-      "defense": 28
+      "power": 44,
+      "defense": 34
     },
     {
       "id": "card_s01_011",
@@ -230,8 +230,8 @@ module.exports = {
       "tags": [
         "loop"
       ],
-      "power": 41,
-      "defense": 31
+      "power": 44,
+      "defense": 34
     },
     {
       "id": "card_s01_012",
@@ -251,8 +251,8 @@ module.exports = {
       "tags": [
         "concept"
       ],
-      "power": 35,
-      "defense": 25
+      "power": 42,
+      "defense": 32
     },
     {
       "id": "card_s01_013",
@@ -272,8 +272,8 @@ module.exports = {
       "tags": [
         "concept"
       ],
-      "power": 40,
-      "defense": 30
+      "power": 32,
+      "defense": 22
     },
     {
       "id": "card_s01_014",
@@ -293,8 +293,8 @@ module.exports = {
       "tags": [
         "concept"
       ],
-      "power": 39,
-      "defense": 29
+      "power": 44,
+      "defense": 34
     },
     {
       "id": "card_s01_015",
@@ -314,8 +314,8 @@ module.exports = {
       "tags": [
         "concept"
       ],
-      "power": 39,
-      "defense": 29
+      "power": 40,
+      "defense": 30
     },
     {
       "id": "card_s01_016",
@@ -335,8 +335,8 @@ module.exports = {
       "tags": [
         "tool"
       ],
-      "power": 40,
-      "defense": 30
+      "power": 32,
+      "defense": 22
     },
     {
       "id": "card_s01_017",
@@ -356,8 +356,8 @@ module.exports = {
       "tags": [
         "tool"
       ],
-      "power": 31,
-      "defense": 21
+      "power": 32,
+      "defense": 22
     },
     {
       "id": "card_s01_018",
@@ -377,8 +377,8 @@ module.exports = {
       "tags": [
         "loop"
       ],
-      "power": 53,
-      "defense": 43
+      "power": 58,
+      "defense": 48
     },
     {
       "id": "card_s01_019",
@@ -398,8 +398,8 @@ module.exports = {
       "tags": [
         "loop"
       ],
-      "power": 37,
-      "defense": 27
+      "power": 40,
+      "defense": 30
     },
     {
       "id": "card_s01_020",
@@ -419,8 +419,8 @@ module.exports = {
       "tags": [
         "tool"
       ],
-      "power": 44,
-      "defense": 34
+      "power": 42,
+      "defense": 32
     },
     {
       "id": "card_s01_021",
@@ -440,8 +440,8 @@ module.exports = {
       "tags": [
         "concept"
       ],
-      "power": 37,
-      "defense": 27
+      "power": 30,
+      "defense": 20
     },
     {
       "id": "card_s01_022",
@@ -461,8 +461,8 @@ module.exports = {
       "tags": [
         "tool"
       ],
-      "power": 44,
-      "defense": 34
+      "power": 36,
+      "defense": 26
     },
     {
       "id": "card_s01_023",
@@ -482,8 +482,8 @@ module.exports = {
       "tags": [
         "concept"
       ],
-      "power": 35,
-      "defense": 25
+      "power": 41,
+      "defense": 31
     },
     {
       "id": "card_s01_024",
@@ -503,8 +503,8 @@ module.exports = {
       "tags": [
         "tool"
       ],
-      "power": 30,
-      "defense": 20
+      "power": 41,
+      "defense": 31
     },
     {
       "id": "card_s01_025",
@@ -525,8 +525,8 @@ module.exports = {
         "stream",
         "error"
       ],
-      "power": 39,
-      "defense": 29
+      "power": 36,
+      "defense": 26
     },
     {
       "id": "card_s01_026",
@@ -546,8 +546,8 @@ module.exports = {
       "tags": [
         "concept"
       ],
-      "power": 32,
-      "defense": 22
+      "power": 41,
+      "defense": 31
     },
     {
       "id": "card_s02_001",
@@ -567,8 +567,8 @@ module.exports = {
       "tags": [
         "concept"
       ],
-      "power": 33,
-      "defense": 23
+      "power": 43,
+      "defense": 33
     },
     {
       "id": "card_s02_002",
@@ -588,8 +588,8 @@ module.exports = {
       "tags": [
         "concept"
       ],
-      "power": 50,
-      "defense": 40
+      "power": 63,
+      "defense": 53
     },
     {
       "id": "card_s02_003",
@@ -609,8 +609,8 @@ module.exports = {
       "tags": [
         "concept"
       ],
-      "power": 99,
-      "defense": 89
+      "power": 96,
+      "defense": 86
     },
     {
       "id": "card_s02_004",
@@ -651,8 +651,8 @@ module.exports = {
       "tags": [
         "concept"
       ],
-      "power": 55,
-      "defense": 45
+      "power": 56,
+      "defense": 46
     },
     {
       "id": "card_s02_006",
@@ -672,8 +672,8 @@ module.exports = {
       "tags": [
         "concept"
       ],
-      "power": 97,
-      "defense": 87
+      "power": 94,
+      "defense": 84
     },
     {
       "id": "card_s03_001",
@@ -693,8 +693,8 @@ module.exports = {
       "tags": [
         "agent"
       ],
-      "power": 73,
-      "defense": 63
+      "power": 71,
+      "defense": 61
     },
     {
       "id": "card_s03_002",
@@ -714,8 +714,8 @@ module.exports = {
       "tags": [
         "concept"
       ],
-      "power": 62,
-      "defense": 52
+      "power": 54,
+      "defense": 44
     },
     {
       "id": "card_s03_003",
@@ -735,8 +735,8 @@ module.exports = {
       "tags": [
         "plan"
       ],
-      "power": 55,
-      "defense": 45
+      "power": 58,
+      "defense": 48
     },
     {
       "id": "card_s03_004",
@@ -756,8 +756,8 @@ module.exports = {
       "tags": [
         "concept"
       ],
-      "power": 60,
-      "defense": 50
+      "power": 51,
+      "defense": 41
     },
     {
       "id": "card_s03_005",
@@ -777,8 +777,8 @@ module.exports = {
       "tags": [
         "concept"
       ],
-      "power": 57,
-      "defense": 47
+      "power": 50,
+      "defense": 40
     },
     {
       "id": "card_s03_006",
@@ -798,8 +798,8 @@ module.exports = {
       "tags": [
         "concept"
       ],
-      "power": 60,
-      "defense": 50
+      "power": 57,
+      "defense": 47
     },
     {
       "id": "card_s03_007",
@@ -819,8 +819,8 @@ module.exports = {
       "tags": [
         "task"
       ],
-      "power": 57,
-      "defense": 47
+      "power": 62,
+      "defense": 52
     },
     {
       "id": "card_s03_008",
@@ -840,8 +840,8 @@ module.exports = {
       "tags": [
         "concept"
       ],
-      "power": 78,
-      "defense": 68
+      "power": 72,
+      "defense": 62
     },
     {
       "id": "card_s03_009",
@@ -861,8 +861,8 @@ module.exports = {
       "tags": [
         "concept"
       ],
-      "power": 59,
-      "defense": 49
+      "power": 55,
+      "defense": 45
     },
     {
       "id": "card_s03_010",
@@ -882,8 +882,8 @@ module.exports = {
       "tags": [
         "plan"
       ],
-      "power": 83,
-      "defense": 73
+      "power": 79,
+      "defense": 69
     },
     {
       "id": "card_s03_011",
@@ -903,8 +903,8 @@ module.exports = {
       "tags": [
         "plan"
       ],
-      "power": 79,
-      "defense": 69
+      "power": 71,
+      "defense": 61
     },
     {
       "id": "card_s03_012",
@@ -924,8 +924,8 @@ module.exports = {
       "tags": [
         "concept"
       ],
-      "power": 97,
-      "defense": 87
+      "power": 99,
+      "defense": 89
     },
     {
       "id": "card_s03_013",
@@ -945,8 +945,8 @@ module.exports = {
       "tags": [
         "concept"
       ],
-      "power": 56,
-      "defense": 46
+      "power": 63,
+      "defense": 53
     },
     {
       "id": "card_s03_014",
@@ -966,8 +966,8 @@ module.exports = {
       "tags": [
         "concept"
       ],
-      "power": 72,
-      "defense": 62
+      "power": 80,
+      "defense": 70
     },
     {
       "id": "card_s03_015",
@@ -987,8 +987,8 @@ module.exports = {
       "tags": [
         "concept"
       ],
-      "power": 70,
-      "defense": 60
+      "power": 76,
+      "defense": 66
     },
     {
       "id": "card_s03_016",
@@ -1008,8 +1008,8 @@ module.exports = {
       "tags": [
         "concept"
       ],
-      "power": 71,
-      "defense": 61
+      "power": 75,
+      "defense": 65
     },
     {
       "id": "card_s03_017",
@@ -1029,8 +1029,8 @@ module.exports = {
       "tags": [
         "tool"
       ],
-      "power": 74,
-      "defense": 64
+      "power": 84,
+      "defense": 74
     },
     {
       "id": "card_s03_018",
@@ -1050,8 +1050,8 @@ module.exports = {
       "tags": [
         "concept"
       ],
-      "power": 75,
-      "defense": 65
+      "power": 77,
+      "defense": 67
     },
     {
       "id": "card_s03_019",
@@ -1071,8 +1071,8 @@ module.exports = {
       "tags": [
         "loop"
       ],
-      "power": 96,
-      "defense": 86
+      "power": 99,
+      "defense": 89
     },
     {
       "id": "card_s03_020",
@@ -1092,8 +1092,8 @@ module.exports = {
       "tags": [
         "task"
       ],
-      "power": 51,
-      "defense": 41
+      "power": 64,
+      "defense": 54
     },
     {
       "id": "card_s03_021",
@@ -1113,8 +1113,8 @@ module.exports = {
       "tags": [
         "concept"
       ],
-      "power": 53,
-      "defense": 43
+      "power": 57,
+      "defense": 47
     },
     {
       "id": "card_s03_022",
@@ -1155,8 +1155,8 @@ module.exports = {
       "tags": [
         "concept"
       ],
-      "power": 63,
-      "defense": 53
+      "power": 64,
+      "defense": 54
     },
     {
       "id": "card_s03_024",
@@ -1176,8 +1176,8 @@ module.exports = {
       "tags": [
         "task"
       ],
-      "power": 64,
-      "defense": 54
+      "power": 51,
+      "defense": 41
     },
     {
       "id": "card_s03_025",
@@ -1197,8 +1197,8 @@ module.exports = {
       "tags": [
         "concept"
       ],
-      "power": 50,
-      "defense": 40
+      "power": 60,
+      "defense": 50
     },
     {
       "id": "card_s03_026",
@@ -1218,8 +1218,8 @@ module.exports = {
       "tags": [
         "concept"
       ],
-      "power": 62,
-      "defense": 52
+      "power": 61,
+      "defense": 51
     },
     {
       "id": "card_s04_001",
@@ -1240,8 +1240,8 @@ module.exports = {
         "context",
         "task"
       ],
-      "power": 61,
-      "defense": 51
+      "power": 60,
+      "defense": 50
     },
     {
       "id": "card_s04_002",
@@ -1261,8 +1261,8 @@ module.exports = {
       "tags": [
         "concept"
       ],
-      "power": 31,
-      "defense": 21
+      "power": 36,
+      "defense": 26
     },
     {
       "id": "card_s04_003",
@@ -1282,8 +1282,8 @@ module.exports = {
       "tags": [
         "agent"
       ],
-      "power": 40,
-      "defense": 30
+      "power": 31,
+      "defense": 21
     },
     {
       "id": "card_s04_004",
@@ -1303,8 +1303,8 @@ module.exports = {
       "tags": [
         "agent"
       ],
-      "power": 34,
-      "defense": 24
+      "power": 40,
+      "defense": 30
     },
     {
       "id": "card_s04_005",
@@ -1324,8 +1324,8 @@ module.exports = {
       "tags": [
         "context"
       ],
-      "power": 44,
-      "defense": 34
+      "power": 40,
+      "defense": 30
     },
     {
       "id": "card_s04_006",
@@ -1346,8 +1346,8 @@ module.exports = {
         "agent",
         "context"
       ],
-      "power": 76,
-      "defense": 66
+      "power": 75,
+      "defense": 65
     },
     {
       "id": "card_s04_007",
@@ -1367,8 +1367,8 @@ module.exports = {
       "tags": [
         "concept"
       ],
-      "power": 37,
-      "defense": 27
+      "power": 40,
+      "defense": 30
     },
     {
       "id": "card_s04_008",
@@ -1390,8 +1390,8 @@ module.exports = {
         "tool",
         "task"
       ],
-      "power": 59,
-      "defense": 49
+      "power": 57,
+      "defense": 47
     },
     {
       "id": "card_s04_009",
@@ -1411,8 +1411,8 @@ module.exports = {
       "tags": [
         "agent"
       ],
-      "power": 50,
-      "defense": 40
+      "power": 58,
+      "defense": 48
     },
     {
       "id": "card_s04_010",
@@ -1433,8 +1433,8 @@ module.exports = {
         "agent",
         "tool"
       ],
-      "power": 41,
-      "defense": 31
+      "power": 42,
+      "defense": 32
     },
     {
       "id": "card_s04_011",
@@ -1454,8 +1454,8 @@ module.exports = {
       "tags": [
         "agent"
       ],
-      "power": 64,
-      "defense": 54
+      "power": 55,
+      "defense": 45
     },
     {
       "id": "card_s04_012",
@@ -1475,8 +1475,8 @@ module.exports = {
       "tags": [
         "concept"
       ],
-      "power": 54,
-      "defense": 44
+      "power": 61,
+      "defense": 51
     },
     {
       "id": "card_s04_013",
@@ -1496,8 +1496,8 @@ module.exports = {
       "tags": [
         "concept"
       ],
-      "power": 36,
-      "defense": 26
+      "power": 32,
+      "defense": 22
     },
     {
       "id": "card_s04_014",
@@ -1517,8 +1517,8 @@ module.exports = {
       "tags": [
         "context"
       ],
-      "power": 31,
-      "defense": 21
+      "power": 38,
+      "defense": 28
     },
     {
       "id": "card_s04_015",
@@ -1538,8 +1538,8 @@ module.exports = {
       "tags": [
         "task"
       ],
-      "power": 31,
-      "defense": 21
+      "power": 38,
+      "defense": 28
     },
     {
       "id": "card_s04_016",
@@ -1559,8 +1559,8 @@ module.exports = {
       "tags": [
         "agent"
       ],
-      "power": 43,
-      "defense": 33
+      "power": 42,
+      "defense": 32
     },
     {
       "id": "card_s04_017",
@@ -1580,8 +1580,8 @@ module.exports = {
       "tags": [
         "concept"
       ],
-      "power": 41,
-      "defense": 31
+      "power": 36,
+      "defense": 26
     },
     {
       "id": "card_s04_018",
@@ -1623,8 +1623,8 @@ module.exports = {
       "tags": [
         "tool"
       ],
-      "power": 32,
-      "defense": 22
+      "power": 33,
+      "defense": 23
     },
     {
       "id": "card_s04_020",
@@ -1644,8 +1644,8 @@ module.exports = {
       "tags": [
         "concept"
       ],
-      "power": 40,
-      "defense": 30
+      "power": 41,
+      "defense": 31
     },
     {
       "id": "card_s04_021",
@@ -1665,8 +1665,8 @@ module.exports = {
       "tags": [
         "concept"
       ],
-      "power": 31,
-      "defense": 21
+      "power": 37,
+      "defense": 27
     },
     {
       "id": "card_s04_022",
@@ -1686,8 +1686,8 @@ module.exports = {
       "tags": [
         "context"
       ],
-      "power": 70,
-      "defense": 60
+      "power": 76,
+      "defense": 66
     },
     {
       "id": "card_s04_023",
@@ -1707,8 +1707,8 @@ module.exports = {
       "tags": [
         "concept"
       ],
-      "power": 39,
-      "defense": 29
+      "power": 32,
+      "defense": 22
     },
     {
       "id": "card_s04_024",
@@ -1728,8 +1728,8 @@ module.exports = {
       "tags": [
         "agent"
       ],
-      "power": 39,
-      "defense": 29
+      "power": 37,
+      "defense": 27
     },
     {
       "id": "card_s04_025",
@@ -1749,8 +1749,8 @@ module.exports = {
       "tags": [
         "concept"
       ],
-      "power": 31,
-      "defense": 21
+      "power": 42,
+      "defense": 32
     },
     {
       "id": "card_s04_026",
@@ -1770,8 +1770,8 @@ module.exports = {
       "tags": [
         "concept"
       ],
-      "power": 30,
-      "defense": 20
+      "power": 44,
+      "defense": 34
     },
     {
       "id": "card_s04_027",
@@ -1791,8 +1791,8 @@ module.exports = {
       "tags": [
         "agent"
       ],
-      "power": 37,
-      "defense": 27
+      "power": 34,
+      "defense": 24
     },
     {
       "id": "card_s04_028",
@@ -1812,8 +1812,8 @@ module.exports = {
       "tags": [
         "concept"
       ],
-      "power": 39,
-      "defense": 29
+      "power": 30,
+      "defense": 20
     },
     {
       "id": "card_s04_029",
@@ -1834,8 +1834,8 @@ module.exports = {
         "agent",
         "context"
       ],
-      "power": 53,
-      "defense": 43
+      "power": 63,
+      "defense": 53
     },
     {
       "id": "card_s05_001",
@@ -1855,8 +1855,8 @@ module.exports = {
       "tags": [
         "prompt"
       ],
-      "power": 62,
-      "defense": 52
+      "power": 55,
+      "defense": 45
     },
     {
       "id": "card_s05_002",
@@ -1876,8 +1876,8 @@ module.exports = {
       "tags": [
         "concept"
       ],
-      "power": 60,
-      "defense": 50
+      "power": 62,
+      "defense": 52
     },
     {
       "id": "card_s05_003",
@@ -1897,8 +1897,8 @@ module.exports = {
       "tags": [
         "concept"
       ],
-      "power": 56,
-      "defense": 46
+      "power": 51,
+      "defense": 41
     },
     {
       "id": "card_s05_004",
@@ -1918,8 +1918,8 @@ module.exports = {
       "tags": [
         "concept"
       ],
-      "power": 53,
-      "defense": 43
+      "power": 60,
+      "defense": 50
     },
     {
       "id": "card_s05_005",
@@ -1939,8 +1939,8 @@ module.exports = {
       "tags": [
         "concept"
       ],
-      "power": 60,
-      "defense": 50
+      "power": 53,
+      "defense": 43
     },
     {
       "id": "card_s05_006",
@@ -1981,8 +1981,8 @@ module.exports = {
       "tags": [
         "concept"
       ],
-      "power": 62,
-      "defense": 52
+      "power": 58,
+      "defense": 48
     },
     {
       "id": "card_s05_008",
@@ -2002,8 +2002,8 @@ module.exports = {
       "tags": [
         "concept"
       ],
-      "power": 75,
-      "defense": 65
+      "power": 70,
+      "defense": 60
     },
     {
       "id": "card_s05_009",
@@ -2023,8 +2023,8 @@ module.exports = {
       "tags": [
         "concept"
       ],
-      "power": 73,
-      "defense": 63
+      "power": 84,
+      "defense": 74
     },
     {
       "id": "card_s05_010",
@@ -2044,8 +2044,8 @@ module.exports = {
       "tags": [
         "concept"
       ],
-      "power": 73,
-      "defense": 63
+      "power": 81,
+      "defense": 71
     },
     {
       "id": "card_s05_011",
@@ -2065,8 +2065,8 @@ module.exports = {
       "tags": [
         "concept"
       ],
-      "power": 61,
-      "defense": 51
+      "power": 50,
+      "defense": 40
     },
     {
       "id": "card_s05_012",
@@ -2086,8 +2086,8 @@ module.exports = {
       "tags": [
         "concept"
       ],
-      "power": 83,
-      "defense": 73
+      "power": 73,
+      "defense": 63
     },
     {
       "id": "card_s05_013",
@@ -2128,8 +2128,8 @@ module.exports = {
       "tags": [
         "prompt"
       ],
-      "power": 85,
-      "defense": 75
+      "power": 90,
+      "defense": 80
     },
     {
       "id": "card_s05_015",
@@ -2149,8 +2149,8 @@ module.exports = {
       "tags": [
         "tool"
       ],
-      "power": 74,
-      "defense": 64
+      "power": 75,
+      "defense": 65
     },
     {
       "id": "card_s05_016",
@@ -2170,8 +2170,8 @@ module.exports = {
       "tags": [
         "context"
       ],
-      "power": 54,
-      "defense": 44
+      "power": 52,
+      "defense": 42
     },
     {
       "id": "card_s05_017",
@@ -2191,8 +2191,8 @@ module.exports = {
       "tags": [
         "memory"
       ],
-      "power": 59,
-      "defense": 49
+      "power": 62,
+      "defense": 52
     },
     {
       "id": "card_s05_018",
@@ -2212,8 +2212,8 @@ module.exports = {
       "tags": [
         "concept"
       ],
-      "power": 57,
-      "defense": 47
+      "power": 62,
+      "defense": 52
     },
     {
       "id": "card_s05_019",
@@ -2233,8 +2233,8 @@ module.exports = {
       "tags": [
         "memory"
       ],
-      "power": 61,
-      "defense": 51
+      "power": 56,
+      "defense": 46
     },
     {
       "id": "card_s05_020",
@@ -2254,8 +2254,8 @@ module.exports = {
       "tags": [
         "concept"
       ],
-      "power": 59,
-      "defense": 49
+      "power": 61,
+      "defense": 51
     },
     {
       "id": "card_s05_021",
@@ -2275,8 +2275,8 @@ module.exports = {
       "tags": [
         "loop"
       ],
-      "power": 84,
-      "defense": 74
+      "power": 79,
+      "defense": 69
     },
     {
       "id": "card_s05_022",
@@ -2317,8 +2317,8 @@ module.exports = {
       "tags": [
         "prompt"
       ],
-      "power": 61,
-      "defense": 51
+      "power": 56,
+      "defense": 46
     },
     {
       "id": "card_s05_024",
@@ -2338,8 +2338,8 @@ module.exports = {
       "tags": [
         "concept"
       ],
-      "power": 50,
-      "defense": 40
+      "power": 57,
+      "defense": 47
     },
     {
       "id": "card_s05_025",
@@ -2359,8 +2359,8 @@ module.exports = {
       "tags": [
         "concept"
       ],
-      "power": 58,
-      "defense": 48
+      "power": 52,
+      "defense": 42
     },
     {
       "id": "card_s05_026",
@@ -2380,8 +2380,8 @@ module.exports = {
       "tags": [
         "memory"
       ],
-      "power": 57,
-      "defense": 47
+      "power": 64,
+      "defense": 54
     },
     {
       "id": "card_s05_027",
@@ -2401,8 +2401,8 @@ module.exports = {
       "tags": [
         "concept"
       ],
-      "power": 54,
-      "defense": 44
+      "power": 58,
+      "defense": 48
     },
     {
       "id": "card_s06_001",
@@ -2422,8 +2422,8 @@ module.exports = {
       "tags": [
         "context"
       ],
-      "power": 60,
-      "defense": 50
+      "power": 50,
+      "defense": 40
     },
     {
       "id": "card_s06_002",
@@ -2443,8 +2443,8 @@ module.exports = {
       "tags": [
         "concept"
       ],
-      "power": 37,
-      "defense": 27
+      "power": 34,
+      "defense": 24
     },
     {
       "id": "card_s06_003",
@@ -2464,8 +2464,8 @@ module.exports = {
       "tags": [
         "context"
       ],
-      "power": 39,
-      "defense": 29
+      "power": 34,
+      "defense": 24
     },
     {
       "id": "card_s06_004",
@@ -2485,8 +2485,8 @@ module.exports = {
       "tags": [
         "context"
       ],
-      "power": 42,
-      "defense": 32
+      "power": 30,
+      "defense": 20
     },
     {
       "id": "card_s06_005",
@@ -2506,8 +2506,8 @@ module.exports = {
       "tags": [
         "concept"
       ],
-      "power": 44,
-      "defense": 34
+      "power": 30,
+      "defense": 20
     },
     {
       "id": "card_s06_006",
@@ -2527,8 +2527,8 @@ module.exports = {
       "tags": [
         "concept"
       ],
-      "power": 51,
-      "defense": 41
+      "power": 60,
+      "defense": 50
     },
     {
       "id": "card_s06_007",
@@ -2548,8 +2548,8 @@ module.exports = {
       "tags": [
         "concept"
       ],
-      "power": 34,
-      "defense": 24
+      "power": 39,
+      "defense": 29
     },
     {
       "id": "card_s06_008",
@@ -2569,8 +2569,8 @@ module.exports = {
       "tags": [
         "concept"
       ],
-      "power": 62,
-      "defense": 52
+      "power": 60,
+      "defense": 50
     },
     {
       "id": "card_s06_009",
@@ -2590,8 +2590,8 @@ module.exports = {
       "tags": [
         "concept"
       ],
-      "power": 59,
-      "defense": 49
+      "power": 54,
+      "defense": 44
     },
     {
       "id": "card_s06_010",
@@ -2611,8 +2611,8 @@ module.exports = {
       "tags": [
         "concept"
       ],
-      "power": 82,
-      "defense": 72
+      "power": 75,
+      "defense": 65
     },
     {
       "id": "card_s06_011",
@@ -2632,8 +2632,8 @@ module.exports = {
       "tags": [
         "concept"
       ],
-      "power": 38,
-      "defense": 28
+      "power": 31,
+      "defense": 21
     },
     {
       "id": "card_s06_012",
@@ -2653,8 +2653,8 @@ module.exports = {
       "tags": [
         "tool"
       ],
-      "power": 51,
-      "defense": 41
+      "power": 60,
+      "defense": 50
     },
     {
       "id": "card_s06_013",
@@ -2674,8 +2674,8 @@ module.exports = {
       "tags": [
         "tool"
       ],
-      "power": 54,
-      "defense": 44
+      "power": 61,
+      "defense": 51
     },
     {
       "id": "card_s06_014",
@@ -2695,8 +2695,8 @@ module.exports = {
       "tags": [
         "concept"
       ],
-      "power": 60,
-      "defense": 50
+      "power": 59,
+      "defense": 49
     },
     {
       "id": "card_s06_015",
@@ -2716,8 +2716,8 @@ module.exports = {
       "tags": [
         "loop"
       ],
-      "power": 57,
-      "defense": 47
+      "power": 50,
+      "defense": 40
     },
     {
       "id": "card_s06_016",
@@ -2758,8 +2758,8 @@ module.exports = {
       "tags": [
         "concept"
       ],
-      "power": 55,
-      "defense": 45
+      "power": 54,
+      "defense": 44
     },
     {
       "id": "card_s06_018",
@@ -2779,8 +2779,8 @@ module.exports = {
       "tags": [
         "loop"
       ],
-      "power": 50,
-      "defense": 40
+      "power": 64,
+      "defense": 54
     },
     {
       "id": "card_s06_019",
@@ -2800,8 +2800,8 @@ module.exports = {
       "tags": [
         "concept"
       ],
-      "power": 42,
-      "defense": 32
+      "power": 32,
+      "defense": 22
     },
     {
       "id": "card_s06_020",
@@ -2821,8 +2821,8 @@ module.exports = {
       "tags": [
         "concept"
       ],
-      "power": 33,
-      "defense": 23
+      "power": 36,
+      "defense": 26
     },
     {
       "id": "card_s06_021",
@@ -2842,8 +2842,8 @@ module.exports = {
       "tags": [
         "concept"
       ],
-      "power": 34,
-      "defense": 24
+      "power": 39,
+      "defense": 29
     },
     {
       "id": "card_s06_022",
@@ -2863,8 +2863,8 @@ module.exports = {
       "tags": [
         "concept"
       ],
-      "power": 39,
-      "defense": 29
+      "power": 35,
+      "defense": 25
     },
     {
       "id": "card_s06_023",
@@ -2884,8 +2884,8 @@ module.exports = {
       "tags": [
         "memory"
       ],
-      "power": 34,
-      "defense": 24
+      "power": 35,
+      "defense": 25
     },
     {
       "id": "card_s06_024",
@@ -2905,8 +2905,8 @@ module.exports = {
       "tags": [
         "concept"
       ],
-      "power": 30,
-      "defense": 20
+      "power": 42,
+      "defense": 32
     },
     {
       "id": "card_s07_001",
@@ -2926,8 +2926,8 @@ module.exports = {
       "tags": [
         "permission"
       ],
-      "power": 61,
-      "defense": 51
+      "power": 57,
+      "defense": 47
     },
     {
       "id": "card_s07_002",
@@ -2947,8 +2947,8 @@ module.exports = {
       "tags": [
         "concept"
       ],
-      "power": 37,
-      "defense": 27
+      "power": 30,
+      "defense": 20
     },
     {
       "id": "card_s07_003",
@@ -2968,8 +2968,8 @@ module.exports = {
       "tags": [
         "concept"
       ],
-      "power": 35,
-      "defense": 25
+      "power": 42,
+      "defense": 32
     },
     {
       "id": "card_s07_004",
@@ -2989,8 +2989,8 @@ module.exports = {
       "tags": [
         "permission"
       ],
-      "power": 30,
-      "defense": 20
+      "power": 33,
+      "defense": 23
     },
     {
       "id": "card_s07_005",
@@ -3010,8 +3010,8 @@ module.exports = {
       "tags": [
         "permission"
       ],
-      "power": 32,
-      "defense": 22
+      "power": 39,
+      "defense": 29
     },
     {
       "id": "card_s07_006",
@@ -3031,8 +3031,8 @@ module.exports = {
       "tags": [
         "concept"
       ],
-      "power": 50,
-      "defense": 40
+      "power": 56,
+      "defense": 46
     },
     {
       "id": "card_s07_007",
@@ -3052,8 +3052,8 @@ module.exports = {
       "tags": [
         "permission"
       ],
-      "power": 50,
-      "defense": 40
+      "power": 53,
+      "defense": 43
     },
     {
       "id": "card_s07_008",
@@ -3073,8 +3073,8 @@ module.exports = {
       "tags": [
         "concept"
       ],
-      "power": 40,
-      "defense": 30
+      "power": 37,
+      "defense": 27
     },
     {
       "id": "card_s07_009",
@@ -3094,8 +3094,8 @@ module.exports = {
       "tags": [
         "concept"
       ],
-      "power": 41,
-      "defense": 31
+      "power": 36,
+      "defense": 26
     },
     {
       "id": "card_s07_010",
@@ -3136,8 +3136,8 @@ module.exports = {
       "tags": [
         "concept"
       ],
-      "power": 43,
-      "defense": 33
+      "power": 42,
+      "defense": 32
     },
     {
       "id": "card_s07_012",
@@ -3157,8 +3157,8 @@ module.exports = {
       "tags": [
         "concept"
       ],
-      "power": 36,
-      "defense": 26
+      "power": 39,
+      "defense": 29
     },
     {
       "id": "card_s07_013",
@@ -3178,8 +3178,8 @@ module.exports = {
       "tags": [
         "concept"
       ],
-      "power": 40,
-      "defense": 30
+      "power": 33,
+      "defense": 23
     },
     {
       "id": "card_s07_014",
@@ -3199,8 +3199,8 @@ module.exports = {
       "tags": [
         "concept"
       ],
-      "power": 36,
-      "defense": 26
+      "power": 33,
+      "defense": 23
     },
     {
       "id": "card_s07_015",
@@ -3220,8 +3220,8 @@ module.exports = {
       "tags": [
         "permission"
       ],
-      "power": 57,
-      "defense": 47
+      "power": 55,
+      "defense": 45
     },
     {
       "id": "card_s07_016",
@@ -3241,8 +3241,8 @@ module.exports = {
       "tags": [
         "permission"
       ],
-      "power": 54,
-      "defense": 44
+      "power": 56,
+      "defense": 46
     },
     {
       "id": "card_s07_017",
@@ -3262,8 +3262,8 @@ module.exports = {
       "tags": [
         "permission"
       ],
-      "power": 54,
-      "defense": 44
+      "power": 63,
+      "defense": 53
     },
     {
       "id": "card_s07_018",
@@ -3283,8 +3283,8 @@ module.exports = {
       "tags": [
         "concept"
       ],
-      "power": 78,
-      "defense": 68
+      "power": 84,
+      "defense": 74
     },
     {
       "id": "card_s07_019",
@@ -3304,8 +3304,8 @@ module.exports = {
       "tags": [
         "concept"
       ],
-      "power": 55,
-      "defense": 45
+      "power": 58,
+      "defense": 48
     },
     {
       "id": "card_s07_020",
@@ -3325,8 +3325,8 @@ module.exports = {
       "tags": [
         "concept"
       ],
-      "power": 37,
-      "defense": 27
+      "power": 39,
+      "defense": 29
     },
     {
       "id": "card_s07_021",
@@ -3346,8 +3346,8 @@ module.exports = {
       "tags": [
         "concept"
       ],
-      "power": 36,
-      "defense": 26
+      "power": 35,
+      "defense": 25
     },
     {
       "id": "card_s07_022",
@@ -3388,8 +3388,8 @@ module.exports = {
       "tags": [
         "security"
       ],
-      "power": 38,
-      "defense": 28
+      "power": 30,
+      "defense": 20
     },
     {
       "id": "card_s07_024",
@@ -3409,8 +3409,8 @@ module.exports = {
       "tags": [
         "concept"
       ],
-      "power": 37,
-      "defense": 27
+      "power": 38,
+      "defense": 28
     },
     {
       "id": "card_s07_025",
@@ -3431,8 +3431,8 @@ module.exports = {
         "tool",
         "permission"
       ],
-      "power": 55,
-      "defense": 45
+      "power": 50,
+      "defense": 40
     },
     {
       "id": "card_s07_026",
@@ -3452,8 +3452,8 @@ module.exports = {
       "tags": [
         "concept"
       ],
-      "power": 30,
-      "defense": 20
+      "power": 42,
+      "defense": 32
     },
     {
       "id": "card_s07_027",
@@ -3475,8 +3475,8 @@ module.exports = {
         "permission",
         "security"
       ],
-      "power": 62,
-      "defense": 52
+      "power": 64,
+      "defense": 54
     },
     {
       "id": "card_s08_001",
@@ -3497,8 +3497,8 @@ module.exports = {
         "loop",
         "hook"
       ],
-      "power": 52,
-      "defense": 42
+      "power": 64,
+      "defense": 54
     },
     {
       "id": "card_s08_002",
@@ -3540,8 +3540,8 @@ module.exports = {
         "loop",
         "hook"
       ],
-      "power": 51,
-      "defense": 41
+      "power": 59,
+      "defense": 49
     },
     {
       "id": "card_s08_004",
@@ -3561,8 +3561,8 @@ module.exports = {
       "tags": [
         "concept"
       ],
-      "power": 60,
-      "defense": 50
+      "power": 57,
+      "defense": 47
     },
     {
       "id": "card_s08_005",
@@ -3582,8 +3582,8 @@ module.exports = {
       "tags": [
         "concept"
       ],
-      "power": 33,
-      "defense": 23
+      "power": 35,
+      "defense": 25
     },
     {
       "id": "card_s08_006",
@@ -3603,8 +3603,8 @@ module.exports = {
       "tags": [
         "concept"
       ],
-      "power": 34,
-      "defense": 24
+      "power": 31,
+      "defense": 21
     },
     {
       "id": "card_s08_007",
@@ -3624,8 +3624,8 @@ module.exports = {
       "tags": [
         "hook"
       ],
-      "power": 63,
-      "defense": 53
+      "power": 54,
+      "defense": 44
     },
     {
       "id": "card_s08_008",
@@ -3645,8 +3645,8 @@ module.exports = {
       "tags": [
         "hook"
       ],
-      "power": 58,
-      "defense": 48
+      "power": 63,
+      "defense": 53
     },
     {
       "id": "card_s08_009",
@@ -3667,8 +3667,8 @@ module.exports = {
         "loop",
         "hook"
       ],
-      "power": 78,
-      "defense": 68
+      "power": 72,
+      "defense": 62
     },
     {
       "id": "card_s08_010",
@@ -3688,8 +3688,8 @@ module.exports = {
       "tags": [
         "concept"
       ],
-      "power": 63,
-      "defense": 53
+      "power": 64,
+      "defense": 54
     },
     {
       "id": "card_s08_011",
@@ -3709,8 +3709,8 @@ module.exports = {
       "tags": [
         "concept"
       ],
-      "power": 33,
-      "defense": 23
+      "power": 32,
+      "defense": 22
     },
     {
       "id": "card_s08_012",
@@ -3730,8 +3730,8 @@ module.exports = {
       "tags": [
         "concept"
       ],
-      "power": 61,
-      "defense": 51
+      "power": 59,
+      "defense": 49
     },
     {
       "id": "card_s08_013",
@@ -3773,8 +3773,8 @@ module.exports = {
         "loop",
         "hook"
       ],
-      "power": 76,
-      "defense": 66
+      "power": 79,
+      "defense": 69
     },
     {
       "id": "card_s08_015",
@@ -3815,8 +3815,8 @@ module.exports = {
       "tags": [
         "hook"
       ],
-      "power": 34,
-      "defense": 24
+      "power": 33,
+      "defense": 23
     },
     {
       "id": "card_s08_017",
@@ -3836,8 +3836,8 @@ module.exports = {
       "tags": [
         "concept"
       ],
-      "power": 31,
-      "defense": 21
+      "power": 44,
+      "defense": 34
     },
     {
       "id": "card_s08_018",
@@ -3857,8 +3857,8 @@ module.exports = {
       "tags": [
         "concept"
       ],
-      "power": 34,
-      "defense": 24
+      "power": 32,
+      "defense": 22
     },
     {
       "id": "card_s08_019",
@@ -3878,8 +3878,8 @@ module.exports = {
       "tags": [
         "concept"
       ],
-      "power": 64,
-      "defense": 54
+      "power": 53,
+      "defense": 43
     },
     {
       "id": "card_s08_020",
@@ -3899,8 +3899,8 @@ module.exports = {
       "tags": [
         "concept"
       ],
-      "power": 38,
-      "defense": 28
+      "power": 44,
+      "defense": 34
     },
     {
       "id": "card_s08_021",
@@ -3920,8 +3920,8 @@ module.exports = {
       "tags": [
         "concept"
       ],
-      "power": 39,
-      "defense": 29
+      "power": 32,
+      "defense": 22
     },
     {
       "id": "card_s09_001",
@@ -3941,8 +3941,8 @@ module.exports = {
       "tags": [
         "concept"
       ],
-      "power": 30,
-      "defense": 20
+      "power": 43,
+      "defense": 33
     },
     {
       "id": "card_s09_002",
@@ -3962,8 +3962,8 @@ module.exports = {
       "tags": [
         "memory"
       ],
-      "power": 50,
-      "defense": 40
+      "power": 55,
+      "defense": 45
     },
     {
       "id": "card_s09_003",
@@ -3983,8 +3983,8 @@ module.exports = {
       "tags": [
         "concept"
       ],
-      "power": 34,
-      "defense": 24
+      "power": 41,
+      "defense": 31
     },
     {
       "id": "card_s09_004",
@@ -4004,8 +4004,8 @@ module.exports = {
       "tags": [
         "concept"
       ],
-      "power": 42,
-      "defense": 32
+      "power": 33,
+      "defense": 23
     },
     {
       "id": "card_s09_005",
@@ -4025,8 +4025,8 @@ module.exports = {
       "tags": [
         "concept"
       ],
-      "power": 32,
-      "defense": 22
+      "power": 31,
+      "defense": 21
     },
     {
       "id": "card_s09_006",
@@ -4046,8 +4046,8 @@ module.exports = {
       "tags": [
         "concept"
       ],
-      "power": 34,
-      "defense": 24
+      "power": 33,
+      "defense": 23
     },
     {
       "id": "card_s09_007",
@@ -4067,8 +4067,8 @@ module.exports = {
       "tags": [
         "memory"
       ],
-      "power": 35,
-      "defense": 25
+      "power": 40,
+      "defense": 30
     },
     {
       "id": "card_s09_008",
@@ -4088,8 +4088,8 @@ module.exports = {
       "tags": [
         "concept"
       ],
-      "power": 36,
-      "defense": 26
+      "power": 35,
+      "defense": 25
     },
     {
       "id": "card_s09_009",
@@ -4109,8 +4109,8 @@ module.exports = {
       "tags": [
         "concept"
       ],
-      "power": 43,
-      "defense": 33
+      "power": 32,
+      "defense": 22
     },
     {
       "id": "card_s09_010",
@@ -4130,8 +4130,8 @@ module.exports = {
       "tags": [
         "concept"
       ],
-      "power": 53,
-      "defense": 43
+      "power": 56,
+      "defense": 46
     },
     {
       "id": "card_s09_011",
@@ -4151,8 +4151,8 @@ module.exports = {
       "tags": [
         "concept"
       ],
-      "power": 32,
-      "defense": 22
+      "power": 40,
+      "defense": 30
     },
     {
       "id": "card_s09_012",
@@ -4172,8 +4172,8 @@ module.exports = {
       "tags": [
         "memory"
       ],
-      "power": 33,
-      "defense": 23
+      "power": 35,
+      "defense": 25
     },
     {
       "id": "card_s09_013",
@@ -4193,8 +4193,8 @@ module.exports = {
       "tags": [
         "concept"
       ],
-      "power": 59,
-      "defense": 49
+      "power": 61,
+      "defense": 51
     },
     {
       "id": "card_s09_014",
@@ -4214,8 +4214,8 @@ module.exports = {
       "tags": [
         "concept"
       ],
-      "power": 42,
-      "defense": 32
+      "power": 35,
+      "defense": 25
     },
     {
       "id": "card_s09_015",
@@ -4235,8 +4235,8 @@ module.exports = {
       "tags": [
         "memory"
       ],
-      "power": 78,
-      "defense": 68
+      "power": 74,
+      "defense": 64
     },
     {
       "id": "card_s09_016",
@@ -4256,8 +4256,8 @@ module.exports = {
       "tags": [
         "memory"
       ],
-      "power": 59,
-      "defense": 49
+      "power": 50,
+      "defense": 40
     },
     {
       "id": "card_s09_017",
@@ -4277,8 +4277,8 @@ module.exports = {
       "tags": [
         "concept"
       ],
-      "power": 41,
-      "defense": 31
+      "power": 39,
+      "defense": 29
     },
     {
       "id": "card_s09_018",
@@ -4298,8 +4298,8 @@ module.exports = {
       "tags": [
         "memory"
       ],
-      "power": 51,
-      "defense": 41
+      "power": 63,
+      "defense": 53
     },
     {
       "id": "card_s09_019",
@@ -4320,8 +4320,8 @@ module.exports = {
         "tool",
         "memory"
       ],
-      "power": 38,
-      "defense": 28
+      "power": 36,
+      "defense": 26
     },
     {
       "id": "card_s09_020",
@@ -4341,8 +4341,8 @@ module.exports = {
       "tags": [
         "memory"
       ],
-      "power": 50,
-      "defense": 40
+      "power": 54,
+      "defense": 44
     },
     {
       "id": "card_s09_021",
@@ -4362,8 +4362,8 @@ module.exports = {
       "tags": [
         "concept"
       ],
-      "power": 38,
-      "defense": 28
+      "power": 37,
+      "defense": 27
     },
     {
       "id": "card_s09_022",
@@ -4383,8 +4383,8 @@ module.exports = {
       "tags": [
         "memory"
       ],
-      "power": 42,
-      "defense": 32
+      "power": 44,
+      "defense": 34
     },
     {
       "id": "card_s09_023",
@@ -4406,8 +4406,8 @@ module.exports = {
         "memory",
         "plan"
       ],
-      "power": 40,
-      "defense": 30
+      "power": 33,
+      "defense": 23
     },
     {
       "id": "card_s09_024",
@@ -4427,8 +4427,8 @@ module.exports = {
       "tags": [
         "memory"
       ],
-      "power": 41,
-      "defense": 31
+      "power": 42,
+      "defense": 32
     },
     {
       "id": "card_s09_025",
@@ -4448,8 +4448,8 @@ module.exports = {
       "tags": [
         "task"
       ],
-      "power": 41,
-      "defense": 31
+      "power": 31,
+      "defense": 21
     },
     {
       "id": "card_s09_026",
@@ -4490,8 +4490,8 @@ module.exports = {
       "tags": [
         "concept"
       ],
-      "power": 30,
-      "defense": 20
+      "power": 31,
+      "defense": 21
     },
     {
       "id": "card_s09_028",
@@ -4511,8 +4511,8 @@ module.exports = {
       "tags": [
         "concept"
       ],
-      "power": 41,
-      "defense": 31
+      "power": 35,
+      "defense": 25
     },
     {
       "id": "card_s09_029",
@@ -4533,8 +4533,8 @@ module.exports = {
         "memory",
         "error"
       ],
-      "power": 34,
-      "defense": 24
+      "power": 36,
+      "defense": 26
     },
     {
       "id": "card_s09_030",
@@ -4556,8 +4556,8 @@ module.exports = {
         "memory",
         "error"
       ],
-      "power": 41,
-      "defense": 31
+      "power": 36,
+      "defense": 26
     },
     {
       "id": "card_s09_031",
@@ -4578,8 +4578,8 @@ module.exports = {
         "memory",
         "error"
       ],
-      "power": 53,
-      "defense": 43
+      "power": 51,
+      "defense": 41
     },
     {
       "id": "card_s09_032",
@@ -4599,8 +4599,8 @@ module.exports = {
       "tags": [
         "memory"
       ],
-      "power": 44,
-      "defense": 34
+      "power": 36,
+      "defense": 26
     },
     {
       "id": "card_s09_033",
@@ -4620,8 +4620,8 @@ module.exports = {
       "tags": [
         "memory"
       ],
-      "power": 43,
-      "defense": 33
+      "power": 44,
+      "defense": 34
     },
     {
       "id": "card_s09_034",
@@ -4641,8 +4641,8 @@ module.exports = {
       "tags": [
         "concept"
       ],
-      "power": 39,
-      "defense": 29
+      "power": 44,
+      "defense": 34
     },
     {
       "id": "card_s09_035",
@@ -4662,8 +4662,8 @@ module.exports = {
       "tags": [
         "concept"
       ],
-      "power": 35,
-      "defense": 25
+      "power": 34,
+      "defense": 24
     },
     {
       "id": "card_s09_036",
@@ -4683,8 +4683,8 @@ module.exports = {
       "tags": [
         "memory"
       ],
-      "power": 34,
-      "defense": 24
+      "power": 33,
+      "defense": 23
     },
     {
       "id": "card_s09_037",
@@ -4704,8 +4704,8 @@ module.exports = {
       "tags": [
         "memory"
       ],
-      "power": 62,
-      "defense": 52
+      "power": 54,
+      "defense": 44
     },
     {
       "id": "card_s09_038",
@@ -4725,8 +4725,8 @@ module.exports = {
       "tags": [
         "concept"
       ],
-      "power": 42,
-      "defense": 32
+      "power": 38,
+      "defense": 28
     },
     {
       "id": "card_s09_039",
@@ -4746,8 +4746,8 @@ module.exports = {
       "tags": [
         "memory"
       ],
-      "power": 53,
-      "defense": 43
+      "power": 52,
+      "defense": 42
     },
     {
       "id": "card_s10_001",
@@ -4767,8 +4767,8 @@ module.exports = {
       "tags": [
         "concept"
       ],
-      "power": 52,
-      "defense": 42
+      "power": 55,
+      "defense": 45
     },
     {
       "id": "card_s10_002",
@@ -4788,8 +4788,8 @@ module.exports = {
       "tags": [
         "concept"
       ],
-      "power": 30,
-      "defense": 20
+      "power": 36,
+      "defense": 26
     },
     {
       "id": "card_s10_003",
@@ -4809,8 +4809,8 @@ module.exports = {
       "tags": [
         "concept"
       ],
-      "power": 40,
-      "defense": 30
+      "power": 32,
+      "defense": 22
     },
     {
       "id": "card_s10_004",
@@ -4830,8 +4830,8 @@ module.exports = {
       "tags": [
         "prompt"
       ],
-      "power": 40,
-      "defense": 30
+      "power": 32,
+      "defense": 22
     },
     {
       "id": "card_s10_005",
@@ -4851,8 +4851,8 @@ module.exports = {
       "tags": [
         "concept"
       ],
-      "power": 35,
-      "defense": 25
+      "power": 36,
+      "defense": 26
     },
     {
       "id": "card_s10_006",
@@ -4872,8 +4872,8 @@ module.exports = {
       "tags": [
         "concept"
       ],
-      "power": 39,
-      "defense": 29
+      "power": 44,
+      "defense": 34
     },
     {
       "id": "card_s10_007",
@@ -4893,8 +4893,8 @@ module.exports = {
       "tags": [
         "concept"
       ],
-      "power": 52,
-      "defense": 42
+      "power": 61,
+      "defense": 51
     },
     {
       "id": "card_s10_008",
@@ -4914,8 +4914,8 @@ module.exports = {
       "tags": [
         "concept"
       ],
-      "power": 41,
-      "defense": 31
+      "power": 30,
+      "defense": 20
     },
     {
       "id": "card_s10_009",
@@ -4935,8 +4935,8 @@ module.exports = {
       "tags": [
         "concept"
       ],
-      "power": 40,
-      "defense": 30
+      "power": 43,
+      "defense": 33
     },
     {
       "id": "card_s10_010",
@@ -4956,8 +4956,8 @@ module.exports = {
       "tags": [
         "concept"
       ],
-      "power": 40,
-      "defense": 30
+      "power": 35,
+      "defense": 25
     },
     {
       "id": "card_s10_011",
@@ -4998,8 +4998,8 @@ module.exports = {
       "tags": [
         "concept"
       ],
-      "power": 36,
-      "defense": 26
+      "power": 34,
+      "defense": 24
     },
     {
       "id": "card_s10_013",
@@ -5019,8 +5019,8 @@ module.exports = {
       "tags": [
         "concept"
       ],
-      "power": 53,
-      "defense": 43
+      "power": 58,
+      "defense": 48
     },
     {
       "id": "card_s10_014",
@@ -5040,8 +5040,8 @@ module.exports = {
       "tags": [
         "concept"
       ],
-      "power": 41,
-      "defense": 31
+      "power": 38,
+      "defense": 28
     },
     {
       "id": "card_s10_015",
@@ -5061,8 +5061,8 @@ module.exports = {
       "tags": [
         "concept"
       ],
-      "power": 35,
-      "defense": 25
+      "power": 33,
+      "defense": 23
     },
     {
       "id": "card_s10_016",
@@ -5082,8 +5082,8 @@ module.exports = {
       "tags": [
         "concept"
       ],
-      "power": 31,
-      "defense": 21
+      "power": 30,
+      "defense": 20
     },
     {
       "id": "card_s10_017",
@@ -5103,8 +5103,8 @@ module.exports = {
       "tags": [
         "prompt"
       ],
-      "power": 38,
-      "defense": 28
+      "power": 33,
+      "defense": 23
     },
     {
       "id": "card_s10_018",
@@ -5124,8 +5124,8 @@ module.exports = {
       "tags": [
         "concept"
       ],
-      "power": 74,
-      "defense": 64
+      "power": 84,
+      "defense": 74
     },
     {
       "id": "card_s10_019",
@@ -5145,8 +5145,8 @@ module.exports = {
       "tags": [
         "concept"
       ],
-      "power": 36,
-      "defense": 26
+      "power": 32,
+      "defense": 22
     },
     {
       "id": "card_s10_020",
@@ -5167,8 +5167,8 @@ module.exports = {
         "prompt",
         "memory"
       ],
-      "power": 59,
-      "defense": 49
+      "power": 62,
+      "defense": 52
     },
     {
       "id": "card_s10_021",
@@ -5188,8 +5188,8 @@ module.exports = {
       "tags": [
         "concept"
       ],
-      "power": 32,
-      "defense": 22
+      "power": 36,
+      "defense": 26
     },
     {
       "id": "card_s10_022",
@@ -5209,8 +5209,8 @@ module.exports = {
       "tags": [
         "prompt"
       ],
-      "power": 36,
-      "defense": 26
+      "power": 33,
+      "defense": 23
     },
     {
       "id": "card_s10_023",
@@ -5230,8 +5230,8 @@ module.exports = {
       "tags": [
         "prompt"
       ],
-      "power": 35,
-      "defense": 25
+      "power": 32,
+      "defense": 22
     },
     {
       "id": "card_s10_024",
@@ -5251,8 +5251,8 @@ module.exports = {
       "tags": [
         "memory"
       ],
-      "power": 44,
-      "defense": 34
+      "power": 33,
+      "defense": 23
     },
     {
       "id": "card_s10_025",
@@ -5272,8 +5272,8 @@ module.exports = {
       "tags": [
         "prompt"
       ],
-      "power": 43,
-      "defense": 33
+      "power": 35,
+      "defense": 25
     },
     {
       "id": "card_s10_026",
@@ -5293,8 +5293,8 @@ module.exports = {
       "tags": [
         "concept"
       ],
-      "power": 38,
-      "defense": 28
+      "power": 40,
+      "defense": 30
     },
     {
       "id": "card_s10_027",
@@ -5314,8 +5314,8 @@ module.exports = {
       "tags": [
         "prompt"
       ],
-      "power": 63,
-      "defense": 53
+      "power": 51,
+      "defense": 41
     },
     {
       "id": "card_s11_001",
@@ -5335,8 +5335,8 @@ module.exports = {
       "tags": [
         "error"
       ],
-      "power": 55,
-      "defense": 45
+      "power": 58,
+      "defense": 48
     },
     {
       "id": "card_s11_002",
@@ -5377,8 +5377,8 @@ module.exports = {
       "tags": [
         "concept"
       ],
-      "power": 42,
-      "defense": 32
+      "power": 37,
+      "defense": 27
     },
     {
       "id": "card_s11_004",
@@ -5398,8 +5398,8 @@ module.exports = {
       "tags": [
         "error"
       ],
-      "power": 35,
-      "defense": 25
+      "power": 40,
+      "defense": 30
     },
     {
       "id": "card_s11_005",
@@ -5419,8 +5419,8 @@ module.exports = {
       "tags": [
         "concept"
       ],
-      "power": 30,
-      "defense": 20
+      "power": 36,
+      "defense": 26
     },
     {
       "id": "card_s11_006",
@@ -5440,8 +5440,8 @@ module.exports = {
       "tags": [
         "concept"
       ],
-      "power": 43,
-      "defense": 33
+      "power": 30,
+      "defense": 20
     },
     {
       "id": "card_s11_007",
@@ -5461,8 +5461,8 @@ module.exports = {
       "tags": [
         "concept"
       ],
-      "power": 63,
-      "defense": 53
+      "power": 53,
+      "defense": 43
     },
     {
       "id": "card_s11_008",
@@ -5482,8 +5482,8 @@ module.exports = {
       "tags": [
         "concept"
       ],
-      "power": 31,
-      "defense": 21
+      "power": 36,
+      "defense": 26
     },
     {
       "id": "card_s11_009",
@@ -5503,8 +5503,8 @@ module.exports = {
       "tags": [
         "error"
       ],
-      "power": 53,
-      "defense": 43
+      "power": 62,
+      "defense": 52
     },
     {
       "id": "card_s11_010",
@@ -5524,8 +5524,8 @@ module.exports = {
       "tags": [
         "error"
       ],
-      "power": 63,
-      "defense": 53
+      "power": 60,
+      "defense": 50
     },
     {
       "id": "card_s11_011",
@@ -5545,8 +5545,8 @@ module.exports = {
       "tags": [
         "prompt"
       ],
-      "power": 62,
-      "defense": 52
+      "power": 56,
+      "defense": 46
     },
     {
       "id": "card_s11_012",
@@ -5566,8 +5566,8 @@ module.exports = {
       "tags": [
         "concept"
       ],
-      "power": 79,
-      "defense": 69
+      "power": 77,
+      "defense": 67
     },
     {
       "id": "card_s11_013",
@@ -5587,8 +5587,8 @@ module.exports = {
       "tags": [
         "error"
       ],
-      "power": 33,
-      "defense": 23
+      "power": 40,
+      "defense": 30
     },
     {
       "id": "card_s11_014",
@@ -5608,8 +5608,8 @@ module.exports = {
       "tags": [
         "concept"
       ],
-      "power": 53,
-      "defense": 43
+      "power": 51,
+      "defense": 41
     },
     {
       "id": "card_s11_015",
@@ -5629,8 +5629,8 @@ module.exports = {
       "tags": [
         "context"
       ],
-      "power": 71,
-      "defense": 61
+      "power": 72,
+      "defense": 62
     },
     {
       "id": "card_s11_016",
@@ -5650,8 +5650,8 @@ module.exports = {
       "tags": [
         "concept"
       ],
-      "power": 52,
-      "defense": 42
+      "power": 56,
+      "defense": 46
     },
     {
       "id": "card_s11_017",
@@ -5713,8 +5713,8 @@ module.exports = {
       "tags": [
         "concept"
       ],
-      "power": 53,
-      "defense": 43
+      "power": 55,
+      "defense": 45
     },
     {
       "id": "card_s11_020",
@@ -5755,8 +5755,8 @@ module.exports = {
       "tags": [
         "error"
       ],
-      "power": 36,
-      "defense": 26
+      "power": 42,
+      "defense": 32
     },
     {
       "id": "card_s11_022",
@@ -5776,8 +5776,8 @@ module.exports = {
       "tags": [
         "concept"
       ],
-      "power": 39,
-      "defense": 29
+      "power": 30,
+      "defense": 20
     },
     {
       "id": "card_s11_023",
@@ -5797,8 +5797,8 @@ module.exports = {
       "tags": [
         "prompt"
       ],
-      "power": 33,
-      "defense": 23
+      "power": 31,
+      "defense": 21
     },
     {
       "id": "card_s11_024",
@@ -5818,8 +5818,8 @@ module.exports = {
       "tags": [
         "concept"
       ],
-      "power": 37,
-      "defense": 27
+      "power": 30,
+      "defense": 20
     },
     {
       "id": "card_s11_025",
@@ -5839,8 +5839,8 @@ module.exports = {
       "tags": [
         "error"
       ],
-      "power": 31,
-      "defense": 21
+      "power": 33,
+      "defense": 23
     },
     {
       "id": "card_s11_026",
@@ -5881,8 +5881,8 @@ module.exports = {
       "tags": [
         "task"
       ],
-      "power": 82,
-      "defense": 72
+      "power": 84,
+      "defense": 74
     },
     {
       "id": "card_s12_002",
@@ -5902,8 +5902,8 @@ module.exports = {
       "tags": [
         "concept"
       ],
-      "power": 32,
-      "defense": 22
+      "power": 33,
+      "defense": 23
     },
     {
       "id": "card_s12_003",
@@ -5923,8 +5923,8 @@ module.exports = {
       "tags": [
         "concept"
       ],
-      "power": 34,
-      "defense": 24
+      "power": 43,
+      "defense": 33
     },
     {
       "id": "card_s12_004",
@@ -5944,8 +5944,8 @@ module.exports = {
       "tags": [
         "task"
       ],
-      "power": 44,
-      "defense": 34
+      "power": 41,
+      "defense": 31
     },
     {
       "id": "card_s12_005",
@@ -5965,8 +5965,8 @@ module.exports = {
       "tags": [
         "concept"
       ],
-      "power": 39,
-      "defense": 29
+      "power": 32,
+      "defense": 22
     },
     {
       "id": "card_s12_006",
@@ -5986,8 +5986,8 @@ module.exports = {
       "tags": [
         "task"
       ],
-      "power": 31,
-      "defense": 21
+      "power": 37,
+      "defense": 27
     },
     {
       "id": "card_s12_007",
@@ -6007,8 +6007,8 @@ module.exports = {
       "tags": [
         "concept"
       ],
-      "power": 31,
-      "defense": 21
+      "power": 44,
+      "defense": 34
     },
     {
       "id": "card_s12_008",
@@ -6028,8 +6028,8 @@ module.exports = {
       "tags": [
         "concept"
       ],
-      "power": 32,
-      "defense": 22
+      "power": 35,
+      "defense": 25
     },
     {
       "id": "card_s12_009",
@@ -6049,8 +6049,8 @@ module.exports = {
       "tags": [
         "concept"
       ],
-      "power": 37,
-      "defense": 27
+      "power": 44,
+      "defense": 34
     },
     {
       "id": "card_s12_010",
@@ -6070,8 +6070,8 @@ module.exports = {
       "tags": [
         "task"
       ],
-      "power": 61,
-      "defense": 51
+      "power": 59,
+      "defense": 49
     },
     {
       "id": "card_s12_011",
@@ -6091,8 +6091,8 @@ module.exports = {
       "tags": [
         "task"
       ],
-      "power": 55,
-      "defense": 45
+      "power": 59,
+      "defense": 49
     },
     {
       "id": "card_s12_012",
@@ -6112,8 +6112,8 @@ module.exports = {
       "tags": [
         "task"
       ],
-      "power": 76,
-      "defense": 66
+      "power": 77,
+      "defense": 67
     },
     {
       "id": "card_s12_013",
@@ -6133,8 +6133,8 @@ module.exports = {
       "tags": [
         "concept"
       ],
-      "power": 44,
-      "defense": 34
+      "power": 41,
+      "defense": 31
     },
     {
       "id": "card_s12_014",
@@ -6154,8 +6154,8 @@ module.exports = {
       "tags": [
         "task"
       ],
-      "power": 51,
-      "defense": 41
+      "power": 55,
+      "defense": 45
     },
     {
       "id": "card_s12_015",
@@ -6175,8 +6175,8 @@ module.exports = {
       "tags": [
         "concept"
       ],
-      "power": 63,
-      "defense": 53
+      "power": 58,
+      "defense": 48
     },
     {
       "id": "card_s12_016",
@@ -6196,8 +6196,8 @@ module.exports = {
       "tags": [
         "task"
       ],
-      "power": 70,
-      "defense": 60
+      "power": 80,
+      "defense": 70
     },
     {
       "id": "card_s12_017",
@@ -6218,8 +6218,8 @@ module.exports = {
         "tool",
         "task"
       ],
-      "power": 41,
-      "defense": 31
+      "power": 33,
+      "defense": 23
     },
     {
       "id": "card_s12_018",
@@ -6240,8 +6240,8 @@ module.exports = {
         "loop",
         "task"
       ],
-      "power": 78,
-      "defense": 68
+      "power": 81,
+      "defense": 71
     },
     {
       "id": "card_s12_019",
@@ -6261,8 +6261,8 @@ module.exports = {
       "tags": [
         "concept"
       ],
-      "power": 40,
-      "defense": 30
+      "power": 42,
+      "defense": 32
     },
     {
       "id": "card_s12_020",
@@ -6282,8 +6282,8 @@ module.exports = {
       "tags": [
         "concept"
       ],
-      "power": 32,
-      "defense": 22
+      "power": 30,
+      "defense": 20
     },
     {
       "id": "card_s12_021",
@@ -6303,8 +6303,8 @@ module.exports = {
       "tags": [
         "concept"
       ],
-      "power": 40,
-      "defense": 30
+      "power": 41,
+      "defense": 31
     },
     {
       "id": "card_s12_022",
@@ -6324,8 +6324,8 @@ module.exports = {
       "tags": [
         "concept"
       ],
-      "power": 37,
-      "defense": 27
+      "power": 40,
+      "defense": 30
     },
     {
       "id": "card_s12_023",
@@ -6345,8 +6345,8 @@ module.exports = {
       "tags": [
         "task"
       ],
-      "power": 42,
-      "defense": 32
+      "power": 44,
+      "defense": 34
     },
     {
       "id": "card_s12_024",
@@ -6387,8 +6387,8 @@ module.exports = {
       "tags": [
         "task"
       ],
-      "power": 41,
-      "defense": 31
+      "power": 40,
+      "defense": 30
     },
     {
       "id": "card_s12_026",
@@ -6408,8 +6408,8 @@ module.exports = {
       "tags": [
         "concept"
       ],
-      "power": 37,
-      "defense": 27
+      "power": 33,
+      "defense": 23
     },
     {
       "id": "card_s12_027",
@@ -6429,8 +6429,8 @@ module.exports = {
       "tags": [
         "concept"
       ],
-      "power": 37,
-      "defense": 27
+      "power": 43,
+      "defense": 33
     },
     {
       "id": "card_s12_028",
@@ -6450,8 +6450,8 @@ module.exports = {
       "tags": [
         "concept"
       ],
-      "power": 42,
-      "defense": 32
+      "power": 30,
+      "defense": 20
     },
     {
       "id": "card_s13_001",
@@ -6471,8 +6471,8 @@ module.exports = {
       "tags": [
         "loop"
       ],
-      "power": 70,
-      "defense": 60
+      "power": 75,
+      "defense": 65
     },
     {
       "id": "card_s13_002",
@@ -6492,8 +6492,8 @@ module.exports = {
       "tags": [
         "concept"
       ],
-      "power": 33,
-      "defense": 23
+      "power": 43,
+      "defense": 33
     },
     {
       "id": "card_s13_003",
@@ -6513,8 +6513,8 @@ module.exports = {
       "tags": [
         "concept"
       ],
-      "power": 43,
-      "defense": 33
+      "power": 37,
+      "defense": 27
     },
     {
       "id": "card_s13_004",
@@ -6534,8 +6534,8 @@ module.exports = {
       "tags": [
         "concept"
       ],
-      "power": 32,
-      "defense": 22
+      "power": 37,
+      "defense": 27
     },
     {
       "id": "card_s13_005",
@@ -6555,8 +6555,8 @@ module.exports = {
       "tags": [
         "concept"
       ],
-      "power": 39,
-      "defense": 29
+      "power": 41,
+      "defense": 31
     },
     {
       "id": "card_s13_006",
@@ -6576,8 +6576,8 @@ module.exports = {
       "tags": [
         "concept"
       ],
-      "power": 39,
-      "defense": 29
+      "power": 34,
+      "defense": 24
     },
     {
       "id": "card_s13_007",
@@ -6597,8 +6597,8 @@ module.exports = {
       "tags": [
         "loop"
       ],
-      "power": 78,
-      "defense": 68
+      "power": 80,
+      "defense": 70
     },
     {
       "id": "card_s13_008",
@@ -6618,8 +6618,8 @@ module.exports = {
       "tags": [
         "concept"
       ],
-      "power": 35,
-      "defense": 25
+      "power": 37,
+      "defense": 27
     },
     {
       "id": "card_s13_009",
@@ -6660,8 +6660,8 @@ module.exports = {
       "tags": [
         "concept"
       ],
-      "power": 55,
-      "defense": 45
+      "power": 59,
+      "defense": 49
     },
     {
       "id": "card_s13_011",
@@ -6681,8 +6681,8 @@ module.exports = {
       "tags": [
         "concept"
       ],
-      "power": 31,
-      "defense": 21
+      "power": 44,
+      "defense": 34
     },
     {
       "id": "card_s13_012",
@@ -6702,8 +6702,8 @@ module.exports = {
       "tags": [
         "task"
       ],
-      "power": 57,
-      "defense": 47
+      "power": 56,
+      "defense": 46
     },
     {
       "id": "card_s13_013",
@@ -6724,8 +6724,8 @@ module.exports = {
         "loop",
         "task"
       ],
-      "power": 72,
-      "defense": 62
+      "power": 71,
+      "defense": 61
     },
     {
       "id": "card_s13_014",
@@ -6745,8 +6745,8 @@ module.exports = {
       "tags": [
         "loop"
       ],
-      "power": 76,
-      "defense": 66
+      "power": 82,
+      "defense": 72
     },
     {
       "id": "card_s13_015",
@@ -6766,8 +6766,8 @@ module.exports = {
       "tags": [
         "concept"
       ],
-      "power": 55,
-      "defense": 45
+      "power": 63,
+      "defense": 53
     },
     {
       "id": "card_s13_016",
@@ -6787,8 +6787,8 @@ module.exports = {
       "tags": [
         "prompt"
       ],
-      "power": 51,
-      "defense": 41
+      "power": 64,
+      "defense": 54
     },
     {
       "id": "card_s13_017",
@@ -6808,8 +6808,8 @@ module.exports = {
       "tags": [
         "loop"
       ],
-      "power": 51,
-      "defense": 41
+      "power": 63,
+      "defense": 53
     },
     {
       "id": "card_s13_018",
@@ -6829,8 +6829,8 @@ module.exports = {
       "tags": [
         "task"
       ],
-      "power": 32,
-      "defense": 22
+      "power": 40,
+      "defense": 30
     },
     {
       "id": "card_s13_019",
@@ -6850,8 +6850,8 @@ module.exports = {
       "tags": [
         "task"
       ],
-      "power": 33,
-      "defense": 23
+      "power": 41,
+      "defense": 31
     },
     {
       "id": "card_s13_020",
@@ -6871,8 +6871,8 @@ module.exports = {
       "tags": [
         "task"
       ],
-      "power": 33,
-      "defense": 23
+      "power": 35,
+      "defense": 25
     },
     {
       "id": "card_s13_021",
@@ -6892,8 +6892,8 @@ module.exports = {
       "tags": [
         "concept"
       ],
-      "power": 32,
-      "defense": 22
+      "power": 35,
+      "defense": 25
     },
     {
       "id": "card_s13_022",
@@ -6913,8 +6913,8 @@ module.exports = {
       "tags": [
         "loop"
       ],
-      "power": 37,
-      "defense": 27
+      "power": 38,
+      "defense": 28
     },
     {
       "id": "card_s13_023",
@@ -6934,8 +6934,8 @@ module.exports = {
       "tags": [
         "concept"
       ],
-      "power": 30,
-      "defense": 20
+      "power": 35,
+      "defense": 25
     },
     {
       "id": "card_s13_024",
@@ -6955,8 +6955,8 @@ module.exports = {
       "tags": [
         "context"
       ],
-      "power": 30,
-      "defense": 20
+      "power": 43,
+      "defense": 33
     },
     {
       "id": "card_s13_025",
@@ -6976,8 +6976,8 @@ module.exports = {
       "tags": [
         "task"
       ],
-      "power": 35,
-      "defense": 25
+      "power": 39,
+      "defense": 29
     },
     {
       "id": "card_s13_026",
@@ -6997,8 +6997,8 @@ module.exports = {
       "tags": [
         "concept"
       ],
-      "power": 44,
-      "defense": 34
+      "power": 38,
+      "defense": 28
     },
     {
       "id": "card_s13_027",
@@ -7018,8 +7018,8 @@ module.exports = {
       "tags": [
         "concept"
       ],
-      "power": 39,
-      "defense": 29
+      "power": 30,
+      "defense": 20
     },
     {
       "id": "card_s14_001",
@@ -7039,8 +7039,8 @@ module.exports = {
       "tags": [
         "concept"
       ],
-      "power": 59,
-      "defense": 49
+      "power": 52,
+      "defense": 42
     },
     {
       "id": "card_s14_002",
@@ -7060,8 +7060,8 @@ module.exports = {
       "tags": [
         "concept"
       ],
-      "power": 33,
-      "defense": 23
+      "power": 30,
+      "defense": 20
     },
     {
       "id": "card_s14_003",
@@ -7081,8 +7081,8 @@ module.exports = {
       "tags": [
         "concept"
       ],
-      "power": 36,
-      "defense": 26
+      "power": 37,
+      "defense": 27
     },
     {
       "id": "card_s14_004",
@@ -7102,8 +7102,8 @@ module.exports = {
       "tags": [
         "concept"
       ],
-      "power": 37,
-      "defense": 27
+      "power": 38,
+      "defense": 28
     },
     {
       "id": "card_s14_005",
@@ -7123,8 +7123,8 @@ module.exports = {
       "tags": [
         "concept"
       ],
-      "power": 63,
-      "defense": 53
+      "power": 59,
+      "defense": 49
     },
     {
       "id": "card_s14_006",
@@ -7144,8 +7144,8 @@ module.exports = {
       "tags": [
         "concept"
       ],
-      "power": 30,
-      "defense": 20
+      "power": 36,
+      "defense": 26
     },
     {
       "id": "card_s14_007",
@@ -7187,8 +7187,8 @@ module.exports = {
       "tags": [
         "concept"
       ],
-      "power": 43,
-      "defense": 33
+      "power": 41,
+      "defense": 31
     },
     {
       "id": "card_s14_009",
@@ -7208,8 +7208,8 @@ module.exports = {
       "tags": [
         "concept"
       ],
-      "power": 62,
-      "defense": 52
+      "power": 58,
+      "defense": 48
     },
     {
       "id": "card_s14_010",
@@ -7229,8 +7229,8 @@ module.exports = {
       "tags": [
         "concept"
       ],
-      "power": 59,
-      "defense": 49
+      "power": 64,
+      "defense": 54
     },
     {
       "id": "card_s14_011",
@@ -7250,8 +7250,8 @@ module.exports = {
       "tags": [
         "concept"
       ],
-      "power": 43,
-      "defense": 33
+      "power": 44,
+      "defense": 34
     },
     {
       "id": "card_s14_012",
@@ -7271,8 +7271,8 @@ module.exports = {
       "tags": [
         "concept"
       ],
-      "power": 40,
-      "defense": 30
+      "power": 41,
+      "defense": 31
     },
     {
       "id": "card_s14_013",
@@ -7292,8 +7292,8 @@ module.exports = {
       "tags": [
         "concept"
       ],
-      "power": 62,
-      "defense": 52
+      "power": 52,
+      "defense": 42
     },
     {
       "id": "card_s14_014",
@@ -7313,8 +7313,8 @@ module.exports = {
       "tags": [
         "loop"
       ],
-      "power": 63,
-      "defense": 53
+      "power": 64,
+      "defense": 54
     },
     {
       "id": "card_s14_015",
@@ -7334,8 +7334,8 @@ module.exports = {
       "tags": [
         "concept"
       ],
-      "power": 58,
-      "defense": 48
+      "power": 64,
+      "defense": 54
     },
     {
       "id": "card_s14_016",
@@ -7355,8 +7355,8 @@ module.exports = {
       "tags": [
         "loop"
       ],
-      "power": 60,
-      "defense": 50
+      "power": 62,
+      "defense": 52
     },
     {
       "id": "card_s14_017",
@@ -7376,8 +7376,8 @@ module.exports = {
       "tags": [
         "task"
       ],
-      "power": 33,
-      "defense": 23
+      "power": 30,
+      "defense": 20
     },
     {
       "id": "card_s14_018",
@@ -7397,8 +7397,8 @@ module.exports = {
       "tags": [
         "concept"
       ],
-      "power": 40,
-      "defense": 30
+      "power": 31,
+      "defense": 21
     },
     {
       "id": "card_s14_019",
@@ -7418,8 +7418,8 @@ module.exports = {
       "tags": [
         "loop"
       ],
-      "power": 53,
-      "defense": 43
+      "power": 58,
+      "defense": 48
     },
     {
       "id": "card_s14_020",
@@ -7439,8 +7439,8 @@ module.exports = {
       "tags": [
         "concept"
       ],
-      "power": 38,
-      "defense": 28
+      "power": 32,
+      "defense": 22
     },
     {
       "id": "card_s14_021",
@@ -7460,8 +7460,8 @@ module.exports = {
       "tags": [
         "concept"
       ],
-      "power": 38,
-      "defense": 28
+      "power": 34,
+      "defense": 24
     },
     {
       "id": "card_s14_022",
@@ -7481,8 +7481,8 @@ module.exports = {
       "tags": [
         "concept"
       ],
-      "power": 42,
-      "defense": 32
+      "power": 34,
+      "defense": 24
     },
     {
       "id": "card_s14_023",
@@ -7502,8 +7502,8 @@ module.exports = {
       "tags": [
         "task"
       ],
-      "power": 38,
-      "defense": 28
+      "power": 43,
+      "defense": 33
     },
     {
       "id": "card_s14_024",
@@ -7523,8 +7523,8 @@ module.exports = {
       "tags": [
         "concept"
       ],
-      "power": 54,
-      "defense": 44
+      "power": 52,
+      "defense": 42
     },
     {
       "id": "card_s15_001",
@@ -7544,8 +7544,8 @@ module.exports = {
       "tags": [
         "concept"
       ],
-      "power": 80,
-      "defense": 70
+      "power": 75,
+      "defense": 65
     },
     {
       "id": "card_s15_002",
@@ -7565,8 +7565,8 @@ module.exports = {
       "tags": [
         "concept"
       ],
-      "power": 31,
-      "defense": 21
+      "power": 44,
+      "defense": 34
     },
     {
       "id": "card_s15_003",
@@ -7586,8 +7586,8 @@ module.exports = {
       "tags": [
         "concept"
       ],
-      "power": 37,
-      "defense": 27
+      "power": 34,
+      "defense": 24
     },
     {
       "id": "card_s15_004",
@@ -7607,8 +7607,8 @@ module.exports = {
       "tags": [
         "concept"
       ],
-      "power": 31,
-      "defense": 21
+      "power": 42,
+      "defense": 32
     },
     {
       "id": "card_s15_005",
@@ -7628,8 +7628,8 @@ module.exports = {
       "tags": [
         "concept"
       ],
-      "power": 41,
-      "defense": 31
+      "power": 36,
+      "defense": 26
     },
     {
       "id": "card_s15_006",
@@ -7649,8 +7649,8 @@ module.exports = {
       "tags": [
         "concept"
       ],
-      "power": 33,
-      "defense": 23
+      "power": 35,
+      "defense": 25
     },
     {
       "id": "card_s15_007",
@@ -7670,8 +7670,8 @@ module.exports = {
       "tags": [
         "agent"
       ],
-      "power": 81,
-      "defense": 71
+      "power": 74,
+      "defense": 64
     },
     {
       "id": "card_s15_008",
@@ -7691,8 +7691,8 @@ module.exports = {
       "tags": [
         "concept"
       ],
-      "power": 41,
-      "defense": 31
+      "power": 42,
+      "defense": 32
     },
     {
       "id": "card_s15_009",
@@ -7712,8 +7712,8 @@ module.exports = {
       "tags": [
         "concept"
       ],
-      "power": 62,
-      "defense": 52
+      "power": 63,
+      "defense": 53
     },
     {
       "id": "card_s15_010",
@@ -7733,8 +7733,8 @@ module.exports = {
       "tags": [
         "concept"
       ],
-      "power": 60,
-      "defense": 50
+      "power": 63,
+      "defense": 53
     },
     {
       "id": "card_s15_011",
@@ -7754,8 +7754,8 @@ module.exports = {
       "tags": [
         "concept"
       ],
-      "power": 62,
-      "defense": 52
+      "power": 53,
+      "defense": 43
     },
     {
       "id": "card_s15_012",
@@ -7775,8 +7775,8 @@ module.exports = {
       "tags": [
         "concept"
       ],
-      "power": 38,
-      "defense": 28
+      "power": 34,
+      "defense": 24
     },
     {
       "id": "card_s15_013",
@@ -7796,8 +7796,8 @@ module.exports = {
       "tags": [
         "concept"
       ],
-      "power": 53,
-      "defense": 43
+      "power": 61,
+      "defense": 51
     },
     {
       "id": "card_s15_014",
@@ -7817,8 +7817,8 @@ module.exports = {
       "tags": [
         "tool"
       ],
-      "power": 77,
-      "defense": 67
+      "power": 73,
+      "defense": 63
     },
     {
       "id": "card_s15_015",
@@ -7838,8 +7838,8 @@ module.exports = {
       "tags": [
         "concept"
       ],
-      "power": 51,
-      "defense": 41
+      "power": 50,
+      "defense": 40
     },
     {
       "id": "card_s15_016",
@@ -7859,8 +7859,8 @@ module.exports = {
       "tags": [
         "task"
       ],
-      "power": 84,
-      "defense": 74
+      "power": 82,
+      "defense": 72
     },
     {
       "id": "card_s15_017",
@@ -7880,8 +7880,8 @@ module.exports = {
       "tags": [
         "concept"
       ],
-      "power": 52,
-      "defense": 42
+      "power": 58,
+      "defense": 48
     },
     {
       "id": "card_s15_018",
@@ -7902,8 +7902,8 @@ module.exports = {
         "agent",
         "task"
       ],
-      "power": 38,
-      "defense": 28
+      "power": 39,
+      "defense": 29
     },
     {
       "id": "card_s15_019",
@@ -7923,8 +7923,8 @@ module.exports = {
       "tags": [
         "mcp"
       ],
-      "power": 35,
-      "defense": 25
+      "power": 40,
+      "defense": 30
     },
     {
       "id": "card_s15_020",
@@ -7944,8 +7944,8 @@ module.exports = {
       "tags": [
         "concept"
       ],
-      "power": 39,
-      "defense": 29
+      "power": 30,
+      "defense": 20
     },
     {
       "id": "card_s15_021",
@@ -7965,8 +7965,8 @@ module.exports = {
       "tags": [
         "concept"
       ],
-      "power": 30,
-      "defense": 20
+      "power": 35,
+      "defense": 25
     },
     {
       "id": "card_s15_022",
@@ -8007,8 +8007,8 @@ module.exports = {
       "tags": [
         "concept"
       ],
-      "power": 33,
-      "defense": 23
+      "power": 38,
+      "defense": 28
     },
     {
       "id": "card_s15_024",
@@ -8028,8 +8028,8 @@ module.exports = {
       "tags": [
         "concept"
       ],
-      "power": 37,
-      "defense": 27
+      "power": 35,
+      "defense": 25
     },
     {
       "id": "card_s15_025",
@@ -8049,8 +8049,8 @@ module.exports = {
       "tags": [
         "concept"
       ],
-      "power": 39,
-      "defense": 29
+      "power": 41,
+      "defense": 31
     },
     {
       "id": "card_s15_026",
@@ -8070,8 +8070,8 @@ module.exports = {
       "tags": [
         "concept"
       ],
-      "power": 36,
-      "defense": 26
+      "power": 31,
+      "defense": 21
     },
     {
       "id": "card_s15_027",
@@ -8091,8 +8091,8 @@ module.exports = {
       "tags": [
         "concept"
       ],
-      "power": 35,
-      "defense": 25
+      "power": 31,
+      "defense": 21
     },
     {
       "id": "card_s16_001",
@@ -8112,8 +8112,8 @@ module.exports = {
       "tags": [
         "mcp"
       ],
-      "power": 87,
-      "defense": 77
+      "power": 94,
+      "defense": 84
     },
     {
       "id": "card_s16_002",
@@ -8133,8 +8133,8 @@ module.exports = {
       "tags": [
         "concept"
       ],
-      "power": 64,
-      "defense": 54
+      "power": 57,
+      "defense": 47
     },
     {
       "id": "card_s16_003",
@@ -8154,8 +8154,8 @@ module.exports = {
       "tags": [
         "concept"
       ],
-      "power": 64,
-      "defense": 54
+      "power": 56,
+      "defense": 46
     },
     {
       "id": "card_s16_004",
@@ -8175,8 +8175,8 @@ module.exports = {
       "tags": [
         "mcp"
       ],
-      "power": 59,
-      "defense": 49
+      "power": 62,
+      "defense": 52
     },
     {
       "id": "card_s16_005",
@@ -8196,8 +8196,8 @@ module.exports = {
       "tags": [
         "concept"
       ],
-      "power": 52,
-      "defense": 42
+      "power": 62,
+      "defense": 52
     },
     {
       "id": "card_s16_006",
@@ -8217,8 +8217,8 @@ module.exports = {
       "tags": [
         "concept"
       ],
-      "power": 77,
-      "defense": 67
+      "power": 70,
+      "defense": 60
     },
     {
       "id": "card_s16_007",
@@ -8238,8 +8238,8 @@ module.exports = {
       "tags": [
         "concept"
       ],
-      "power": 70,
-      "defense": 60
+      "power": 76,
+      "defense": 66
     },
     {
       "id": "card_s16_008",
@@ -8259,8 +8259,8 @@ module.exports = {
       "tags": [
         "mcp"
       ],
-      "power": 74,
-      "defense": 64
+      "power": 79,
+      "defense": 69
     },
     {
       "id": "card_s16_009",
@@ -8280,8 +8280,8 @@ module.exports = {
       "tags": [
         "concept"
       ],
-      "power": 74,
-      "defense": 64
+      "power": 71,
+      "defense": 61
     },
     {
       "id": "card_s16_010",
@@ -8301,8 +8301,8 @@ module.exports = {
       "tags": [
         "concept"
       ],
-      "power": 52,
-      "defense": 42
+      "power": 56,
+      "defense": 46
     },
     {
       "id": "card_s16_011",
@@ -8343,8 +8343,8 @@ module.exports = {
       "tags": [
         "concept"
       ],
-      "power": 70,
-      "defense": 60
+      "power": 77,
+      "defense": 67
     },
     {
       "id": "card_s16_013",
@@ -8364,8 +8364,8 @@ module.exports = {
       "tags": [
         "concept"
       ],
-      "power": 72,
-      "defense": 62
+      "power": 73,
+      "defense": 63
     },
     {
       "id": "card_s16_014",
@@ -8385,8 +8385,8 @@ module.exports = {
       "tags": [
         "concept"
       ],
-      "power": 63,
-      "defense": 53
+      "power": 56,
+      "defense": 46
     },
     {
       "id": "card_s16_015",
@@ -8406,8 +8406,8 @@ module.exports = {
       "tags": [
         "mcp"
       ],
-      "power": 70,
-      "defense": 60
+      "power": 78,
+      "defense": 68
     },
     {
       "id": "card_s16_016",
@@ -8427,8 +8427,8 @@ module.exports = {
       "tags": [
         "mcp"
       ],
-      "power": 97,
-      "defense": 87
+      "power": 92,
+      "defense": 82
     },
     {
       "id": "card_s16_017",
@@ -8448,8 +8448,8 @@ module.exports = {
       "tags": [
         "mcp"
       ],
-      "power": 51,
-      "defense": 41
+      "power": 59,
+      "defense": 49
     },
     {
       "id": "card_s16_018",
@@ -8469,8 +8469,8 @@ module.exports = {
       "tags": [
         "concept"
       ],
-      "power": 64,
-      "defense": 54
+      "power": 61,
+      "defense": 51
     },
     {
       "id": "card_s16_019",
@@ -8490,8 +8490,8 @@ module.exports = {
       "tags": [
         "mcp"
       ],
-      "power": 50,
-      "defense": 40
+      "power": 63,
+      "defense": 53
     },
     {
       "id": "card_s16_020",
@@ -8511,8 +8511,8 @@ module.exports = {
       "tags": [
         "concept"
       ],
-      "power": 83,
-      "defense": 73
+      "power": 72,
+      "defense": 62
     },
     {
       "id": "card_s16_021",
@@ -8533,8 +8533,8 @@ module.exports = {
         "mcp",
         "task"
       ],
-      "power": 53,
-      "defense": 43
+      "power": 62,
+      "defense": 52
     },
     {
       "id": "card_s16_022",
@@ -8554,8 +8554,8 @@ module.exports = {
       "tags": [
         "concept"
       ],
-      "power": 53,
-      "defense": 43
+      "power": 56,
+      "defense": 46
     },
     {
       "id": "card_s16_023",
@@ -8575,8 +8575,8 @@ module.exports = {
       "tags": [
         "concept"
       ],
-      "power": 39,
-      "defense": 29
+      "power": 41,
+      "defense": 31
     },
     {
       "id": "card_s16_024",
@@ -8596,8 +8596,8 @@ module.exports = {
       "tags": [
         "concept"
       ],
-      "power": 83,
-      "defense": 73
+      "power": 73,
+      "defense": 63
     },
     {
       "id": "card_s16_025",
@@ -8617,8 +8617,8 @@ module.exports = {
       "tags": [
         "concept"
       ],
-      "power": 44,
-      "defense": 34
+      "power": 31,
+      "defense": 21
     },
     {
       "id": "card_s16_026",
@@ -8638,8 +8638,8 @@ module.exports = {
       "tags": [
         "mcp"
       ],
-      "power": 37,
-      "defense": 27
+      "power": 30,
+      "defense": 20
     },
     {
       "id": "card_s16_027",
@@ -8659,8 +8659,8 @@ module.exports = {
       "tags": [
         "concept"
       ],
-      "power": 34,
-      "defense": 24
+      "power": 35,
+      "defense": 25
     },
     {
       "id": "card_s16_028",
@@ -8680,8 +8680,8 @@ module.exports = {
       "tags": [
         "concept"
       ],
-      "power": 33,
-      "defense": 23
+      "power": 42,
+      "defense": 32
     },
     {
       "id": "card_s17_001",
@@ -8701,8 +8701,8 @@ module.exports = {
       "tags": [
         "task"
       ],
-      "power": 73,
-      "defense": 63
+      "power": 79,
+      "defense": 69
     },
     {
       "id": "card_s17_002",
@@ -8722,8 +8722,8 @@ module.exports = {
       "tags": [
         "concept"
       ],
-      "power": 34,
-      "defense": 24
+      "power": 42,
+      "defense": 32
     },
     {
       "id": "card_s17_003",
@@ -8743,8 +8743,8 @@ module.exports = {
       "tags": [
         "concept"
       ],
-      "power": 30,
-      "defense": 20
+      "power": 39,
+      "defense": 29
     },
     {
       "id": "card_s17_004",
@@ -8764,8 +8764,8 @@ module.exports = {
       "tags": [
         "concept"
       ],
-      "power": 33,
-      "defense": 23
+      "power": 31,
+      "defense": 21
     },
     {
       "id": "card_s17_005",
@@ -8785,8 +8785,8 @@ module.exports = {
       "tags": [
         "concept"
       ],
-      "power": 38,
-      "defense": 28
+      "power": 36,
+      "defense": 26
     },
     {
       "id": "card_s17_006",
@@ -8806,8 +8806,8 @@ module.exports = {
       "tags": [
         "concept"
       ],
-      "power": 43,
-      "defense": 33
+      "power": 40,
+      "defense": 30
     },
     {
       "id": "card_s17_007",
@@ -8827,8 +8827,8 @@ module.exports = {
       "tags": [
         "task"
       ],
-      "power": 89,
-      "defense": 79
+      "power": 85,
+      "defense": 75
     },
     {
       "id": "card_s17_008",
@@ -8848,8 +8848,8 @@ module.exports = {
       "tags": [
         "concept"
       ],
-      "power": 32,
-      "defense": 22
+      "power": 41,
+      "defense": 31
     },
     {
       "id": "card_s17_009",
@@ -8870,8 +8870,8 @@ module.exports = {
         "task",
         "security"
       ],
-      "power": 95,
-      "defense": 85
+      "power": 86,
+      "defense": 76
     },
     {
       "id": "card_s17_010",
@@ -8891,8 +8891,8 @@ module.exports = {
       "tags": [
         "task"
       ],
-      "power": 72,
-      "defense": 62
+      "power": 71,
+      "defense": 61
     },
     {
       "id": "card_s17_011",
@@ -8912,8 +8912,8 @@ module.exports = {
       "tags": [
         "concept"
       ],
-      "power": 82,
-      "defense": 72
+      "power": 78,
+      "defense": 68
     },
     {
       "id": "card_s17_012",
@@ -8933,8 +8933,8 @@ module.exports = {
       "tags": [
         "mcp"
       ],
-      "power": 97,
-      "defense": 87
+      "power": 85,
+      "defense": 75
     },
     {
       "id": "card_s17_013",
@@ -8954,8 +8954,8 @@ module.exports = {
       "tags": [
         "concept"
       ],
-      "power": 75,
-      "defense": 65
+      "power": 82,
+      "defense": 72
     },
     {
       "id": "card_s17_014",
@@ -8975,8 +8975,8 @@ module.exports = {
       "tags": [
         "concept"
       ],
-      "power": 31,
-      "defense": 21
+      "power": 36,
+      "defense": 26
     },
     {
       "id": "card_s17_015",
@@ -8996,8 +8996,8 @@ module.exports = {
       "tags": [
         "loop"
       ],
-      "power": 81,
-      "defense": 71
+      "power": 76,
+      "defense": 66
     },
     {
       "id": "card_s17_016",
@@ -9017,8 +9017,8 @@ module.exports = {
       "tags": [
         "concept"
       ],
-      "power": 83,
-      "defense": 73
+      "power": 71,
+      "defense": 61
     },
     {
       "id": "card_s17_017",
@@ -9038,8 +9038,8 @@ module.exports = {
       "tags": [
         "task"
       ],
-      "power": 82,
-      "defense": 72
+      "power": 77,
+      "defense": 67
     },
     {
       "id": "card_s17_018",
@@ -9061,8 +9061,8 @@ module.exports = {
         "prompt",
         "task"
       ],
-      "power": 74,
-      "defense": 64
+      "power": 83,
+      "defense": 73
     },
     {
       "id": "card_s17_019",
@@ -9082,8 +9082,8 @@ module.exports = {
       "tags": [
         "concept"
       ],
-      "power": 70,
-      "defense": 60
+      "power": 80,
+      "defense": 70
     },
     {
       "id": "card_s17_020",
@@ -9103,8 +9103,8 @@ module.exports = {
       "tags": [
         "concept"
       ],
-      "power": 73,
-      "defense": 63
+      "power": 84,
+      "defense": 74
     },
     {
       "id": "card_s17_021",
@@ -9124,8 +9124,8 @@ module.exports = {
       "tags": [
         "concept"
       ],
-      "power": 39,
-      "defense": 29
+      "power": 30,
+      "defense": 20
     },
     {
       "id": "card_s17_022",
@@ -9145,8 +9145,8 @@ module.exports = {
       "tags": [
         "mcp"
       ],
-      "power": 74,
-      "defense": 64
+      "power": 81,
+      "defense": 71
     },
     {
       "id": "card_s17_023",
@@ -9166,8 +9166,8 @@ module.exports = {
       "tags": [
         "concept"
       ],
-      "power": 52,
-      "defense": 42
+      "power": 54,
+      "defense": 44
     },
     {
       "id": "card_s17_024",
@@ -9187,8 +9187,8 @@ module.exports = {
       "tags": [
         "agent"
       ],
-      "power": 44,
-      "defense": 34
+      "power": 36,
+      "defense": 26
     },
     {
       "id": "card_s17_025",
@@ -9208,8 +9208,8 @@ module.exports = {
       "tags": [
         "concept"
       ],
-      "power": 36,
-      "defense": 26
+      "power": 32,
+      "defense": 22
     },
     {
       "id": "card_s17_026",
@@ -9229,8 +9229,8 @@ module.exports = {
       "tags": [
         "concept"
       ],
-      "power": 32,
-      "defense": 22
+      "power": 41,
+      "defense": 31
     },
     {
       "id": "card_s17_027",
@@ -9271,8 +9271,8 @@ module.exports = {
       "tags": [
         "concept"
       ],
-      "power": 31,
-      "defense": 21
+      "power": 36,
+      "defense": 26
     },
     {
       "id": "card_s17_029",
@@ -9292,8 +9292,8 @@ module.exports = {
       "tags": [
         "task"
       ],
-      "power": 33,
-      "defense": 23
+      "power": 42,
+      "defense": 32
     },
     {
       "id": "card_s17_030",
@@ -9313,8 +9313,8 @@ module.exports = {
       "tags": [
         "task"
       ],
-      "power": 44,
-      "defense": 34
+      "power": 39,
+      "defense": 29
     },
     {
       "id": "card_s17_031",
@@ -9334,8 +9334,8 @@ module.exports = {
       "tags": [
         "concept"
       ],
-      "power": 43,
-      "defense": 33
+      "power": 40,
+      "defense": 30
     },
     {
       "id": "card_s17_032",
@@ -9355,8 +9355,8 @@ module.exports = {
       "tags": [
         "context"
       ],
-      "power": 41,
-      "defense": 31
+      "power": 36,
+      "defense": 26
     },
     {
       "id": "card_s18_001",
@@ -9376,8 +9376,8 @@ module.exports = {
       "tags": [
         "task"
       ],
-      "power": 59,
-      "defense": 49
+      "power": 54,
+      "defense": 44
     },
     {
       "id": "card_s18_002",
@@ -9397,8 +9397,8 @@ module.exports = {
       "tags": [
         "concept"
       ],
-      "power": 34,
-      "defense": 24
+      "power": 36,
+      "defense": 26
     },
     {
       "id": "card_s18_003",
@@ -9439,8 +9439,8 @@ module.exports = {
       "tags": [
         "concept"
       ],
-      "power": 41,
-      "defense": 31
+      "power": 30,
+      "defense": 20
     },
     {
       "id": "card_s18_005",
@@ -9460,8 +9460,8 @@ module.exports = {
       "tags": [
         "concept"
       ],
-      "power": 38,
-      "defense": 28
+      "power": 40,
+      "defense": 30
     },
     {
       "id": "card_s18_006",
@@ -9481,8 +9481,8 @@ module.exports = {
       "tags": [
         "concept"
       ],
-      "power": 30,
-      "defense": 20
+      "power": 33,
+      "defense": 23
     },
     {
       "id": "card_s18_007",
@@ -9502,8 +9502,8 @@ module.exports = {
       "tags": [
         "task"
       ],
-      "power": 96,
-      "defense": 86
+      "power": 85,
+      "defense": 75
     },
     {
       "id": "card_s18_008",
@@ -9523,8 +9523,8 @@ module.exports = {
       "tags": [
         "concept"
       ],
-      "power": 40,
-      "defense": 30
+      "power": 38,
+      "defense": 28
     },
     {
       "id": "card_s18_009",
@@ -9544,8 +9544,8 @@ module.exports = {
       "tags": [
         "task"
       ],
-      "power": 75,
-      "defense": 65
+      "power": 82,
+      "defense": 72
     },
     {
       "id": "card_s18_010",
@@ -9565,8 +9565,8 @@ module.exports = {
       "tags": [
         "concept"
       ],
-      "power": 90,
-      "defense": 80
+      "power": 87,
+      "defense": 77
     },
     {
       "id": "card_s18_011",
@@ -9586,8 +9586,8 @@ module.exports = {
       "tags": [
         "concept"
       ],
-      "power": 74,
-      "defense": 64
+      "power": 77,
+      "defense": 67
     },
     {
       "id": "card_s18_012",
@@ -9607,8 +9607,8 @@ module.exports = {
       "tags": [
         "concept"
       ],
-      "power": 84,
-      "defense": 74
+      "power": 76,
+      "defense": 66
     },
     {
       "id": "card_s18_013",
@@ -9628,8 +9628,8 @@ module.exports = {
       "tags": [
         "concept"
       ],
-      "power": 39,
-      "defense": 29
+      "power": 42,
+      "defense": 32
     },
     {
       "id": "card_s18_014",
@@ -9649,8 +9649,8 @@ module.exports = {
       "tags": [
         "task"
       ],
-      "power": 72,
-      "defense": 62
+      "power": 70,
+      "defense": 60
     },
     {
       "id": "card_s18_015",
@@ -9670,8 +9670,8 @@ module.exports = {
       "tags": [
         "concept"
       ],
-      "power": 82,
-      "defense": 72
+      "power": 79,
+      "defense": 69
     },
     {
       "id": "card_s18_016",
@@ -9712,8 +9712,8 @@ module.exports = {
       "tags": [
         "concept"
       ],
-      "power": 87,
-      "defense": 77
+      "power": 96,
+      "defense": 86
     },
     {
       "id": "card_s18_018",
@@ -9733,8 +9733,8 @@ module.exports = {
       "tags": [
         "concept"
       ],
-      "power": 70,
-      "defense": 60
+      "power": 82,
+      "defense": 72
     },
     {
       "id": "card_s18_019",
@@ -9754,8 +9754,8 @@ module.exports = {
       "tags": [
         "task"
       ],
-      "power": 81,
-      "defense": 71
+      "power": 79,
+      "defense": 69
     },
     {
       "id": "card_s18_020",
@@ -9775,8 +9775,8 @@ module.exports = {
       "tags": [
         "task"
       ],
-      "power": 51,
-      "defense": 41
+      "power": 63,
+      "defense": 53
     },
     {
       "id": "card_s18_021",
@@ -9796,8 +9796,8 @@ module.exports = {
       "tags": [
         "concept"
       ],
-      "power": 82,
-      "defense": 72
+      "power": 80,
+      "defense": 70
     },
     {
       "id": "card_s18_022",
@@ -9817,8 +9817,8 @@ module.exports = {
       "tags": [
         "task"
       ],
-      "power": 37,
-      "defense": 27
+      "power": 43,
+      "defense": 33
     },
     {
       "id": "card_s18_023",
@@ -9838,8 +9838,8 @@ module.exports = {
       "tags": [
         "concept"
       ],
-      "power": 32,
-      "defense": 22
+      "power": 39,
+      "defense": 29
     },
     {
       "id": "card_s18_024",
@@ -9859,8 +9859,8 @@ module.exports = {
       "tags": [
         "task"
       ],
-      "power": 40,
-      "defense": 30
+      "power": 39,
+      "defense": 29
     },
     {
       "id": "card_s18_025",
@@ -9880,8 +9880,8 @@ module.exports = {
       "tags": [
         "task"
       ],
-      "power": 43,
-      "defense": 33
+      "power": 30,
+      "defense": 20
     },
     {
       "id": "card_s18_026",
@@ -9901,8 +9901,8 @@ module.exports = {
       "tags": [
         "concept"
       ],
-      "power": 39,
-      "defense": 29
+      "power": 30,
+      "defense": 20
     },
     {
       "id": "card_s18_027",
@@ -9922,8 +9922,8 @@ module.exports = {
       "tags": [
         "concept"
       ],
-      "power": 62,
-      "defense": 52
+      "power": 64,
+      "defense": 54
     },
     {
       "id": "card_s18_028",
@@ -9943,8 +9943,8 @@ module.exports = {
       "tags": [
         "concept"
       ],
-      "power": 41,
-      "defense": 31
+      "power": 31,
+      "defense": 21
     },
     {
       "id": "card_s18_029",
@@ -9964,8 +9964,8 @@ module.exports = {
       "tags": [
         "concept"
       ],
-      "power": 39,
-      "defense": 29
+      "power": 38,
+      "defense": 28
     },
     {
       "id": "card_s18_030",
@@ -9985,8 +9985,8 @@ module.exports = {
       "tags": [
         "concept"
       ],
-      "power": 31,
-      "defense": 21
+      "power": 39,
+      "defense": 29
     },
     {
       "id": "card_s19_001",
@@ -10006,8 +10006,8 @@ module.exports = {
       "tags": [
         "concept"
       ],
-      "power": 30,
-      "defense": 20
+      "power": 37,
+      "defense": 27
     },
     {
       "id": "card_s19_002",
@@ -10029,8 +10029,8 @@ module.exports = {
         "tool",
         "mcp"
       ],
-      "power": 61,
-      "defense": 51
+      "power": 60,
+      "defense": 50
     },
     {
       "id": "card_s19_003",
@@ -10050,8 +10050,8 @@ module.exports = {
       "tags": [
         "tool"
       ],
-      "power": 61,
-      "defense": 51
+      "power": 64,
+      "defense": 54
     },
     {
       "id": "card_s19_004",
@@ -10071,8 +10071,8 @@ module.exports = {
       "tags": [
         "concept"
       ],
-      "power": 31,
-      "defense": 21
+      "power": 30,
+      "defense": 20
     },
     {
       "id": "card_s19_005",
@@ -10092,8 +10092,8 @@ module.exports = {
       "tags": [
         "concept"
       ],
-      "power": 57,
-      "defense": 47
+      "power": 58,
+      "defense": 48
     },
     {
       "id": "card_s19_006",
@@ -10113,8 +10113,8 @@ module.exports = {
       "tags": [
         "concept"
       ],
-      "power": 38,
-      "defense": 28
+      "power": 40,
+      "defense": 30
     },
     {
       "id": "card_s19_007",
@@ -10134,8 +10134,8 @@ module.exports = {
       "tags": [
         "mcp"
       ],
-      "power": 37,
-      "defense": 27
+      "power": 43,
+      "defense": 33
     },
     {
       "id": "card_s19_008",
@@ -10155,8 +10155,8 @@ module.exports = {
       "tags": [
         "tool"
       ],
-      "power": 58,
-      "defense": 48
+      "power": 60,
+      "defense": 50
     },
     {
       "id": "card_s19_009",
@@ -10197,8 +10197,8 @@ module.exports = {
       "tags": [
         "concept"
       ],
-      "power": 63,
-      "defense": 53
+      "power": 51,
+      "defense": 41
     },
     {
       "id": "card_s19_011",
@@ -10218,8 +10218,8 @@ module.exports = {
       "tags": [
         "concept"
       ],
-      "power": 63,
-      "defense": 53
+      "power": 64,
+      "defense": 54
     },
     {
       "id": "card_s19_012",
@@ -10239,8 +10239,8 @@ module.exports = {
       "tags": [
         "concept"
       ],
-      "power": 42,
-      "defense": 32
+      "power": 32,
+      "defense": 22
     },
     {
       "id": "card_s19_013",
@@ -10260,8 +10260,8 @@ module.exports = {
       "tags": [
         "mcp"
       ],
-      "power": 41,
-      "defense": 31
+      "power": 38,
+      "defense": 28
     },
     {
       "id": "card_s19_014",
@@ -10303,8 +10303,8 @@ module.exports = {
       "tags": [
         "concept"
       ],
-      "power": 43,
-      "defense": 33
+      "power": 32,
+      "defense": 22
     },
     {
       "id": "card_s19_016",
@@ -10324,8 +10324,8 @@ module.exports = {
       "tags": [
         "concept"
       ],
-      "power": 52,
-      "defense": 42
+      "power": 51,
+      "defense": 41
     },
     {
       "id": "card_s19_017",
@@ -10347,8 +10347,8 @@ module.exports = {
         "permission",
         "mcp"
       ],
-      "power": 72,
-      "defense": 62
+      "power": 75,
+      "defense": 65
     },
     {
       "id": "card_s19_018",
@@ -10368,8 +10368,8 @@ module.exports = {
       "tags": [
         "concept"
       ],
-      "power": 83,
-      "defense": 73
+      "power": 70,
+      "defense": 60
     },
     {
       "id": "card_s19_019",
@@ -10390,8 +10390,8 @@ module.exports = {
         "tool",
         "mcp"
       ],
-      "power": 40,
-      "defense": 30
+      "power": 42,
+      "defense": 32
     },
     {
       "id": "card_s19_020",
@@ -10411,8 +10411,8 @@ module.exports = {
       "tags": [
         "concept"
       ],
-      "power": 31,
-      "defense": 21
+      "power": 36,
+      "defense": 26
     },
     {
       "id": "card_s19_021",
@@ -10432,8 +10432,8 @@ module.exports = {
       "tags": [
         "concept"
       ],
-      "power": 56,
-      "defense": 46
+      "power": 51,
+      "defense": 41
     },
     {
       "id": "card_s19_022",
@@ -10453,8 +10453,8 @@ module.exports = {
       "tags": [
         "tool"
       ],
-      "power": 50,
-      "defense": 40
+      "power": 62,
+      "defense": 52
     },
     {
       "id": "card_s19_023",
@@ -10474,8 +10474,8 @@ module.exports = {
       "tags": [
         "concept"
       ],
-      "power": 64,
-      "defense": 54
+      "power": 52,
+      "defense": 42
     },
     {
       "id": "card_s19_024",
@@ -10495,8 +10495,8 @@ module.exports = {
       "tags": [
         "concept"
       ],
-      "power": 37,
-      "defense": 27
+      "power": 34,
+      "defense": 24
     },
     {
       "id": "card_s19_025",
@@ -10540,8 +10540,8 @@ module.exports = {
         "tool",
         "mcp"
       ],
-      "power": 44,
-      "defense": 34
+      "power": 31,
+      "defense": 21
     },
     {
       "id": "card_s19_027",
@@ -10561,8 +10561,8 @@ module.exports = {
       "tags": [
         "concept"
       ],
-      "power": 35,
-      "defense": 25
+      "power": 36,
+      "defense": 26
     },
     {
       "id": "card_s19_028",
@@ -10582,8 +10582,8 @@ module.exports = {
       "tags": [
         "tool"
       ],
-      "power": 37,
-      "defense": 27
+      "power": 31,
+      "defense": 21
     },
     {
       "id": "card_s19_029",
@@ -10603,8 +10603,8 @@ module.exports = {
       "tags": [
         "concept"
       ],
-      "power": 62,
-      "defense": 52
+      "power": 60,
+      "defense": 50
     },
     {
       "id": "card_s19_030",
@@ -10626,8 +10626,8 @@ module.exports = {
         "tool",
         "mcp"
       ],
-      "power": 51,
-      "defense": 41
+      "power": 61,
+      "defense": 51
     },
     {
       "id": "card_bp01_001",
@@ -10647,8 +10647,8 @@ module.exports = {
       "tags": [
         "concept"
       ],
-      "power": 39,
-      "defense": 29
+      "power": 38,
+      "defense": 28
     },
     {
       "id": "card_bp01_002",
@@ -10668,8 +10668,8 @@ module.exports = {
       "tags": [
         "concept"
       ],
-      "power": 43,
-      "defense": 33
+      "power": 30,
+      "defense": 20
     },
     {
       "id": "card_bp01_003",
@@ -10689,8 +10689,8 @@ module.exports = {
       "tags": [
         "concept"
       ],
-      "power": 51,
-      "defense": 41
+      "power": 57,
+      "defense": 47
     },
     {
       "id": "card_bp01_004",
@@ -10710,8 +10710,8 @@ module.exports = {
       "tags": [
         "concept"
       ],
-      "power": 41,
-      "defense": 31
+      "power": 39,
+      "defense": 29
     },
     {
       "id": "card_bp01_005",
@@ -10731,8 +10731,8 @@ module.exports = {
       "tags": [
         "concept"
       ],
-      "power": 44,
-      "defense": 34
+      "power": 36,
+      "defense": 26
     },
     {
       "id": "card_bp01_006",
@@ -10752,8 +10752,8 @@ module.exports = {
       "tags": [
         "concept"
       ],
-      "power": 32,
-      "defense": 22
+      "power": 42,
+      "defense": 32
     },
     {
       "id": "card_bp01_007",
@@ -10773,8 +10773,8 @@ module.exports = {
       "tags": [
         "concept"
       ],
-      "power": 71,
-      "defense": 61
+      "power": 82,
+      "defense": 72
     },
     {
       "id": "card_bp01_008",
@@ -10794,8 +10794,8 @@ module.exports = {
       "tags": [
         "context"
       ],
-      "power": 60,
-      "defense": 50
+      "power": 55,
+      "defense": 45
     },
     {
       "id": "card_bp01_009",
@@ -10836,8 +10836,8 @@ module.exports = {
       "tags": [
         "concept"
       ],
-      "power": 33,
-      "defense": 23
+      "power": 34,
+      "defense": 24
     },
     {
       "id": "card_bp02_001",
@@ -10857,8 +10857,8 @@ module.exports = {
       "tags": [
         "concept"
       ],
-      "power": 30,
-      "defense": 20
+      "power": 33,
+      "defense": 23
     },
     {
       "id": "card_bp02_002",
@@ -10878,8 +10878,8 @@ module.exports = {
       "tags": [
         "concept"
       ],
-      "power": 34,
-      "defense": 24
+      "power": 40,
+      "defense": 30
     },
     {
       "id": "card_bp02_003",
@@ -10899,8 +10899,8 @@ module.exports = {
       "tags": [
         "concept"
       ],
-      "power": 35,
-      "defense": 25
+      "power": 32,
+      "defense": 22
     },
     {
       "id": "card_bp03_001",
@@ -10920,8 +10920,8 @@ module.exports = {
       "tags": [
         "concept"
       ],
-      "power": 32,
-      "defense": 22
+      "power": 42,
+      "defense": 32
     },
     {
       "id": "card_bp03_002",
@@ -10941,8 +10941,8 @@ module.exports = {
       "tags": [
         "concept"
       ],
-      "power": 43,
-      "defense": 33
+      "power": 38,
+      "defense": 28
     },
     {
       "id": "card_bp03_003",
@@ -10962,8 +10962,8 @@ module.exports = {
       "tags": [
         "concept"
       ],
-      "power": 42,
-      "defense": 32
+      "power": 39,
+      "defense": 29
     },
     {
       "id": "card_bp04_001",
@@ -10985,8 +10985,8 @@ module.exports = {
         "prompt",
         "hook"
       ],
-      "power": 84,
-      "defense": 74
+      "power": 70,
+      "defense": 60
     },
     {
       "id": "card_bp04_002",
@@ -11006,8 +11006,8 @@ module.exports = {
       "tags": [
         "concept"
       ],
-      "power": 42,
-      "defense": 32
+      "power": 35,
+      "defense": 25
     },
     {
       "id": "card_bp04_003",
@@ -11027,8 +11027,8 @@ module.exports = {
       "tags": [
         "hook"
       ],
-      "power": 32,
-      "defense": 22
+      "power": 37,
+      "defense": 27
     },
     {
       "id": "card_bp04_004",
@@ -11048,8 +11048,8 @@ module.exports = {
       "tags": [
         "hook"
       ],
-      "power": 33,
-      "defense": 23
+      "power": 34,
+      "defense": 24
     },
     {
       "id": "card_bp04_005",
@@ -11069,8 +11069,8 @@ module.exports = {
       "tags": [
         "hook"
       ],
-      "power": 35,
-      "defense": 25
+      "power": 31,
+      "defense": 21
     },
     {
       "id": "card_bp04_006",
@@ -11090,8 +11090,8 @@ module.exports = {
       "tags": [
         "hook"
       ],
-      "power": 61,
-      "defense": 51
+      "power": 59,
+      "defense": 49
     },
     {
       "id": "card_bp04_007",
@@ -11111,8 +11111,8 @@ module.exports = {
       "tags": [
         "concept"
       ],
-      "power": 39,
-      "defense": 29
+      "power": 37,
+      "defense": 27
     },
     {
       "id": "card_bp04_008",
@@ -11132,8 +11132,8 @@ module.exports = {
       "tags": [
         "concept"
       ],
-      "power": 33,
-      "defense": 23
+      "power": 43,
+      "defense": 33
     },
     {
       "id": "card_bp04_009",
@@ -11153,8 +11153,8 @@ module.exports = {
       "tags": [
         "concept"
       ],
-      "power": 39,
-      "defense": 29
+      "power": 38,
+      "defense": 28
     },
     {
       "id": "card_bp04_010",
@@ -11174,8 +11174,8 @@ module.exports = {
       "tags": [
         "concept"
       ],
-      "power": 31,
-      "defense": 21
+      "power": 34,
+      "defense": 24
     },
     {
       "id": "card_bp04_011",
@@ -11195,8 +11195,8 @@ module.exports = {
       "tags": [
         "concept"
       ],
-      "power": 31,
-      "defense": 21
+      "power": 40,
+      "defense": 30
     },
     {
       "id": "card_bp04_012",
@@ -11216,8 +11216,8 @@ module.exports = {
       "tags": [
         "concept"
       ],
-      "power": 30,
-      "defense": 20
+      "power": 40,
+      "defense": 30
     },
     {
       "id": "card_bp04_013",
@@ -11237,8 +11237,8 @@ module.exports = {
       "tags": [
         "concept"
       ],
-      "power": 92,
-      "defense": 82
+      "power": 86,
+      "defense": 76
     },
     {
       "id": "card_bp04_014",
@@ -11258,8 +11258,8 @@ module.exports = {
       "tags": [
         "hook"
       ],
-      "power": 41,
-      "defense": 31
+      "power": 38,
+      "defense": 28
     },
     {
       "id": "card_bp04_015",
@@ -11279,8 +11279,8 @@ module.exports = {
       "tags": [
         "concept"
       ],
-      "power": 30,
-      "defense": 20
+      "power": 44,
+      "defense": 34
     },
     {
       "id": "card_bp04_016",
@@ -11300,8 +11300,8 @@ module.exports = {
       "tags": [
         "concept"
       ],
-      "power": 32,
-      "defense": 22
+      "power": 41,
+      "defense": 31
     },
     {
       "id": "card_bp04_017",
@@ -11321,8 +11321,8 @@ module.exports = {
       "tags": [
         "concept"
       ],
-      "power": 40,
-      "defense": 30
+      "power": 36,
+      "defense": 26
     },
     {
       "id": "card_bp04_018",
@@ -11342,8 +11342,8 @@ module.exports = {
       "tags": [
         "concept"
       ],
-      "power": 95,
-      "defense": 85
+      "power": 90,
+      "defense": 80
     },
     {
       "id": "card_bp04_019",
@@ -11363,8 +11363,8 @@ module.exports = {
       "tags": [
         "prompt"
       ],
-      "power": 41,
-      "defense": 31
+      "power": 38,
+      "defense": 28
     },
     {
       "id": "card_bp04_020",
@@ -11384,8 +11384,8 @@ module.exports = {
       "tags": [
         "tool"
       ],
-      "power": 64,
-      "defense": 54
+      "power": 61,
+      "defense": 51
     },
     {
       "id": "card_bp04_021",
@@ -11405,8 +11405,8 @@ module.exports = {
       "tags": [
         "tool"
       ],
-      "power": 34,
-      "defense": 24
+      "power": 41,
+      "defense": 31
     },
     {
       "id": "card_bp04_022",
@@ -11426,8 +11426,8 @@ module.exports = {
       "tags": [
         "concept"
       ],
-      "power": 31,
-      "defense": 21
+      "power": 41,
+      "defense": 31
     },
     {
       "id": "card_bp04_023",
@@ -11447,8 +11447,8 @@ module.exports = {
       "tags": [
         "concept"
       ],
-      "power": 34,
-      "defense": 24
+      "power": 31,
+      "defense": 21
     },
     {
       "id": "card_bp04_024",
@@ -11468,8 +11468,8 @@ module.exports = {
       "tags": [
         "permission"
       ],
-      "power": 34,
-      "defense": 24
+      "power": 38,
+      "defense": 28
     },
     {
       "id": "card_bp04_025",
@@ -11489,8 +11489,8 @@ module.exports = {
       "tags": [
         "concept"
       ],
-      "power": 43,
-      "defense": 33
+      "power": 40,
+      "defense": 30
     },
     {
       "id": "card_bp04_026",
@@ -11510,8 +11510,8 @@ module.exports = {
       "tags": [
         "concept"
       ],
-      "power": 31,
-      "defense": 21
+      "power": 40,
+      "defense": 30
     },
     {
       "id": "card_bp04_027",
@@ -11531,8 +11531,8 @@ module.exports = {
       "tags": [
         "concept"
       ],
-      "power": 31,
-      "defense": 21
+      "power": 34,
+      "defense": 24
     },
     {
       "id": "card_bp04_028",
@@ -11552,8 +11552,8 @@ module.exports = {
       "tags": [
         "concept"
       ],
-      "power": 42,
-      "defense": 32
+      "power": 44,
+      "defense": 34
     },
     {
       "id": "card_bp04_029",
@@ -11573,8 +11573,8 @@ module.exports = {
       "tags": [
         "tool"
       ],
-      "power": 35,
-      "defense": 25
+      "power": 41,
+      "defense": 31
     },
     {
       "id": "card_bp04_030",
@@ -11594,8 +11594,8 @@ module.exports = {
       "tags": [
         "concept"
       ],
-      "power": 39,
-      "defense": 29
+      "power": 42,
+      "defense": 32
     },
     {
       "id": "card_bp04_031",
@@ -11615,8 +11615,8 @@ module.exports = {
       "tags": [
         "context"
       ],
-      "power": 43,
-      "defense": 33
+      "power": 41,
+      "defense": 31
     },
     {
       "id": "card_bp04_032",
@@ -11636,8 +11636,8 @@ module.exports = {
       "tags": [
         "hook"
       ],
-      "power": 44,
-      "defense": 34
+      "power": 32,
+      "defense": 22
     },
     {
       "id": "card_bp04_033",
@@ -11657,8 +11657,8 @@ module.exports = {
       "tags": [
         "concept"
       ],
-      "power": 37,
-      "defense": 27
+      "power": 44,
+      "defense": 34
     },
     {
       "id": "card_bp05_001",
@@ -11678,8 +11678,8 @@ module.exports = {
       "tags": [
         "concept"
       ],
-      "power": 44,
-      "defense": 34
+      "power": 43,
+      "defense": 33
     },
     {
       "id": "card_bp05_002",
@@ -11699,8 +11699,8 @@ module.exports = {
       "tags": [
         "concept"
       ],
-      "power": 37,
-      "defense": 27
+      "power": 30,
+      "defense": 20
     },
     {
       "id": "card_bp05_003",
@@ -11720,8 +11720,8 @@ module.exports = {
       "tags": [
         "concept"
       ],
-      "power": 36,
-      "defense": 26
+      "power": 43,
+      "defense": 33
     },
     {
       "id": "card_bp05_004",
@@ -11741,8 +11741,8 @@ module.exports = {
       "tags": [
         "concept"
       ],
-      "power": 42,
-      "defense": 32
+      "power": 41,
+      "defense": 31
     },
     {
       "id": "card_bp05_005",
@@ -11762,8 +11762,8 @@ module.exports = {
       "tags": [
         "agent"
       ],
-      "power": 43,
-      "defense": 33
+      "power": 42,
+      "defense": 32
     },
     {
       "id": "card_bp05_006",
@@ -11783,8 +11783,8 @@ module.exports = {
       "tags": [
         "concept"
       ],
-      "power": 35,
-      "defense": 25
+      "power": 44,
+      "defense": 34
     },
     {
       "id": "card_bp05_007",
@@ -11804,8 +11804,8 @@ module.exports = {
       "tags": [
         "concept"
       ],
-      "power": 38,
-      "defense": 28
+      "power": 32,
+      "defense": 22
     },
     {
       "id": "card_bp05_008",
@@ -11825,8 +11825,8 @@ module.exports = {
       "tags": [
         "concept"
       ],
-      "power": 38,
-      "defense": 28
+      "power": 44,
+      "defense": 34
     },
     {
       "id": "card_bp05_009",
@@ -11846,8 +11846,8 @@ module.exports = {
       "tags": [
         "memory"
       ],
-      "power": 85,
-      "defense": 75
+      "power": 95,
+      "defense": 85
     },
     {
       "id": "card_bp05_010",
@@ -11867,8 +11867,8 @@ module.exports = {
       "tags": [
         "concept"
       ],
-      "power": 44,
-      "defense": 34
+      "power": 38,
+      "defense": 28
     },
     {
       "id": "card_bp05_011",
@@ -11888,8 +11888,8 @@ module.exports = {
       "tags": [
         "agent"
       ],
-      "power": 70,
-      "defense": 60
+      "power": 81,
+      "defense": 71
     },
     {
       "id": "card_bp05_012",
@@ -11909,8 +11909,8 @@ module.exports = {
       "tags": [
         "agent"
       ],
-      "power": 37,
-      "defense": 27
+      "power": 38,
+      "defense": 28
     },
     {
       "id": "card_bp05_013",
@@ -11930,8 +11930,8 @@ module.exports = {
       "tags": [
         "permission"
       ],
-      "power": 36,
-      "defense": 26
+      "power": 30,
+      "defense": 20
     },
     {
       "id": "card_bp05_014",
@@ -11951,8 +11951,8 @@ module.exports = {
       "tags": [
         "tool"
       ],
-      "power": 91,
-      "defense": 81
+      "power": 94,
+      "defense": 84
     },
     {
       "id": "card_bp05_015",
@@ -11972,8 +11972,8 @@ module.exports = {
       "tags": [
         "concept"
       ],
-      "power": 31,
-      "defense": 21
+      "power": 38,
+      "defense": 28
     },
     {
       "id": "card_bp06_001",
@@ -11993,8 +11993,8 @@ module.exports = {
       "tags": [
         "mcp"
       ],
-      "power": 43,
-      "defense": 33
+      "power": 34,
+      "defense": 24
     },
     {
       "id": "card_bp06_002",
@@ -12014,8 +12014,8 @@ module.exports = {
       "tags": [
         "mcp"
       ],
-      "power": 63,
-      "defense": 53
+      "power": 59,
+      "defense": 49
     },
     {
       "id": "card_bp06_003",
@@ -12035,8 +12035,8 @@ module.exports = {
       "tags": [
         "concept"
       ],
-      "power": 43,
-      "defense": 33
+      "power": 39,
+      "defense": 29
     },
     {
       "id": "card_bp06_004",
@@ -12056,8 +12056,8 @@ module.exports = {
       "tags": [
         "concept"
       ],
-      "power": 41,
-      "defense": 31
+      "power": 30,
+      "defense": 20
     },
     {
       "id": "card_bp06_005",
@@ -12077,8 +12077,8 @@ module.exports = {
       "tags": [
         "mcp"
       ],
-      "power": 35,
-      "defense": 25
+      "power": 32,
+      "defense": 22
     },
     {
       "id": "card_bp06_006",
@@ -12098,8 +12098,8 @@ module.exports = {
       "tags": [
         "concept"
       ],
-      "power": 42,
-      "defense": 32
+      "power": 43,
+      "defense": 33
     },
     {
       "id": "card_bp06_007",
@@ -12119,8 +12119,8 @@ module.exports = {
       "tags": [
         "mcp"
       ],
-      "power": 36,
-      "defense": 26
+      "power": 40,
+      "defense": 30
     },
     {
       "id": "card_bp06_008",
@@ -12140,8 +12140,8 @@ module.exports = {
       "tags": [
         "concept"
       ],
-      "power": 37,
-      "defense": 27
+      "power": 33,
+      "defense": 23
     },
     {
       "id": "card_bp06_009",
@@ -12161,8 +12161,8 @@ module.exports = {
       "tags": [
         "concept"
       ],
-      "power": 44,
-      "defense": 34
+      "power": 33,
+      "defense": 23
     },
     {
       "id": "card_bp06_010",
@@ -12184,8 +12184,8 @@ module.exports = {
         "permission",
         "mcp"
       ],
-      "power": 34,
-      "defense": 24
+      "power": 32,
+      "defense": 22
     },
     {
       "id": "card_bp06_011",
@@ -12226,8 +12226,8 @@ module.exports = {
       "tags": [
         "concept"
       ],
-      "power": 32,
-      "defense": 22
+      "power": 42,
+      "defense": 32
     },
     {
       "id": "card_bp06_013",
@@ -12268,8 +12268,8 @@ module.exports = {
       "tags": [
         "concept"
       ],
-      "power": 35,
-      "defense": 25
+      "power": 43,
+      "defense": 33
     },
     {
       "id": "card_bp06_015",
@@ -12289,8 +12289,8 @@ module.exports = {
       "tags": [
         "concept"
       ],
-      "power": 43,
-      "defense": 33
+      "power": 41,
+      "defense": 31
     },
     {
       "id": "card_bp07_001",
@@ -12310,8 +12310,8 @@ module.exports = {
       "tags": [
         "concept"
       ],
-      "power": 97,
-      "defense": 87
+      "power": 92,
+      "defense": 82
     },
     {
       "id": "card_bp07_002",
@@ -12331,8 +12331,8 @@ module.exports = {
       "tags": [
         "permission"
       ],
-      "power": 31,
-      "defense": 21
+      "power": 34,
+      "defense": 24
     },
     {
       "id": "card_bp07_003",
@@ -12373,8 +12373,8 @@ module.exports = {
       "tags": [
         "permission"
       ],
-      "power": 39,
-      "defense": 29
+      "power": 34,
+      "defense": 24
     },
     {
       "id": "card_bp07_005",
@@ -12395,8 +12395,8 @@ module.exports = {
         "tool",
         "permission"
       ],
-      "power": 93,
-      "defense": 83
+      "power": 98,
+      "defense": 88
     },
     {
       "id": "card_bp07_006",
@@ -12416,8 +12416,8 @@ module.exports = {
       "tags": [
         "concept"
       ],
-      "power": 32,
-      "defense": 22
+      "power": 34,
+      "defense": 24
     },
     {
       "id": "card_bp07_007",
@@ -12437,8 +12437,8 @@ module.exports = {
       "tags": [
         "concept"
       ],
-      "power": 30,
-      "defense": 20
+      "power": 39,
+      "defense": 29
     },
     {
       "id": "card_bp07_008",
@@ -12458,8 +12458,8 @@ module.exports = {
       "tags": [
         "concept"
       ],
-      "power": 61,
-      "defense": 51
+      "power": 51,
+      "defense": 41
     },
     {
       "id": "card_bp07_009",
@@ -12479,8 +12479,8 @@ module.exports = {
       "tags": [
         "concept"
       ],
-      "power": 43,
-      "defense": 33
+      "power": 42,
+      "defense": 32
     },
     {
       "id": "card_bp07_010",
@@ -12500,8 +12500,8 @@ module.exports = {
       "tags": [
         "concept"
       ],
-      "power": 44,
-      "defense": 34
+      "power": 32,
+      "defense": 22
     },
     {
       "id": "card_bp07_011",
@@ -12521,8 +12521,8 @@ module.exports = {
       "tags": [
         "concept"
       ],
-      "power": 33,
-      "defense": 23
+      "power": 44,
+      "defense": 34
     },
     {
       "id": "card_bp07_012",
@@ -12542,8 +12542,8 @@ module.exports = {
       "tags": [
         "concept"
       ],
-      "power": 34,
-      "defense": 24
+      "power": 32,
+      "defense": 22
     },
     {
       "id": "card_bp07_013",
@@ -12584,8 +12584,8 @@ module.exports = {
       "tags": [
         "concept"
       ],
-      "power": 40,
-      "defense": 30
+      "power": 37,
+      "defense": 27
     },
     {
       "id": "card_bp07_015",
@@ -12605,8 +12605,8 @@ module.exports = {
       "tags": [
         "concept"
       ],
-      "power": 30,
-      "defense": 20
+      "power": 33,
+      "defense": 23
     },
     {
       "id": "card_bp07_016",
@@ -12668,8 +12668,8 @@ module.exports = {
       "tags": [
         "concept"
       ],
-      "power": 35,
-      "defense": 25
+      "power": 43,
+      "defense": 33
     },
     {
       "id": "card_bp07_019",
@@ -12689,8 +12689,8 @@ module.exports = {
       "tags": [
         "concept"
       ],
-      "power": 43,
-      "defense": 33
+      "power": 34,
+      "defense": 24
     },
     {
       "id": "card_bp07_020",
@@ -12710,8 +12710,8 @@ module.exports = {
       "tags": [
         "concept"
       ],
-      "power": 32,
-      "defense": 22
+      "power": 33,
+      "defense": 23
     },
     {
       "id": "card_bp07_021",
@@ -12731,8 +12731,8 @@ module.exports = {
       "tags": [
         "concept"
       ],
-      "power": 31,
-      "defense": 21
+      "power": 34,
+      "defense": 24
     },
     {
       "id": "card_bp07_022",
@@ -12753,8 +12753,8 @@ module.exports = {
         "memory",
         "plan"
       ],
-      "power": 32,
-      "defense": 22
+      "power": 34,
+      "defense": 24
     },
     {
       "id": "card_bp07_023",
@@ -12774,8 +12774,8 @@ module.exports = {
       "tags": [
         "concept"
       ],
-      "power": 31,
-      "defense": 21
+      "power": 38,
+      "defense": 28
     },
     {
       "id": "card_bp07_024",
@@ -12795,8 +12795,8 @@ module.exports = {
       "tags": [
         "concept"
       ],
-      "power": 36,
-      "defense": 26
+      "power": 38,
+      "defense": 28
     },
     {
       "id": "card_bp07_025",
@@ -12816,8 +12816,8 @@ module.exports = {
       "tags": [
         "concept"
       ],
-      "power": 38,
-      "defense": 28
+      "power": 43,
+      "defense": 33
     },
     {
       "id": "card_bp07_026",
@@ -12837,8 +12837,8 @@ module.exports = {
       "tags": [
         "concept"
       ],
-      "power": 36,
-      "defense": 26
+      "power": 32,
+      "defense": 22
     },
     {
       "id": "card_bp07_027",
@@ -12858,8 +12858,8 @@ module.exports = {
       "tags": [
         "concept"
       ],
-      "power": 36,
-      "defense": 26
+      "power": 37,
+      "defense": 27
     },
     {
       "id": "card_bp07_028",
@@ -12879,8 +12879,8 @@ module.exports = {
       "tags": [
         "concept"
       ],
-      "power": 35,
-      "defense": 25
+      "power": 41,
+      "defense": 31
     },
     {
       "id": "card_bp07_029",
@@ -12900,8 +12900,8 @@ module.exports = {
       "tags": [
         "concept"
       ],
-      "power": 44,
-      "defense": 34
+      "power": 41,
+      "defense": 31
     },
     {
       "id": "card_bp07_030",
@@ -12921,8 +12921,8 @@ module.exports = {
       "tags": [
         "concept"
       ],
-      "power": 35,
-      "defense": 25
+      "power": 39,
+      "defense": 29
     },
     {
       "id": "card_bp07_031",
@@ -12942,8 +12942,8 @@ module.exports = {
       "tags": [
         "concept"
       ],
-      "power": 33,
-      "defense": 23
+      "power": 37,
+      "defense": 27
     },
     {
       "id": "card_bp07_032",
@@ -12964,8 +12964,8 @@ module.exports = {
         "permission",
         "security"
       ],
-      "power": 40,
-      "defense": 30
+      "power": 42,
+      "defense": 32
     },
     {
       "id": "card_bp07_033",
@@ -12985,8 +12985,8 @@ module.exports = {
       "tags": [
         "concept"
       ],
-      "power": 34,
-      "defense": 24
+      "power": 41,
+      "defense": 31
     },
     {
       "id": "card_bp07_034",
@@ -13006,8 +13006,8 @@ module.exports = {
       "tags": [
         "prompt"
       ],
-      "power": 44,
-      "defense": 34
+      "power": 37,
+      "defense": 27
     },
     {
       "id": "card_bp07_035",
@@ -13027,8 +13027,8 @@ module.exports = {
       "tags": [
         "concept"
       ],
-      "power": 31,
-      "defense": 21
+      "power": 43,
+      "defense": 33
     },
     {
       "id": "card_bp07_036",
@@ -13048,8 +13048,8 @@ module.exports = {
       "tags": [
         "mcp"
       ],
-      "power": 36,
-      "defense": 26
+      "power": 39,
+      "defense": 29
     },
     {
       "id": "card_bp07_037",
@@ -13069,8 +13069,8 @@ module.exports = {
       "tags": [
         "concept"
       ],
-      "power": 40,
-      "defense": 30
+      "power": 36,
+      "defense": 26
     },
     {
       "id": "card_bp07_038",
@@ -13090,8 +13090,8 @@ module.exports = {
       "tags": [
         "concept"
       ],
-      "power": 39,
-      "defense": 29
+      "power": 44,
+      "defense": 34
     },
     {
       "id": "card_bp07_039",
@@ -13111,8 +13111,8 @@ module.exports = {
       "tags": [
         "concept"
       ],
-      "power": 32,
-      "defense": 22
+      "power": 35,
+      "defense": 25
     },
     {
       "id": "card_bp07_040",
@@ -13132,8 +13132,8 @@ module.exports = {
       "tags": [
         "concept"
       ],
-      "power": 41,
-      "defense": 31
+      "power": 34,
+      "defense": 24
     },
     {
       "id": "card_bp07_041",
@@ -13174,8 +13174,8 @@ module.exports = {
       "tags": [
         "concept"
       ],
-      "power": 42,
-      "defense": 32
+      "power": 30,
+      "defense": 20
     },
     {
       "id": "card_bp07_043",
@@ -13195,8 +13195,8 @@ module.exports = {
       "tags": [
         "concept"
       ],
-      "power": 38,
-      "defense": 28
+      "power": 33,
+      "defense": 23
     },
     {
       "id": "card_bp07_044",
@@ -13216,8 +13216,8 @@ module.exports = {
       "tags": [
         "concept"
       ],
-      "power": 36,
-      "defense": 26
+      "power": 43,
+      "defense": 33
     },
     {
       "id": "card_bp07_045",
@@ -13237,8 +13237,8 @@ module.exports = {
       "tags": [
         "concept"
       ],
-      "power": 40,
-      "defense": 30
+      "power": 38,
+      "defense": 28
     },
     {
       "id": "card_bp07_046",
@@ -13258,8 +13258,8 @@ module.exports = {
       "tags": [
         "concept"
       ],
-      "power": 59,
-      "defense": 49
+      "power": 53,
+      "defense": 43
     },
     {
       "id": "card_bp07_047",
@@ -13279,8 +13279,8 @@ module.exports = {
       "tags": [
         "concept"
       ],
-      "power": 42,
-      "defense": 32
+      "power": 43,
+      "defense": 33
     }
   ]
 };

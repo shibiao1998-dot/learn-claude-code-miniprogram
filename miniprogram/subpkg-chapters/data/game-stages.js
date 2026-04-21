@@ -21,14 +21,6 @@ module.exports = {
           },
           "options": [
             {
-              "id": "b",
-              "text": {
-                "zh": "版本 3：加入最大轮数和失败保护",
-                "en": "版本 3：加入最大轮数和失败保护",
-                "ja": "Version 3: safety bound を足す"
-              }
-            },
-            {
               "id": "a",
               "text": {
                 "zh": "这一章要解决什么问题",
@@ -37,19 +29,27 @@ module.exports = {
               }
             },
             {
-              "id": "d",
+              "id": "b",
               "text": {
-                "zh": "什么是 fork，为什么它是“下一步”，不是“起步”",
-                "en": "什么是 fork，为什么它是“下一步”，不是“起步”",
-                "ja": "fork とは何か、なぜ「次の段階」なのか"
+                "zh": "第四步：把 `todo` 接成一个工具",
+                "en": "第四步：把 `todo` 接成一个工具",
+                "ja": "第 4 段階: `todo` を 1 つの tool として loop へ接ぐ"
               }
             },
             {
               "id": "c",
               "text": {
-                "zh": "初学者最容易犯的错",
-                "en": "初学者最容易犯的错",
-                "ja": "初学者最容易犯的错"
+                "zh": "版本 3：加入最大轮数和失败保护",
+                "en": "版本 3：加入最大轮数和失败保护",
+                "ja": "Version 3: safety bound を足す"
+              }
+            },
+            {
+              "id": "d",
+              "text": {
+                "zh": "5. 以为 reminder 是可有可无的小装饰",
+                "en": "5. 以为 reminder 是可有可无的小装饰",
+                "ja": "5. session plan と durable task graph を同一視する"
               }
             }
           ],
@@ -80,27 +80,27 @@ module.exports = {
               }
             },
             {
-              "id": "d",
+              "id": "b",
               "text": {
-                "zh": "最小心智模型",
-                "en": "Try It",
-                "ja": "最小心智モデル"
+                "zh": "坑 1：把子智能体当成“为了炫技的并发”",
+                "en": "坑 1：把子智能体当成“为了炫技的并发”",
+                "ja": "1. subagent を「並列アピール機能」だと思う"
               }
             },
             {
-              "id": "b",
+              "id": "d",
               "text": {
-                "zh": "第三步：整体历史过长时，做一次完整压缩",
-                "en": "Key Takeaway",
-                "ja": "第三步：整体历史过长时，做一次完整压缩"
+                "zh": "它如何接到主循环里",
+                "en": "它如何接到主循环里",
+                "ja": "它如何接到主循环里"
               }
             },
             {
               "id": "c",
               "text": {
-                "zh": "初学者最容易踩的坑",
-                "en": "初学者最容易踩的坑",
-                "ja": "初学者が混ぜやすいポイント"
+                "zh": "1. PlanItem",
+                "en": "1. PlanItem",
+                "ja": "1. PlanItem"
               }
             }
           ],
@@ -123,19 +123,11 @@ module.exports = {
           },
           "options": [
             {
-              "id": "c",
+              "id": "b",
               "text": {
-                "zh": "skill、memory、CLAUDE.md 的边界",
-                "en": "skill、memory、CLAUDE.md 的边界",
-                "ja": "skill、memory、CLAUDE.md 的边界"
-              }
-            },
-            {
-              "id": "d",
-              "text": {
-                "zh": "第三步：追加 assistant 回复",
-                "en": "第三步：追加 assistant 回复",
-                "ja": "第 3 段階: assistant response 自体も history へ戻す"
+                "zh": "1. 以为压缩等于删除",
+                "en": "1. 以为压缩等于删除",
+                "ja": "1. 以为压缩等于删除"
               }
             },
             {
@@ -147,11 +139,19 @@ module.exports = {
               }
             },
             {
-              "id": "b",
+              "id": "c",
               "text": {
-                "zh": "第五步：手动压缩和自动压缩复用同一条机制",
-                "en": "第五步：手动压缩和自动压缩复用同一条机制",
-                "ja": "第五步：手动压缩和自动压缩复用同一条机制"
+                "zh": "1. 把计划写得过长",
+                "en": "1. 把计划写得过长",
+                "ja": "1. plan を model の頭の中だけに置く"
+              }
+            },
+            {
+              "id": "d",
+              "text": {
+                "zh": "为什么它真的有用",
+                "en": "为什么它真的有用",
+                "ja": "なぜ本当に useful なのか"
               }
             }
           ],
@@ -174,6 +174,22 @@ module.exports = {
           },
           "options": [
             {
+              "id": "d",
+              "text": {
+                "zh": "它如何接进整个系统",
+                "en": "它如何接进整个系统",
+                "ja": "この章でわざと単純化していること"
+              }
+            },
+            {
+              "id": "c",
+              "text": {
+                "zh": "2. Tool Result Block",
+                "en": "2. Tool Result Block",
+                "ja": "2. Tool Result Block"
+              }
+            },
+            {
               "id": "a",
               "text": {
                 "zh": "什么是 turn",
@@ -184,25 +200,9 @@ module.exports = {
             {
               "id": "b",
               "text": {
-                "zh": "它如何接到主循环里",
-                "en": "它如何接到主循环里",
-                "ja": "它如何接到主循环里"
-              }
-            },
-            {
-              "id": "c",
-              "text": {
-                "zh": "2. 只在撞到上限后才临时乱补",
-                "en": "2. 只在撞到上限后才临时乱补",
-                "ja": "2. 只在撞到上限后才临时乱补"
-              }
-            },
-            {
-              "id": "d",
-              "text": {
-                "zh": "第四步：只把结果带回父智能体",
-                "en": "第四步：只把结果带回父智能体",
-                "ja": "第 4 段階: 子は最後に summary だけ返す"
+                "zh": "这一章最关键的数据结构",
+                "en": "这一章最关键的数据结构",
+                "ja": "この章の核になるデータ構造"
               }
             }
           ],
@@ -225,19 +225,19 @@ module.exports = {
           },
           "options": [
             {
-              "id": "d",
+              "id": "b",
               "text": {
-                "zh": "它如何接到主循环里",
-                "en": "它如何接到主循环里",
-                "ja": "main loop に何が増えるのか"
+                "zh": "第三步：把 skill 目录放进 system prompt",
+                "en": "第三步：把 skill 目录放进 system prompt",
+                "ja": "第三步：把 skill 目录放进 system prompt"
               }
             },
             {
-              "id": "b",
+              "id": "c",
               "text": {
-                "zh": "什么是 loading",
-                "en": "What Changed From s04",
-                "ja": "試してみる"
+                "zh": "为什么这章故意不讲成任务图",
+                "en": "为什么这章故意不讲成任务图",
+                "ja": "なぜここで task graph まで教えないのか"
               }
             },
             {
@@ -249,11 +249,11 @@ module.exports = {
               }
             },
             {
-              "id": "c",
+              "id": "d",
               "text": {
-                "zh": "最小实现",
-                "en": "最小实现",
-                "ja": "最小実装を段階で追う"
+                "zh": "它如何接到主循环里",
+                "en": "它如何接到主循环里",
+                "ja": "它如何接到主循环里"
               }
             }
           ],
@@ -298,22 +298,6 @@ module.exports = {
           },
           "options": [
             {
-              "id": "c",
-              "text": {
-                "zh": "它如何接到主循环里",
-                "en": "它如何接到主循环里",
-                "ja": "它如何接到主循环里"
-              }
-            },
-            {
-              "id": "b",
-              "text": {
-                "zh": "3. 把 skill 当成“绝对规则”",
-                "en": "3. 把 skill 当成“绝对规则”",
-                "ja": "3. 把 skill 当成“绝对规则”"
-              }
-            },
-            {
               "id": "a",
               "text": {
                 "zh": "问题",
@@ -322,11 +306,27 @@ module.exports = {
               }
             },
             {
+              "id": "c",
+              "text": {
+                "zh": "2. 只保存用户消息，不保存 assistant 消息",
+                "en": "2. 只保存用户消息，不保存 assistant 消息",
+                "ja": "2. 只保存用户消息，不保存 assistant 消息"
+              }
+            },
+            {
+              "id": "b",
+              "text": {
+                "zh": "第五步：让 skill 正文只在当前需要时进入上下文",
+                "en": "第五步：让 skill 正文只在当前需要时进入上下文",
+                "ja": "第五步：让 skill 正文只在当前需要时进入上下文"
+              }
+            },
+            {
               "id": "d",
               "text": {
-                "zh": "什么是会话内规划",
-                "en": "The Solution",
-                "ja": "session 内 planning とは何か"
+                "zh": "先解释几个名词",
+                "en": "The Problem",
+                "ja": "解決策"
               }
             }
           ],
@@ -349,22 +349,6 @@ module.exports = {
           },
           "options": [
             {
-              "id": "d",
-              "text": {
-                "zh": "1. Message",
-                "en": "Key Takeaway",
-                "ja": "1. Message"
-              }
-            },
-            {
-              "id": "b",
-              "text": {
-                "zh": "2. 不区分“当前一步”和“未来几步”",
-                "en": "2. 不区分“当前一步”和“未来几步”",
-                "ja": "2. `in_progress` を複数許してしまう"
-              }
-            },
-            {
               "id": "a",
               "text": {
                 "zh": "解决方案",
@@ -375,9 +359,25 @@ module.exports = {
             {
               "id": "c",
               "text": {
-                "zh": "4. 把 skill 和 memory 混成一类",
-                "en": "4. 把 skill 和 memory 混成一类",
-                "ja": "4. 把 skill 和 memory 混成一类"
+                "zh": "2. skill 目录信息写得太弱",
+                "en": "2. skill 目录信息写得太弱",
+                "ja": "2. skill 目录信息写得太弱"
+              }
+            },
+            {
+              "id": "d",
+              "text": {
+                "zh": "什么是 active step",
+                "en": "What Changed From s02",
+                "ja": "active step とは何か"
+              }
+            },
+            {
+              "id": "b",
+              "text": {
+                "zh": "最小心智模型",
+                "en": "What's Next",
+                "ja": "最小心智モデル"
               }
             }
           ],
@@ -400,35 +400,35 @@ module.exports = {
           },
           "options": [
             {
-              "id": "a",
-              "text": {
-                "zh": "工作原理",
-                "en": "The Solution",
-                "ja": "仕組み"
-              }
-            },
-            {
               "id": "c",
               "text": {
-                "zh": "什么是活跃上下文",
+                "zh": "什么是 todo",
                 "en": "How It Works",
-                "ja": "s05からの変更点"
+                "ja": "todo とは何か"
               }
             },
             {
               "id": "d",
               "text": {
-                "zh": "它如何接到主循环里",
-                "en": "它如何接到主循环里",
-                "ja": "它如何接到主循环里"
+                "zh": "版本 1：空白上下文子智能体",
+                "en": "版本 1：空白上下文子智能体",
+                "ja": "Version 1: blank-context subagent"
               }
             },
             {
               "id": "b",
               "text": {
-                "zh": "2. 不区分“当前一步”和“未来几步”",
-                "en": "2. 不区分“当前一步”和“未来几步”",
-                "ja": "2. `in_progress` を複数許してしまう"
+                "zh": "最小实现",
+                "en": "最小实现",
+                "ja": "最小実装を段階で追う"
+              }
+            },
+            {
+              "id": "a",
+              "text": {
+                "zh": "工作原理",
+                "en": "The Solution",
+                "ja": "仕組み"
               }
             }
           ],
@@ -451,15 +451,7 @@ module.exports = {
           },
           "options": [
             {
-              "id": "a",
-              "text": {
-                "zh": "消息规范化",
-                "en": "How It Works",
-                "ja": "s01からの変更点"
-              }
-            },
-            {
-              "id": "d",
+              "id": "b",
               "text": {
                 "zh": "第三步：子智能体只拿必要工具",
                 "en": "第三步：子智能体只拿必要工具",
@@ -467,19 +459,27 @@ module.exports = {
               }
             },
             {
-              "id": "c",
+              "id": "d",
               "text": {
-                "zh": "它如何接到主循环里",
-                "en": "它如何接到主循环里",
-                "ja": "main loop に何が増えるのか"
+                "zh": "2. Tool Result Block",
+                "en": "2. Tool Result Block",
+                "ja": "2. Tool Result Block"
               }
             },
             {
-              "id": "b",
+              "id": "c",
               "text": {
-                "zh": "关键数据结构",
-                "en": "What You've Mastered",
-                "ja": "关键数据结构"
+                "zh": "CLAUDE.md",
+                "en": "CLAUDE.md",
+                "ja": "CLAUDE.md"
+              }
+            },
+            {
+              "id": "a",
+              "text": {
+                "zh": "消息规范化",
+                "en": "How It Works",
+                "ja": "s01からの変更点"
               }
             }
           ],
@@ -502,22 +502,6 @@ module.exports = {
           },
           "options": [
             {
-              "id": "c",
-              "text": {
-                "zh": "什么是 loading",
-                "en": "What Changed From s04",
-                "ja": "試してみる"
-              }
-            },
-            {
-              "id": "d",
-              "text": {
-                "zh": "第一步：准备初始消息",
-                "en": "第一步：准备初始消息",
-                "ja": "第 1 段階: 初期 message を作る"
-              }
-            },
-            {
               "id": "a",
               "text": {
                 "zh": "为什么需要",
@@ -526,11 +510,27 @@ module.exports = {
               }
             },
             {
+              "id": "c",
+              "text": {
+                "zh": "5. 一上来就讲太多多源加载细节",
+                "en": "5. 一上来就讲太多多源加载细节",
+                "ja": "5. 一上来就讲太多多源加载细节"
+              }
+            },
+            {
+              "id": "d",
+              "text": {
+                "zh": "1. 把所有 skill 正文永远塞进 system prompt",
+                "en": "1. 把所有 skill 正文永远塞进 system prompt",
+                "ja": "1. 把所有 skill 正文永远塞进 system prompt"
+              }
+            },
+            {
               "id": "b",
               "text": {
-                "zh": "用处 1：给父上下文减负",
-                "en": "用处 1：给父上下文减负",
-                "ja": "1. 親 context を軽く保てる"
+                "zh": "1. 把工具结果打印出来，但不写回 `messages`",
+                "en": "1. 把工具结果打印出来，但不写回 `messages`",
+                "ja": "一文で覚える"
               }
             }
           ],
@@ -583,27 +583,27 @@ module.exports = {
               }
             },
             {
-              "id": "c",
+              "id": "b",
               "text": {
-                "zh": "什么是活跃上下文",
-                "en": "How It Works",
-                "ja": "s05からの変更点"
+                "zh": "第四步：如果模型调用了工具，就执行",
+                "en": "第四步：如果模型调用了工具，就执行",
+                "ja": "第 4 段階: tool_use があればจริง行する"
               }
             },
             {
               "id": "d",
               "text": {
-                "zh": "3. 不给工具结果绑定 `tool_use_id`",
-                "en": "3. 不给工具结果绑定 `tool_use_id`",
-                "ja": "3. 不给工具结果绑定 `tool_use_id`"
+                "zh": "版本 3：加入最大轮数和失败保护",
+                "en": "版本 3：加入最大轮数和失败保护",
+                "ja": "Version 3: safety bound を足す"
               }
             },
             {
-              "id": "b",
+              "id": "c",
               "text": {
-                "zh": "什么叫“上下文隔离”",
-                "en": "What Changed From s03",
-                "ja": "context isolation とは何か"
+                "zh": "第一步：准备一个计划管理器",
+                "en": "第一步：准备一个计划管理器",
+                "ja": "第 1 段階: plan manager を用意する"
               }
             }
           ],
@@ -626,6 +626,14 @@ module.exports = {
           },
           "options": [
             {
+              "id": "c",
+              "text": {
+                "zh": "组合成一个完整循环",
+                "en": "组合成一个完整循环",
+                "ja": "全体を 1 つの loop にまとめる"
+              }
+            },
+            {
               "id": "a",
               "text": {
                 "zh": "先解释几个名词",
@@ -634,27 +642,19 @@ module.exports = {
               }
             },
             {
-              "id": "d",
-              "text": {
-                "zh": "最小心智模型",
-                "en": "Step 2: Lever 1 -- Micro-Compact",
-                "ja": "高完成度システムではどう広がるか"
-              }
-            },
-            {
-              "id": "c",
-              "text": {
-                "zh": "什么是“父智能体”",
-                "en": "The Solution",
-                "ja": "親 agent とは何か"
-              }
-            },
-            {
               "id": "b",
               "text": {
-                "zh": "第三步：整体历史过长时，做一次完整压缩",
-                "en": "Key Takeaway",
-                "ja": "第三步：整体历史过长时，做一次完整压缩"
+                "zh": "1. PlanItem",
+                "en": "1. PlanItem",
+                "ja": "1. PlanItem"
+              }
+            },
+            {
+              "id": "d",
+              "text": {
+                "zh": "什么是 skill",
+                "en": "The Solution",
+                "ja": "仕組み"
               }
             }
           ],
@@ -677,35 +677,35 @@ module.exports = {
           },
           "options": [
             {
-              "id": "b",
-              "text": {
-                "zh": "版本 2：限制工具集",
-                "en": "版本 2：限制工具集",
-                "ja": "Version 2: tool set を制限する"
-              }
-            },
-            {
-              "id": "c",
-              "text": {
-                "zh": "压缩后，真正要保住什么",
-                "en": "压缩后，真正要保住什么",
-                "ja": "压缩后，真正要保住什么"
-              }
-            },
-            {
-              "id": "d",
-              "text": {
-                "zh": "先解释几个名词",
-                "en": "The Problem",
-                "ja": "先に言葉をそろえる"
-              }
-            },
-            {
               "id": "a",
               "text": {
                 "zh": "什么是会话内规划",
                 "en": "The Solution",
                 "ja": "session 内 planning とは何か"
+              }
+            },
+            {
+              "id": "d",
+              "text": {
+                "zh": "什么是 state",
+                "en": "Try It",
+                "ja": "state とは何か"
+              }
+            },
+            {
+              "id": "b",
+              "text": {
+                "zh": "什么是 turn",
+                "en": "How It Works",
+                "ja": "turn とは何か"
+              }
+            },
+            {
+              "id": "c",
+              "text": {
+                "zh": "什么是 loading",
+                "en": "What Changed From s04",
+                "ja": "試してみる"
               }
             }
           ],
@@ -728,11 +728,19 @@ module.exports = {
           },
           "options": [
             {
-              "id": "b",
+              "id": "c",
               "text": {
-                "zh": "memory",
-                "en": "memory",
-                "ja": "memory"
+                "zh": "和后续章节的关系",
+                "en": "和后续章节的关系",
+                "ja": "5. `max_turns` のような safety bound を持たない"
+              }
+            },
+            {
+              "id": "d",
+              "text": {
+                "zh": "3. 摘要只写成一句空话",
+                "en": "3. 摘要只写成一句空话",
+                "ja": "3. 摘要只写成一句空话"
               }
             },
             {
@@ -744,19 +752,11 @@ module.exports = {
               }
             },
             {
-              "id": "c",
+              "id": "b",
               "text": {
-                "zh": "什么是 loading",
-                "en": "What Changed From s04",
-                "ja": "試してみる"
-              }
-            },
-            {
-              "id": "d",
-              "text": {
-                "zh": "5. 一上来就给初学者讲过多产品化层级",
-                "en": "5. 一上来就给初学者讲过多产品化层级",
-                "ja": "5. 一上来就给初学者讲过多产品化层级"
+                "zh": "3. 把会话计划当成长期任务系统",
+                "en": "3. 把会话计划当成长期任务系统",
+                "ja": "3. plan を一度書いたら更新しない"
               }
             }
           ],
@@ -779,27 +779,11 @@ module.exports = {
           },
           "options": [
             {
-              "id": "b",
-              "text": {
-                "zh": "3. 状态约束",
-                "en": "3. 状态约束",
-                "ja": "3. 状態制約"
-              }
-            },
-            {
               "id": "c",
               "text": {
-                "zh": "初学者最容易犯的错",
-                "en": "初学者最容易犯的错",
-                "ja": "初学者最容易犯的错"
-              }
-            },
-            {
-              "id": "d",
-              "text": {
-                "zh": "第五步：把工具结果作为新消息写回去",
-                "en": "第五步：把工具结果作为新消息写回去",
-                "ja": "第 5 段階: tool_result を user-side message として write-back する"
+                "zh": "实现",
+                "en": "Try It",
+                "ja": "教学上の簡略化"
               }
             },
             {
@@ -808,6 +792,22 @@ module.exports = {
                 "zh": "什么是 active step",
                 "en": "What Changed From s02",
                 "ja": "active step とは何か"
+              }
+            },
+            {
+              "id": "d",
+              "text": {
+                "zh": "3. 把 skill 当成“绝对规则”",
+                "en": "3. 把 skill 当成“绝对规则”",
+                "ja": "3. 把 skill 当成“绝对规则”"
+              }
+            },
+            {
+              "id": "b",
+              "text": {
+                "zh": "消息规范化",
+                "en": "How It Works",
+                "ja": "s01からの変更点"
               }
             }
           ],
@@ -854,9 +854,17 @@ module.exports = {
             {
               "id": "b",
               "text": {
-                "zh": "3. 把 skill 当成“绝对规则”",
-                "en": "3. 把 skill 当成“绝对规则”",
-                "ja": "3. 把 skill 当成“绝对规则”"
+                "zh": "3. SkillRegistry",
+                "en": "3. SkillRegistry",
+                "ja": "3. SkillRegistry"
+              }
+            },
+            {
+              "id": "c",
+              "text": {
+                "zh": "5. 一上来就给初学者讲过多产品化层级",
+                "en": "5. 一上来就给初学者讲过多产品化层级",
+                "ja": "5. 一上来就给初学者讲过多产品化层级"
               }
             },
             {
@@ -870,17 +878,9 @@ module.exports = {
             {
               "id": "d",
               "text": {
-                "zh": "第一步：把每个 skill 放成一个目录",
-                "en": "第一步：把每个 skill 放成一个目录",
-                "ja": "第一步：把每个 skill 放成一个目录"
-              }
-            },
-            {
-              "id": "c",
-              "text": {
-                "zh": "第二步：调用模型",
-                "en": "第二步：调用模型",
-                "ja": "第 2 段階: model を呼ぶ"
+                "zh": "什么是“父智能体”",
+                "en": "The Solution",
+                "ja": "親 agent とは何か"
               }
             }
           ],
@@ -905,17 +905,17 @@ module.exports = {
             {
               "id": "d",
               "text": {
-                "zh": "4. 把 skill 和 memory 混成一类",
-                "en": "4. 把 skill 和 memory 混成一类",
-                "ja": "4. 把 skill 和 memory 混成一类"
+                "zh": "什么是压缩",
+                "en": "Step 1: Lever 0 -- Persisted Output",
+                "ja": "試してみる"
               }
             },
             {
-              "id": "b",
+              "id": "c",
               "text": {
-                "zh": "初学者最容易犯的错",
-                "en": "初学者最容易犯的错",
-                "ja": "初学者最容易犯的错"
+                "zh": "用处 3：让后面的多 agent 协作有基础",
+                "en": "用处 3：让后面的多 agent 协作有基础",
+                "ja": "3. 後の multi-agent chapter の準備になる"
               }
             },
             {
@@ -927,11 +927,11 @@ module.exports = {
               }
             },
             {
-              "id": "c",
+              "id": "b",
               "text": {
-                "zh": "第二步：旧工具结果做微压缩",
-                "en": "Stage 1 Complete",
-                "ja": "第二步：旧工具结果做微压缩"
+                "zh": "5. 以为 reminder 是可有可无的小装饰",
+                "en": "5. 以为 reminder 是可有可无的小装饰",
+                "ja": "5. session plan と durable task graph を同一視する"
               }
             }
           ],
@@ -954,6 +954,14 @@ module.exports = {
           },
           "options": [
             {
+              "id": "c",
+              "text": {
+                "zh": "这一章要解决什么问题",
+                "en": "What You'll Learn",
+                "ja": "この章が解く問題"
+              }
+            },
+            {
               "id": "a",
               "text": {
                 "zh": "什么是“父智能体”",
@@ -964,25 +972,17 @@ module.exports = {
             {
               "id": "d",
               "text": {
-                "zh": "什么是 todo",
-                "en": "How It Works",
-                "ja": "todo とは何か"
-              }
-            },
-            {
-              "id": "c",
-              "text": {
-                "zh": "这一章要解决什么问题",
-                "en": "What You'll Learn",
-                "ja": "問題"
+                "zh": "坑 2：把父历史全部原样灌回去",
+                "en": "坑 2：把父历史全部原样灌回去",
+                "ja": "2. 子の history を全部親へ戻してしまう"
               }
             },
             {
               "id": "b",
               "text": {
-                "zh": "第三步：整体历史过长时，做一次完整压缩",
-                "en": "Key Takeaway",
-                "ja": "第三步：整体历史过长时，做一次完整压缩"
+                "zh": "初学者最容易犯的错",
+                "en": "初学者最容易犯的错",
+                "ja": "初学者最容易犯的错"
               }
             }
           ],
@@ -1005,35 +1005,35 @@ module.exports = {
           },
           "options": [
             {
-              "id": "a",
+              "id": "c",
               "text": {
-                "zh": "什么是“子智能体”",
-                "en": "How It Works",
-                "ja": "子 agent とは何か"
+                "zh": "第二步：从 `SKILL.md` 里读取最小元信息",
+                "en": "第二步：从 `SKILL.md` 里读取最小元信息",
+                "ja": "第二步：从 `SKILL.md` 里读取最小元信息"
               }
             },
             {
               "id": "d",
               "text": {
-                "zh": "5. 一上来就给初学者讲过多产品化层级",
-                "en": "5. 一上来就给初学者讲过多产品化层级",
-                "ja": "5. 一上来就给初学者讲过多产品化层级"
+                "zh": "最小实现",
+                "en": "Try It",
+                "ja": "最小实现"
               }
             },
             {
               "id": "b",
               "text": {
-                "zh": "第五步：如果连续几轮没更新计划，就提醒",
-                "en": "第五步：如果连续几轮没更新计划，就提醒",
-                "ja": "第 5 段階: 数 turn 更新がなければ reminder を挿入する"
+                "zh": "坑 1：把子智能体当成“为了炫技的并发”",
+                "en": "坑 1：把子智能体当成“为了炫技的并发”",
+                "ja": "1. subagent を「並列アピール機能」だと思う"
               }
             },
             {
-              "id": "c",
+              "id": "a",
               "text": {
-                "zh": "什么是会话内规划",
-                "en": "The Solution",
-                "ja": "session 内 planning とは何か"
+                "zh": "什么是“子智能体”",
+                "en": "How It Works",
+                "ja": "子 agent とは何か"
               }
             }
           ],
@@ -1056,19 +1056,11 @@ module.exports = {
           },
           "options": [
             {
-              "id": "b",
-              "text": {
-                "zh": "最小心智模型",
-                "en": "Try It",
-                "ja": "高完成度システムではどう広がるか"
-              }
-            },
-            {
               "id": "d",
               "text": {
-                "zh": "第五步：手动压缩和自动压缩复用同一条机制",
-                "en": "第五步：手动压缩和自动压缩复用同一条机制",
-                "ja": "第五步：手动压缩和自动压缩复用同一条机制"
+                "zh": "第五步：让 skill 正文只在当前需要时进入上下文",
+                "en": "第五步：让 skill 正文只在当前需要时进入上下文",
+                "ja": "第五步：让 skill 正文只在当前需要时进入上下文"
               }
             },
             {
@@ -1080,11 +1072,19 @@ module.exports = {
               }
             },
             {
+              "id": "b",
+              "text": {
+                "zh": "1. 把所有 skill 正文永远塞进 system prompt",
+                "en": "1. 把所有 skill 正文永远塞进 system prompt",
+                "ja": "1. 把所有 skill 正文永远塞进 system prompt"
+              }
+            },
+            {
               "id": "c",
               "text": {
-                "zh": "初学者最容易踩的坑",
-                "en": "初学者最容易踩的坑",
-                "ja": "初学者が混ぜやすいポイント"
+                "zh": "初学者最容易犯的错",
+                "en": "初学者最容易犯的错",
+                "ja": "この章を読み終えたら何が言えるべきか"
               }
             }
           ],
@@ -1137,27 +1137,27 @@ module.exports = {
               }
             },
             {
-              "id": "b",
+              "id": "c",
               "text": {
-                "zh": "用处 2：让任务描述更清楚",
-                "en": "用处 2：让任务描述更清楚",
-                "ja": "2. subtask の prompt を鋭くできる"
+                "zh": "第四步：如果模型调用了工具，就执行",
+                "en": "第四步：如果模型调用了工具，就执行",
+                "ja": "第 4 段階: tool_use があればจริง行する"
               }
             },
             {
-              "id": "c",
+              "id": "b",
               "text": {
-                "zh": "CLAUDE.md",
-                "en": "CLAUDE.md",
-                "ja": "CLAUDE.md"
+                "zh": "什么是上下文窗口",
+                "en": "The Solution",
+                "ja": "仕組み"
               }
             },
             {
               "id": "d",
               "text": {
-                "zh": "最小心智模型",
-                "en": "What's Next",
-                "ja": "最小心智モデル"
+                "zh": "3. 摘要只写成一句空话",
+                "en": "3. 摘要只写成一句空话",
+                "ja": "3. 摘要只写成一句空话"
               }
             }
           ],
@@ -1180,35 +1180,35 @@ module.exports = {
           },
           "options": [
             {
-              "id": "a",
-              "text": {
-                "zh": "先解释几个名词",
-                "en": "The Problem",
-                "ja": "解決策"
-              }
-            },
-            {
               "id": "d",
               "text": {
-                "zh": "什么是上下文窗口",
-                "en": "The Solution",
-                "ja": "仕組み"
-              }
-            },
-            {
-              "id": "c",
-              "text": {
-                "zh": "工作原理",
-                "en": "The Solution",
-                "ja": "仕組み"
+                "zh": "什么是 loading",
+                "en": "What Changed From s04",
+                "ja": "試してみる"
               }
             },
             {
               "id": "b",
               "text": {
-                "zh": "第五步：如果连续几轮没更新计划，就提醒",
-                "en": "第五步：如果连续几轮没更新计划，就提醒",
-                "ja": "第 5 段階: 数 turn 更新がなければ reminder を挿入する"
+                "zh": "消息规范化",
+                "en": "How It Works",
+                "ja": "s01からの変更点"
+              }
+            },
+            {
+              "id": "c",
+              "text": {
+                "zh": "什么是 state",
+                "en": "Try It",
+                "ja": "state とは何か"
+              }
+            },
+            {
+              "id": "a",
+              "text": {
+                "zh": "先解释几个名词",
+                "en": "The Problem",
+                "ja": "解決策"
               }
             }
           ],
@@ -1231,19 +1231,11 @@ module.exports = {
           },
           "options": [
             {
-              "id": "b",
+              "id": "c",
               "text": {
-                "zh": "这一章要解决什么问题",
-                "en": "What You'll Learn",
-                "ja": "問題"
-              }
-            },
-            {
-              "id": "d",
-              "text": {
-                "zh": "为什么它真的有用",
-                "en": "为什么它真的有用",
-                "ja": "なぜ本当に useful なのか"
+                "zh": "最小实现",
+                "en": "最小实现",
+                "ja": "最小実装を段階で追う"
               }
             },
             {
@@ -1255,11 +1247,19 @@ module.exports = {
               }
             },
             {
-              "id": "c",
+              "id": "b",
               "text": {
-                "zh": "什么是 discovery",
-                "en": "How It Works",
-                "ja": "s04からの変更点"
+                "zh": "3. SkillRegistry",
+                "en": "3. SkillRegistry",
+                "ja": "3. SkillRegistry"
+              }
+            },
+            {
+              "id": "d",
+              "text": {
+                "zh": "这一章要解决什么问题",
+                "en": "What You'll Learn",
+                "ja": "問題"
               }
             }
           ],
@@ -1282,6 +1282,14 @@ module.exports = {
           },
           "options": [
             {
+              "id": "d",
+              "text": {
+                "zh": "5. 一上来就讲太多多源加载细节",
+                "en": "5. 一上来就讲太多多源加载细节",
+                "ja": "5. 一上来就讲太多多源加载细节"
+              }
+            },
+            {
               "id": "a",
               "text": {
                 "zh": "什么是 discovery",
@@ -1290,27 +1298,19 @@ module.exports = {
               }
             },
             {
-              "id": "d",
+              "id": "c",
               "text": {
-                "zh": "skill、memory、CLAUDE.md 的边界",
-                "en": "skill、memory、CLAUDE.md 的边界",
-                "ja": "skill、memory、CLAUDE.md 的边界"
+                "zh": "第五步：把工具结果作为新消息写回去",
+                "en": "第五步：把工具结果作为新消息写回去",
+                "ja": "第 5 段階: tool_result を user-side message として write-back する"
               }
             },
             {
               "id": "b",
               "text": {
-                "zh": "5. 以为 `messages` 只是聊天展示",
-                "en": "5. 以为 `messages` 只是聊天展示",
-                "ja": "5. 以为 `messages` 只是聊天展示"
-              }
-            },
-            {
-              "id": "c",
-              "text": {
-                "zh": "什么叫“上下文隔离”",
-                "en": "What Changed From s03",
-                "ja": "context isolation とは何か"
+                "zh": "第三步：追加 assistant 回复",
+                "en": "第三步：追加 assistant 回复",
+                "ja": "第 3 段階: assistant response 自体も history へ戻す"
               }
             }
           ],
@@ -1333,19 +1333,27 @@ module.exports = {
           },
           "options": [
             {
+              "id": "c",
+              "text": {
+                "zh": "先解释几个名词",
+                "en": "The Problem",
+                "ja": "先に言葉をそろえる"
+              }
+            },
+            {
               "id": "b",
               "text": {
-                "zh": "这一章到底要解决什么问题",
-                "en": "What You'll Learn",
-                "ja": "この章が解く問題"
+                "zh": "3. 摘要只写成一句空话",
+                "en": "3. 摘要只写成一句空话",
+                "ja": "3. 摘要只写成一句空话"
               }
             },
             {
               "id": "d",
               "text": {
-                "zh": "版本 3：加入最大轮数和失败保护",
-                "en": "版本 3：加入最大轮数和失败保护",
-                "ja": "Version 3: safety bound を足す"
+                "zh": "5. 以为 reminder 是可有可无的小装饰",
+                "en": "5. 以为 reminder 是可有可无的小装饰",
+                "ja": "5. session plan と durable task graph を同一視する"
               }
             },
             {
@@ -1354,14 +1362,6 @@ module.exports = {
                 "zh": "什么是 loading",
                 "en": "What Changed From s04",
                 "ja": "試してみる"
-              }
-            },
-            {
-              "id": "c",
-              "text": {
-                "zh": "1. 把计划写得过长",
-                "en": "1. 把计划写得过长",
-                "ja": "1. plan を model の頭の中だけに置く"
               }
             }
           ],
@@ -1406,19 +1406,19 @@ module.exports = {
           },
           "options": [
             {
-              "id": "c",
+              "id": "d",
               "text": {
-                "zh": "什么是 tool_result",
-                "en": "What Changed",
-                "ja": "tool_result とは何か"
+                "zh": "最小实现",
+                "en": "最小实现",
+                "ja": "最小实现"
               }
             },
             {
-              "id": "b",
+              "id": "c",
               "text": {
-                "zh": "第五步：把工具结果作为新消息写回去",
-                "en": "第五步：把工具结果作为新消息写回去",
-                "ja": "第 5 段階: tool_result を user-side message として write-back する"
+                "zh": "第一步：准备初始消息",
+                "en": "第一步：准备初始消息",
+                "ja": "第 1 段階: 初期 message を作る"
               }
             },
             {
@@ -1430,11 +1430,11 @@ module.exports = {
               }
             },
             {
-              "id": "d",
+              "id": "b",
               "text": {
-                "zh": "2. 只保存用户消息，不保存 assistant 消息",
-                "en": "2. 只保存用户消息，不保存 assistant 消息",
-                "ja": "2. 只保存用户消息，不保存 assistant 消息"
+                "zh": "3. 把 skill 当成“绝对规则”",
+                "en": "3. 把 skill 当成“绝对规则”",
+                "ja": "3. 把 skill 当成“绝对规则”"
               }
             }
           ],
@@ -1457,27 +1457,11 @@ module.exports = {
           },
           "options": [
             {
-              "id": "d",
-              "text": {
-                "zh": "坑 3：一上来就做特别复杂的角色系统",
-                "en": "坑 3：一上来就做特别复杂的角色系统",
-                "ja": "3. 最初から役割を増やしすぎる"
-              }
-            },
-            {
               "id": "c",
               "text": {
-                "zh": "解决方案",
-                "en": "The Problem",
-                "ja": "解決策"
-              }
-            },
-            {
-              "id": "b",
-              "text": {
-                "zh": "3. 把 skill 当成“绝对规则”",
-                "en": "3. 把 skill 当成“绝对规则”",
-                "ja": "3. 把 skill 当成“绝对规则”"
+                "zh": "组合成一个完整循环",
+                "en": "组合成一个完整循环",
+                "ja": "全体を 1 つの loop にまとめる"
               }
             },
             {
@@ -1486,6 +1470,22 @@ module.exports = {
                 "zh": "先解释几个名词",
                 "en": "The Problem",
                 "ja": "解決策"
+              }
+            },
+            {
+              "id": "b",
+              "text": {
+                "zh": "什么是 discovery",
+                "en": "How It Works",
+                "ja": "s04からの変更点"
+              }
+            },
+            {
+              "id": "d",
+              "text": {
+                "zh": "第三步：整体历史过长时，做一次完整压缩",
+                "en": "Key Takeaway",
+                "ja": "第三步：整体历史过长时，做一次完整压缩"
               }
             }
           ],
@@ -1508,27 +1508,27 @@ module.exports = {
           },
           "options": [
             {
-              "id": "b",
+              "id": "d",
               "text": {
-                "zh": "最小实现",
-                "en": "最小实现",
-                "ja": "最小実装を段階で追う"
+                "zh": "消息规范化",
+                "en": "How It Works",
+                "ja": "s01からの変更点"
               }
             },
             {
-              "id": "d",
+              "id": "b",
               "text": {
-                "zh": "什么是 state",
-                "en": "Try It",
-                "ja": "state とは何か"
+                "zh": "为什么它真的有用",
+                "en": "为什么它真的有用",
+                "ja": "なぜ本当に useful なのか"
               }
             },
             {
               "id": "c",
               "text": {
-                "zh": "第四步：提供一个 `load_skill` 工具",
-                "en": "第四步：提供一个 `load_skill` 工具",
-                "ja": "第四步：提供一个 `load_skill` 工具"
+                "zh": "第五步：让 skill 正文只在当前需要时进入上下文",
+                "en": "第五步：让 skill 正文只在当前需要时进入上下文",
+                "ja": "第五步：让 skill 正文只在当前需要时进入上下文"
               }
             },
             {
@@ -1561,9 +1561,17 @@ module.exports = {
             {
               "id": "d",
               "text": {
-                "zh": "第三步：把计划渲染成可读文本",
-                "en": "第三步：把计划渲染成可读文本",
-                "ja": "第 3 段階: render して可読にする"
+                "zh": "什么是 fork，为什么它是“下一步”，不是“起步”",
+                "en": "什么是 fork，为什么它是“下一步”，不是“起步”",
+                "ja": "fork とは何か、なぜ「次の段階」なのか"
+              }
+            },
+            {
+              "id": "c",
+              "text": {
+                "zh": "3. SkillRegistry",
+                "en": "3. SkillRegistry",
+                "ja": "3. SkillRegistry"
               }
             },
             {
@@ -1577,17 +1585,9 @@ module.exports = {
             {
               "id": "b",
               "text": {
-                "zh": "这一章最关键的数据结构",
-                "en": "这一章最关键的数据结构",
-                "ja": "この章の核になるデータ構造"
-              }
-            },
-            {
-              "id": "c",
-              "text": {
-                "zh": "第四步：在主循环里接入压缩",
-                "en": "第四步：在主循环里接入压缩",
-                "ja": "第四步：在主循环里接入压缩"
+                "zh": "1. Message",
+                "en": "Key Takeaway",
+                "ja": "1. Message"
               }
             }
           ],
@@ -1612,17 +1612,9 @@ module.exports = {
             {
               "id": "c",
               "text": {
-                "zh": "第一步：把每个 skill 放成一个目录",
-                "en": "第一步：把每个 skill 放成一个目录",
-                "ja": "第一步：把每个 skill 放成一个目录"
-              }
-            },
-            {
-              "id": "d",
-              "text": {
-                "zh": "最小心智模型",
-                "en": "Try It",
-                "ja": "高完成度システムではどう広がるか"
+                "zh": "CLAUDE.md",
+                "en": "CLAUDE.md",
+                "ja": "CLAUDE.md"
               }
             },
             {
@@ -1636,9 +1628,17 @@ module.exports = {
             {
               "id": "b",
               "text": {
-                "zh": "用处 1：给父上下文减负",
-                "en": "用处 1：给父上下文减负",
-                "ja": "1. 親 context を軽く保てる"
+                "zh": "最小心智模型",
+                "en": "What You've Mastered",
+                "ja": "最小心智モデル"
+              }
+            },
+            {
+              "id": "d",
+              "text": {
+                "zh": "问题",
+                "en": "What You'll Learn",
+                "ja": "問題"
               }
             }
           ],
@@ -1685,9 +1685,25 @@ module.exports = {
             {
               "id": "c",
               "text": {
-                "zh": "task",
-                "en": "task",
-                "ja": "task"
+                "zh": "学完这章后，你应该能回答",
+                "en": "学完这章后，你应该能回答",
+                "ja": "学完这章后，你应该能回答"
+              }
+            },
+            {
+              "id": "b",
+              "text": {
+                "zh": "初学者最容易犯的错",
+                "en": "初学者最容易犯的错",
+                "ja": "初学者最容易犯的错"
+              }
+            },
+            {
+              "id": "d",
+              "text": {
+                "zh": "建议联读",
+                "en": "The Problem",
+                "ja": "併読すると楽になる資料"
               }
             },
             {
@@ -1696,22 +1712,6 @@ module.exports = {
                 "zh": "这一章的核心目标",
                 "en": "What You'll Learn",
                 "ja": "この章の核心目標"
-              }
-            },
-            {
-              "id": "d",
-              "text": {
-                "zh": "4. 忘了说明“教学版统一语义”和“高完成度细化语义”的区别",
-                "en": "4. 忘了说明“教学版统一语义”和“高完成度细化语义”的区别",
-                "ja": "4. 忘了说明“教学版统一语义”和“高完成度细化语义”的区别"
-              }
-            },
-            {
-              "id": "b",
-              "text": {
-                "zh": "1. 单条 memory 文件",
-                "en": "Key Takeaway",
-                "ja": "近い概念との違い"
               }
             }
           ],
@@ -1734,35 +1734,35 @@ module.exports = {
           },
           "options": [
             {
-              "id": "a",
-              "text": {
-                "zh": "建议联读",
-                "en": "The Problem",
-                "ja": "併読すると楽になる資料"
-              }
-            },
-            {
-              "id": "b",
-              "text": {
-                "zh": "最小实现",
-                "en": "最小实现",
-                "ja": "2. 実行関数を作る"
-              }
-            },
-            {
               "id": "d",
               "text": {
-                "zh": "3. HookRunner",
-                "en": "What's Next",
-                "ja": "最小実装"
+                "zh": "1. 把所有错误都当成一种错误",
+                "en": "1. 把所有错误都当成一种错误",
+                "ja": "初学者が混ぜやすいポイント"
               }
             },
             {
               "id": "c",
               "text": {
-                "zh": "这一章的核心目标",
-                "en": "What You'll Learn",
-                "ja": "この章の核心目標"
+                "zh": "这一章和前后章节怎么衔接",
+                "en": "这一章和前后章节怎么衔接",
+                "ja": "5. なぜ続行しているのかを state に残さない"
+              }
+            },
+            {
+              "id": "b",
+              "text": {
+                "zh": "最小心智模型",
+                "en": "Read Together",
+                "ja": "最小心智モデル"
+              }
+            },
+            {
+              "id": "a",
+              "text": {
+                "zh": "建议联读",
+                "en": "The Problem",
+                "ja": "併読すると楽になる資料"
               }
             }
           ],
@@ -1785,35 +1785,35 @@ module.exports = {
           },
           "options": [
             {
-              "id": "a",
-              "text": {
-                "zh": "先解释几个名词",
-                "en": "The Solution",
-                "ja": "先に言葉をそろえる"
-              }
-            },
-            {
-              "id": "b",
-              "text": {
-                "zh": "最小实现结构",
-                "en": "最小实现结构",
-                "ja": "memory とこの章の関係"
-              }
-            },
-            {
               "id": "d",
               "text": {
-                "zh": "1. 把 hook 当成“到处插 if”",
-                "en": "1. 把 hook 当成“到处插 if”",
-                "ja": "3. 何でも Hook に入れようとする"
+                "zh": "memory 为什么要和 system prompt 有关系",
+                "en": "memory 为什么要和 system prompt 有关系",
+                "ja": "memory 为什么要和 system prompt 有关系"
               }
             },
             {
               "id": "c",
               "text": {
-                "zh": "第三步：给 bash 加最小安全检查",
-                "en": "第三步：给 bash 加最小安全检查",
-                "ja": "1. permission を yes/no の 2 値で考える"
+                "zh": "三条恢复路径分别在补什么洞",
+                "en": "三条恢复路径分别在补什么洞",
+                "ja": "第 1 段階: recovery chooser を作る"
+              }
+            },
+            {
+              "id": "b",
+              "text": {
+                "zh": "第二步：先做 deny / allow 两类规则",
+                "en": "第二步：先做 deny / allow 两类规则",
+                "ja": "初学者が混ぜやすいポイント"
+              }
+            },
+            {
+              "id": "a",
+              "text": {
+                "zh": "先解释几个名词",
+                "en": "The Solution",
+                "ja": "先に言葉をそろえる"
               }
             }
           ],
@@ -1836,11 +1836,27 @@ module.exports = {
           },
           "options": [
             {
+              "id": "b",
+              "text": {
+                "zh": "第三步：给 bash 加最小安全检查",
+                "en": "第三步：给 bash 加最小安全检查",
+                "ja": "1. permission を yes/no の 2 値で考える"
+              }
+            },
+            {
               "id": "c",
               "text": {
-                "zh": "什么是“跨会话”",
-                "en": "How It Works",
-                "ja": "1. `user`"
+                "zh": "什么是“组装流水线”",
+                "en": "What Changed from s09",
+                "ja": "最小 builder"
+              }
+            },
+            {
+              "id": "d",
+              "text": {
+                "zh": "学完这章后，你应该能回答",
+                "en": "学完这章后，你应该能回答",
+                "ja": "学完这章后，你应该能回答"
               }
             },
             {
@@ -1849,22 +1865,6 @@ module.exports = {
                 "zh": "什么是权限系统",
                 "en": "Read Together",
                 "ja": "permission system とは何か"
-              }
-            },
-            {
-              "id": "d",
-              "text": {
-                "zh": "第 2 步看 mode",
-                "en": "Key Takeaway",
-                "ja": "2. mode を次に見る理由"
-              }
-            },
-            {
-              "id": "b",
-              "text": {
-                "zh": "错误 2：把当前任务状态存进 memory",
-                "en": "错误 2：把当前任务状态存进 memory",
-                "ja": "错误 2：把当前任务状态存进 memory"
               }
             }
           ],
@@ -1887,6 +1887,14 @@ module.exports = {
           },
           "options": [
             {
+              "id": "b",
+              "text": {
+                "zh": "什么叫恢复",
+                "en": "How It Works",
+                "ja": "recovery とは何か"
+              }
+            },
+            {
               "id": "a",
               "text": {
                 "zh": "什么是权限模式",
@@ -1895,27 +1903,19 @@ module.exports = {
               }
             },
             {
-              "id": "b",
-              "text": {
-                "zh": "学完这一章，你应该真正掌握什么",
-                "en": "学完这一章，你应该真正掌握什么",
-                "ja": "学完这一章，你应该真正掌握什么"
-              }
-            },
-            {
               "id": "d",
               "text": {
-                "zh": "错误 1：把代码结构也存进 memory",
-                "en": "错误 1：把代码结构也存进 memory",
-                "ja": "错误 1：把代码结构也存进 memory"
+                "zh": "初学者最容易犯的错",
+                "en": "初学者最容易犯的错",
+                "ja": "2. Hook ごとに別のデータ形を渡す"
               }
             },
             {
               "id": "c",
               "text": {
-                "zh": "先解释几个名词",
-                "en": "The Solution",
-                "ja": "先に言葉をそろえる"
+                "zh": "1. 权限规则",
+                "en": "1. 权限规则",
+                "ja": "1. PermissionRule"
               }
             }
           ],
@@ -1960,19 +1960,19 @@ module.exports = {
           },
           "options": [
             {
-              "id": "d",
+              "id": "b",
               "text": {
-                "zh": "2. 恢复决策",
-                "en": "What You've Mastered",
-                "ja": "2. Recovery Decision"
+                "zh": "第三步：给 bash 加最小安全检查",
+                "en": "第三步：给 bash 加最小安全检查",
+                "ja": "1. permission を yes/no の 2 値で考える"
               }
             },
             {
-              "id": "b",
+              "id": "d",
               "text": {
-                "zh": "最小实现",
-                "en": "Key Takeaway",
-                "ja": "最小実装を段階で追う"
+                "zh": "为什么不能把所有东西都硬塞进一个大字符串",
+                "en": "Try It",
+                "ja": "2. 部分ごとにテストしやすい"
               }
             },
             {
@@ -1986,9 +1986,9 @@ module.exports = {
             {
               "id": "c",
               "text": {
-                "zh": "最小权限系统应该长什么样",
-                "en": "Try It",
-                "ja": "最小 permission system の形"
+                "zh": "什么叫恢复",
+                "en": "How It Works",
+                "ja": "recovery とは何か"
               }
             }
           ],
@@ -2013,17 +2013,17 @@ module.exports = {
             {
               "id": "b",
               "text": {
-                "zh": "什么是 hook",
-                "en": "The Solution",
-                "ja": "Hook を最も簡単に言うと"
+                "zh": "第 4 步才 ask",
+                "en": "第 4 步才 ask",
+                "ja": "4. ask を最後に置く理由"
               }
             },
             {
               "id": "d",
               "text": {
-                "zh": "哪些东西不要存进 memory",
-                "en": "Try It",
-                "ja": "1. 1 メモリ = 1 ファイル"
+                "zh": "1. 不是所有 memory 都该放在同一个作用域",
+                "en": "1. 不是所有 memory 都该放在同一个作用域",
+                "ja": "1. 不是所有 memory 都该放在同一个作用域"
               }
             },
             {
@@ -2037,9 +2037,9 @@ module.exports = {
             {
               "id": "c",
               "text": {
-                "zh": "plan",
-                "en": "plan",
-                "ja": "plan"
+                "zh": "教学版统一返回约定",
+                "en": "How It Works",
+                "ja": "まず教えるべき 3 つのイベント"
               }
             }
           ],
@@ -2062,11 +2062,19 @@ module.exports = {
           },
           "options": [
             {
-              "id": "b",
+              "id": "c",
               "text": {
-                "zh": "这一章的核心目标",
-                "en": "What You'll Learn",
-                "ja": "この章の核心目標"
+                "zh": "2. 没有重试预算",
+                "en": "2. 没有重试预算",
+                "ja": "1. すべての failure に同じ retry をかける"
+              }
+            },
+            {
+              "id": "d",
+              "text": {
+                "zh": "1. `user`",
+                "en": "3. `project` -- Durable project facts not obvious from the repo",
+                "ja": "4. `reference`"
               }
             },
             {
@@ -2078,19 +2086,11 @@ module.exports = {
               }
             },
             {
-              "id": "c",
+              "id": "b",
               "text": {
-                "zh": "1. HookEvent",
-                "en": "Try It",
-                "ja": "Hook は主状態遷移を置き換えない"
-              }
-            },
-            {
-              "id": "d",
-              "text": {
-                "zh": "什么是权限模式",
-                "en": "How It Works",
-                "ja": "permission mode とは何か"
+                "zh": "2. HookResult",
+                "en": "What You've Mastered",
+                "ja": "Hook には整ったイベント情報を渡す"
               }
             }
           ],
@@ -2113,6 +2113,22 @@ module.exports = {
           },
           "options": [
             {
+              "id": "d",
+              "text": {
+                "zh": "什么是动态信息",
+                "en": "Read Together",
+                "ja": "1 本の大文字列より良い理由"
+              }
+            },
+            {
+              "id": "b",
+              "text": {
+                "zh": "4. memory 会漂移，所以回答前要先核对当前状态",
+                "en": "4. memory 会漂移，所以回答前要先核对当前状态",
+                "ja": "4. memory 会漂移，所以回答前要先核对当前状态"
+              }
+            },
+            {
               "id": "a",
               "text": {
                 "zh": "最小心智模型",
@@ -2121,27 +2137,11 @@ module.exports = {
               }
             },
             {
-              "id": "d",
-              "text": {
-                "zh": "初学者最容易犯的错",
-                "en": "初学者最容易犯的错",
-                "ja": "recovery は query の continuation 理由でもある"
-              }
-            },
-            {
               "id": "c",
               "text": {
-                "zh": "5. 用户说“忽略 memory”时，就当它是空的",
-                "en": "5. 用户说“忽略 memory”时，就当它是空的",
-                "ja": "5. 用户说“忽略 memory”时，就当它是空的"
-              }
-            },
-            {
-              "id": "b",
-              "text": {
-                "zh": "第二步：先做 deny / allow 两类规则",
-                "en": "第二步：先做 deny / allow 两类规则",
-                "ja": "初学者が混ぜやすいポイント"
+                "zh": "错误 1：把代码结构也存进 memory",
+                "en": "错误 1：把代码结构也存进 memory",
+                "ja": "错误 1：把代码结构也存进 memory"
               }
             }
           ],
@@ -2166,25 +2166,17 @@ module.exports = {
             {
               "id": "d",
               "text": {
-                "zh": "第 4 步才 ask",
-                "en": "第 4 步才 ask",
-                "ja": "4. ask を最後に置く理由"
-              }
-            },
-            {
-              "id": "c",
-              "text": {
-                "zh": "什么是权限模式",
-                "en": "How It Works",
-                "ja": "permission mode とは何か"
+                "zh": "位置 2：拿到 response 以后",
+                "en": "位置 2：拿到 response 以后",
+                "ja": "compact と recovery を混ぜない"
               }
             },
             {
               "id": "b",
               "text": {
-                "zh": "第 1 步先看 deny rules",
-                "en": "What's Next",
-                "ja": "1. deny を先に見る理由"
+                "zh": "最小实现结构",
+                "en": "最小实现结构",
+                "ja": "memory とこの章の関係"
               }
             },
             {
@@ -2193,6 +2185,14 @@ module.exports = {
                 "zh": "教学版统一返回约定",
                 "en": "How It Works",
                 "ja": "まず教えるべき 3 つのイベント"
+              }
+            },
+            {
+              "id": "c",
+              "text": {
+                "zh": "4. 压缩后没有告诉模型“这是续场”",
+                "en": "4. 压缩后没有告诉模型“这是续场”",
+                "ja": "3. compact と recovery を 1 つの話にしてしまう"
               }
             }
           ],
@@ -2237,6 +2237,14 @@ module.exports = {
           },
           "options": [
             {
+              "id": "b",
+              "text": {
+                "zh": "最小实现",
+                "en": "Key Takeaway",
+                "ja": "最小実装を段階で追う"
+              }
+            },
+            {
               "id": "a",
               "text": {
                 "zh": "这一章在解决什么问题",
@@ -2247,25 +2255,17 @@ module.exports = {
             {
               "id": "d",
               "text": {
-                "zh": "第 3 步看 allow rules",
-                "en": "第 3 步看 allow rules",
-                "ja": "3. allow を後に見る理由"
-              }
-            },
-            {
-              "id": "b",
-              "text": {
-                "zh": "什么是动态信息",
+                "zh": "什么是权限系统",
                 "en": "Read Together",
-                "ja": "1 本の大文字列より良い理由"
+                "ja": "permission system とは何か"
               }
             },
             {
               "id": "c",
               "text": {
-                "zh": "错误 2：把当前任务状态存进 memory",
-                "en": "错误 2：把当前任务状态存进 memory",
-                "ja": "错误 2：把当前任务状态存进 memory"
+                "zh": "初学者最容易犯的错",
+                "en": "初学者最容易犯的错",
+                "ja": "2. Hook ごとに別のデータ形を渡す"
               }
             }
           ],
@@ -2290,9 +2290,25 @@ module.exports = {
             {
               "id": "b",
               "text": {
-                "zh": "第一步：做一个 builder",
-                "en": "第一步：做一个 builder",
-                "ja": "初学者が混乱しやすい点"
+                "zh": "CLAUDE.md 为什么要单独一段",
+                "en": "CLAUDE.md 为什么要单独一段",
+                "ja": "CLAUDE.md 为什么要单独一段"
+              }
+            },
+            {
+              "id": "c",
+              "text": {
+                "zh": "错误 3：把 memory 当成绝对真相",
+                "en": "错误 3：把 memory 当成绝对真相",
+                "ja": "错误 3：把 memory 当成绝对真相"
+              }
+            },
+            {
+              "id": "d",
+              "text": {
+                "zh": "2. 权限模式",
+                "en": "2. 权限模式",
+                "ja": "2. Permission Mode"
               }
             },
             {
@@ -2301,22 +2317,6 @@ module.exports = {
                 "zh": "但先立一个边界：memory 不是什么都存",
                 "en": "The Problem",
                 "ja": "最初に立てるべき境界"
-              }
-            },
-            {
-              "id": "c",
-              "text": {
-                "zh": "什么是规则",
-                "en": "What Changed From s06",
-                "ja": "rule とは何か"
-              }
-            },
-            {
-              "id": "d",
-              "text": {
-                "zh": "这一章为什么重要",
-                "en": "What You'll Learn",
-                "ja": "なぜこの章が必要か"
               }
             }
           ],
@@ -2339,6 +2339,14 @@ module.exports = {
           },
           "options": [
             {
+              "id": "c",
+              "text": {
+                "zh": "2. 权限模式",
+                "en": "2. 权限模式",
+                "ja": "2. Permission Mode"
+              }
+            },
+            {
               "id": "a",
               "text": {
                 "zh": "建议联读",
@@ -2347,27 +2355,19 @@ module.exports = {
               }
             },
             {
-              "id": "b",
-              "text": {
-                "zh": "5. 用户说“忽略 memory”时，就当它是空的",
-                "en": "5. 用户说“忽略 memory”时，就当它是空的",
-                "ja": "5. 用户说“忽略 memory”时，就当它是空的"
-              }
-            },
-            {
-              "id": "c",
-              "text": {
-                "zh": "路径 2：上下文太长时，先压缩再重试",
-                "en": "路径 2：上下文太长时，先压缩再重试",
-                "ja": "3 つの主 recovery path が埋めている穴"
-              }
-            },
-            {
               "id": "d",
               "text": {
-                "zh": "4. 压缩后没有告诉模型“这是续场”",
-                "en": "4. 压缩后没有告诉模型“这是续场”",
-                "ja": "3. compact と recovery を 1 つの話にしてしまう"
+                "zh": "这一章最关键的结构化边界",
+                "en": "这一章最关键的结构化边界",
+                "ja": "2. 毎回変わる情報も全部同じ塊に入れる"
+              }
+            },
+            {
+              "id": "b",
+              "text": {
+                "zh": "1. 不好维护",
+                "en": "What You've Mastered",
+                "ja": "3. 安定部分と動的部分を分けて育てられる"
               }
             }
           ],
@@ -2390,35 +2390,35 @@ module.exports = {
           },
           "options": [
             {
-              "id": "a",
-              "text": {
-                "zh": "先解释几个名词",
-                "en": "Read Together",
-                "ja": "初学者向けの 4 分類"
-              }
-            },
-            {
               "id": "c",
               "text": {
-                "zh": "最小实现",
-                "en": "Key Takeaway",
-                "ja": "最小実装を段階で追う"
+                "zh": "task",
+                "en": "task",
+                "ja": "task"
               }
             },
             {
               "id": "d",
               "text": {
-                "zh": "1. 不好维护",
-                "en": "What You've Mastered",
-                "ja": "3. 安定部分と動的部分を分けて育てられる"
+                "zh": "2. 把所有变化信息都塞进 system prompt",
+                "en": "2. 把所有变化信息都塞进 system prompt",
+                "ja": "2. 把所有变化信息都塞进 system prompt"
               }
             },
             {
               "id": "b",
               "text": {
-                "zh": "学完这章后，你应该能回答",
-                "en": "学完这章后，你应该能回答",
-                "ja": "学完这章后，你应该能回答"
+                "zh": "第 1 步先看 deny rules",
+                "en": "What's Next",
+                "ja": "1. deny を先に見る理由"
+              }
+            },
+            {
+              "id": "a",
+              "text": {
+                "zh": "先解释几个名词",
+                "en": "Read Together",
+                "ja": "初学者向けの 4 分類"
               }
             }
           ],
@@ -2443,17 +2443,9 @@ module.exports = {
             {
               "id": "c",
               "text": {
-                "zh": "为什么不能把所有东西都硬塞进一个大字符串",
-                "en": "Try It",
-                "ja": "2. 部分ごとにテストしやすい"
-              }
-            },
-            {
-              "id": "d",
-              "text": {
-                "zh": "推荐先实现的 3 种模式",
-                "en": "推荐先实现的 3 种模式",
-                "ja": "最初に実装すると良い 3 つの mode"
+                "zh": "1. 不好维护",
+                "en": "What You've Mastered",
+                "ja": "3. 安定部分と動的部分を分けて育てられる"
               }
             },
             {
@@ -2467,9 +2459,17 @@ module.exports = {
             {
               "id": "b",
               "text": {
-                "zh": "建议联读",
-                "en": "The Problem",
-                "ja": "併読すると楽になる資料"
+                "zh": "5. 恢复过程完全没有日志",
+                "en": "5. 恢复过程完全没有日志",
+                "ja": "4. continuation message を曖昧にする"
+              }
+            },
+            {
+              "id": "d",
+              "text": {
+                "zh": "学完这一章，你应该真正掌握什么",
+                "en": "学完这一章，你应该真正掌握什么",
+                "ja": "学完这一章，你应该真正掌握什么"
               }
             }
           ],
@@ -2514,35 +2514,35 @@ module.exports = {
           },
           "options": [
             {
-              "id": "a",
+              "id": "b",
               "text": {
-                "zh": "这一章为什么重要",
-                "en": "What You'll Learn",
-                "ja": "なぜこの章が必要か"
+                "zh": "这一章和前后章节怎么衔接",
+                "en": "这一章和前后章节怎么衔接",
+                "ja": "5. なぜ続行しているのかを state に残さない"
               }
             },
             {
               "id": "d",
               "text": {
-                "zh": "最小权限系统应该长什么样",
-                "en": "Try It",
-                "ja": "最小 permission system の形"
-              }
-            },
-            {
-              "id": "b",
-              "text": {
-                "zh": "这一章最关键的数据结构",
-                "en": "What's Next",
-                "ja": "最小実装"
+                "zh": "建议联读",
+                "en": "The Problem",
+                "ja": "主線とどう併読するか"
               }
             },
             {
               "id": "c",
               "text": {
-                "zh": "什么是 hook",
-                "en": "The Solution",
-                "ja": "Hook を最も簡単に言うと"
+                "zh": "3. 续写提示",
+                "en": "Stage 2 Complete",
+                "ja": "3. Continuation Message"
+              }
+            },
+            {
+              "id": "a",
+              "text": {
+                "zh": "这一章为什么重要",
+                "en": "What You'll Learn",
+                "ja": "なぜこの章が必要か"
               }
             }
           ],
@@ -2565,6 +2565,22 @@ module.exports = {
           },
           "options": [
             {
+              "id": "b",
+              "text": {
+                "zh": "memory 为什么要和 system prompt 有关系",
+                "en": "memory 为什么要和 system prompt 有关系",
+                "ja": "memory 为什么要和 system prompt 有关系"
+              }
+            },
+            {
+              "id": "c",
+              "text": {
+                "zh": "什么叫恢复",
+                "en": "How It Works",
+                "ja": "recovery とは何か"
+              }
+            },
+            {
               "id": "a",
               "text": {
                 "zh": "建议联读",
@@ -2575,25 +2591,9 @@ module.exports = {
             {
               "id": "d",
               "text": {
-                "zh": "2. 恢复决策",
-                "en": "What You've Mastered",
-                "ja": "2. Recovery Decision"
-              }
-            },
-            {
-              "id": "b",
-              "text": {
-                "zh": "什么是规则",
-                "en": "What Changed From s06",
-                "ja": "rule とは何か"
-              }
-            },
-            {
-              "id": "c",
-              "text": {
-                "zh": "第二步：写一个 `save_memory` 工具",
-                "en": "第二步：写一个 `save_memory` 工具",
-                "ja": "`CLAUDE.md`"
+                "zh": "学完这章后，你应该能回答",
+                "en": "学完这章后，你应该能回答",
+                "ja": "5. decision に reason を残さない"
               }
             }
           ],
@@ -2616,35 +2616,35 @@ module.exports = {
           },
           "options": [
             {
-              "id": "c",
-              "text": {
-                "zh": "第二步：写一个 `save_memory` 工具",
-                "en": "第二步：写一个 `save_memory` 工具",
-                "ja": "`CLAUDE.md`"
-              }
-            },
-            {
-              "id": "b",
-              "text": {
-                "zh": "这一章最关键的结构化边界",
-                "en": "这一章最关键的结构化边界",
-                "ja": "2. 毎回変わる情報も全部同じ塊に入れる"
-              }
-            },
-            {
-              "id": "d",
-              "text": {
-                "zh": "3. HookRunner",
-                "en": "What's Next",
-                "ja": "最小実装"
-              }
-            },
-            {
               "id": "a",
               "text": {
                 "zh": "先解释几个名词",
                 "en": "The Solution",
                 "ja": "最小の心智モデル"
+              }
+            },
+            {
+              "id": "d",
+              "text": {
+                "zh": "初学者最容易犯的错",
+                "en": "初学者最容易犯的错",
+                "ja": "2. Hook ごとに別のデータ形を渡す"
+              }
+            },
+            {
+              "id": "c",
+              "text": {
+                "zh": "1. `user`",
+                "en": "3. `project` -- Durable project facts not obvious from the repo",
+                "ja": "4. `reference`"
+              }
+            },
+            {
+              "id": "b",
+              "text": {
+                "zh": "plan",
+                "en": "plan",
+                "ja": "plan"
               }
             }
           ],
@@ -2667,19 +2667,11 @@ module.exports = {
           },
           "options": [
             {
-              "id": "a",
-              "text": {
-                "zh": "什么是 system prompt",
-                "en": "How It Works",
-                "ja": "最も重要な境界"
-              }
-            },
-            {
               "id": "b",
               "text": {
-                "zh": "3. 不好做缓存和动态更新",
-                "en": "Key Takeaway",
-                "ja": "`CLAUDE.md` が独立した段なのはなぜか"
+                "zh": "2. 把所有变化信息都塞进 system prompt",
+                "en": "2. 把所有变化信息都塞进 system prompt",
+                "ja": "2. 把所有变化信息都塞进 system prompt"
               }
             },
             {
@@ -2691,11 +2683,19 @@ module.exports = {
               }
             },
             {
+              "id": "a",
+              "text": {
+                "zh": "什么是 system prompt",
+                "en": "How It Works",
+                "ja": "最も重要な境界"
+              }
+            },
+            {
               "id": "c",
               "text": {
-                "zh": "什么是规则",
-                "en": "What Changed From s06",
-                "ja": "rule とは何か"
+                "zh": "1. 把 hook 当成“到处插 if”",
+                "en": "1. 把 hook 当成“到处插 if”",
+                "ja": "3. 何でも Hook に入れようとする"
               }
             }
           ],
@@ -2718,27 +2718,11 @@ module.exports = {
           },
           "options": [
             {
-              "id": "c",
-              "text": {
-                "zh": "一个实用的教学版本",
-                "en": "一个实用的教学版本",
-                "ja": "一个实用的教学版本"
-              }
-            },
-            {
               "id": "b",
               "text": {
-                "zh": "这一章要解决什么问题",
-                "en": "What You'll Learn",
-                "ja": "この章が解く問題"
-              }
-            },
-            {
-              "id": "d",
-              "text": {
-                "zh": "关键数据结构",
-                "en": "What Changed From s07",
-                "ja": "重要な境界"
+                "zh": "位置 1：模型调用外层",
+                "en": "位置 1：模型调用外层",
+                "ja": "3. backoff"
               }
             },
             {
@@ -2747,6 +2731,22 @@ module.exports = {
                 "zh": "什么是“组装流水线”",
                 "en": "What Changed from s09",
                 "ja": "最小 builder"
+              }
+            },
+            {
+              "id": "c",
+              "text": {
+                "zh": "这章不应该讲太多什么",
+                "en": "这章不应该讲太多什么",
+                "ja": "3. `bash` を普通の string と同じ感覚で通す"
+              }
+            },
+            {
+              "id": "d",
+              "text": {
+                "zh": "最小心智模型",
+                "en": "Read Together",
+                "ja": "最小の心智モデル"
               }
             }
           ],
@@ -2791,14 +2791,6 @@ module.exports = {
           },
           "options": [
             {
-              "id": "c",
-              "text": {
-                "zh": "4. 压缩后没有告诉模型“这是续场”",
-                "en": "4. 压缩后没有告诉模型“这是续场”",
-                "ja": "3. compact と recovery を 1 つの話にしてしまう"
-              }
-            },
-            {
               "id": "a",
               "text": {
                 "zh": "这一章要解决什么问题",
@@ -2807,19 +2799,27 @@ module.exports = {
               }
             },
             {
-              "id": "d",
+              "id": "b",
               "text": {
-                "zh": "5. 用户说“忽略 memory”时，就当它是空的",
-                "en": "5. 用户说“忽略 memory”时，就当它是空的",
-                "ja": "5. 用户说“忽略 memory”时，就当它是空的"
+                "zh": "第 2 步看 mode",
+                "en": "Key Takeaway",
+                "ja": "2. mode を次に見る理由"
               }
             },
             {
-              "id": "b",
+              "id": "d",
               "text": {
-                "zh": "最小实现怎么写",
-                "en": "最小实现怎么写",
-                "ja": "最小実装を段階で追う"
+                "zh": "什么叫重试预算",
+                "en": "What Changed from s10",
+                "ja": "retry budget とは何か"
+              }
+            },
+            {
+              "id": "c",
+              "text": {
+                "zh": "初学者最容易犯的错",
+                "en": "初学者最容易犯的错",
+                "ja": "初学者最容易犯的错"
               }
             }
           ],
@@ -2842,11 +2842,11 @@ module.exports = {
           },
           "options": [
             {
-              "id": "c",
+              "id": "d",
               "text": {
-                "zh": "学完这章后，你应该能回答",
-                "en": "学完这章后，你应该能回答",
-                "ja": "学完这章后，你应该能回答"
+                "zh": "5. 用户说“忽略 memory”时，就当它是空的",
+                "en": "5. 用户说“忽略 memory”时，就当它是空的",
+                "ja": "5. 用户说“忽略 memory”时，就当它是空的"
               }
             },
             {
@@ -2858,19 +2858,19 @@ module.exports = {
               }
             },
             {
-              "id": "d",
+              "id": "b",
               "text": {
-                "zh": "这章要解决什么问题",
-                "en": "What You'll Learn",
-                "ja": "この章が解決する問題"
+                "zh": "为什么不能把所有东西都硬塞进一个大字符串",
+                "en": "Try It",
+                "ja": "2. 部分ごとにテストしやすい"
               }
             },
             {
-              "id": "b",
+              "id": "c",
               "text": {
-                "zh": "最小心智模型",
-                "en": "Read Together",
-                "ja": "最小心智モデル"
+                "zh": "边界 2：system prompt vs system reminder",
+                "en": "边界 2：system prompt vs system reminder",
+                "ja": "Try It"
               }
             }
           ],
@@ -2893,14 +2893,6 @@ module.exports = {
           },
           "options": [
             {
-              "id": "c",
-              "text": {
-                "zh": "关键数据结构",
-                "en": "What Changed From s07",
-                "ja": "重要な境界"
-              }
-            },
-            {
               "id": "a",
               "text": {
                 "zh": "先解释几个名词",
@@ -2909,19 +2901,27 @@ module.exports = {
               }
             },
             {
-              "id": "b",
+              "id": "d",
               "text": {
-                "zh": "学完这章后，你应该能回答",
-                "en": "学完这章后，你应该能回答",
-                "ja": "学完这章后，你应该能回答"
+                "zh": "推荐先实现的 3 种模式",
+                "en": "推荐先实现的 3 种模式",
+                "ja": "最初に実装すると良い 3 つの mode"
               }
             },
             {
-              "id": "d",
+              "id": "b",
               "text": {
-                "zh": "5. 恢复过程完全没有日志",
-                "en": "5. 恢复过程完全没有日志",
-                "ja": "4. continuation message を曖昧にする"
+                "zh": "什么是“组装流水线”",
+                "en": "What Changed from s09",
+                "ja": "最小 builder"
+              }
+            },
+            {
+              "id": "c",
+              "text": {
+                "zh": "1. 恢复状态",
+                "en": "Try It",
+                "ja": "1. Recovery State"
               }
             }
           ],
@@ -2944,27 +2944,11 @@ module.exports = {
           },
           "options": [
             {
-              "id": "c",
-              "text": {
-                "zh": "CLAUDE.md",
-                "en": "CLAUDE.md",
-                "ja": "CLAUDE.md"
-              }
-            },
-            {
-              "id": "d",
-              "text": {
-                "zh": "最小心智模型",
-                "en": "Read Together",
-                "ja": "最小の心智モデル"
-              }
-            },
-            {
               "id": "b",
               "text": {
-                "zh": "什么是“不可轻易重新推导”",
-                "en": "1. `user` -- Stable user preferences",
-                "ja": "2. `feedback`"
+                "zh": "1. 恢复状态",
+                "en": "Try It",
+                "ja": "1. Recovery State"
               }
             },
             {
@@ -2973,6 +2957,22 @@ module.exports = {
                 "zh": "什么叫恢复",
                 "en": "How It Works",
                 "ja": "recovery とは何か"
+              }
+            },
+            {
+              "id": "c",
+              "text": {
+                "zh": "第一步：先做 3 个模式",
+                "en": "第一步：先做 3 个模式",
+                "ja": "`bash` を特別に気にする理由"
+              }
+            },
+            {
+              "id": "d",
+              "text": {
+                "zh": "最小心智模型",
+                "en": "Read Together",
+                "ja": "最小心智モデル"
               }
             }
           ],
@@ -2995,19 +2995,11 @@ module.exports = {
           },
           "options": [
             {
-              "id": "c",
+              "id": "b",
               "text": {
-                "zh": "第二步：写一个 `save_memory` 工具",
-                "en": "第二步：写一个 `save_memory` 工具",
-                "ja": "`CLAUDE.md`"
-              }
-            },
-            {
-              "id": "d",
-              "text": {
-                "zh": "第一步：做一个 builder",
-                "en": "第一步：做一个 builder",
-                "ja": "初学者が混乱しやすい点"
+                "zh": "什么是权限系统",
+                "en": "Read Together",
+                "ja": "permission system とは何か"
               }
             },
             {
@@ -3019,11 +3011,19 @@ module.exports = {
               }
             },
             {
-              "id": "b",
+              "id": "d",
               "text": {
-                "zh": "位置 2：拿到 response 以后",
-                "en": "位置 2：拿到 response 以后",
-                "ja": "compact と recovery を混ぜない"
+                "zh": "3. 一上来就把所有事件做全",
+                "en": "3. 一上来就把所有事件做全",
+                "ja": "3. 一上来就把所有事件做全"
+              }
+            },
+            {
+              "id": "c",
+              "text": {
+                "zh": "一个实用的教学版本",
+                "en": "一个实用的教学版本",
+                "ja": "一个实用的教学版本"
               }
             }
           ],
@@ -3070,25 +3070,25 @@ module.exports = {
             {
               "id": "b",
               "text": {
-                "zh": "`s12` 的 task 是什么",
-                "en": "`s12` 的 task 是什么",
-                "ja": "前の章とどうつながるか"
+                "zh": "为什么这章放在后台任务之后",
+                "en": "为什么这章放在后台任务之后",
+                "ja": "为什么这章放在后台任务之后"
               }
             },
             {
               "id": "d",
               "text": {
-                "zh": "2. 没有 `last_fired_at`",
-                "en": "2. 没有 `last_fired_at`",
-                "ja": "2. 没有 `last_fired_at`"
+                "zh": "1. 一上来沉迷 cron 语法细节",
+                "en": "1. 一上来沉迷 cron 语法细节",
+                "ja": "1. 一上来沉迷 cron 语法细节"
               }
             },
             {
               "id": "c",
               "text": {
-                "zh": "为什么这章放在后台任务之后",
-                "en": "为什么这章放在后台任务之后",
-                "ja": "为什么这章放在后台任务之后"
+                "zh": "学完这一章，你应该真正掌握什么",
+                "en": "学完这一章，你应该真正掌握什么",
+                "ja": "学完这一章，你应该真正掌握什么"
               }
             },
             {
@@ -3121,25 +3121,9 @@ module.exports = {
             {
               "id": "c",
               "text": {
-                "zh": "和 `s03` 的区别",
-                "en": "和 `s03` 的区别",
-                "ja": "和 `s03` 的区别"
-              }
-            },
-            {
-              "id": "d",
-              "text": {
-                "zh": "先解释几个名词",
-                "en": "The Solution",
-                "ja": "主線とどう併読するか"
-              }
-            },
-            {
-              "id": "b",
-              "text": {
-                "zh": "初学者最容易犯的错",
-                "en": "初学者最容易犯的错",
-                "ja": "初学者最容易犯的错"
+                "zh": "什么是任务",
+                "en": "How It Works",
+                "ja": "仕組み"
               }
             },
             {
@@ -3148,6 +3132,22 @@ module.exports = {
                 "zh": "建议联读",
                 "en": "The Problem",
                 "ja": "主線とどう併読するか"
+              }
+            },
+            {
+              "id": "b",
+              "text": {
+                "zh": "先把几个词讲明白",
+                "en": "The Solution",
+                "ja": "解決策"
+              }
+            },
+            {
+              "id": "d",
+              "text": {
+                "zh": "下一章学什么",
+                "en": "下一章学什么",
+                "ja": "下一章学什么"
               }
             }
           ],
@@ -3170,27 +3170,11 @@ module.exports = {
           },
           "options": [
             {
-              "id": "d",
-              "text": {
-                "zh": "什么是 cron 表达式",
-                "en": "Read Together",
-                "ja": "重要なデータ構造"
-              }
-            },
-            {
               "id": "c",
               "text": {
-                "zh": "什么是任务图",
-                "en": "What Changed",
-                "ja": "試してみる"
-              }
-            },
-            {
-              "id": "b",
-              "text": {
-                "zh": "2. 调度通知",
-                "en": "Key Takeaway",
-                "ja": "なぜ `s13` の後なのか"
+                "zh": "什么是依赖",
+                "en": "Read Together",
+                "ja": "s06からの変更点"
               }
             },
             {
@@ -3199,6 +3183,22 @@ module.exports = {
                 "zh": "先把几个词讲明白",
                 "en": "The Solution",
                 "ja": "解決策"
+              }
+            },
+            {
+              "id": "b",
+              "text": {
+                "zh": "`s12` 的 task 是什么",
+                "en": "`s12` 的 task 是什么",
+                "ja": "前の章とどうつながるか"
+              }
+            },
+            {
+              "id": "d",
+              "text": {
+                "zh": "关键数据结构",
+                "en": "What You've Mastered",
+                "ja": "3. check interval"
               }
             }
           ],
@@ -3221,35 +3221,35 @@ module.exports = {
           },
           "options": [
             {
-              "id": "d",
-              "text": {
-                "zh": "这一章和任务系统的边界",
-                "en": "这一章和任务系统的边界",
-                "ja": "これは task board の task とは違う"
-              }
-            },
-            {
-              "id": "b",
-              "text": {
-                "zh": "3. 检查周期",
-                "en": "3. 检查周期",
-                "ja": "初学者がやりがちな間違い"
-              }
-            },
-            {
-              "id": "c",
-              "text": {
-                "zh": "1. RuntimeTaskRecord",
-                "en": "What's Next",
-                "ja": "1. RuntimeTaskRecord"
-              }
-            },
-            {
               "id": "a",
               "text": {
                 "zh": "什么是任务",
                 "en": "How It Works",
                 "ja": "仕組み"
+              }
+            },
+            {
+              "id": "b",
+              "text": {
+                "zh": "下一章学什么",
+                "en": "下一章学什么",
+                "ja": "下一章学什么"
+              }
+            },
+            {
+              "id": "d",
+              "text": {
+                "zh": "和 `s03` 的区别",
+                "en": "和 `s03` 的区别",
+                "ja": "和 `s03` 的区别"
+              }
+            },
+            {
+              "id": "c",
+              "text": {
+                "zh": "这一章要解决什么问题",
+                "en": "What You'll Learn",
+                "ja": "問題"
               }
             }
           ],
@@ -3272,27 +3272,11 @@ module.exports = {
           },
           "options": [
             {
-              "id": "b",
-              "text": {
-                "zh": "最小心智模型",
-                "en": "Try It",
-                "ja": "2. scheduled notification"
-              }
-            },
-            {
               "id": "c",
               "text": {
-                "zh": "3. 只放内存，不支持落盘",
-                "en": "3. 只放内存，不支持落盘",
-                "ja": "3. 只放内存，不支持落盘"
-              }
-            },
-            {
-              "id": "d",
-              "text": {
-                "zh": "这一章要解决什么问题",
-                "en": "What You'll Learn",
-                "ja": "この章が解決する問題"
+                "zh": "4. 把调度触发结果直接在后台默默执行",
+                "en": "4. 把调度触发结果直接在后台默默执行",
+                "ja": "4. 把调度触发结果直接在后台默默执行"
               }
             },
             {
@@ -3301,6 +3285,22 @@ module.exports = {
                 "zh": "什么是依赖",
                 "en": "Read Together",
                 "ja": "s06からの変更点"
+              }
+            },
+            {
+              "id": "b",
+              "text": {
+                "zh": "什么是 ready",
+                "en": "Try It",
+                "ja": "教学上の境界"
+              }
+            },
+            {
+              "id": "d",
+              "text": {
+                "zh": "为什么这章放在后台任务之后",
+                "en": "为什么这章放在后台任务之后",
+                "ja": "为什么这章放在后台任务之后"
               }
             }
           ],
@@ -3345,35 +3345,35 @@ module.exports = {
           },
           "options": [
             {
-              "id": "d",
-              "text": {
-                "zh": "最小心智模型",
-                "en": "Try It",
-                "ja": "最小心智モデル"
-              }
-            },
-            {
-              "id": "b",
-              "text": {
-                "zh": "2. TaskStatus",
-                "en": "2. TaskStatus",
-                "ja": "2. TaskStatus"
-              }
-            },
-            {
-              "id": "c",
-              "text": {
-                "zh": "先解释几个名词",
-                "en": "The Solution",
-                "ja": "主線とどう併読するか"
-              }
-            },
-            {
               "id": "a",
               "text": {
                 "zh": "这一章要解决什么问题",
                 "en": "What You'll Learn",
                 "ja": "この章が解く問題"
+              }
+            },
+            {
+              "id": "d",
+              "text": {
+                "zh": "第三步：完成后写通知",
+                "en": "第三步：完成后写通知",
+                "ja": "第 3 段階: subprocess が終わったら notification を積む"
+              }
+            },
+            {
+              "id": "c",
+              "text": {
+                "zh": "什么是 cron 表达式",
+                "en": "Read Together",
+                "ja": "重要なデータ構造"
+              }
+            },
+            {
+              "id": "b",
+              "text": {
+                "zh": "先解释几个名词",
+                "en": "The Solution",
+                "ja": "主線とどう併読するか"
               }
             }
           ],
@@ -3396,19 +3396,19 @@ module.exports = {
           },
           "options": [
             {
-              "id": "d",
+              "id": "b",
               "text": {
-                "zh": "最小心智模型",
-                "en": "Try It",
-                "ja": "最小心智モデル"
+                "zh": "第四步：把任务工具接给模型",
+                "en": "第四步：把任务工具接给模型",
+                "ja": "第四步：把任务工具接给模型"
               }
             },
             {
-              "id": "b",
+              "id": "d",
               "text": {
-                "zh": "1. RuntimeTaskRecord",
-                "en": "What's Next",
-                "ja": "1. RuntimeTaskRecord"
+                "zh": "2. 调度通知",
+                "en": "Key Takeaway",
+                "ja": "なぜ `s13` の後なのか"
               }
             },
             {
@@ -3422,9 +3422,9 @@ module.exports = {
             {
               "id": "c",
               "text": {
-                "zh": "什么是任务图",
+                "zh": "什么是持久化调度",
                 "en": "What Changed",
-                "ja": "試してみる"
+                "ja": "1. schedule record"
               }
             }
           ],
@@ -3447,27 +3447,19 @@ module.exports = {
           },
           "options": [
             {
-              "id": "c",
+              "id": "b",
               "text": {
-                "zh": "关键数据结构",
-                "en": "What You've Mastered",
-                "ja": "この章の核になるデータ構造"
+                "zh": "这一章要解决什么问题",
+                "en": "What You'll Learn",
+                "ja": "問題"
               }
             },
             {
               "id": "d",
               "text": {
                 "zh": "最小心智模型",
-                "en": "Try It",
-                "ja": "最小心智モデル"
-              }
-            },
-            {
-              "id": "b",
-              "text": {
-                "zh": "什么是调度器",
-                "en": "How It Works",
-                "ja": "最小の心智モデル"
+                "en": "What You've Mastered",
+                "ja": "最小心智模型"
               }
             },
             {
@@ -3476,6 +3468,14 @@ module.exports = {
                 "zh": "先把几个词讲明白",
                 "en": "The Solution",
                 "ja": "先に言葉をそろえる"
+              }
+            },
+            {
+              "id": "c",
+              "text": {
+                "zh": "`s13` 的 background task 是什么",
+                "en": "`s13` 的 background task 是什么",
+                "ja": "初学者が混ぜやすいポイント"
               }
             }
           ],
@@ -3498,22 +3498,6 @@ module.exports = {
           },
           "options": [
             {
-              "id": "d",
-              "text": {
-                "zh": "下一章学什么",
-                "en": "下一章学什么",
-                "ja": "下一章学什么"
-              }
-            },
-            {
-              "id": "c",
-              "text": {
-                "zh": "学完这一章，你应该真正掌握什么",
-                "en": "学完这一章，你应该真正掌握什么",
-                "ja": "6. timeout / error を `completed` と同じように扱う"
-              }
-            },
-            {
               "id": "a",
               "text": {
                 "zh": "什么叫前台",
@@ -3522,11 +3506,27 @@ module.exports = {
               }
             },
             {
+              "id": "c",
+              "text": {
+                "zh": "什么是持久化调度",
+                "en": "What Changed",
+                "ja": "1. schedule record"
+              }
+            },
+            {
+              "id": "d",
+              "text": {
+                "zh": "这一章要解决什么问题",
+                "en": "What You'll Learn",
+                "ja": "この章が解く問題"
+              }
+            },
+            {
               "id": "b",
               "text": {
-                "zh": "第一步：让任务落盘",
-                "en": "第一步：让任务落盘",
-                "ja": "第一步：让任务落盘"
+                "zh": "关键数据结构",
+                "en": "What You've Mastered",
+                "ja": "3. check interval"
               }
             }
           ],
@@ -3549,11 +3549,19 @@ module.exports = {
           },
           "options": [
             {
+              "id": "b",
+              "text": {
+                "zh": "和 `s03` 的区别",
+                "en": "和 `s03` 的区别",
+                "ja": "和 `s03` 的区别"
+              }
+            },
+            {
               "id": "d",
               "text": {
-                "zh": "最小实现",
-                "en": "最小实现",
-                "ja": "最小实现"
+                "zh": "4. 把调度触发结果直接在后台默默执行",
+                "en": "4. 把调度触发结果直接在后台默默执行",
+                "ja": "4. 把调度触发结果直接在后台默默执行"
               }
             },
             {
@@ -3565,19 +3573,11 @@ module.exports = {
               }
             },
             {
-              "id": "b",
+              "id": "c",
               "text": {
                 "zh": "`s13` 的 background task 是什么",
                 "en": "`s13` 的 background task 是什么",
                 "ja": "初学者が混ぜやすいポイント"
-              }
-            },
-            {
-              "id": "c",
-              "text": {
-                "zh": "为什么完整输出不要直接塞回 prompt",
-                "en": "为什么完整输出不要直接塞回 prompt",
-                "ja": "第 5 段階: preview と full output を分ける"
               }
             }
           ],
@@ -3622,6 +3622,22 @@ module.exports = {
           },
           "options": [
             {
+              "id": "b",
+              "text": {
+                "zh": "为什么这章放在后台任务之后",
+                "en": "为什么这章放在后台任务之后",
+                "ja": "为什么这章放在后台任务之后"
+              }
+            },
+            {
+              "id": "d",
+              "text": {
+                "zh": "第三步：时间到了就发通知",
+                "en": "第三步：时间到了就发通知",
+                "ja": "4. 未来トリガーの仕事を裏で黙って全部実行する"
+              }
+            },
+            {
               "id": "a",
               "text": {
                 "zh": "这一章要解决什么问题",
@@ -3630,27 +3646,11 @@ module.exports = {
               }
             },
             {
-              "id": "d",
-              "text": {
-                "zh": "2. 没有 `last_fired_at`",
-                "en": "2. 没有 `last_fired_at`",
-                "ja": "2. 没有 `last_fired_at`"
-              }
-            },
-            {
-              "id": "b",
-              "text": {
-                "zh": "4. 把 `s12` 的工作目标和本章的运行任务混为一谈",
-                "en": "4. 把 `s12` 的工作目标和本章的运行任务混为一谈",
-                "ja": "5. queue 操作に lock を使わない"
-              }
-            },
-            {
               "id": "c",
               "text": {
-                "zh": "什么是调度器",
-                "en": "How It Works",
-                "ja": "最小の心智モデル"
+                "zh": "第四步：下一轮前排空通知",
+                "en": "第四步：下一轮前排空通知",
+                "ja": "第 4 段階: 次の model call 前に queue を drain する"
               }
             }
           ],
@@ -3675,25 +3675,9 @@ module.exports = {
             {
               "id": "b",
               "text": {
-                "zh": "3. 检查周期",
-                "en": "3. 检查周期",
-                "ja": "初学者がやりがちな間違い"
-              }
-            },
-            {
-              "id": "d",
-              "text": {
-                "zh": "1. 只会创建任务，不会维护依赖",
-                "en": "1. 只会创建任务，不会维护依赖",
-                "ja": "1. 只会创建任务，不会维护依赖"
-              }
-            },
-            {
-              "id": "c",
-              "text": {
-                "zh": "第二步：把依赖关系写成双向",
-                "en": "第二步：把依赖关系写成双向",
-                "ja": "第二步：把依赖关系写成双向"
+                "zh": "下一章学什么",
+                "en": "下一章学什么",
+                "ja": "教学上の境界"
               }
             },
             {
@@ -3702,6 +3686,22 @@ module.exports = {
                 "zh": "建议联读",
                 "en": "The Problem",
                 "ja": "教学上の境界"
+              }
+            },
+            {
+              "id": "d",
+              "text": {
+                "zh": "最小心智模型",
+                "en": "What You've Mastered",
+                "ja": "最小心智模型"
+              }
+            },
+            {
+              "id": "c",
+              "text": {
+                "zh": "为什么这章放在后台任务之后",
+                "en": "为什么这章放在后台任务之后",
+                "ja": "为什么这章放在后台任务之后"
               }
             }
           ],
@@ -3732,27 +3732,27 @@ module.exports = {
               }
             },
             {
-              "id": "c",
+              "id": "d",
               "text": {
-                "zh": "如何接到主循环里",
-                "en": "如何接到主循环里",
-                "ja": "如何接到主循环里"
+                "zh": "2. TaskStatus",
+                "en": "2. TaskStatus",
+                "ja": "2. TaskStatus"
               }
             },
             {
               "id": "b",
               "text": {
-                "zh": "初学者最容易犯的错",
-                "en": "初学者最容易犯的错",
-                "ja": "1. background execution を「もう 1 本の main loop」と考える"
+                "zh": "1. 以为“后台”就是更复杂的主循环",
+                "en": "1. 以为“后台”就是更复杂的主循环",
+                "ja": "2. result を queue ではなく即座に messages へ乱暴に書き込む"
               }
             },
             {
-              "id": "d",
+              "id": "c",
               "text": {
-                "zh": "为什么这章放在后台任务之后",
-                "en": "为什么这章放在后台任务之后",
-                "ja": "为什么这章放在后台任务之后"
+                "zh": "这一章和 s03、s13 的边界",
+                "en": "这一章和 s03、s13 的边界",
+                "ja": "这一章和 s03、s13 的边界"
               }
             }
           ],
@@ -3775,35 +3775,35 @@ module.exports = {
           },
           "options": [
             {
-              "id": "a",
-              "text": {
-                "zh": "什么是调度器",
-                "en": "How It Works",
-                "ja": "最小の心智モデル"
-              }
-            },
-            {
-              "id": "c",
-              "text": {
-                "zh": "1. TaskRecord",
-                "en": "Key Takeaway",
-                "ja": "1. TaskRecord"
-              }
-            },
-            {
               "id": "b",
               "text": {
-                "zh": "2. 只开线程，不登记状态",
-                "en": "2. 只开线程，不登记状态",
-                "ja": "3. full output と preview を分けない"
+                "zh": "`s13` 的 background task 是什么",
+                "en": "`s13` 的 background task 是什么",
+                "ja": "初学者が混ぜやすいポイント"
               }
             },
             {
               "id": "d",
               "text": {
+                "zh": "最小实现",
+                "en": "最小实现",
+                "ja": "1. cron 構文だけに意識を取られる"
+              }
+            },
+            {
+              "id": "c",
+              "text": {
                 "zh": "5. 误以为定时任务必须绝对准点",
                 "en": "5. 误以为定时任务必须绝对准点",
                 "ja": "5. 误以为定时任务必须绝对准点"
+              }
+            },
+            {
+              "id": "a",
+              "text": {
+                "zh": "什么是调度器",
+                "en": "How It Works",
+                "ja": "最小の心智モデル"
               }
             }
           ],
@@ -3826,11 +3826,27 @@ module.exports = {
           },
           "options": [
             {
+              "id": "b",
+              "text": {
+                "zh": "3. 只放内存，不支持落盘",
+                "en": "3. 只放内存，不支持落盘",
+                "ja": "3. 只放内存，不支持落盘"
+              }
+            },
+            {
               "id": "c",
               "text": {
-                "zh": "初学者最容易犯的错",
-                "en": "初学者最容易犯的错",
-                "ja": "初学者最容易犯的错"
+                "zh": "为什么完整输出不要直接塞回 prompt",
+                "en": "为什么完整输出不要直接塞回 prompt",
+                "ja": "第 5 段階: preview と full output を分ける"
+              }
+            },
+            {
+              "id": "d",
+              "text": {
+                "zh": "第一步：让任务落盘",
+                "en": "第一步：让任务落盘",
+                "ja": "第一步：让任务落盘"
               }
             },
             {
@@ -3839,22 +3855,6 @@ module.exports = {
                 "zh": "什么是 cron 表达式",
                 "en": "Read Together",
                 "ja": "重要なデータ構造"
-              }
-            },
-            {
-              "id": "b",
-              "text": {
-                "zh": "`s12` 的 task 是什么",
-                "en": "`s12` 的 task 是什么",
-                "ja": "前の章とどうつながるか"
-              }
-            },
-            {
-              "id": "d",
-              "text": {
-                "zh": "3. 把长日志全文塞进上下文",
-                "en": "3. 把长日志全文塞进上下文",
-                "ja": "4. runtime task と durable task を同一視する"
               }
             }
           ],
@@ -3901,17 +3901,25 @@ module.exports = {
             {
               "id": "d",
               "text": {
-                "zh": "学完这一章，你应该真正掌握什么",
-                "en": "学完这一章，你应该真正掌握什么",
-                "ja": "4. mailbox なしで shared variable だけで会話させる"
+                "zh": "2. 认领后的任务记录",
+                "en": "Key Takeaway",
+                "ja": "2. Claim 後の TaskRecord"
               }
             },
             {
               "id": "b",
               "text": {
-                "zh": "第二步：把外部工具标准化成 agent 能看懂的工具定义",
-                "en": "What You've Mastered",
-                "ja": "1. server config"
+                "zh": "最小实现",
+                "en": "最小实现",
+                "ja": "最小実装を段階で追う"
+              }
+            },
+            {
+              "id": "c",
+              "text": {
+                "zh": "这一章和全仓库的关系",
+                "en": "这一章和全仓库的关系",
+                "ja": "这一章和全仓库的关系"
               }
             },
             {
@@ -3920,14 +3928,6 @@ module.exports = {
                 "zh": "这一章要解决什么问题",
                 "en": "What You'll Learn",
                 "ja": "この章が本当に解きたい問題"
-              }
-            },
-            {
-              "id": "c",
-              "text": {
-                "zh": "什么叫自治",
-                "en": "How It Works",
-                "ja": "自治とは何か"
               }
             }
           ],
@@ -3950,19 +3950,19 @@ module.exports = {
           },
           "options": [
             {
-              "id": "b",
+              "id": "d",
               "text": {
-                "zh": "第四步：认领后先补身份，再把任务提示塞回主循环",
-                "en": "第四步：认领后先补身份，再把任务提示塞回主循环",
-                "ja": "第 4 段階: claim 後は identity と task hint を両方戻す"
+                "zh": "2. 收到请求以后只回一句自然语言",
+                "en": "2. 收到请求以后只回一句自然语言",
+                "ja": "4. approved / rejected を曖昧な文章だけで表す"
               }
             },
             {
-              "id": "d",
+              "id": "b",
               "text": {
-                "zh": "4. EventRecord",
-                "en": "4. EventRecord",
-                "ja": "4. Event Record"
+                "zh": "4. 把协议消息和普通消息混成一种结构",
+                "en": "4. 把协议消息和普通消息混成一种结构",
+                "ja": "前の章とどうつながるか"
               }
             },
             {
@@ -3976,9 +3976,9 @@ module.exports = {
             {
               "id": "c",
               "text": {
-                "zh": "3. CloseoutRecord",
-                "en": "3. CloseoutRecord",
-                "ja": "3. CloseoutRecord"
+                "zh": "这一章要解决什么问题",
+                "en": "What You'll Learn",
+                "ja": "この章が解く問題"
               }
             }
           ],
@@ -4001,19 +4001,11 @@ module.exports = {
           },
           "options": [
             {
-              "id": "c",
+              "id": "b",
               "text": {
-                "zh": "初学者最容易犯的错",
-                "en": "初学者最容易犯的错",
-                "ja": "初学者が混ぜやすいポイント"
-              }
-            },
-            {
-              "id": "d",
-              "text": {
-                "zh": "第三步：同时更新任务记录，不只是写一个 `worktree`",
-                "en": "第三步：同时更新任务记录，不只是写一个 `worktree`",
-                "ja": "第 3 段階: task record 側も同時に更新する"
+                "zh": "1. server 配置",
+                "en": "1. server 配置",
+                "ja": "2. MCP を別世界だと思う"
               }
             },
             {
@@ -4025,11 +4017,19 @@ module.exports = {
               }
             },
             {
-              "id": "b",
+              "id": "c",
               "text": {
-                "zh": "1. 有 worktree 注册表，但任务记录里没有 `worktree`",
-                "en": "1. 有 worktree 注册表，但任务记录里没有 `worktree`",
-                "ja": "1. registry だけあって task record に `worktree` がない"
+                "zh": "最小心智模型",
+                "en": "Message vs Protocol vs Request vs Task",
+                "ja": "最小心智モデル"
+              }
+            },
+            {
+              "id": "d",
+              "text": {
+                "zh": "下一章学什么",
+                "en": "下一章学什么",
+                "ja": "下一章学什么"
               }
             }
           ],
@@ -4052,22 +4052,6 @@ module.exports = {
           },
           "options": [
             {
-              "id": "b",
-              "text": {
-                "zh": "身份重注入为什么重要",
-                "en": "身份重注入为什么重要",
-                "ja": "identity 再注入が重要な理由"
-              }
-            },
-            {
-              "id": "c",
-              "text": {
-                "zh": "4. EventRecord",
-                "en": "4. EventRecord",
-                "ja": "4. Event Record"
-              }
-            },
-            {
               "id": "a",
               "text": {
                 "zh": "什么是队友",
@@ -4076,11 +4060,27 @@ module.exports = {
               }
             },
             {
+              "id": "b",
+              "text": {
+                "zh": "第二步：在 IDLE 里先看邮箱",
+                "en": "第二步：在 IDLE 里先看邮箱",
+                "ja": "第 2 段階: idle では先に inbox を見る"
+              }
+            },
+            {
               "id": "d",
               "text": {
-                "zh": "关键数据结构",
-                "en": "What You've Mastered",
-                "ja": "この章の核になるデータ構造"
+                "zh": "协议 2：计划审批",
+                "en": "协议 2：计划审批",
+                "ja": "第 2 段階: shutdown protocol を作る"
+              }
+            },
+            {
+              "id": "c",
+              "text": {
+                "zh": "最小心智模型",
+                "en": "Message vs Protocol vs Request vs Task",
+                "ja": "最小心智モデル"
               }
             }
           ],
@@ -4103,11 +4103,19 @@ module.exports = {
           },
           "options": [
             {
-              "id": "b",
+              "id": "c",
               "text": {
-                "zh": "先用最简单的话解释 MCP",
-                "en": "The Problem",
-                "ja": "MCP を一番簡単に言うと"
+                "zh": "关键数据结构",
+                "en": "What You've Mastered",
+                "ja": "この章の核になるデータ構造"
+              }
+            },
+            {
+              "id": "d",
+              "text": {
+                "zh": "初学者最容易犯的错",
+                "en": "初学者最容易犯的错",
+                "ja": "2. autonomous claim layer"
               }
             },
             {
@@ -4119,19 +4127,11 @@ module.exports = {
               }
             },
             {
-              "id": "d",
+              "id": "b",
               "text": {
-                "zh": "正文先停在 tools-first，平台层再看桥接文档",
-                "en": "正文先停在 tools-first，平台层再看桥接文档",
-                "ja": "正文先停在 tools-first，平台层再看桥接文档"
-              }
-            },
-            {
-              "id": "c",
-              "text": {
-                "zh": "6. 把 worktree 当成长期垃圾堆",
-                "en": "6. 把 worktree 当成长期垃圾堆",
-                "ja": "6. lane を増やすだけで掃除しない"
+                "zh": "4. EventRecord",
+                "en": "4. EventRecord",
+                "ja": "4. Event Record"
               }
             }
           ],
@@ -4184,27 +4184,27 @@ module.exports = {
               }
             },
             {
-              "id": "d",
+              "id": "c",
               "text": {
-                "zh": "关键数据结构",
-                "en": "What You've Mastered",
-                "ja": "この章の核になるデータ構造"
+                "zh": "3. 只会 `worktree_remove`，不会解释 closeout 的含义",
+                "en": "3. 只会 `worktree_remove`，不会解释 closeout 的含义",
+                "ja": "3. `remove` だけを覚えて closeout の意味を教えない"
               }
             },
             {
-              "id": "c",
+              "id": "d",
               "text": {
-                "zh": "第三步：给每个队友一个邮箱",
-                "en": "第三步：给每个队友一个邮箱",
-                "ja": "Step 2: teammate を spawn する"
+                "zh": "第四步：认领后先补身份，再把任务提示塞回主循环",
+                "en": "第四步：认领后先补身份，再把任务提示塞回主循环",
+                "ja": "第 4 段階: claim 後は identity と task hint を両方戻す"
               }
             },
             {
               "id": "b",
               "text": {
-                "zh": "3. client 注册表",
-                "en": "3. client 注册表",
-                "ja": "Try It"
+                "zh": "先解释几个名词",
+                "en": "The Solution",
+                "ja": "先に言葉をそろえる"
               }
             }
           ],
@@ -4227,27 +4227,11 @@ module.exports = {
           },
           "options": [
             {
-              "id": "d",
-              "text": {
-                "zh": "协议消息",
-                "en": "What Changed From s15",
-                "ja": "protocol envelope"
-              }
-            },
-            {
-              "id": "b",
-              "text": {
-                "zh": "7. 上下文压缩后不重注入身份",
-                "en": "7. 上下文压缩后不重注入身份",
-                "ja": "7. compact 後に identity を戻さない"
-              }
-            },
-            {
               "id": "c",
               "text": {
-                "zh": "4. 空闲阶段只轮询任务板，不看邮箱",
-                "en": "4. 空闲阶段只轮询任务板，不看邮箱",
-                "ja": "4. idle 中に board しか見ない"
+                "zh": "什么叫绑定",
+                "en": "What Changed From s17",
+                "ja": "binding とは何か"
               }
             },
             {
@@ -4256,6 +4240,22 @@ module.exports = {
                 "zh": "建议联读",
                 "en": "The Problem",
                 "ja": "併読すると楽になる資料"
+              }
+            },
+            {
+              "id": "d",
+              "text": {
+                "zh": "关键数据结构",
+                "en": "What You've Mastered",
+                "ja": "この章の核になるデータ構造"
+              }
+            },
+            {
+              "id": "b",
+              "text": {
+                "zh": "2. 协议消息",
+                "en": "2. 协议消息",
+                "ja": "`s15` から何が増えたか"
               }
             }
           ],
@@ -4280,31 +4280,31 @@ module.exports = {
             {
               "id": "d",
               "text": {
-                "zh": "协议 1：优雅关机",
-                "en": "协议 1：优雅关机",
-                "ja": "第 1 段階: team mailbox の上に protocol line を通す"
+                "zh": "第二步：在 IDLE 里先看邮箱",
+                "en": "第二步：在 IDLE 里先看邮箱",
+                "ja": "第 2 段階: idle では先に inbox を見る"
+              }
+            },
+            {
+              "id": "b",
+              "text": {
+                "zh": "1. 只看 `pending`，不看 `blockedBy`",
+                "en": "1. 只看 `pending`，不看 `blockedBy`",
+                "ja": "1. `pending` だけ見て `blockedBy` を見ない"
               }
             },
             {
               "id": "c",
               "text": {
-                "zh": "3. Claim Event Log",
-                "en": "3. Claim Event Log",
-                "ja": "3. Claim Event Log"
+                "zh": "协议请求不是普通消息",
+                "en": "协议请求不是普通消息",
+                "ja": "第 3 段階: plan approval も同じ骨格で扱う"
               }
             },
             {
               "id": "a",
               "text": {
                 "zh": "先把几个词讲明白",
-                "en": "The Solution",
-                "ja": "先に言葉をそろえる"
-              }
-            },
-            {
-              "id": "b",
-              "text": {
-                "zh": "先解释几个名词",
                 "en": "The Solution",
                 "ja": "先に言葉をそろえる"
               }
@@ -4329,27 +4329,11 @@ module.exports = {
           },
           "options": [
             {
-              "id": "d",
-              "text": {
-                "zh": "1. 有一个 MCP client",
-                "en": "Plugin vs Server vs Tool",
-                "ja": "1. `MCPClient`"
-              }
-            },
-            {
               "id": "c",
               "text": {
-                "zh": "第一层：结构化协议",
-                "en": "第一层：结构化协议",
-                "ja": "ここで教えるべき境界"
-              }
-            },
-            {
-              "id": "b",
-              "text": {
-                "zh": "为什么 s17 不能从 s16 退回“内存协议”",
-                "en": "为什么 s17 不能从 s16 退回“内存协议”",
-                "ja": "`s17` は `s16` を上書きしない"
+                "zh": "4. 把协议消息和普通消息混成一种结构",
+                "en": "4. 把协议消息和普通消息混成一种结构",
+                "ja": "前の章とどうつながるか"
               }
             },
             {
@@ -4358,6 +4342,22 @@ module.exports = {
                 "zh": "什么是协议",
                 "en": "How It Works",
                 "ja": "protocol とは何か"
+              }
+            },
+            {
+              "id": "b",
+              "text": {
+                "zh": "1. 没有 `request_id`",
+                "en": "1. 没有 `request_id`",
+                "ja": "3. request の状態を memory 内 dict にしか置かない"
+              }
+            },
+            {
+              "id": "d",
+              "text": {
+                "zh": "什么是 worktree",
+                "en": "The Solution",
+                "ja": "worktree とは何か"
               }
             }
           ],
@@ -4380,22 +4380,6 @@ module.exports = {
           },
           "options": [
             {
-              "id": "d",
-              "text": {
-                "zh": "最小实现",
-                "en": "最小实现",
-                "ja": "最小実装を段階で追う"
-              }
-            },
-            {
-              "id": "c",
-              "text": {
-                "zh": "MessageEnvelope、ProtocolEnvelope、RequestRecord、TaskRecord 的边界",
-                "en": "MessageEnvelope、ProtocolEnvelope、RequestRecord、TaskRecord 的边界",
-                "ja": "1. request を普通の text message と同じように扱う"
-              }
-            },
-            {
               "id": "a",
               "text": {
                 "zh": "什么是 request_id",
@@ -4406,9 +4390,25 @@ module.exports = {
             {
               "id": "b",
               "text": {
-                "zh": "这一章要解决什么问题",
-                "en": "What You'll Learn",
-                "ja": "この章が解く問題"
+                "zh": "第二步：创建 worktree 并写入注册表",
+                "en": "第二步：创建 worktree 并写入注册表",
+                "ja": "第 2 段階: worktree を作り、registry に書く"
+              }
+            },
+            {
+              "id": "c",
+              "text": {
+                "zh": "3. Claim Event Log",
+                "en": "3. Claim Event Log",
+                "ja": "3. Claim Event Log"
+              }
+            },
+            {
+              "id": "d",
+              "text": {
+                "zh": "3. CloseoutRecord",
+                "en": "3. CloseoutRecord",
+                "ja": "3. CloseoutRecord"
               }
             }
           ],
@@ -4455,17 +4455,25 @@ module.exports = {
             {
               "id": "d",
               "text": {
-                "zh": "如何接到整个系统里",
-                "en": "如何接到整个系统里",
-                "ja": "Plugin / Server / Tool を同じ層にしない"
+                "zh": "为什么这一章放在最后",
+                "en": "The Solution",
+                "ja": "なぜ最後の章なのか"
+              }
+            },
+            {
+              "id": "b",
+              "text": {
+                "zh": "2. 收到请求以后只回一句自然语言",
+                "en": "2. 收到请求以后只回一句自然语言",
+                "ja": "4. approved / rejected を曖昧な文章だけで表す"
               }
             },
             {
               "id": "c",
               "text": {
-                "zh": "4. 删除 worktree 前不看未提交改动",
-                "en": "4. 删除 worktree 前不看未提交改动",
-                "ja": "4. remove 前に dirty state を気にしない"
+                "zh": "1. TaskRecord 不再只记录 `worktree`",
+                "en": "What's Next",
+                "ja": "1. TaskRecord 側の lane 情報"
               }
             },
             {
@@ -4474,14 +4482,6 @@ module.exports = {
                 "zh": "这一章要解决什么问题",
                 "en": "What You'll Learn",
                 "ja": "この章が解く問題"
-              }
-            },
-            {
-              "id": "b",
-              "text": {
-                "zh": "建议联读",
-                "en": "Read Together",
-                "ja": "主線とどう併読するか"
               }
             }
           ],
@@ -4506,17 +4506,9 @@ module.exports = {
             {
               "id": "c",
               "text": {
-                "zh": "第五步：仍然走同一条权限管道",
-                "en": "第五步：仍然走同一条权限管道",
-                "ja": "絶対に崩してはいけない境界"
-              }
-            },
-            {
-              "id": "d",
-              "text": {
-                "zh": "第四步：写一个 router",
-                "en": "Key Takeaway",
-                "ja": "3. client registry"
+                "zh": "这一章要解决什么问题",
+                "en": "What You'll Learn",
+                "ja": "この章が解く問題"
               }
             },
             {
@@ -4528,11 +4520,19 @@ module.exports = {
               }
             },
             {
+              "id": "d",
+              "text": {
+                "zh": "2. 协议消息",
+                "en": "2. 协议消息",
+                "ja": "`s15` から何が増えたか"
+              }
+            },
+            {
               "id": "b",
               "text": {
-                "zh": "关键数据结构",
-                "en": "What Changed From s14",
-                "ja": "それまでの章にどう接続するか"
+                "zh": "Teammate、Subagent、Runtime Task 到底怎么区分",
+                "en": "Teammate、Subagent、Runtime Task 到底怎么区分",
+                "ja": "Teammate / Subagent / Runtime Slot をどう分けるか"
               }
             }
           ],
@@ -4557,17 +4557,9 @@ module.exports = {
             {
               "id": "b",
               "text": {
-                "zh": "5. 认领了任务，但没有写 claim event",
-                "en": "5. 认领了任务，但没有写 claim event",
-                "ja": "5. event log を書かない"
-              }
-            },
-            {
-              "id": "c",
-              "text": {
-                "zh": "如何接到前面章节里",
-                "en": "如何接到前面章节里",
-                "ja": "前の章とどうつながるか"
+                "zh": "第四步：队友每轮先看邮箱，再继续工作",
+                "en": "第四步：队友每轮先看邮箱，再继续工作",
+                "ja": "Step 3: 各 teammate に mailbox を持たせる"
               }
             },
             {
@@ -4579,11 +4571,19 @@ module.exports = {
               }
             },
             {
+              "id": "c",
+              "text": {
+                "zh": "如何接到前面章节的系统里",
+                "en": "如何接到前面章节的系统里",
+                "ja": "Step 4: teammate は毎ラウンド mailbox を先に確認する"
+              }
+            },
+            {
               "id": "d",
               "text": {
-                "zh": "这一章要解决什么问题",
-                "en": "What You'll Learn",
-                "ja": "この章が本当に解きたい問題"
+                "zh": "什么是协议",
+                "en": "How It Works",
+                "ja": "protocol とは何か"
               }
             }
           ],
@@ -4606,19 +4606,11 @@ module.exports = {
           },
           "options": [
             {
-              "id": "b",
-              "text": {
-                "zh": "自治的是“长期队友”，不是“一次性 subagent”",
-                "en": "自治的是“长期队友”，不是“一次性 subagent”",
-                "ja": "自治するのは long-lived teammate であって subagent ではない"
-              }
-            },
-            {
               "id": "c",
               "text": {
-                "zh": "3. 状态机",
-                "en": "3. 状态机",
-                "ja": "3. 状態機械"
+                "zh": "第三步：同时更新任务记录，不只是写一个 `worktree`",
+                "en": "第三步：同时更新任务记录，不只是写一个 `worktree`",
+                "ja": "第 3 段階: task record 側も同時に更新する"
               }
             },
             {
@@ -4635,6 +4627,14 @@ module.exports = {
                 "zh": "关键数据结构",
                 "en": "What You've Mastered",
                 "ja": "この章の核になるデータ構造"
+              }
+            },
+            {
+              "id": "b",
+              "text": {
+                "zh": "身份重注入为什么重要",
+                "en": "身份重注入为什么重要",
+                "ja": "identity 再注入が重要な理由"
               }
             }
           ],
@@ -4657,19 +4657,11 @@ module.exports = {
           },
           "options": [
             {
-              "id": "c",
-              "text": {
-                "zh": "初学者最容易犯的错",
-                "en": "初学者最容易犯的错",
-                "ja": "初学者が混ぜやすいポイント"
-              }
-            },
-            {
               "id": "b",
               "text": {
-                "zh": "学完这一章，你应该真正掌握什么",
-                "en": "学完这一章，你应该真正掌握什么",
-                "ja": "教学上の境界"
+                "zh": "3. Claim Event Log",
+                "en": "3. Claim Event Log",
+                "ja": "3. Claim Event Log"
               }
             },
             {
@@ -4681,11 +4673,19 @@ module.exports = {
               }
             },
             {
+              "id": "c",
+              "text": {
+                "zh": "初学者最容易犯的错",
+                "en": "初学者最容易犯的错",
+                "ja": "2. request_id を持たせない"
+              }
+            },
+            {
               "id": "d",
               "text": {
-                "zh": "协议请求不是普通消息",
-                "en": "协议请求不是普通消息",
-                "ja": "第 3 段階: plan approval も同じ骨格で扱う"
+                "zh": "自治的是“长期队友”，不是“一次性 subagent”",
+                "en": "自治的是“长期队友”，不是“一次性 subagent”",
+                "ja": "自治するのは long-lived teammate であって subagent ではない"
               }
             }
           ],
@@ -4730,6 +4730,14 @@ module.exports = {
           },
           "options": [
             {
+              "id": "b",
+              "text": {
+                "zh": "关键数据结构",
+                "en": "What You've Mastered",
+                "ja": "この章の核になるデータ構造"
+              }
+            },
+            {
               "id": "a",
               "text": {
                 "zh": "这一章要解决什么问题",
@@ -4738,27 +4746,19 @@ module.exports = {
               }
             },
             {
-              "id": "b",
-              "text": {
-                "zh": "最小心智模型",
-                "en": "Try It",
-                "ja": "最小心智モデル"
-              }
-            },
-            {
               "id": "d",
               "text": {
-                "zh": "建议联读",
-                "en": "The Problem",
-                "ja": "併読すると楽になる資料"
+                "zh": "这一章和全仓库的关系",
+                "en": "这一章和全仓库的关系",
+                "ja": "这一章和全仓库的关系"
               }
             },
             {
               "id": "c",
               "text": {
-                "zh": "请求追踪表",
-                "en": "Try It",
-                "ja": "durable request record"
+                "zh": "2. 队友之间共用同一份 messages",
+                "en": "2. 队友之间共用同一份 messages",
+                "ja": "1. teammate を「名前付き subagent」にする"
               }
             }
           ],
@@ -4781,11 +4781,27 @@ module.exports = {
           },
           "options": [
             {
+              "id": "d",
+              "text": {
+                "zh": "1. TeamMember",
+                "en": "Try It",
+                "ja": "主要データ構造"
+              }
+            },
+            {
               "id": "b",
               "text": {
-                "zh": "为什么这一章放在最后",
-                "en": "The Solution",
-                "ja": "なぜ最後の章なのか"
+                "zh": "6. 把 worktree 当成长期垃圾堆",
+                "en": "6. 把 worktree 当成长期垃圾堆",
+                "ja": "6. lane を増やすだけで掃除しない"
+              }
+            },
+            {
+              "id": "c",
+              "text": {
+                "zh": "关键数据结构",
+                "en": "What You've Mastered",
+                "ja": "この章の核になるデータ構造"
               }
             },
             {
@@ -4794,22 +4810,6 @@ module.exports = {
                 "zh": "建议联读",
                 "en": "The Problem",
                 "ja": "併読すると楽になる資料"
-              }
-            },
-            {
-              "id": "c",
-              "text": {
-                "zh": "初学者最容易犯的错",
-                "en": "初学者最容易犯的错",
-                "ja": "2. autonomous claim layer"
-              }
-            },
-            {
-              "id": "d",
-              "text": {
-                "zh": "什么叫认领",
-                "en": "Read Together",
-                "ja": "claim とは何か"
               }
             }
           ],
@@ -4832,6 +4832,22 @@ module.exports = {
           },
           "options": [
             {
+              "id": "c",
+              "text": {
+                "zh": "为什么这一章放在最后",
+                "en": "The Solution",
+                "ja": "なぜ最後の章なのか"
+              }
+            },
+            {
+              "id": "b",
+              "text": {
+                "zh": "什么是队友",
+                "en": "How It Works",
+                "ja": "teammate とは何か"
+              }
+            },
+            {
               "id": "a",
               "text": {
                 "zh": "先解释几个名词",
@@ -4842,25 +4858,9 @@ module.exports = {
             {
               "id": "d",
               "text": {
-                "zh": "5. 身份块",
-                "en": "5. 身份块",
-                "ja": "5. Identity Block"
-              }
-            },
-            {
-              "id": "b",
-              "text": {
-                "zh": "1. ProtocolEnvelope",
-                "en": "What's Next",
-                "ja": "1. ProtocolEnvelope"
-              }
-            },
-            {
-              "id": "c",
-              "text": {
-                "zh": "这一章要解决什么问题",
-                "en": "What You'll Learn",
-                "ja": "この章が解く問題"
+                "zh": "Teammate、Subagent、Runtime Task 到底怎么区分",
+                "en": "Teammate、Subagent、Runtime Task 到底怎么区分",
+                "ja": "Teammate / Subagent / Runtime Slot をどう分けるか"
               }
             }
           ],
@@ -4883,6 +4883,14 @@ module.exports = {
           },
           "options": [
             {
+              "id": "b",
+              "text": {
+                "zh": "3. Claim Event Log",
+                "en": "3. Claim Event Log",
+                "ja": "3. Claim Event Log"
+              }
+            },
+            {
               "id": "a",
               "text": {
                 "zh": "什么是 worktree",
@@ -4891,27 +4899,19 @@ module.exports = {
               }
             },
             {
-              "id": "b",
+              "id": "d",
               "text": {
-                "zh": "3. 忽略命名与路由",
-                "en": "3. 忽略命名与路由",
-                "ja": "3. 忽略命名与路由"
+                "zh": "1. Claimable Predicate",
+                "en": "What's Next",
+                "ja": "1. Claimable Predicate"
               }
             },
             {
               "id": "c",
               "text": {
-                "zh": "建议联读",
-                "en": "The Problem",
-                "ja": "併読のすすめ"
-              }
-            },
-            {
-              "id": "d",
-              "text": {
-                "zh": "最小实现",
-                "en": "Key Takeaway",
-                "ja": "`MessageEnvelope`"
+                "zh": "第二层：自治认领",
+                "en": "第二层：自治认领",
+                "ja": "1. protocol request layer"
               }
             }
           ],
@@ -4934,22 +4934,6 @@ module.exports = {
           },
           "options": [
             {
-              "id": "d",
-              "text": {
-                "zh": "Plugin 又是什么",
-                "en": "Normalized external tool definition",
-                "ja": "Plugin は何をするか"
-              }
-            },
-            {
-              "id": "c",
-              "text": {
-                "zh": "3. 没有请求状态表",
-                "en": "3. 没有请求状态表",
-                "ja": "5. protocol と task を混同する"
-              }
-            },
-            {
               "id": "a",
               "text": {
                 "zh": "什么叫隔离执行",
@@ -4960,9 +4944,25 @@ module.exports = {
             {
               "id": "b",
               "text": {
-                "zh": "最小心智模型",
-                "en": "How It Works",
-                "ja": "最小の心智モデル"
+                "zh": "3. client 注册表",
+                "en": "3. client 注册表",
+                "ja": "Try It"
+              }
+            },
+            {
+              "id": "c",
+              "text": {
+                "zh": "最小实现步骤",
+                "en": "What Changed From s18",
+                "ja": "システム全体へどう接続するか"
+              }
+            },
+            {
+              "id": "d",
+              "text": {
+                "zh": "第一步：让队友拥有 `WORK -> IDLE` 的循环",
+                "en": "第一步：让队友拥有 `WORK -> IDLE` 的循环",
+                "ja": "第 1 段階: WORK と IDLE を分ける"
               }
             }
           ],
@@ -5007,19 +5007,11 @@ module.exports = {
           },
           "options": [
             {
-              "id": "d",
-              "text": {
-                "zh": "最小实现",
-                "en": "最小实现",
-                "ja": "最小実装を段階で追う"
-              }
-            },
-            {
               "id": "c",
               "text": {
-                "zh": "5. 认领了任务，但没有写 claim event",
-                "en": "5. 认领了任务，但没有写 claim event",
-                "ja": "5. event log を書かない"
+                "zh": "建议联读",
+                "en": "The Problem",
+                "ja": "併読すると楽になる資料"
               }
             },
             {
@@ -5031,11 +5023,19 @@ module.exports = {
               }
             },
             {
+              "id": "d",
+              "text": {
+                "zh": "1. server 配置",
+                "en": "1. server 配置",
+                "ja": "2. MCP を別世界だと思う"
+              }
+            },
+            {
               "id": "b",
               "text": {
-                "zh": "为什么 worktree 不是“只是一个 git 小技巧”",
-                "en": "为什么 worktree 不是“只是一个 git 小技巧”",
-                "ja": "なぜ worktree は「Git の小技」で終わらないのか"
+                "zh": "4. 没有邮箱，靠共享变量直接喊话",
+                "en": "4. 没有邮箱，靠共享变量直接喊话",
+                "ja": "3. roster を durable にしない"
               }
             }
           ],
@@ -5058,22 +5058,6 @@ module.exports = {
           },
           "options": [
             {
-              "id": "b",
-              "text": {
-                "zh": "协议请求不是普通消息",
-                "en": "协议请求不是普通消息",
-                "ja": "第 3 段階: plan approval も同じ骨格で扱う"
-              }
-            },
-            {
-              "id": "d",
-              "text": {
-                "zh": "什么是协议",
-                "en": "How It Works",
-                "ja": "protocol とは何か"
-              }
-            },
-            {
               "id": "a",
               "text": {
                 "zh": "先用最简单的话解释 MCP",
@@ -5082,11 +5066,27 @@ module.exports = {
               }
             },
             {
+              "id": "b",
+              "text": {
+                "zh": "如何接到前面章节里",
+                "en": "如何接到前面章节里",
+                "ja": "前の章とどうつながるか"
+              }
+            },
+            {
+              "id": "d",
+              "text": {
+                "zh": "3. MessageEnvelope",
+                "en": "What's Next",
+                "ja": "`TeamConfig`"
+              }
+            },
+            {
               "id": "c",
               "text": {
-                "zh": "3. client 注册表",
-                "en": "3. client 注册表",
-                "ja": "Try It"
+                "zh": "什么叫自治",
+                "en": "How It Works",
+                "ja": "自治とは何か"
               }
             }
           ],
@@ -5111,25 +5111,25 @@ module.exports = {
             {
               "id": "d",
               "text": {
-                "zh": "先把几个词讲明白",
-                "en": "The Solution",
-                "ja": "先に言葉をそろえる"
-              }
-            },
-            {
-              "id": "b",
-              "text": {
-                "zh": "2. 有一个工具名前缀规则",
-                "en": "Key Data Structures",
-                "ja": "2. 命名規則"
+                "zh": "身份重注入为什么重要",
+                "en": "身份重注入为什么重要",
+                "ja": "identity 再注入が重要な理由"
               }
             },
             {
               "id": "c",
               "text": {
-                "zh": "学完这一章，你应该真正掌握什么",
-                "en": "学完这一章，你应该真正掌握什么",
-                "ja": "4. mailbox なしで shared variable だけで会話させる"
+                "zh": "3. MessageEnvelope",
+                "en": "What's Next",
+                "ja": "`TeamConfig`"
+              }
+            },
+            {
+              "id": "b",
+              "text": {
+                "zh": "这一章要解决什么问题",
+                "en": "What You'll Learn",
+                "ja": "この章が解く問題"
               }
             },
             {
@@ -5160,11 +5160,11 @@ module.exports = {
           },
           "options": [
             {
-              "id": "d",
+              "id": "b",
               "text": {
-                "zh": "7. 上下文压缩后不重注入身份",
-                "en": "7. 上下文压缩后不重注入身份",
-                "ja": "7. compact 後に identity を戻さない"
+                "zh": "7. 没有事件日志",
+                "en": "7. 没有事件日志",
+                "ja": "7. event log を持たない"
               }
             },
             {
@@ -5178,17 +5178,17 @@ module.exports = {
             {
               "id": "c",
               "text": {
-                "zh": "为什么 s17 不能从 s16 退回“内存协议”",
-                "en": "为什么 s17 不能从 s16 退回“内存协议”",
-                "ja": "`s17` は `s16` を上書きしない"
+                "zh": "第一步：先有一份队伍名册",
+                "en": "第一步：先有一份队伍名册",
+                "ja": "最小実装の進め方"
               }
             },
             {
-              "id": "b",
+              "id": "d",
               "text": {
-                "zh": "第二步：spawn 一个持久队友",
-                "en": "第二步：spawn 一个持久队友",
-                "ja": "Step 1: まず roster を持つ"
+                "zh": "这一章要解决什么问题",
+                "en": "What You'll Learn",
+                "ja": "この章が解く問題"
               }
             }
           ],
@@ -5211,19 +5211,11 @@ module.exports = {
           },
           "options": [
             {
-              "id": "d",
-              "text": {
-                "zh": "第四步：队友每轮先看邮箱，再继续工作",
-                "en": "第四步：队友每轮先看邮箱，再继续工作",
-                "ja": "Step 3: 各 teammate に mailbox を持たせる"
-              }
-            },
-            {
               "id": "b",
               "text": {
-                "zh": "第五步：长时间没事就退出",
-                "en": "第五步：长时间没事就退出",
-                "ja": "第 5 段階: 長時間なにもなければ shutdown する"
+                "zh": "这一章要解决什么问题",
+                "en": "What You'll Learn",
+                "ja": "この章が本当に解きたい問題"
               }
             },
             {
@@ -5237,9 +5229,17 @@ module.exports = {
             {
               "id": "c",
               "text": {
-                "zh": "Teammate、Subagent、Runtime Task 到底怎么区分",
-                "en": "Teammate、Subagent、Runtime Task 到底怎么区分",
-                "ja": "Teammate / Subagent / Runtime Slot をどう分けるか"
+                "zh": "建议联读",
+                "en": "The Problem",
+                "ja": "併読すると楽になる資料"
+              }
+            },
+            {
+              "id": "d",
+              "text": {
+                "zh": "第三步：如果邮箱没消息，再按“当前角色”扫描可认领任务",
+                "en": "第三步：如果邮箱没消息，再按“当前角色”扫描可认领任务",
+                "ja": "第 3 段階: inbox が空なら role 付きで task board を走査する"
               }
             }
           ],
@@ -5286,17 +5286,25 @@ module.exports = {
             {
               "id": "b",
               "text": {
-                "zh": "2. 权限系统",
-                "en": "Settings Hierarchy",
-                "ja": "Settings Hierarchy"
+                "zh": "工具调用前验证 Bash 命令",
+                "en": "Display Settings",
+                "ja": "Display Settings"
+              }
+            },
+            {
+              "id": "c",
+              "text": {
+                "zh": "Frontmatter 字段（13 个）",
+                "en": "Frontmatter Fields (13)",
+                "ja": "Frontmatter Fields (13)"
               }
             },
             {
               "id": "d",
               "text": {
-                "zh": "Notification",
-                "en": "Model Configuration",
-                "ja": "Model Configuration"
+                "zh": "工作流程",
+                "en": "工作流程",
+                "ja": "工作流程"
               }
             },
             {
@@ -5305,14 +5313,6 @@ module.exports = {
                 "zh": "1. 编写优秀的 CLAUDE.md",
                 "en": "1. Writing a Good CLAUDE.md",
                 "ja": "1. Writing a Good CLAUDE.md"
-              }
-            },
-            {
-              "id": "c",
-              "text": {
-                "zh": "工具权限语法",
-                "en": "Plans & Memory Directories",
-                "ja": "Plans & Memory Directories"
               }
             }
           ],
@@ -5335,22 +5335,6 @@ module.exports = {
           },
           "options": [
             {
-              "id": "b",
-              "text": {
-                "zh": "最佳实践",
-                "en": "Best Practices",
-                "ja": "Best Practices"
-              }
-            },
-            {
-              "id": "d",
-              "text": {
-                "zh": "6. 编排架构：Command → Agent → Skill",
-                "en": "6. 编排架构：Command → Agent → Skill",
-                "ja": "6. 编排架构：Command → Agent → Skill"
-              }
-            },
-            {
               "id": "a",
               "text": {
                 "zh": "2. 大型 Monorepo 中的 CLAUDE.md",
@@ -5359,11 +5343,27 @@ module.exports = {
               }
             },
             {
+              "id": "d",
+              "text": {
+                "zh": "官方捆绑技能（5 个）",
+                "en": "![Official](../!/tags/official.svg) **(5)**",
+                "ja": "![Official](../!/tags/official.svg) **(5)**"
+              }
+            },
+            {
+              "id": "b",
+              "text": {
+                "zh": "模型覆盖",
+                "en": "Company Announcements",
+                "ja": "Company Announcements"
+              }
+            },
+            {
               "id": "c",
               "text": {
-                "zh": "代理与子代理",
-                "en": "OpenTelemetry",
-                "ja": "OpenTelemetry"
+                "zh": "4. 显示与用户体验",
+                "en": "Permission Structure",
+                "ja": "Permission Structure"
               }
             }
           ],
@@ -5386,19 +5386,27 @@ module.exports = {
           },
           "options": [
             {
+              "id": "d",
+              "text": {
+                "zh": "受管设置中的服务器匹配",
+                "en": "Sources",
+                "ja": "Sources"
+              }
+            },
+            {
               "id": "b",
               "text": {
-                "zh": "插件设置",
-                "en": "MCP Server Matching (Managed Settings)",
-                "ja": "MCP Server Matching (Managed Settings)"
+                "zh": "预算与限制",
+                "en": "Useful Commands",
+                "ja": "Useful Commands"
               }
             },
             {
               "id": "c",
               "text": {
-                "zh": "1. 设置层级",
-                "en": "Table of Contents",
-                "ja": "Table of Contents"
+                "zh": "3. 内置代理类型（5 个）",
+                "en": "Sources",
+                "ja": "Sources"
               }
             },
             {
@@ -5407,14 +5415,6 @@ module.exports = {
                 "zh": "两种加载机制",
                 "en": "The Two Loading Mechanisms",
                 "ja": "The Two Loading Mechanisms"
-              }
-            },
-            {
-              "id": "d",
-              "text": {
-                "zh": "会话启动时加载项目上下文",
-                "en": "Status Line Configuration",
-                "ja": "Status Line Configuration"
               }
             }
           ],
@@ -5437,6 +5437,14 @@ module.exports = {
           },
           "options": [
             {
+              "id": "c",
+              "text": {
+                "zh": "5. 关键事件详解",
+                "en": "MCP Settings",
+                "ja": "MCP Settings"
+              }
+            },
+            {
               "id": "a",
               "text": {
                 "zh": "Monorepo 结构示例",
@@ -5445,27 +5453,19 @@ module.exports = {
               }
             },
             {
-              "id": "c",
-              "text": {
-                "zh": "工作流程",
-                "en": "工作流程",
-                "ja": "工作流程"
-              }
-            },
-            {
               "id": "d",
               "text": {
-                "zh": "4. 全部 Hook 事件（25 个）",
-                "en": "Tool Permission Syntax",
-                "ja": "Tool Permission Syntax"
+                "zh": "代理定义",
+                "en": "代理定义",
+                "ja": "代理定义"
               }
             },
             {
               "id": "b",
               "text": {
-                "zh": "使用方式",
-                "en": "Model Environment Variables",
-                "ja": "Model Environment Variables"
+                "zh": "Frontmatter 字段（13 个）",
+                "en": "Frontmatter Fields (13)",
+                "ja": "Frontmatter Fields (13)"
               }
             }
           ],
@@ -5488,15 +5488,23 @@ module.exports = {
           },
           "options": [
             {
-              "id": "c",
+              "id": "a",
               "text": {
-                "zh": "2. Frontmatter 字段（16 个）",
-                "en": "![Official](../!/tags/official.svg) **(5)**",
-                "ja": "![Official](../!/tags/official.svg) **(5)**"
+                "zh": "场景 1：从根目录启动 Claude Code",
+                "en": "Scenario 1: Running Claude Code from the Root Directory",
+                "ja": "Scenario 1: Running Claude Code from the Root Directory"
               }
             },
             {
-              "id": "b",
+              "id": "c",
+              "text": {
+                "zh": "Frontmatter 字段（13 个）",
+                "en": "Frontmatter Fields (13)",
+                "ja": "Frontmatter Fields (13)"
+              }
+            },
+            {
+              "id": "d",
               "text": {
                 "zh": "模型与配置",
                 "en": "Status Line Configuration",
@@ -5504,19 +5512,11 @@ module.exports = {
               }
             },
             {
-              "id": "d",
+              "id": "b",
               "text": {
-                "zh": "`.mcp.json` 配置示例",
-                "en": "Settings for MCP Servers",
-                "ja": "Settings for MCP Servers"
-              }
-            },
-            {
-              "id": "a",
-              "text": {
-                "zh": "场景 1：从根目录启动 Claude Code",
-                "en": "Scenario 1: Running Claude Code from the Root Directory",
-                "ja": "Scenario 1: Running Claude Code from the Root Directory"
+                "zh": "9. CLI 启动标志",
+                "en": "Display Settings",
+                "ja": "Display Settings"
               }
             }
           ],
@@ -5561,6 +5561,14 @@ module.exports = {
           },
           "options": [
             {
+              "id": "d",
+              "text": {
+                "zh": "模型环境变量",
+                "en": "Permissions",
+                "ja": "Permissions"
+              }
+            },
+            {
               "id": "a",
               "text": {
                 "zh": "Frontmatter 字段（13 个）",
@@ -5571,25 +5579,17 @@ module.exports = {
             {
               "id": "c",
               "text": {
-                "zh": "使用方式",
-                "en": "使用方式",
-                "ja": "使用方式"
-              }
-            },
-            {
-              "id": "d",
-              "text": {
-                "zh": "1. 什么是子代理",
-                "en": "Frontmatter Fields (16)",
-                "ja": "Frontmatter Fields (16)"
+                "zh": "6. 决策控制模式总结",
+                "en": "Model Environment Variables",
+                "ja": "Model Environment Variables"
               }
             },
             {
               "id": "b",
               "text": {
-                "zh": "系统提示词",
-                "en": "AWS Settings",
-                "ja": "AWS Settings"
+                "zh": "最佳实践",
+                "en": "Best Practices",
+                "ja": "Best Practices"
               }
             }
           ],
@@ -5612,11 +5612,27 @@ module.exports = {
           },
           "options": [
             {
+              "id": "d",
+              "text": {
+                "zh": "12. 常用命令速查",
+                "en": "Table of Contents",
+                "ja": "Table of Contents"
+              }
+            },
+            {
+              "id": "b",
+              "text": {
+                "zh": "WorktreeCreate / WorktreeRemove",
+                "en": "Effort Level",
+                "ja": "Effort Level"
+              }
+            },
+            {
               "id": "c",
               "text": {
-                "zh": "插件设置",
-                "en": "MCP Server Matching (Managed Settings)",
-                "ja": "MCP Server Matching (Managed Settings)"
+                "zh": "2. 配置格式",
+                "en": "Settings Hierarchy",
+                "ja": "Settings Hierarchy"
               }
             },
             {
@@ -5625,22 +5641,6 @@ module.exports = {
                 "zh": "官方内置命令（69 个）",
                 "en": "![Official](../!/tags/official.svg) **(69)**",
                 "ja": "![Official](../!/tags/official.svg) **(69)**"
-              }
-            },
-            {
-              "id": "d",
-              "text": {
-                "zh": "两种加载机制",
-                "en": "The Two Loading Mechanisms",
-                "ja": "The Two Loading Mechanisms"
-              }
-            },
-            {
-              "id": "b",
-              "text": {
-                "zh": "参考来源",
-                "en": "Sources",
-                "ja": "Sources"
               }
             }
           ],
@@ -5663,19 +5663,11 @@ module.exports = {
           },
           "options": [
             {
-              "id": "b",
-              "text": {
-                "zh": "`/hooks` 菜单",
-                "en": "Plans & Memory Directories",
-                "ja": "Plans & Memory Directories"
-              }
-            },
-            {
               "id": "c",
               "text": {
-                "zh": "禁用 Hooks",
-                "en": "Worktree Settings",
-                "ja": "Worktree Settings"
+                "zh": "调试与诊断",
+                "en": "Usage",
+                "ja": "Usage"
               }
             },
             {
@@ -5687,11 +5679,19 @@ module.exports = {
               }
             },
             {
+              "id": "b",
+              "text": {
+                "zh": "FileChanged",
+                "en": "Model Overrides",
+                "ja": "Model Overrides"
+              }
+            },
+            {
               "id": "d",
               "text": {
-                "zh": "匹配器参考",
-                "en": "MCP Servers",
-                "ja": "MCP Servers"
+                "zh": "工具权限语法",
+                "en": "Plans & Memory Directories",
+                "ja": "Plans & Memory Directories"
               }
             }
           ],
@@ -5736,6 +5736,14 @@ module.exports = {
           },
           "options": [
             {
+              "id": "b",
+              "text": {
+                "zh": "权限结构",
+                "en": "Core Configuration",
+                "ja": "Core Configuration"
+              }
+            },
+            {
               "id": "a",
               "text": {
                 "zh": "Frontmatter 字段（13 个）",
@@ -5746,25 +5754,17 @@ module.exports = {
             {
               "id": "d",
               "text": {
-                "zh": "工具权限语法",
-                "en": "Plans & Memory Directories",
-                "ja": "Plans & Memory Directories"
+                "zh": "代理与子代理",
+                "en": "OpenTelemetry",
+                "ja": "OpenTelemetry"
               }
             },
             {
               "id": "c",
               "text": {
-                "zh": "工作流程",
-                "en": "工作流程",
-                "ja": "工作流程"
-              }
-            },
-            {
-              "id": "b",
-              "text": {
-                "zh": "方式一：使用 `/agents` 命令",
-                "en": "![How to Use](../!/tags/how-to-use.svg)",
-                "ja": "![How to Use](../!/tags/how-to-use.svg)"
+                "zh": "10. 来源",
+                "en": "10. 来源",
+                "ja": "10. 来源"
               }
             }
           ],
@@ -5795,27 +5795,27 @@ module.exports = {
               }
             },
             {
-              "id": "b",
+              "id": "c",
               "text": {
-                "zh": "Frontmatter 字段（13 个）",
-                "en": "Frontmatter Fields (13)",
-                "ja": "Frontmatter Fields (13)"
+                "zh": "模型与配置",
+                "en": "Status Line Configuration",
+                "ja": "Status Line Configuration"
               }
             },
             {
-              "id": "c",
+              "id": "b",
               "text": {
-                "zh": "2. Frontmatter 字段（16 个）",
-                "en": "![Official](../!/tags/official.svg) **(5)**",
-                "ja": "![Official](../!/tags/official.svg) **(5)**"
+                "zh": "MCP 与插件",
+                "en": "Environment Variables (via `env`)",
+                "ja": "Environment Variables (via `env`)"
               }
             },
             {
               "id": "d",
               "text": {
-                "zh": "设置覆盖",
-                "en": "Power-ups (10)",
-                "ja": "Power-ups (10)"
+                "zh": "代理与子代理",
+                "en": "OpenTelemetry",
+                "ja": "OpenTelemetry"
               }
             }
           ],
@@ -5838,17 +5838,17 @@ module.exports = {
           },
           "options": [
             {
-              "id": "d",
+              "id": "b",
               "text": {
-                "zh": "使用 HTTP Hook",
-                "en": "File Suggestion Configuration",
-                "ja": "File Suggestion Configuration"
+                "zh": "通用设置",
+                "en": "Plugins",
+                "ja": "Plugins"
               }
             },
             {
-              "id": "c",
+              "id": "d",
               "text": {
-                "zh": "模型与配置",
+                "zh": "会话启动时加载项目上下文",
                 "en": "Status Line Configuration",
                 "ja": "Status Line Configuration"
               }
@@ -5862,11 +5862,11 @@ module.exports = {
               }
             },
             {
-              "id": "b",
+              "id": "c",
               "text": {
-                "zh": "Hook 类型",
-                "en": "Core Configuration",
-                "ja": "Core Configuration"
+                "zh": "3. 内置代理类型（5 个）",
+                "en": "Sources",
+                "ja": "Sources"
               }
             }
           ],
@@ -5919,27 +5919,27 @@ module.exports = {
               }
             },
             {
-              "id": "c",
-              "text": {
-                "zh": "目录与工作区",
-                "en": "Common Environment Variables",
-                "ja": "Common Environment Variables"
-              }
-            },
-            {
               "id": "d",
               "text": {
-                "zh": "匹配器参考",
-                "en": "MCP Servers",
-                "ja": "MCP Servers"
+                "zh": "MCP 与插件",
+                "en": "Environment Variables (via `env`)",
+                "ja": "Environment Variables (via `env`)"
               }
             },
             {
               "id": "b",
               "text": {
-                "zh": "PostToolUse",
-                "en": "Plugins",
-                "ja": "Plugins"
+                "zh": "6. 编排架构：Command → Agent → Skill",
+                "en": "6. 编排架构：Command → Agent → Skill",
+                "ja": "6. 编排架构：Command → Agent → Skill"
+              }
+            },
+            {
+              "id": "c",
+              "text": {
+                "zh": "2. 配置格式",
+                "en": "Settings Hierarchy",
+                "ja": "Settings Hierarchy"
               }
             }
           ],
@@ -5962,22 +5962,6 @@ module.exports = {
           },
           "options": [
             {
-              "id": "c",
-              "text": {
-                "zh": "7. 其他核心设置",
-                "en": "Sandbox Settings",
-                "ja": "Sandbox Settings"
-              }
-            },
-            {
-              "id": "d",
-              "text": {
-                "zh": "代理与子代理",
-                "en": "OpenTelemetry",
-                "ja": "OpenTelemetry"
-              }
-            },
-            {
               "id": "a",
               "text": {
                 "zh": "2. 配置格式",
@@ -5988,9 +5972,25 @@ module.exports = {
             {
               "id": "b",
               "text": {
-                "zh": "参考来源",
+                "zh": "受管设置中的服务器匹配",
                 "en": "Sources",
                 "ja": "Sources"
+              }
+            },
+            {
+              "id": "d",
+              "text": {
+                "zh": "SessionStart",
+                "en": "MCP Server Matching (Managed Settings)",
+                "ja": "MCP Server Matching (Managed Settings)"
+              }
+            },
+            {
+              "id": "c",
+              "text": {
+                "zh": "方式三：手动创建文件",
+                "en": "方式三：手动创建文件",
+                "ja": "方式三：手动创建文件"
               }
             }
           ],
@@ -6013,35 +6013,35 @@ module.exports = {
           },
           "options": [
             {
-              "id": "b",
-              "text": {
-                "zh": "SessionStart",
-                "en": "MCP Server Matching (Managed Settings)",
-                "ja": "MCP Server Matching (Managed Settings)"
-              }
-            },
-            {
-              "id": "d",
-              "text": {
-                "zh": "1. 什么是子代理",
-                "en": "Frontmatter Fields (16)",
-                "ja": "Frontmatter Fields (16)"
-              }
-            },
-            {
-              "id": "c",
-              "text": {
-                "zh": "事件总览",
-                "en": "Hooks",
-                "ja": "Hooks"
-              }
-            },
-            {
               "id": "a",
               "text": {
                 "zh": "Hook 类型",
                 "en": "Core Configuration",
                 "ja": "Core Configuration"
+              }
+            },
+            {
+              "id": "c",
+              "text": {
+                "zh": "目录与工作区",
+                "en": "Common Environment Variables",
+                "ja": "Common Environment Variables"
+              }
+            },
+            {
+              "id": "d",
+              "text": {
+                "zh": "禁用 Hooks",
+                "en": "Worktree Settings",
+                "ja": "Worktree Settings"
+              }
+            },
+            {
+              "id": "b",
+              "text": {
+                "zh": "使用 HTTP Hook",
+                "en": "File Suggestion Configuration",
+                "ja": "File Suggestion Configuration"
               }
             }
           ],
@@ -6064,27 +6064,27 @@ module.exports = {
           },
           "options": [
             {
-              "id": "c",
-              "text": {
-                "zh": "1. 设置层级",
-                "en": "Table of Contents",
-                "ja": "Table of Contents"
-              }
-            },
-            {
               "id": "d",
               "text": {
-                "zh": "参考来源",
-                "en": "Sources",
-                "ja": "Sources"
+                "zh": "Monorepo 结构示例",
+                "en": "Example Monorepo Structure",
+                "ja": "Example Monorepo Structure"
               }
             },
             {
               "id": "b",
               "text": {
-                "zh": "模型覆盖",
-                "en": "Company Announcements",
-                "ja": "Company Announcements"
+                "zh": "6. 编排架构：Command → Agent → Skill",
+                "en": "6. 编排架构：Command → Agent → Skill",
+                "ja": "6. 编排架构：Command → Agent → Skill"
+              }
+            },
+            {
+              "id": "c",
+              "text": {
+                "zh": "8. 使用建议",
+                "en": "8. 使用建议",
+                "ja": "8. 使用建议"
               }
             },
             {
@@ -6115,11 +6115,11 @@ module.exports = {
           },
           "options": [
             {
-              "id": "d",
+              "id": "b",
               "text": {
-                "zh": "7. 常用环境变量",
-                "en": "7. 常用环境变量",
-                "ja": "7. 常用环境变量"
+                "zh": "6. 编排架构：Command → Agent → Skill",
+                "en": "6. 编排架构：Command → Agent → Skill",
+                "ja": "6. 编排架构：Command → Agent → Skill"
               }
             },
             {
@@ -6131,19 +6131,19 @@ module.exports = {
               }
             },
             {
-              "id": "b",
+              "id": "d",
               "text": {
-                "zh": "5. 关键事件详解",
-                "en": "MCP Settings",
-                "ja": "MCP Settings"
+                "zh": "Spinner 自定义示例",
+                "en": "Tool Permission Syntax",
+                "ja": "Tool Permission Syntax"
               }
             },
             {
               "id": "c",
               "text": {
-                "zh": "预算与限制",
-                "en": "Useful Commands",
-                "ja": "Useful Commands"
+                "zh": "使用环境变量保护密钥",
+                "en": "Permission Rules for MCP Tools",
+                "ja": "Permission Rules for MCP Tools"
               }
             }
           ],
@@ -6190,25 +6190,25 @@ module.exports = {
             {
               "id": "b",
               "text": {
-                "zh": "4. Settings 中的 MCP 配置",
-                "en": "MCP Scopes",
-                "ja": "MCP Scopes"
+                "zh": "7. 实用示例",
+                "en": "Display & UX",
+                "ja": "Display & UX"
               }
             },
             {
               "id": "d",
               "text": {
-                "zh": "子代理中的 Hooks",
-                "en": "General Settings",
-                "ja": "General Settings"
+                "zh": "输出与格式",
+                "en": "AWS & Cloud Credentials",
+                "ja": "AWS & Cloud Credentials"
               }
             },
             {
               "id": "c",
               "text": {
-                "zh": "官方捆绑技能（5 个）",
-                "en": "![Official](../!/tags/official.svg) **(5)**",
-                "ja": "![Official](../!/tags/official.svg) **(5)**"
+                "zh": "WorktreeCreate / WorktreeRemove",
+                "en": "Effort Level",
+                "ja": "Effort Level"
               }
             },
             {
@@ -6247,27 +6247,27 @@ module.exports = {
               }
             },
             {
-              "id": "d",
+              "id": "b",
               "text": {
-                "zh": "9. 常用命令",
-                "en": "9. 常用命令",
-                "ja": "9. 常用命令"
+                "zh": "模型别名",
+                "en": "Attribution Settings",
+                "ja": "Attribution Settings"
               }
             },
             {
               "id": "c",
               "text": {
-                "zh": "11. 仅启动环境变量",
-                "en": "Sources",
-                "ja": "Sources"
-              }
-            },
-            {
-              "id": "b",
-              "text": {
                 "zh": "集成",
                 "en": "Quick Reference: Complete Example",
                 "ja": "Quick Reference: Complete Example"
+              }
+            },
+            {
+              "id": "d",
+              "text": {
+                "zh": "文件写入后自动运行 Lint",
+                "en": "Global Config Settings (`~/.claude.json`)",
+                "ja": "Global Config Settings (`~/.claude.json`)"
               }
             }
           ],
@@ -6290,14 +6290,6 @@ module.exports = {
           },
           "options": [
             {
-              "id": "c",
-              "text": {
-                "zh": "场景 2：从组件目录启动 Claude Code",
-                "en": "Scenario 2: Running Claude Code from a Component Directory",
-                "ja": "Scenario 2: Running Claude Code from a Component Directory"
-              }
-            },
-            {
               "id": "a",
               "text": {
                 "zh": "3. 内置代理类型（5 个）",
@@ -6308,17 +6300,25 @@ module.exports = {
             {
               "id": "b",
               "text": {
-                "zh": "参考来源",
-                "en": "Sources",
-                "ja": "Sources"
+                "zh": "10. 来源",
+                "en": "10. 来源",
+                "ja": "10. 来源"
+              }
+            },
+            {
+              "id": "c",
+              "text": {
+                "zh": "Plans 和 Memory 目录",
+                "en": "Plugin Settings",
+                "ja": "Plugin Settings"
               }
             },
             {
               "id": "d",
               "text": {
-                "zh": "8. 使用建议",
-                "en": "8. 使用建议",
-                "ja": "8. 使用建议"
+                "zh": "3. 模型配置",
+                "en": "Worktree Settings",
+                "ja": "Worktree Settings"
               }
             }
           ],
@@ -6341,35 +6341,35 @@ module.exports = {
           },
           "options": [
             {
-              "id": "a",
-              "text": {
-                "zh": "4. 创建自定义子代理",
-                "en": "Weather Agent",
-                "ja": "Weather Agent"
-              }
-            },
-            {
-              "id": "d",
-              "text": {
-                "zh": "受管设置中的服务器匹配",
-                "en": "Sources",
-                "ja": "Sources"
-              }
-            },
-            {
               "id": "b",
               "text": {
-                "zh": "8. Power-ups（交互教程）",
-                "en": "Effort Level",
-                "ja": "Effort Level"
+                "zh": "代理定义",
+                "en": "代理定义",
+                "ja": "代理定义"
               }
             },
             {
               "id": "c",
               "text": {
-                "zh": "5. MCP 工具的权限规则",
-                "en": "5. MCP 工具的权限规则",
-                "ja": "5. MCP 工具的权限规则"
+                "zh": "2. Frontmatter 字段（16 个）",
+                "en": "![Official](../!/tags/official.svg) **(5)**",
+                "ja": "![Official](../!/tags/official.svg) **(5)**"
+              }
+            },
+            {
+              "id": "d",
+              "text": {
+                "zh": "1. 编写优秀的 CLAUDE.md",
+                "en": "1. Writing a Good CLAUDE.md",
+                "ja": "1. Writing a Good CLAUDE.md"
+              }
+            },
+            {
+              "id": "a",
+              "text": {
+                "zh": "4. 创建自定义子代理",
+                "en": "Weather Agent",
+                "ja": "Weather Agent"
               }
             }
           ],
@@ -6392,35 +6392,35 @@ module.exports = {
           },
           "options": [
             {
-              "id": "a",
+              "id": "c",
               "text": {
-                "zh": "方式一：使用 `/agents` 命令",
-                "en": "![How to Use](../!/tags/how-to-use.svg)",
-                "ja": "![How to Use](../!/tags/how-to-use.svg)"
+                "zh": "模型与配置",
+                "en": "Status Line Configuration",
+                "ja": "Status Line Configuration"
               }
             },
             {
               "id": "d",
               "text": {
-                "zh": "Spinner 自定义示例",
-                "en": "Tool Permission Syntax",
-                "ja": "Tool Permission Syntax"
+                "zh": "Worktree（工作树）设置",
+                "en": "Model Configuration",
+                "ja": "Model Configuration"
               }
             },
             {
               "id": "b",
               "text": {
-                "zh": "权限模式",
-                "en": "General Settings",
-                "ja": "General Settings"
+                "zh": "1. 什么是子代理",
+                "en": "Frontmatter Fields (16)",
+                "ja": "Frontmatter Fields (16)"
               }
             },
             {
-              "id": "c",
+              "id": "a",
               "text": {
-                "zh": "模型环境变量",
-                "en": "Permissions",
-                "ja": "Permissions"
+                "zh": "方式一：使用 `/agents` 命令",
+                "en": "![How to Use](../!/tags/how-to-use.svg)",
+                "ja": "![How to Use](../!/tags/how-to-use.svg)"
               }
             }
           ],
@@ -6465,19 +6465,19 @@ module.exports = {
           },
           "options": [
             {
-              "id": "c",
+              "id": "b",
               "text": {
-                "zh": "代理定义",
-                "en": "代理定义",
-                "ja": "代理定义"
+                "zh": "2. 推荐的日常 MCP 服务器",
+                "en": "Configuration",
+                "ja": "Configuration"
               }
             },
             {
               "id": "d",
               "text": {
-                "zh": "6. 编排架构：Command → Agent → Skill",
-                "en": "6. 编排架构：Command → Agent → Skill",
-                "ja": "6. 编排架构：Command → Agent → Skill"
+                "zh": "匹配器参考",
+                "en": "MCP Servers",
+                "ja": "MCP Servers"
               }
             },
             {
@@ -6489,11 +6489,11 @@ module.exports = {
               }
             },
             {
-              "id": "b",
+              "id": "c",
               "text": {
-                "zh": "各事件退出码 2 的行为",
-                "en": "Permission Structure",
-                "ja": "Permission Structure"
+                "zh": "4. Settings 中的 MCP 配置",
+                "en": "MCP Scopes",
+                "ja": "MCP Scopes"
               }
             }
           ],
@@ -6516,6 +6516,14 @@ module.exports = {
           },
           "options": [
             {
+              "id": "d",
+              "text": {
+                "zh": "HTTP 响应处理",
+                "en": "Permission Modes",
+                "ja": "Permission Modes"
+              }
+            },
+            {
               "id": "a",
               "text": {
                 "zh": "2. 推荐的日常 MCP 服务器",
@@ -6524,27 +6532,19 @@ module.exports = {
               }
             },
             {
-              "id": "c",
-              "text": {
-                "zh": "3. 输入与输出",
-                "en": "Authentication Helpers",
-                "ja": "Authentication Helpers"
-              }
-            },
-            {
-              "id": "d",
-              "text": {
-                "zh": "5. MCP 工具的权限规则",
-                "en": "5. MCP 工具的权限规则",
-                "ja": "5. MCP 工具的权限规则"
-              }
-            },
-            {
               "id": "b",
               "text": {
-                "zh": "场景 1：从根目录启动 Claude Code",
-                "en": "Scenario 1: Running Claude Code from the Root Directory",
-                "ja": "Scenario 1: Running Claude Code from the Root Directory"
+                "zh": "方式二：让 Claude 帮你创建",
+                "en": "![How to Implement](../!/tags/how-to-implement.svg)",
+                "ja": "![How to Implement](../!/tags/how-to-implement.svg)"
+              }
+            },
+            {
+              "id": "c",
+              "text": {
+                "zh": "3. 配置",
+                "en": "Server Types",
+                "ja": "Server Types"
               }
             }
           ],
@@ -6567,11 +6567,19 @@ module.exports = {
           },
           "options": [
             {
+              "id": "b",
+              "text": {
+                "zh": "7. 实用示例",
+                "en": "Display & UX",
+                "ja": "Display & UX"
+              }
+            },
+            {
               "id": "c",
               "text": {
-                "zh": "PostToolUse",
-                "en": "Plugins",
-                "ja": "Plugins"
+                "zh": "调试与诊断",
+                "en": "Usage",
+                "ja": "Usage"
               }
             },
             {
@@ -6585,17 +6593,9 @@ module.exports = {
             {
               "id": "d",
               "text": {
-                "zh": "通用输入字段",
-                "en": "Company Announcements",
-                "ja": "Company Announcements"
-              }
-            },
-            {
-              "id": "b",
-              "text": {
-                "zh": "5. 实践示例：天气代理",
-                "en": "5. 实践示例：天气代理",
-                "ja": "5. 实践示例：天气代理"
+                "zh": "7. 权限控制",
+                "en": "7. 权限控制",
+                "ja": "7. 权限控制"
               }
             }
           ],
@@ -6620,9 +6620,9 @@ module.exports = {
             {
               "id": "d",
               "text": {
-                "zh": "5. 实践示例：天气代理",
-                "en": "5. 实践示例：天气代理",
-                "ja": "5. 实践示例：天气代理"
+                "zh": "模型与配置",
+                "en": "Status Line Configuration",
+                "ja": "Status Line Configuration"
               }
             },
             {
@@ -6636,17 +6636,17 @@ module.exports = {
             {
               "id": "c",
               "text": {
-                "zh": "Frontmatter 字段（13 个）",
-                "en": "Frontmatter Fields (13)",
-                "ja": "Frontmatter Fields (13)"
+                "zh": "Hook 类型",
+                "en": "Core Configuration",
+                "ja": "Core Configuration"
               }
             },
             {
               "id": "b",
               "text": {
-                "zh": "文件写入后自动运行 Lint",
-                "en": "Global Config Settings (`~/.claude.json`)",
-                "ja": "Global Config Settings (`~/.claude.json`)"
+                "zh": "工作流程",
+                "en": "工作流程",
+                "ja": "工作流程"
               }
             }
           ],
@@ -6669,6 +6669,22 @@ module.exports = {
           },
           "options": [
             {
+              "id": "b",
+              "text": {
+                "zh": "模型别名",
+                "en": "Attribution Settings",
+                "ja": "Attribution Settings"
+              }
+            },
+            {
+              "id": "c",
+              "text": {
+                "zh": "2. Frontmatter 字段（16 个）",
+                "en": "![Official](../!/tags/official.svg) **(5)**",
+                "ja": "![Official](../!/tags/official.svg) **(5)**"
+              }
+            },
+            {
               "id": "a",
               "text": {
                 "zh": "`.mcp.json` 配置示例",
@@ -6677,27 +6693,11 @@ module.exports = {
               }
             },
             {
-              "id": "b",
-              "text": {
-                "zh": "禁用 Hooks",
-                "en": "Worktree Settings",
-                "ja": "Worktree Settings"
-              }
-            },
-            {
               "id": "d",
               "text": {
-                "zh": "1. 什么是 Hooks",
-                "en": "Table of Contents",
-                "ja": "Table of Contents"
-              }
-            },
-            {
-              "id": "c",
-              "text": {
-                "zh": "代理与子代理",
-                "en": "OpenTelemetry",
-                "ja": "OpenTelemetry"
+                "zh": "官方内置命令（69 个）",
+                "en": "![Official](../!/tags/official.svg) **(69)**",
+                "ja": "![Official](../!/tags/official.svg) **(69)**"
               }
             }
           ],
@@ -6742,27 +6742,11 @@ module.exports = {
           },
           "options": [
             {
-              "id": "b",
-              "text": {
-                "zh": "7. 实用示例",
-                "en": "Display & UX",
-                "ja": "Display & UX"
-              }
-            },
-            {
-              "id": "d",
-              "text": {
-                "zh": "9. 常用命令",
-                "en": "9. 常用命令",
-                "ja": "9. 常用命令"
-              }
-            },
-            {
               "id": "c",
               "text": {
-                "zh": "8. 与子代理配合使用",
-                "en": "8. 与子代理配合使用",
-                "ja": "8. 与子代理配合使用"
+                "zh": "会话管理",
+                "en": "Global Config Settings (`~/.claude.json`)",
+                "ja": "Global Config Settings (`~/.claude.json`)"
               }
             },
             {
@@ -6771,6 +6755,22 @@ module.exports = {
                 "zh": "1. 设置层级",
                 "en": "Table of Contents",
                 "ja": "Table of Contents"
+              }
+            },
+            {
+              "id": "d",
+              "text": {
+                "zh": "核心要点",
+                "en": "Key Takeaways",
+                "ja": "Key Takeaways"
+              }
+            },
+            {
+              "id": "b",
+              "text": {
+                "zh": "预算与限制",
+                "en": "Useful Commands",
+                "ja": "Useful Commands"
               }
             }
           ],
@@ -6793,35 +6793,35 @@ module.exports = {
           },
           "options": [
             {
-              "id": "b",
-              "text": {
-                "zh": "2. Frontmatter 字段（16 个）",
-                "en": "![Official](../!/tags/official.svg) **(5)**",
-                "ja": "![Official](../!/tags/official.svg) **(5)**"
-              }
-            },
-            {
-              "id": "d",
-              "text": {
-                "zh": "禁用 Hooks",
-                "en": "Worktree Settings",
-                "ja": "Worktree Settings"
-              }
-            },
-            {
-              "id": "c",
-              "text": {
-                "zh": "方式一：使用 `/agents` 命令",
-                "en": "![How to Use](../!/tags/how-to-use.svg)",
-                "ja": "![How to Use](../!/tags/how-to-use.svg)"
-              }
-            },
-            {
               "id": "a",
               "text": {
                 "zh": "2. 权限系统",
                 "en": "Settings Hierarchy",
                 "ja": "Settings Hierarchy"
+              }
+            },
+            {
+              "id": "d",
+              "text": {
+                "zh": "Stop",
+                "en": "Plugin Settings",
+                "ja": "Plugin Settings"
+              }
+            },
+            {
+              "id": "b",
+              "text": {
+                "zh": "6. 插件系统",
+                "en": "MCP Settings",
+                "ja": "MCP Settings"
+              }
+            },
+            {
+              "id": "c",
+              "text": {
+                "zh": "SessionStart",
+                "en": "MCP Server Matching (Managed Settings)",
+                "ja": "MCP Server Matching (Managed Settings)"
               }
             }
           ],
@@ -6844,9 +6844,9 @@ module.exports = {
           },
           "options": [
             {
-              "id": "d",
+              "id": "c",
               "text": {
-                "zh": "3. 模型配置",
+                "zh": "禁用 Hooks",
                 "en": "Worktree Settings",
                 "ja": "Worktree Settings"
               }
@@ -6860,19 +6860,19 @@ module.exports = {
               }
             },
             {
-              "id": "c",
+              "id": "d",
               "text": {
-                "zh": "6. 决策控制模式总结",
-                "en": "Model Environment Variables",
-                "ja": "Model Environment Variables"
+                "zh": "PermissionRequest",
+                "en": "Model Aliases",
+                "ja": "Model Aliases"
               }
             },
             {
               "id": "b",
               "text": {
-                "zh": "工具调用前验证 Bash 命令",
-                "en": "Display Settings",
-                "ja": "Display Settings"
+                "zh": "工具权限语法",
+                "en": "Plans & Memory Directories",
+                "ja": "Plans & Memory Directories"
               }
             }
           ],
@@ -6897,25 +6897,17 @@ module.exports = {
             {
               "id": "c",
               "text": {
-                "zh": "7. 实用示例",
-                "en": "Display & UX",
-                "ja": "Display & UX"
+                "zh": "Spinner 自定义示例",
+                "en": "Tool Permission Syntax",
+                "ja": "Tool Permission Syntax"
               }
             },
             {
               "id": "b",
               "text": {
-                "zh": "11. 仅启动环境变量",
-                "en": "Sources",
-                "ja": "Sources"
-              }
-            },
-            {
-              "id": "d",
-              "text": {
-                "zh": "方式一：使用 `/agents` 命令",
-                "en": "![How to Use](../!/tags/how-to-use.svg)",
-                "ja": "![How to Use](../!/tags/how-to-use.svg)"
+                "zh": "官方内置命令（69 个）",
+                "en": "![Official](../!/tags/official.svg) **(69)**",
+                "ja": "![Official](../!/tags/official.svg) **(69)**"
               }
             },
             {
@@ -6924,6 +6916,14 @@ module.exports = {
                 "zh": "权限模式",
                 "en": "General Settings",
                 "ja": "General Settings"
+              }
+            },
+            {
+              "id": "d",
+              "text": {
+                "zh": "2. 大型 Monorepo 中的 CLAUDE.md",
+                "en": "2. CLAUDE.md in Large Monorepos",
+                "ja": "2. CLAUDE.md in Large Monorepos"
               }
             }
           ],
@@ -6946,11 +6946,19 @@ module.exports = {
           },
           "options": [
             {
+              "id": "c",
+              "text": {
+                "zh": "使用 HTTP Hook",
+                "en": "File Suggestion Configuration",
+                "ja": "File Suggestion Configuration"
+              }
+            },
+            {
               "id": "b",
               "text": {
-                "zh": "7. 常用环境变量",
-                "en": "7. 常用环境变量",
-                "ja": "7. 常用环境变量"
+                "zh": "使用方式",
+                "en": "使用方式",
+                "ja": "使用方式"
               }
             },
             {
@@ -6964,17 +6972,9 @@ module.exports = {
             {
               "id": "d",
               "text": {
-                "zh": "模型别名",
-                "en": "Attribution Settings",
-                "ja": "Attribution Settings"
-              }
-            },
-            {
-              "id": "c",
-              "text": {
-                "zh": "13. 完整配置示例",
-                "en": "Session Management",
-                "ja": "Session Management"
+                "zh": "SessionStart",
+                "en": "MCP Server Matching (Managed Settings)",
+                "ja": "MCP Server Matching (Managed Settings)"
               }
             }
           ],
