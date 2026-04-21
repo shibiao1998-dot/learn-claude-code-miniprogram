@@ -31,6 +31,117 @@ function writeJSModule(filePath, data) {
   console.log('  -> ' + path.relative(ROOT, filePath) + ' (' + sizeKB + ' KB)');
 }
 
+// --- Markdown Knowledge Extraction ---
+
+// Sections to skip (not knowledge content)
+var SKIP_SECTIONS = [
+  '试一试', '教学边界', '一句话记住', '相对', '如果你开始觉得',
+  'Try it', 'Teaching boundary', 'One sentence',
+  '試してみよう', '教学の境界'
+];
+
+function shouldSkipSection(heading) {
+  for (var i = 0; i < SKIP_SECTIONS.length; i++) {
+    if (heading.indexOf(SKIP_SECTIONS[i]) !== -1) return true;
+  }
+  return false;
+}
+
+function extractKnowledgePoints(markdown) {
+  var lines = markdown.split('\n');
+  var points = [];
+  var currentH2 = null;
+  var currentBody = [];
+  var codeBlockOpen = false;
+
+  for (var i = 0; i < lines.length; i++) {
+    var line = lines[i];
+
+    // Track code block boundaries
+    if (line.trim().indexOf('```') === 0) {
+      codeBlockOpen = !codeBlockOpen;
+      if (!codeBlockOpen) {
+        currentBody.push(line);
+      }
+      continue;
+    }
+    if (codeBlockOpen) {
+      currentBody.push(line);
+      continue;
+    }
+
+    // Skip navigation breadcrumb lines
+    if (line.indexOf('`s00') !== -1 && line.indexOf(' > ') !== -1) continue;
+
+    // H2: major knowledge point
+    if (line.indexOf('## ') === 0 && line.indexOf('### ') !== 0) {
+      // Save previous section
+      if (currentH2 && !shouldSkipSection(currentH2)) {
+        points.push({
+          level: 2,
+          heading: currentH2,
+          body: currentBody.join('\n'),
+          boldTerms: extractBoldTerms(currentBody.join('\n')),
+          hasCode: currentBody.some(function(l) { return l.trim().indexOf('```') === 0; })
+        });
+      }
+      currentH2 = line.replace(/^##\s+/, '').trim();
+      currentBody = [];
+      continue;
+    }
+
+    // H3: sub-knowledge point (nested under current H2)
+    if (line.indexOf('### ') === 0 && line.indexOf('#### ') !== 0) {
+      var h3Title = line.replace(/^###\s+/, '').trim();
+      if (currentH2 && !shouldSkipSection(h3Title)) {
+        // Flush current body to H2 first
+        if (currentBody.length > 0 && !shouldSkipSection(currentH2)) {
+          points.push({
+            level: 2,
+            heading: currentH2,
+            body: currentBody.join('\n'),
+            boldTerms: extractBoldTerms(currentBody.join('\n')),
+            hasCode: currentBody.some(function(l) { return l.trim().indexOf('```') === 0; })
+          });
+          currentBody = [];
+        }
+        // Start tracking H3
+        currentH2 = h3Title;
+        currentBody = [];
+        continue;
+      }
+    }
+
+    currentBody.push(line);
+  }
+
+  // Don't forget last section
+  if (currentH2 && !shouldSkipSection(currentH2)) {
+    points.push({
+      level: 2,
+      heading: currentH2,
+      body: currentBody.join('\n'),
+      boldTerms: extractBoldTerms(currentBody.join('\n')),
+      hasCode: currentBody.some(function(l) { return l.trim().indexOf('```') === 0; })
+    });
+  }
+
+  return points;
+}
+
+function extractBoldTerms(text) {
+  var matches = [];
+  var regex = /\*\*([^*]+)\*\*/g;
+  var match;
+  while ((match = regex.exec(text)) !== null) {
+    var term = match[1].trim();
+    if (term.length > 2 && term.length < 80) {
+      matches.push(term);
+    }
+  }
+  return matches;
+}
+
 // --- Load meta ---
 console.log('Loading meta.js...');
 var meta = loadJSModule(META_PATH);
