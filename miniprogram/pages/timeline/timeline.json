@@ -1,4 +1,7 @@
 {
-  "navigationBarTitleText": "学习时间线",
+  "navigationBarTitleText": "区域地图",
+  "navigationBarBackgroundColor": "#0D1117",
+  "navigationBarTextStyle": "white",
+  "backgroundColor": "#0D1117",
   "usingComponents": {}
 }
