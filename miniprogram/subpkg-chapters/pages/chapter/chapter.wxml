@@ -1,525 +1,153 @@
 <!-- subpkg-chapters/pages/chapter/chapter.wxml -->
-<view class="page">
+<view class="game-page">
 
-  <!-- ══════════════ 固定 Tab 栏 ══════════════ -->
-  <view class="tab-bar">
-    <view
-      wx:for="{{tabs}}"
-      wx:key="id"
-      class="tab-item {{activeTab === item.id ? 'tab-item--active' : ''}}"
-      bindtap="switchTab"
-      data-tab="{{item.id}}"
-    >
-      <text class="tab-label">{{item.label}}</text>
-      <view class="tab-indicator" wx:if="{{activeTab === item.id}}"></view>
+  <!-- ══════════ Game Header ══════════ -->
+  <view class="game-header" wx:if="{{!showSettlement}}">
+    <view class="game-header__top">
+      <text class="game-header__back font-mono" bindtap="goBack">← ESC</text>
+      <view class="game-header__phase">
+        <text class="phase-badge font-mono" style="color:{{regionColor}}">{{phaseLabel}}</text>
+        <text class="phase-counter font-mono">{{questionIndex}}/{{totalQuestions}}</text>
+      </view>
+    </view>
+    <text class="game-header__title">{{stageTitle}}</text>
+    <view class="game-header__bar">
+      <view class="game-header__bar-fill" style="width:{{progressPercent}}%;background:{{regionColor}}"></view>
     </view>
   </view>
 
-  <!-- ══════════════ 滚动内容区 ══════════════ -->
-  <scroll-view
-    scroll-y
-    class="content-scroll"
-    scroll-into-view="{{scrollToLineId}}"
-  >
+  <!-- ══════════ Phase 1 & 3: Question ══════════ -->
+  <scroll-view scroll-y class="game-content" wx:if="{{currentQuestion && !showReview && !showSettlement}}">
 
-    <!-- ────────── 章节 Header（所有 Tab 共用）────────── -->
-    <view class="chapter-header">
+    <!-- Difficulty indicator -->
+    <view class="diff-row">
+      <text class="diff-label font-mono" style="color:{{regionColor}}">{{currentQuestion.diffLabel}}</text>
+      <text class="diff-text font-mono">难度 {{currentQuestion.difficulty}}</text>
+    </view>
 
-      <!-- 图层徽章 -->
+    <!-- Question stem -->
+    <view class="question-card">
+      <text class="question-stem">{{currentQuestion.stem}}</text>
+    </view>
+
+    <!-- Options -->
+    <view class="options-list">
       <view
-        class="layer-badge"
-        style="background:{{chapterLayerColor}}22;border-color:{{chapterLayerColor}}44;color:{{chapterLayerColor}}"
+        wx:for="{{currentQuestion.options}}"
+        wx:key="id"
+        class="option-item {{selectedOption === item.id ? 'option--selected' : ''}} {{showFeedback && item.id === feedbackAnswer ? 'option--correct' : ''}} {{showFeedback && selectedOption === item.id && !feedbackCorrect ? 'option--wrong' : ''}}"
+        bindtap="selectOption"
+        data-optionid="{{item.id}}"
       >
-        <text class="layer-badge__text">{{chapterLayerLabel}}</text>
+        <text class="option-id font-mono">{{item.id}}</text>
+        <text class="option-text">{{item.text}}</text>
       </view>
+    </view>
 
-      <!-- 标题区 -->
-      <view class="title-row">
-        <text class="chapter-id-label">{{chapterId}}</text>
-        <text class="chapter-title">{{chapterTitle}}</text>
+    <!-- Confirm button (before feedback) -->
+    <view class="action-area" wx:if="{{!showFeedback}}">
+      <view class="btn-confirm {{selectedOption ? 'btn-confirm--active' : ''}}" bindtap="confirmAnswer" style="{{selectedOption ? 'background:' + regionColor : ''}}">
+        <text class="btn-confirm__text font-mono">> SUBMIT</text>
       </view>
+    </view>
 
-      <!-- 副标题 -->
-      <text class="chapter-subtitle" wx:if="{{chapterSubtitle}}">{{chapterSubtitle}}</text>
-
-      <!-- keyInsight 引用块 -->
-      <view class="insight-block" wx:if="{{chapterKeyInsight}}">
-        <view class="insight-bar"></view>
-        <text class="insight-text">{{chapterKeyInsight}}</text>
+    <!-- Feedback (after answer) -->
+    <view class="feedback-area" wx:if="{{showFeedback}}">
+      <view class="feedback-badge {{feedbackCorrect ? 'feedback--correct' : 'feedback--wrong'}}">
+        <text class="feedback-badge__icon font-mono">{{feedbackCorrect ? '✓' : '✗'}}</text>
+        <text class="feedback-badge__text font-mono">{{feedbackCorrect ? 'CORRECT' : 'INCORRECT'}}</text>
       </view>
-
-      <!-- 核心新增 -->
-      <view class="core-addition" wx:if="{{chapterCoreAddition}}">
-        <text class="core-addition__label">新增结构</text>
-        <text class="core-addition__text">{{chapterCoreAddition}}</text>
+      <view class="feedback-explain" wx:if="{{feedbackExplanation}}">
+        <text class="feedback-explain__text">{{feedbackExplanation}}</text>
       </view>
+      <view class="btn-next" bindtap="nextQuestion">
+        <text class="btn-next__text font-mono">> NEXT</text>
+      </view>
+    </view>
 
-      <!-- 元信息行：LOC + tools（普通章节） -->
-      <view class="meta-row" wx:if="{{!isBestPractice}}">
-        <view class="meta-item">
-          <text class="meta-value">{{chapterLoc}}</text>
-          <text class="meta-unit">LOC</text>
+  </scroll-view>
+
+  <!-- ══════════ Phase 2: Review ══════════ -->
+  <scroll-view scroll-y class="game-content" wx:if="{{showReview && !showSettlement}}">
+
+    <view class="review-header">
+      <text class="review-title font-mono" style="color:{{regionColor}}">// REVIEW</text>
+      <text class="review-subtitle">答题回顾 — 答错的题目重点关注</text>
+    </view>
+
+    <view class="review-list">
+      <view wx:for="{{reviewCards}}" wx:key="index" class="review-card {{item.correct ? 'review--correct' : 'review--wrong'}}">
+        <view class="review-card__header">
+          <text class="review-card__icon font-mono">{{item.correct ? '✓' : '✗'}}</text>
+          <text class="review-card__stem">{{item.stem}}</text>
         </view>
-        <view class="meta-divider"></view>
-        <view class="meta-tools">
-          <text
-            wx:for="{{chapterTools}}"
-            wx:key="*this"
-            class="tool-tag {{chapterNewTools.indexOf(item) >= 0 ? 'tool-tag--new' : ''}}"
-          >{{item}}</text>
-        </view>
-      </view>
-
-      <!-- 已读状态 -->
-      <view class="read-badge" wx:if="{{isRead}}">
-        <text class="read-badge__icon">✓</text>
-        <text class="read-badge__text">已读</text>
-      </view>
-
-      <!-- ── 章节导读（可折叠）── -->
-      <view class="guide-section" wx:if="{{guide}}">
-        <view class="guide-toggle" bindtap="toggleGuide">
-          <text class="guide-toggle__label">{{t.version.guide_label || '本章导读'}}</text>
-          <text class="guide-toggle__arrow {{isGuideExpanded ? 'guide-toggle__arrow--open' : ''}}">▼</text>
-        </view>
-
-        <view class="guide-body {{isGuideExpanded ? 'guide-body--open' : ''}}">
-          <view class="guide-item" wx:if="{{guide.focus}}">
-            <view class="guide-item__head">
-              <view class="guide-item__dot guide-item__dot--focus"></view>
-              <text class="guide-item__label">{{t.version.guide_focus_title || '先盯住什么'}}</text>
-            </view>
-            <text class="guide-item__text">{{guide.focus}}</text>
-          </view>
-          <view class="guide-item" wx:if="{{guide.confusion}}">
-            <view class="guide-item__head">
-              <view class="guide-item__dot guide-item__dot--confusion"></view>
-              <text class="guide-item__label">{{t.version.guide_confusion_title || '最容易混淆什么'}}</text>
-            </view>
-            <text class="guide-item__text">{{guide.confusion}}</text>
-          </view>
-          <view class="guide-item" wx:if="{{guide.goal}}">
-            <view class="guide-item__head">
-              <view class="guide-item__dot guide-item__dot--goal"></view>
-              <text class="guide-item__label">{{t.version.guide_goal_title || '学完应该会什么'}}</text>
-            </view>
-            <text class="guide-item__text">{{guide.goal}}</text>
-          </view>
+        <view class="review-card__body" wx:if="{{!item.correct}}">
+          <text class="review-card__answer">正确答案: {{item.correctAnswer}}</text>
+          <text class="review-card__explain">{{item.explanation}}</text>
         </view>
       </view>
     </view>
 
-    <!-- ══════════════ Learn Tab ══════════════ -->
-    <block wx:if="{{activeTab === 'learn'}}">
-      <view class="doc-content">
-
-        <block wx:if="{{docNodes.length === 0}}">
-          <view class="empty-state">
-            <text class="empty-state__text">文档内容加载中…</text>
-          </view>
-        </block>
-
-        <block wx:for="{{docNodes}}" wx:key="index">
-
-          <!-- h1 -->
-          <view wx:if="{{item.type === 'h1'}}" class="md-h1">
-            <text>{{item.content}}</text>
-          </view>
-
-          <!-- h2 -->
-          <view wx:elif="{{item.type === 'h2'}}" class="md-h2">
-            <view class="md-h2__bar"></view>
-            <text>{{item.content}}</text>
-          </view>
-
-          <!-- h3 -->
-          <view wx:elif="{{item.type === 'h3'}}" class="md-h3">
-            <text>{{item.content}}</text>
-          </view>
-
-          <!-- blockquote -->
-          <view wx:elif="{{item.type === 'blockquote'}}" class="md-blockquote">
-            <view class="md-blockquote__bar"></view>
-            <rich-text nodes="{{item.htmlContent || item.content}}" class="md-blockquote__text"></rich-text>
-          </view>
-
-          <!-- hr -->
-          <view wx:elif="{{item.type === 'hr'}}" class="md-hr"></view>
-
-          <!-- list_item -->
-          <view wx:elif="{{item.type === 'list_item'}}" class="md-li">
-            <text class="md-li__dot">•</text>
-            <rich-text nodes="{{item.htmlContent || item.content}}" class="md-li__text"></rich-text>
-          </view>
-
-          <!-- code_block -->
-          <view wx:elif="{{item.type === 'code_block'}}" class="md-code-block">
-            <view class="md-code-block__header">
-              <text class="md-code-block__lang">{{item.lang}}</text>
-            </view>
-            <scroll-view scroll-x class="md-code-block__scroll">
-              <text class="md-code-block__text" user-select="{{true}}">{{item.content}}</text>
-            </scroll-view>
-          </view>
-
-          <!-- table -->
-          <view wx:elif="{{item.type === 'table'}}" class="md-table-wrap">
-            <scroll-view scroll-x class="md-table-scroll">
-              <view class="md-table">
-                <view class="md-table__row md-table__row--header">
-                  <view wx:for="{{item.headers}}" wx:for-item="cell" wx:key="index" class="md-table__cell md-table__cell--header">
-                    <text>{{cell}}</text>
-                  </view>
-                </view>
-                <view wx:for="{{item.rows}}" wx:for-item="row" wx:key="index" class="md-table__row">
-                  <view wx:for="{{row}}" wx:for-item="cell" wx:key="index" class="md-table__cell">
-                    <text>{{cell}}</text>
-                  </view>
-                </view>
-              </view>
-            </scroll-view>
-          </view>
-
-          <!-- paragraph（默认） -->
-          <view wx:else class="md-paragraph">
-            <rich-text nodes="{{item.htmlContent || item.content}}" class="md-paragraph__text"></rich-text>
-          </view>
-
-        </block>
-      </view>
-    </block>
-
-    <!-- ══════════════ Code Tab ══════════════ -->
-    <block wx:elif="{{activeTab === 'code'}}">
-      <view class="code-viewer">
-
-        <!-- 文件信息头 -->
-        <view class="code-header">
-          <view class="code-header__left">
-            <text class="code-header__filename">{{filename}}</text>
-            <text class="code-header__loc">{{totalLoc}} 行</text>
-          </view>
-          <view class="code-header__copy" bindtap="copySource">
-            <text class="code-header__copy-icon">⎘</text>
-            <text class="code-header__copy-label">复制</text>
-          </view>
-        </view>
-
-        <!-- 函数/类导航 -->
-        <view class="func-nav" wx:if="{{functions.length > 0 || classes.length > 0}}">
-          <text class="func-nav__title">跳转</text>
-          <scroll-view scroll-x class="func-nav__scroll">
-            <view class="func-nav__list">
-              <view
-                wx:for="{{classes}}"
-                wx:for-item="cls"
-                wx:key="name"
-                class="func-tag func-tag--class"
-                bindtap="scrollToFunc"
-                data-line="{{cls.startLine}}"
-              >
-                <text class="func-tag__prefix">C</text>
-                <text>{{cls.name}}</text>
-              </view>
-              <view
-                wx:for="{{functions}}"
-                wx:for-item="fn"
-                wx:key="name"
-                class="func-tag func-tag--func"
-                bindtap="scrollToFunc"
-                data-line="{{fn.startLine}}"
-              >
-                <text class="func-tag__prefix">f</text>
-                <text>{{fn.name}}</text>
-              </view>
-            </view>
-          </scroll-view>
-        </view>
-
-        <!-- 截断提示 -->
-        <view class="truncate-tip" wx:if="{{isTruncated}}">
-          <text class="truncate-tip__text">显示前 {{displayLoc}} 行（共 {{totalLoc}} 行），复制按钮可获取完整源码</text>
-        </view>
-
-        <!-- 代码内容 -->
-        <view class="code-body" wx:if="{{codeLoaded && codeLines.length > 0}}">
-          <scroll-view scroll-x scroll-y class="code-scroll" scroll-into-view="{{scrollToLineId}}">
-            <view class="code-lines">
-              <view
-                wx:for="{{codeLines}}"
-                wx:key="index"
-                id="line-{{index}}"
-                class="code-line"
-              >
-                <text class="code-line__num">{{index + 1}}</text>
-                <view class="code-line__tokens">
-                  <text
-                    wx:for="{{item}}"
-                    wx:for-item="token"
-                    wx:key="index"
-                    class="code-token"
-                    style="color:{{token.color}}"
-                  >{{token.value}}</text>
-                </view>
-              </view>
-            </view>
-          </scroll-view>
-        </view>
-
-        <!-- 加载中占位 -->
-        <view class="code-loading" wx:if="{{!codeLoaded}}">
-          <text class="code-loading__text">加载中…</text>
-        </view>
-
-      </view>
-    </block>
-
-    <!-- ══════════════ Deep Dive Tab ══════════════ -->
-    <block wx:elif="{{activeTab === 'deep-dive'}}">
-      <view class="deep-dive">
-
-        <!-- 加载中占位 -->
-        <view class="deep-dive__loading" wx:if="{{!deepDiveLoaded}}">
-          <text class="deep-dive__loading-text">加载中…</text>
-        </view>
-
-        <block wx:if="{{deepDiveLoaded}}">
-
-          <!-- ── 1. 执行流程图 ── -->
-          <view class="dd-section" wx:if="{{flowItems.length > 0}}">
-            <view class="dd-section__head">
-              <view class="dd-section__bar"></view>
-              <text class="dd-section__title">执行流程图</text>
-            </view>
-            <view class="dd-flow">
-              <view
-                wx:for="{{flowItems}}"
-                wx:key="id"
-                class="dd-flow-node dd-flow-node--{{item.type}}"
-              >
-                <view class="dd-flow-node__box">
-                  <text class="dd-flow-node__label">{{item.label}}</text>
-                </view>
-                <view class="dd-flow-arrow" wx:if="{{!item.isLast}}">
-                  <view class="dd-flow-arrow__line"></view>
-                  <text class="dd-flow-arrow__label" wx:if="{{item.edgeSummary}}">{{item.edgeSummary}}</text>
-                </view>
-              </view>
-            </view>
-          </view>
-
-          <!-- ── 2. 架构蓝图 ── -->
-          <view class="dd-section" wx:if="{{blueprintData}}">
-            <view class="dd-section__head">
-              <view class="dd-section__bar"></view>
-              <text class="dd-section__title">架构蓝图</text>
-            </view>
-
-            <!-- 摘要 -->
-            <view class="dd-blueprint-summary" wx:if="{{blueprintData.summary}}">
-              <text class="dd-blueprint-summary__text">{{blueprintData.summary}}</text>
-            </view>
-
-            <!-- Slices -->
-            <view
-              wx:for="{{blueprintData.slices}}"
-              wx:for-item="slice"
-              wx:key="id"
-              class="dd-blueprint-slice"
-              wx:if="{{slice.items.length > 0}}"
-            >
-              <text class="dd-blueprint-slice__label">{{slice.label}}</text>
-              <view
-                wx:for="{{slice.items}}"
-                wx:for-item="item"
-                wx:key="name"
-                class="dd-blueprint-item"
-              >
-                <view class="dd-blueprint-item__head">
-                  <text class="dd-blueprint-item__name">{{item.name}}</text>
-                  <text class="dd-blueprint-item__badge" wx:if="{{item.fresh}}">新增</text>
-                </view>
-                <text class="dd-blueprint-item__detail">{{item.detail}}</text>
-              </view>
-            </view>
-
-            <!-- Records -->
-            <view class="dd-blueprint-slice" wx:if="{{blueprintData.records.length > 0}}">
-              <text class="dd-blueprint-slice__label">关键数据结构</text>
-              <view
-                wx:for="{{blueprintData.records}}"
-                wx:key="name"
-                class="dd-blueprint-item dd-blueprint-item--record"
-              >
-                <view class="dd-blueprint-item__head">
-                  <text class="dd-blueprint-item__name dd-blueprint-item__name--mono">{{item.name}}</text>
-                  <text class="dd-blueprint-item__badge dd-blueprint-item__badge--record" wx:if="{{item.fresh}}">新增</text>
-                </view>
-                <text class="dd-blueprint-item__detail">{{item.detail}}</text>
-              </view>
-            </view>
-
-            <!-- Handoff 执行步骤 -->
-            <view class="dd-blueprint-slice" wx:if="{{blueprintData.handoff.length > 0}}">
-              <text class="dd-blueprint-slice__label">执行移交</text>
-              <view
-                wx:for="{{blueprintData.handoff}}"
-                wx:key="index"
-                class="dd-handoff-item"
-              >
-                <view class="dd-handoff-item__num">{{index + 1}}</view>
-                <text class="dd-handoff-item__text">{{item}}</text>
-              </view>
-            </view>
-          </view>
-
-          <!-- ── 3. Agent Loop 模拟器 ── -->
-          <view class="dd-section" wx:if="{{simulatorSteps.length > 0}}">
-            <view class="dd-section__head">
-              <view class="dd-section__bar"></view>
-              <text class="dd-section__title">Agent Loop 模拟器</text>
-            </view>
-
-            <view class="dd-sim">
-              <!-- 进度条 -->
-              <view class="dd-sim-progress-bar">
-                <view class="dd-sim-progress-bar__fill" style="width:{{simProgressPercent}}%"></view>
-              </view>
-
-              <!-- 上一步摘要 -->
-              <view class="dd-sim-peek" wx:if="{{simPrevStep}}" bindtap="simPrev">
-                <text class="dd-sim-peek__label">{{simPrevStep.typeLabel}}</text>
-                <text class="dd-sim-peek__text">{{simPrevStep.contentPreview}}</text>
-              </view>
-
-              <!-- 当前步骤（全尺寸高亮） -->
-              <view class="dd-sim-current dd-sim-current--{{simCurrentStepData.type}}" wx:if="{{simCurrentStepData}}">
-                <view class="dd-sim-current__header">
-                  <text class="dd-sim-current__type">{{simCurrentStepData.typeLabel}}</text>
-                  <text class="dd-sim-current__tool" wx:if="{{simCurrentStepData.toolName}}">{{simCurrentStepData.toolName}}</text>
-                  <text class="dd-sim-current__counter">{{simCurrentStep + 1}}/{{simulatorSteps.length}}</text>
-                </view>
-                <text class="dd-sim-current__content">{{simCurrentStepData.content}}</text>
-                <text class="dd-sim-current__annotation" wx:if="{{simCurrentStepData.annotation}}">{{simCurrentStepData.annotation}}</text>
-              </view>
-
-              <!-- 下一步提示 -->
-              <view class="dd-sim-peek dd-sim-peek--next" wx:if="{{simNextStep}}" bindtap="simNext">
-                <text class="dd-sim-peek__label">{{simNextStep.typeLabel}}</text>
-                <text class="dd-sim-peek__text">{{simNextStep.contentPreview}}</text>
-              </view>
-
-              <!-- 控制按钮 -->
-              <view class="dd-sim-controls">
-                <view class="dd-sim-btn dd-sim-btn--prev {{simCurrentStep <= 0 ? 'dd-sim-btn--disabled' : ''}}" bindtap="simPrev">
-                  <text class="dd-sim-btn__text">← 上一步</text>
-                </view>
-                <view class="dd-sim-btn dd-sim-btn--next {{simCurrentStep >= simulatorSteps.length - 1 ? 'dd-sim-btn--disabled' : ''}}" bindtap="simNext">
-                  <text class="dd-sim-btn__text">下一步 →</text>
-                </view>
-              </view>
-            </view>
-          </view>
-
-          <!-- ── 4. 关联桥接文档 ── -->
-          <view class="dd-section" wx:if="{{bridgeDocLinks.length > 0}}">
-            <view class="dd-section__head">
-              <view class="dd-section__bar"></view>
-              <text class="dd-section__title">扩展阅读</text>
-            </view>
-            <view
-              wx:for="{{bridgeDocLinks}}"
-              wx:key="slug"
-              class="dd-bridge-card"
-              bindtap="openBridgeDoc"
-              data-slug="{{item.slug}}"
-            >
-              <view class="dd-bridge-card__top">
-                <text class="dd-bridge-card__kind dd-bridge-card__kind--{{item.kind}}">{{item.kind === 'map' ? '地图' : '机制'}}</text>
-                <text class="dd-bridge-card__title">{{item.title}}</text>
-                <text class="dd-bridge-card__arrow">›</text>
-              </view>
-              <text class="dd-bridge-card__summary">{{item.summary}}</text>
-            </view>
-          </view>
-
-          <!-- ── BP: 相关 Tips ── -->
-          <view class="dd-section" wx:if="{{relatedTipsList.length > 0}}">
-            <view class="dd-section__head">
-              <view class="dd-section__bar" style="background:#EA580C"></view>
-              <text class="dd-section__title">相关实用技巧</text>
-            </view>
-            <view
-              wx:for="{{relatedTipsList}}"
-              wx:key="slug"
-              class="dd-bridge-card"
-              bindtap="openTipsCategory"
-              data-slug="{{item.slug}}"
-            >
-              <view class="dd-bridge-card__top">
-                <text class="dd-bridge-card__kind" style="background:#EA580C22;color:#EA580C">Tips</text>
-                <text class="dd-bridge-card__title">{{item.title}}</text>
-                <text class="dd-bridge-card__arrow">›</text>
-              </view>
-              <text class="dd-bridge-card__summary">{{item.count}} 条实用技巧</text>
-            </view>
-          </view>
-
-          <!-- ── BP: 关联架构章节 ── -->
-          <view class="dd-section" wx:if="{{relatedChapterLinks.length > 0}}">
-            <view class="dd-section__head">
-              <view class="dd-section__bar" style="background:#2563EB"></view>
-              <text class="dd-section__title">关联架构章节</text>
-            </view>
-            <view
-              wx:for="{{relatedChapterLinks}}"
-              wx:key="id"
-              class="dd-bridge-card"
-              bindtap="goToRelatedChapter"
-              data-id="{{item.id}}"
-            >
-              <view class="dd-bridge-card__top">
-                <text class="dd-bridge-card__kind" style="background:{{item.layerColor}}22;color:{{item.layerColor}}">{{item.id}}</text>
-                <text class="dd-bridge-card__title">{{item.title}}</text>
-                <text class="dd-bridge-card__arrow">›</text>
-              </view>
-            </view>
-          </view>
-
-          <!-- 无数据时占位 -->
-          <view class="coming-soon" wx:if="{{flowItems.length === 0 && !blueprintData && simulatorSteps.length === 0 && relatedTipsList.length === 0 && relatedChapterLinks.length === 0}}">
-            <text class="coming-soon__icon">🔭</text>
-            <text class="coming-soon__title">暂无深度内容</text>
-            <text class="coming-soon__desc">当前章节暂无可视化数据</text>
-          </view>
-
-        </block>
-      </view>
-    </block>
-
-    <!-- ══════════════ 底部前后导航 ══════════════ -->
-    <view class="nav-footer">
-      <view
-        class="nav-btn {{prevId ? '' : 'nav-btn--disabled'}}"
-        bindtap="goToPrev"
-      >
-        <text class="nav-btn__arrow">←</text>
-        <text class="nav-btn__label">{{prevId ? prevId : '已是第一章'}}</text>
-      </view>
-
-      <view class="nav-footer__divider"></view>
-
-      <view
-        class="nav-btn nav-btn--right {{nextId ? '' : 'nav-btn--disabled'}}"
-        bindtap="goToNext"
-      >
-        <text class="nav-btn__label">{{nextId ? nextId : '已是最后章'}}</text>
-        <text class="nav-btn__arrow">→</text>
-      </view>
+    <view class="btn-continue" bindtap="continueAfterReview">
+      <text class="btn-continue__text font-mono">> CONTINUE</text>
     </view>
 
-    <!-- 底部安全距离 -->
-    <view class="safe-bottom"></view>
+  </scroll-view>
+
+  <!-- ══════════ Settlement Screen ══════════ -->
+  <scroll-view scroll-y class="game-content" wx:if="{{showSettlement}}">
+
+    <view class="settle-container">
+      <!-- Stage complete header -->
+      <view class="settle-header">
+        <text class="settle-title font-mono" style="color:{{regionColor}}">STAGE CLEAR</text>
+        <text class="settle-stage">{{stageTitle}}</text>
+      </view>
+
+      <!-- Stars -->
+      <view class="settle-stars">
+        <text class="settle-star {{result.stars >= 1 ? 'settle-star--earned' : ''}}">★</text>
+        <text class="settle-star {{result.stars >= 2 ? 'settle-star--earned' : ''}}">★</text>
+        <text class="settle-star {{result.stars >= 3 ? 'settle-star--earned' : ''}}">★</text>
+      </view>
+
+      <!-- Score -->
+      <view class="settle-score">
+        <text class="settle-score__text font-mono">{{result.correctCount}}/{{result.totalQuestions}} correct ({{result.ratio}}%)</text>
+      </view>
+
+      <!-- EXP gained -->
+      <view class="settle-exp">
+        <text class="settle-exp__label font-mono">EXP +</text>
+        <text class="settle-exp__value font-mono" style="color:{{regionColor}}">{{result.expReward}}</text>
+      </view>
+
+      <!-- Level up notification -->
+      <view class="settle-levelup" wx:if="{{newLevel}}">
+        <text class="settle-levelup__text font-mono" style="color:var(--color-terminal-gold)">LEVEL UP! → {{newLevel.title}} Lv.{{newLevel.level}}</text>
+      </view>
+
+      <!-- Earned cards -->
+      <view class="settle-cards" wx:if="{{earnedCardDetails.length > 0}}">
+        <text class="settle-cards__title font-mono">CARDS OBTAINED:</text>
+        <view class="settle-cards__list">
+          <view wx:for="{{earnedCardDetails}}" wx:key="id" class="settle-card settle-card--{{item.rarity}}">
+            <text class="settle-card__rarity font-mono">{{item.rarity}}</text>
+            <text class="settle-card__name">{{item.name}}</text>
+          </view>
+        </view>
+      </view>
+
+      <!-- Action buttons -->
+      <view class="settle-actions">
+        <view class="btn-settle btn-settle--retry" bindtap="retryStage">
+          <text class="btn-settle__text font-mono">> RETRY</text>
+        </view>
+        <view class="btn-settle btn-settle--map" bindtap="goToMap">
+          <text class="btn-settle__text font-mono">> MAP</text>
+        </view>
+      </view>
+    </view>
 
   </scroll-view>
 </view>
