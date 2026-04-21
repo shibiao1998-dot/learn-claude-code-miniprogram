@@ -1,87 +1,85 @@
 <!-- pages/timeline/timeline.wxml -->
-<scroll-view scroll-y class="page">
+<scroll-view scroll-y class="map-page">
 
-  <!-- Page Header -->
-  <view class="page-header">
-    <view class="header-top">
-      <text class="page-title">{{pageTitle}}</text>
-      <view class="lang-switcher">
-        <text class="lang-btn {{locale=='zh'?'active':''}}" bindtap="switchLocale" data-locale="zh">中</text>
-        <text class="lang-btn {{locale=='en'?'active':''}}" bindtap="switchLocale" data-locale="en">EN</text>
-        <text class="lang-btn {{locale=='ja'?'active':''}}" bindtap="switchLocale" data-locale="ja">日</text>
-      </view>
+  <!-- Terminal Header -->
+  <view class="map-header">
+    <text class="map-header__title">REGION MAP</text>
+    <view class="map-header__stats">
+      <text class="map-header__level font-mono">{{levelInfo.title}} Lv.{{levelInfo.level}}</text>
+      <text class="map-header__progress font-mono">{{totalProgress}}% decoded</text>
     </view>
-    <text class="page-subtitle">{{pageSubtitle}}</text>
-    <view class="progress-strip">
-      <view class="bar-track">
-        <view class="bar-fill" style="width:{{readCount / totalChapters * 100}}%"></view>
-      </view>
-      <text class="bar-label">{{readCount}} / {{totalChapters}}</text>
+    <view class="map-progress-bar">
+      <view class="map-progress-bar__fill" style="width:{{totalProgress}}%"></view>
     </view>
   </view>
 
-  <!-- Metro Timeline -->
-  <view class="metro-timeline">
-    <block wx:for="{{timelineItems}}" wx:key="id">
+  <!-- Regions -->
+  <view class="region-list">
+    <view wx:for="{{regions}}" wx:key="id" class="region-section {{item.unlocked ? '' : 'region--locked'}}">
 
-      <!-- Layer connector (between layer sections, not for first layer-start) -->
-      <view wx:if="{{item.isLayerStart && index > 0}}" class="metro-connector">
-        <view class="connector-top" style="background:{{item.prevLayerColor}}"></view>
-        <view class="connector-bottom" style="background:{{item.layerColor}}"></view>
-      </view>
-
-      <!-- Transfer station (layer boundary) -->
-      <view wx:if="{{item.isLayerStart}}" class="metro-transfer">
-        <!-- Rail line behind transfer -->
-        <view class="metro-rail" style="background:{{item.layerColor}}"></view>
-        <!-- Transfer node (ring + dot) -->
-        <view class="transfer-node" style="border-color:{{item.layerColor}}">
-          <view class="transfer-dot" style="background:{{item.layerColor}}"></view>
+      <!-- Region Header (tap to expand/collapse) -->
+      <view class="region-header" bindtap="toggleRegion" data-regionid="{{item.id}}">
+        <view class="region-header__left">
+          <text class="region-symbol font-mono" style="color:{{item.colorHex}}">{{item.symbol}}</text>
+          <text class="region-label font-mono" style="color:{{item.colorHex}}">{{item.label}}</text>
+          <text class="region-lock font-mono" wx:if="{{!item.unlocked}}">[LOCKED]</text>
         </view>
-        <view class="transfer-info">
-          <text class="transfer-name">{{item.layerLabel}}</text>
-          <text class="transfer-range">{{item.rangeText}}</text>
+        <view class="region-header__right">
+          <text class="region-stars font-mono">{{item.totalStars}}/{{item.maxStars}}</text>
+          <text class="region-chevron font-mono">{{item.expanded ? '▾' : '▸'}}</text>
         </view>
       </view>
 
-      <!-- Regular station -->
-      <view
-        class="metro-station {{item.isRead ? 'read' : ''}} {{item.isCurrent ? 'current' : ''}} {{!item.isRead && !item.isCurrent ? 'future' : ''}}"
-        bindtap="goToChapter"
-        data-id="{{item.id}}"
-        hover-class="station-hover"
-      >
-        <!-- Rail line behind station -->
-        <view class="metro-rail {{item.isLast ? 'metro-rail-last' : ''}}" style="background:{{item.layerColor}}"></view>
-        <!-- Station dot -->
-        <view class="station-dot-wrap">
-          <view class="station-dot" style="background:{{item.layerColor}}"></view>
+      <!-- Region Progress Bar -->
+      <view class="region-bar">
+        <view class="region-bar__track">
+          <view class="region-bar__fill" style="width:{{item.barWidth}}%;background:{{item.colorHex}}"></view>
         </view>
-        <!-- Station text -->
-        <view class="station-text">
-          <text class="station-id">{{item.id}}</text>
-          <text class="station-title">{{item.title}}</text>
-        </view>
-        <text wx:if="{{item.isRead}}" class="station-check">✓</text>
-        <text wx:elif="{{item.isCurrent}}" class="station-current-label">{{t_currentLabel || '当前'}}</text>
+        <text class="region-bar__text font-mono">{{item.cleared}}/{{item.total}}</text>
       </view>
 
-    </block>
-  </view>
+      <!-- Stage List (expanded) -->
+      <view class="stage-list" wx:if="{{item.expanded && item.unlocked}}">
+        <view
+          wx:for="{{item.stages}}"
+          wx:for-item="stage"
+          wx:key="id"
+          class="stage-node {{stage.cleared ? 'stage--cleared' : 'stage--pending'}}"
+          bindtap="goToStage"
+          data-stageid="{{stage.id}}"
+          data-regionid="{{item.id}}"
+        >
+          <!-- Node connector line -->
+          <view class="stage-connector" style="background:{{item.colorHex}}"></view>
 
-  <!-- Bridge Docs -->
-  <view class="bridge-section" wx:if="{{bridgeLinks.length > 0}}">
-    <text class="bridge-title">Bridge Docs</text>
-    <view class="bridge-list">
-      <text
-        wx:for="{{bridgeLinks}}"
-        wx:key="slug"
-        class="bridge-link"
-        bindtap="openBridgeDoc"
-        data-slug="{{item.slug}}"
-      >{{item.label}}</text>
+          <!-- Node dot -->
+          <view class="stage-dot {{stage.cleared ? 'stage-dot--cleared' : ''}}" style="border-color:{{item.colorHex}}">
+            <text wx:if="{{stage.cleared}}" class="stage-dot__check">✓</text>
+            <view wx:else class="stage-dot__inner" style="background:{{item.colorHex}}"></view>
+          </view>
+
+          <!-- Stage info -->
+          <view class="stage-info">
+            <text class="stage-chapter font-mono">{{stage.chapter}}</text>
+            <text class="stage-title">{{stage.title}}</text>
+          </view>
+
+          <!-- Stars -->
+          <view class="stage-stars">
+            <text class="star {{stage.stars >= 1 ? 'star--earned' : ''}}">★</text>
+            <text class="star {{stage.stars >= 2 ? 'star--earned' : ''}}">★</text>
+            <text class="star {{stage.stars >= 3 ? 'star--earned' : ''}}">★</text>
+          </view>
+        </view>
+      </view>
+
+      <!-- Locked overlay message -->
+      <view class="locked-msg" wx:if="{{item.expanded && !item.unlocked}}">
+        <text class="locked-msg__text font-mono">> access denied: complete previous region</text>
+      </view>
+
     </view>
   </view>
 
-  <view class="page-footer"></view>
+  <view class="map-footer"></view>
 </scroll-view>
