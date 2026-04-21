@@ -142,6 +142,108 @@ function extractBoldTerms(text) {
   return matches;
 }
 
+// --- Region Mapping ---
+var REGION_MAP = {
+  core: { versions: ['s01','s02','s03','s04','s05','s06'], symbol: '>' },
+  tools: { versions: ['s07','s08','s09','s10','s11'], symbol: '$' },
+  runtime: { versions: ['s12','s13','s14'], symbol: '#' },
+  network: { versions: ['s15','s16','s17','s18','s19'], symbol: '@' },
+  practice: { versions: ['bp01','bp02','bp03','bp04','bp05','bp06','bp07'], symbol: '!' }
+};
+
+function getRegion(versionId) {
+  var keys = Object.keys(REGION_MAP);
+  for (var i = 0; i < keys.length; i++) {
+    if (REGION_MAP[keys[i]].versions.indexOf(versionId) !== -1) {
+      return keys[i];
+    }
+  }
+  return 'core';
+}
+
+// --- Card Generation ---
+function generateCardId(versionId, index) {
+  var padded = String(index + 1);
+  while (padded.length < 3) padded = '0' + padded;
+  return 'card_' + versionId + '_' + padded;
+}
+
+function scoreRarity(point, versionMeta) {
+  var score = 0;
+  score += Math.min(point.boldTerms.length * 2, 10);
+  if (point.hasCode) score += 3;
+  var bodyLen = point.body.length;
+  if (bodyLen > 1000) score += 3;
+  else if (bodyLen > 500) score += 1;
+  if (versionMeta) {
+    if (versionMeta.tools && versionMeta.tools.length > 3) score += 2;
+    if (versionMeta.classes && versionMeta.classes.length > 2) score += 2;
+  }
+  return score;
+}
+
+function assignRarity(score) {
+  if (score >= 14) return 'SSR';
+  if (score >= 10) return 'SR';
+  if (score >= 5) return 'R';
+  return 'N';
+}
+
+function generatePowerDefense(rarity) {
+  var bases = { N: [30, 20], R: [50, 40], SR: [70, 60], SSR: [85, 75] };
+  var base = bases[rarity] || bases.N;
+  var variance = Math.floor(Math.random() * 15);
+  return { power: base[0] + variance, defense: base[1] + variance };
+}
+
+function extractTags(heading, boldTerms) {
+  var tags = [];
+  var combined = (heading + ' ' + boldTerms.join(' ')).toLowerCase();
+  var tagKeywords = {
+    loop: ['loop', '循环', 'ループ'],
+    agent: ['agent', '智能体', 'エージェント'],
+    tool: ['tool', '工具', 'ツール'],
+    prompt: ['prompt', '提示', 'プロンプト'],
+    context: ['context', '上下文', 'コンテキスト'],
+    permission: ['permission', '权限', '許可'],
+    mcp: ['mcp', 'protocol', '协议'],
+    task: ['task', '任务', 'タスク'],
+    memory: ['memory', '记忆', 'メモリ'],
+    hook: ['hook', '钩子', 'フック'],
+    stream: ['stream', '流式', 'ストリーム'],
+    error: ['error', '错误', 'エラー', 'recovery', '恢复'],
+    plan: ['plan', '规划', '計画'],
+    security: ['security', '安全', 'sandbox', '沙箱']
+  };
+  var keys = Object.keys(tagKeywords);
+  for (var i = 0; i < keys.length; i++) {
+    var words = tagKeywords[keys[i]];
+    for (var j = 0; j < words.length; j++) {
+      if (combined.indexOf(words[j]) !== -1) {
+        tags.push(keys[i]);
+        break;
+      }
+    }
+  }
+  return tags.length > 0 ? tags.slice(0, 3) : ['concept'];
+}
+
+function makeCardDescription(point) {
+  if (point.boldTerms.length > 0) {
+    return point.boldTerms[0];
+  }
+  var lines = point.body.split('\n');
+  for (var i = 0; i < lines.length; i++) {
+    var line = lines[i].trim();
+    if (line.length > 10 && line.indexOf('#') !== 0 && line.indexOf('```') !== 0
+        && line.indexOf('>') !== 0 && line.indexOf('|') !== 0 && line.indexOf('-') !== 0) {
+      if (line.length > 60) return line.substring(0, 57) + '...';
+      return line;
+    }
+  }
+  return point.heading;
+}
+
 // --- Load meta ---
 console.log('Loading meta.js...');
 var meta = loadJSModule(META_PATH);
@@ -170,7 +272,89 @@ function main() {
   console.log('\n=== Build Game Data ===\n');
   console.log('Chapters: ' + allVersionIds.length);
   console.log('Locales: ' + locales.join(', '));
-  // TODO: extraction, card generation, stage generation
+  // --- Generate Cards ---
+  console.log('\nGenerating cards...');
+  var allCards = [];
+
+  allVersionIds.forEach(function(verId) {
+    var docs = chapterDocs[verId];
+    if (!docs || !docs.zh) return;
+
+    var region = getRegion(verId);
+    var versionMeta = meta.versions[verId];
+    var zhPoints = extractKnowledgePoints(docs.zh.content);
+    var enPoints = docs.en ? extractKnowledgePoints(docs.en.content) : [];
+    var jaPoints = docs.ja ? extractKnowledgePoints(docs.ja.content) : [];
+
+    zhPoints.forEach(function(zhPoint, idx) {
+      var enPoint = enPoints[idx] || null;
+      var jaPoint = jaPoints[idx] || null;
+      var score = scoreRarity(zhPoint, versionMeta);
+      var rarity = assignRarity(score);
+      var stats = generatePowerDefense(rarity);
+      var tags = extractTags(zhPoint.heading, zhPoint.boldTerms);
+
+      var card = {
+        id: generateCardId(verId, idx),
+        name: {
+          zh: zhPoint.heading,
+          en: enPoint ? enPoint.heading : zhPoint.heading,
+          ja: jaPoint ? jaPoint.heading : zhPoint.heading
+        },
+        desc: {
+          zh: makeCardDescription(zhPoint),
+          en: enPoint ? makeCardDescription(enPoint) : makeCardDescription(zhPoint),
+          ja: jaPoint ? makeCardDescription(jaPoint) : makeCardDescription(zhPoint)
+        },
+        rarity: rarity,
+        region: region,
+        chapter: verId,
+        tags: tags,
+        power: stats.power,
+        defense: stats.defense
+      };
+      allCards.push(card);
+    });
+  });
+
+  // --- Rarity distribution adjustment ---
+  var total = allCards.length;
+  var targets = {
+    SSR: Math.max(Math.round(total * 0.03), 1),
+    SR: Math.round(total * 0.12),
+    R: Math.round(total * 0.25)
+  };
+
+  var scored = allCards.map(function(card) {
+    var docs = chapterDocs[card.chapter];
+    var zhPoints = extractKnowledgePoints(docs.zh.content);
+    var point = zhPoints.filter(function(p) { return p.heading === card.name.zh; })[0];
+    var versionMeta = meta.versions[card.chapter];
+    return { card: card, score: point ? scoreRarity(point, versionMeta) : 0 };
+  });
+  scored.sort(function(a, b) { return b.score - a.score; });
+
+  var ssrCount = 0, srCount = 0, rCount = 0;
+  scored.forEach(function(item) {
+    if (ssrCount < targets.SSR) {
+      item.card.rarity = 'SSR';
+      ssrCount++;
+    } else if (srCount < targets.SR) {
+      item.card.rarity = 'SR';
+      srCount++;
+    } else if (rCount < targets.R) {
+      item.card.rarity = 'R';
+      rCount++;
+    } else {
+      item.card.rarity = 'N';
+    }
+    var stats = generatePowerDefense(item.card.rarity);
+    item.card.power = stats.power;
+    item.card.defense = stats.defense;
+  });
+
+  console.log('Total cards: ' + allCards.length);
+  console.log('Distribution: SSR=' + ssrCount + ' SR=' + srCount + ' R=' + rCount + ' N=' + (total - ssrCount - srCount - rCount));
 }
 
 main();
