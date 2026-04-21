@@ -534,6 +534,76 @@ function main() {
 
   console.log('Total cards: ' + allCards.length);
   console.log('Distribution: SSR=' + ssrCount + ' SR=' + srCount + ' R=' + rCount + ' N=' + (total - ssrCount - srCount - rCount));
+
+  // --- Generate Stages ---
+  console.log('\nGenerating stages...');
+  var allStages = [];
+
+  var cardsByRegion = {};
+  allCards.forEach(function(card) {
+    if (!cardsByRegion[card.region]) cardsByRegion[card.region] = [];
+    cardsByRegion[card.region].push(card);
+  });
+
+  allVersionIds.forEach(function(verId) {
+    var docs = chapterDocs[verId];
+    if (!docs || !docs.zh) return;
+
+    var region = getRegion(verId);
+    var versionMeta = meta.versions[verId];
+
+    var zhPoints = extractKnowledgePoints(docs.zh.content);
+    var enPoints = docs.en ? extractKnowledgePoints(docs.en.content) : [];
+    var jaPoints = docs.ja ? extractKnowledgePoints(docs.ja.content) : [];
+
+    var regionCards = cardsByRegion[region] || [];
+    var questions = generateQuestions(verId, zhPoints, enPoints, jaPoints, regionCards);
+
+    var stageCards = allCards
+      .filter(function(c) { return c.chapter === verId; })
+      .slice(0, 3)
+      .map(function(c) { return c.id; });
+
+    var stage = {
+      id: 'stage_' + verId,
+      chapter: verId,
+      region: region,
+      title: {
+        zh: versionMeta && versionMeta.content && versionMeta.content.zh
+          ? versionMeta.content.zh.subtitle || versionMeta.title
+          : verId,
+        en: versionMeta && versionMeta.content && versionMeta.content.en
+          ? versionMeta.content.en.subtitle || versionMeta.title
+          : verId,
+        ja: versionMeta && versionMeta.content && versionMeta.content.ja
+          ? versionMeta.content.ja.subtitle || versionMeta.title
+          : verId
+      },
+      questions: questions,
+      star_thresholds: [0.4, 0.7, 1.0],
+      reward_cards: stageCards
+    };
+
+    allStages.push(stage);
+  });
+
+  console.log('Total stages: ' + allStages.length);
+
+  var totalQ = 0;
+  var diffCounts = { 1: 0, 2: 0, 3: 0 };
+  allStages.forEach(function(s) {
+    totalQ += s.questions.length;
+    s.questions.forEach(function(q) { diffCounts[q.difficulty]++; });
+  });
+  console.log('Total questions: ' + totalQ);
+  console.log('Difficulty spread: concept=' + diffCounts[1] + ' application=' + diffCounts[2] + ' judgment=' + diffCounts[3]);
+
+  // --- Write output files ---
+  console.log('\nWriting output files...');
+  writeJSModule(CARDS_OUTPUT, { cards: allCards });
+  writeJSModule(STAGES_OUTPUT, { stages: allStages });
+
+  console.log('\n=== Done! ===');
 }
 
 main();
