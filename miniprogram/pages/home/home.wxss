@@ -1,265 +1,328 @@
-/* pages/home/home.wxss — V3 Design */
+/* pages/home/home.wxss — Terminal Console */
 
-.page {
+.terminal-page {
   height: 100vh;
-  background: var(--color-bg);
+  padding: var(--spacing-lg);
+  padding-bottom: 160rpx;
 }
 
-/* ========== Page Header ========== */
-.page-header {
-  padding: 16rpx 40rpx 0;
+/* --- Terminal Header --- */
+.terminal-header {
+  margin-bottom: var(--spacing-xl);
 }
 
 .header-top {
   display: flex;
-  flex-direction: row;
   justify-content: space-between;
-  align-items: baseline;
-  margin-bottom: 8rpx;
+  align-items: center;
+  margin-bottom: var(--spacing-sm);
 }
 
-.page-title {
-  font-size: 56rpx;
-  font-weight: 700;
-  letter-spacing: -1rpx;
-  line-height: 1.15;
-  color: var(--color-text-primary);
+.terminal-title {
+  font-size: var(--font-lg);
+  color: var(--color-terminal-green);
+  letter-spacing: 2rpx;
 }
 
-.page-subtitle {
-  display: block;
-  font-size: 26rpx;
+.terminal-prompt {
+  font-size: var(--font-sm);
   color: var(--color-text-secondary);
-  margin-top: 8rpx;
-  line-height: 1.4;
 }
 
-/* Language Switcher — segmented control */
 .lang-switcher {
   display: flex;
-  flex-direction: row;
-  border: 2rpx solid var(--color-border);
-  border-radius: 12rpx;
-  overflow: hidden;
-  flex-shrink: 0;
+  gap: 4rpx;
 }
 
 .lang-btn {
-  font-size: 24rpx;
-  font-weight: 500;
+  font-size: var(--font-xs);
   color: var(--color-text-muted);
   padding: 8rpx 16rpx;
-  border-right: 2rpx solid var(--color-border);
-  line-height: 1;
-}
-
-.lang-btn:last-child {
-  border-right: none;
+  border-radius: var(--radius-sm);
+  background: var(--color-bg-card);
 }
 
 .lang-btn.active {
-  background: var(--color-text-primary);
-  color: #FFFFFF;
+  color: var(--color-terminal-green);
+  background: var(--color-bg-elevated);
+}
+
+/* --- Status Card --- */
+.status-card {
+  background: var(--color-bg-card);
+  border-radius: var(--radius-md);
+  padding: var(--spacing-lg);
+  margin-bottom: var(--spacing-lg);
+  border: 1rpx solid var(--color-border);
+}
+
+.status-row {
+  display: flex;
+  align-items: center;
+  margin-bottom: var(--spacing-sm);
+}
+
+.status-row-sub {
+  margin-bottom: 0;
+  margin-top: var(--spacing-sm);
+  justify-content: space-between;
+}
+
+.status-label {
+  font-size: var(--font-md);
+  color: var(--color-text-primary);
   font-weight: 600;
 }
 
-/* ========== Progress Strip ========== */
-.progress-strip {
-  padding: 0 40rpx;
-  margin: 32rpx 0 40rpx;
+.status-sep {
+  color: var(--color-text-muted);
+  margin: 0 var(--spacing-sm);
+}
+
+.status-value {
+  font-size: var(--font-sm);
+  color: var(--color-text-secondary);
+}
+
+.status-mini {
+  font-size: var(--font-xs);
+  color: var(--color-text-muted);
+}
+
+/* Progress bars */
+.total-bar {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-sm);
 }
 
 .bar-track {
-  width: 100%;
-  height: 6rpx;
-  background: var(--color-border);
-  border-radius: 3rpx;
+  flex: 1;
+  height: 12rpx;
+  background: var(--color-bg-muted);
+  border-radius: var(--radius-pill);
   overflow: hidden;
 }
 
 .bar-fill {
   height: 100%;
-  border-radius: 3rpx;
-  background: var(--color-text-primary);
-  transition: width 0.3s;
+  background: var(--color-terminal-green);
+  border-radius: var(--radius-pill);
+  transition: width 0.5s ease;
 }
 
-.bar-label {
-  display: block;
-  font-size: 22rpx;
-  font-weight: 500;
-  color: var(--color-text-muted);
-  margin-top: 12rpx;
+.bar-pct {
+  font-size: var(--font-xs);
+  color: var(--color-text-secondary);
+  min-width: 80rpx;
   text-align: right;
-  font-variant: tabular-nums;
 }
 
-/* ========== Quick Entry Grid ========== */
-.quick-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 20rpx;
-  padding: 0 40rpx;
-  margin-bottom: 48rpx;
-}
-
-.quick-card {
-  background: var(--color-bg-card);
-  border: 2rpx solid var(--color-border);
-  border-radius: 12rpx;
-  padding: 28rpx;
-}
-
-.quick-card:active {
-  background: #F1F5F9;
-}
-
-.qc-title {
-  display: block;
-  font-size: 26rpx;
-  font-weight: 500;
-  color: var(--color-text-primary);
-  line-height: 1.3;
-  margin-bottom: 4rpx;
-}
-
-.qc-desc {
-  display: block;
-  font-size: 22rpx;
-  color: var(--color-text-muted);
-}
-
-/* ========== Chapter List ========== */
-.chapters-section {
-  padding: 0 40rpx;
-}
-
-.layer-group {
-  margin-bottom: 48rpx;
-}
-
-.layer-group:last-child {
-  margin-bottom: 0;
-}
-
-.layer-header {
+/* --- Action Buttons --- */
+.action-row {
   display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: space-between;
-  margin-bottom: 20rpx;
+  gap: var(--spacing-md);
+  margin-bottom: var(--spacing-xl);
 }
 
-.layer-header-left {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  gap: 16rpx;
-}
-
-.layer-dot {
-  width: 12rpx;
-  height: 12rpx;
-  border-radius: 50%;
-  flex-shrink: 0;
-}
-
-.layer-name {
-  font-size: 24rpx;
-  font-weight: 600;
-  letter-spacing: 0.5rpx;
-  color: var(--color-text-secondary);
-}
-
-.layer-name-en {
-  font-size: 22rpx;
-  font-weight: 500;
-  color: var(--color-text-muted);
-}
-
-.layer-count {
-  font-size: 22rpx;
-  font-weight: 500;
-  color: var(--color-text-muted);
-  font-variant: tabular-nums;
-}
-
-.layer-count.complete {
-  color: var(--color-core);
-}
-
-/* Chapter rows */
-.chapter-list {
-  border-left: 4rpx solid var(--color-border);
-  margin-left: 4rpx;
-  padding-left: 32rpx;
-}
-
-.chapter-row {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  padding: 14rpx 0;
-  gap: 16rpx;
-}
-
-.chapter-hover {
-  opacity: 0.6;
-}
-
-.ch-id {
-  font-family: 'SF Mono', 'Menlo', monospace;
-  font-size: 22rpx;
-  font-weight: 500;
-  color: var(--color-text-muted);
-  width: 52rpx;
-  flex-shrink: 0;
-}
-
-.ch-title {
-  font-size: 28rpx;
-  font-weight: 400;
-  color: var(--color-text-primary);
+.action-btn {
   flex: 1;
-  line-height: 1.3;
+  background: var(--color-bg-card);
+  border: 1rpx solid var(--color-border);
+  border-radius: var(--radius-md);
+  padding: var(--spacing-lg) var(--spacing-md);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--spacing-xs);
 }
 
-/* Read state */
-.chapter-row.read .ch-title {
+.action-btn:active {
+  background: var(--color-bg-elevated);
+}
+
+.action-icon {
+  font-size: var(--font-xl);
+  color: var(--color-terminal-green);
+}
+
+.action-daily .action-icon {
+  color: var(--color-terminal-orange);
+}
+
+.action-daily.completed .action-icon {
   color: var(--color-text-muted);
 }
 
-.chapter-row.read .ch-id {
-  color: var(--color-text-faint);
-}
-
-/* Status indicators */
-.ch-status {
-  font-size: 24rpx;
-  color: var(--color-core);
-  flex-shrink: 0;
-  width: 32rpx;
-  text-align: center;
-}
-
-.ch-arrow {
-  font-size: 28rpx;
+.action-daily.completed .action-title {
   color: var(--color-text-muted);
-  flex-shrink: 0;
-  width: 32rpx;
+}
+
+.action-title {
+  font-size: var(--font-sm);
+  color: var(--color-text-primary);
+}
+
+.action-desc {
+  font-size: var(--font-2xs);
+  color: var(--color-text-muted);
+}
+
+/* --- Region Progress --- */
+.regions-section {
+  margin-bottom: var(--spacing-xl);
+}
+
+.section-title {
+  font-size: var(--font-sm);
+  color: var(--color-terminal-green);
+  margin-bottom: var(--spacing-md);
+  display: block;
+}
+
+.region-list {
+  background: var(--color-bg-card);
+  border-radius: var(--radius-md);
+  border: 1rpx solid var(--color-border);
+  padding: var(--spacing-sm) var(--spacing-md);
+}
+
+.region-row {
+  display: flex;
+  align-items: center;
+  padding: var(--spacing-sm) 0;
+  gap: var(--spacing-sm);
+}
+
+.region-row.locked {
+  opacity: 0.4;
+}
+
+.region-symbol {
+  font-size: var(--font-md);
+  width: 48rpx;
   text-align: center;
 }
 
-/* Next chapter — slightly emphasized */
-.chapter-row.next .ch-id {
+.region-core { color: var(--color-region-core); }
+.region-tools { color: var(--color-region-tools); }
+.region-runtime { color: var(--color-region-runtime); }
+.region-network { color: var(--color-region-network); }
+.region-practice { color: var(--color-region-practice); }
+
+.region-label {
+  font-size: var(--font-sm);
+  color: var(--color-text-primary);
+  width: 200rpx;
+}
+
+.region-bar {
+  flex: 1;
+}
+
+.bar-track-sm {
+  height: 8rpx;
+  background: var(--color-bg-muted);
+  border-radius: var(--radius-pill);
+  overflow: hidden;
+}
+
+.bar-fill-sm {
+  height: 100%;
+  border-radius: var(--radius-pill);
+  transition: width 0.5s ease;
+}
+
+.region-bg-core { background: var(--color-region-core); }
+.region-bg-tools { background: var(--color-region-tools); }
+.region-bg-runtime { background: var(--color-region-runtime); }
+.region-bg-network { background: var(--color-region-network); }
+.region-bg-practice { background: var(--color-region-practice); }
+
+.region-pct {
+  font-size: var(--font-xs);
   color: var(--color-text-secondary);
+  width: 72rpx;
+  text-align: right;
 }
 
-.chapter-row.next .ch-title {
-  font-weight: 500;
+.region-stars {
+  font-size: var(--font-xs);
+  color: var(--color-terminal-orange);
+  width: 80rpx;
+  text-align: right;
 }
 
-/* ========== Footer ========== */
+.region-lock {
+  font-size: var(--font-sm);
+  width: 80rpx;
+  text-align: right;
+}
+
+/* --- Recent Cards --- */
+.recent-section {
+  margin-bottom: var(--spacing-xl);
+}
+
+.recent-scroll {
+  white-space: nowrap;
+}
+
+.recent-cards-row {
+  display: inline-flex;
+  gap: var(--spacing-sm);
+  padding: var(--spacing-xs) 0;
+}
+
+.mini-card {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  width: 160rpx;
+  height: 200rpx;
+  background: var(--color-bg-card);
+  border-radius: var(--radius-md);
+  padding: var(--spacing-sm);
+  justify-content: center;
+  gap: var(--spacing-xs);
+  border: 1rpx solid var(--color-rarity-n);
+}
+
+.mini-card.rarity-R {
+  border-color: var(--color-rarity-r);
+}
+
+.mini-card.rarity-SR {
+  border-color: var(--color-rarity-sr);
+  box-shadow: 0 0 16rpx rgba(188, 140, 255, 0.15);
+}
+
+.mini-card.rarity-SSR {
+  border-color: var(--color-rarity-ssr);
+  box-shadow: 0 0 20rpx rgba(240, 192, 64, 0.2);
+}
+
+.mini-card-rarity {
+  font-size: var(--font-2xs);
+  color: var(--color-text-muted);
+}
+
+.rarity-R .mini-card-rarity { color: var(--color-rarity-r); }
+.rarity-SR .mini-card-rarity { color: var(--color-rarity-sr); }
+.rarity-SSR .mini-card-rarity { color: var(--color-rarity-ssr); }
+
+.mini-card-name {
+  font-size: var(--font-2xs);
+  color: var(--color-text-primary);
+  text-align: center;
+  white-space: normal;
+  word-break: break-all;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
 .page-footer {
-  height: 80rpx;
+  height: 40rpx;
 }
