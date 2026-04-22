@@ -4,6 +4,7 @@
   height: 100vh;
   padding: var(--spacing-lg);
   padding-bottom: 160rpx;
+  box-sizing: border-box;
 }
 
 /* --- Terminal Header --- */
@@ -213,7 +214,7 @@
 .region-label {
   font-size: var(--font-sm);
   color: var(--color-text-primary);
-  width: 200rpx;
+  width: 150rpx;
 }
 
 .region-bar {
@@ -249,13 +250,13 @@
 .region-stars {
   font-size: var(--font-xs);
   color: var(--color-terminal-orange);
-  width: 80rpx;
+  width: 64rpx;
   text-align: right;
 }
 
 .region-lock {
   font-size: var(--font-sm);
-  width: 80rpx;
+  width: 64rpx;
   text-align: right;
 }
 
