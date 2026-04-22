@@ -1,52 +1,62 @@
-/* app.wxss — Terminal Dark Theme */
+/* app.wxss — Bright Learning Theme */
 page {
   /* Background & Surface */
-  --color-bg: #0D1117;
-  --color-bg-card: #161B22;
-  --color-bg-elevated: #21262D;
-  --color-bg-muted: #30363D;
+  --color-bg: #FFFFFF;
+  --color-bg-card: #F8FAFC;
+  --color-bg-elevated: #FFFFFF;
+  --color-bg-muted: #F1F5F9;
 
   /* Text hierarchy */
-  --color-text-primary: #E6EDF3;
-  --color-text-secondary: #8B949E;
-  --color-text-muted: #484F58;
-  --color-text-faint: #30363D;
+  --color-text-primary: #1E293B;
+  --color-text-secondary: #64748B;
+  --color-text-muted: #94A3B8;
+  --color-text-faint: #CBD5E1;
 
-  /* Terminal accent colors */
-  --color-terminal-green: #3FB950;
-  --color-terminal-orange: #D29922;
-  --color-terminal-red: #F85149;
-  --color-terminal-blue: #58A6FF;
-  --color-terminal-purple: #BC8CFF;
-  --color-terminal-gold: #F0C040;
+  /* Accent colors (bright palette) */
+  --color-accent-green: #10B981;
+  --color-accent-orange: #F59E0B;
+  --color-accent-red: #EF4444;
+  --color-accent-blue: #3B82F6;
+  --color-accent-purple: #8B5CF6;
+  --color-accent-gold: #F59E0B;
+  --color-accent-pink: #F43F5E;
 
   /* Region colors */
-  --color-region-core: #3FB950;
-  --color-region-tools: #58A6FF;
-  --color-region-runtime: #BC8CFF;
-  --color-region-network: #F85149;
-  --color-region-practice: #D29922;
+  --color-region-core: #10B981;
+  --color-region-tools: #3B82F6;
+  --color-region-runtime: #8B5CF6;
+  --color-region-network: #F43F5E;
+  --color-region-practice: #F59E0B;
 
   /* Rarity colors */
-  --color-rarity-n: #484F58;
-  --color-rarity-r: #58A6FF;
-  --color-rarity-sr: #BC8CFF;
-  --color-rarity-ssr: #F0C040;
+  --color-rarity-n: #94A3B8;
+  --color-rarity-r: #3B82F6;
+  --color-rarity-sr: #8B5CF6;
+  --color-rarity-ssr: #F59E0B;
 
   /* Borders */
-  --color-border: #30363D;
-  --color-border-light: #21262D;
+  --color-border: #E2E8F0;
+  --color-border-light: #F1F5F9;
 
   /* Semantic */
-  --color-success: #3FB950;
-  --color-warning: #D29922;
-  --color-error: #F85149;
+  --color-success: #10B981;
+  --color-warning: #F59E0B;
+  --color-error: #EF4444;
+  --color-info: #3B82F6;
+  --color-exp: #8B5CF6;
+  --color-streak: #F59E0B;
+
+  /* Shadows (replacing dark borders) */
+  --shadow-sm: 0 2rpx 8rpx rgba(0,0,0,0.04);
+  --shadow-md: 0 4rpx 16rpx rgba(0,0,0,0.08);
+  --shadow-lg: 0 8rpx 32rpx rgba(0,0,0,0.12);
 
   /* Radius */
   --radius-xs: 4rpx;
   --radius-sm: 8rpx;
-  --radius-md: 12rpx;
-  --radius-lg: 16rpx;
+  --radius-md: 16rpx;
+  --radius-lg: 24rpx;
+  --radius-xl: 32rpx;
   --radius-pill: 200rpx;
 
   /* Spacing — 4px grid (8rpx = 4px) */
@@ -69,8 +79,8 @@ page {
   --font-3xl: 56rpx;
 
   /* Font families */
-  --font-mono: Menlo, 'Courier New', Consolas, monospace;
-  --font-body: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'PingFang SC', sans-serif;
+  --font-mono: "SF Mono", Menlo, Consolas, monospace;
+  --font-body: -apple-system, BlinkMacSystemFont, "SF Pro Display", "PingFang SC", sans-serif;
 
   background-color: var(--color-bg);
   color: var(--color-text-primary);
@@ -84,12 +94,12 @@ page {
 .text-primary { color: var(--color-text-primary); }
 .text-secondary { color: var(--color-text-secondary); }
 .text-muted { color: var(--color-text-muted); }
-.text-green { color: var(--color-terminal-green); }
-.text-blue { color: var(--color-terminal-blue); }
-.text-orange { color: var(--color-terminal-orange); }
-.text-red { color: var(--color-terminal-red); }
-.text-purple { color: var(--color-terminal-purple); }
-.text-gold { color: var(--color-terminal-gold); }
+.text-green { color: var(--color-accent-green); }
+.text-blue { color: var(--color-accent-blue); }
+.text-orange { color: var(--color-accent-orange); }
+.text-red { color: var(--color-accent-red); }
+.text-purple { color: var(--color-accent-purple); }
+.text-gold { color: var(--color-accent-gold); }
 
 .font-mono { font-family: var(--font-mono); }
 
