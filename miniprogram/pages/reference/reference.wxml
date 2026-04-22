@@ -1,85 +1,91 @@
 <!-- pages/reference/reference.wxml -->
-<scroll-view scroll-y class="page">
+<scroll-view scroll-y class="archive-page">
 
-  <!-- Page Header -->
-  <view class="page-header">
-    <view class="header-top">
-      <text class="page-title">{{t.reference.title}}</text>
-      <view class="lang-switcher">
-        <text class="lang-btn {{locale=='zh'?'active':''}}" bindtap="switchLocale" data-locale="zh">中</text>
-        <text class="lang-btn {{locale=='en'?'active':''}}" bindtap="switchLocale" data-locale="en">EN</text>
-        <text class="lang-btn {{locale=='ja'?'active':''}}" bindtap="switchLocale" data-locale="ja">日</text>
+  <!-- Player Stats Header -->
+  <view class="arc-header">
+    <text class="arc-header__title font-mono">ARCHIVE</text>
+    <view class="arc-stats-row">
+      <view class="arc-stat">
+        <text class="arc-stat__value font-mono">Lv.{{levelInfo.level}}</text>
+        <text class="arc-stat__label font-mono">{{levelInfo.title}}</text>
+      </view>
+      <view class="arc-stat">
+        <text class="arc-stat__value font-mono">{{levelInfo.exp}}</text>
+        <text class="arc-stat__label font-mono">EXP</text>
+      </view>
+      <view class="arc-stat">
+        <text class="arc-stat__value font-mono">{{streakInfo.current}}</text>
+        <text class="arc-stat__label font-mono">STREAK</text>
+      </view>
+      <view class="arc-stat">
+        <text class="arc-stat__value font-mono">{{collectionStats.obtained}}</text>
+        <text class="arc-stat__label font-mono">CARDS</text>
       </view>
     </view>
-    <text class="page-subtitle">{{t.reference.subtitle}}</text>
+    <!-- EXP progress bar -->
+    <view class="arc-exp-bar" wx:if="{{levelInfo.nextLevelExp}}">
+      <view class="arc-exp-bar__fill" style="width:{{levelInfo.progress * 100}}%"></view>
+    </view>
+    <text class="arc-exp-hint font-mono" wx:if="{{levelInfo.nextLevelExp}}">{{levelInfo.exp}}/{{levelInfo.nextLevelExp}} → Lv.{{levelInfo.level + 1}}</text>
+    <text class="arc-exp-hint font-mono" wx:else>MAX LEVEL</text>
   </view>
 
-  <!-- Foundation Docs (kind=map) -->
-  <view class="ref-section">
-    <view class="ref-section-header">
-      <view class="ref-indicator ref-indicator--map"></view>
-      <text class="ref-section-title">{{t.reference.foundation_title}}</text>
-      <text class="ref-section-count">{{foundationDocs.length}} {{locale == 'zh' ? '篇' : locale == 'ja' ? '件' : 'docs'}}</text>
-    </view>
-    <view class="ref-doc-list">
-      <view
-        wx:for="{{foundationDocs}}"
-        wx:key="slug"
-        class="ref-doc-row"
-        bindtap="openDoc"
-        data-slug="{{item.slug}}"
-        hover-class="doc-hover"
-      >
-        <text class="ref-doc-title">{{item.title}}</text>
-        <text class="ref-doc-summary">{{item.summary}}</text>
+  <!-- Achievement Summary -->
+  <view class="arc-summary">
+    <text class="arc-summary__title font-mono">ACHIEVEMENTS</text>
+    <text class="arc-summary__count font-mono">{{achievementStats.unlocked}}/{{achievementStats.total}}</text>
+  </view>
+
+  <!-- Achievement Categories -->
+  <view class="arc-categories">
+    <view wx:for="{{categories}}" wx:key="id" class="arc-category">
+      <view class="arc-category__header">
+        <text class="arc-category__icon font-mono" style="color:{{item.color}}">{{item.icon}}</text>
+        <text class="arc-category__label font-mono" style="color:{{item.color}}">{{item.label}}</text>
+        <text class="arc-category__count font-mono">{{item.unlocked}}/{{item.total}}</text>
       </view>
-    </view>
-  </view>
-
-  <!-- Mechanism Docs -->
-  <view class="ref-section">
-    <view class="ref-section-header">
-      <view class="ref-indicator ref-indicator--mechanism"></view>
-      <text class="ref-section-title">{{t.reference.deep_dive_title}}</text>
-      <text class="ref-section-count">{{mechanismDocs.length}} {{locale == 'zh' ? '篇' : locale == 'ja' ? '件' : 'docs'}}</text>
-    </view>
-    <view class="ref-doc-list">
-      <view
-        wx:for="{{mechanismDocs}}"
-        wx:key="slug"
-        class="ref-doc-row"
-        bindtap="openDoc"
-        data-slug="{{item.slug}}"
-        hover-class="doc-hover"
-      >
-        <text class="ref-doc-title">{{item.title}}</text>
-        <text class="ref-doc-summary">{{item.summary}}</text>
-      </view>
-    </view>
-  </view>
-
-  <!-- Tips & Tricks 速查 -->
-  <view class="ref-section" wx:if="{{tipCategories.length > 0}}">
-    <view class="ref-section-header">
-      <view class="ref-indicator ref-indicator--tips"></view>
-      <text class="ref-section-title">{{t.reference.tips_title || '实用技巧'}}</text>
-      <text class="ref-section-count">{{tipCategories.length}} {{locale == 'zh' ? '分类' : locale == 'ja' ? 'カテゴリ' : 'categories'}}</text>
-    </view>
-    <text class="ref-section-subtitle">{{t.reference.tips_subtitle || '来自 Claude Code 团队的实战经验'}}</text>
-    <view class="ref-doc-list ref-tips-grid">
-      <view
-        wx:for="{{tipCategories}}"
-        wx:key="id"
-        class="ref-tip-card"
-        bindtap="openTipsCategory"
-        data-slug="{{item.slug}}"
-        hover-class="doc-hover"
-      >
-        <text class="ref-tip-card__label">{{item.label}}</text>
-        <text class="ref-tip-card__count">{{item.count}} tips</text>
+      <view class="arc-badges">
+        <view wx:for="{{item.items}}" wx:for-item="ach" wx:key="id"
+              class="arc-badge {{ach.unlocked ? 'arc-badge--unlocked' : 'arc-badge--locked'}}">
+          <text class="arc-badge__icon font-mono">{{ach.unlocked ? ach.icon : '?'}}</text>
+          <view class="arc-badge__info">
+            <text class="arc-badge__name">{{ach.unlocked ? ach.name : '???'}}</text>
+            <text class="arc-badge__desc">{{ach.unlocked ? ach.desc : '未解锁'}}</text>
+          </view>
+        </view>
       </view>
     </view>
   </view>
 
-  <view class="page-footer"></view>
+  <!-- Settings Section -->
+  <view class="arc-settings">
+    <text class="arc-settings__title font-mono">SETTINGS</text>
+
+    <!-- Language Switcher -->
+    <view class="arc-setting-row">
+      <text class="arc-setting-row__label font-mono">LANGUAGE</text>
+      <view class="arc-lang-switcher">
+        <text class="arc-lang-btn font-mono {{locale=='zh'?'arc-lang-btn--active':''}}" bindtap="switchLocale" data-locale="zh">中</text>
+        <text class="arc-lang-btn font-mono {{locale=='en'?'arc-lang-btn--active':''}}" bindtap="switchLocale" data-locale="en">EN</text>
+        <text class="arc-lang-btn font-mono {{locale=='ja'?'arc-lang-btn--active':''}}" bindtap="switchLocale" data-locale="ja">日</text>
+      </view>
+    </view>
+
+    <!-- Reset Save -->
+    <view class="arc-setting-row">
+      <text class="arc-setting-row__label font-mono">RESET SAVE</text>
+      <view class="arc-reset-btn" bindtap="showReset" wx:if="{{!showResetConfirm}}">
+        <text class="arc-reset-btn__text font-mono">RESET</text>
+      </view>
+      <view class="arc-reset-confirm" wx:else>
+        <text class="arc-reset-confirm__warn font-mono">确认重置所有进度？</text>
+        <view class="arc-reset-actions">
+          <text class="arc-reset-action arc-reset-action--cancel font-mono" bindtap="cancelReset">取消</text>
+          <text class="arc-reset-action arc-reset-action--confirm font-mono" bindtap="confirmReset">确认重置</text>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <view class="arc-footer"></view>
 </scroll-view>
