@@ -149,6 +149,9 @@
         <view class="btn-settle btn-settle--retry" bindtap="retryStage" wx:if="{{!reviewMode}}">
           <text class="btn-settle__text font-mono">> RETRY</text>
         </view>
+        <view class="btn-settle btn-settle--share" bindtap="shareResult" wx:if="{{!reviewMode}}">
+          <text class="btn-settle__text font-mono">> SHARE</text>
+        </view>
         <view class="btn-settle btn-settle--map" bindtap="goToMap">
           <text class="btn-settle__text font-mono">> {{reviewMode ? 'HOME' : 'MAP'}}</text>
         </view>
