@@ -663,3 +663,21 @@
   font-size: var(--font-sm);
   color: var(--color-terminal-orange);
 }
+
+/* ── Share Button ── */
+.btn-settle--share {
+  background: var(--color-bg-elevated);
+  border: 1rpx solid var(--color-terminal-green);
+}
+
+.btn-settle--share .btn-settle__text {
+  color: var(--color-terminal-green);
+}
+
+.btn-settle--share:active {
+  background: var(--color-terminal-green);
+}
+
+.btn-settle--share:active .btn-settle__text {
+  color: #0D1117;
+}
