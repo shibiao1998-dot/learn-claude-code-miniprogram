@@ -15,7 +15,7 @@
 .arc-header__title {
   font-size: var(--font-xl);
   font-weight: 700;
-  color: var(--color-terminal-blue);
+  color: var(--color-text-primary);
   display: block;
   margin-bottom: var(--spacing-sm);
 }
@@ -55,7 +55,7 @@
 
 .arc-exp-bar__fill {
   height: 100%;
-  background: var(--color-terminal-blue);
+  background: var(--color-accent-blue);
   border-radius: 3rpx;
   transition: width 0.3s;
 }
@@ -86,7 +86,7 @@
 
 .arc-summary__count {
   font-size: var(--font-sm);
-  color: var(--color-terminal-green);
+  color: var(--color-accent-green);
 }
 
 /* ── Categories ── */
@@ -135,8 +135,8 @@
   gap: var(--spacing-sm);
   padding: var(--spacing-sm);
   background: var(--color-bg-card);
-  border: 1rpx solid var(--color-border);
-  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-sm);
+  border-radius: var(--radius-lg);
 }
 
 .arc-badge--locked {
@@ -157,7 +157,7 @@
 }
 
 .arc-badge--unlocked .arc-badge__icon {
-  color: var(--color-terminal-green);
+  color: var(--color-accent-green);
   background: var(--color-bg-elevated);
 }
 
@@ -250,13 +250,13 @@
 /* Reset */
 .arc-reset-btn {
   padding: var(--spacing-xs) var(--spacing-md);
-  border: 1rpx solid var(--color-terminal-red);
+  border: 1rpx solid var(--color-error);
   border-radius: var(--radius-sm);
 }
 
 .arc-reset-btn__text {
   font-size: var(--font-xs);
-  color: var(--color-terminal-red);
+  color: var(--color-error);
 }
 
 .arc-reset-confirm {
@@ -268,7 +268,7 @@
 
 .arc-reset-confirm__warn {
   font-size: var(--font-2xs);
-  color: var(--color-terminal-red);
+  color: var(--color-error);
 }
 
 .arc-reset-actions {
@@ -290,7 +290,7 @@
 
 .arc-reset-action--confirm {
   color: #FFFFFF;
-  background: var(--color-terminal-red);
+  background: var(--color-error);
 }
 
 /* ── Statistics Section ── */
@@ -303,7 +303,7 @@
 .arc-stats-section__title {
   font-size: var(--font-sm);
   font-weight: 700;
-  color: var(--color-terminal-green);
+  color: var(--color-text-primary);
   display: block;
   margin-bottom: var(--spacing-md);
 }
@@ -319,8 +319,8 @@
 /* Overview */
 .stats-overview {
   background: var(--color-bg-card);
-  border: 1rpx solid var(--color-border);
-  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-sm);
+  border-radius: var(--radius-lg);
   padding: var(--spacing-sm) var(--spacing-md);
 }
 
@@ -385,8 +385,8 @@
   display: flex;
   justify-content: space-around;
   background: var(--color-bg-card);
-  border: 1rpx solid var(--color-border);
-  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-sm);
+  border-radius: var(--radius-lg);
   padding: var(--spacing-md);
 }
 
@@ -413,8 +413,8 @@
   display: flex;
   justify-content: space-around;
   background: var(--color-bg-card);
-  border: 1rpx solid var(--color-border);
-  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-sm);
+  border-radius: var(--radius-lg);
   padding: var(--spacing-md);
 }
 

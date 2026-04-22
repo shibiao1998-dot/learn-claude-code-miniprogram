@@ -3,10 +3,10 @@
 
   <!-- Collection Header -->
   <view class="coll-header">
-    <text class="coll-header__title font-mono">COLLECTION</text>
+    <text class="coll-header__title">🃏 卡片图鉴</text>
     <view class="coll-header__stats">
-      <text class="coll-stat font-mono">{{stats.obtained}}/{{stats.total}}</text>
-      <text class="coll-stat-pct font-mono">({{stats.percent}}%)</text>
+      <text class="coll-stat">{{stats.obtained}}/{{stats.total}}</text>
+      <text class="coll-stat-pct">({{stats.percent}}%)</text>
     </view>
     <view class="coll-progress-bar">
       <view class="coll-progress-bar__fill" style="width:{{stats.percent}}%"></view>
@@ -35,9 +35,9 @@
 
   <!-- Filter tabs -->
   <view class="filter-row">
-    <text class="filter-tab font-mono {{activeFilter === 'all' ? 'filter-tab--active' : ''}}" bindtap="setFilter" data-filter="all">ALL</text>
-    <text class="filter-tab font-mono {{activeFilter === 'obtained' ? 'filter-tab--active' : ''}}" bindtap="setFilter" data-filter="obtained">OBTAINED</text>
-    <text class="filter-tab font-mono {{activeFilter === 'missing' ? 'filter-tab--active' : ''}}" bindtap="setFilter" data-filter="missing">MISSING</text>
+    <text class="filter-tab {{activeFilter === 'all' ? 'filter-tab--active' : ''}}" bindtap="setFilter" data-filter="all">ALL</text>
+    <text class="filter-tab {{activeFilter === 'obtained' ? 'filter-tab--active' : ''}}" bindtap="setFilter" data-filter="obtained">OBTAINED</text>
+    <text class="filter-tab {{activeFilter === 'missing' ? 'filter-tab--active' : ''}}" bindtap="setFilter" data-filter="missing">MISSING</text>
   </view>
 
   <!-- Region Sections -->
@@ -45,9 +45,9 @@
     <view wx:for="{{regions}}" wx:key="id" class="coll-region" wx:if="{{item.visible}}">
 
       <view class="coll-region__header">
-        <text class="coll-region__symbol font-mono" style="color:{{item.colorHex}}">{{item.symbol}}</text>
-        <text class="coll-region__label font-mono" style="color:{{item.colorHex}}">{{item.label}}</text>
-        <text class="coll-region__count font-mono">{{item.obtained}}/{{item.total}}</text>
+        <text class="coll-region__symbol" style="color:{{item.colorHex}}">{{item.symbol}}</text>
+        <text class="coll-region__label" style="color:{{item.colorHex}}">{{item.label}}</text>
+        <text class="coll-region__count">{{item.obtained}}/{{item.total}}</text>
       </view>
 
       <view class="card-grid">
