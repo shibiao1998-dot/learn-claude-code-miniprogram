@@ -100,12 +100,12 @@
     <view class="settle-container">
       <!-- Stage complete header -->
       <view class="settle-header {{animStep >= 1 ? 'settle-anim-fadein' : 'settle-anim-hidden'}}">
-        <text class="settle-title font-mono" style="color:{{regionColor}}">STAGE CLEAR</text>
+        <text class="settle-title font-mono" style="color:{{regionColor}}">{{reviewMode ? 'REVIEW DONE' : 'STAGE CLEAR'}}</text>
         <text class="settle-stage">{{stageTitle}}</text>
       </view>
 
       <!-- Stars -->
-      <view class="settle-stars {{animStep >= 2 ? '' : 'settle-anim-hidden'}}">
+      <view class="settle-stars {{animStep >= 2 ? '' : 'settle-anim-hidden'}}" wx:if="{{!reviewMode}}">
         <text class="settle-star {{result.stars >= 1 ? 'settle-star--earned' : ''}} {{animStep >= 3 ? 'settle-star-pop' : 'settle-anim-hidden'}}">★</text>
         <text class="settle-star {{result.stars >= 2 ? 'settle-star--earned' : ''}} {{animStep >= 4 ? 'settle-star-pop' : 'settle-anim-hidden'}}">★</text>
         <text class="settle-star {{result.stars >= 3 ? 'settle-star--earned' : ''}} {{animStep >= 5 ? 'settle-star-pop' : 'settle-anim-hidden'}}">★</text>
@@ -119,16 +119,21 @@
       <!-- EXP gained -->
       <view class="settle-exp {{animStep >= 7 ? 'settle-anim-slidein' : 'settle-anim-hidden'}}">
         <text class="settle-exp__label font-mono">EXP +</text>
-        <text class="settle-exp__value font-mono" style="color:{{regionColor}}">{{result.expReward}}</text>
+        <text class="settle-exp__value font-mono" style="color:{{regionColor}}">{{reviewMode ? result.correctCount * 10 : result.expReward}}</text>
+      </view>
+
+      <!-- Review mode stats -->
+      <view class="settle-review {{animStep >= 8 ? 'settle-anim-fadein' : 'settle-anim-hidden'}}" wx:if="{{reviewMode}}">
+        <text class="settle-review__text font-mono">MASTERED: {{reviewMastered}} · REMAINING: {{reviewRemaining}}</text>
       </view>
 
       <!-- Level up notification -->
-      <view class="settle-levelup {{animStep >= 8 ? 'settle-anim-pulse' : 'settle-anim-hidden'}}" wx:if="{{newLevel}}">
+      <view class="settle-levelup {{animStep >= 8 ? 'settle-anim-pulse' : 'settle-anim-hidden'}}" wx:if="{{newLevel && !reviewMode}}">
         <text class="settle-levelup__text font-mono" style="color:var(--color-terminal-gold)">LEVEL UP! → {{newLevel.title}} Lv.{{newLevel.level}}</text>
       </view>
 
       <!-- Earned cards -->
-      <view class="settle-cards" wx:if="{{earnedCardDetails.length > 0}}">
+      <view class="settle-cards" wx:if="{{earnedCardDetails.length > 0 && !reviewMode}}">
         <text class="settle-cards__title font-mono {{animStep >= 9 ? 'settle-anim-fadein' : 'settle-anim-hidden'}}">CARDS OBTAINED:</text>
         <view class="settle-cards__list">
           <view wx:for="{{earnedCardDetails}}" wx:key="id"
@@ -141,11 +146,11 @@
 
       <!-- Action buttons (show after all animations) -->
       <view class="settle-actions {{animStep >= 7 ? 'settle-anim-fadein' : 'settle-anim-hidden'}}">
-        <view class="btn-settle btn-settle--retry" bindtap="retryStage">
+        <view class="btn-settle btn-settle--retry" bindtap="retryStage" wx:if="{{!reviewMode}}">
           <text class="btn-settle__text font-mono">> RETRY</text>
         </view>
         <view class="btn-settle btn-settle--map" bindtap="goToMap">
-          <text class="btn-settle__text font-mono">> MAP</text>
+          <text class="btn-settle__text font-mono">> {{reviewMode ? 'HOME' : 'MAP'}}</text>
         </view>
       </view>
     </view>
