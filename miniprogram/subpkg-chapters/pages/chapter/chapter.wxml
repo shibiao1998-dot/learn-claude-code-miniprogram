@@ -99,47 +99,48 @@
 
     <view class="settle-container">
       <!-- Stage complete header -->
-      <view class="settle-header">
+      <view class="settle-header {{animStep >= 1 ? 'settle-anim-fadein' : 'settle-anim-hidden'}}">
         <text class="settle-title font-mono" style="color:{{regionColor}}">STAGE CLEAR</text>
         <text class="settle-stage">{{stageTitle}}</text>
       </view>
 
       <!-- Stars -->
-      <view class="settle-stars">
-        <text class="settle-star {{result.stars >= 1 ? 'settle-star--earned' : ''}}">★</text>
-        <text class="settle-star {{result.stars >= 2 ? 'settle-star--earned' : ''}}">★</text>
-        <text class="settle-star {{result.stars >= 3 ? 'settle-star--earned' : ''}}">★</text>
+      <view class="settle-stars {{animStep >= 2 ? '' : 'settle-anim-hidden'}}">
+        <text class="settle-star {{result.stars >= 1 ? 'settle-star--earned' : ''}} {{animStep >= 3 ? 'settle-star-pop' : 'settle-anim-hidden'}}">★</text>
+        <text class="settle-star {{result.stars >= 2 ? 'settle-star--earned' : ''}} {{animStep >= 4 ? 'settle-star-pop' : 'settle-anim-hidden'}}">★</text>
+        <text class="settle-star {{result.stars >= 3 ? 'settle-star--earned' : ''}} {{animStep >= 5 ? 'settle-star-pop' : 'settle-anim-hidden'}}">★</text>
       </view>
 
       <!-- Score -->
-      <view class="settle-score">
+      <view class="settle-score {{animStep >= 6 ? 'settle-anim-fadein' : 'settle-anim-hidden'}}">
         <text class="settle-score__text font-mono">{{result.correctCount}}/{{result.totalQuestions}} correct ({{result.ratio}}%)</text>
       </view>
 
       <!-- EXP gained -->
-      <view class="settle-exp">
+      <view class="settle-exp {{animStep >= 7 ? 'settle-anim-slidein' : 'settle-anim-hidden'}}">
         <text class="settle-exp__label font-mono">EXP +</text>
         <text class="settle-exp__value font-mono" style="color:{{regionColor}}">{{result.expReward}}</text>
       </view>
 
       <!-- Level up notification -->
-      <view class="settle-levelup" wx:if="{{newLevel}}">
+      <view class="settle-levelup {{animStep >= 8 ? 'settle-anim-pulse' : 'settle-anim-hidden'}}" wx:if="{{newLevel}}">
         <text class="settle-levelup__text font-mono" style="color:var(--color-terminal-gold)">LEVEL UP! → {{newLevel.title}} Lv.{{newLevel.level}}</text>
       </view>
 
       <!-- Earned cards -->
       <view class="settle-cards" wx:if="{{earnedCardDetails.length > 0}}">
-        <text class="settle-cards__title font-mono">CARDS OBTAINED:</text>
+        <text class="settle-cards__title font-mono {{animStep >= 9 ? 'settle-anim-fadein' : 'settle-anim-hidden'}}">CARDS OBTAINED:</text>
         <view class="settle-cards__list">
-          <view wx:for="{{earnedCardDetails}}" wx:key="id" class="settle-card settle-card--{{item.rarity}}">
+          <view wx:for="{{earnedCardDetails}}" wx:key="id"
+                class="settle-card settle-card--{{item.rarity}} {{animStep >= 9 + index ? 'settle-anim-slideup' : 'settle-anim-hidden'}}">
             <text class="settle-card__rarity font-mono">{{item.rarity}}</text>
             <text class="settle-card__name">{{item.name}}</text>
           </view>
         </view>
       </view>
 
-      <!-- Action buttons -->
-      <view class="settle-actions">
+      <!-- Action buttons (show after all animations) -->
+      <view class="settle-actions {{animStep >= 7 ? 'settle-anim-fadein' : 'settle-anim-hidden'}}">
         <view class="btn-settle btn-settle--retry" bindtap="retryStage">
           <text class="btn-settle__text font-mono">> RETRY</text>
         </view>
