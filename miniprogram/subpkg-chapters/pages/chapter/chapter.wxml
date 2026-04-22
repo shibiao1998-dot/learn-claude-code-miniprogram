@@ -4,7 +4,7 @@
   <!-- ══════════ Game Header ══════════ -->
   <view class="game-header" wx:if="{{!showSettlement && !showLearn}}">
     <view class="game-header__top">
-      <text class="game-header__back font-mono" bindtap="goBack">← 返回</text>
+      <text class="game-header__back" bindtap="goBack">← 返回</text>
       <view class="game-header__phase">
         <text class="phase-badge font-mono" style="color:{{regionColor}}">{{phaseLabel}}</text>
         <text class="phase-counter font-mono">{{questionIndex}}/{{totalQuestions}}</text>
@@ -78,8 +78,8 @@
 
     <!-- Difficulty indicator -->
     <view class="diff-row">
-      <text class="diff-label font-mono" style="color:{{regionColor}}">{{currentQuestion.diffLabel}}</text>
-      <text class="diff-text font-mono">难度 {{currentQuestion.difficulty}}</text>
+      <text class="diff-label" style="color:{{regionColor}}">{{currentQuestion.diffLabel}}</text>
+      <text class="diff-text">难度 {{currentQuestion.difficulty}}</text>
     </view>
 
     <!-- Question stem -->
@@ -96,7 +96,7 @@
         bindtap="selectOption"
         data-optionid="{{item.id}}"
       >
-        <text class="option-id font-mono">{{item.id}}</text>
+        <text class="option-id">{{item.id}}</text>
         <text class="option-text">{{item.text}}</text>
       </view>
     </view>
@@ -104,21 +104,21 @@
     <!-- Confirm button (before feedback) -->
     <view class="action-area" wx:if="{{!showFeedback}}">
       <view class="btn-confirm {{selectedOption ? 'btn-confirm--active' : ''}}" bindtap="confirmAnswer" style="{{selectedOption ? 'background:' + regionColor : ''}}">
-        <text class="btn-confirm__text font-mono">> SUBMIT</text>
+        <text class="btn-confirm__text">提交答案</text>
       </view>
     </view>
 
     <!-- Feedback (after answer) -->
     <view class="feedback-area" wx:if="{{showFeedback}}">
       <view class="feedback-badge {{feedbackCorrect ? 'feedback--correct' : 'feedback--wrong'}}">
-        <text class="feedback-badge__icon font-mono">{{feedbackCorrect ? '✓' : '✗'}}</text>
-        <text class="feedback-badge__text font-mono">{{feedbackCorrect ? 'CORRECT' : 'INCORRECT'}}</text>
+        <text class="feedback-badge__icon">{{feedbackCorrect ? '✓' : '✗'}}</text>
+        <text class="feedback-badge__text">{{feedbackCorrect ? '✓ 正确' : '✗ 错误'}}</text>
       </view>
       <view class="feedback-explain" wx:if="{{feedbackExplanation}}">
         <text class="feedback-explain__text">{{feedbackExplanation}}</text>
       </view>
       <view class="btn-next" bindtap="nextQuestion">
-        <text class="btn-next__text font-mono">> NEXT</text>
+        <text class="btn-next__text">下一题 →</text>
       </view>
     </view>
 
@@ -128,14 +128,14 @@
   <scroll-view scroll-y class="game-content" wx:if="{{showReview && !showSettlement && reviewMode}}">
 
     <view class="review-header">
-      <text class="review-title font-mono" style="color:{{regionColor}}">// REVIEW</text>
+      <text class="review-title" style="color:{{regionColor}}">📝 答题回顾</text>
       <text class="review-subtitle">答题回顾 — 答错的题目重点关注</text>
     </view>
 
     <view class="review-list">
       <view wx:for="{{reviewCards}}" wx:key="index" class="review-card {{item.correct ? 'review--correct' : 'review--wrong'}}">
         <view class="review-card__header">
-          <text class="review-card__icon font-mono">{{item.correct ? '✓' : '✗'}}</text>
+          <text class="review-card__icon">{{item.correct ? '✓' : '✗'}}</text>
           <text class="review-card__stem">{{item.stem}}</text>
         </view>
         <view class="review-card__body" wx:if="{{!item.correct}}">
@@ -146,7 +146,7 @@
     </view>
 
     <view class="btn-continue" bindtap="continueAfterReview">
-      <text class="btn-continue__text font-mono">> CONTINUE</text>
+      <text class="btn-continue__text">继续</text>
     </view>
 
   </scroll-view>
@@ -157,7 +157,7 @@
     <view class="settle-container">
       <!-- Stage complete header -->
       <view class="settle-header {{animStep >= 1 ? 'settle-anim-fadein' : 'settle-anim-hidden'}}">
-        <text class="settle-title font-mono" style="color:{{regionColor}}">{{reviewMode ? 'REVIEW DONE' : 'STAGE CLEAR'}}</text>
+        <text class="settle-title" style="color:{{regionColor}}">{{reviewMode ? '复习完成' : '🎉 关卡通过'}}</text>
         <text class="settle-stage">{{stageTitle}}</text>
       </view>
 
@@ -170,28 +170,28 @@
 
       <!-- Score -->
       <view class="settle-score {{animStep >= 6 ? 'settle-anim-fadein' : 'settle-anim-hidden'}}">
-        <text class="settle-score__text font-mono">{{result.correctCount}}/{{result.totalQuestions}} correct ({{result.ratio}}%)</text>
+        <text class="settle-score__text">{{result.correctCount}}/{{result.totalQuestions}} correct ({{result.ratio}}%)</text>
       </view>
 
       <!-- EXP gained -->
       <view class="settle-exp {{animStep >= 7 ? 'settle-anim-slidein' : 'settle-anim-hidden'}}">
-        <text class="settle-exp__label font-mono">EXP +</text>
-        <text class="settle-exp__value font-mono" style="color:{{regionColor}}">{{reviewMode ? result.correctCount * 10 : result.expReward}}</text>
+        <text class="settle-exp__label">EXP +</text>
+        <text class="settle-exp__value" style="color:{{regionColor}}">{{reviewMode ? result.correctCount * 10 : result.expReward}}</text>
       </view>
 
       <!-- Review mode stats -->
       <view class="settle-review {{animStep >= 8 ? 'settle-anim-fadein' : 'settle-anim-hidden'}}" wx:if="{{reviewMode}}">
-        <text class="settle-review__text font-mono">MASTERED: {{reviewMastered}} · REMAINING: {{reviewRemaining}}</text>
+        <text class="settle-review__text">MASTERED: {{reviewMastered}} · REMAINING: {{reviewRemaining}}</text>
       </view>
 
       <!-- Level up notification -->
       <view class="settle-levelup {{animStep >= 8 ? 'settle-anim-pulse' : 'settle-anim-hidden'}}" wx:if="{{newLevel && !reviewMode}}">
-        <text class="settle-levelup__text font-mono" style="color:var(--color-terminal-gold)">LEVEL UP! → {{newLevel.title}} Lv.{{newLevel.level}}</text>
+        <text class="settle-levelup__text" style="color:var(--color-accent-gold)">LEVEL UP! → {{newLevel.title}} Lv.{{newLevel.level}}</text>
       </view>
 
       <!-- Earned cards -->
       <view class="settle-cards" wx:if="{{earnedCardDetails.length > 0 && !reviewMode}}">
-        <text class="settle-cards__title font-mono {{animStep >= 9 ? 'settle-anim-fadein' : 'settle-anim-hidden'}}">CARDS OBTAINED:</text>
+        <text class="settle-cards__title {{animStep >= 9 ? 'settle-anim-fadein' : 'settle-anim-hidden'}}">🃏 获得卡片</text>
         <view class="settle-cards__list">
           <view wx:for="{{earnedCardDetails}}" wx:key="id"
                 class="settle-card settle-card--{{item.rarity}} {{animStep >= 9 + index ? 'settle-anim-slideup' : 'settle-anim-hidden'}}">
@@ -204,13 +204,13 @@
       <!-- Action buttons (show after all animations) -->
       <view class="settle-actions {{animStep >= 7 ? 'settle-anim-fadein' : 'settle-anim-hidden'}}">
         <view class="btn-settle btn-settle--retry" bindtap="retryStage" wx:if="{{!reviewMode}}">
-          <text class="btn-settle__text font-mono">> RETRY</text>
+          <text class="btn-settle__text">🔄 重试</text>
         </view>
         <view class="btn-settle btn-settle--share" bindtap="shareResult" wx:if="{{!reviewMode}}">
-          <text class="btn-settle__text font-mono">> SHARE</text>
+          <text class="btn-settle__text">📤 分享</text>
         </view>
         <view class="btn-settle btn-settle--map" bindtap="goToMap">
-          <text class="btn-settle__text font-mono">> {{reviewMode ? 'HOME' : 'MAP'}}</text>
+          <text class="btn-settle__text">{{reviewMode ? '🏠 首页' : '🗺️ 地图'}}</text>
         </view>
       </view>
     </view>

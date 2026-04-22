@@ -12,7 +12,7 @@
 .game-header {
   padding: var(--spacing-md) var(--spacing-md) var(--spacing-sm);
   background: var(--color-bg-card);
-  border-bottom: 1rpx solid var(--color-border);
+  box-shadow: var(--shadow-sm);
 }
 
 .game-header__top {
@@ -97,8 +97,8 @@
 /* ── Question Card ── */
 .question-card {
   background: var(--color-bg-card);
-  border: 1rpx solid var(--color-border);
-  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-sm);
+  border-radius: var(--radius-lg);
   padding: var(--spacing-lg);
   margin-bottom: var(--spacing-lg);
 }
@@ -125,27 +125,28 @@
   padding: var(--spacing-md);
   background: var(--color-bg-card);
   border: 1rpx solid var(--color-border);
-  border-radius: var(--radius-md);
+  border-radius: var(--radius-lg);
   transition: border-color 0.2s, background 0.2s;
 }
 
 .option-item:active {
-  opacity: 0.8;
+  transform: scale(0.98);
+  transition: transform 0.15s ease;
 }
 
 .option--selected {
-  border-color: var(--color-terminal-blue);
-  background: #58A6FF12;
+  border-color: var(--color-accent-blue);
+  background: #3B82F612;
 }
 
 .option--correct {
-  border-color: var(--color-terminal-green);
-  background: #3FB95012;
+  border-color: var(--color-success);
+  background: #10B98112;
 }
 
 .option--wrong {
-  border-color: var(--color-terminal-red);
-  background: #F8514912;
+  border-color: var(--color-error);
+  background: #EF444412;
 }
 
 .option-id {
@@ -158,15 +159,15 @@
 }
 
 .option--selected .option-id {
-  color: var(--color-terminal-blue);
+  color: var(--color-accent-blue);
 }
 
 .option--correct .option-id {
-  color: var(--color-terminal-green);
+  color: var(--color-success);
 }
 
 .option--wrong .option-id {
-  color: var(--color-terminal-red);
+  color: var(--color-error);
 }
 
 .option-text {
@@ -220,7 +221,8 @@
 }
 
 .btn-next:active {
-  background: var(--color-bg-muted);
+  transform: scale(0.95);
+  transition: transform 0.15s ease;
 }
 
 /* ── Feedback ── */
@@ -234,18 +236,18 @@
   align-items: center;
   gap: var(--spacing-sm);
   padding: var(--spacing-md);
-  border-radius: var(--radius-md);
+  border-radius: var(--radius-lg);
   margin-bottom: var(--spacing-sm);
 }
 
 .feedback--correct {
-  background: #3FB95018;
-  border: 1rpx solid #3FB95044;
+  background: #10B98118;
+  border: 1rpx solid #10B98144;
 }
 
 .feedback--wrong {
-  background: #F8514918;
-  border: 1rpx solid #F8514944;
+  background: #EF444418;
+  border: 1rpx solid #EF444444;
 }
 
 .feedback-badge__icon {
@@ -253,16 +255,16 @@
   font-weight: 700;
 }
 
-.feedback--correct .feedback-badge__icon { color: var(--color-terminal-green); }
-.feedback--wrong .feedback-badge__icon { color: var(--color-terminal-red); }
+.feedback--correct .feedback-badge__icon { color: var(--color-success); }
+.feedback--wrong .feedback-badge__icon { color: var(--color-error); }
 
 .feedback-badge__text {
   font-size: var(--font-sm);
   font-weight: 700;
 }
 
-.feedback--correct .feedback-badge__text { color: var(--color-terminal-green); }
-.feedback--wrong .feedback-badge__text { color: var(--color-terminal-red); }
+.feedback--correct .feedback-badge__text { color: var(--color-success); }
+.feedback--wrong .feedback-badge__text { color: var(--color-error); }
 
 .feedback-explain {
   background: var(--color-bg-card);
@@ -304,17 +306,17 @@
 
 .review-card {
   background: var(--color-bg-card);
-  border: 1rpx solid var(--color-border);
-  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-sm);
+  border-radius: var(--radius-lg);
   padding: var(--spacing-md);
 }
 
 .review--correct {
-  border-left: 4rpx solid var(--color-terminal-green);
+  border-left: 4rpx solid var(--color-success);
 }
 
 .review--wrong {
-  border-left: 4rpx solid var(--color-terminal-red);
+  border-left: 4rpx solid var(--color-error);
 }
 
 .review-card__header {
@@ -330,8 +332,8 @@
   flex-shrink: 0;
 }
 
-.review--correct .review-card__icon { color: var(--color-terminal-green); }
-.review--wrong .review-card__icon { color: var(--color-terminal-red); }
+.review--correct .review-card__icon { color: var(--color-success); }
+.review--wrong .review-card__icon { color: var(--color-error); }
 
 .review-card__stem {
   font-size: var(--font-sm);
@@ -348,7 +350,7 @@
 
 .review-card__answer {
   font-size: var(--font-xs);
-  color: var(--color-terminal-green);
+  color: var(--color-success);
   display: block;
   margin-bottom: var(--spacing-xs);
 }
@@ -377,7 +379,8 @@
 }
 
 .btn-continue:active {
-  background: var(--color-bg-muted);
+  transform: scale(0.95);
+  transition: transform 0.15s ease;
 }
 
 /* ── Settlement Screen ── */
@@ -419,7 +422,7 @@
 }
 
 .settle-star--earned {
-  color: var(--color-terminal-gold);
+  color: var(--color-accent-gold);
 }
 
 .settle-score {
@@ -452,8 +455,8 @@
 .settle-levelup {
   margin-bottom: var(--spacing-lg);
   padding: var(--spacing-sm) var(--spacing-lg);
-  background: #F0C04018;
-  border: 1rpx solid #F0C04044;
+  background: #F59E0B18;
+  border: 1rpx solid #F59E0B44;
   border-radius: var(--radius-md);
 }
 
@@ -487,8 +490,8 @@
   gap: var(--spacing-sm);
   padding: var(--spacing-sm) var(--spacing-md);
   background: var(--color-bg-card);
-  border-radius: var(--radius-md);
-  border: 1rpx solid var(--color-border);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-sm);
 }
 
 .settle-card--N { border-left: 4rpx solid var(--color-rarity-n); }
@@ -535,7 +538,7 @@
 }
 
 .btn-settle--map {
-  background: var(--color-terminal-green);
+  background: var(--color-accent-green);
 }
 
 .btn-settle__text {
@@ -545,11 +548,12 @@
 }
 
 .btn-settle--map .btn-settle__text {
-  color: #0D1117;
+  color: #FFFFFF;
 }
 
 .btn-settle:active {
-  opacity: 0.8;
+  transform: scale(0.95);
+  transition: transform 0.15s ease;
 }
 
 /* ── Settlement Animations ── */
@@ -662,25 +666,25 @@
 
 .settle-review__text {
   font-size: var(--font-sm);
-  color: var(--color-terminal-orange);
+  color: var(--color-accent-orange);
 }
 
 /* ── Share Button ── */
 .btn-settle--share {
   background: var(--color-bg-elevated);
-  border: 1rpx solid var(--color-terminal-green);
+  border: 1rpx solid var(--color-accent-green);
 }
 
 .btn-settle--share .btn-settle__text {
-  color: var(--color-terminal-green);
+  color: var(--color-accent-green);
 }
 
 .btn-settle--share:active {
-  background: var(--color-terminal-green);
+  background: var(--color-accent-green);
 }
 
 .btn-settle--share:active .btn-settle__text {
-  color: #0D1117;
+  color: #FFFFFF;
 }
 
 /* ══════════ LEARN Phase Styles ══════════ */
