@@ -6,6 +6,7 @@ var gameDaily = require('../../../utils/game-daily');
 var gameSave = require('../../../utils/game-save');
 var gameReview = require('../../../utils/game-review');
 var stageData = require('../../data/game-stages');
+var knowledgeCards = require('../../data/knowledge-cards');
 var sound = require('../../../utils/sound');
 var shareCard = require('../../../utils/share-card');
 
@@ -16,6 +17,14 @@ function _findStage(chapterId) {
     if (stages[i].id === stageId) return stages[i];
   }
   return null;
+}
+
+function _findKnowledgeCards(stageId) {
+  var stages = knowledgeCards.stages;
+  for (var i = 0; i < stages.length; i++) {
+    if (stages[i].stage_id === stageId) return stages[i].cards;
+  }
+  return [];
 }
 
 var REGION_COLORS = {
@@ -37,6 +46,12 @@ Page({
     phase: 0,
     phaseLabel: '',
     finished: false,
+
+    showLearn: false,
+    learnCards: [],
+    learnCardIndex: 0,
+    learnCardTotal: 0,
+    learnCompleted: false,
 
     currentQuestion: null,
     questionIndex: 0,
@@ -91,15 +106,51 @@ Page({
     var regionLabels = { core: 'CORE/', tools: 'TOOLS/', runtime: 'RUNTIME/', network: 'NETWORK/', practice: 'PRACTICE/' };
 
     this._session = gameEngine.createSession(stage);
+    this._stageChapterId = chapterId;
 
+    var cards = _findKnowledgeCards(stage.id);
+    var localizedCards = cards.map(function(card) {
+      return {
+        id: card.id,
+        title: card.title[locale] || card.title.zh || '',
+        icon: card.icon,
+        content: card.content[locale] || card.content.zh || '',
+        code_example: card.code_example || '',
+        key_point: card.key_point[locale] || card.key_point.zh || ''
+      };
+    });
+
+    if (localizedCards.length > 0) {
+      this.setData({
+        mode: 'stage',
+        stageTitle: title,
+        regionLabel: regionLabels[stage.region] || '',
+        regionColor: REGION_COLORS[stage.region] || '#10B981',
+        phase: 0,
+        phaseLabel: 'LEARN',
+        showLearn: true,
+        learnCards: localizedCards,
+        learnCardIndex: 0,
+        learnCardTotal: localizedCards.length,
+        learnCompleted: false,
+        totalQuestions: stage.questions.length
+      });
+    } else {
+      this._enterQuizPhase(locale, stage);
+    }
+  },
+
+  _enterQuizPhase: function(locale, stage) {
+    if (!stage) {
+      var chapterId = this._stageChapterId;
+      stage = _findStage(chapterId);
+    }
     var q = gameEngine.getCurrentQuestion(this._session);
     this.setData({
-      mode: 'stage',
-      stageTitle: title,
-      regionLabel: regionLabels[stage.region] || '',
-      regionColor: REGION_COLORS[stage.region] || '#10B981',
       phase: 1,
-      phaseLabel: 'CHALLENGE',
+      phaseLabel: 'QUIZ',
+      showLearn: false,
+      learnCompleted: true,
       currentQuestion: this._formatQuestion(q, locale),
       questionIndex: 1,
       totalQuestions: stage.questions.length,
@@ -221,6 +272,17 @@ Page({
     };
   },
 
+  onLearnCardChange: function(e) {
+    var current = e.detail.current;
+    this.setData({ learnCardIndex: current });
+  },
+
+  startQuizFromLearn: function() {
+    var locale = this.data.locale;
+    gameSave.addExp(5);
+    this._enterQuizPhase(locale, null);
+  },
+
   selectOption: function(e) {
     if (this.data.showFeedback) return;
     var optionId = e.currentTarget.dataset.optionid;
@@ -253,6 +315,7 @@ Page({
     } else {
       wx.vibrateShort({ type: 'heavy' });
       sound.play('wrong');
+      gameReview.addToReview(q.id);
     }
   },
 
@@ -260,14 +323,10 @@ Page({
     var session = this._session;
     var locale = this.data.locale;
 
+    // Review mode special handling (keep existing)
     if (this.data.reviewMode && session.phase === 2) {
       session.finished = true;
       this._showSettlement();
-      return;
-    }
-
-    if (session.phase === 2 && this.data.phase === 1) {
-      this._enterReviewPhase(locale);
       return;
     }
 
@@ -278,6 +337,12 @@ Page({
 
     var q = gameEngine.getCurrentQuestion(session);
     if (!q) {
+      // Normal/daily mode: go directly to settlement
+      if (this.data.mode !== 'review') {
+        this._showSettlement();
+        return;
+      }
+      // Review mode: enter review phase
       if (session.phase === 2) {
         this._enterReviewPhase(locale);
       } else {
