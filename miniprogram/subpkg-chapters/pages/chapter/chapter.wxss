@@ -5,6 +5,7 @@
   background: var(--color-bg);
   display: flex;
   flex-direction: column;
+  box-sizing: border-box;
 }
 
 /* ── Game Header ── */

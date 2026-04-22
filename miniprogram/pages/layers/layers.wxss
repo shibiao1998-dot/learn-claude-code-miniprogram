@@ -4,6 +4,7 @@
   height: 100vh;
   background: var(--color-bg);
   padding: 0 var(--spacing-md);
+  box-sizing: border-box;
 }
 
 /* ── Header ── */
