@@ -1,5 +1,6 @@
 // utils/game-engine.js
 var gameSave = require('./game-save');
+var gameReview = require('./game-review');
 
 // --- Stage Session ---
 function createSession(stage) {
@@ -147,12 +148,10 @@ function saveStageResult(result) {
     } else {
       data.stages[result.stageId].attempts = (prev.attempts || 0) + 1;
     }
+  });
 
-    result.reviewIds.forEach(function(qId) {
-      if (data.review.indexOf(qId) === -1) {
-        data.review.push(qId);
-      }
-    });
+  result.reviewIds.forEach(function(qId) {
+    gameReview.addToReview(qId, result.stageId);
   });
 
   gameSave.addExp(result.expReward);
