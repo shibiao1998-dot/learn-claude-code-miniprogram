@@ -5,6 +5,7 @@ var gameCards = require('../../../utils/game-cards');
 var gameDaily = require('../../../utils/game-daily');
 var gameSave = require('../../../utils/game-save');
 var stageData = require('../../data/game-stages');
+var sound = require('../../../utils/sound');
 
 function _findStage(chapterId) {
   var stageId = 'stage_' + chapterId;
@@ -52,7 +53,8 @@ Page({
     showSettlement: false,
     result: null,
     earnedCardDetails: [],
-    newLevel: null
+    newLevel: null,
+    animStep: 0
   },
 
   _session: null,
@@ -178,6 +180,14 @@ Page({
       feedbackExplanation: explText,
       feedbackAnswer: result.answer
     });
+
+    if (result.correct) {
+      wx.vibrateShort({ type: 'light' });
+      sound.play('correct');
+    } else {
+      wx.vibrateShort({ type: 'heavy' });
+      sound.play('wrong');
+    }
   },
 
   nextQuestion: function() {
@@ -322,6 +332,53 @@ Page({
       earnedCardDetails: earnedCardDetails,
       newLevel: leveledUp ? newLevelInfo : null
     });
+
+    this._playSettlementAnimation();
+  },
+
+  _playSettlementAnimation: function() {
+    var self = this;
+    var stars = self.data.result ? self.data.result.stars : 0;
+
+    setTimeout(function() { self.setData({ animStep: 1 }); }, 100);
+
+    setTimeout(function() { self.setData({ animStep: 2 }); }, 400);
+
+    var starDelay = 600;
+    for (var i = 1; i <= 3; i++) {
+      (function(idx) {
+        setTimeout(function() {
+          self.setData({ animStep: 2 + idx });
+          if (idx <= stars) {
+            wx.vibrateShort({ type: 'medium' });
+            sound.play('star');
+          }
+        }, starDelay + idx * 200);
+      })(i);
+    }
+
+    setTimeout(function() { self.setData({ animStep: 6 }); }, 1400);
+
+    setTimeout(function() { self.setData({ animStep: 7 }); }, 1600);
+
+    if (self.data.newLevel) {
+      setTimeout(function() {
+        self.setData({ animStep: 8 });
+        wx.vibrateLong();
+        sound.play('levelup');
+      }, 1800);
+    }
+
+    var cardStartDelay = self.data.newLevel ? 2100 : 1800;
+    var earnedCards = self.data.earnedCardDetails || [];
+    for (var j = 0; j < earnedCards.length; j++) {
+      (function(idx) {
+        setTimeout(function() {
+          self.setData({ animStep: 9 + idx });
+          sound.play('card');
+        }, cardStartDelay + idx * 150);
+      })(j);
+    }
   },
 
   goBack: function() {
@@ -343,7 +400,8 @@ Page({
         showSettlement: false,
         showReview: false,
         showFeedback: false,
-        selectedOption: ''
+        selectedOption: '',
+        animStep: 0
       });
     }
   },
