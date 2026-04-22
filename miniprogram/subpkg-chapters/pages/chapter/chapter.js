@@ -7,6 +7,7 @@ var gameSave = require('../../../utils/game-save');
 var gameReview = require('../../../utils/game-review');
 var stageData = require('../../data/game-stages');
 var sound = require('../../../utils/sound');
+var shareCard = require('../../../utils/share-card');
 
 function _findStage(chapterId) {
   var stageId = 'stage_' + chapterId;
@@ -497,11 +498,78 @@ Page({
     wx.switchTab({ url: '/pages/timeline/timeline' });
   },
 
+  shareResult: function() {
+    if (!this.data.result) return;
+    var self = this;
+    var levelInfo = gameSave.getLevelInfo();
+    var shareData = {
+      title: self.data.stageTitle,
+      stars: self.data.result.stars,
+      score: self.data.result.correctCount,
+      total: self.data.result.totalQuestions,
+      ratio: self.data.result.ratio,
+      exp: self.data.result.expReward,
+      level: levelInfo.title + ' Lv.' + levelInfo.level,
+      cards: self.data.earnedCardDetails.map(function(c) {
+        return { name: c.name, rarity: c.rarity };
+      })
+    };
+
+    wx.showLoading({ title: '生成中...' });
+    shareCard.generateShareImage(shareData, function(tempFilePath) {
+      wx.hideLoading();
+      if (!tempFilePath) {
+        wx.showToast({ title: '生成失败', icon: 'none' });
+        return;
+      }
+      self._shareImagePath = tempFilePath;
+      wx.showActionSheet({
+        itemList: ['分享给好友', '保存到相册'],
+        success: function(res) {
+          if (res.tapIndex === 0) {
+            wx.showToast({ title: '请点击右上角分享', icon: 'none' });
+          } else if (res.tapIndex === 1) {
+            self._saveToAlbum(tempFilePath);
+          }
+        }
+      });
+    });
+  },
+
+  _saveToAlbum: function(filePath) {
+    wx.saveImageToPhotosAlbum({
+      filePath: filePath,
+      success: function() {
+        wx.showToast({ title: '已保存到相册', icon: 'success' });
+      },
+      fail: function(err) {
+        if (err.errMsg && err.errMsg.indexOf('auth deny') !== -1) {
+          wx.showModal({
+            title: '需要相册权限',
+            content: '请在设置中开启相册访问权限',
+            confirmText: '去设置',
+            success: function(res) {
+              if (res.confirm) {
+                wx.openSetting();
+              }
+            }
+          });
+        } else {
+          wx.showToast({ title: '保存失败', icon: 'none' });
+        }
+      }
+    });
+  },
+
   onShareAppMessage: function() {
-    return {
+    var shareObj = {
       title: 'Claude Code Terminal — 闯关',
       path: '/pages/home/home'
     };
+    if (this._shareImagePath) {
+      shareObj.imageUrl = this._shareImagePath;
+    }
+    return shareObj;
   },
 
   onShareTimeline: function() {
