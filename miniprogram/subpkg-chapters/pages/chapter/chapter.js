@@ -4,6 +4,7 @@ var gameEngine = require('../../../utils/game-engine');
 var gameCards = require('../../../utils/game-cards');
 var gameDaily = require('../../../utils/game-daily');
 var gameSave = require('../../../utils/game-save');
+var gameReview = require('../../../utils/game-review');
 var stageData = require('../../data/game-stages');
 var sound = require('../../../utils/sound');
 
@@ -54,7 +55,10 @@ Page({
     result: null,
     earnedCardDetails: [],
     newLevel: null,
-    animStep: 0
+    animStep: 0,
+    reviewMode: false,
+    reviewMastered: 0,
+    reviewRemaining: 0
   },
 
   _session: null,
@@ -63,7 +67,9 @@ Page({
     var locale = i18n.getLocale();
     this.setData({ locale: locale });
 
-    if (options.mode === 'daily') {
+    if (options.mode === 'review') {
+      this._startReview(locale);
+    } else if (options.mode === 'daily') {
       this._startDaily(locale);
     } else {
       var chapterId = options.id || 's01';
@@ -134,6 +140,65 @@ Page({
     });
   },
 
+  _startReview: function(locale) {
+    var queue = gameReview.getReviewQueue();
+    if (!queue || queue.length === 0) {
+      wx.showToast({ title: '暂无待复习题目', icon: 'none' });
+      wx.navigateBack();
+      return;
+    }
+
+    var allStages = stageData.stages;
+    var questions = [];
+    for (var i = 0; i < queue.length; i++) {
+      var qId = queue[i].questionId;
+      var found = false;
+      for (var s = 0; s < allStages.length; s++) {
+        var qs = allStages[s].questions;
+        for (var q = 0; q < qs.length; q++) {
+          if (qs[q].id === qId) {
+            questions.push(qs[q]);
+            found = true;
+            break;
+          }
+        }
+        if (found) break;
+      }
+    }
+
+    if (questions.length === 0) {
+      wx.showToast({ title: '题目数据加载失败', icon: 'none' });
+      wx.navigateBack();
+      return;
+    }
+
+    var fakeReviewStage = {
+      id: 'stage_review',
+      chapter: 'review',
+      region: 'core',
+      questions: questions,
+      star_thresholds: [0.4, 0.7, 1.0],
+      reward_cards: []
+    };
+
+    this._session = gameEngine.createSession(fakeReviewStage);
+
+    var firstQ = gameEngine.getCurrentQuestion(this._session);
+    this.setData({
+      mode: 'review',
+      reviewMode: true,
+      stageTitle: '错题复习',
+      regionLabel: 'REVIEW/',
+      regionColor: '#D29922',
+      phase: 1,
+      phaseLabel: 'REVIEW',
+      currentQuestion: this._formatQuestion(firstQ, locale),
+      questionIndex: 1,
+      totalQuestions: questions.length,
+      progressPercent: Math.round(1 / questions.length * 100)
+    });
+  },
+
   _formatQuestion: function(q, locale) {
     if (!q) return null;
     var stem = q.stem;
@@ -193,6 +258,12 @@ Page({
   nextQuestion: function() {
     var session = this._session;
     var locale = this.data.locale;
+
+    if (this.data.reviewMode && session.phase === 2) {
+      session.finished = true;
+      this._showSettlement();
+      return;
+    }
 
     if (session.phase === 2 && this.data.phase === 1) {
       this._enterReviewPhase(locale);
@@ -292,7 +363,23 @@ Page({
     var locale = this.data.locale;
     var prevLevel = gameSave.getLevelInfo();
 
-    if (this.data.mode === 'daily') {
+    if (this.data.mode === 'review') {
+      var session = this._session;
+      var mastered = 0;
+      for (var i = 0; i < session.questions.length; i++) {
+        var qId = session.questions[i].id;
+        var ans = session.answers[qId];
+        var correct = ans && ans.correct;
+        gameReview.completeReview(qId, correct);
+        if (correct) mastered++;
+      }
+      gameSave.addExp(result.correctCount * 10);
+      var reviewStats = gameReview.getReviewStats();
+      this.setData({
+        reviewMastered: mastered,
+        reviewRemaining: reviewStats.pending
+      });
+    } else if (this.data.mode === 'daily') {
       gameDaily.completeDailyChallenge(result.correctCount);
     } else {
       gameEngine.saveStageResult(result);
