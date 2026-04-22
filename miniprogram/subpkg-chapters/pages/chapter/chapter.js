@@ -108,7 +108,7 @@ Page({
   },
 
   _startDaily: function(locale) {
-    var questions = gameDaily.getDailyQuestions();
+    var questions = gameDaily.getDailyQuestions(stageData.stages);
     if (!questions || questions.length === 0) {
       wx.showToast({ title: '每日挑战加载失败', icon: 'none' });
       wx.navigateBack();

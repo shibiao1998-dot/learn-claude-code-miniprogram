@@ -1,6 +1,5 @@
 // utils/game-daily.js
 var gameSave = require('./game-save');
-var stageData = require('../subpkg-chapters/data/game-stages');
 
 // --- Seeded daily random ---
 function _dailySeed() {
@@ -23,9 +22,9 @@ function _seededRandom(seed) {
 }
 
 // --- Pick 3 random questions for today ---
-function getDailyQuestions() {
+function getDailyQuestions(allStages) {
   var allQuestions = [];
-  stageData.stages.forEach(function(stage) {
+  allStages.forEach(function(stage) {
     stage.questions.forEach(function(q) {
       allQuestions.push(q);
     });
