@@ -4,11 +4,11 @@ var eventBus = require('../../utils/event-bus');
 var gameCards = require('../../utils/game-cards');
 
 var REGIONS = [
-  { id: 'core', symbol: '>', label: 'CORE/', colorHex: '#3FB950' },
-  { id: 'tools', symbol: '$', label: 'TOOLS/', colorHex: '#58A6FF' },
-  { id: 'runtime', symbol: '#', label: 'RUNTIME/', colorHex: '#BC8CFF' },
-  { id: 'network', symbol: '@', label: 'NETWORK/', colorHex: '#F85149' },
-  { id: 'practice', symbol: '!', label: 'PRACTICE/', colorHex: '#D29922' }
+  { id: 'core', symbol: '>', label: 'CORE/', colorHex: '#10B981' },
+  { id: 'tools', symbol: '$', label: 'TOOLS/', colorHex: '#3B82F6' },
+  { id: 'runtime', symbol: '#', label: 'RUNTIME/', colorHex: '#8B5CF6' },
+  { id: 'network', symbol: '@', label: 'NETWORK/', colorHex: '#F43F5E' },
+  { id: 'practice', symbol: '!', label: 'PRACTICE/', colorHex: '#F59E0B' }
 ];
 
 Page({

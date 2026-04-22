@@ -6,11 +6,11 @@ var gameSave = require('../../utils/game-save');
 var stageData = require('../../data/game-stages-meta');
 
 var REGIONS = [
-  { id: 'core', symbol: '>', label: 'CORE/', color: 'var(--color-region-core)', colorHex: '#3FB950' },
-  { id: 'tools', symbol: '$', label: 'TOOLS/', color: 'var(--color-region-tools)', colorHex: '#58A6FF' },
-  { id: 'runtime', symbol: '#', label: 'RUNTIME/', color: 'var(--color-region-runtime)', colorHex: '#BC8CFF' },
-  { id: 'network', symbol: '@', label: 'NETWORK/', color: 'var(--color-region-network)', colorHex: '#F85149' },
-  { id: 'practice', symbol: '!', label: 'PRACTICE/', color: 'var(--color-region-practice)', colorHex: '#D29922' }
+  { id: 'core', symbol: '>', label: 'CORE/', color: 'var(--color-region-core)', colorHex: '#10B981' },
+  { id: 'tools', symbol: '$', label: 'TOOLS/', color: 'var(--color-region-tools)', colorHex: '#3B82F6' },
+  { id: 'runtime', symbol: '#', label: 'RUNTIME/', color: 'var(--color-region-runtime)', colorHex: '#8B5CF6' },
+  { id: 'network', symbol: '@', label: 'NETWORK/', color: 'var(--color-region-network)', colorHex: '#F43F5E' },
+  { id: 'practice', symbol: '!', label: 'PRACTICE/', color: 'var(--color-region-practice)', colorHex: '#F59E0B' }
 ];
 
 var REGION_STAGES = {

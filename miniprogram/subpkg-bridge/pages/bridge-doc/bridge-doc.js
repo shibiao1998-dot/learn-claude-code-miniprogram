@@ -187,7 +187,7 @@ Page({
     var cardDesc = desc[locale] || desc.zh || desc.en || '';
     var obtained = gameCards.isObtained(cardId);
     var regionLabels = { core: 'CORE/', tools: 'TOOLS/', runtime: 'RUNTIME/', network: 'NETWORK/', practice: 'PRACTICE/' };
-    var regionColors = { core: '#3FB950', tools: '#58A6FF', runtime: '#BC8CFF', network: '#F85149', practice: '#D29922' };
+    var regionColors = { core: '#10B981', tools: '#3B82F6', runtime: '#8B5CF6', network: '#F43F5E', practice: '#F59E0B' };
 
     wx.setNavigationBarTitle({ title: cardName });
 
@@ -201,7 +201,7 @@ Page({
         rarity: card.rarity,
         region: card.region,
         regionLabel: regionLabels[card.region] || '',
-        regionColor: regionColors[card.region] || '#3FB950',
+        regionColor: regionColors[card.region] || '#10B981',
         chapter: card.chapter,
         tags: card.tags || [],
         power: card.power,

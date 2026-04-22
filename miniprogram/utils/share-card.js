@@ -1,17 +1,17 @@
 // utils/share-card.js
 
 var COLORS = {
-  bg: '#0D1117',
-  text: '#E6EDF3',
-  textMuted: '#8B949E',
-  border: '#30363D',
-  green: '#3FB950',
-  gold: '#F0C040',
-  orange: '#D29922',
-  rarityN: '#484F58',
-  rarityR: '#58A6FF',
-  raritySR: '#BC8CFF',
-  raritySSR: '#F0C040'
+  bg: '#FFFFFF',
+  text: '#1E293B',
+  textMuted: '#64748B',
+  border: '#E2E8F0',
+  green: '#10B981',
+  gold: '#F59E0B',
+  orange: '#F59E0B',
+  rarityN: '#94A3B8',
+  rarityR: '#3B82F6',
+  raritySR: '#8B5CF6',
+  raritySSR: '#F59E0B'
 };
 
 var RARITY_COLORS = {

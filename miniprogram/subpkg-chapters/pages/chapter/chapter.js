@@ -19,11 +19,11 @@ function _findStage(chapterId) {
 }
 
 var REGION_COLORS = {
-  core: '#3FB950',
-  tools: '#58A6FF',
-  runtime: '#BC8CFF',
-  network: '#F85149',
-  practice: '#D29922'
+  core: '#10B981',
+  tools: '#3B82F6',
+  runtime: '#8B5CF6',
+  network: '#F43F5E',
+  practice: '#F59E0B'
 };
 
 Page({
@@ -32,7 +32,7 @@ Page({
     locale: 'zh',
     stageTitle: '',
     regionLabel: '',
-    regionColor: '#3FB950',
+    regionColor: '#10B981',
 
     phase: 0,
     phaseLabel: '',
@@ -97,7 +97,7 @@ Page({
       mode: 'stage',
       stageTitle: title,
       regionLabel: regionLabels[stage.region] || '',
-      regionColor: REGION_COLORS[stage.region] || '#3FB950',
+      regionColor: REGION_COLORS[stage.region] || '#10B981',
       phase: 1,
       phaseLabel: 'CHALLENGE',
       currentQuestion: this._formatQuestion(q, locale),
@@ -131,7 +131,7 @@ Page({
       mode: 'daily',
       stageTitle: '每日挑战',
       regionLabel: 'DAILY/',
-      regionColor: '#D29922',
+      regionColor: '#F59E0B',
       phase: 1,
       phaseLabel: 'CHALLENGE',
       currentQuestion: this._formatQuestion(q, locale),
@@ -190,7 +190,7 @@ Page({
       reviewMode: true,
       stageTitle: '错题复习',
       regionLabel: 'REVIEW/',
-      regionColor: '#D29922',
+      regionColor: '#F59E0B',
       phase: 1,
       phaseLabel: 'REVIEW',
       currentQuestion: this._formatQuestion(firstQ, locale),
