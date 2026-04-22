@@ -1,14 +1,14 @@
-/* pages/home/home.wxss — Terminal Console */
+/* pages/home/home.wxss — Bright Learning App */
 
-.terminal-page {
+.home-page {
   height: 100vh;
   padding: var(--spacing-lg);
   padding-bottom: 160rpx;
   box-sizing: border-box;
 }
 
-/* --- Terminal Header --- */
-.terminal-header {
+/* --- Page Header --- */
+.page-header {
   margin-bottom: var(--spacing-xl);
 }
 
@@ -19,13 +19,13 @@
   margin-bottom: var(--spacing-sm);
 }
 
-.terminal-title {
+.header-greeting {
   font-size: var(--font-lg);
-  color: var(--color-terminal-green);
-  letter-spacing: 2rpx;
+  color: var(--color-text-primary);
+  font-weight: 600;
 }
 
-.terminal-prompt {
+.header-level {
   font-size: var(--font-sm);
   color: var(--color-text-secondary);
 }
@@ -44,17 +44,18 @@
 }
 
 .lang-btn.active {
-  color: var(--color-terminal-green);
+  color: var(--color-accent-green);
   background: var(--color-bg-elevated);
+  font-weight: 600;
 }
 
 /* --- Status Card --- */
 .status-card {
   background: var(--color-bg-card);
-  border-radius: var(--radius-md);
+  border-radius: var(--radius-lg);
   padding: var(--spacing-lg);
   margin-bottom: var(--spacing-lg);
-  border: 1rpx solid var(--color-border);
+  box-shadow: var(--shadow-sm);
 }
 
 .status-row {
@@ -107,7 +108,7 @@
 
 .bar-fill {
   height: 100%;
-  background: var(--color-terminal-green);
+  background: var(--color-accent-green);
   border-radius: var(--radius-pill);
   transition: width 0.5s ease;
 }
@@ -129,26 +130,28 @@
 .action-btn {
   flex: 1;
   background: var(--color-bg-card);
-  border: 1rpx solid var(--color-border);
-  border-radius: var(--radius-md);
+  border-radius: var(--radius-lg);
   padding: var(--spacing-lg) var(--spacing-md);
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: var(--spacing-xs);
+  box-shadow: var(--shadow-sm);
+  transition: transform 0.15s ease;
 }
 
 .action-btn:active {
+  transform: scale(0.95);
   background: var(--color-bg-elevated);
 }
 
 .action-icon {
   font-size: var(--font-xl);
-  color: var(--color-terminal-green);
+  color: var(--color-accent-green);
 }
 
 .action-daily .action-icon {
-  color: var(--color-terminal-orange);
+  color: var(--color-accent-orange);
 }
 
 .action-daily.completed .action-icon {
@@ -176,15 +179,16 @@
 
 .section-title {
   font-size: var(--font-sm);
-  color: var(--color-terminal-green);
+  color: var(--color-text-primary);
+  font-weight: 600;
   margin-bottom: var(--spacing-md);
   display: block;
 }
 
 .region-list {
   background: var(--color-bg-card);
-  border-radius: var(--radius-md);
-  border: 1rpx solid var(--color-border);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-sm);
   padding: var(--spacing-sm) var(--spacing-md);
 }
 
@@ -249,7 +253,7 @@
 
 .region-stars {
   font-size: var(--font-xs);
-  color: var(--color-terminal-orange);
+  color: var(--color-accent-orange);
   width: 64rpx;
   text-align: right;
 }
@@ -334,13 +338,16 @@
   align-items: center;
   justify-content: space-between;
   background: var(--color-bg-card);
-  border: 1rpx solid var(--color-terminal-orange);
-  border-radius: var(--radius-md);
+  border: 1rpx solid var(--color-accent-orange);
+  border-radius: var(--radius-lg);
   padding: var(--spacing-md) var(--spacing-lg);
   margin-bottom: var(--spacing-xl);
+  box-shadow: var(--shadow-sm);
+  transition: transform 0.15s ease;
 }
 
 .review-entry:active {
+  transform: scale(0.98);
   background: var(--color-bg-elevated);
 }
 
@@ -352,7 +359,7 @@
 
 .review-entry__icon {
   font-size: var(--font-xl);
-  color: var(--color-terminal-orange);
+  color: var(--color-accent-orange);
   font-weight: 700;
 }
 
@@ -374,5 +381,5 @@
 
 .review-entry__arrow {
   font-size: var(--font-md);
-  color: var(--color-terminal-orange);
+  color: var(--color-accent-orange);
 }

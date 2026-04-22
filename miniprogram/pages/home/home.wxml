@@ -1,27 +1,27 @@
-<!-- pages/home/home.wxml — Terminal Console -->
-<scroll-view scroll-y class="terminal-page">
+<!-- pages/home/home.wxml — Bright Learning App -->
+<scroll-view scroll-y class="home-page">
 
-  <!-- Terminal Header -->
-  <view class="terminal-header">
+  <!-- Page Header -->
+  <view class="page-header">
     <view class="header-top">
-      <text class="terminal-title font-mono">CLAUDE CODE TERMINAL</text>
+      <text class="header-greeting">👋 欢迎回来</text>
       <view class="lang-switcher">
         <text class="lang-btn {{locale=='zh'?'active':''}}" bindtap="switchLocale" data-locale="zh">中</text>
         <text class="lang-btn {{locale=='en'?'active':''}}" bindtap="switchLocale" data-locale="en">EN</text>
         <text class="lang-btn {{locale=='ja'?'active':''}}" bindtap="switchLocale" data-locale="ja">日</text>
       </view>
     </view>
-    <text class="terminal-prompt font-mono">{{levelInfo.title || 'guest'}}@claude:~$</text>
+    <text class="header-level">Level {{levelInfo.level || 1}} · {{levelInfo.title || 'guest'}}</text>
   </view>
 
   <!-- Player Status -->
   <view class="status-card">
     <view class="status-row">
-      <text class="status-label font-mono">Level {{levelInfo.level || 1}}</text>
+      <text class="status-label">Level {{levelInfo.level || 1}}</text>
       <text class="status-sep">·</text>
-      <text class="status-value font-mono">{{levelInfo.title || 'guest'}}</text>
+      <text class="status-value">{{levelInfo.title || 'guest'}}</text>
       <text class="status-sep">·</text>
-      <text class="status-value font-mono">{{levelInfo.exp || 0}} exp</text>
+      <text class="status-value">{{levelInfo.exp || 0}} exp</text>
     </view>
     <!-- Total progress bar -->
     <view class="total-bar">
@@ -31,64 +31,64 @@
       <text class="bar-pct font-mono">{{totalProgress}}%</text>
     </view>
     <view class="status-row status-row-sub">
-      <text class="status-mini font-mono">🔥 {{streakInfo.current || 0}} days</text>
-      <text class="status-mini font-mono">{{collectionStats.obtained || 0}}/{{collectionStats.total || 0}} cards</text>
+      <text class="status-mini">🔥 {{streakInfo.current || 0}} days</text>
+      <text class="status-mini">{{collectionStats.obtained || 0}}/{{collectionStats.total || 0}} cards</text>
     </view>
   </view>
 
   <!-- Action Buttons -->
   <view class="action-row">
     <view class="action-btn action-daily {{dailyState.completed ? 'completed' : ''}}" bindtap="goToDailyChallenge">
-      <text class="action-icon font-mono">>_</text>
+      <text class="action-icon">📖</text>
       <text class="action-title">{{dailyState.completed ? '已完成' : '今日挑战'}}</text>
-      <text class="action-desc font-mono">3题/20exp</text>
+      <text class="action-desc">3题/20exp</text>
     </view>
     <view class="action-btn action-continue" bindtap="goToContinue" wx:if="{{nextStageId}}">
-      <text class="action-icon font-mono">>>></text>
+      <text class="action-icon">⚡</text>
       <text class="action-title">继续闯关</text>
-      <text class="action-desc font-mono">{{nextRegionLabel}}</text>
+      <text class="action-desc">{{nextRegionLabel}}</text>
     </view>
     <view class="action-btn action-map" bindtap="goToMap" wx:else>
-      <text class="action-icon font-mono">◇◆</text>
+      <text class="action-icon">🗺️</text>
       <text class="action-title">查看地图</text>
-      <text class="action-desc font-mono">选择区域</text>
+      <text class="action-desc">选择区域</text>
     </view>
   </view>
 
   <!-- Review Entry -->
   <view class="review-entry" wx:if="{{reviewStats.pending > 0}}" bindtap="goToReview">
     <view class="review-entry__left">
-      <text class="review-entry__icon font-mono">?!</text>
+      <text class="review-entry__icon">📝</text>
       <view class="review-entry__info">
         <text class="review-entry__title">错题复习</text>
-        <text class="review-entry__desc font-mono">{{reviewStats.pending}} 题待复习 · 10exp/题</text>
+        <text class="review-entry__desc">{{reviewStats.pending}} 题待复习 · 10exp/题</text>
       </view>
     </view>
-    <text class="review-entry__arrow font-mono">></text>
+    <text class="review-entry__arrow">→</text>
   </view>
 
   <!-- Region Progress -->
   <view class="regions-section">
-    <text class="section-title font-mono">> status</text>
+    <text class="section-title">📊 学习进度</text>
     <view class="region-list">
       <view wx:for="{{regions}}" wx:key="id" class="region-row {{item.unlocked ? '' : 'locked'}}">
-        <text class="region-symbol font-mono region-{{item.id}}">{{item.symbol}}</text>
-        <text class="region-label font-mono">{{item.label}}</text>
+        <text class="region-symbol region-{{item.id}}">{{item.symbol}}</text>
+        <text class="region-label">{{item.label}}</text>
         <view class="region-bar">
           <view class="bar-track-sm">
             <view class="bar-fill-sm region-bg-{{item.id}}" style="width:{{item.barWidth}}%"></view>
           </view>
         </view>
-        <text class="region-pct font-mono" wx:if="{{item.unlocked}}">{{item.barWidth}}%</text>
-        <text class="region-stars font-mono" wx:if="{{item.unlocked && item.totalStars > 0}}">⭐{{item.totalStars}}</text>
-        <text class="region-lock font-mono" wx:if="{{!item.unlocked}}">🔒</text>
+        <text class="region-pct" wx:if="{{item.unlocked}}">{{item.barWidth}}%</text>
+        <text class="region-stars" wx:if="{{item.unlocked && item.totalStars > 0}}">⭐{{item.totalStars}}</text>
+        <text class="region-lock" wx:if="{{!item.unlocked}}">🔒</text>
       </view>
     </view>
   </view>
 
   <!-- Recent Cards -->
   <view class="recent-section" wx:if="{{recentCards.length > 0}}">
-    <text class="section-title font-mono">> recent cards</text>
+    <text class="section-title">🃏 最近获得</text>
     <scroll-view scroll-x class="recent-scroll">
       <view class="recent-cards-row">
         <view wx:for="{{recentCards}}" wx:key="id" class="mini-card rarity-{{item.rarity}}">

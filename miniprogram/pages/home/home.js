@@ -177,14 +177,14 @@ Page({
 
   onShareAppMessage: function() {
     return {
-      title: 'Claude Code Terminal — 游戏化学习',
+      title: 'Claude Code 学习 — 游戏化学习工具',
       path: '/pages/home/home'
     };
   },
 
   onShareTimeline: function() {
     return {
-      title: 'Claude Code Terminal — 游戏化学习'
+      title: 'Claude Code 学习 — 游戏化学习工具'
     };
   },
 });
