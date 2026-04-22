@@ -1,12 +1,12 @@
 <!-- pages/timeline/timeline.wxml -->
 <scroll-view scroll-y class="map-page">
 
-  <!-- Terminal Header -->
+  <!-- Header -->
   <view class="map-header">
-    <text class="map-header__title">REGION MAP</text>
+    <text class="map-header__title">🗺️ 学习地图</text>
     <view class="map-header__stats">
-      <text class="map-header__level font-mono">{{levelInfo.title}} Lv.{{levelInfo.level}}</text>
-      <text class="map-header__progress font-mono">{{totalProgress}}% decoded</text>
+      <text class="map-header__level">{{levelInfo.title}} Lv.{{levelInfo.level}}</text>
+      <text class="map-header__progress">{{totalProgress}}%</text>
     </view>
     <view class="map-progress-bar">
       <view class="map-progress-bar__fill" style="width:{{totalProgress}}%"></view>
@@ -20,13 +20,13 @@
       <!-- Region Header (tap to expand/collapse) -->
       <view class="region-header" bindtap="toggleRegion" data-regionid="{{item.id}}">
         <view class="region-header__left">
-          <text class="region-symbol font-mono" style="color:{{item.colorHex}}">{{item.symbol}}</text>
-          <text class="region-label font-mono" style="color:{{item.colorHex}}">{{item.label}}</text>
-          <text class="region-lock font-mono" wx:if="{{!item.unlocked}}">[LOCKED]</text>
+          <text class="region-symbol" style="color:{{item.colorHex}}">{{item.symbol}}</text>
+          <text class="region-label" style="color:{{item.colorHex}}">{{item.label}}</text>
+          <text class="region-lock" wx:if="{{!item.unlocked}}">🔒</text>
         </view>
         <view class="region-header__right">
-          <text class="region-stars font-mono">{{item.totalStars}}/{{item.maxStars}}</text>
-          <text class="region-chevron font-mono">{{item.expanded ? '▾' : '▸'}}</text>
+          <text class="region-stars">{{item.totalStars}}/{{item.maxStars}}</text>
+          <text class="region-chevron">{{item.expanded ? '▾' : '▸'}}</text>
         </view>
       </view>
 
@@ -35,7 +35,7 @@
         <view class="region-bar__track">
           <view class="region-bar__fill" style="width:{{item.barWidth}}%;background:{{item.colorHex}}"></view>
         </view>
-        <text class="region-bar__text font-mono">{{item.cleared}}/{{item.total}}</text>
+        <text class="region-bar__text">{{item.cleared}}/{{item.total}}</text>
       </view>
 
       <!-- Stage List (expanded) -->
@@ -75,7 +75,7 @@
 
       <!-- Locked overlay message -->
       <view class="locked-msg" wx:if="{{item.expanded && !item.unlocked}}">
-        <text class="locked-msg__text font-mono">> access denied: complete previous region</text>
+        <text class="locked-msg__text">请先完成上一区域</text>
       </view>
 
     </view>
