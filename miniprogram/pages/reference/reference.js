@@ -1,101 +1,123 @@
 // pages/reference/reference.js
-const i18n = require('../../utils/i18n');
-const eventBus = require('../../utils/event-bus');
-const bridgeDocsMeta = require('../../data/bridge-docs-meta.js');
-const tipsIndex = require('../../data/tips-index.js');
+var i18n = require('../../utils/i18n');
+var eventBus = require('../../utils/event-bus');
+var gameSave = require('../../utils/game-save');
+var gameCards = require('../../utils/game-cards');
+var gameDaily = require('../../utils/game-daily');
+var gameAchievement = require('../../utils/game-achievement');
+
+var CATEGORIES = [
+  { id: 'explore', icon: '>', label: 'EXPLORE', color: 'var(--color-region-core)' },
+  { id: 'collect', icon: '$', label: 'COLLECT', color: 'var(--color-region-tools)' },
+  { id: 'mastery', icon: '#', label: 'MASTERY', color: 'var(--color-region-runtime)' },
+  { id: 'persist', icon: '!', label: 'PERSIST', color: 'var(--color-region-practice)' }
+];
 
 Page({
   data: {
     locale: 'zh',
-    t: {},
-    foundationDocs: [],   // kind=map
-    mechanismDocs: [],    // kind=mechanism
-    tipCategories: [],    // Tips 分类列表
+    levelInfo: {},
+    streakInfo: {},
+    collectionStats: {},
+    achievementStats: {},
+    categories: [],
+    showResetConfirm: false
   },
 
-  onLoad() {
+  onLoad: function() {
     this._buildPageData();
-    this._localeListener = (locale) => {
-      this.setData({ locale });
+    this._localeListener = function() {
       this._buildPageData();
-    };
+    }.bind(this);
     eventBus.on('locale:change', this._localeListener);
   },
 
-  onUnload() {
+  onShow: function() {
+    this._buildPageData();
+  },
+
+  onUnload: function() {
     eventBus.off('locale:change', this._localeListener);
   },
 
-  _buildPageData() {
-    const locale = i18n.getLocale();
+  _buildPageData: function() {
+    var locale = i18n.getLocale();
+    var levelInfo = gameSave.getLevelInfo();
+    var streakInfo = gameDaily.getStreakInfo();
+    var collectionStats = gameCards.getCollectionStats();
+    var achievementStats = gameAchievement.getAchievementStats();
+    var allAchievements = gameAchievement.getAllAchievements();
 
-    let messages = {};
-    try {
-      switch (locale) {
-        case 'en': messages = require('../../i18n/en.js'); break;
-        case 'ja': messages = require('../../i18n/ja.js'); break;
-        default:   messages = require('../../i18n/zh.js'); break;
+    var categories = CATEGORIES.map(function(cat) {
+      var items = [];
+      for (var i = 0; i < allAchievements.length; i++) {
+        var ach = allAchievements[i];
+        if (ach.category === cat.id) {
+          items.push({
+            id: ach.id,
+            icon: ach.icon,
+            name: ach.name[locale] || ach.name.zh || ach.name.en || ach.id,
+            desc: ach.desc[locale] || ach.desc.zh || ach.desc.en || '',
+            unlocked: ach.unlocked
+          });
+        }
       }
-    } catch (e) {
-      console.warn('[reference] failed to load i18n messages');
-    }
-
-    const foundationDocs = [];
-    const mechanismDocs = [];
-
-    Object.values(bridgeDocsMeta).forEach(function(doc) {
-      const title = (doc.title && (doc.title[locale] || doc.title['en'])) || doc.slug;
-      const summary = (doc.summary && (doc.summary[locale] || doc.summary['en'])) || '';
-
-      const entry = { slug: doc.slug, title: title, summary: summary };
-
-      if (doc.kind === 'map') {
-        foundationDocs.push(entry);
-      } else if (doc.kind === 'mechanism') {
-        mechanismDocs.push(entry);
+      var unlockedCount = 0;
+      for (var j = 0; j < items.length; j++) {
+        if (items[j].unlocked) unlockedCount++;
       }
-    });
-
-    // 构建 Tips 分类数据
-    var tipCategories = [];
-    for (var i = 0; i < tipsIndex.length; i++) {
-      var cat = tipsIndex[i];
-      var label = (cat.label && (cat.label[locale] || cat.label['en'])) || cat.id;
-      tipCategories.push({
+      return {
         id: cat.id,
-        slug: cat.slug,
-        label: label,
-        count: cat.count,
-      });
-    }
+        icon: cat.icon,
+        label: cat.label,
+        color: cat.color,
+        items: items,
+        unlocked: unlockedCount,
+        total: items.length
+      };
+    });
 
     this.setData({
       locale: locale,
-      t: messages,
-      foundationDocs: foundationDocs,
-      mechanismDocs: mechanismDocs,
-      tipCategories: tipCategories,
+      levelInfo: levelInfo,
+      streakInfo: streakInfo,
+      collectionStats: collectionStats,
+      achievementStats: achievementStats,
+      categories: categories,
+      showResetConfirm: false
     });
   },
 
-  openDoc(e) {
-    const slug = e.currentTarget.dataset.slug;
-    wx.navigateTo({
-      url: '/subpkg-bridge/pages/bridge-doc/bridge-doc?slug=' + slug,
-    });
-  },
-
-  openTipsCategory: function(e) {
-    var slug = e.currentTarget.dataset.slug;
-    if (slug) {
-      wx.navigateTo({
-        url: '/subpkg-bridge/pages/bridge-doc/bridge-doc?slug=' + slug,
-      });
-    }
-  },
-
-  switchLocale(e) {
-    const locale = e.currentTarget.dataset.locale;
+  switchLocale: function(e) {
+    var locale = e.currentTarget.dataset.locale;
     getApp().setLocale(locale);
   },
+
+  showReset: function() {
+    this.setData({ showResetConfirm: true });
+  },
+
+  cancelReset: function() {
+    this.setData({ showResetConfirm: false });
+  },
+
+  confirmReset: function() {
+    gameSave.reset();
+    this.setData({ showResetConfirm: false });
+    this._buildPageData();
+    wx.showToast({ title: '存档已重置', icon: 'none' });
+  },
+
+  onShareAppMessage: function() {
+    return {
+      title: 'Claude Code Terminal — 档案',
+      path: '/pages/home/home'
+    };
+  },
+
+  onShareTimeline: function() {
+    return {
+      title: 'Claude Code Terminal — 档案'
+    };
+  }
 });

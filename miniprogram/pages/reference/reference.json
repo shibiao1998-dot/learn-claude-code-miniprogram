@@ -1,4 +1,7 @@
 {
-  "navigationBarTitleText": "参考资料",
+  "navigationBarTitleText": "档案",
+  "navigationBarBackgroundColor": "#0D1117",
+  "navigationBarTextStyle": "white",
+  "navigationStyle": "default",
   "usingComponents": {}
 }
