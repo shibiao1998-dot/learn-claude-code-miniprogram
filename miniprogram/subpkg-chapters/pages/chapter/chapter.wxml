@@ -2,9 +2,9 @@
 <view class="game-page">
 
   <!-- ══════════ Game Header ══════════ -->
-  <view class="game-header" wx:if="{{!showSettlement}}">
+  <view class="game-header" wx:if="{{!showSettlement && !showLearn}}">
     <view class="game-header__top">
-      <text class="game-header__back font-mono" bindtap="goBack">← ESC</text>
+      <text class="game-header__back font-mono" bindtap="goBack">← 返回</text>
       <view class="game-header__phase">
         <text class="phase-badge font-mono" style="color:{{regionColor}}">{{phaseLabel}}</text>
         <text class="phase-counter font-mono">{{questionIndex}}/{{totalQuestions}}</text>
@@ -13,6 +13,63 @@
     <text class="game-header__title">{{stageTitle}}</text>
     <view class="game-header__bar">
       <view class="game-header__bar-fill" style="width:{{progressPercent}}%;background:{{regionColor}}"></view>
+    </view>
+  </view>
+
+  <!-- ══════════ Phase 0: Learn Cards ══════════ -->
+  <view class="learn-section" wx:if="{{showLearn && !showSettlement}}">
+
+    <!-- Learn header -->
+    <view class="learn-header">
+      <text class="learn-title">📖 学习 · {{stageTitle}}</text>
+      <view class="learn-progress-bar">
+        <view class="learn-progress-fill" style="width:{{(learnCardIndex + 1) / learnCardTotal * 100}}%"></view>
+      </view>
+      <text class="learn-progress-text">{{learnCardIndex + 1}} / {{learnCardTotal}}</text>
+    </view>
+
+    <!-- Swiper cards -->
+    <swiper
+      class="learn-swiper"
+      current="{{learnCardIndex}}"
+      bindchange="onLearnCardChange"
+      duration="300"
+      easing-function="easeOutCubic"
+    >
+      <swiper-item wx:for="{{learnCards}}" wx:key="id">
+        <view class="learn-card">
+          <text class="learn-card__icon">{{item.icon}}</text>
+          <text class="learn-card__title">{{item.title}}</text>
+          <text class="learn-card__content">{{item.content}}</text>
+          <view class="learn-card__code" wx:if="{{item.code_example}}">
+            <text class="learn-card__code-text font-mono">{{item.code_example}}</text>
+          </view>
+          <view class="learn-card__keypoint">
+            <text class="learn-card__keypoint-text">💡 {{item.key_point}}</text>
+          </view>
+        </view>
+      </swiper-item>
+    </swiper>
+
+    <!-- Progress dots -->
+    <view class="learn-dots">
+      <view
+        wx:for="{{learnCards}}"
+        wx:key="id"
+        class="learn-dot {{learnCardIndex === index ? 'learn-dot--active' : ''}}"
+        style="{{learnCardIndex === index ? 'background:' + regionColor : ''}}"
+      ></view>
+    </view>
+
+    <!-- Action button -->
+    <view class="learn-action">
+      <view
+        class="btn-learn-next"
+        bindtap="{{learnCardIndex === learnCardTotal - 1 ? 'startQuizFromLearn' : ''}}"
+        style="background:{{regionColor}}"
+      >
+        <text class="btn-learn-next__text">{{learnCardIndex === learnCardTotal - 1 ? '开始测验 →' : ''}}</text>
+      </view>
     </view>
   </view>
 
@@ -68,7 +125,7 @@
   </scroll-view>
 
   <!-- ══════════ Phase 2: Review ══════════ -->
-  <scroll-view scroll-y class="game-content" wx:if="{{showReview && !showSettlement}}">
+  <scroll-view scroll-y class="game-content" wx:if="{{showReview && !showSettlement && reviewMode}}">
 
     <view class="review-header">
       <text class="review-title font-mono" style="color:{{regionColor}}">// REVIEW</text>
