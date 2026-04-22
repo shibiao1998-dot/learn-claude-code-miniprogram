@@ -326,3 +326,52 @@
 .page-footer {
   height: 40rpx;
 }
+
+/* --- Review Entry --- */
+.review-entry {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: var(--color-bg-card);
+  border: 1rpx solid var(--color-terminal-orange);
+  border-radius: var(--radius-md);
+  padding: var(--spacing-md) var(--spacing-lg);
+  margin-bottom: var(--spacing-xl);
+}
+
+.review-entry:active {
+  background: var(--color-bg-elevated);
+}
+
+.review-entry__left {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-md);
+}
+
+.review-entry__icon {
+  font-size: var(--font-xl);
+  color: var(--color-terminal-orange);
+  font-weight: 700;
+}
+
+.review-entry__info {
+  display: flex;
+  flex-direction: column;
+  gap: 4rpx;
+}
+
+.review-entry__title {
+  font-size: var(--font-sm);
+  color: var(--color-text-primary);
+}
+
+.review-entry__desc {
+  font-size: var(--font-2xs);
+  color: var(--color-text-muted);
+}
+
+.review-entry__arrow {
+  font-size: var(--font-md);
+  color: var(--color-terminal-orange);
+}

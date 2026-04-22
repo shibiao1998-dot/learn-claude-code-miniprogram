@@ -55,6 +55,18 @@
     </view>
   </view>
 
+  <!-- Review Entry -->
+  <view class="review-entry" wx:if="{{reviewStats.pending > 0}}" bindtap="goToReview">
+    <view class="review-entry__left">
+      <text class="review-entry__icon font-mono">?!</text>
+      <view class="review-entry__info">
+        <text class="review-entry__title">错题复习</text>
+        <text class="review-entry__desc font-mono">{{reviewStats.pending}} 题待复习 · 10exp/题</text>
+      </view>
+    </view>
+    <text class="review-entry__arrow font-mono">></text>
+  </view>
+
   <!-- Region Progress -->
   <view class="regions-section">
     <text class="section-title font-mono">> status</text>

@@ -652,3 +652,14 @@
 .settle-card--SSR.settle-anim-slideup {
   box-shadow: 0 0 20rpx 6rpx rgba(240, 192, 64, 0.35);
 }
+
+/* Review settlement stats */
+.settle-review {
+  text-align: center;
+  padding: var(--spacing-sm) 0;
+}
+
+.settle-review__text {
+  font-size: var(--font-sm);
+  color: var(--color-terminal-orange);
+}

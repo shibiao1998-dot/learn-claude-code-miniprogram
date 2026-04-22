@@ -6,6 +6,7 @@ var gameEngine = require('../../utils/game-engine');
 var gameCards = require('../../utils/game-cards');
 var gameDaily = require('../../utils/game-daily');
 var gameAchievement = require('../../utils/game-achievement');
+var gameReview = require('../../utils/game-review');
 var stageData = require('../../subpkg-chapters/data/game-stages');
 
 var REGIONS = [
@@ -29,6 +30,7 @@ Page({
     recentCards: [],
     nextStageId: null,
     nextRegionLabel: '',
+    reviewStats: { total: 0, pending: 0 },
   },
 
   onLoad: function() {
@@ -126,6 +128,8 @@ Page({
 
     gameAchievement.checkAndUnlock();
 
+    var reviewStats = gameReview.getReviewStats();
+
     this.setData({
       levelInfo: levelInfo,
       streakInfo: streakInfo,
@@ -135,7 +139,8 @@ Page({
       totalProgress: totalProgress,
       recentCards: recentCards,
       nextStageId: nextStageId,
-      nextRegionLabel: nextRegionLabel
+      nextRegionLabel: nextRegionLabel,
+      reviewStats: reviewStats
     });
   },
 
@@ -152,6 +157,12 @@ Page({
         url: '/subpkg-chapters/pages/chapter/chapter?id=' + chapter
       });
     }
+  },
+
+  goToReview: function() {
+    wx.navigateTo({
+      url: '/subpkg-chapters/pages/chapter/chapter?mode=review'
+    });
   },
 
   goToMap: function() {
