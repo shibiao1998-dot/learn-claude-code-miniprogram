@@ -804,7 +804,7 @@
   height: 16rpx;
   border-radius: 50%;
   background: var(--color-bg-muted);
-  transition: all 0.3s ease;
+  transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
 }
 
 .learn-dot--active {
@@ -826,4 +826,99 @@
   color: #FFFFFF;
   font-size: var(--font-md);
   font-weight: 600;
+}
+
+/* ══════════ L1: Transition Animations ══════════ */
+
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(20rpx); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.game-header {
+  animation: fadeInUp 0.4s ease-out;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.game-content {
+  animation: fadeIn 0.3s ease-out;
+}
+
+.learn-card {
+  animation: scaleIn 0.3s ease-out;
+}
+
+@keyframes scaleIn {
+  from { opacity: 0; transform: scale(0.95); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+/* ══════════ L2: Interactive Feedback ══════════ */
+
+.btn-press,
+.btn-confirm,
+.btn-next,
+.btn-settle,
+.action-btn,
+.btn-learn-next {
+  transition: transform 0.15s ease;
+}
+.btn-press:active,
+.btn-confirm:active,
+.btn-next:active,
+.btn-settle:active,
+.action-btn:active,
+.btn-learn-next:active {
+  transform: scale(0.95);
+}
+
+@keyframes correctBounce {
+  0% { transform: translateY(0); }
+  30% { transform: translateY(-4rpx); }
+  100% { transform: translateY(0); }
+}
+
+.option--correct {
+  animation: correctBounce 0.3s ease-out;
+}
+
+@keyframes wrongShake {
+  0%, 100% { transform: translateX(0); }
+  20% { transform: translateX(-6rpx); }
+  40% { transform: translateX(6rpx); }
+  60% { transform: translateX(-6rpx); }
+  80% { transform: translateX(6rpx); }
+}
+
+.option--wrong {
+  animation: wrongShake 0.2s ease-out;
+}
+
+@keyframes iconPop {
+  0% { transform: scale(0); }
+  60% { transform: scale(1.2); }
+  100% { transform: scale(1); }
+}
+
+.feedback-badge__icon {
+  animation: iconPop 0.3s ease-out;
+}
+
+@keyframes slideInUp {
+  from { opacity: 0; transform: translateY(20rpx); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.feedback-explain {
+  animation: slideInUp 0.3s ease-out;
+}
+
+/* ══════════ L3: Reward Animations ══════════ */
+
+.settle-exp__value {
+  transition: all 0.8s ease-out;
 }
