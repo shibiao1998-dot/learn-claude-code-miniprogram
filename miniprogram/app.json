@@ -26,21 +26,21 @@
     }
   ],
   "window": {
-    "backgroundTextStyle": "dark",
-    "navigationBarBackgroundColor": "#0D1117",
-    "navigationBarTitleText": "Claude Code Terminal",
-    "navigationBarTextStyle": "white",
-    "backgroundColor": "#0D1117"
+    "backgroundTextStyle": "light",
+    "navigationBarBackgroundColor": "#FFFFFF",
+    "navigationBarTitleText": "Claude Code 学习",
+    "navigationBarTextStyle": "black",
+    "backgroundColor": "#F1F5F9"
   },
   "tabBar": {
-    "color": "#484F58",
-    "selectedColor": "#E6EDF3",
-    "backgroundColor": "#161B22",
-    "borderStyle": "black",
+    "color": "#94A3B8",
+    "selectedColor": "#1E293B",
+    "backgroundColor": "#FFFFFF",
+    "borderStyle": "white",
     "list": [
       {
         "pagePath": "pages/home/home",
-        "text": "终端",
+        "text": "首页",
         "iconPath": "assets/icons/home.png",
         "selectedIconPath": "assets/icons/home-active.png"
       },
