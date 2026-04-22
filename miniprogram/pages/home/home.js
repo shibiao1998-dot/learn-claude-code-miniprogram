@@ -7,7 +7,7 @@ var gameCards = require('../../utils/game-cards');
 var gameDaily = require('../../utils/game-daily');
 var gameAchievement = require('../../utils/game-achievement');
 var gameReview = require('../../utils/game-review');
-var stageData = require('../../subpkg-chapters/data/game-stages');
+var stageData = require('../../data/game-stages-meta');
 
 var REGIONS = [
   { id: 'core', symbol: '>', label: 'CORE/', stages: ['stage_s01','stage_s02','stage_s03','stage_s04','stage_s05','stage_s06'] },

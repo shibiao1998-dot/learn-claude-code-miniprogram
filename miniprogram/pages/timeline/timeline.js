@@ -3,7 +3,7 @@ var i18n = require('../../utils/i18n');
 var eventBus = require('../../utils/event-bus');
 var gameEngine = require('../../utils/game-engine');
 var gameSave = require('../../utils/game-save');
-var stageData = require('../../subpkg-chapters/data/game-stages');
+var stageData = require('../../data/game-stages-meta');
 
 var REGIONS = [
   { id: 'core', symbol: '>', label: 'CORE/', color: 'var(--color-region-core)', colorHex: '#3FB950' },
