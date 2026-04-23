@@ -39,12 +39,12 @@
         </view>
         <view class="card-meta__row">
           <text class="card-meta__label font-mono">STATUS</text>
-          <text class="card-meta__value font-mono" style="color:{{cardData.obtained ? 'var(--color-terminal-green)' : 'var(--color-terminal-red)'}}">{{cardData.obtained ? '✓ DECODED' : '✗ LOCKED'}}</text>
+          <text class="card-meta__value" style="color:{{cardData.obtained ? 'var(--color-accent-green)' : 'var(--color-error)'}}">{{cardData.obtained ? '✓ 已获得' : '✗ 未获得'}}</text>
         </view>
       </view>
 
       <view class="card-back-btn" bindtap="goBack">
-        <text class="card-back-btn__text font-mono">> BACK</text>
+        <text class="card-back-btn__text">← 返回</text>
       </view>
     </view>
   </block>
