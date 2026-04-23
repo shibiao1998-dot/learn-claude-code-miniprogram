@@ -816,19 +816,67 @@ module.exports = {
       stage_id: 'stage_s12',
       cards: [
         {
-          id: 'kc_s12_placeholder',
-          title: { zh: '即将推出', en: 'Coming Soon', ja: '近日公開' },
-          icon: '🚀',
+          id: 'kc_s12_001',
+          title: { zh: '从 Todo 到 Task', en: 'From Todo to Task', ja: 'TodoからTaskへ' },
+          icon: '📋',
           content: {
-            zh: '本章节的学习卡片正在制作中，敬请期待！你可以直接开始测验。',
-            en: 'Knowledge cards for this chapter are being prepared. You can start the quiz directly.',
-            ja: 'この章のカードは準備中です。クイズを始めることができます。'
+            zh: 'Todo 是当前会话的临时清单，Task 是可持久化的工作图。Task 多了两个关键能力：依赖关系（谁先谁后）和持久化（关掉再开还在）。跨轮次、多人协作时必须用 Task。',
+            en: 'Todo is a session-scoped checklist; Task is a persistent work graph. Tasks add two key capabilities: dependencies (ordering) and persistence (survive restarts). Use tasks for cross-turn and multi-agent work.',
+            ja: 'Todoはセッション内の一時リスト、Taskは永続化可能な作業グラフ。Taskには2つの重要な能力：依存関係（順序付け）と永続化（再起動後も存続）。ターン横断・複数エージェント協作にはTaskが必須。'
           },
-          code_example: '',
+          code_example: '# Todo: 当前会话的临时步骤\ntodo = ["读文件", "改代码", "跑测试"]\n\n# Task: 持久化 + 依赖关系\ntask = {\n    "id": 1, "subject": "Write parser",\n    "status": "pending",\n    "blockedBy": [], "blocks": [2, 3],\n}',
           key_point: {
-            zh: '点击下方按钮直接开始测验',
-            en: 'Click below to start the quiz',
-            ja: '下のボタンをクリックしてクイズを開始'
+            zh: 'Todo 更像本轮计划，Task 更像长期工作板——区别在依赖和持久化',
+            en: 'Todo is a session plan; Task is a persistent board — the difference is dependencies and persistence',
+            ja: 'Todoはセッション計画、Taskは永続ボード — 違いは依存関係と永続化'
+          }
+        },
+        {
+          id: 'kc_s12_002',
+          title: { zh: 'TaskRecord 核心结构', en: 'TaskRecord Core Structure', ja: 'TaskRecordのコア構造' },
+          icon: '🏗️',
+          content: {
+            zh: '每个任务至少需要：id（唯一标识）、subject（一句话描述）、status（走到哪了）、blockedBy（在等谁）、blocks（完成后解锁谁）、owner（谁在做）。这六个字段就够搭起最小任务系统。',
+            en: 'Each task needs at minimum: id (unique key), subject (one-line description), status (current state), blockedBy (waiting on whom), blocks (who I unlock), owner (who\'s working). Six fields build a minimal task system.',
+            ja: '各タスクに最低限必要：id（一意識別子）、subject（一行説明）、status（現在の状態）、blockedBy（誰を待つか）、blocks（誰を解放するか）、owner（誰が担当）。6フィールドで最小タスクシステムが構築可能。'
+          },
+          code_example: 'task = {\n    "id": 1,\n    "subject": "Write parser",\n    "status": "pending",\n    "blockedBy": [],\n    "blocks": [2, 3],\n    "owner": "",\n}',
+          key_point: {
+            zh: 'TaskRecord 六个字段：id / subject / status / blockedBy / blocks / owner',
+            en: 'TaskRecord has six fields: id / subject / status / blockedBy / blocks / owner',
+            ja: 'TaskRecordは6フィールド：id / subject / status / blockedBy / blocks / owner'
+          }
+        },
+        {
+          id: 'kc_s12_003',
+          title: { zh: 'is_ready() 就绪判断', en: 'is_ready() Readiness Check', ja: 'is_ready() 準備判定' },
+          icon: '✅',
+          content: {
+            zh: '任务系统的核心不是"保存清单"，而是"判断什么时候能开工"。一条任务 ready 的条件很简单：状态还是 pending，而且 blockedBy 列表为空。这就是最关键的一条判断规则。',
+            en: 'The core of a task system is not saving a list but judging when work can start. A task is ready when: status is pending AND blockedBy is empty. This single rule is the most important piece.',
+            ja: 'タスクシステムの核心は「リスト保存」ではなく「いつ開始できるか判断する」こと。タスクがready：statusがpendingかつblockedByが空。この1つのルールが最も重要。'
+          },
+          code_example: 'def is_ready(task):\n    return (\n        task["status"] == "pending"\n        and not task["blockedBy"]\n    )',
+          key_point: {
+            zh: '任务系统的核心不是"保存清单"，而是 is_ready() 判断"谁现在能开工"',
+            en: 'The core is not saving lists but is_ready() — judging who can start now',
+            ja: '核心は「リスト保存」ではなくis_ready() — 「今誰が開始できるか」の判断'
+          }
+        },
+        {
+          id: 'kc_s12_004',
+          title: { zh: '完成自动解锁后续', en: 'Completion Auto-Unlocks Downstream', ja: '完了で後続を自動解放' },
+          icon: '🔓',
+          content: {
+            zh: '当一个任务标记完成时，系统要自动把它从所有后续任务的 blockedBy 列表中移除。这样被阻塞的任务就可能变成 ready 状态。这说明任务系统不是静态记录表，而是会随完成事件自动推进的工作图。',
+            en: 'When a task completes, the system must remove it from blockedBy lists of all downstream tasks. This may make blocked tasks become ready. The task system is not a static table but a work graph that auto-advances on completion events.',
+            ja: 'タスク完了時、システムは全後続タスクのblockedByリストからそれを削除。これによりブロックされていたタスクがready状態になりうる。タスクシステムは静的な表ではなく、完了イベントで自動推進する作業グラフ。'
+          },
+          code_example: 'def complete(self, task_id):\n    task = self.load(task_id)\n    task["status"] = "completed"\n    self.save(task)\n    for other in self.all_tasks():\n        if task_id in other["blockedBy"]:\n            other["blockedBy"].remove(task_id)\n            self.save(other)',
+          key_point: {
+            zh: '任务系统不是静态记录表，而是会随完成事件自动推进的工作图',
+            en: 'The task system auto-advances as a work graph, not a static table',
+            ja: 'タスクシステムは静的な表ではなく、完了イベントで自動推進する作業グラフ'
           }
         }
       ]
@@ -837,19 +885,67 @@ module.exports = {
       stage_id: 'stage_s13',
       cards: [
         {
-          id: 'kc_s13_placeholder',
-          title: { zh: '即将推出', en: 'Coming Soon', ja: '近日公開' },
+          id: 'kc_s13_001',
+          title: { zh: '主循环只有一条', en: 'The Main Loop Stays Single', ja: 'メインループは1つのまま' },
+          icon: '🔂',
+          content: {
+            zh: '后台任务不是"多了一条主循环"。主循环仍然只有一条，并行的是等待而不是循环本身。慢命令在另一条执行线上跑，主循环先去做别的事，结果稍后通过通知回来。',
+            en: 'Background tasks don\'t add another main loop. The main loop stays single — what\'s parallel is the waiting, not the loop itself. Slow commands run on a separate thread; the main loop continues, and results come back via notifications.',
+            ja: 'バックグラウンドタスクはメインループを増やすのではない。メインループは1つのまま — 並列なのはループではなく待機。遅いコマンドは別スレッドで実行、メインループは他の作業を続け、結果は通知で戻る。'
+          },
+          code_example: '# 主循环（只有一条）\ntask_id = bg.run("pytest")  # 立刻返回\n# ... 继续做别的事 ...\n\n# 下一轮前排空通知\nfor n in bg.drain_notifications():\n    messages.append(user_msg(n["preview"]))',
+          key_point: {
+            zh: '主循环只有一条，并行的是等待，不是主循环本身',
+            en: 'The main loop stays single — what\'s parallel is the waiting, not the loop',
+            ja: 'メインループは1つのまま — 並列なのはループではなく待機'
+          }
+        },
+        {
+          id: 'kc_s13_002',
+          title: { zh: 'background_run 立即返回', en: 'background_run Returns Immediately', ja: 'background_runは即座に返す' },
           icon: '🚀',
           content: {
-            zh: '本章节的学习卡片正在制作中，敬请期待！你可以直接开始测验。',
-            en: 'Knowledge cards for this chapter are being prepared. You can start the quiz directly.',
-            ja: 'この章のカードは準備中です。クイズを始めることができます。'
+            zh: 'background_run 的关键设计是：调用后立即返回一个 task_id，不会阻塞主循环。真正的命令在后台线程里执行。模型拿到 task_id 后就可以继续推进其他工作。',
+            en: 'The key design of background_run: it returns a task_id immediately without blocking the main loop. The actual command runs in a background thread. The model can continue other work with the task_id.',
+            ja: 'background_runの重要な設計：呼び出し後即座にtask_idを返し、メインループをブロックしない。実際のコマンドはバックグラウンドスレッドで実行。モデルはtask_idを持って他の作業を続けられる。'
           },
-          code_example: '',
+          code_example: 'def run(self, command):\n    task_id = new_id()\n    self.tasks[task_id] = {"status": "running"}\n    thread = threading.Thread(\n        target=self._execute,\n        args=(task_id, command),\n    )\n    thread.start()\n    return task_id  # 立刻返回，不阻塞',
           key_point: {
-            zh: '点击下方按钮直接开始测验',
-            en: 'Click below to start the quiz',
-            ja: '下のボタンをクリックしてクイズを開始'
+            zh: 'background_run 立即返回 task_id，主循环不等待',
+            en: 'background_run returns task_id immediately — the main loop never waits',
+            ja: 'background_runは即座にtask_idを返す — メインループは待機しない'
+          }
+        },
+        {
+          id: 'kc_s13_003',
+          title: { zh: '通知队列模式', en: 'Notification Queue Pattern', ja: '通知キューパターン' },
+          icon: '📬',
+          content: {
+            zh: '后台任务完成后不直接把全文塞回上下文——几万行日志会撑爆窗口。更好的做法是：完整输出写磁盘，通知里只放简短摘要，模型真的需要全文时再调 read_file。通知负责提醒，文件负责存原文。',
+            en: 'Don\'t inject full output into context when a task completes — thousands of log lines would overflow. Write full output to disk, put only a brief summary in the notification. The model reads the file when it needs details. Notifications remind; files store.',
+            ja: 'タスク完了時に全出力をコンテキストに注入しない — 数万行のログはウィンドウを溢れさせる。完全な出力はディスクに書き、通知には短い要約のみ。モデルは詳細が必要な時にread_fileで読む。通知は提醒、ファイルは保存。'
+          },
+          code_example: 'notification = {\n    "task_id": "a1b2c3",\n    "status": "completed",\n    "preview": "tests passed (12/12)",\n}\n# 完整输出在 .runtime-tasks/a1b2c3.log',
+          key_point: {
+            zh: '通知只放摘要，完整输出写文件——别把长日志全塞进上下文',
+            en: 'Notifications carry summaries only; full output goes to files',
+            ja: '通知は要約のみ、完全な出力はファイルに — ログをコンテキストに詰め込まない'
+          }
+        },
+        {
+          id: 'kc_s13_004',
+          title: { zh: '排空通知再调模型', en: 'Drain Notifications Before Model Call', ja: 'モデル呼び出し前に通知を排空' },
+          icon: '🧹',
+          content: {
+            zh: '每次调模型之前，先把通知队列排空，把后台结果摘要注入 messages。这样模型在下一轮就会知道哪个任务完成了、是成功还是失败。这是主循环多出的一个标准前置步骤。',
+            en: 'Before each model call, drain the notification queue and inject result summaries into messages. This way the model knows which tasks completed and whether they succeeded. It\'s a standard pre-step added to the main loop.',
+            ja: 'モデル呼び出し前に通知キューを排空し、結果の要約をmessagesに注入。これによりモデルは次のターンでどのタスクが完了し成功/失敗かを把握。メインループに追加される標準的な前処理ステップ。'
+          },
+          code_example: 'def before_model_call(messages):\n    for n in bg.drain_notifications():\n        text = f"[bg:{n[\'task_id\']}] {n[\'status\']}"\n        text += f" - {n[\'preview\']}"\n        messages.append({"role": "user", "content": text})',
+          key_point: {
+            zh: '每次调模型前先排空通知队列，让模型知道后台发生了什么',
+            en: 'Drain notifications before each model call so the model knows what happened',
+            ja: 'モデル呼び出し前に通知を排空し、バックグラウンドの状況をモデルに伝える'
           }
         }
       ]
@@ -858,19 +954,51 @@ module.exports = {
       stage_id: 'stage_s14',
       cards: [
         {
-          id: 'kc_s14_placeholder',
-          title: { zh: '即将推出', en: 'Coming Soon', ja: '近日公開' },
-          icon: '🚀',
+          id: 'kc_s14_001',
+          title: { zh: '调度 = 记住何时开始', en: 'Scheduling = Remembering When to Start', ja: 'スケジューリング = いつ開始するかを記憶' },
+          icon: '🕐',
           content: {
-            zh: '本章节的学习卡片正在制作中，敬请期待！你可以直接开始测验。',
-            en: 'Knowledge cards for this chapter are being prepared. You can start the quiz directly.',
-            ja: 'この章のカードは準備中です。クイズを始めることができます。'
+            zh: '后台任务解决的是"已经启动的慢操作结果什么时候回来"，定时调度解决的是"一件事应该在未来什么时候开始"。调度器做的是"记住未来"，不是"取代主循环"。',
+            en: 'Background tasks solve "when does the result come back"; cron scheduling solves "when should something start in the future." The scheduler remembers the future — it does not replace the main loop.',
+            ja: 'バックグラウンドタスクは「結果がいつ戻るか」を解決、cronスケジューラは「将来いつ開始すべきか」を解決。スケジューラは「未来を記憶する」のであってメインループの代替ではない。'
           },
-          code_example: '',
+          code_example: '# 后台任务：已经在跑，等结果\ntask_id = bg.run("pytest")\n\n# 定时调度：未来某时再开始\nscheduler.create(\n    cron="0 9 * * 1",\n    prompt="Run weekly status report",\n)',
           key_point: {
-            zh: '点击下方按钮直接开始测验',
-            en: 'Click below to start the quiz',
-            ja: '下のボタンをクリックしてクイズを開始'
+            zh: '后台任务是在"等结果"，定时调度是在"等开始"',
+            en: 'Background tasks wait for results; cron scheduling waits for start time',
+            ja: 'バックグラウンドタスクは「結果待ち」、cronスケジューラは「開始待ち」'
+          }
+        },
+        {
+          id: 'kc_s14_002',
+          title: { zh: 'Cron 表达式与记录', en: 'Cron Expression and Record', ja: 'Cron式とレコード' },
+          icon: '📅',
+          content: {
+            zh: 'Cron 用 5 个字段表示时间规则：分 时 日 月 周。调度记录至少要有 id、cron 表达式、触发后要执行的 prompt、是否重复、上次触发时间。last_fired_at 防止短时间内重复触发。',
+            en: 'Cron uses 5 fields: minute hour day month weekday. A schedule record needs: id, cron expression, prompt to inject, recurring flag, and last_fired_at to prevent duplicate triggers.',
+            ja: 'Cronは5フィールド：分 時 日 月 曜日。スケジュールレコードに必要：id、cron式、注入するprompt、繰り返しフラグ、last_fired_at（重複トリガー防止）。'
+          },
+          code_example: 'schedule = {\n    "id": "job_001",\n    "cron": "0 9 * * 1",\n    "prompt": "Run weekly report",\n    "recurring": True,\n    "last_fired_at": None,\n}',
+          key_point: {
+            zh: 'Cron 五个字段表示时间规则，调度记录要有 last_fired_at 防重复触发',
+            en: 'Cron uses five fields for timing; the record needs last_fired_at to prevent re-triggers',
+            ja: 'Cronは5フィールドで時間を表現、レコードにはlast_fired_atで重複トリガーを防止'
+          }
+        },
+        {
+          id: 'kc_s14_003',
+          title: { zh: '定时通知回主循环', en: 'Scheduled Prompts Return to Main Loop', ja: '定時通知はメインループに戻る' },
+          icon: '🔁',
+          content: {
+            zh: '时间到了后，调度器不是直接在后台执行任务，而是把 prompt 放进通知队列。主循环下一轮把它当成新的用户消息喂给模型。定时任务最终还是由模型接手，不是另起一套系统。',
+            en: 'When time is up, the scheduler doesn\'t execute directly — it puts the prompt into the notification queue. The main loop feeds it to the model as a new user message next turn. Scheduled tasks still go through the model, not a separate system.',
+            ja: '時間になるとスケジューラは直接実行せず、promptを通知キューに入れる。メインループは次のターンで新しいユーザーメッセージとしてモデルに渡す。定時タスクもモデルが処理し、別システムではない。'
+          },
+          code_example: 'def check_jobs(self, now):\n    for job in self.jobs:\n        if cron_matches(job["cron"], now):\n            self.queue.put({\n                "type": "scheduled_prompt",\n                "prompt": job["prompt"],\n            })\n            job["last_fired_at"] = now',
+          key_point: {
+            zh: '定时触发后 prompt 进通知队列，最终还是回到同一条主循环',
+            en: 'Scheduled prompts enter the notification queue and return to the same main loop',
+            ja: '定時トリガー後promptは通知キューに入り、同じメインループに戻る'
           }
         }
       ]
