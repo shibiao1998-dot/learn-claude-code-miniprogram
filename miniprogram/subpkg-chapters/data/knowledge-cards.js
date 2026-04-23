@@ -1349,24 +1349,72 @@ module.exports = {
       ]
     },
 
-    // ===== 占位区域：bp01-bp07 =====
+    // ===== bp01-bp07：CLAUDE.md / Commands / Skills / Hooks / Subagents / MCP / Settings =====
     {
       stage_id: 'stage_bp01',
       cards: [
         {
-          id: 'kc_bp01_placeholder',
-          title: { zh: '即将推出', en: 'Coming Soon', ja: '近日公開' },
-          icon: '🚀',
+          id: 'kc_bp01_001',
+          title: { zh: '最高性价比的质量提升手段', en: 'Highest-Leverage Quality Tool', ja: '最もコスパの良い品質向上手段' },
+          icon: '📝',
           content: {
-            zh: '本章节的学习卡片正在制作中，敬请期待！你可以直接开始测验。',
-            en: 'Knowledge cards for this chapter are being prepared. You can start the quiz directly.',
-            ja: 'この章のカードは準備中です。クイズを始めることができます。'
+            zh: '一份结构良好的 CLAUDE.md 是提升 Claude Code 输出质量的最有效方式。把编码标准、项目约定、常见陷阱写进去，Claude 每次会话都能直接读到，不用你反复提醒。',
+            en: 'A well-structured CLAUDE.md is the highest-leverage way to improve Claude Code output. Put coding standards, project conventions, and common pitfalls in it — Claude reads it every session without you repeating yourself.',
+            ja: '構造化されたCLAUDE.mdはClaude Codeの出力品質を向上させる最もコスパの良い方法。コーディング標準、プロジェクト規約、よくある落とし穴を書けば、毎セッションでClaudeが自動的に読み取る。'
           },
-          code_example: '',
+          code_example: '# CLAUDE.md 示例结构\n# ## 编码标准\n# - 使用 TypeScript strict mode\n# - 测试覆盖率 > 80%\n# ## 项目约定\n# - API 路由在 src/routes/\n# - 数据库迁移用 Prisma',
           key_point: {
-            zh: '点击下方按钮直接开始测验',
-            en: 'Click below to start the quiz',
-            ja: '下のボタンをクリックしてクイズを開始'
+            zh: 'CLAUDE.md 是最高性价比的质量提升手段——写一次，每次会话自动生效',
+            en: 'CLAUDE.md is the highest-leverage quality tool — write once, applied every session',
+            ja: 'CLAUDE.mdは最もコスパの良い品質向上手段 — 一度書けば毎セッション自動適用'
+          }
+        },
+        {
+          id: 'kc_bp01_002',
+          title: { zh: '两种加载机制', en: 'Two Loading Mechanisms', ja: '2つの読み込みメカニズム' },
+          icon: '📂',
+          content: {
+            zh: 'Claude Code 用两种方式加载 CLAUDE.md：祖先加载——启动时沿目录树向上找，找到的全部立即加载；后代加载——子目录的 CLAUDE.md 只在你访问该子目录的文件时才懒加载。',
+            en: 'Claude Code loads CLAUDE.md two ways: ancestor loading — walks up the directory tree at startup, loading everything found immediately; descendant loading — subdirectory CLAUDE.md files are lazy-loaded only when you access files in that subdirectory.',
+            ja: 'Claude Codeは2つの方法でCLAUDE.mdを読み込み：祖先ロード — 起動時にディレクトリツリーを上方に辿り全て即座に読み込み；子孫ロード — サブディレクトリのCLAUDE.mdはそのサブディレクトリのファイルにアクセスした時のみ遅延読み込み。'
+          },
+          code_example: '# 祖先加载（启动时立即加载）\n# /project/CLAUDE.md        <- 立即加载\n# /project/../CLAUDE.md     <- 立即加载\n\n# 后代加载（访问时才加载）\n# /project/frontend/CLAUDE.md  <- 懒加载\n# /project/backend/CLAUDE.md   <- 懒加载',
+          key_point: {
+            zh: '祖先目录的 CLAUDE.md 启动时立即加载，子目录的只在访问时才懒加载',
+            en: 'Ancestor CLAUDE.md loads at startup; descendant ones lazy-load only on access',
+            ja: '祖先ディレクトリのCLAUDE.mdは起動時に即座に読み込み、子孫はアクセス時のみ遅延読み込み'
+          }
+        },
+        {
+          id: 'kc_bp01_003',
+          title: { zh: 'Monorepo 分层指令', en: 'Monorepo Layered Instructions', ja: 'Monorepo 階層指示' },
+          icon: '🗂️',
+          content: {
+            zh: '在 monorepo 中，把共享约定放根级 CLAUDE.md（编码标准、提交格式），组件专用指令放组件目录的 CLAUDE.md（框架模式、测试约定）。这样前端开发者不会被后端指令干扰，反之亦然。',
+            en: 'In a monorepo, put shared conventions in root CLAUDE.md (coding standards, commit formats) and component-specific instructions in component CLAUDE.md files (framework patterns, test conventions). Frontend devs won\'t be distracted by backend rules and vice versa.',
+            ja: 'Monorepoでは共有規約をルートCLAUDE.md（コーディング標準、コミット形式）に、コンポーネント固有の指示をコンポーネントのCLAUDE.md（フレームワークパターン、テスト規約）に配置。フロントエンド開発者はバックエンドのルールに邪魔されない。'
+          },
+          code_example: '# /monorepo/\n# ├── CLAUDE.md          <- 共享编码标准\n# ├── frontend/\n# │   └── CLAUDE.md    <- React 专用指令\n# ├── backend/\n# │   └── CLAUDE.md    <- Go 专用指令\n# └── api/\n#     └── CLAUDE.md    <- API 专用指令',
+          key_point: {
+            zh: '根级放共享约定，组件目录放专用指令——各自隔离互不干扰',
+            en: 'Root for shared conventions, component dirs for specific rules — isolated, no interference',
+            ja: 'ルートに共有規約、コンポーネントディレクトリに専用指示 — 隔離して干渉なし'
+          }
+        },
+        {
+          id: 'kc_bp01_004',
+          title: { zh: 'CLAUDE.local.md 存个人偏好', en: 'CLAUDE.local.md for Personal Prefs', ja: 'CLAUDE.local.mdで個人設定' },
+          icon: '🙍',
+          content: {
+            zh: 'CLAUDE.local.md 不会被 git 提交，用来存不该和团队共享的个人偏好：你喜欢的回复风格、你本地的路径配置、你个人的调试习惯。和团队共享的规则放 CLAUDE.md，个人的放 .local.md。',
+            en: 'CLAUDE.local.md is git-ignored — use it for personal preferences that shouldn\'t be shared: your preferred response style, local path configs, personal debugging habits. Team rules go in CLAUDE.md; personal ones in .local.md.',
+            ja: 'CLAUDE.local.mdはgit管理外 — チームと共有すべきでない個人設定に使用：好みの回答スタイル、ローカルパス設定、個人的なデバッグ習慣。チームルールはCLAUDE.mdに、個人設定は.local.mdに。'
+          },
+          code_example: '# CLAUDE.md（团队共享，提交到 git）\n# - 使用 conventional commits\n# - PR 必须有 reviewer\n\n# CLAUDE.local.md（个人偏好，不提交）\n# - 回复用中文\n# - 本地数据库端口 5433',
+          key_point: {
+            zh: '团队规则放 CLAUDE.md 提交到 git，个人偏好放 CLAUDE.local.md 不提交',
+            en: 'Team rules in CLAUDE.md (committed); personal prefs in CLAUDE.local.md (git-ignored)',
+            ja: 'チームルールはCLAUDE.md（コミット）、個人設定はCLAUDE.local.md（git管理外）'
           }
         }
       ]
@@ -1375,19 +1423,51 @@ module.exports = {
       stage_id: 'stage_bp02',
       cards: [
         {
-          id: 'kc_bp02_placeholder',
-          title: { zh: '即将推出', en: 'Coming Soon', ja: '近日公開' },
-          icon: '🚀',
+          id: 'kc_bp02_001',
+          title: { zh: 'Command = frontmatter + 正文', en: 'Command = frontmatter + body', ja: 'Command = frontmatter + 本文' },
+          icon: '📄',
           content: {
-            zh: '本章节的学习卡片正在制作中，敬请期待！你可以直接开始测验。',
-            en: 'Knowledge cards for this chapter are being prepared. You can start the quiz directly.',
-            ja: 'この章のカードは準備中です。クイズを始めることができます。'
+            zh: 'Claude Code 的自定义命令就是一个 Markdown 文件：顶部 YAML frontmatter 定义元数据（名称、描述、权限），正文就是命令的 prompt。用 /命令名 触发。放在 .claude/commands/ 目录下。',
+            en: 'A custom Claude Code command is a Markdown file: YAML frontmatter at top defines metadata (name, description, permissions), body is the command prompt. Triggered via /command-name. Lives in .claude/commands/ directory.',
+            ja: 'Claude Codeのカスタムコマンドはマークダウンファイル：上部のYAML frontmatterでメタデータ（名前、説明、権限）を定義、本文がコマンドのprompt。/コマンド名で起動。.claude/commands/ディレクトリに配置。'
           },
-          code_example: '',
+          code_example: '# .claude/commands/review.md\n# ---\n# name: review\n# description: Review current changes\n# allowed-tools: Bash, Read\n# ---\n# Review the git diff and suggest improvements.',
           key_point: {
-            zh: '点击下方按钮直接开始测验',
-            en: 'Click below to start the quiz',
-            ja: '下のボタンをクリックしてクイズを開始'
+            zh: 'Command = Markdown 文件，frontmatter 定义元数据，正文就是 prompt',
+            en: 'Command = Markdown file; frontmatter for metadata, body is the prompt',
+            ja: 'Command = マークダウンファイル、frontmatterでメタデータ、本文がprompt'
+          }
+        },
+        {
+          id: 'kc_bp02_002',
+          title: { zh: '13 个关键 frontmatter 字段', en: '13 Key frontmatter Fields', ja: '13の重要frontmatterフィールド' },
+          icon: '🔧',
+          content: {
+            zh: '最常用的字段：name（命令名）、description（描述，用于自动补全）、allowed-tools（无需确认就能用的工具）、model（指定用哪个模型）、context: fork（在隔离子 agent 中运行）。其他字段按需使用。',
+            en: 'Key fields: name (command name), description (for autocomplete), allowed-tools (tools usable without prompts), model (which model to use), context: fork (run in isolated subagent). Use other fields as needed.',
+            ja: '主要フィールド：name（コマンド名）、description（自動補完用）、allowed-tools（確認なしで使えるツール）、model（使用モデル指定）、context: fork（隔離サブエージェントで実行）。その他は必要に応じて使用。'
+          },
+          code_example: '# 关键 frontmatter 字段\n# name: "review"            命令名\n# description: "..."        自动补全描述\n# allowed-tools: "Bash,Read" 免确认工具\n# model: "sonnet"           指定模型\n# context: "fork"           隔离运行',
+          key_point: {
+            zh: '最常用：name、description、allowed-tools、model、context',
+            en: 'Most used: name, description, allowed-tools, model, context',
+            ja: '最もよく使う：name、description、allowed-tools、model、context'
+          }
+        },
+        {
+          id: 'kc_bp02_003',
+          title: { zh: '69 个内置命令分 8 类', en: '69 Built-in Commands in 8 Categories', ja: '69の組み込みコマンドが8カテゴリ' },
+          icon: '📚',
+          content: {
+            zh: 'Claude Code 内置 69 个命令，分为 8 大类：Auth（登录登出）、Config（主题/模型/权限设置）、Context（token 使用量/上下文可视化）、Debug（诊断/反馈）、Edit（文件操作）、File（项目管理）、Git（版本控制）、Workflow（任务/代理编排）。',
+            en: 'Claude Code has 69 built-in commands in 8 categories: Auth (login/logout), Config (theme/model/permissions), Context (token usage/visualization), Debug (diagnostics/feedback), Edit (file ops), File (project management), Git (version control), Workflow (task/agent orchestration).',
+            ja: 'Claude Codeには69の組み込みコマンドが8カテゴリ：Auth（ログイン/ログアウト）、Config（テーマ/モデル/権限）、Context（トークン使用量/可視化）、Debug（診断/フィードバック）、Edit（ファイル操作）、File（プロジェクト管理）、Git（バージョン管理）、Workflow（タスク/エージェント編成）。'
+          },
+          code_example: 'COMMAND_CATEGORIES = {\n    "Auth": 5,       # 登录/登出\n    "Config": 11,    # 主题/模型/权限\n    "Context": 7,    # token/上下文\n    "Debug": 4,      # 诊断/反馈\n    "Edit": 8,       # 文件操作\n    "File": 12,      # 项目管理\n    "Git": 10,       # 版本控制\n    "Workflow": 12,  # 任务/代理\n}',
+          key_point: {
+            zh: '69 个内置命令分 8 类，从登录到代理编排全覆盖',
+            en: '69 built-in commands in 8 categories, from login to agent orchestration',
+            ja: '69の組み込みコマンドが8カテゴリ、ログインからエージェント編成まで網羅'
           }
         }
       ]
@@ -1396,19 +1476,51 @@ module.exports = {
       stage_id: 'stage_bp03',
       cards: [
         {
-          id: 'kc_bp03_placeholder',
-          title: { zh: '即将推出', en: 'Coming Soon', ja: '近日公開' },
-          icon: '🚀',
+          id: 'kc_bp03_001',
+          title: { zh: 'Skill vs Command', en: 'Skill vs Command', ja: 'Skill vs Command' },
+          icon: '🧠',
           content: {
-            zh: '本章节的学习卡片正在制作中，敬请期待！你可以直接开始测验。',
-            en: 'Knowledge cards for this chapter are being prepared. You can start the quiz directly.',
-            ja: 'この章のカードは準備中です。クイズを始めることができます。'
+            zh: 'Skill 和 Command 结构很像（都是 Markdown + frontmatter），但 Skill 多了一个关键能力：可以被 Claude 自动发现和调用。Command 需要用户手动输入 /名字 触发，Skill 可以在 Claude 判断需要时自动激活。',
+            en: 'Skills and Commands have similar structure (Markdown + frontmatter), but Skills have one key extra ability: auto-discovery. Commands need manual /name triggers; Skills can activate automatically when Claude judges they\'re needed.',
+            ja: 'SkillとCommandは似た構造（Markdown + frontmatter）だが、Skillには重要な追加能力：自動発見。Commandはユーザーが手動で/名前で起動、SkillはClaudeが必要と判断した時に自動的にアクティブ化可能。'
           },
-          code_example: '',
+          code_example: '# Command: 用户手动触发\n# /review -> 执行 review.md\n\n# Skill: Claude 自动发现\n# description 字段决定何时触发\n# Claude 判断"需要调试" -> 自动加载 debug skill',
           key_point: {
-            zh: '点击下方按钮直接开始测验',
-            en: 'Click below to start the quiz',
-            ja: '下のボタンをクリックしてクイズを開始'
+            zh: 'Command 要手动触发，Skill 能被 Claude 自动发现和调用',
+            en: 'Commands need manual triggers; Skills can be auto-discovered and invoked by Claude',
+            ja: 'Commandは手動起動、SkillはClaudeが自動発見して呼び出せる'
+          }
+        },
+        {
+          id: 'kc_bp03_002',
+          title: { zh: 'description 决定触发时机', en: 'description Determines Trigger Timing', ja: 'descriptionが起動タイミングを決定' },
+          icon: '🎯',
+          content: {
+            zh: 'Skill 的 description 字段不只是给人看的说明——它是 Claude 判断"要不要自动加载这个 skill"的核心依据。description 写得越精准，Claude 在正确时机激活的概率越高。模糊的 description 会导致不该用时乱用。',
+            en: 'A Skill\'s description is not just documentation — it\'s the primary signal Claude uses to decide "should I auto-load this skill." The more precise the description, the higher the chance of correct activation timing. Vague descriptions lead to unwanted activations.',
+            ja: 'Skillのdescriptionは単なる説明ではなく、Claudeが「このskillを自動ロードすべきか」を判断する主要シグナル。descriptionが正確なほど正しいタイミングでの起動確率が上がる。曖昧なdescriptionは不要な起動を招く。'
+          },
+          code_example: '# 好的 description: 精准触发\n# description: "Use when debugging test failures\n#   or unexpected error messages"\n\n# 差的 description: 到处乱触发\n# description: "A helpful debugging tool"',
+          key_point: {
+            zh: 'description 是 Claude 判断何时激活 Skill 的核心——写得精准才能触发对',
+            en: 'description is how Claude decides when to activate — precision determines correct triggering',
+            ja: 'descriptionはClaudeがSkillをいつ起動するか判断する核心 — 精度が正しい起動を決める'
+          }
+        },
+        {
+          id: 'kc_bp03_003',
+          title: { zh: '5 个官方捆绑技能', en: '5 Official Bundled Skills', ja: '5つの公式バンドルスキル' },
+          icon: '🎁',
+          content: {
+            zh: 'Claude Code 自带 5 个官方 Skill：simplify（审查代码质量）、batch（批量处理文件）、debug（调试失败命令）、loop（定时重复执行）、claude-api（构建 Anthropic SDK 应用）。可以直接使用，也可以作为自定义 Skill 的参考模板。',
+            en: 'Claude Code ships with 5 official Skills: simplify (review code quality), batch (process files in bulk), debug (debug failed commands), loop (repeat on interval), claude-api (build Anthropic SDK apps). Use directly or as templates for custom Skills.',
+            ja: 'Claude Codeには5つの公式Skill：simplify（コード品質レビュー）、batch（ファイル一括処理）、debug（失敗コマンドのデバッグ）、loop（定期繰り返し実行）、claude-api（Anthropic SDKアプリ構築）。直接使用やカスタムSkillのテンプレートとして活用可能。'
+          },
+          code_example: 'OFFICIAL_SKILLS = [\n    "simplify",   # 审查代码质量和重复\n    "batch",      # 批量对多文件运行命令\n    "debug",      # 调试失败的命令\n    "loop",       # 按间隔重复运行\n    "claude-api", # 构建 Anthropic SDK 应用\n]',
+          key_point: {
+            zh: '5 个官方 Skill：simplify / batch / debug / loop / claude-api',
+            en: '5 official Skills: simplify / batch / debug / loop / claude-api',
+            ja: '5つの公式Skill：simplify / batch / debug / loop / claude-api'
           }
         }
       ]
@@ -1417,19 +1529,67 @@ module.exports = {
       stage_id: 'stage_bp04',
       cards: [
         {
-          id: 'kc_bp04_placeholder',
-          title: { zh: '即将推出', en: 'Coming Soon', ja: '近日公開' },
-          icon: '🚀',
+          id: 'kc_bp04_001',
+          title: { zh: '四种 Hook 类型', en: 'Four Hook Types', ja: '4種類のHookタイプ' },
+          icon: '🔌',
           content: {
-            zh: '本章节的学习卡片正在制作中，敬请期待！你可以直接开始测验。',
-            en: 'Knowledge cards for this chapter are being prepared. You can start the quiz directly.',
-            ja: 'この章のカードは準備中です。クイズを始めることができます。'
+            zh: 'Claude Code 支持四种 Hook 类型：command（执行 shell 命令）、prompt（让 LLM 处理）、agent（让子代理处理）、http（发 POST 请求到 URL）。根据需求选择——简单验证用 command，复杂判断用 prompt 或 agent。',
+            en: 'Claude Code supports four hook types: command (run shell command), prompt (LLM-processed), agent (handled by subagent), http (POST to URL endpoint). Choose based on needs — command for simple validation, prompt/agent for complex judgment.',
+            ja: 'Claude Codeは4種類のHookをサポート：command（シェルコマンド実行）、prompt（LLM処理）、agent（サブエージェント処理）、http（URLにPOSTリクエスト）。用途に応じて選択 — 簡単な検証はcommand、複雑な判断はprompt/agent。'
           },
-          code_example: '',
+          code_example: '# settings.json 中的 hook 配置\nhooks = {\n    "PreToolUse": [{\n        "matcher": "Bash",\n        "hooks": [\n            {"type": "command", "command": "./validate.sh"},\n            {"type": "prompt", "prompt": "Check safety"},\n        ]\n    }]\n}',
           key_point: {
-            zh: '点击下方按钮直接开始测验',
-            en: 'Click below to start the quiz',
-            ja: '下のボタンをクリックしてクイズを開始'
+            zh: '四种类型：command / prompt / agent / http——按需求复杂度选择',
+            en: 'Four types: command / prompt / agent / http — choose by complexity',
+            ja: '4種類：command / prompt / agent / http — 複雑さに応じて選択'
+          }
+        },
+        {
+          id: 'kc_bp04_002',
+          title: { zh: '三种事件频率', en: 'Three Event Frequencies', ja: '3種類のイベント頻度' },
+          icon: '⏱️',
+          content: {
+            zh: 'Hook 事件按触发频率分三级：每会话一次（SessionStart/SessionEnd），每轮一次（UserPromptSubmit/Stop），每次工具调用（PreToolUse/PostToolUse）。频率越高的 hook 越要注意性能开销。',
+            en: 'Hook events come in three frequencies: per-session (SessionStart/SessionEnd), per-turn (UserPromptSubmit/Stop), per-tool-call (PreToolUse/PostToolUse). Higher frequency hooks need more attention to performance overhead.',
+            ja: 'Hookイベントは3つの頻度：セッションごと（SessionStart/SessionEnd）、ターンごと（UserPromptSubmit/Stop）、ツール呼び出しごと（PreToolUse/PostToolUse）。高頻度のhookほどパフォーマンスへの注意が必要。'
+          },
+          code_example: 'EVENT_FREQUENCY = {\n    "per_session": ["SessionStart", "SessionEnd"],\n    "per_turn":    ["UserPromptSubmit", "Stop"],\n    "per_tool":    ["PreToolUse", "PostToolUse"],\n}',
+          key_point: {
+            zh: '三种频率：每会话 / 每轮 / 每次工具调用——频率越高越要注意性能',
+            en: 'Three frequencies: per-session / per-turn / per-tool-call — higher frequency needs more performance care',
+            ja: '3種の頻度：セッションごと / ターンごと / ツール呼び出しごと — 高頻度ほどパフォーマンスに注意'
+          }
+        },
+        {
+          id: 'kc_bp04_003',
+          title: { zh: '退出码语义', en: 'Exit Code Semantics', ja: '終了コードのセマンティクス' },
+          icon: '🔢',
+          content: {
+            zh: 'Hook 的退出码决定系统行为：0 表示成功（解析 stdout 的 JSON 输出），2 表示阻断性错误（stderr 内容反馈给 Claude），其他值表示非阻断性错误（记录通知后继续）。只有退出码 2 能阻止操作。',
+            en: 'Hook exit codes determine system behavior: 0 = success (parse stdout JSON), 2 = blocking error (stderr fed to Claude), other = non-blocking error (log notification, continue). Only exit code 2 can block an operation.',
+            ja: 'Hookの終了コードがシステム動作を決定：0は成功（stdoutのJSONを解析）、2はブロッキングエラー（stderrをClaudeにフィード）、その他は非ブロッキングエラー（通知を記録し続行）。操作をブロックできるのは終了コード2のみ。'
+          },
+          code_example: 'EXIT_CODES = {\n    0: "success - parse stdout JSON",\n    2: "blocking error - stderr to Claude",\n    # other: "non-blocking - log and continue",\n}\n# 只有 exit 2 能阻止当前操作',
+          key_point: {
+            zh: '退出码 0 成功、2 阻断、其他继续——只有 2 能真正阻止操作',
+            en: 'Exit 0 = success, 2 = block, other = continue — only 2 actually blocks',
+            ja: '終了コード0は成功、2はブロック、その他は続行 — 操作を阻止できるのは2のみ'
+          }
+        },
+        {
+          id: 'kc_bp04_004',
+          title: { zh: 'Matcher 配置格式', en: 'Matcher Configuration Format', ja: 'Matcher設定フォーマット' },
+          icon: '⚙️',
+          content: {
+            zh: 'Hook 通过 matcher 字段决定何时触发。matcher 匹配工具名（如 "Bash"、"Write|Edit"）。配置在 settings.json 的 hooks 字段下，来源可以是 User/Project/Local/Plugin 四个层级。',
+            en: 'Hooks use the matcher field to decide when to trigger. Matchers match tool names (e.g., "Bash", "Write|Edit"). Configured under the hooks field in settings.json, with sources from four levels: User/Project/Local/Plugin.',
+            ja: 'Hookはmatcherフィールドで発火タイミングを決定。matcherはツール名にマッチ（例："Bash"、"Write|Edit"）。settings.jsonのhooksフィールドで設定、ソースは4レベル：User/Project/Local/Plugin。'
+          },
+          code_example: '# settings.json\n{"hooks": {\n    "PostToolUse": [{\n        "matcher": "Write|Edit",\n        "hooks": [{\n            "type": "command",\n            "command": "./scripts/lint-on-save.sh"\n        }]\n    }]\n}}',
+          key_point: {
+            zh: 'matcher 匹配工具名决定何时触发，配置在 settings.json 中',
+            en: 'Matchers match tool names to decide when to fire; configured in settings.json',
+            ja: 'matcherはツール名にマッチして発火タイミングを決定、settings.jsonで設定'
           }
         }
       ]
@@ -1438,19 +1598,67 @@ module.exports = {
       stage_id: 'stage_bp05',
       cards: [
         {
-          id: 'kc_bp05_placeholder',
-          title: { zh: '即将推出', en: 'Coming Soon', ja: '近日公開' },
-          icon: '🚀',
+          id: 'kc_bp05_001',
+          title: { zh: '子代理 = 专用 AI 代理', en: 'Subagent = Specialized AI Agent', ja: 'サブエージェント = 専用AIエージェント' },
+          icon: '🤖',
           content: {
-            zh: '本章节的学习卡片正在制作中，敬请期待！你可以直接开始测验。',
-            en: 'Knowledge cards for this chapter are being prepared. You can start the quiz directly.',
-            ja: 'この章のカードは準備中です。クイズを始めることができます。'
+            zh: '子代理是主会话中生成的专用 AI 代理，每个可以有自己的工具集、模型、权限模式和生命周期 Hook。通过 .claude/agents/ 目录下的 Markdown 文件定义，YAML frontmatter 控制行为。',
+            en: 'Subagents are specialized AI agents spawned within the main session. Each can have its own tools, model, permission mode, and lifecycle hooks. Defined via Markdown files in .claude/agents/ with YAML frontmatter controlling behavior.',
+            ja: 'サブエージェントはメインセッション内で生成される専用AIエージェント。各自のツールセット、モデル、権限モード、ライフサイクルhookを持てる。.claude/agents/のマークダウンファイルで定義、YAML frontmatterで動作を制御。'
           },
-          code_example: '',
+          code_example: '# .claude/agents/reviewer.md\n# ---\n# name: reviewer\n# tools: Read, Bash\n# model: sonnet\n# permissionMode: plan\n# ---\n# Review code changes for quality issues.',
           key_point: {
-            zh: '点击下方按钮直接开始测验',
-            en: 'Click below to start the quiz',
-            ja: '下のボタンをクリックしてクイズを開始'
+            zh: '子代理 = 专用 AI 代理，有自己的工具集、模型和权限',
+            en: 'Subagent = specialized AI agent with its own tools, model, and permissions',
+            ja: 'サブエージェント = 専用AIエージェント、独自のツール・モデル・権限を持つ'
+          }
+        },
+        {
+          id: 'kc_bp05_002',
+          title: { zh: '16 个 frontmatter 字段', en: '16 frontmatter Fields', ja: '16のfrontmatterフィールド' },
+          icon: '📋',
+          content: {
+            zh: '最关键的几个：tools（允许哪些工具）、model（用哪个模型）、permissionMode（权限模式）、isolation: worktree（在独立工作树中运行）、maxTurns（最大轮数限制）、skills（预加载的技能）。',
+            en: 'Key fields: tools (which tools allowed), model (which model), permissionMode (permission level), isolation: worktree (run in isolated worktree), maxTurns (max turn limit), skills (preloaded skills).',
+            ja: '主要フィールド：tools（許可ツール）、model（使用モデル）、permissionMode（権限レベル）、isolation: worktree（隔離ワークツリーで実行）、maxTurns（最大ターン制限）、skills（プリロードスキル）。'
+          },
+          code_example: '# 关键 frontmatter\n# tools: "Read, Write, Edit, Bash"\n# model: "sonnet"\n# permissionMode: "acceptEdits"\n# isolation: "worktree"\n# maxTurns: 20\n# skills: ["debug", "simplify"]',
+          key_point: {
+            zh: '最关键：tools / model / permissionMode / isolation / maxTurns / skills',
+            en: 'Most important: tools / model / permissionMode / isolation / maxTurns / skills',
+            ja: '最重要：tools / model / permissionMode / isolation / maxTurns / skills'
+          }
+        },
+        {
+          id: 'kc_bp05_003',
+          title: { zh: '5 个内置代理类型', en: '5 Built-in Agent Types', ja: '5つの組み込みエージェントタイプ' },
+          icon: '🗂️',
+          content: {
+            zh: 'Claude Code 自带 5 个内置代理：general-purpose（通用，所有工具）、Explore（快速搜索，只读，用 haiku）、Plan（规划研究，只读）、statusline-setup（状态栏配置）、claude-code-guide（回答 Claude Code 问题）。',
+            en: '5 built-in agents: general-purpose (all tools, full capabilities), Explore (fast search, read-only, haiku model), Plan (pre-planning research, read-only), statusline-setup (status bar config), claude-code-guide (answers Claude Code questions).',
+            ja: '5つの組み込みエージェント：general-purpose（全ツール）、Explore（高速検索、読み取りのみ、haikuモデル）、Plan（計画研究、読み取りのみ）、statusline-setup（ステータスバー設定）、claude-code-guide（Claude Codeの質問回答）。'
+          },
+          code_example: 'BUILT_IN_AGENTS = {\n    "general-purpose": "all tools, inherit model",\n    "Explore":  "read-only, haiku, fast search",\n    "Plan":     "read-only, inherit, research",\n    "statusline-setup": "Read+Edit, sonnet",\n    "claude-code-guide": "read-only, haiku",\n}',
+          key_point: {
+            zh: '5 个内置代理各有分工——通用 / 搜索 / 规划 / 配置 / 问答',
+            en: '5 built-in agents, each specialized — general / search / planning / config / Q&A',
+            ja: '5つの組み込みエージェントは各自専門 — 汎用 / 検索 / 計画 / 設定 / Q&A'
+          }
+        },
+        {
+          id: 'kc_bp05_004',
+          title: { zh: 'Command→Agent→Skill 编排', en: 'Command→Agent→Skill Orchestration', ja: 'Command→Agent→Skill編成' },
+          icon: '🏗️',
+          content: {
+            zh: 'Claude Code 的三层扩展架构形成编排链：Command 定义入口（用户用 /名字 触发），Agent 定义执行者（有自己的工具和模型），Skill 定义知识（可以被预加载到 Agent 上下文中）。三层组合实现复杂工作流。',
+            en: 'Claude Code\'s three-layer extension architecture forms an orchestration chain: Commands define entry points (/name triggers), Agents define executors (own tools and model), Skills define knowledge (preloadable into agent context). Three layers combine for complex workflows.',
+            ja: 'Claude Codeの3層拡張アーキテクチャが編成チェーンを形成：Commandはエントリポイント（/名前でトリガー）、Agentは実行者（独自ツールとモデル）、Skillは知識（エージェントコンテキストにプリロード可能）。3層の組み合わせで複雑なワークフローを実現。'
+          },
+          code_example: '# 编排链\n# Command: /deploy\n#   -> Agent: deploy-agent (tools: Bash, Write)\n#       -> Skill: pre-deploy-checklist\n#       -> Skill: rollback-procedure\n# 三层组合 = 复杂工作流',
+          key_point: {
+            zh: 'Command 定义入口、Agent 定义执行者、Skill 定义知识——三层组合',
+            en: 'Command = entry point, Agent = executor, Skill = knowledge — three layers combined',
+            ja: 'Command = エントリポイント、Agent = 実行者、Skill = 知識 — 3層の組み合わせ'
           }
         }
       ]
@@ -1459,19 +1667,51 @@ module.exports = {
       stage_id: 'stage_bp06',
       cards: [
         {
-          id: 'kc_bp06_placeholder',
-          title: { zh: '即将推出', en: 'Coming Soon', ja: '近日公開' },
-          icon: '🚀',
+          id: 'kc_bp06_001',
+          title: { zh: '推荐日常 MCP 服务器', en: 'Recommended Daily MCP Servers', ja: '推奨日常MCPサーバー' },
+          icon: '🛠️',
           content: {
-            zh: '本章节的学习卡片正在制作中，敬请期待！你可以直接开始测验。',
-            en: 'Knowledge cards for this chapter are being prepared. You can start the quiz directly.',
-            ja: 'この章のカードは準備中です。クイズを始めることができます。'
+            zh: '日常最实用的 5 个 MCP 服务器：Context7（拉取最新库文档避免幻觉 API）、Playwright（浏览器自动化测试）、Claude in Chrome（连接真实 Chrome 调试）、DeepWiki（获取 GitHub 仓库文档）、Excalidraw（生成架构图）。',
+            en: '5 most practical daily MCP servers: Context7 (pull latest library docs, avoid hallucinated APIs), Playwright (browser automation testing), Claude in Chrome (connect real Chrome for debugging), DeepWiki (GitHub repo documentation), Excalidraw (generate architecture diagrams).',
+            ja: '日常最も実用的な5つのMCPサーバー：Context7（最新ライブラリドキュメント取得、API幻覚回避）、Playwright（ブラウザ自動化テスト）、Claude in Chrome（実際のChrome接続デバッグ）、DeepWiki（GitHubリポジトリドキュメント）、Excalidraw（アーキテクチャ図生成）。'
           },
-          code_example: '',
+          code_example: 'RECOMMENDED_MCP = [\n    "context7",         # 最新库文档\n    "playwright",       # 浏览器自动化\n    "claude-in-chrome", # Chrome 调试\n    "deepwiki",         # GitHub 仓库文档\n    "excalidraw",       # 架构图生成\n]\n# 研究 -> 调试 -> 文档化',
           key_point: {
-            zh: '点击下方按钮直接开始测验',
-            en: 'Click below to start the quiz',
-            ja: '下のボタンをクリックしてクイズを開始'
+            zh: '日常 5 个就够：Context7 / Playwright / Chrome / DeepWiki / Excalidraw',
+            en: '5 daily servers: Context7 / Playwright / Chrome / DeepWiki / Excalidraw',
+            ja: '日常は5つで十分：Context7 / Playwright / Chrome / DeepWiki / Excalidraw'
+          }
+        },
+        {
+          id: 'kc_bp06_002',
+          title: { zh: '.mcp.json 配置', en: '.mcp.json Configuration', ja: '.mcp.json設定' },
+          icon: '⚙️',
+          content: {
+            zh: 'MCP 服务器在 .mcp.json 中配置。两种传输方式：stdio（启动本地进程，如 npx 命令）和 http（连接远程 URL）。用环境变量引用密钥，避免在配置文件中硬编码 API Key。',
+            en: 'MCP servers are configured in .mcp.json. Two transport types: stdio (spawn local process, e.g., npx commands) and http (connect to remote URL). Use environment variables for secrets to avoid hardcoding API keys in config.',
+            ja: 'MCPサーバーは.mcp.jsonで設定。2つの転送方式：stdio（ローカルプロセス起動、npxコマンドなど）とhttp（リモートURL接続）。環境変数でシークレットを参照し、設定ファイルにAPIキーをハードコードしない。'
+          },
+          code_example: '# .mcp.json\n{"mcpServers": {\n    "context7": {\n        "command": "npx",\n        "args": ["-y", "@upstash/context7-mcp"]\n    },\n    "remote": {\n        "type": "http",\n        "url": "https://mcp.example.com/mcp"\n    }\n}}',
+          key_point: {
+            zh: '.mcp.json 配置服务器，stdio 接本地进程，http 接远程 URL',
+            en: '.mcp.json configures servers — stdio for local processes, http for remote URLs',
+            ja: '.mcp.jsonでサーバー設定 — stdioはローカルプロセス、httpはリモートURL'
+          }
+        },
+        {
+          id: 'kc_bp06_003',
+          title: { zh: 'Settings MCP 审批控制', en: 'Settings MCP Approval Control', ja: 'Settings MCP承認制御' },
+          icon: '🛡️',
+          content: {
+            zh: '在 settings.json 中可以精细控制 MCP 服务器的审批：enableAllProjectMcpServers 自动批准所有服务器，enabledMcpjsonServers 按名称白名单批准，disabledMcpjsonServers 按名称黑名单拒绝。受管设置还能强制全组织策略。',
+            en: 'settings.json provides fine-grained MCP server approval: enableAllProjectMcpServers auto-approves all, enabledMcpjsonServers whitelists by name, disabledMcpjsonServers blacklists by name. Managed settings can enforce organization-wide policies.',
+            ja: 'settings.jsonでMCPサーバーの承認を細かく制御：enableAllProjectMcpServersで全自動承認、enabledMcpjsonServersで名前指定ホワイトリスト、disabledMcpjsonServersで名前指定ブラックリスト。受管設定で組織全体のポリシーを強制可能。'
+          },
+          code_example: '# settings.json\n{"enableAllProjectMcpServers": False,\n "enabledMcpjsonServers": [\n     "context7", "playwright"\n ],\n "disabledMcpjsonServers": [\n     "untrusted-server"\n ]}',
+          key_point: {
+            zh: '白名单批准、黑名单拒绝、全量批准——三种粒度控制 MCP 服务器',
+            en: 'Whitelist, blacklist, or approve-all — three granularity levels for MCP server control',
+            ja: 'ホワイトリスト、ブラックリスト、全承認 — 3つの粒度でMCPサーバーを制御'
           }
         }
       ]
@@ -1480,19 +1720,67 @@ module.exports = {
       stage_id: 'stage_bp07',
       cards: [
         {
-          id: 'kc_bp07_placeholder',
-          title: { zh: '即将推出', en: 'Coming Soon', ja: '近日公開' },
+          id: 'kc_bp07_001',
+          title: { zh: '五层设置优先级', en: 'Five-Layer Settings Priority', ja: '5層設定優先度' },
+          icon: '🏔️',
+          content: {
+            zh: '设置按优先级从高到低：受管设置（组织强制不可覆盖）→ 命令行参数（单次会话）→ .claude/settings.local.json（个人项目）→ .claude/settings.json（团队共享）→ ~/.claude/settings.json（全局默认）。deny 规则具有最高安全优先级。',
+            en: 'Settings priority from high to low: managed settings (org-enforced, cannot override) → CLI args (single session) → .claude/settings.local.json (personal project) → .claude/settings.json (team shared) → ~/.claude/settings.json (global default). Deny rules have highest security priority.',
+            ja: '設定優先度（高→低）：受管設定（組織強制、上書き不可）→ CLIパラメータ（単一セッション）→ .claude/settings.local.json（個人プロジェクト）→ .claude/settings.json（チーム共有）→ ~/.claude/settings.json（グローバルデフォルト）。denyルールは最高セキュリティ優先度。'
+          },
+          code_example: 'SETTINGS_PRIORITY = [\n    "managed",         # 组织强制，不可覆盖\n    "cli_args",        # 命令行参数\n    "settings.local",  # 个人项目设置\n    "settings.json",   # 团队共享设置\n    "~/.claude/",      # 全局默认\n]',
+          key_point: {
+            zh: '五层优先级：受管 → CLI → local → project → global，deny 不可覆盖',
+            en: 'Five layers: managed → CLI → local → project → global; deny cannot be overridden',
+            ja: '5層の優先度：受管 → CLI → local → project → global、denyは上書き不可'
+          }
+        },
+        {
+          id: 'kc_bp07_002',
+          title: { zh: '六种权限模式', en: 'Six Permission Modes', ja: '6つの権限モード' },
+          icon: '🔑',
+          content: {
+            zh: '六种权限模式满足不同场景：default（标准检查带提示）、acceptEdits（自动接受编辑）、dontAsk（未预批准则自动拒绝）、bypassPermissions（跳过所有检查，危险）、auto（AI 分类器替代手动提示）、plan（只读探索）。',
+            en: 'Six permission modes for different scenarios: default (standard checks with prompts), acceptEdits (auto-accept edits), dontAsk (auto-reject unless pre-approved), bypassPermissions (skip all checks, dangerous), auto (AI classifier replaces prompts), plan (read-only exploration).',
+            ja: '6つの権限モード：default（標準チェック＋プロンプト）、acceptEdits（編集自動承認）、dontAsk（事前承認なしは自動拒否）、bypassPermissions（全チェックスキップ、危険）、auto（AIクラシファイアでプロンプト代替）、plan（読み取り専用探索）。'
+          },
+          code_example: 'PERMISSION_MODES = {\n    "default":     "standard checks with prompts",\n    "acceptEdits": "auto-accept file edits",\n    "dontAsk":     "reject unless pre-approved",\n    "bypass":      "skip all checks (dangerous)",\n    "auto":        "AI classifier decides",\n    "plan":        "read-only exploration",\n}',
+          key_point: {
+            zh: '六种模式从最谨慎到最自由：plan → default → acceptEdits → auto → bypass',
+            en: 'Six modes from cautious to liberal: plan → default → acceptEdits → auto → bypass',
+            ja: '6モード、慎重から自由へ：plan → default → acceptEdits → auto → bypass'
+          }
+        },
+        {
+          id: 'kc_bp07_003',
+          title: { zh: '工具权限语法', en: 'Tool Permission Syntax', ja: 'ツール権限構文' },
+          icon: '📝',
+          content: {
+            zh: '权限规则用工具名加括号模式表示：Bash(npm run *) 允许 npm 命令，Read(.env) 拦截读取 .env，Edit(src/**) 允许编辑 src 下所有文件。求值顺序：先 deny，再 ask，最后 allow，第一个匹配的生效。',
+            en: 'Permission rules use tool name plus pattern: Bash(npm run *) allows npm commands, Read(.env) blocks reading .env, Edit(src/**) allows editing under src. Evaluation order: deny first, then ask, then allow — first match wins.',
+            ja: '権限ルールはツール名+パターン：Bash(npm run *)でnpmコマンド許可、Read(.env)で.envの読み取りブロック、Edit(src/**)でsrc以下の編集許可。評価順序：deny → ask → allow、最初のマッチが有効。'
+          },
+          code_example: 'permissions = {\n    "deny":  ["Read(.env)", "Bash(curl *)"],\n    "ask":   ["Bash(rm *)", "Bash(git push *)"],\n    "allow": ["Edit(*)", "Bash(npm run *)",\n              "Bash(git *)"],\n}\n# 求值顺序: deny -> ask -> allow',
+          key_point: {
+            zh: 'Bash(pattern) / Read(path) / Edit(path) 语法，deny→ask→allow 顺序求值',
+            en: 'Bash(pattern) / Read(path) / Edit(path) syntax, evaluated deny → ask → allow',
+            ja: 'Bash(pattern) / Read(path) / Edit(path)構文、deny → ask → allow の順で評価'
+          }
+        },
+        {
+          id: 'kc_bp07_004',
+          title: { zh: 'CLI 启动标志', en: 'CLI Launch Flags', ja: 'CLI起動フラグ' },
           icon: '🚀',
           content: {
-            zh: '本章节的学习卡片正在制作中，敬请期待！你可以直接开始测验。',
-            en: 'Knowledge cards for this chapter are being prepared. You can start the quiz directly.',
-            ja: 'この章のカードは準備中です。クイズを始めることができます。'
+            zh: '常用启动标志：--model 指定模型，--permission-mode 设置权限模式，--agent 用自定义代理启动，--print 非交互式单次输出，--resume 恢复之前的会话。这些标志优先级高于 settings.json 但低于受管设置。',
+            en: 'Common CLI flags: --model selects model, --permission-mode sets permissions, --agent starts with custom agent, --print for non-interactive single output, --resume to continue a previous session. Flags override settings.json but not managed settings.',
+            ja: 'よく使うCLIフラグ：--modelでモデル指定、--permission-modeで権限設定、--agentでカスタムエージェント起動、--printで非対話式単一出力、--resumeで前セッション再開。フラグはsettings.jsonより優先するが受管設定には勝てない。'
           },
-          code_example: '',
+          code_example: '# 常用启动方式\n# claude --model opus\n# claude --permission-mode plan\n# claude --agent reviewer\n# claude --print "Explain this code"\n# claude --resume',
           key_point: {
-            zh: '点击下方按钮直接开始测验',
-            en: 'Click below to start the quiz',
-            ja: '下のボタンをクリックしてクイズを開始'
+            zh: '--model / --permission-mode / --agent / --print / --resume 五个最常用标志',
+            en: 'Five most used flags: --model / --permission-mode / --agent / --print / --resume',
+            ja: '最もよく使う5フラグ：--model / --permission-mode / --agent / --print / --resume'
           }
         }
       ]
