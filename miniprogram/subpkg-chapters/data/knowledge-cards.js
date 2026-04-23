@@ -1007,19 +1007,67 @@ module.exports = {
       stage_id: 'stage_s15',
       cards: [
         {
-          id: 'kc_s15_placeholder',
-          title: { zh: '即将推出', en: 'Coming Soon', ja: '近日公開' },
-          icon: '🚀',
+          id: 'kc_s15_001',
+          title: { zh: 'Teammate vs Subagent', en: 'Teammate vs Subagent', ja: 'Teammate vs Subagent' },
+          icon: '👥',
           content: {
-            zh: '本章节的学习卡片正在制作中，敬请期待！你可以直接开始测验。',
-            en: 'Knowledge cards for this chapter are being prepared. You can start the quiz directly.',
-            ja: 'この章のカードは準備中です。クイズを始めることができます。'
+            zh: 'Subagent 是一次性外包助手——干完就消失。Teammate 是长期在线队友——有名字、有邮箱、有独立循环，可以反复接活。根本区别在生命周期，不在名字。',
+            en: 'A subagent is a one-shot helper — it finishes and disappears. A teammate is a persistent collaborator with a name, inbox, and independent loop, able to take work repeatedly. The key difference is lifecycle.',
+            ja: 'サブエージェントは使い捨ての助手 — 完了後消える。チームメイトは名前、受信箱、独立ループを持つ永続的な協力者で繰り返し作業を受ける。根本的な違いはライフサイクル。'
           },
-          code_example: '',
+          code_example: '# Subagent: 一次性\nresult = spawn_subagent("探索 auth 模块")\n# 做完就消失\n\n# Teammate: 长期在线\nspawn_teammate("alice", role="coder")\nsend_message("alice", "请负责测试")\n# alice 持续接活',
           key_point: {
-            zh: '点击下方按钮直接开始测验',
-            en: 'Click below to start the quiz',
-            ja: '下のボタンをクリックしてクイズを開始'
+            zh: 'Subagent 干完就消失，Teammate 长期在线反复接活——区别在生命周期',
+            en: 'Subagents vanish after one task; teammates persist and take work repeatedly',
+            ja: 'サブエージェントは1回で消える、チームメイトは永続的に繰り返し作業を受ける'
+          }
+        },
+        {
+          id: 'kc_s15_002',
+          title: { zh: '团队三要素', en: 'Three Team Essentials', ja: 'チーム3要素' },
+          icon: '🏛️',
+          content: {
+            zh: '一个最小团队系统需要三样东西：名册（团队里有谁、什么角色）、邮箱（每人一个收件箱）、独立循环（每人有自己的 messages 和 agent loop）。三者缺一，团队就立不起来。',
+            en: 'A minimal team system needs three things: a roster (who\'s on the team, what role), mailboxes (one inbox per member), and independent loops (each has their own messages and agent loop). Missing any one, the team can\'t function.',
+            ja: '最小限のチームシステムに必要な3要素：名簿（メンバーと役割）、メールボックス（各メンバーの受信箱）、独立ループ（各自のmessagesとエージェントループ）。1つでも欠けるとチームは機能しない。'
+          },
+          code_example: '# 名册\nconfig = {"members": [\n    {"name": "alice", "role": "coder"},\n    {"name": "bob",   "role": "tester"},\n]}\n# 邮箱: .team/inbox/alice.jsonl\n# 独立循环: 每人自己的 messages + loop',
+          key_point: {
+            zh: '团队三要素：名册 + 邮箱 + 独立循环，缺一不可',
+            en: 'Three essentials: roster + mailboxes + independent loops — all required',
+            ja: 'チーム3要素：名簿 + メールボックス + 独立ループ — すべて必須'
+          }
+        },
+        {
+          id: 'kc_s15_003',
+          title: { zh: 'TeamConfig 与消息信封', en: 'TeamConfig and Message Envelope', ja: 'TeamConfigとメッセージ封筒' },
+          icon: '📨',
+          content: {
+            zh: 'TeamConfig 保存在 .team/config.json，记录团队名和成员列表。消息用 MessageEnvelope 包装：谁发的、发给谁、内容是什么、什么时候发的。信封让系统能追踪每条消息的来源和去向。',
+            en: 'TeamConfig lives in .team/config.json, recording team name and member list. Messages are wrapped in a MessageEnvelope: from, to, content, timestamp. The envelope lets the system track message origins and destinations.',
+            ja: 'TeamConfigは.team/config.jsonに保存、チーム名とメンバーリストを記録。メッセージはMessageEnvelopeで包装：from、to、content、timestamp。封筒によりシステムがメッセージの送信元と宛先を追跡可能。'
+          },
+          code_example: 'config = {\n    "team_name": "default",\n    "members": [{"name": "alice", "role": "coder"}],\n}\nmessage = {\n    "type": "message",\n    "from": "lead", "content": "Review auth",\n    "timestamp": 1710000000.0,\n}',
+          key_point: {
+            zh: 'TeamConfig 记录名册，MessageEnvelope 包装每条消息的来源和去向',
+            en: 'TeamConfig records the roster; MessageEnvelope wraps each message\'s origin and destination',
+            ja: 'TeamConfigは名簿を記録、MessageEnvelopeは各メッセージの送信元と宛先を包装'
+          }
+        },
+        {
+          id: 'kc_s15_004',
+          title: { zh: '邮箱驱动工作分配', en: 'Inbox-Driven Work Assignment', ja: '受信箱駆動の作業割り当て' },
+          icon: '📥',
+          content: {
+            zh: '队友不是靠"被重新创建"来获得新任务，而是靠"下一轮先检查邮箱"来接收新工作。每轮开始前先 drain inbox，把新消息追加到自己的 messages 里，然后继续工作。',
+            en: 'Teammates don\'t get new tasks by being recreated — they check their inbox at the start of each turn. Drain the inbox, append new messages to their own messages list, then continue working.',
+            ja: 'チームメイトは再作成で新タスクを得るのではなく、各ターン開始時に受信箱をチェック。受信箱を排空し、新メッセージを自分のmessagesに追加してから作業を続ける。'
+          },
+          code_example: 'def teammate_loop(name, role, prompt):\n    messages = [{"role": "user", "content": prompt}]\n    while True:\n        inbox = bus.read_inbox(name)\n        for item in inbox:\n            messages.append(user_msg(item))\n        response = call_model(messages)\n        # ... 处理工具调用 ...',
+          key_point: {
+            zh: '队友靠检查邮箱接收新工作，不是靠重新创建',
+            en: 'Teammates receive work by checking their inbox, not by being recreated',
+            ja: 'チームメイトは受信箱チェックで新しい作業を受け取る、再作成ではなく'
           }
         }
       ]
@@ -1028,19 +1076,67 @@ module.exports = {
       stage_id: 'stage_s16',
       cards: [
         {
-          id: 'kc_s16_placeholder',
-          title: { zh: '即将推出', en: 'Coming Soon', ja: '近日公開' },
-          icon: '🚀',
+          id: 'kc_s16_001',
+          title: { zh: '结构化协议设计', en: 'Structured Protocol Design', ja: '構造化プロトコル設計' },
+          icon: '🤝',
           content: {
-            zh: '本章节的学习卡片正在制作中，敬请期待！你可以直接开始测验。',
-            en: 'Knowledge cards for this chapter are being prepared. You can start the quiz directly.',
-            ja: 'この章のカードは準備中です。クイズを始めることができます。'
+            zh: '自由文本消息解决不了"这件事到底批没批准"的问题。结构化协议用 request_id 给每个请求编号，用状态机追踪 pending→approved/rejected。这样多个请求同时存在也不会乱。',
+            en: 'Free text messages can\'t answer "was this approved or not." Structured protocols assign a request_id to each request and track it through a state machine: pending → approved/rejected. Multiple concurrent requests stay organized.',
+            ja: '自由テキストでは「承認されたかどうか」に答えられない。構造化プロトコルは各リクエストにrequest_idを付与し、状態マシンでpending→approved/rejectedを追跡。複数の同時リクエストも整理される。'
           },
-          code_example: '',
+          code_example: 'request = {\n    "request_id": "req_001",\n    "kind": "shutdown",\n    "from": "lead", "to": "alice",\n    "status": "pending",\n}\n# pending -> approved | rejected | expired',
           key_point: {
-            zh: '点击下方按钮直接开始测验',
-            en: 'Click below to start the quiz',
-            ja: '下のボタンをクリックしてクイズを開始'
+            zh: '结构化协议 = request_id + 状态机，让"批没批准"有明确追踪',
+            en: 'Structured protocol = request_id + state machine for explicit approval tracking',
+            ja: '構造化プロトコル = request_id + 状態マシンで承認を明示的に追跡'
+          }
+        },
+        {
+          id: 'kc_s16_002',
+          title: { zh: '优雅关机协议', en: 'Graceful Shutdown Protocol', ja: 'グレースフルシャットダウンプロトコル' },
+          icon: '🛑',
+          content: {
+            zh: '优雅关机不是直接杀线程，而是走请求-响应流程：lead 发 shutdown_request，队友明确回复同意或拒绝。同意后先收尾再退出。这背后是通用的 request-response 模板。',
+            en: 'Graceful shutdown is not killing a thread — it\'s a request-response flow: lead sends shutdown_request, teammate explicitly approves or rejects. On approval, finish up then exit. This uses a universal request-response template.',
+            ja: 'グレースフルシャットダウンはスレッド強制終了ではなく、リクエスト-レスポンスフロー：leadがshutdown_requestを送り、チームメイトが明示的に承認/拒否。承認後、後処理してから終了。汎用的なrequest-responseテンプレート。'
+          },
+          code_example: 'def request_shutdown(target):\n    req_id = new_id()\n    requests[req_id] = {"kind": "shutdown", "status": "pending"}\n    bus.send("lead", target,\n        msg_type="shutdown_request",\n        extra={"request_id": req_id})',
+          key_point: {
+            zh: '优雅关机 = 请求 → 明确回复 → 收尾退出，不是直接杀进程',
+            en: 'Graceful shutdown = request → explicit reply → clean exit, not killing the process',
+            ja: 'グレースフルシャットダウン = リクエスト → 明示的回答 → 後処理退出、プロセス強制終了ではない'
+          }
+        },
+        {
+          id: 'kc_s16_003',
+          title: { zh: '计划审批协议', en: 'Plan Approval Protocol', ja: '計画審批プロトコル' },
+          icon: '📝',
+          content: {
+            zh: '计划审批和关机协议底层模板完全一样：一方发 request，另一方明确回复 approve/reject，双方用同一个 request_id 对上号。学会一个模板就能复用到所有需要审批的场景。',
+            en: 'Plan approval uses the exact same template as shutdown: one side sends a request, the other replies approve/reject, both match on request_id. Learn one template and reuse it for all approval scenarios.',
+            ja: '計画審批はシャットダウンと全く同じテンプレート：一方がリクエストを送り、他方がapprove/rejectで回答、双方がrequest_idで照合。1つのテンプレートを学べば全承認シナリオで再利用可能。'
+          },
+          code_example: 'def submit_plan(name, plan_text):\n    req_id = new_id()\n    requests[req_id] = {"kind": "plan_approval", "status": "pending"}\n    bus.send(name, "lead",\n        msg_type="plan_approval",\n        extra={"request_id": req_id, "plan": plan_text})',
+          key_point: {
+            zh: '关机和审批用同一个 request-response 模板，学会一个就能复用',
+            en: 'Shutdown and approval share one request-response template — learn once, reuse everywhere',
+            ja: 'シャットダウンと審批は同じrequest-responseテンプレート — 一度学べばどこでも再利用'
+          }
+        },
+        {
+          id: 'kc_s16_004',
+          title: { zh: '普通消息 vs 协议消息', en: 'Plain vs Protocol Messages', ja: '普通メッセージ vs プロトコルメッセージ' },
+          icon: '💬',
+          content: {
+            zh: '邮箱里现在有两类消息：普通消息适合讨论和提醒，协议消息适合审批、关机、交接。协议消息至少要带 type、request_id、from、to、payload。普通消息解决"说了什么"，协议消息解决"这件事走到哪一步"。',
+            en: 'The inbox now has two message types: plain messages for discussion and reminders, protocol messages for approvals, shutdowns, and handoffs. Protocol messages need type, request_id, from, to, payload. Plain = "what was said"; protocol = "where is this workflow."',
+            ja: '受信箱に2種類：普通メッセージは議論やリマインダー、プロトコルメッセージは承認・シャットダウン・引継ぎ用。プロトコルにはtype、request_id、from、to、payloadが必要。普通=「何を言ったか」、プロトコル=「このフローはどの段階か」。'
+          },
+          code_example: '# 普通消息\n{"type": "message", "content": "请帮忙看看"}\n\n# 协议消息\n{"type": "shutdown_request",\n "request_id": "req_001",\n "from": "lead", "to": "alice",\n "payload": {}}',
+          key_point: {
+            zh: '普通消息解决"说了什么"，协议消息解决"这件事走到哪一步了"',
+            en: 'Plain messages say what; protocol messages track where a workflow stands',
+            ja: '普通メッセージは「何を言ったか」、プロトコルメッセージは「フローのどの段階か」'
           }
         }
       ]
@@ -1049,19 +1145,67 @@ module.exports = {
       stage_id: 'stage_s17',
       cards: [
         {
-          id: 'kc_s17_placeholder',
-          title: { zh: '即将推出', en: 'Coming Soon', ja: '近日公開' },
-          icon: '🚀',
+          id: 'kc_s17_001',
+          title: { zh: 'WORK↔IDLE 双阶段循环', en: 'WORK↔IDLE Two-Phase Loop', ja: 'WORK↔IDLE 2段階ループ' },
+          icon: '🔄',
           content: {
-            zh: '本章节的学习卡片正在制作中，敬请期待！你可以直接开始测验。',
-            en: 'Knowledge cards for this chapter are being prepared. You can start the quiz directly.',
-            ja: 'この章のカードは準備中です。クイズを始めることができます。'
+            zh: '自治队友在两个阶段间切换：WORK 阶段正常工作，IDLE 阶段检查有没有新活。空闲不是关机——是"手头没活但随时准备接新活"。长时间无事可做才真正退出。',
+            en: 'Autonomous teammates alternate between two phases: WORK for normal execution, IDLE for checking new work. Idle is not shutdown — it means "nothing in hand but ready anytime." Only a prolonged idle leads to actual exit.',
+            ja: '自律チームメイトは2段階を切り替え：WORK段階で通常作業、IDLE段階で新しい作業をチェック。アイドルはシャットダウンではなく「手持ちなしだがいつでも準備完了」。長時間何もなければ実際に終了。'
           },
-          code_example: '',
+          code_example: 'while True:\n    run_work_phase(messages)\n    should_resume = run_idle_phase(name, messages)\n    if not should_resume:\n        break  # 长时间无事，退出',
           key_point: {
-            zh: '点击下方按钮直接开始测验',
-            en: 'Click below to start the quiz',
-            ja: '下のボタンをクリックしてクイズを開始'
+            zh: '自治不是让 agent 乱跑，而是让它在 WORK 和 IDLE 间有序切换',
+            en: 'Autonomy is not running wild but orderly switching between WORK and IDLE',
+            ja: '自律は暴走ではなくWORKとIDLEの間で秩序ある切り替え'
+          }
+        },
+        {
+          id: 'kc_s17_002',
+          title: { zh: '空闲时先邮箱再任务板', en: 'Inbox First, Task Board Second', ja: '受信箱優先、タスクボード次' },
+          icon: '📋',
+          content: {
+            zh: 'IDLE 阶段的检查顺序很重要：先看邮箱（有人明确找我就优先处理），再扫任务板（没人找就自己找可做的任务）。邮箱优先保证了明确指令不被抢任务逻辑覆盖。',
+            en: 'Check order during IDLE matters: inbox first (if someone explicitly sent work, handle it), then scan the task board (if no messages, look for claimable tasks). Inbox-first ensures explicit instructions aren\'t overridden by auto-claim logic.',
+            ja: 'IDLE段階のチェック順序が重要：まず受信箱（明示的な指示を優先処理）、次にタスクボード（メッセージなければ認領可能なタスクを探す）。受信箱優先で明示的指示が自動認領ロジックに上書きされない。'
+          },
+          code_example: 'def idle_phase(name, role, messages):\n    inbox = bus.read_inbox(name)\n    if inbox:          # 先看邮箱\n        messages.extend(inbox)\n        return True\n    unclaimed = scan_unclaimed_tasks(role)\n    if unclaimed:      # 再看任务板\n        claim_task(unclaimed[0], name)\n        return True\n    return False       # 什么都没有',
+          key_point: {
+            zh: '先看邮箱再看任务板——明确指令优先于自动认领',
+            en: 'Check inbox first, then task board — explicit instructions override auto-claim',
+            ja: 'まず受信箱、次にタスクボード — 明示的指示が自動認領より優先'
+          }
+        },
+        {
+          id: 'kc_s17_003',
+          title: { zh: '安全认领任务', en: 'Safe Task Claiming', ja: '安全なタスク認領' },
+          icon: '🔒',
+          content: {
+            zh: '认领不是"空着就拿"。安全认领需要同时满足四个条件：任务是 pending、还没人认领、没有前置阻塞、当前队友角色匹配。而且认领动作必须加锁，防止两人同时抢同一条任务。',
+            en: 'Claiming is not "grab whatever\'s free." Safe claiming requires four conditions: task is pending, no owner yet, no active blockers, and the teammate\'s role matches. The claim action must be locked to prevent two agents claiming the same task.',
+            ja: '認領は「空いていれば取る」ではない。安全な認領には4条件：pendingである、オーナーなし、ブロッカーなし、チームメイトの役割が一致。認領アクションはロック必須で2エージェントの同時認領を防ぐ。'
+          },
+          code_example: 'def is_claimable(task, role):\n    return (\n        task["status"] == "pending"\n        and not task["owner"]\n        and not task["blockedBy"]\n        and role_matches(task, role)\n    )\nwith claim_lock:\n    if not task["owner"]:\n        task["owner"] = name',
+          key_point: {
+            zh: '安全认领 = pending + 无主 + 无阻塞 + 角色匹配 + 加锁',
+            en: 'Safe claim = pending + no owner + no blockers + role match + lock',
+            ja: '安全な認領 = pending + オーナーなし + ブロッカーなし + 役割一致 + ロック'
+          }
+        },
+        {
+          id: 'kc_s17_004',
+          title: { zh: '身份重注入', en: 'Identity Re-injection', ja: 'アイデンティティ再注入' },
+          icon: '🪪',
+          content: {
+            zh: '上下文压缩后队友可能忘记"我是谁、我的角色、我属于哪个团队"。如果身份信息变薄，后续行为就会漂移。解决方法是在恢复工作前把身份块重新注入 messages 开头。',
+            en: 'After context compaction, a teammate may forget its name, role, and team. If identity context thins out, behavior drifts. The fix: re-inject an identity block at the start of messages before resuming work.',
+            ja: 'コンテキスト圧縮後、チームメイトは自分の名前、役割、所属チームを忘れる可能性がある。アイデンティティが薄まると行動がずれる。対策：作業再開前にmessages冒頭にアイデンティティブロックを再注入。'
+          },
+          code_example: 'def ensure_identity(messages, name, role, team):\n    identity = (\n        f"You are \'{name}\', role: {role}, "\n        f"team: {team}. Continue your work."\n    )\n    messages.insert(0, {"role": "user", "content": identity})',
+          key_point: {
+            zh: '压缩后队友可能忘记自己是谁——恢复前要重新注入身份块',
+            en: 'After compaction teammates may forget who they are — re-inject identity before resuming',
+            ja: '圧縮後チームメイトは自分を忘れうる — 再開前にアイデンティティを再注入'
           }
         }
       ]
@@ -1070,19 +1214,67 @@ module.exports = {
       stage_id: 'stage_s18',
       cards: [
         {
-          id: 'kc_s18_placeholder',
-          title: { zh: '即将推出', en: 'Coming Soon', ja: '近日公開' },
-          icon: '🚀',
+          id: 'kc_s18_001',
+          title: { zh: 'Task 管做什么 Worktree 管在哪做', en: 'Task = What, Worktree = Where', ja: 'Task=何を、Worktree=どこで' },
+          icon: '🗂️',
           content: {
-            zh: '本章节的学习卡片正在制作中，敬请期待！你可以直接开始测验。',
-            en: 'Knowledge cards for this chapter are being prepared. You can start the quiz directly.',
-            ja: 'この章のカードは準備中です。クイズを始めることができます。'
+            zh: '任务系统回答"做什么、谁在做、状态如何"，worktree 回答"在哪个独立目录里做"。两者通过 task_id 关联。如果所有人在同一目录改文件，很快会互相踩到。',
+            en: 'The task system answers "what, who, status"; worktree answers "in which isolated directory." They connect via task_id. Without isolation, everyone editing the same directory will step on each other.',
+            ja: 'タスクシステムは「何を、誰が、状態は」に回答、worktreeは「どの独立ディレクトリで」に回答。task_idで関連付け。隔離なしでは全員が同じディレクトリで編集し互いに干渉する。'
           },
-          code_example: '',
+          code_example: '# 任务板\ntask = {"id": 12, "subject": "Refactor auth",\n        "worktree": "auth-refactor"}\n\n# Worktree 注册表\nwt = {"name": "auth-refactor",\n      "path": ".worktrees/auth-refactor",\n      "task_id": 12, "status": "active"}',
           key_point: {
-            zh: '点击下方按钮直接开始测验',
-            en: 'Click below to start the quiz',
-            ja: '下のボタンをクリックしてクイズを開始'
+            zh: '任务记录"做什么"，worktree 记录"在哪做"——通过 task_id 关联',
+            en: 'Tasks record "what"; worktrees record "where" — linked by task_id',
+            ja: 'タスクは「何を」、worktreeは「どこで」を記録 — task_idで関連付け'
+          }
+        },
+        {
+          id: 'kc_s18_002',
+          title: { zh: 'WorktreeRecord 与任务绑定', en: 'WorktreeRecord and Task Binding', ja: 'WorktreeRecordとタスクバインド' },
+          icon: '🔗',
+          content: {
+            zh: '创建 worktree 时必须同时更新两边：worktree 注册表记录路径和分支，任务记录写入 worktree 名称。只更新一边的话，系统就无法从任务板一眼看出"这个任务在哪个目录里做"。',
+            en: 'When creating a worktree, update both sides: the worktree registry records path and branch, the task record gets the worktree name. Updating only one side means the task board can\'t show where work is happening.',
+            ja: 'worktree作成時は両方を更新：worktreeレジストリにパスとブランチを記録、タスクレコードにworktree名を書き込み。片方だけ更新ではタスクボードから作業場所が見えない。'
+          },
+          code_example: 'def bind_worktree(task_id, name):\n    task = tasks.load(task_id)\n    task["worktree"] = name\n    task["worktree_state"] = "active"\n    tasks.save(task)\n    # worktree 注册表也同步更新',
+          key_point: {
+            zh: '创建 worktree 时任务记录和注册表要双向更新，只改一边会脱节',
+            en: 'Bind worktree to task on both sides — one-sided updates break the link',
+            ja: 'worktreeとタスクは双方向更新 — 片方だけでは連携が切れる'
+          }
+        },
+        {
+          id: 'kc_s18_003',
+          title: { zh: '隔离执行 cwd 切换', en: 'Isolation via cwd Switching', ja: 'cwd切り替えによる隔離実行' },
+          icon: '📁',
+          content: {
+            zh: '隔离的核心就是一行代码：subprocess.run(command, cwd=worktree_path)。同一个命令在不同 cwd 里执行，影响范围就不一样。两个任务各自在自己的 worktree 目录里跑，互不干扰。',
+            en: 'The core of isolation is one line: subprocess.run(command, cwd=worktree_path). The same command in different cwd affects different files. Two tasks each run in their own worktree directory without interference.',
+            ja: '隔離の核心は1行：subprocess.run(command, cwd=worktree_path)。同じコマンドでもcwdが異なれば影響範囲が異なる。2つのタスクが各自のworktreeディレクトリで干渉なく実行。'
+          },
+          code_example: '# 任务 A 在自己的目录里跑\nsubprocess.run("pytest", cwd=".worktrees/auth-refactor")\n\n# 任务 B 在自己的目录里跑\nsubprocess.run("pytest", cwd=".worktrees/fix-billing")',
+          key_point: {
+            zh: '隔离的核心是 cwd 切换——同一命令在不同目录执行，互不干扰',
+            en: 'Isolation is cwd switching — same command, different directory, no interference',
+            ja: '隔離の核心はcwd切り替え — 同じコマンド、異なるディレクトリ、干渉なし'
+          }
+        },
+        {
+          id: 'kc_s18_004',
+          title: { zh: 'Closeout: keep 或 remove', en: 'Closeout: keep or remove', ja: 'クローズアウト：keepかremove' },
+          icon: '🧹',
+          content: {
+            zh: '任务完成时必须显式决定 worktree 怎么收尾：keep 保留目录（方便 review 或后续追查），remove 删除目录（释放资源）。删除前要检查有没有未提交的改动。不要让收尾是隐式的。',
+            en: 'When a task finishes, explicitly decide worktree fate: keep (for review or follow-up) or remove (free resources). Check for uncommitted changes before removing. Never let closeout be implicit.',
+            ja: 'タスク完了時にworktreeの処理を明示的に決定：keep（レビューや追跡用に保持）またはremove（リソース解放）。削除前に未コミットの変更を確認。クローズアウトを暗黙にしない。'
+          },
+          code_example: 'def closeout(name, action, reason=""):\n    if action == "remove":\n        if has_uncommitted(name):\n            raise Error("uncommitted changes")\n        remove_worktree(name)\n    elif action == "keep":\n        mark_kept(name, reason)',
+          key_point: {
+            zh: '收尾要显式决定 keep 或 remove，删除前必须检查未提交改动',
+            en: 'Explicitly choose keep or remove at closeout; check for uncommitted changes before removing',
+            ja: 'クローズアウトはkeepかremoveを明示的に選択、削除前に未コミット変更を確認'
           }
         }
       ]
@@ -1091,19 +1283,67 @@ module.exports = {
       stage_id: 'stage_s19',
       cards: [
         {
-          id: 'kc_s19_placeholder',
-          title: { zh: '即将推出', en: 'Coming Soon', ja: '近日公開' },
-          icon: '🚀',
+          id: 'kc_s19_001',
+          title: { zh: 'MCP 是外部工具统一协议', en: 'MCP: Unified External Tool Protocol', ja: 'MCP：外部ツール統一プロトコル' },
+          icon: '🔌',
           content: {
-            zh: '本章节的学习卡片正在制作中，敬请期待！你可以直接开始测验。',
-            en: 'Knowledge cards for this chapter are being prepared. You can start the quiz directly.',
-            ja: 'この章のカードは準備中です。クイズを始めることができます。'
+            zh: '前面所有工具都写在你的 Python 代码里。MCP 让外部程序也能把工具接进 agent——启动外部服务，问它有什么工具，模型要用时转发请求，再把结果带回主循环。本质是把工具来源从本地硬编码变成外部可插拔。',
+            en: 'Previously all tools were in your Python code. MCP lets external programs plug tools into the agent — start an external service, ask what tools it has, forward requests when the model calls them, bring results back. It makes tool sources pluggable instead of hardcoded.',
+            ja: 'これまで全ツールはPythonコード内。MCPは外部プログラムもエージェントにツールを接続可能に — 外部サービスを起動、利用可能なツールを照会、モデルの呼び出しを転送、結果を返す。ツールソースをハードコードからプラガブルに。'
           },
-          code_example: '',
+          code_example: '# 本地工具：写在代码里\nhandler = TOOL_HANDLERS["read_file"]\n\n# MCP 工具：来自外部进程\nclient = MCPClient("npx @mcp/server-postgres")\ntools = client.list_tools()\nresult = client.call_tool("query", args)',
           key_point: {
-            zh: '点击下方按钮直接开始测验',
-            en: 'Click below to start the quiz',
-            ja: '下のボタンをクリックしてクイズを開始'
+            zh: 'MCP 把工具来源从"本地硬编码"升级成"外部可插拔"',
+            en: 'MCP upgrades tool sources from hardcoded to externally pluggable',
+            ja: 'MCPはツールソースを「ハードコード」から「外部プラガブル」にアップグレード'
+          }
+        },
+        {
+          id: 'kc_s19_002',
+          title: { zh: '工具名前缀规则', en: 'Tool Name Prefix Convention', ja: 'ツール名プレフィックス規則' },
+          icon: '🏷️',
+          content: {
+            zh: '为了区分本地工具和 MCP 工具，用前缀命名：mcp__server__tool。比如 mcp__postgres__query 一眼就知道是 MCP 工具、来自 postgres server、原始工具名是 query。避免命名冲突。',
+            en: 'To distinguish local from MCP tools, use prefix naming: mcp__server__tool. For example mcp__postgres__query immediately tells you it\'s an MCP tool from the postgres server, original name query. Prevents naming conflicts.',
+            ja: 'ローカルツールとMCPツールを区別するためプレフィックス命名：mcp__server__tool。例えばmcp__postgres__queryならMCPツールでpostgresサーバー由来、元の名前はquery。名前衝突を防止。'
+          },
+          code_example: '# 前缀命名规则\n"mcp__postgres__query"    # MCP + server + tool\n"mcp__browser__open_tab"  # MCP + server + tool\n\n# 路由时一看前缀就知道走哪条线\nif tool.startswith("mcp__"):\n    return mcp_router.call(tool, args)',
+          key_point: {
+            zh: 'mcp__server__tool 前缀命名让系统一眼区分本地工具和外部工具',
+            en: 'mcp__server__tool prefix naming instantly distinguishes local from external tools',
+            ja: 'mcp__server__toolプレフィックスでローカルツールと外部ツールを即座に区別'
+          }
+        },
+        {
+          id: 'kc_s19_003',
+          title: { zh: 'Plugin manifest 发现服务器', en: 'Plugin Manifest for Server Discovery', ja: 'Pluginマニフェストによるサーバー発見' },
+          icon: '🗺️',
+          content: {
+            zh: 'Plugin 解决的是"这些外部工具配置怎么被发现"。最小 plugin 就是一个 plugin.json，写明插件名、版本、它提供哪些 MCP server、每个 server 的启动命令。主程序读到 manifest 就知道怎么把 server 拉起来。',
+            en: 'Plugins solve "how external tool configs are discovered." A minimal plugin is a plugin.json declaring name, version, MCP servers, and launch commands. The main program reads the manifest and knows how to start each server.',
+            ja: 'Pluginは「外部ツール設定をどう発見するか」を解決。最小限のpluginはplugin.jsonで名前、バージョン、MCPサーバー、起動コマンドを宣言。メインプログラムはmanifestを読んで各サーバーの起動方法を把握。'
+          },
+          code_example: '# plugin.json\nmanifest = {\n    "name": "my-db-tools",\n    "version": "1.0.0",\n    "mcpServers": {\n        "postgres": {\n            "command": "npx",\n            "args": ["-y", "@mcp/server-postgres"],\n        }\n    }\n}',
+          key_point: {
+            zh: 'Plugin manifest 告诉主程序"有哪些外部 server 可以接入、怎么启动"',
+            en: 'Plugin manifests tell the main program which external servers are available and how to start them',
+            ja: 'Pluginマニフェストはメインプログラムに「利用可能な外部サーバーと起動方法」を伝える'
+          }
+        },
+        {
+          id: 'kc_s19_004',
+          title: { zh: '统一权限管道路由', en: 'Unified Permission Pipeline Routing', ja: '統一権限パイプラインルーティング' },
+          icon: '🛡️',
+          content: {
+            zh: 'MCP 工具虽然来自外部，但不能绕开权限系统。统一路由器只做一件事：如果是本地工具交给 handler，如果是 MCP 工具交给 client——但两者都先过同一条权限管道。结果也要标准化回统一格式。',
+            en: 'MCP tools come from outside but must not bypass the permission system. The unified router does one thing: local tools go to handlers, MCP tools go to clients — but both pass through the same permission pipeline first. Results are normalized to a unified format.',
+            ja: 'MCPツールは外部由来だが権限システムをバイパスしてはならない。統一ルーターの仕事：ローカルツールはハンドラーへ、MCPツールはクライアントへ — ただし両方とも同じ権限パイプラインを先に通す。結果も統一フォーマットに正規化。'
+          },
+          code_example: 'def handle_tool_call(name, input):\n    decision = check_permission(name, input)\n    if decision == "deny":\n        return "Permission denied"\n    if name.startswith("mcp__"):\n        return mcp_router.call(name, input)\n    return native_handler(name, input)',
+          key_point: {
+            zh: '本地工具和 MCP 工具走同一条权限管道——外部不能绕开安全',
+            en: 'Local and MCP tools share the same permission pipeline — external tools can\'t bypass security',
+            ja: 'ローカルツールとMCPツールは同じ権限パイプラインを通る — 外部ツールもセキュリティをバイパスできない'
           }
         }
       ]
