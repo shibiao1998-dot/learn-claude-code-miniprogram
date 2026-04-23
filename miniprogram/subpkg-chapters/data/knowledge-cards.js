@@ -455,19 +455,67 @@ module.exports = {
       stage_id: 'stage_s07',
       cards: [
         {
-          id: 'kc_s07_placeholder',
-          title: { zh: '即将推出', en: 'Coming Soon', ja: '近日公開' },
-          icon: '🚀',
+          id: 'kc_s07_001',
+          title: { zh: '权限管道四步流程', en: 'Four-Step Permission Pipeline', ja: '権限パイプライン4段階フロー' },
+          icon: '🚦',
           content: {
-            zh: '本章节的学习卡片正在制作中，敬请期待！你可以直接开始测验。',
-            en: 'Knowledge cards for this chapter are being prepared. You can start the quiz directly.',
-            ja: 'この章のカードは準備中です。クイズを始めることができます。'
+            zh: '权限系统不是一个简单开关，而是一条四步管道：先看 deny rules 拦截危险操作，再看当前模式（plan 阻止写入），然后看 allow rules 自动放行安全操作，最后才问用户。',
+            en: 'The permission system is a four-step pipeline: deny rules block dangerous ops, mode check restricts by session style, allow rules auto-approve safe ops, then ask the user.',
+            ja: '権限システムは4段階パイプライン：denyルールで危険操作をブロック、モード確認、allowルールで安全操作を自動許可、最後にユーザー確認。'
           },
-          code_example: '',
+          code_example: 'def check_permission(tool, input):\n    if matches_deny(tool, input): return "deny"\n    if mode == "plan" and is_write(tool): return "deny"\n    if matches_allow(tool, input): return "allow"\n    return "ask"',
           key_point: {
-            zh: '点击下方按钮直接开始测验',
-            en: 'Click below to start the quiz',
-            ja: '下のボタンをクリックしてクイズを開始'
+            zh: '任何工具调用都不应直接执行，中间必须先过一条权限管道',
+            en: 'Every tool call must pass through a permission pipeline before execution',
+            ja: 'すべてのツール呼び出しは実行前に権限パイプラインを通す必要がある'
+          }
+        },
+        {
+          id: 'kc_s07_002',
+          title: { zh: '三种权限模式', en: 'Three Permission Modes', ja: '3つの権限モード' },
+          icon: '🔑',
+          content: {
+            zh: '先稳住三种模式就够：default 模式下未命中规则问用户，plan 模式只允许读不允许写，auto 模式让安全操作自动过、危险操作才问。',
+            en: 'Three modes cover most needs: default asks the user for unmatched rules, plan allows only reads, auto approves safe ops and asks for risky ones.',
+            ja: '3つのモードで大半をカバー：defaultはルール未該当時にユーザー確認、planは読み取りのみ、autoは安全操作を自動承認し危険のみ確認。'
+          },
+          code_example: 'MODES = {\n    "default": "ask user when unmatched",\n    "plan":    "read-only, block all writes",\n    "auto":    "safe ops pass, risky ops ask",\n}',
+          key_point: {
+            zh: '先做 default / plan / auto 三种模式，已经够用',
+            en: 'Start with default / plan / auto — three modes are enough',
+            ja: 'default / plan / auto の3モードから始めれば十分'
+          }
+        },
+        {
+          id: 'kc_s07_003',
+          title: { zh: 'Bash 命令安全检查', en: 'Bash Command Safety Check', ja: 'Bashコマンド安全チェック' },
+          icon: '🛡️',
+          content: {
+            zh: '所有工具里 bash 最危险——read_file 只能读，write_file 只能写，但 bash 几乎能做任何事。不能把 bash 命令当普通字符串，至少要检查 sudo、rm -rf 等危险模式。',
+            en: 'bash is the most dangerous tool — read_file only reads, write_file only writes, but bash can do almost anything. Check for danger patterns like sudo, rm -rf, and command substitution.',
+            ja: 'bashは最も危険なツール。read_fileは読み取りのみ、write_fileは書き込みのみだがbashはほぼ何でも可能。sudo、rm -rfなどの危険パターンを検査すべきです。'
+          },
+          code_example: 'DANGEROUS = ["sudo", "rm -rf", "$(", "`"]\ndef is_dangerous_bash(cmd):\n    return any(p in cmd for p in DANGEROUS)',
+          key_point: {
+            zh: 'bash 不是普通文本，而是可执行动作描述，必须特殊对待',
+            en: 'bash is not plain text but an executable action — it needs special handling',
+            ja: 'bashは単なるテキストではなく実行可能なアクション — 特別な扱いが必要'
+          }
+        },
+        {
+          id: 'kc_s07_004',
+          title: { zh: '权限规则数据结构', en: 'Permission Rule Data Structure', ja: '権限ルールのデータ構造' },
+          icon: '📋',
+          content: {
+            zh: '一条权限规则最少要三个字段：针对哪个工具、匹配什么模式、命中后怎么处理。规则和决策结果分开两层，决策结果还要带上原因说明。',
+            en: 'A permission rule needs three fields: which tool, what pattern to match, and what to do (allow/deny/ask). Rules and decisions are separate objects — decisions include a reason.',
+            ja: '権限ルールには3フィールド：対象ツール、マッチパターン、アクション。ルールと判定結果は別オブジェクトで、判定結果には理由を含めます。'
+          },
+          code_example: 'rule = {\n    "tool": "bash",\n    "content": "sudo *",\n    "behavior": "deny",\n}\ndecision = {\n    "behavior": "deny",\n    "reason": "matched deny rule",\n}',
+          key_point: {
+            zh: '权限规则 = 工具 + 模式 + 动作，决策结果要带理由',
+            en: 'Permission rule = tool + pattern + action; decisions must include a reason',
+            ja: '権限ルール = ツール + パターン + アクション、判定結果には理由を含める'
           }
         }
       ]
@@ -476,19 +524,67 @@ module.exports = {
       stage_id: 'stage_s08',
       cards: [
         {
-          id: 'kc_s08_placeholder',
-          title: { zh: '即将推出', en: 'Coming Soon', ja: '近日公開' },
-          icon: '🚀',
+          id: 'kc_s08_001',
+          title: { zh: 'Hook 是预留插口', en: 'Hook Is a Pre-built Interface', ja: 'Hookは事前予約された呼び出し口' },
+          icon: '🔌',
           content: {
-            zh: '本章节的学习卡片正在制作中，敬请期待！你可以直接开始测验。',
-            en: 'Knowledge cards for this chapter are being prepared. You can start the quiz directly.',
-            ja: 'この章のカードは準備中です。クイズを始めることができます。'
+            zh: 'Hook 不是在主循环里塞 if/else，而是主循环在固定时机对外暴露的调用接口。主循环只需知道：现在是什么事件、交出什么上下文、收到结果怎么处理。',
+            en: 'A hook is not an if/else in the main loop but a call interface exposed at fixed moments. The loop only knows: what event, what context to pass, how to handle the result.',
+            ja: 'Hookはメインループのif/elseではなく、固定タイミングで公開するコールインターフェース。ループが知るのは：イベント名、渡すコンテキスト、結果の処理方法だけ。'
           },
-          code_example: '',
+          code_example: 'result = run_hooks("PreToolUse", {\n    "tool_name": block.name,\n    "input": block.input,\n})\nif result["exit_code"] == 1:\n    skip_tool_execution()',
           key_point: {
-            zh: '点击下方按钮直接开始测验',
-            en: 'Click below to start the quiz',
-            ja: '下のボタンをクリックしてクイズを開始'
+            zh: 'Hook 让系统可扩展，但不要求主循环理解每个扩展需求',
+            en: 'Hooks make the system extensible without the main loop understanding each extension',
+            ja: 'Hookはメインループに拡張の詳細を理解させずにシステムを拡張可能にする'
+          }
+        },
+        {
+          id: 'kc_s08_002',
+          title: { zh: '三个核心事件', en: 'Three Core Events', ja: '3つのコアイベント' },
+          icon: '📡',
+          content: {
+            zh: '先学三个事件就够：SessionStart 会话开始时触发（打印欢迎信息），PreToolUse 工具执行前触发（额外检查或拦截），PostToolUse 工具执行后触发（审计日志或追加说明）。',
+            en: 'Three events are enough: SessionStart fires at session begin, PreToolUse fires before tool execution for checks or blocking, PostToolUse fires after for audit logs or notes.',
+            ja: '3つのイベントで十分：SessionStartはセッション開始時、PreToolUseはツール実行前（チェックやブロック）、PostToolUseは実行後（監査ログや補足）に発火。'
+          },
+          code_example: 'HOOKS = {\n    "SessionStart": [on_session_start],\n    "PreToolUse":   [pre_tool_guard],\n    "PostToolUse":  [post_tool_log],\n}',
+          key_point: {
+            zh: '先学 SessionStart / PreToolUse / PostToolUse，就能搭出最小 hook 机制',
+            en: 'Master SessionStart / PreToolUse / PostToolUse and you have a minimal hook system',
+            ja: 'SessionStart / PreToolUse / PostToolUse を押さえれば最小限のhook機構が作れる'
+          }
+        },
+        {
+          id: 'kc_s08_003',
+          title: { zh: '退出码约定 0/1/2', en: 'Exit Code Convention 0/1/2', ja: '終了コード規約 0/1/2' },
+          icon: '🔢',
+          content: {
+            zh: '统一用三个退出码：0 表示正常继续（观察），1 表示阻止当前动作（拦截），2 表示注入补充消息再继续（补充）。hook 的三种核心作用一目了然。',
+            en: 'Three unified exit codes: 0 = continue normally (observe), 1 = block the action (intercept), 2 = inject a message then continue (augment). The three core hook roles are immediately clear.',
+            ja: '3つの統一終了コード：0は正常続行（観察）、1はアクションブロック（遮断）、2はメッセージ注入して続行（補強）。hookの3つの核心的役割が一目瞭然。'
+          },
+          code_example: 'EXIT_CONTINUE = 0  # 观察：正常继续\nEXIT_BLOCK    = 1  # 拦截：阻止当前动作\nEXIT_INJECT   = 2  # 补充：追加消息再继续',
+          key_point: {
+            zh: '0 = 继续，1 = 拦截，2 = 补充——hook 的三种核心作用',
+            en: '0 = continue, 1 = block, 2 = inject — the three core hook actions',
+            ja: '0 = 続行、1 = ブロック、2 = メッセージ注入 — hookの3つの核心アクション'
+          }
+        },
+        {
+          id: 'kc_s08_004',
+          title: { zh: 'Hook 接入主循环', en: 'Integrating Hooks into the Main Loop', ja: 'Hookをメインループに統合する' },
+          icon: '🔗',
+          content: {
+            zh: '接法很简单：工具执行前调 run_hooks("PreToolUse")，返回 1 跳过执行、返回 2 先追加消息。执行后调 run_hooks("PostToolUse") 做补充。主循环结构几乎不变。',
+            en: 'Integration is simple: call run_hooks("PreToolUse") before execution — 1 skips it, 2 appends a message first. Call run_hooks("PostToolUse") after for augmentation. The loop barely changes.',
+            ja: '統合はシンプル：実行前にrun_hooks("PreToolUse")を呼び、1で実行スキップ、2でメッセージ追加。実行後にrun_hooks("PostToolUse")で補足。ループ構造はほぼ不変。'
+          },
+          code_example: 'pre = run_hooks("PreToolUse", payload)\nif pre["exit_code"] == 1:\n    results.append(blocked_result(pre["message"]))\n    continue\noutput = run_tool(block)\nrun_hooks("PostToolUse", {**payload, "output": output})',
+          key_point: {
+            zh: '主循环只需在工具执行前后各插一行 run_hooks，结构几乎不变',
+            en: 'Just add run_hooks before and after tool execution — the loop barely changes',
+            ja: 'ツール実行前後にrun_hooks呼び出しを追加するだけ — ループ構造はほぼ不変'
           }
         }
       ]
@@ -497,19 +593,83 @@ module.exports = {
       stage_id: 'stage_s09',
       cards: [
         {
-          id: 'kc_s09_placeholder',
-          title: { zh: '即将推出', en: 'Coming Soon', ja: '近日公開' },
-          icon: '🚀',
+          id: 'kc_s09_001',
+          title: { zh: 'Memory 只存跨会话价值', en: 'Memory Stores Only Cross-Session Value', ja: 'Memoryはセッション横断の価値だけを保存' },
+          icon: '🧠',
           content: {
-            zh: '本章节的学习卡片正在制作中，敬请期待！你可以直接开始测验。',
-            en: 'Knowledge cards for this chapter are being prepared. You can start the quiz directly.',
-            ja: 'この章のカードは準備中です。クイズを始めることができます。'
+            zh: 'Memory 不是"什么都记"。只有跨会话仍有价值、且不能从当前仓库状态轻易推出来的信息才该存。什么都存会变成垃圾堆，让系统产生幻觉。',
+            en: 'Memory is not about storing everything. Only information valuable across sessions that cannot be re-derived from the current repo state deserves storage. Storing everything turns memory into a hallucination source.',
+            ja: 'Memoryは「すべてを記録」するものではない。セッション横断で価値があり、現在のリポジトリから再導出できない情報だけが保存に値します。何でも保存するとmemoryは幻覚の源になります。'
           },
-          code_example: '',
+          code_example: '# 该存\n"用户偏好 tabs 缩进"       # 代码看不出\n"重写因合规要求"            # git log 看不出\n# 不该存\n"src/ 有 tests/"            # 可重新读\n"当前在改认证模块"          # 是 task 不是 memory',
           key_point: {
-            zh: '点击下方按钮直接开始测验',
-            en: 'Click below to start the quiz',
-            ja: '下のボタンをクリックしてクイズを開始'
+            zh: 'Memory 保存的是"以后还可能有价值、但代码里不容易直接看出来"的信息',
+            en: 'Memory stores what may matter later but cannot be easily seen in the code',
+            ja: 'Memoryは「将来も価値がありうるが、コードからは読み取れない」情報を保存する'
+          }
+        },
+        {
+          id: 'kc_s09_002',
+          title: { zh: '四类 Memory', en: 'Four Memory Types', ja: '4種類のMemory' },
+          icon: '📂',
+          content: {
+            zh: '四种类型各有边界：user 存用户偏好（喜欢什么风格），feedback 存用户纠正（以前错过什么），project 存项目隐性约定（为什么这样设计），reference 存外部资源指针。',
+            en: 'Four types with clear boundaries: user for preferences, feedback for corrections, project for implicit conventions, reference for external resource pointers.',
+            ja: '4種類に明確な境界：userはユーザーの好み、feedbackは修正指示、projectは暗黙の約束事、referenceは外部リソースへのポインタ。'
+          },
+          code_example: 'MEMORY_TYPES = (\n    "user",       # 用户偏好\n    "feedback",   # 用户纠正\n    "project",    # 项目隐性约定\n    "reference",  # 外部资源指针\n)',
+          key_point: {
+            zh: 'user / feedback / project / reference 四类各有边界，不要混用',
+            en: 'Four types — user / feedback / project / reference — each with clear boundaries',
+            ja: 'user / feedback / project / reference の4種類にはそれぞれ明確な境界がある'
+          }
+        },
+        {
+          id: 'kc_s09_003',
+          title: { zh: 'Memory 文件结构', en: 'Memory File Structure', ja: 'Memoryファイル構造' },
+          icon: '📄',
+          content: {
+            zh: '每条 memory 独立一个文件，用 frontmatter 标注元信息，正文写具体内容。再加一个 MEMORY.md 索引文件让系统快速知道有哪些 memory 可用。',
+            en: 'Each memory is an independent file with frontmatter metadata and content body. A MEMORY.md index lets the system quickly see what\'s available without reading every file.',
+            ja: '各memoryは独立ファイルでfrontmatterにメタ情報、本文に内容を記録。MEMORY.mdインデックスで全ファイルを読まずに利用可能なmemoryを確認。'
+          },
+          code_example: '# .memory/prefer_tabs.md\n# ---\n# name: prefer_tabs\n# type: user\n# ---\n# User prefers tabs over spaces.\n\n# MEMORY.md (索引)\n# - prefer_tabs [user]',
+          key_point: {
+            zh: '一条 memory 一个文件 + MEMORY.md 索引，结构简单好维护',
+            en: 'One memory per file plus a MEMORY.md index — simple and maintainable',
+            ja: '1メモリ1ファイル + MEMORY.mdインデックス — シンプルで維持しやすい'
+          }
+        },
+        {
+          id: 'kc_s09_004',
+          title: { zh: '不该存入 Memory 的东西', en: 'What Should Not Go into Memory', ja: 'Memoryに入れてはいけないもの' },
+          icon: '⚠️',
+          content: {
+            zh: '文件结构可以重新读代码得到，任务进度属于 task，临时分支名很快过时，bug 修复细节看提交记录。存了不该存的，memory 会从"帮助变聪明"变成"帮助产生幻觉"。',
+            en: 'File structures can be re-read from code, task progress belongs to tasks, temp branch names expire fast, bug fix details belong in commits. Wrong storage turns memory into a hallucination source.',
+            ja: 'ファイル構造はコードから再読取可能、タスク進捗はtaskに属す、一時ブランチ名はすぐ無効化、バグ修正詳細はコミット履歴に。不適切な保存はmemoryを幻覚の源に変える。'
+          },
+          code_example: 'BAD_MEMORY = [\n    "src/ 有 tests/",       # 可重新读\n    "当前 PR #42 还差两项", # task 不是 memory\n    "feat/auth 分支",       # 很快过时\n    "用 try/except 修 bug", # 看 git log\n]',
+          key_point: {
+            zh: '能从代码重新读到的、属于当前任务的、很快过时的——都不该进 memory',
+            en: 'If re-readable from code, part of a current task, or expires quickly — don\'t store it',
+            ja: 'コードから再読取可能、現タスクに属する、すぐ無効化する情報はmemoryに入れない'
+          }
+        },
+        {
+          id: 'kc_s09_005',
+          title: { zh: 'Memory 与其他系统的边界', en: 'Memory vs Other Storage Systems', ja: 'Memoryと他システムの境界' },
+          icon: '🗂️',
+          content: {
+            zh: '简单判断法：只对这次任务有用放 task/plan，以后很多会话可能用放 memory，长期系统级固定说明放 CLAUDE.md。三者各管一层，不要混。',
+            en: 'Simple rule: useful only for this task → task/plan; useful across sessions → memory; permanent system instruction → CLAUDE.md. Three layers, don\'t mix.',
+            ja: '簡単な判断法：今のタスクだけならtask/plan、セッション横断ならmemory、恒久的指示ならCLAUDE.md。3層を混ぜない。'
+          },
+          code_example: 'def where_to_store(info):\n    if info.only_this_task:  return "task/plan"\n    if info.cross_session:   return "memory"\n    if info.permanent_rule:  return "CLAUDE.md"',
+          key_point: {
+            zh: 'task/plan 管当前任务，memory 管跨会话价值，CLAUDE.md 管长期规则',
+            en: 'task/plan for current work, memory for cross-session value, CLAUDE.md for lasting rules',
+            ja: 'task/planは現在の作業、memoryはセッション横断の価値、CLAUDE.mdは恒久ルール'
           }
         }
       ]
@@ -518,19 +678,67 @@ module.exports = {
       stage_id: 'stage_s10',
       cards: [
         {
-          id: 'kc_s10_placeholder',
-          title: { zh: '即将推出', en: 'Coming Soon', ja: '近日公開' },
-          icon: '🚀',
+          id: 'kc_s10_001',
+          title: { zh: 'Prompt 是组装流水线', en: 'Prompt Is an Assembly Pipeline', ja: 'Promptは組み立てパイプライン' },
+          icon: '🏭',
           content: {
-            zh: '本章节的学习卡片正在制作中，敬请期待！你可以直接开始测验。',
-            en: 'Knowledge cards for this chapter are being prepared. You can start the quiz directly.',
-            ja: 'この章のカードは準備中です。クイズを始めることができます。'
+            zh: '很多初学者把 system prompt 写成一大段固定文本。但系统长功能后工具列表会变、memory 会变、目录会变。prompt 应该升级成由多个来源共同组装的流水线。',
+            en: 'Many beginners write system prompts as one big static string. But as the system grows, tools, memory, and directories change. The prompt should become an assembly pipeline from multiple sources.',
+            ja: '多くの初心者はプロンプトを大きな固定テキストとして書く。しかし成長するとツール、memory、ディレクトリが変化。プロンプトは複数ソースからの組み立てパイプラインにすべき。'
           },
-          code_example: '',
+          code_example: 'class SystemPromptBuilder:\n    def build(self):\n        parts = []\n        parts.append(self._build_core())\n        parts.append(self._build_tools())\n        parts.append(self._build_memory())\n        parts.append(self._build_dynamic())\n        return "\\n\\n".join(p for p in parts if p)',
           key_point: {
-            zh: '点击下方按钮直接开始测验',
-            en: 'Click below to start the quiz',
-            ja: '下のボタンをクリックしてクイズを開始'
+            zh: 'Prompt 的关键不是"写一段很长的话"，而是把不同来源按清晰边界组装',
+            en: 'The key is assembling sources with clear boundaries, not writing one long string',
+            ja: 'プロンプトの鍵は「長い文章」ではなく、異なるソースを明確な境界で組み立てること'
+          }
+        },
+        {
+          id: 'kc_s10_002',
+          title: { zh: '六段组装结构', en: 'Six-Section Assembly Structure', ja: '6セクション組み立て構造' },
+          icon: '🧩',
+          content: {
+            zh: '把 prompt 想成六段：核心身份说明、工具列表、skills 元信息、memory 内容、CLAUDE.md 指令链、动态环境信息。每段只负责一种来源，职责清晰。',
+            en: 'Think of the prompt as six sections: core identity, tool definitions, skill metadata, memory content, CLAUDE.md chain, and dynamic environment. Each handles one source.',
+            ja: 'プロンプトを6セクションとして捉える：コアID、ツール定義、skillメタデータ、memory、CLAUDE.mdチェーン、動的環境情報。各セクションは1ソースのみ担当。'
+          },
+          code_example: 'SECTIONS = [\n    "core",       # 身份和行为说明\n    "tools",      # 工具列表\n    "skills",     # 技能元信息\n    "memory",     # 跨会话记忆\n    "claude_md",  # 指令文件链\n    "dynamic",    # 日期/目录/模式\n]',
+          key_point: {
+            zh: '六段各管一种来源：core + tools + skills + memory + claude_md + dynamic',
+            en: 'Six sections, one source each: core + tools + skills + memory + claude_md + dynamic',
+            ja: '6セクション各1ソース：core + tools + skills + memory + claude_md + dynamic'
+          }
+        },
+        {
+          id: 'kc_s10_003',
+          title: { zh: '稳定说明 vs 动态提醒', en: 'Stable Instructions vs Dynamic Reminders', ja: '安定した説明 vs 動的リマインダー' },
+          icon: '⚖️',
+          content: {
+            zh: '最重要的边界是稳定系统说明（身份、规则、工具）和每轮临时提醒（日期、新上下文）。两者不该混在一起——主 prompt 保持稳定，每轮变化用 reminder 追加。',
+            en: 'The key boundary is stable instructions (identity, rules, tools) vs per-turn reminders (date, new context). Keep the main prompt stable; append changes as reminders.',
+            ja: '最も重要な境界は安定したシステム説明（ID、ルール、ツール）と毎ターンのリマインダー（日付、新コンテキスト）。メインプロンプトは安定させ、変化はreminderで追加。'
+          },
+          code_example: '# 稳定部分（很少变）\nsystem_prompt = build_core() + build_tools()\n\n# 动态部分（每轮可变）\nreminder = f"Date: {today}\\nCWD: {cwd}\\nMode: {mode}"',
+          key_point: {
+            zh: '稳定说明和动态提醒分开——一个很少变，一个每轮都可能变',
+            en: 'Separate stable instructions from dynamic reminders — one rarely changes, the other may change every turn',
+            ja: '安定した説明と動的リマインダーは分離 — 前者はめったに変わらず後者は毎ターン変わりうる'
+          }
+        },
+        {
+          id: 'kc_s10_004',
+          title: { zh: 'CLAUDE.md 分层叠加', en: 'CLAUDE.md Layered Stacking', ja: 'CLAUDE.mdの階層的積み重ね' },
+          icon: '📚',
+          content: {
+            zh: 'CLAUDE.md 不是只有一个文件，它会分层：用户全局级、项目根目录级、当前子目录级。所有层全部拼进系统输入，不互相覆盖。规则来源可以分层叠加。',
+            en: 'CLAUDE.md is layered: user global, project root, current subdirectory. All layers concatenate into system input — they don\'t override each other. Instructions stack.',
+            ja: 'CLAUDE.mdは階層化：ユーザーグローバル、プロジェクトルート、サブディレクトリ。全階層がシステム入力に結合され上書きしない。指示は積み重なる。'
+          },
+          code_example: 'layers = [\n    load("~/.claude/CLAUDE.md"),        # 全局\n    load("/project/CLAUDE.md"),          # 项目\n    load("/project/frontend/CLAUDE.md"), # 子目录\n]\nclaude_md = "\\n".join(layers)',
+          key_point: {
+            zh: 'CLAUDE.md 分层叠加：全局 → 项目 → 子目录，全部拼进去不互相覆盖',
+            en: 'CLAUDE.md layers stack: global → project → subdirectory, all concatenated, never overridden',
+            ja: 'CLAUDE.mdは階層的積み重ね：グローバル→プロジェクト→サブディレクトリ、結合し上書きしない'
           }
         }
       ]
@@ -539,19 +747,67 @@ module.exports = {
       stage_id: 'stage_s11',
       cards: [
         {
-          id: 'kc_s11_placeholder',
-          title: { zh: '即将推出', en: 'Coming Soon', ja: '近日公開' },
-          icon: '🚀',
+          id: 'kc_s11_001',
+          title: { zh: '三类错误三条恢复路径', en: 'Three Error Types, Three Recovery Paths', ja: '3種類のエラーと3つの復旧パス' },
+          icon: '🔧',
           content: {
-            zh: '本章节的学习卡片正在制作中，敬请期待！你可以直接开始测验。',
-            en: 'Knowledge cards for this chapter are being prepared. You can start the quiz directly.',
-            ja: 'この章のカードは準備中です。クイズを始めることができます。'
+            zh: '只需区分三类：输出被截断（token 用完），上下文太长（装不进窗口），临时连接失败（网络抖动）。对应续写、压缩重试、退避等待三条路径。先分类再选动作。',
+            en: 'Three error types: output truncated (tokens exhausted), context too long (window overflow), transient failure (network hiccup). Three paths: continue, compact, backoff. Classify first.',
+            ja: '3種類のエラー：出力切り詰め（トークン枯渇）、コンテキスト超過、一時的接続障害。3つの復旧パス：続行、圧縮、バックオフ。まず分類してからアクション選択。'
           },
-          code_example: '',
+          code_example: 'def choose_recovery(stop_reason, error):\n    if stop_reason == "max_tokens":\n        return "continue"\n    if "prompt" in error and "long" in error:\n        return "compact"\n    if "timeout" in error or "rate" in error:\n        return "backoff"\n    return "fail"',
           key_point: {
-            zh: '点击下方按钮直接开始测验',
-            en: 'Click below to start the quiz',
-            ja: '下のボタンをクリックしてクイズを開始'
+            zh: '错误先分类，恢复再执行——不要把所有错误当一种处理',
+            en: 'Classify errors first, then recover — don\'t treat all errors the same',
+            ja: 'まずエラーを分類し、それから復旧 — すべてのエラーを同じに扱わない'
+          }
+        },
+        {
+          id: 'kc_s11_002',
+          title: { zh: '续写提示的关键', en: 'Key to Continuation Prompts', ja: '続行プロンプトのポイント' },
+          icon: '✍️',
+          content: {
+            zh: '输出被截断时不能只说"继续"。必须明确告诉模型：不要重新总结、不要重来、直接从中断点接着写。否则模型大概率重复已输出的内容。',
+            en: 'When output is truncated, don\'t just say "continue." Explicitly tell the model: don\'t re-summarize, don\'t restart, pick up from where you stopped. Otherwise it repeats content.',
+            ja: '出力切り詰め時に単に「続けて」では不十分。モデルに明示：再要約しない、やり直さない、中断点から直接続ける。そうしないと既出内容を繰り返す。'
+          },
+          code_example: 'CONTINUE_MSG = (\n    "Output limit hit. "\n    "Continue directly from where you stopped. "\n    "Do not restart or repeat."\n)\nmessages.append({"role": "user", "content": CONTINUE_MSG})',
+          key_point: {
+            zh: '续写提示必须说"不要重复、不要重来、直接接着写"',
+            en: 'The continuation prompt must say "don\'t repeat, don\'t restart, continue directly"',
+            ja: '続行プロンプトは「繰り返さない、やり直さない、直接続ける」と明示すべき'
+          }
+        },
+        {
+          id: 'kc_s11_003',
+          title: { zh: '上下文压缩恢复', en: 'Context Compaction Recovery', ja: 'コンテキスト圧縮による復旧' },
+          icon: '📦',
+          content: {
+            zh: '上下文太长时不是删历史，而是把旧对话变成仍能继续工作的摘要。摘要要保留：当前任务、已做的事、关键决定、下一步。压缩后告诉模型"这是前文摘要"。',
+            en: 'Don\'t delete history — compress old conversations into a workable summary preserving: current task, progress, key decisions, next steps. Tell the model it\'s a summary.',
+            ja: '履歴削除ではなく作業継続可能な要約に圧縮。現タスク、進捗、重要判断、次ステップを保持。圧縮後モデルに「前文の要約」と伝える。'
+          },
+          code_example: 'def auto_compact(messages):\n    summary = summarize(messages)\n    return [{\n        "role": "user",\n        "content": "Session compacted. Continue:\\n" + summary,\n    }]',
+          key_point: {
+            zh: '压缩不是删历史，而是把旧对话变成仍然能继续工作的摘要',
+            en: 'Compaction turns old conversations into a workable summary, not deletion',
+            ja: '圧縮は履歴の削除ではなく、作業を継続できる要約への変換'
+          }
+        },
+        {
+          id: 'kc_s11_004',
+          title: { zh: '退避重试与预算', en: 'Backoff Retry and Budget', ja: 'バックオフリトライと予算' },
+          icon: '⏱️',
+          content: {
+            zh: '超时或限流时别立刻重打，退避一会儿再试。但必须有重试预算（续写最多 3 次、退避最多 3 次）。没有预算程序可能无限循环。每条路径各算各的次数。',
+            en: 'On timeout or rate limit, back off then retry. But set a budget — max 3 continuations, max 3 backoffs. Without a budget, the loop may run forever. Each path counts separately.',
+            ja: 'タイムアウトやレート制限時は少し待ってリトライ。ただしリトライ予算必須（続行最大3回、バックオフ最大3回）。予算なしでは無限ループの可能性。各パスは別カウント。'
+          },
+          code_example: 'recovery = {\n    "continuation_attempts": 0,  # max 3\n    "compact_attempts": 0,       # max 3\n    "transport_attempts": 0,     # max 3\n}\ndef backoff_delay(attempt):\n    return min(1.0 * (2 ** attempt), 30.0)',
+          key_point: {
+            zh: '每条恢复路径都要有预算——没有预算，主循环可能永远卡在"继续"',
+            en: 'Every recovery path needs a budget — without one the loop might retry forever',
+            ja: '各復旧パスに予算が必要 — なければループが永遠にリトライし続ける可能性'
           }
         }
       ]
