@@ -74,7 +74,23 @@ Page({
     animStep: 0,
     reviewMode: false,
     reviewMastered: 0,
-    reviewRemaining: 0
+    reviewRemaining: 0,
+
+    comboCount: 0,
+    comboAnimTrigger: 0,
+    comboBreakTrigger: 0,
+    comboBreakShow: false,
+    feedbackAnimTrigger: 0,
+    floatScoreText: '',
+    maxCombo: 0,
+    comboMultiplier: 1.0,
+    baseExp: 0,
+
+    starRevealTrigger0: '',
+    starRevealTrigger1: '',
+    starRevealTrigger2: '',
+    scoreRevealTrigger: '',
+    expRevealTrigger: ''
   },
 
   _session: null,
@@ -302,21 +318,46 @@ Page({
     var explanation = result.explanation;
     var explText = explanation[locale] || explanation.zh || explanation.en || '';
 
-    this.setData({
+    var updateData = {
       showFeedback: true,
       feedbackCorrect: result.correct,
       feedbackExplanation: explText,
       feedbackAnswer: result.answer
-    });
+    };
 
     if (result.correct) {
+      updateData.comboCount = result.combo;
+      updateData.comboAnimTrigger = Date.now();
+
+      var multiplierLabel = '';
+      if (result.combo >= 8) multiplierLabel = ' ×2.0';
+      else if (result.combo >= 5) multiplierLabel = ' ×1.5';
+      else if (result.combo >= 3) multiplierLabel = ' ×1.2';
+      updateData.floatScoreText = '+1' + multiplierLabel;
+      updateData.feedbackAnimTrigger = Date.now();
+
       wx.vibrateShort({ type: 'light' });
       sound.play('correct');
+
+      if (result.combo === 3 || result.combo === 5 || result.combo === 8) {
+        sound.play('star');
+      }
     } else {
+      var hadCombo = this.data.comboCount >= 2;
+      updateData.comboCount = 0;
+      updateData.floatScoreText = '';
+
+      if (hadCombo) {
+        updateData.comboBreakShow = true;
+        updateData.comboBreakTrigger = Date.now();
+      }
+
       wx.vibrateShort({ type: 'heavy' });
       sound.play('wrong');
       gameReview.addToReview(q.id);
     }
+
+    this.setData(updateData);
   },
 
   nextQuestion: function() {
@@ -361,6 +402,8 @@ Page({
       feedbackCorrect: false,
       feedbackExplanation: '',
       feedbackAnswer: '',
+      comboBreakShow: false,
+      floatScoreText: '',
       questionIndex: idx,
       totalQuestions: totalQ,
       progressPercent: Math.round(idx / totalQ * 100)
@@ -475,6 +518,8 @@ Page({
       showReview: false,
       showFeedback: false,
       currentQuestion: null,
+      comboCount: 0,
+      comboBreakShow: false,
       result: {
         stars: result.stars,
         correctCount: result.correctCount,
@@ -482,6 +527,9 @@ Page({
         expReward: result.expReward,
         ratio: Math.round(result.ratio * 100)
       },
+      maxCombo: result.maxCombo,
+      comboMultiplier: result.comboMultiplier,
+      baseExp: result.baseExp,
       earnedCardDetails: earnedCardDetails,
       newLevel: leveledUp ? newLevelInfo : null
     });
@@ -497,39 +545,63 @@ Page({
 
     setTimeout(function() { self.setData({ animStep: 2 }); }, 400);
 
-    var starDelay = 600;
+    var starDelay = 650;
     for (var i = 1; i <= 3; i++) {
       (function(idx) {
         setTimeout(function() {
           self.setData({ animStep: 2 + idx });
-          if (idx <= stars) {
+          var earned = idx <= stars ? 1 : 0;
+          var triggerKey = 'starRevealTrigger' + (idx - 1);
+          var triggerData = {};
+          triggerData[triggerKey] = (idx - 1) + '_' + earned + '_' + Date.now();
+          self.setData(triggerData);
+          if (earned) {
             wx.vibrateShort({ type: 'medium' });
             sound.play('star');
           }
-        }, starDelay + idx * 200);
+        }, starDelay + (idx - 1) * 250);
       })(i);
     }
 
-    setTimeout(function() { self.setData({ animStep: 6 }); }, 1400);
+    setTimeout(function() {
+      self.setData({ animStep: 6 });
+      var r = self.data.result;
+      self.setData({
+        scoreRevealTrigger: r.correctCount + '_' + r.totalQuestions + '_' + r.ratio + '_' + Date.now()
+      });
+    }, 1500);
 
-    setTimeout(function() { self.setData({ animStep: 7 }); }, 1600);
+    setTimeout(function() {
+      self.setData({ animStep: 7 });
+      var r = self.data.result;
+      self.setData({
+        expRevealTrigger: r.expReward + '_' + self.data.comboMultiplier + '_' + Date.now()
+      });
+    }, 1800);
+
+    var comboDelay = 2000;
+    if (self.data.maxCombo >= 3) {
+      setTimeout(function() { self.setData({ animStep: 8 }); }, comboDelay);
+      comboDelay = 2200;
+    }
 
     if (self.data.newLevel) {
       setTimeout(function() {
-        self.setData({ animStep: 8 });
+        self.setData({ animStep: 9 });
         wx.vibrateLong();
         sound.play('levelup');
-      }, 1800);
+      }, comboDelay);
+      comboDelay += 200;
     }
 
-    var cardStartDelay = self.data.newLevel ? 2100 : 1800;
+    var cardStartDelay = comboDelay + 200;
     var earnedCards = self.data.earnedCardDetails || [];
     for (var j = 0; j < earnedCards.length; j++) {
       (function(idx) {
         setTimeout(function() {
-          self.setData({ animStep: 9 + idx });
+          self.setData({ animStep: 10 + idx });
           sound.play('card');
-        }, cardStartDelay + idx * 150);
+        }, cardStartDelay + idx * 200);
       })(j);
     }
   },
@@ -554,7 +626,18 @@ Page({
         showReview: false,
         showFeedback: false,
         selectedOption: '',
-        animStep: 0
+        animStep: 0,
+        comboCount: 0,
+        comboBreakShow: false,
+        floatScoreText: '',
+        maxCombo: 0,
+        comboMultiplier: 1.0,
+        baseExp: 0,
+        starRevealTrigger0: '',
+        starRevealTrigger1: '',
+        starRevealTrigger2: '',
+        scoreRevealTrigger: '',
+        expRevealTrigger: ''
       });
     }
   },
