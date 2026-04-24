@@ -5560,255 +5560,918 @@ module.exports = {
           "type": "choice",
           "difficulty": 1,
           "stem": {
-            "zh": "以下哪个概念与「这一章的核心目标」直接相关？",
-            "en": "Which concept is directly related to \"What You'll Learn\"?",
-            "ja": "「この章の核心目標」に直接関連する概念はどれですか？"
+            "zh": "权限管道的第一步是什么？",
+            "en": "What is the first step in the permission pipeline?",
+            "ja": "権限パイプラインの最初のステップは何ですか？"
           },
           "options": [
             {
-              "id": "c",
+              "id": "a",
               "text": {
-                "zh": "学完这章后，你应该能回答",
-                "en": "学完这章后，你应该能回答",
-                "ja": "学完这章后，你应该能回答"
+                "zh": "检查 deny rules，拦截危险操作",
+                "en": "Check deny rules to block dangerous operations",
+                "ja": "deny rules を確認して危険な操作をブロックする"
               }
             },
             {
               "id": "b",
               "text": {
-                "zh": "初学者最容易犯的错",
-                "en": "初学者最容易犯的错",
-                "ja": "初学者最容易犯的错"
+                "zh": "询问用户是否允许",
+                "en": "Ask the user for permission",
+                "ja": "ユーザーに許可を求める"
+              }
+            },
+            {
+              "id": "c",
+              "text": {
+                "zh": "检查 allow rules，自动放行",
+                "en": "Check allow rules to auto-approve",
+                "ja": "allow rules を確認して自動承認する"
               }
             },
             {
               "id": "d",
               "text": {
-                "zh": "建议联读",
-                "en": "The Problem",
-                "ja": "併読すると楽になる資料"
-              }
-            },
-            {
-              "id": "a",
-              "text": {
-                "zh": "这一章的核心目标",
-                "en": "What You'll Learn",
-                "ja": "この章の核心目標"
+                "zh": "判断当前是哪种权限模式",
+                "en": "Determine the current permission mode",
+                "ja": "現在の権限モードを判定する"
               }
             }
           ],
           "answer": "a",
           "explanation": {
-            "zh": "“意图”不能直接变成“执行”，中间必须经过权限检查。",
-            "en": "What You'll Learn",
-            "ja": "「model の意図」がそのまま「実行」へ落ちる"
+            "zh": "权限管道四步顺序是：先 deny rules 拦截危险操作，再看当前模式，再看 allow rules，最后才问用户。deny rules 是第一道关卡，确保危险操作最先被拦截。",
+            "en": "The pipeline order is: deny rules first, then mode check, then allow rules, then ask user. deny rules act as the first gate to block dangerous operations immediately.",
+            "ja": "パイプラインの順序は deny rules、モード確認、allow rules、ユーザー確認の順です。deny rules が最初のゲートとして危険な操作を即座にブロックします。"
           },
           "reward_card": "card_s07_001"
         },
         {
           "id": "q_s07_002",
           "type": "choice",
-          "difficulty": 1,
+          "difficulty": 2,
           "stem": {
-            "zh": "以下哪个概念与「建议联读」直接相关？",
-            "en": "Which concept is directly related to \"The Problem\"?",
-            "ja": "「併読すると楽になる資料」に直接関連する概念はどれですか？"
+            "zh": "工具调用请求到达后，权限管道的正确执行顺序是？",
+            "en": "After a tool call arrives, what is the correct order of the permission pipeline?",
+            "ja": "ツール呼び出しが届いた後、権限パイプラインの正しい実行順序は？"
           },
           "options": [
             {
-              "id": "d",
+              "id": "a",
               "text": {
-                "zh": "1. 把所有错误都当成一种错误",
-                "en": "1. 把所有错误都当成一种错误",
-                "ja": "初学者が混ぜやすいポイント"
-              }
-            },
-            {
-              "id": "c",
-              "text": {
-                "zh": "这一章和前后章节怎么衔接",
-                "en": "这一章和前后章节怎么衔接",
-                "ja": "5. なぜ続行しているのかを state に残さない"
+                "zh": "allow rules → deny rules → 当前模式 → 询问用户",
+                "en": "allow rules -> deny rules -> mode check -> ask user",
+                "ja": "allow rules -> deny rules -> モード確認 -> ユーザー確認"
               }
             },
             {
               "id": "b",
               "text": {
-                "zh": "最小心智模型",
-                "en": "Read Together",
-                "ja": "最小心智モデル"
+                "zh": "deny rules → 当前模式 → allow rules → 询问用户",
+                "en": "deny rules -> mode check -> allow rules -> ask user",
+                "ja": "deny rules -> モード確認 -> allow rules -> ユーザー確認"
               }
             },
             {
-              "id": "a",
+              "id": "c",
               "text": {
-                "zh": "建议联读",
-                "en": "The Problem",
-                "ja": "併読すると楽になる資料"
+                "zh": "当前模式 → deny rules → allow rules → 询问用户",
+                "en": "mode check -> deny rules -> allow rules -> ask user",
+                "ja": "モード確認 -> deny rules -> allow rules -> ユーザー確認"
+              }
+            },
+            {
+              "id": "d",
+              "text": {
+                "zh": "询问用户 → deny rules → allow rules → 当前模式",
+                "en": "ask user -> deny rules -> allow rules -> mode check",
+                "ja": "ユーザー確認 -> deny rules -> allow rules -> モード確認"
               }
             }
           ],
-          "answer": "a",
+          "answer": "b",
           "explanation": {
-            "zh": "建议联读",
-            "en": "The Problem",
-            "ja": "併読すると楽になる資料"
+            "zh": "正确顺序是 deny→模式→allow→问用户。deny rules 最先执行，确保危险操作第一时间被拦截；allow rules 放行安全操作，避免打扰用户；只有两类规则都未命中才会询问用户。",
+            "en": "The correct order is deny->mode->allow->ask user. deny rules run first to catch dangerous operations immediately; allow rules approve safe ones without bothering the user; the user is only asked as a last resort.",
+            "ja": "正しい順序は deny->モード->allow->ユーザー確認です。deny rules が最初に実行されて危険な操作を即座に捕捉し、allow rules が安全な操作を承認してユーザーを煩わせず、どちらにも該当しない場合のみユーザーに確認します。"
           },
-          "reward_card": "card_s07_002"
+          "reward_card": "card_s07_001"
         },
         {
           "id": "q_s07_003",
           "type": "choice",
-          "difficulty": 1,
+          "difficulty": 2,
           "stem": {
-            "zh": "以下哪个概念与「先解释几个名词」直接相关？",
-            "en": "Which concept is directly related to \"The Solution\"?",
-            "ja": "「先に言葉をそろえる」に直接関連する概念はどれですか？"
+            "zh": "在权限管道中，allow rules 的作用是什么？",
+            "en": "What is the role of allow rules in the permission pipeline?",
+            "ja": "権限パイプラインにおいて allow rules の役割は何ですか？"
           },
           "options": [
             {
-              "id": "d",
+              "id": "a",
               "text": {
-                "zh": "memory 为什么要和 system prompt 有关系",
-                "en": "memory 为什么要和 system prompt 有关系",
-                "ja": "memory 为什么要和 system prompt 有关系"
-              }
-            },
-            {
-              "id": "c",
-              "text": {
-                "zh": "三条恢复路径分别在补什么洞",
-                "en": "三条恢复路径分别在补什么洞",
-                "ja": "第 1 段階: recovery chooser を作る"
+                "zh": "拦截危险操作，阻止执行",
+                "en": "Block dangerous operations from executing",
+                "ja": "危険な操作をブロックして実行を阻止する"
               }
             },
             {
               "id": "b",
               "text": {
-                "zh": "第二步：先做 deny / allow 两类规则",
-                "en": "第二步：先做 deny / allow 两类规则",
-                "ja": "初学者が混ぜやすいポイント"
+                "zh": "决定当前是 plan 模式还是 auto 模式",
+                "en": "Determine whether the current mode is plan or auto",
+                "ja": "現在のモードが plan か auto かを決定する"
               }
             },
             {
-              "id": "a",
+              "id": "c",
               "text": {
-                "zh": "先解释几个名词",
-                "en": "The Solution",
-                "ja": "先に言葉をそろえる"
+                "zh": "让安全操作自动通过，不再询问用户",
+                "en": "Auto-approve safe operations so the user is not asked",
+                "ja": "安全な操作を自動承認してユーザーへの確認を省略する"
+              }
+            },
+            {
+              "id": "d",
+              "text": {
+                "zh": "记录操作日志供审计使用",
+                "en": "Log operations for audit purposes",
+                "ja": "監査用に操作ログを記録する"
               }
             }
           ],
-          "answer": "a",
+          "answer": "c",
           "explanation": {
-            "zh": "先解释几个名词",
-            "en": "The Solution",
-            "ja": "先に言葉をそろえる"
+            "zh": "allow rules 负责识别已知安全的操作并自动放行，避免对每次无害操作都打扰用户。拦截危险操作是 deny rules 的职责，模式判断是独立的第二步。",
+            "en": "allow rules identify known-safe operations and approve them automatically, avoiding interrupting the user for every harmless action. Blocking dangerous ops is deny rules' job; mode checking is a separate second step.",
+            "ja": "allow rules は既知の安全な操作を識別して自動承認し、無害なアクションごとにユーザーを中断させないようにします。危険な操作のブロックは deny rules の役割で、モード確認は独立した第 2 ステップです。"
           },
-          "reward_card": "card_s07_003"
+          "reward_card": "card_s07_001"
         },
         {
           "id": "q_s07_004",
           "type": "choice",
           "difficulty": 1,
           "stem": {
-            "zh": "以下哪个概念与「什么是权限系统」直接相关？",
-            "en": "Which concept is directly related to \"Read Together\"?",
-            "ja": "「permission system とは何か」に直接関連する概念はどれですか？"
+            "zh": "plan 模式下，写操作（write_file 等）会怎样处理？",
+            "en": "In plan mode, how are write operations (e.g., write_file) handled?",
+            "ja": "plan モードでは、書き込み操作（write_file など）はどのように処理されますか？"
           },
           "options": [
             {
+              "id": "a",
+              "text": {
+                "zh": "先询问用户，再决定是否执行",
+                "en": "Ask the user first, then decide whether to execute",
+                "ja": "まずユーザーに確認してから実行するかどうか決める"
+              }
+            },
+            {
               "id": "b",
               "text": {
-                "zh": "第三步：给 bash 加最小安全检查",
-                "en": "第三步：给 bash 加最小安全检查",
-                "ja": "1. permission を yes/no の 2 値で考える"
+                "zh": "由 allow rules 决定是否放行",
+                "en": "allow rules decide whether to approve",
+                "ja": "allow rules が承認するかどうかを決める"
               }
             },
             {
               "id": "c",
               "text": {
-                "zh": "什么是“组装流水线”",
-                "en": "What Changed from s09",
-                "ja": "最小 builder"
+                "zh": "只记录意图，延迟到会话结束再统一执行",
+                "en": "Record intent only, execute all at once at session end",
+                "ja": "意図のみ記録し、セッション終了時にまとめて実行する"
               }
             },
             {
               "id": "d",
               "text": {
-                "zh": "学完这章后，你应该能回答",
-                "en": "学完这章后，你应该能回答",
-                "ja": "学完这章后，你应该能回答"
-              }
-            },
-            {
-              "id": "a",
-              "text": {
-                "zh": "什么是权限系统",
-                "en": "Read Together",
-                "ja": "permission system とは何か"
+                "zh": "直接被拒绝，不允许任何写操作",
+                "en": "Directly rejected; no write operations are allowed",
+                "ja": "直接拒否され、書き込み操作は一切許可されない"
               }
             }
           ],
-          "answer": "a",
+          "answer": "d",
           "explanation": {
-            "zh": "什么是权限系统",
-            "en": "Read Together",
-            "ja": "permission system とは何か"
+            "zh": "plan 模式的核心特征是只允许读操作、阻止所有写操作。这确保 Claude 在规划阶段只能收集信息而无法改变系统状态，是三种模式中限制最严格的。",
+            "en": "The defining feature of plan mode is allowing only reads and blocking all writes. This ensures Claude can only gather information during planning without changing system state -- the most restrictive of the three modes.",
+            "ja": "plan モードの核心的な特徴は読み取り操作のみを許可し、すべての書き込み操作をブロックすることです。これにより Claude は計画段階で情報収集のみが可能でシステム状態を変更できず、3 つのモードの中で最も制限が厳しいです。"
           },
-          "reward_card": "card_s07_004"
+          "reward_card": "card_s07_002"
         },
         {
           "id": "q_s07_005",
           "type": "choice",
-          "difficulty": 1,
+          "difficulty": 2,
           "stem": {
-            "zh": "以下哪个概念与「什么是权限模式」直接相关？",
-            "en": "Which concept is directly related to \"How It Works\"?",
-            "ja": "「permission mode とは何か」に直接関連する概念はどれですか？"
+            "zh": "auto 模式与 default 模式的核心区别是什么？",
+            "en": "What is the key difference between auto mode and default mode?",
+            "ja": "auto モードと default モードの核心的な違いは何ですか？"
           },
           "options": [
             {
-              "id": "b",
-              "text": {
-                "zh": "什么叫恢复",
-                "en": "How It Works",
-                "ja": "recovery とは何か"
-              }
-            },
-            {
               "id": "a",
               "text": {
-                "zh": "什么是权限模式",
-                "en": "How It Works",
-                "ja": "permission mode とは何か"
+                "zh": "auto 模式让安全操作自动通过，危险操作才询问；default 模式未命中规则就询问",
+                "en": "auto mode auto-approves safe ops and only asks for dangerous ones; default mode asks whenever no rule matches",
+                "ja": "auto モードは安全な操作を自動承認して危険な操作のみ確認し、default モードはルールに一致しない場合に確認する"
               }
             },
             {
-              "id": "d",
+              "id": "b",
               "text": {
-                "zh": "初学者最容易犯的错",
-                "en": "初学者最容易犯的错",
-                "ja": "2. Hook ごとに別のデータ形を渡す"
+                "zh": "auto 模式完全不需要权限系统，所有操作直接执行",
+                "en": "auto mode bypasses the permission system entirely",
+                "ja": "auto モードは権限システムを完全にバイパスする"
               }
             },
             {
               "id": "c",
               "text": {
-                "zh": "1. 权限规则",
-                "en": "1. 权限规则",
-                "ja": "1. PermissionRule"
+                "zh": "default 模式只允许读操作，auto 模式允许读写",
+                "en": "default mode only allows reads; auto mode allows reads and writes",
+                "ja": "default モードは読み取りのみ許可し、auto モードは読み書きを許可する"
+              }
+            },
+            {
+              "id": "d",
+              "text": {
+                "zh": "auto 模式下 deny rules 不生效",
+                "en": "deny rules do not apply in auto mode",
+                "ja": "auto モードでは deny rules が適用されない"
               }
             }
           ],
           "answer": "a",
           "explanation": {
-            "zh": "什么是权限模式",
-            "en": "Step 1.",
-            "ja": "permission mode とは何か"
+            "zh": "default 模式下，未命中任何规则的操作都会询问用户；auto 模式则让 allow rules 覆盖更多安全操作，只有真正危险的操作才打扰用户。两种模式都经过完整的权限管道，deny rules 依然有效。",
+            "en": "In default mode, any operation not matched by a rule prompts the user; in auto mode allow rules cover more safe operations so only genuinely dangerous ones ask the user. Both modes still run through the full pipeline and deny rules still apply.",
+            "ja": "default モードではルールに一致しない操作がユーザーに確認を求め、auto モードでは allow rules がより多くの安全な操作をカバーして本当に危険な操作のみユーザーに確認します。両モードとも完全なパイプラインを経由し deny rules は引き続き有効です。"
           },
-          "reward_card": "card_s07_005"
+          "reward_card": "card_s07_002"
+        },
+        {
+          "id": "q_s07_006",
+          "type": "choice",
+          "difficulty": 1,
+          "stem": {
+            "zh": "以下三种权限模式中，哪种对写操作限制最严格？",
+            "en": "Among the three permission modes, which is most restrictive for write operations?",
+            "ja": "3 つの権限モードのうち、書き込み操作に最も厳しい制限を設けているのはどれですか？"
+          },
+          "options": [
+            {
+              "id": "a",
+              "text": {
+                "zh": "auto 模式",
+                "en": "auto mode",
+                "ja": "auto モード"
+              }
+            },
+            {
+              "id": "b",
+              "text": {
+                "zh": "plan 模式",
+                "en": "plan mode",
+                "ja": "plan モード"
+              }
+            },
+            {
+              "id": "c",
+              "text": {
+                "zh": "default 模式",
+                "en": "default mode",
+                "ja": "default モード"
+              }
+            },
+            {
+              "id": "d",
+              "text": {
+                "zh": "三种模式对写操作的限制相同",
+                "en": "All three modes restrict writes equally",
+                "ja": "3 つのモードはすべて書き込み制限が同じ"
+              }
+            }
+          ],
+          "answer": "b",
+          "explanation": {
+            "zh": "plan 模式完全禁止写操作，是三种模式中限制最严的。auto 模式最宽松（安全写操作可自动通过），default 模式居中（未命中规则才询问）。",
+            "en": "plan mode completely prohibits write operations, making it the most restrictive of the three. auto mode is most permissive (safe writes auto-pass), default mode is in between (asks when no rule matches).",
+            "ja": "plan モードは書き込み操作を完全に禁止し、3 つのモードの中で最も制限が厳しいです。auto モードが最も寛容（安全な書き込みは自動通過）で、default モードはその中間（ルール不一致時に確認）です。"
+          },
+          "reward_card": "card_s07_002"
+        },
+        {
+          "id": "q_s07_007",
+          "type": "choice",
+          "difficulty": 2,
+          "stem": {
+            "zh": "为什么说 bash 工具调用必须「特殊对待」，而不能像 read_file 一样处理？",
+            "en": "Why must bash tool calls be treated specially rather than like read_file calls?",
+            "ja": "なぜ bash ツール呼び出しは read_file のように処理せず「特別扱い」しなければならないのですか？"
+          },
+          "options": [
+            {
+              "id": "a",
+              "text": {
+                "zh": "bash 调用比 read_file 慢，需要单独排队",
+                "en": "bash calls are slower than read_file and need a separate queue",
+                "ja": "bash 呼び出しは read_file より遅いため別のキューが必要"
+              }
+            },
+            {
+              "id": "b",
+              "text": {
+                "zh": "bash 调用需要额外的日志记录",
+                "en": "bash calls require extra logging",
+                "ja": "bash 呼び出しには追加のログ記録が必要"
+              }
+            },
+            {
+              "id": "c",
+              "text": {
+                "zh": "bash 命令是可执行动作描述，几乎能做任何事，危险程度远超读写文件",
+                "en": "bash commands are executable action descriptions that can do almost anything, far more dangerous than file reads/writes",
+                "ja": "bash コマンドはほぼ何でもできる実行可能なアクション記述であり、ファイルの読み書きよりはるかに危険"
+              }
+            },
+            {
+              "id": "d",
+              "text": {
+                "zh": "read_file 也需要特殊处理，两者一样危险",
+                "en": "read_file also needs special treatment; they are equally dangerous",
+                "ja": "read_file も特別な処理が必要で、両者は同等に危険"
+              }
+            }
+          ],
+          "answer": "c",
+          "explanation": {
+            "zh": "read_file 只能读文件，write_file 只能写文件，功能都是单一的。bash 则不同——它是一段可执行动作描述，能删文件、启进程、修改系统设置……几乎没有限制，因此必须专门检查 sudo、rm -rf 等危险模式。",
+            "en": "read_file only reads files and write_file only writes files -- their scope is narrow. bash is an executable action description that can delete files, spawn processes, modify system settings, and more, so it requires dedicated checks for dangerous patterns like sudo and rm -rf.",
+            "ja": "read_file はファイルを読むだけで write_file はファイルを書くだけであり、スコープは狭いです。bash は実行可能なアクション記述でファイルの削除、プロセスの起動、システム設定の変更などほぼ何でもできるため、sudo や rm -rf などの危険なパターンの専用チェックが必要です。"
+          },
+          "reward_card": "card_s07_003"
+        },
+        {
+          "id": "q_s07_008",
+          "type": "choice",
+          "difficulty": 2,
+          "stem": {
+            "zh": "对 bash 命令进行安全检查时，至少应该检测哪些危险模式？",
+            "en": "When checking bash commands for safety, which dangerous patterns should be detected at minimum?",
+            "ja": "bash コマンドの安全チェック時に最低限検出すべき危険なパターンはどれですか？"
+          },
+          "options": [
+            {
+              "id": "a",
+              "text": {
+                "zh": "所有包含空格的命令",
+                "en": "All commands that contain spaces",
+                "ja": "スペースを含むすべてのコマンド"
+              }
+            },
+            {
+              "id": "b",
+              "text": {
+                "zh": "超过 50 个字符的命令",
+                "en": "Commands longer than 50 characters",
+                "ja": "50 文字を超えるコマンド"
+              }
+            },
+            {
+              "id": "c",
+              "text": {
+                "zh": "任何包含 python 或 node 的命令",
+                "en": "Any command containing python or node",
+                "ja": "python または node を含むすべてのコマンド"
+              }
+            },
+            {
+              "id": "d",
+              "text": {
+                "zh": "sudo、rm -rf 等高权限或不可逆操作",
+                "en": "sudo, rm -rf, and other high-privilege or irreversible operations",
+                "ja": "sudo、rm -rf などの高権限または不可逆な操作"
+              }
+            }
+          ],
+          "answer": "d",
+          "explanation": {
+            "zh": "bash 安全检查的最低标准是识别不可逆或提权操作，典型代表是 sudo（获取超级权限）和 rm -rf（递归删除文件）。命令长度、是否含空格等与危险性无关。",
+            "en": "The minimum bar for bash safety checks is identifying irreversible or privilege-escalating operations, typified by sudo (gaining superuser access) and rm -rf (recursive deletion). Command length or containing spaces has no bearing on danger.",
+            "ja": "bash 安全チェックの最低基準は不可逆または権限昇格操作の識別であり、典型例は sudo（スーパーユーザー権限の取得）と rm -rf（再帰的削除）です。コマンドの長さやスペースの有無は危険性と無関係です。"
+          },
+          "reward_card": "card_s07_003"
+        },
+        {
+          "id": "q_s07_009",
+          "type": "choice",
+          "difficulty": 1,
+          "stem": {
+            "zh": "bash 命令与 read_file、write_file 相比，危险性更高的根本原因是？",
+            "en": "What is the fundamental reason bash commands are more dangerous than read_file or write_file?",
+            "ja": "bash コマンドが read_file や write_file より危険な根本的な理由は？"
+          },
+          "options": [
+            {
+              "id": "a",
+              "text": {
+                "zh": "bash 命令执行速度更快，来不及拦截",
+                "en": "bash commands execute faster, leaving no time to intercept",
+                "ja": "bash コマンドは実行が速くインターセプトする時間がない"
+              }
+            },
+            {
+              "id": "b",
+              "text": {
+                "zh": "bash 能执行几乎任意系统操作，功能边界远比 read/write 宽",
+                "en": "bash can execute almost any system operation; its scope is far broader than read/write",
+                "ja": "bash はほぼ任意のシステム操作を実行でき、そのスコープは read/write よりはるかに広い"
+              }
+            },
+            {
+              "id": "c",
+              "text": {
+                "zh": "bash 是网络工具，可能发送数据到外部",
+                "en": "bash is a network tool that may send data externally",
+                "ja": "bash はネットワークツールで外部にデータを送信する可能性がある"
+              }
+            },
+            {
+              "id": "d",
+              "text": {
+                "zh": "bash 不支持权限规则，必须绕过管道",
+                "en": "bash does not support permission rules and must bypass the pipeline",
+                "ja": "bash は権限ルールをサポートしておらずパイプラインをバイパスする必要がある"
+              }
+            }
+          ],
+          "answer": "b",
+          "explanation": {
+            "zh": "read_file 只读文件、write_file 只写文件，操作边界非常清晰。bash 则是一个通用执行器，能够组合任意系统调用，因此其能力边界几乎无限，危险性也远超其他工具。",
+            "en": "read_file only reads and write_file only writes -- their boundaries are clear. bash is a general-purpose executor that can combine arbitrary system calls, so its capability boundary is nearly unlimited, making it far more dangerous.",
+            "ja": "read_file は読むだけで write_file は書くだけで境界が明確です。bash は任意のシステム呼び出しを組み合わせられる汎用実行器であり、その能力の境界はほぼ無限で他のツールよりはるかに危険です。"
+          },
+          "reward_card": "card_s07_003"
+        },
+        {
+          "id": "q_s07_010",
+          "type": "choice",
+          "difficulty": 2,
+          "stem": {
+            "zh": "一条 PermissionRule 最少需要哪三个字段？",
+            "en": "What are the minimum three fields a PermissionRule must have?",
+            "ja": "PermissionRule が最低限持つべき 3 つのフィールドは何ですか？"
+          },
+          "options": [
+            {
+              "id": "a",
+              "text": {
+                "zh": "工具名、用户名、时间戳",
+                "en": "tool name, username, timestamp",
+                "ja": "ツール名、ユーザー名、タイムスタンプ"
+              }
+            },
+            {
+              "id": "b",
+              "text": {
+                "zh": "针对哪个工具、匹配什么模式、命中后怎么处理",
+                "en": "which tool, what pattern to match, what action to take on match",
+                "ja": "対象のツール、マッチするパターン、マッチ時のアクション"
+              }
+            },
+            {
+              "id": "c",
+              "text": {
+                "zh": "规则 ID、优先级、描述",
+                "en": "rule ID, priority, description",
+                "ja": "ルール ID、優先度、説明"
+              }
+            },
+            {
+              "id": "d",
+              "text": {
+                "zh": "工具名、执行结果、日志级别",
+                "en": "tool name, execution result, log level",
+                "ja": "ツール名、実行結果、ログレベル"
+              }
+            }
+          ],
+          "answer": "b",
+          "explanation": {
+            "zh": "PermissionRule 的最小三要素是：工具（针对哪个工具生效）、模式（匹配什么样的参数或命令）、动作（命中后允许、拒绝还是询问）。规则 ID、优先级等是辅助字段，不是必需的最小结构。",
+            "en": "The minimum three elements of a PermissionRule are: tool (which tool it applies to), pattern (what arguments or commands to match), and action (allow, deny, or ask on match). Rule ID and priority are supplementary fields, not minimum requirements.",
+            "ja": "PermissionRule の最小 3 要素は、ツール（どのツールに適用するか）、パターン（どの引数やコマンドにマッチするか）、アクション（マッチ時に許可・拒否・確認のいずれか）です。ルール ID や優先度は補助フィールドで最小構造には不要です。"
+          },
+          "reward_card": "card_s07_001"
+        },
+        {
+          "id": "q_s07_011",
+          "type": "choice",
+          "difficulty": 2,
+          "stem": {
+            "zh": "权限决策结果（PermissionDecision）和权限规则（PermissionRule）为什么要分成两层，而不是合并？",
+            "en": "Why are PermissionDecision and PermissionRule kept as two separate layers rather than merged?",
+            "ja": "PermissionDecision と PermissionRule はなぜ統合せず 2 つの層に分けるのですか？"
+          },
+          "options": [
+            {
+              "id": "a",
+              "text": {
+                "zh": "规则和决策合并可以减少代码量",
+                "en": "Merging rules and decisions reduces code volume",
+                "ja": "ルールと決定を統合するとコード量が減る"
+              }
+            },
+            {
+              "id": "b",
+              "text": {
+                "zh": "决策结果需要加密，所以单独存储",
+                "en": "Decisions need encryption so they are stored separately",
+                "ja": "決定結果は暗号化が必要なので別々に保存する"
+              }
+            },
+            {
+              "id": "c",
+              "text": {
+                "zh": "规则描述通用匹配逻辑，决策记录具体情境下的结果和理由，职责不同",
+                "en": "Rules describe generic match logic; decisions record the outcome and rationale for a specific context -- different responsibilities",
+                "ja": "ルールは汎用的なマッチロジックを記述し、決定は特定のコンテキストにおける結果と理由を記録する -- 責務が異なる"
+              }
+            },
+            {
+              "id": "d",
+              "text": {
+                "zh": "这只是代码风格偏好，无实际功能差异",
+                "en": "It is just a code style preference with no functional difference",
+                "ja": "これは単なるコードスタイルの好みで機能的な違いはない"
+              }
+            }
+          ],
+          "answer": "c",
+          "explanation": {
+            "zh": "规则是静态的匹配模板（工具+模式+动作），适合复用；决策是运行时产生的具体结论，需要附带理由、上下文等信息。两层分离使规则可以被多次调用，决策则携带每次判断的完整依据。",
+            "en": "Rules are static match templates (tool+pattern+action) suited for reuse; decisions are runtime conclusions that need rationale and context. Separating the two lets rules be reused across many calls while each decision carries full justification for that specific invocation.",
+            "ja": "ルールは再利用に適した静的なマッチテンプレート（ツール+パターン+アクション）で、決定は理由やコンテキストを含む実行時の具体的な結論です。2 層に分けることでルールを多数の呼び出しで再利用でき、各決定はその特定の呼び出しの完全な根拠を持ちます。"
+          },
+          "reward_card": "card_s07_001"
+        },
+        {
+          "id": "q_s07_012",
+          "type": "choice",
+          "difficulty": 3,
+          "stem": {
+            "zh": "某次工具调用没有命中任何 deny rule，也没有命中任何 allow rule，当前处于 default 模式。管道接下来会怎么做？",
+            "en": "A tool call matches no deny rule and no allow rule, and the current mode is default. What does the pipeline do next?",
+            "ja": "あるツール呼び出しが deny rule にも allow rule にもマッチせず、現在のモードが default の場合、パイプラインは次に何をしますか？"
+          },
+          "options": [
+            {
+              "id": "a",
+              "text": {
+                "zh": "自动拒绝，视为潜在危险操作",
+                "en": "Automatically reject it as a potentially dangerous operation",
+                "ja": "潜在的に危険な操作として自動拒否する"
+              }
+            },
+            {
+              "id": "b",
+              "text": {
+                "zh": "自动允许，因为没有明确拒绝规则",
+                "en": "Automatically allow it because no explicit deny rule matched",
+                "ja": "明示的な deny rule がマッチしなかったので自動許可する"
+              }
+            },
+            {
+              "id": "c",
+              "text": {
+                "zh": "切换到 plan 模式并重新评估",
+                "en": "Switch to plan mode and re-evaluate",
+                "ja": "plan モードに切り替えて再評価する"
+              }
+            },
+            {
+              "id": "d",
+              "text": {
+                "zh": "询问用户是否允许",
+                "en": "Ask the user for permission",
+                "ja": "ユーザーに許可を求める"
+              }
+            }
+          ],
+          "answer": "d",
+          "explanation": {
+            "zh": "在 default 模式下，如果操作既没被 deny rules 拦截，也没被 allow rules 放行，管道会到达最后一步：询问用户。这正是 default 模式与 auto 模式的核心区别——auto 模式会通过更宽松的 allow rules 覆盖更多操作，减少询问次数。",
+            "en": "In default mode, when an operation passes deny rules but is not covered by allow rules, the pipeline reaches its final step: asking the user. This is exactly the core difference from auto mode -- auto mode uses broader allow rules to cover more operations and ask less often.",
+            "ja": "default モードでは、操作が deny rules を通過しても allow rules でカバーされていない場合、パイプラインは最終ステップであるユーザーへの確認に到達します。これが auto モードとの核心的な違いで、auto モードはより広い allow rules を使ってより多くの操作をカバーし確認頻度を減らします。"
+          },
+          "reward_card": "card_s07_002"
+        },
+        {
+          "id": "q_s07_013",
+          "type": "choice",
+          "difficulty": 3,
+          "stem": {
+            "zh": "plan 模式下，一条 allow rule 明确允许 write_file 操作，该操作会被执行吗？",
+            "en": "In plan mode, if an allow rule explicitly permits a write_file operation, will it be executed?",
+            "ja": "plan モードで allow rule が write_file 操作を明示的に許可している場合、その操作は実行されますか？"
+          },
+          "options": [
+            {
+              "id": "a",
+              "text": {
+                "zh": "会执行，因为 allow rule 优先级高于模式检查",
+                "en": "Yes, because allow rules have higher priority than mode checks",
+                "ja": "はい、allow rules はモード確認より優先度が高いから"
+              }
+            },
+            {
+              "id": "b",
+              "text": {
+                "zh": "不会执行，plan 模式在管道第二步就阻止所有写操作",
+                "en": "No, plan mode blocks all write operations at the second step of the pipeline",
+                "ja": "いいえ、plan モードはパイプラインの第 2 ステップですべての書き込み操作をブロックする"
+              }
+            },
+            {
+              "id": "c",
+              "text": {
+                "zh": "会执行，但会在日志中标记为异常",
+                "en": "Yes, but it is flagged as anomalous in logs",
+                "ja": "はい、ただしログに異常としてフラグが立てられる"
+              }
+            },
+            {
+              "id": "d",
+              "text": {
+                "zh": "取决于 deny rules 是否有对应拦截规则",
+                "en": "It depends on whether deny rules have a matching block rule",
+                "ja": "deny rules に対応するブロックルールがあるかどうかによる"
+              }
+            }
+          ],
+          "answer": "b",
+          "explanation": {
+            "zh": "管道的第二步是模式检查，plan 模式在此直接阻止所有写操作，执行不会继续到 allow rules 阶段。allow rules 是第三步，排在模式检查之后，因此在 plan 模式下 allow rules 无法覆盖写操作的限制。",
+            "en": "The second pipeline step is mode check, and plan mode blocks all writes there before reaching allow rules. allow rules are the third step, after mode check, so in plan mode they cannot override the write restriction.",
+            "ja": "パイプラインの第 2 ステップはモード確認で、plan モードはそこで allow rules に到達する前にすべての書き込みをブロックします。allow rules はモード確認の後の第 3 ステップなので、plan モードでは書き込み制限を上書きできません。"
+          },
+          "reward_card": "card_s07_002"
+        },
+        {
+          "id": "q_s07_014",
+          "type": "choice",
+          "difficulty": 3,
+          "stem": {
+            "zh": "在权限系统中，`rm -rf /tmp/cache` 的危险性与 `rm -rf /` 的危险性是否需要区分对待？",
+            "en": "In the permission system, should 'rm -rf /tmp/cache' and 'rm -rf /' be treated differently in terms of danger?",
+            "ja": "権限システムにおいて、'rm -rf /tmp/cache' と 'rm -rf /' の危険性は区別して扱う必要がありますか？"
+          },
+          "options": [
+            {
+              "id": "a",
+              "text": {
+                "zh": "不需要，两者都包含 rm -rf，一律拒绝即可",
+                "en": "No, both contain rm -rf and should be rejected uniformly",
+                "ja": "いいえ、両方とも rm -rf を含むので一律拒否でよい"
+              }
+            },
+            {
+              "id": "b",
+              "text": {
+                "zh": "不需要，bash 工具调用统一走安全审计队列，不做细粒度区分",
+                "en": "No, bash calls go through a unified audit queue without fine-grained distinction",
+                "ja": "いいえ、bash 呼び出しは統一した監査キューを経由し細粒度の区別はしない"
+              }
+            },
+            {
+              "id": "c",
+              "text": {
+                "zh": "需要，细粒度规则可以区分高危和低危 bash 命令，避免过度拦截",
+                "en": "Yes, fine-grained rules can distinguish high-risk from lower-risk bash commands to avoid over-blocking",
+                "ja": "はい、細粒度のルールで高リスクと低リスクの bash コマンドを区別して過度なブロックを避けられる"
+              }
+            },
+            {
+              "id": "d",
+              "text": {
+                "zh": "需要，只有影响根目录的命令才危险，tmp 目录可以自动放行",
+                "en": "Yes, only commands affecting the root directory are dangerous; tmp directories can auto-pass",
+                "ja": "はい、ルートディレクトリに影響するコマンドのみ危険で tmp ディレクトリは自動許可できる"
+              }
+            }
+          ],
+          "answer": "c",
+          "explanation": {
+            "zh": "PermissionRule 的模式字段支持细粒度匹配，可以区分 rm -rf /（根目录，极危险）和 rm -rf /tmp/cache（临时缓存，可接受）。一律拒绝 rm -rf 会导致合法操作无法执行；精细规则才能平衡安全与可用性。",
+            "en": "The pattern field of PermissionRule supports fine-grained matching, distinguishing rm -rf / (root, extremely dangerous) from rm -rf /tmp/cache (temp cache, acceptable). Blanket rejection of rm -rf blocks legitimate operations; precise rules balance security with usability.",
+            "ja": "PermissionRule のパターンフィールドは細粒度マッチングをサポートし、rm -rf /（ルート、極めて危険）と rm -rf /tmp/cache（一時キャッシュ、許容可能）を区別できます。rm -rf の一律拒否は正当な操作をブロックし、精密なルールがセキュリティと使いやすさのバランスを実現します。"
+          },
+          "reward_card": "card_s07_003"
+        },
+        {
+          "id": "q_s07_015",
+          "type": "choice",
+          "difficulty": 2,
+          "stem": {
+            "zh": "以下哪种说法正确描述了权限决策结果（PermissionDecision）应该携带的信息？",
+            "en": "Which statement correctly describes what a PermissionDecision should carry?",
+            "ja": "PermissionDecision が持つべき情報を正しく説明しているのはどれですか？"
+          },
+          "options": [
+            {
+              "id": "a",
+              "text": {
+                "zh": "只需要一个布尔值：允许或拒绝",
+                "en": "Only a boolean: allow or deny",
+                "ja": "ブール値（許可または拒否）のみ"
+              }
+            },
+            {
+              "id": "b",
+              "text": {
+                "zh": "只需要结果和时间戳，理由不重要",
+                "en": "Only the result and timestamp; rationale is unimportant",
+                "ja": "結果とタイムスタンプのみ、理由は重要ではない"
+              }
+            },
+            {
+              "id": "c",
+              "text": {
+                "zh": "只需要记录触发的规则 ID",
+                "en": "Only the ID of the triggered rule",
+                "ja": "トリガーされたルールの ID のみ"
+              }
+            },
+            {
+              "id": "d",
+              "text": {
+                "zh": "决策结果加上作出该决策的理由",
+                "en": "The decision outcome plus the rationale for making that decision",
+                "ja": "決定の結果とその決定を下した理由"
+              }
+            }
+          ],
+          "answer": "d",
+          "explanation": {
+            "zh": "PermissionDecision 不只是 yes/no，还必须携带理由（比如「命中了哪条规则」「为什么是危险操作」），这样上层系统才能向用户解释为什么某个操作被拒绝，也有助于调试规则。",
+            "en": "A PermissionDecision is not just yes/no -- it must carry rationale (e.g., which rule matched, why the operation is dangerous) so that the upper system can explain rejections to users and help debug rules.",
+            "ja": "PermissionDecision は単なる yes/no ではなく、理由（どのルールにマッチしたか、なぜ危険な操作かなど）を持たなければなりません。これにより上位システムがユーザーに拒否の理由を説明でき、ルールのデバッグにも役立ちます。"
+          },
+          "reward_card": "card_s07_001"
+        },
+        {
+          "id": "q_s07_016",
+          "type": "choice",
+          "difficulty": 3,
+          "stem": {
+            "zh": "如果把权限管道的 deny rules 和 allow rules 顺序对调（先 allow 后 deny），会导致什么问题？",
+            "en": "If deny rules and allow rules are swapped (allow first, then deny), what problem arises?",
+            "ja": "deny rules と allow rules の順序を逆にした場合（先に allow、次に deny）、どのような問題が生じますか？"
+          },
+          "options": [
+            {
+              "id": "a",
+              "text": {
+                "zh": "性能会变差，但安全性不受影响",
+                "en": "Performance degrades but safety is unaffected",
+                "ja": "パフォーマンスが低下するが安全性には影響しない"
+              }
+            },
+            {
+              "id": "b",
+              "text": {
+                "zh": "用户会被询问更多次，体验变差",
+                "en": "Users are asked more frequently, worsening the experience",
+                "ja": "ユーザーへの確認が増えて体験が悪化する"
+              }
+            },
+            {
+              "id": "c",
+              "text": {
+                "zh": "危险操作可能被 allow rule 先放行，deny rule 永远不会执行到",
+                "en": "Dangerous operations could be approved by allow rules first, so deny rules never get a chance to run",
+                "ja": "危険な操作が先に allow rules で承認されてしまい、deny rules が実行される機会がなくなる"
+              }
+            },
+            {
+              "id": "d",
+              "text": {
+                "zh": "deny rules 会失效，所有操作都能被 allow rules 放行",
+                "en": "deny rules become ineffective and all ops can be approved by allow rules",
+                "ja": "deny rules が無効になり allow rules ですべての操作を承認できてしまう"
+              }
+            }
+          ],
+          "answer": "c",
+          "explanation": {
+            "zh": "管道是顺序执行、命中即停的。如果 allow rules 先执行，一条宽泛的 allow rule（如「允许所有 bash」）可能在 deny rules 检查之前就放行了危险命令。deny 必须最先执行，才能保证安全底线不被 allow 覆盖。",
+            "en": "The pipeline executes sequentially and stops on first match. If allow rules run first, a broad allow rule (e.g., 'allow all bash') could approve dangerous commands before deny rules ever check them. deny must run first to guarantee the safety floor cannot be overridden by allow.",
+            "ja": "パイプラインは順番に実行され最初のマッチで停止します。allow rules が先に実行されると、広い allow rule（例：'すべての bash を許可'）が deny rules のチェック前に危険なコマンドを承認してしまいます。deny が最初に実行されることで安全の底線が allow に上書きされないことを保証します。"
+          },
+          "reward_card": "card_s07_001"
+        },
+        {
+          "id": "q_s07_017",
+          "type": "choice",
+          "difficulty": 3,
+          "stem": {
+            "zh": "在 auto 模式下，一个 bash 命令既没命中 deny rules，也没命中 allow rules，会发生什么？",
+            "en": "In auto mode, a bash command matches no deny rule and no allow rule. What happens?",
+            "ja": "auto モードで bash コマンドが deny rule にも allow rule にもマッチしない場合、何が起こりますか？"
+          },
+          "options": [
+            {
+              "id": "a",
+              "text": {
+                "zh": "询问用户，auto 模式并非跳过所有确认",
+                "en": "Ask the user; auto mode does not skip all confirmations",
+                "ja": "ユーザーに確認する、auto モードはすべての確認をスキップするわけではない"
+              }
+            },
+            {
+              "id": "b",
+              "text": {
+                "zh": "切换到 plan 模式重新评估",
+                "en": "Switch to plan mode and re-evaluate",
+                "ja": "plan モードに切り替えて再評価する"
+              }
+            },
+            {
+              "id": "c",
+              "text": {
+                "zh": "自动拒绝，因为 auto 模式只允许 allow rules 明确放行的操作",
+                "en": "Auto-reject, because auto mode only allows what allow rules explicitly approve",
+                "ja": "自動拒否される、なぜなら auto モードは allow rules が明示的に承認したものだけを許可するから"
+              }
+            },
+            {
+              "id": "d",
+              "text": {
+                "zh": "自动执行，因为 auto 模式下所有命令都不需要确认",
+                "en": "Auto-execute, because in auto mode all commands skip confirmation",
+                "ja": "自動実行される、なぜなら auto モードではすべてのコマンドが確認をスキップするから"
+              }
+            }
+          ],
+          "answer": "a",
+          "explanation": {
+            "zh": "auto 模式的作用是让更多安全操作通过 allow rules 自动放行，从而减少询问次数——而不是消除所有询问。当 allow rules 也未命中时，管道仍然会询问用户，危险操作不会自动执行。",
+            "en": "auto mode makes more safe operations pass through allow rules automatically, reducing how often the user is asked -- it does not eliminate all confirmations. When allow rules also miss, the pipeline still asks the user; dangerous operations are never auto-executed.",
+            "ja": "auto モードはより多くの安全な操作を allow rules で自動的に通過させることでユーザーへの確認頻度を減らしますが、すべての確認をなくすわけではありません。allow rules もミスした場合、パイプラインはまだユーザーに確認し、危険な操作は自動実行されません。"
+          },
+          "reward_card": "card_s07_002"
+        },
+        {
+          "id": "q_s07_018",
+          "type": "choice",
+          "difficulty": 1,
+          "stem": {
+            "zh": "权限系统存在的根本原因是什么？",
+            "en": "What is the fundamental reason for having a permission system?",
+            "ja": "権限システムが存在する根本的な理由は何ですか？"
+          },
+          "options": [
+            {
+              "id": "a",
+              "text": {
+                "zh": "为了限制 Claude 每分钟能执行的操作数量",
+                "en": "To limit the number of operations Claude can run per minute",
+                "ja": "Claude が 1 分間に実行できる操作数を制限するため"
+              }
+            },
+            {
+              "id": "b",
+              "text": {
+                "zh": "工具调用意图不能直接变成执行，中间必须经过安全审查",
+                "en": "A tool call intent cannot directly become execution; it must pass through safety review first",
+                "ja": "ツール呼び出しの意図は直接実行にはならず、まず安全審査を通過しなければならない"
+              }
+            },
+            {
+              "id": "c",
+              "text": {
+                "zh": "为了把用户请求翻译成机器可执行的格式",
+                "en": "To translate user requests into machine-executable format",
+                "ja": "ユーザーリクエストをマシン実行可能な形式に変換するため"
+              }
+            },
+            {
+              "id": "d",
+              "text": {
+                "zh": "为了记录所有工具调用的日志",
+                "en": "To log all tool calls",
+                "ja": "すべてのツール呼び出しをログに記録するため"
+              }
+            }
+          ],
+          "answer": "b",
+          "explanation": {
+            "zh": "权限系统存在的核心原因是：模型的「意图」不能不经审查就直接变成「执行」。每一个工具调用都必须先经过权限管道，决定是允许、拒绝还是询问用户，才能真正执行。",
+            "en": "The core reason for the permission system is that a model's intent cannot become execution without review. Every tool call must first pass through the permission pipeline to decide allow, deny, or ask the user before actually executing.",
+            "ja": "権限システムの核心的な存在理由は、モデルの「意図」が審査なしに直接「実行」にならないようにすることです。すべてのツール呼び出しは実際に実行される前に権限パイプラインを通過して許可・拒否・ユーザー確認を決定しなければなりません。"
+          },
+          "reward_card": "card_s07_003"
         }
       ],
       "star_thresholds": [
