@@ -20801,257 +20801,920 @@ module.exports = {
         {
           "id": "q_bp04_001",
           "type": "choice",
-          "difficulty": 2,
+          "difficulty": 1,
           "stem": {
-            "zh": "在 Claude Code 中，关于「1. 什么是 Hooks」的正确理解是？",
-            "en": "What is the correct understanding of \"Table of Contents\" in Claude Code?",
-            "ja": "Claude Code における「Table of Contents」の正しい理解はどれですか？"
+            "zh": "Claude Code 中 Hooks 系统提供了哪四种 Hook 类型？",
+            "en": "Which four Hook types does the Claude Code Hooks system provide?",
+            "ja": "Claude Code の Hooks システムが提供する 4 種類の Hook タイプはどれですか？"
           },
           "options": [
             {
               "id": "a",
               "text": {
-                "zh": "1. 什么是 Hooks",
-                "en": "Table of Contents",
-                "ja": "Table of Contents"
-              }
-            },
-            {
-              "id": "d",
-              "text": {
-                "zh": "MCP 与插件",
-                "en": "Environment Variables (via `env`)",
-                "ja": "Environment Variables (via `env`)"
+                "zh": "command / prompt / agent / http",
+                "en": "command / prompt / agent / http",
+                "ja": "command / prompt / agent / http"
               }
             },
             {
               "id": "b",
               "text": {
-                "zh": "6. 编排架构：Command → Agent → Skill",
-                "en": "6. 编排架构：Command → Agent → Skill",
-                "ja": "6. 编排架构：Command → Agent → Skill"
+                "zh": "pre / post / error / success",
+                "en": "pre / post / error / success",
+                "ja": "pre / post / error / success"
               }
             },
             {
               "id": "c",
               "text": {
-                "zh": "2. 配置格式",
-                "en": "Settings Hierarchy",
-                "ja": "Settings Hierarchy"
+                "zh": "shell / python / node / http",
+                "en": "shell / python / node / http",
+                "ja": "shell / python / node / http"
+              }
+            },
+            {
+              "id": "d",
+              "text": {
+                "zh": "start / stop / read / write",
+                "en": "start / stop / read / write",
+                "ja": "start / stop / read / write"
               }
             }
           ],
           "answer": "a",
           "explanation": {
-            "zh": "Command hooks（命令钩子）",
-            "en": "Table of Contents",
-            "ja": "Table of Contents"
+            "zh": "四种 Hook 类型分别是：command（执行命令）、prompt（注入提示词）、agent（调用子代理）、http（发送 HTTP 请求），按需求复杂度选择。",
+            "en": "The four Hook types are: command (execute a command), prompt (inject a prompt), agent (call a sub-agent), and http (send an HTTP request). Choose based on complexity needs.",
+            "ja": "4 種類の Hook タイプは command（コマンド実行）、prompt（プロンプト注入）、agent（サブエージェント呼び出し）、http（HTTP リクエスト送信）です。"
           },
           "reward_card": "card_bp04_001"
         },
         {
           "id": "q_bp04_002",
           "type": "choice",
-          "difficulty": 2,
+          "difficulty": 1,
           "stem": {
-            "zh": "在 Claude Code 中，关于「2. 配置格式」的正确理解是？",
-            "en": "What is the correct understanding of \"Settings Hierarchy\" in Claude Code?",
-            "ja": "Claude Code における「Settings Hierarchy」の正しい理解はどれですか？"
+            "zh": "当只需要执行简单脚本时，最适合选择哪种 Hook 类型？",
+            "en": "Which Hook type is best suited for simply running a script?",
+            "ja": "単純なスクリプトを実行したい場合、最も適した Hook タイプはどれですか？"
           },
           "options": [
             {
-              "id": "a",
-              "text": {
-                "zh": "2. 配置格式",
-                "en": "Settings Hierarchy",
-                "ja": "Settings Hierarchy"
-              }
-            },
-            {
               "id": "b",
               "text": {
-                "zh": "受管设置中的服务器匹配",
-                "en": "Sources",
-                "ja": "Sources"
+                "zh": "http",
+                "en": "http",
+                "ja": "http"
               }
             },
             {
-              "id": "d",
+              "id": "a",
               "text": {
-                "zh": "SessionStart",
-                "en": "MCP Server Matching (Managed Settings)",
-                "ja": "MCP Server Matching (Managed Settings)"
+                "zh": "agent",
+                "en": "agent",
+                "ja": "agent"
               }
             },
             {
               "id": "c",
               "text": {
-                "zh": "方式三：手动创建文件",
-                "en": "方式三：手动创建文件",
-                "ja": "方式三：手动创建文件"
+                "zh": "command",
+                "en": "command",
+                "ja": "command"
+              }
+            },
+            {
+              "id": "d",
+              "text": {
+                "zh": "prompt",
+                "en": "prompt",
+                "ja": "prompt"
               }
             }
           ],
-          "answer": "a",
+          "answer": "c",
           "explanation": {
-            "zh": "2. 配置格式",
-            "en": "Managed settings",
-            "ja": "Managed settings"
+            "zh": "command 类型直接执行 shell 命令或脚本，是最简单的 Hook 类型，适合轻量级自动化任务，无需额外推理能力。",
+            "en": "The command type directly executes shell commands or scripts. It is the simplest Hook type, ideal for lightweight automation without needing reasoning capabilities.",
+            "ja": "command タイプはシェルコマンドやスクリプトを直接実行します。最もシンプルな Hook タイプで、推論能力が不要な軽量自動化タスクに適しています。"
           },
-          "reward_card": "card_bp04_002"
+          "reward_card": "card_bp04_001"
         },
         {
           "id": "q_bp04_003",
           "type": "choice",
-          "difficulty": 1,
+          "difficulty": 2,
           "stem": {
-            "zh": "以下哪个概念与「Hook 类型」直接相关？",
-            "en": "Which concept is directly related to \"Core Configuration\"?",
-            "ja": "「Core Configuration」に直接関連する概念はどれですか？"
+            "zh": "需要在 Hook 中向 Claude 追加上下文信息时，应选择哪种类型？",
+            "en": "Which Hook type should you use to append context information to Claude during a hook?",
+            "ja": "Hook の中で Claude にコンテキスト情報を追加したい場合、どの Hook タイプを選ぶべきですか？"
           },
           "options": [
             {
-              "id": "a",
-              "text": {
-                "zh": "Hook 类型",
-                "en": "Core Configuration",
-                "ja": "Core Configuration"
-              }
-            },
-            {
               "id": "c",
               "text": {
-                "zh": "目录与工作区",
-                "en": "Common Environment Variables",
-                "ja": "Common Environment Variables"
-              }
-            },
-            {
-              "id": "d",
-              "text": {
-                "zh": "禁用 Hooks",
-                "en": "Worktree Settings",
-                "ja": "Worktree Settings"
+                "zh": "command",
+                "en": "command",
+                "ja": "command"
               }
             },
             {
               "id": "b",
               "text": {
-                "zh": "使用 HTTP Hook",
-                "en": "File Suggestion Configuration",
-                "ja": "File Suggestion Configuration"
+                "zh": "prompt",
+                "en": "prompt",
+                "ja": "prompt"
+              }
+            },
+            {
+              "id": "d",
+              "text": {
+                "zh": "http",
+                "en": "http",
+                "ja": "http"
+              }
+            },
+            {
+              "id": "a",
+              "text": {
+                "zh": "agent",
+                "en": "agent",
+                "ja": "agent"
               }
             }
           ],
-          "answer": "a",
+          "answer": "b",
           "explanation": {
-            "zh": "Hook 类型",
-            "en": "Core Configuration",
-            "ja": "Core Configuration"
+            "zh": "prompt 类型允许向当前对话注入额外的提示词或上下文，是四种类型中专门用于信息注入的类型。",
+            "en": "The prompt type allows injecting additional prompts or context into the current conversation. It is the type specifically designed for information injection.",
+            "ja": "prompt タイプは現在の会話に追加のプロンプトやコンテキストを注入することができます。情報注入に特化した Hook タイプです。"
           },
-          "reward_card": "card_bp04_003"
+          "reward_card": "card_bp04_001"
         },
         {
           "id": "q_bp04_004",
           "type": "choice",
           "difficulty": 2,
           "stem": {
-            "zh": "在 Claude Code 中，关于「子代理中的 Hooks」的正确理解是？",
-            "en": "What is the correct understanding of \"General Settings\" in Claude Code?",
-            "ja": "Claude Code における「General Settings」の正しい理解はどれですか？"
+            "zh": "以下关于四种 Hook 类型与复杂度的对应关系，哪项描述正确？",
+            "en": "Which statement correctly describes the relationship between Hook types and complexity?",
+            "ja": "4 種類の Hook タイプと複雑度の関係について、正しく述べているものはどれですか？"
           },
           "options": [
             {
               "id": "d",
               "text": {
-                "zh": "Monorepo 结构示例",
-                "en": "Example Monorepo Structure",
-                "ja": "Example Monorepo Structure"
+                "zh": "http 最简单，agent 最复杂",
+                "en": "http is the simplest, agent is the most complex",
+                "ja": "http が最もシンプルで、agent が最も複雑"
               }
             },
             {
               "id": "b",
               "text": {
-                "zh": "6. 编排架构：Command → Agent → Skill",
-                "en": "6. 编排架构：Command → Agent → Skill",
-                "ja": "6. 编排架构：Command → Agent → Skill"
+                "zh": "四种类型复杂度相同，只是触发方式不同",
+                "en": "All four types have the same complexity, only differing in how they are triggered",
+                "ja": "4 種類の複雑度は同じで、トリガー方法が異なるだけ"
               }
             },
             {
               "id": "c",
               "text": {
-                "zh": "8. 使用建议",
-                "en": "8. 使用建议",
-                "ja": "8. 使用建议"
+                "zh": "prompt 最简单，http 次之，command 再次，agent 最复杂",
+                "en": "prompt is simplest, then http, then command, then agent is most complex",
+                "ja": "prompt が最もシンプルで、次に http、command、agent が最も複雑"
               }
             },
             {
               "id": "a",
               "text": {
-                "zh": "子代理中的 Hooks",
-                "en": "General Settings",
-                "ja": "General Settings"
+                "zh": "command 最简单，agent 最复杂，可按需求复杂度选择",
+                "en": "command is the simplest, agent is the most complex, choose based on requirement complexity",
+                "ja": "command が最もシンプルで agent が最も複雑、要件の複雑さに応じて選択する"
               }
             }
           ],
           "answer": "a",
           "explanation": {
-            "zh": "子代理中的 Hooks",
-            "en": "(Managed only)",
-            "ja": "(Managed only)"
+            "zh": "四种类型按复杂度递增：command（执行命令）< prompt（注入提示）< http（调用接口）< agent（调用子代理）。按实际需求复杂度选择合适的类型。",
+            "en": "The four types increase in complexity: command < prompt < http < agent. Choose the type that matches your actual requirement complexity.",
+            "ja": "4 種類は複雑度順に command < prompt < http < agent となります。実際の要件の複雑さに合わせて選択してください。"
           },
-          "reward_card": "card_bp04_004"
+          "reward_card": "card_bp04_001"
         },
         {
           "id": "q_bp04_005",
           "type": "choice",
           "difficulty": 1,
           "stem": {
-            "zh": "以下哪个概念与「`/hooks` 菜单」直接相关？",
-            "en": "Which concept is directly related to \"Plans & Memory Directories\"?",
-            "ja": "「Plans & Memory Directories」に直接関連する概念はどれですか？"
+            "zh": "Claude Code Hooks 支持哪三种事件触发频率？",
+            "en": "What three event trigger frequencies do Claude Code Hooks support?",
+            "ja": "Claude Code Hooks がサポートする 3 種類のイベントトリガー頻度はどれですか？"
           },
           "options": [
             {
-              "id": "b",
+              "id": "c",
               "text": {
-                "zh": "6. 编排架构：Command → Agent → Skill",
-                "en": "6. 编排架构：Command → Agent → Skill",
-                "ja": "6. 编排架构：Command → Agent → Skill"
+                "zh": "启动 / 运行中 / 停止",
+                "en": "startup / running / shutdown",
+                "ja": "起動 / 実行中 / 停止"
               }
             },
             {
-              "id": "a",
+              "id": "b",
               "text": {
-                "zh": "`/hooks` 菜单",
-                "en": "Plans & Memory Directories",
-                "ja": "Plans & Memory Directories"
+                "zh": "每分钟 / 每小时 / 每天",
+                "en": "every minute / every hour / every day",
+                "ja": "毎分 / 毎時 / 毎日"
               }
             },
             {
               "id": "d",
               "text": {
-                "zh": "Spinner 自定义示例",
-                "en": "Tool Permission Syntax",
-                "ja": "Tool Permission Syntax"
+                "zh": "每会话 / 每轮 / 每次工具调用",
+                "en": "per session / per turn / per tool call",
+                "ja": "セッションごと / ターンごと / ツール呼び出しごと"
+              }
+            },
+            {
+              "id": "a",
+              "text": {
+                "zh": "一次性 / 重复 / 条件触发",
+                "en": "one-time / recurring / conditional",
+                "ja": "一回限り / 繰り返し / 条件トリガー"
+              }
+            }
+          ],
+          "answer": "d",
+          "explanation": {
+            "zh": "三种触发频率分别是：每会话（SessionStart/SessionEnd）、每轮（PreTurn/PostTurn）、每次工具调用（PreToolUse/PostToolUse）。频率越高越要注意性能。",
+            "en": "The three frequencies are: per session (SessionStart/SessionEnd), per turn (PreTurn/PostTurn), and per tool call (PreToolUse/PostToolUse). Higher frequency means more attention to performance.",
+            "ja": "3 種類の頻度はセッションごと（SessionStart/SessionEnd）、ターンごと（PreTurn/PostTurn）、ツール呼び出しごと（PreToolUse/PostToolUse）です。"
+          },
+          "reward_card": "card_bp04_002"
+        },
+        {
+          "id": "q_bp04_006",
+          "type": "choice",
+          "difficulty": 2,
+          "stem": {
+            "zh": "在三种事件频率中，为什么频率越高越需要注意性能？",
+            "en": "Among the three event frequencies, why does higher frequency require more attention to performance?",
+            "ja": "3 種類のイベント頻度の中で、頻度が高いほどパフォーマンスに注意が必要なのはなぜですか？"
+          },
+          "options": [
+            {
+              "id": "b",
+              "text": {
+                "zh": "高频 Hook 需要更高的系统权限",
+                "en": "High-frequency hooks require higher system permissions",
+                "ja": "高頻度 Hook はより高いシステム権限が必要"
+              }
+            },
+            {
+              "id": "d",
+              "text": {
+                "zh": "高频 Hook 会消耗更多 API Token",
+                "en": "High-frequency hooks consume more API tokens",
+                "ja": "高頻度 Hook はより多くの API トークンを消費する"
+              }
+            },
+            {
+              "id": "a",
+              "text": {
+                "zh": "高频 Hook 比低频 Hook 更容易出错",
+                "en": "High-frequency hooks are more error-prone than low-frequency ones",
+                "ja": "高頻度 Hook は低頻度 Hook よりエラーが発生しやすい"
               }
             },
             {
               "id": "c",
               "text": {
-                "zh": "使用环境变量保护密钥",
-                "en": "Permission Rules for MCP Tools",
-                "ja": "Permission Rules for MCP Tools"
+                "zh": "执行次数多，每次耗时累积后会明显拖慢整体响应",
+                "en": "The high execution count accumulates latency and noticeably slows overall response time",
+                "ja": "実行回数が多いため、毎回の処理時間が積み重なり全体の応答が遅くなる"
+              }
+            }
+          ],
+          "answer": "c",
+          "explanation": {
+            "zh": "每次工具调用都触发的 Hook，在一次对话中可能执行数十次。如果 Hook 本身耗时较长，累积延迟会显著拖慢整体响应速度，因此高频 Hook 应尽量轻量。",
+            "en": "A hook triggered on every tool call can run dozens of times in a single conversation. If the hook itself takes time, accumulated latency will significantly slow overall response speed, so high-frequency hooks should be kept lightweight.",
+            "ja": "ツール呼び出しごとにトリガーされる Hook は、1 回の会話で数十回実行される可能性があります。Hook 自体に時間がかかると積み重なった遅延が全体の応答速度を大幅に低下させます。"
+          },
+          "reward_card": "card_bp04_002"
+        },
+        {
+          "id": "q_bp04_007",
+          "type": "choice",
+          "difficulty": 1,
+          "stem": {
+            "zh": "SessionStart 事件属于哪种触发频率？",
+            "en": "Which trigger frequency does the SessionStart event belong to?",
+            "ja": "SessionStart イベントはどのトリガー頻度に属しますか？"
+          },
+          "options": [
+            {
+              "id": "b",
+              "text": {
+                "zh": "每次工具调用",
+                "en": "per tool call",
+                "ja": "ツール呼び出しごと"
+              }
+            },
+            {
+              "id": "a",
+              "text": {
+                "zh": "每会话",
+                "en": "per session",
+                "ja": "セッションごと"
+              }
+            },
+            {
+              "id": "c",
+              "text": {
+                "zh": "每轮",
+                "en": "per turn",
+                "ja": "ターンごと"
+              }
+            },
+            {
+              "id": "d",
+              "text": {
+                "zh": "按条件触发",
+                "en": "conditional trigger",
+                "ja": "条件トリガー"
               }
             }
           ],
           "answer": "a",
           "explanation": {
-            "zh": "`/hooks` 菜单",
-            "en": "Example:",
-            "ja": "Example:"
+            "zh": "SessionStart 和 SessionEnd 属于「每会话」频率，在整个对话开始或结束时各触发一次，是频率最低的事件，性能开销最小。",
+            "en": "SessionStart and SessionEnd belong to the 'per session' frequency, triggering once at the start or end of the entire conversation. This is the lowest-frequency event with minimal performance overhead.",
+            "ja": "SessionStart と SessionEnd は「セッションごと」頻度に属し、会話全体の開始または終了時に一度だけトリガーされます。最も低い頻度でパフォーマンスへの影響が最小です。"
           },
-          "reward_card": "card_bp04_005"
+          "reward_card": "card_bp04_002"
+        },
+        {
+          "id": "q_bp04_008",
+          "type": "choice",
+          "difficulty": 2,
+          "stem": {
+            "zh": "PreToolUse 和 PostToolUse 事件属于哪种触发频率，设计时应注意什么？",
+            "en": "What trigger frequency do PreToolUse and PostToolUse events belong to, and what should be considered when designing them?",
+            "ja": "PreToolUse と PostToolUse イベントはどのトリガー頻度に属し、設計時に何を考慮すべきですか？"
+          },
+          "options": [
+            {
+              "id": "d",
+              "text": {
+                "zh": "每会话，需确保只触发一次",
+                "en": "per session, must ensure they trigger only once",
+                "ja": "セッションごと、一度だけトリガーされることを確認する必要がある"
+              }
+            },
+            {
+              "id": "c",
+              "text": {
+                "zh": "每轮，需确保幂等性",
+                "en": "per turn, must ensure idempotency",
+                "ja": "ターンごと、冪等性を確保する必要がある"
+              }
+            },
+            {
+              "id": "a",
+              "text": {
+                "zh": "每会话，可以执行重操作",
+                "en": "per session, can perform heavy operations",
+                "ja": "セッションごと、重い処理を実行できる"
+              }
+            },
+            {
+              "id": "b",
+              "text": {
+                "zh": "每次工具调用，需保持轻量避免拖慢响应",
+                "en": "per tool call, must stay lightweight to avoid slowing responses",
+                "ja": "ツール呼び出しごと、応答を遅らせないよう軽量に保つ必要がある"
+              }
+            }
+          ],
+          "answer": "b",
+          "explanation": {
+            "zh": "PreToolUse/PostToolUse 属于频率最高的「每次工具调用」类型，一次对话中可能触发数十次。因此 Hook 逻辑应尽量轻量，避免耗时操作。",
+            "en": "PreToolUse/PostToolUse belong to the highest-frequency 'per tool call' type, potentially triggering dozens of times per conversation. Hook logic should therefore be kept lightweight to avoid time-consuming operations.",
+            "ja": "PreToolUse/PostToolUse は最も高頻度の「ツール呼び出しごと」タイプに属し、1 回の会話で数十回トリガーされる可能性があります。Hook ロジックは軽量に保つ必要があります。"
+          },
+          "reward_card": "card_bp04_002"
+        },
+        {
+          "id": "q_bp04_009",
+          "type": "choice",
+          "difficulty": 1,
+          "stem": {
+            "zh": "Hook 脚本退出码为 2 时，Claude Code 会有什么特殊行为？",
+            "en": "What special behavior does Claude Code exhibit when a Hook script exits with code 2?",
+            "ja": "Hook スクリプトの終了コードが 2 の場合、Claude Code はどのような特殊な動作をしますか？"
+          },
+          "options": [
+            {
+              "id": "d",
+              "text": {
+                "zh": "重试执行该 Hook 最多 3 次",
+                "en": "Retry executing the Hook up to 3 times",
+                "ja": "Hook の実行を最大 3 回リトライする"
+              }
+            },
+            {
+              "id": "b",
+              "text": {
+                "zh": "记录警告日志，但继续执行",
+                "en": "Log a warning but continue execution",
+                "ja": "警告をログに記録するが実行を継続する"
+              }
+            },
+            {
+              "id": "a",
+              "text": {
+                "zh": "跳过本次工具调用，继续下一个",
+                "en": "Skip the current tool call and continue to the next",
+                "ja": "現在のツール呼び出しをスキップして次へ進む"
+              }
+            },
+            {
+              "id": "c",
+              "text": {
+                "zh": "阻断当前操作，不继续执行后续步骤",
+                "en": "Block the current operation and stop subsequent steps from executing",
+                "ja": "現在の操作をブロックし、後続のステップの実行を停止する"
+              }
+            }
+          ],
+          "answer": "c",
+          "explanation": {
+            "zh": "退出码 2 是特殊的「阻断」信号，只有退出码 2 能真正阻止 Claude Code 继续执行当前操作。这是实现 Hook 拦截逻辑的关键机制。",
+            "en": "Exit code 2 is the special 'block' signal. Only exit code 2 can truly prevent Claude Code from continuing the current operation. This is the key mechanism for implementing Hook interception logic.",
+            "ja": "終了コード 2 は特別な「ブロック」シグナルです。終了コード 2 のみが Claude Code の現在の操作の継続を本当に阻止できます。"
+          },
+          "reward_card": "card_bp04_003"
+        },
+        {
+          "id": "q_bp04_010",
+          "type": "choice",
+          "difficulty": 1,
+          "stem": {
+            "zh": "Hook 脚本退出码为 0 时，代表什么语义？",
+            "en": "What does an exit code of 0 mean for a Hook script?",
+            "ja": "Hook スクリプトの終了コードが 0 の場合、どういう意味ですか？"
+          },
+          "options": [
+            {
+              "id": "c",
+              "text": {
+                "zh": "阻断操作",
+                "en": "block operation",
+                "ja": "操作をブロック"
+              }
+            },
+            {
+              "id": "b",
+              "text": {
+                "zh": "Hook 跳过，不执行任何逻辑",
+                "en": "Hook skipped, no logic executed",
+                "ja": "Hook がスキップされ、ロジックは実行されない"
+              }
+            },
+            {
+              "id": "d",
+              "text": {
+                "zh": "触发重试机制",
+                "en": "trigger retry mechanism",
+                "ja": "リトライメカニズムをトリガー"
+              }
+            },
+            {
+              "id": "a",
+              "text": {
+                "zh": "成功，继续后续执行",
+                "en": "success, continue subsequent execution",
+                "ja": "成功、後続の実行を継続"
+              }
+            }
+          ],
+          "answer": "a",
+          "explanation": {
+            "zh": "退出码 0 表示 Hook 执行成功，Claude Code 继续后续操作，这是正常的成功路径。",
+            "en": "Exit code 0 means the Hook executed successfully, and Claude Code continues subsequent operations. This is the normal success path.",
+            "ja": "終了コード 0 は Hook が正常に実行されたことを示し、Claude Code は後続の操作を継続します。これが通常の成功パスです。"
+          },
+          "reward_card": "card_bp04_003"
+        },
+        {
+          "id": "q_bp04_011",
+          "type": "choice",
+          "difficulty": 2,
+          "stem": {
+            "zh": "Hook 脚本退出码为 1（非 0 非 2）时，Claude Code 会怎么处理？",
+            "en": "How does Claude Code handle a Hook script that exits with code 1 (not 0 or 2)?",
+            "ja": "Hook スクリプトの終了コードが 1（0 でも 2 でもない）の場合、Claude Code はどう処理しますか？"
+          },
+          "options": [
+            {
+              "id": "b",
+              "text": {
+                "zh": "阻断当前操作，与退出码 2 相同",
+                "en": "Block the current operation, same as exit code 2",
+                "ja": "現在の操作をブロックし、終了コード 2 と同じ動作"
+              }
+            },
+            {
+              "id": "a",
+              "text": {
+                "zh": "终止整个 Claude Code 会话",
+                "en": "Terminate the entire Claude Code session",
+                "ja": "Claude Code セッション全体を終了する"
+              }
+            },
+            {
+              "id": "c",
+              "text": {
+                "zh": "忽略错误，与退出码 0 相同",
+                "en": "Ignore the error, same as exit code 0",
+                "ja": "エラーを無視し、終了コード 0 と同じ動作"
+              }
+            },
+            {
+              "id": "d",
+              "text": {
+                "zh": "记录错误，但继续后续执行（不阻断）",
+                "en": "Log the error but continue subsequent execution (no blocking)",
+                "ja": "エラーをログに記録するが後続の実行を継続する（ブロックしない）"
+              }
+            }
+          ],
+          "answer": "d",
+          "explanation": {
+            "zh": "退出码 0 成功、2 阻断、其他任意非零值（包括 1）会记录错误日志，但操作继续执行。只有退出码 2 能真正阻断操作，这点容易误解。",
+            "en": "Exit code 0 means success, exit code 2 means block, and any other non-zero value (including 1) logs an error but execution continues. Only exit code 2 truly blocks the operation - this is a common misconception.",
+            "ja": "終了コード 0 は成功、2 はブロック、その他のゼロ以外の値（1 を含む）はエラーをログに記録しますが実行は継続します。終了コード 2 のみが操作を真にブロックします。"
+          },
+          "reward_card": "card_bp04_003"
+        },
+        {
+          "id": "q_bp04_012",
+          "type": "choice",
+          "difficulty": 3,
+          "stem": {
+            "zh": "要实现「阻止 Claude 删除 .env 文件」的 Hook，脚本逻辑应如何设计？",
+            "en": "To implement a Hook that prevents Claude from deleting .env files, how should the script logic be designed?",
+            "ja": "Claude が .env ファイルを削除しないようにする Hook を実装するには、スクリプトロジックをどのように設計すべきですか？"
+          },
+          "options": [
+            {
+              "id": "c",
+              "text": {
+                "zh": "检测到 .env 文件时输出警告信息，退出码返回 0",
+                "en": "Output a warning when .env file detected, exit with code 0",
+                "ja": ".env ファイルを検出したら警告を出力し、終了コード 0 で終了"
+              }
+            },
+            {
+              "id": "a",
+              "text": {
+                "zh": "检测到 .env 文件时抛出异常，退出码返回 1",
+                "en": "Throw an exception when .env file detected, exit with code 1",
+                "ja": ".env ファイルを検出したら例外をスローし、終了コード 1 で終了"
+              }
+            },
+            {
+              "id": "d",
+              "text": {
+                "zh": "检测到 .env 文件时发送通知邮件，退出码返回 0",
+                "en": "Send a notification email when .env file detected, exit with code 0",
+                "ja": ".env ファイルを検出したら通知メールを送信し、終了コード 0 で終了"
+              }
+            },
+            {
+              "id": "b",
+              "text": {
+                "zh": "检测到目标文件包含 .env 时，退出码返回 2",
+                "en": "When the target file contains .env, exit with code 2",
+                "ja": "対象ファイルに .env が含まれる場合、終了コード 2 で終了"
+              }
+            }
+          ],
+          "answer": "b",
+          "explanation": {
+            "zh": "只有退出码 2 能真正阻止操作。正确做法是在 PreToolUse Hook 中检查工具参数，若目标是 .env 文件则返回退出码 2 阻断删除操作。退出码 0 或 1 均无法阻断。",
+            "en": "Only exit code 2 can truly block the operation. The correct approach is to check tool parameters in a PreToolUse Hook, and if the target is a .env file, return exit code 2 to block the delete. Exit codes 0 or 1 cannot block.",
+            "ja": "終了コード 2 のみが操作を真にブロックできます。正しいアプローチは PreToolUse Hook でツールパラメータを確認し、対象が .env ファイルであれば終了コード 2 を返して削除をブロックすることです。"
+          },
+          "reward_card": "card_bp04_003"
+        },
+        {
+          "id": "q_bp04_013",
+          "type": "choice",
+          "difficulty": 2,
+          "stem": {
+            "zh": "Hooks 的 matcher 配置的作用是什么？",
+            "en": "What is the purpose of the matcher configuration in Hooks?",
+            "ja": "Hooks の matcher 設定の目的は何ですか？"
+          },
+          "options": [
+            {
+              "id": "b",
+              "text": {
+                "zh": "匹配 Claude 输出内容中的特定关键词",
+                "en": "Match specific keywords in Claude's output content",
+                "ja": "Claude の出力内容の特定キーワードをマッチングする"
+              }
+            },
+            {
+              "id": "d",
+              "text": {
+                "zh": "匹配用户输入的命令类型",
+                "en": "Match the type of command entered by the user",
+                "ja": "ユーザーが入力したコマンドの種類をマッチングする"
+              }
+            },
+            {
+              "id": "c",
+              "text": {
+                "zh": "匹配工具名，决定该 Hook 对哪些工具生效",
+                "en": "Match tool names to determine which tools this Hook applies to",
+                "ja": "ツール名をマッチングし、この Hook がどのツールに適用されるかを決定する"
+              }
+            },
+            {
+              "id": "a",
+              "text": {
+                "zh": "匹配文件路径模式，决定监控哪些文件",
+                "en": "Match file path patterns to determine which files to monitor",
+                "ja": "ファイルパスパターンをマッチングし、監視するファイルを決定する"
+              }
+            }
+          ],
+          "answer": "c",
+          "explanation": {
+            "zh": "matcher 配置用于匹配工具名称，决定该 Hook 在哪些工具调用时触发。例如配置 matcher 为「Write」则只在 Write 工具调用时触发，而非所有工具调用。",
+            "en": "The matcher configuration is used to match tool names, determining when this Hook triggers. For example, configuring matcher as 'Write' means it only triggers on Write tool calls, not all tool calls.",
+            "ja": "matcher 設定はツール名をマッチングするために使用され、この Hook がトリガーされるタイミングを決定します。例えば matcher を「Write」に設定すると Write ツール呼び出し時のみトリガーされます。"
+          },
+          "reward_card": "card_bp04_004"
+        },
+        {
+          "id": "q_bp04_014",
+          "type": "choice",
+          "difficulty": 1,
+          "stem": {
+            "zh": "Hooks 配置应写在哪个文件中？",
+            "en": "In which file should Hooks configuration be written?",
+            "ja": "Hooks の設定はどのファイルに記述すべきですか？"
+          },
+          "options": [
+            {
+              "id": "c",
+              "text": {
+                "zh": ".env 文件",
+                "en": ".env file",
+                "ja": ".env ファイル"
+              }
+            },
+            {
+              "id": "d",
+              "text": {
+                "zh": "CLAUDE.md 文件",
+                "en": "CLAUDE.md file",
+                "ja": "CLAUDE.md ファイル"
+              }
+            },
+            {
+              "id": "b",
+              "text": {
+                "zh": "package.json 文件",
+                "en": "package.json file",
+                "ja": "package.json ファイル"
+              }
+            },
+            {
+              "id": "a",
+              "text": {
+                "zh": "settings.json 文件",
+                "en": "settings.json file",
+                "ja": "settings.json ファイル"
+              }
+            }
+          ],
+          "answer": "a",
+          "explanation": {
+            "zh": "Hooks 配置在 settings.json 中，可以是用户级（~/.claude/settings.json）或项目级（.claude/settings.json）。matcher 字段也在 settings.json 的 hooks 数组中配置。",
+            "en": "Hooks are configured in settings.json, either at user level (~/.claude/settings.json) or project level (.claude/settings.json). The matcher field is also configured in the hooks array within settings.json.",
+            "ja": "Hooks は settings.json（ユーザーレベルの ~/.claude/settings.json またはプロジェクトレベルの .claude/settings.json）で設定します。matcher フィールドも settings.json の hooks 配列内に設定します。"
+          },
+          "reward_card": "card_bp04_004"
+        },
+        {
+          "id": "q_bp04_015",
+          "type": "choice",
+          "difficulty": 3,
+          "stem": {
+            "zh": "以下哪个 settings.json 片段能正确配置「仅在 Bash 工具调用前触发的 Hook」？",
+            "en": "Which settings.json snippet correctly configures a 'Hook that only triggers before Bash tool calls'?",
+            "ja": "次の settings.json スニペットのうち、「Bash ツール呼び出し前のみトリガーされる Hook」を正しく設定しているのはどれですか？"
+          },
+          "options": [
+            {
+              "id": "c",
+              "text": {
+                "zh": "{ \"hooks\": { \"event\": \"PreToolUse\", \"command\": \"./check.sh\" } }",
+                "en": "{ \"hooks\": { \"event\": \"PreToolUse\", \"command\": \"./check.sh\" } }",
+                "ja": "{ \"hooks\": { \"event\": \"PreToolUse\", \"command\": \"./check.sh\" } }"
+              }
+            },
+            {
+              "id": "b",
+              "text": {
+                "zh": "{ \"hooks\": [{ \"matcher\": \"*\", \"event\": \"PreToolUse\", \"command\": \"./check.sh\" }] }",
+                "en": "{ \"hooks\": [{ \"matcher\": \"*\", \"event\": \"PreToolUse\", \"command\": \"./check.sh\" }] }",
+                "ja": "{ \"hooks\": [{ \"matcher\": \"*\", \"event\": \"PreToolUse\", \"command\": \"./check.sh\" }] }"
+              }
+            },
+            {
+              "id": "a",
+              "text": {
+                "zh": "{ \"hooks\": [{ \"matcher\": \"Bash\", \"event\": \"PostToolUse\", \"command\": \"./check.sh\" }] }",
+                "en": "{ \"hooks\": [{ \"matcher\": \"Bash\", \"event\": \"PostToolUse\", \"command\": \"./check.sh\" }] }",
+                "ja": "{ \"hooks\": [{ \"matcher\": \"Bash\", \"event\": \"PostToolUse\", \"command\": \"./check.sh\" }] }"
+              }
+            },
+            {
+              "id": "d",
+              "text": {
+                "zh": "{ \"hooks\": [{ \"matcher\": \"Bash\", \"event\": \"PreToolUse\", \"command\": \"./check.sh\" }] }",
+                "en": "{ \"hooks\": [{ \"matcher\": \"Bash\", \"event\": \"PreToolUse\", \"command\": \"./check.sh\" }] }",
+                "ja": "{ \"hooks\": [{ \"matcher\": \"Bash\", \"event\": \"PreToolUse\", \"command\": \"./check.sh\" }] }"
+              }
+            }
+          ],
+          "answer": "d",
+          "explanation": {
+            "zh": "正确配置需要三要素：matcher 指定工具名「Bash」、event 指定触发时机「PreToolUse」（调用前）、command 指定要执行的脚本。缺少 matcher 则对所有工具生效。",
+            "en": "Correct configuration requires three elements: matcher specifying the tool name 'Bash', event specifying the trigger timing 'PreToolUse' (before call), and command specifying the script to execute. Without matcher, it applies to all tools.",
+            "ja": "正しい設定には 3 つの要素が必要です：ツール名「Bash」を指定する matcher、トリガータイミング「PreToolUse」（呼び出し前）を指定する event、実行するスクリプトを指定する command。"
+          },
+          "reward_card": "card_bp04_004"
+        },
+        {
+          "id": "q_bp04_016",
+          "type": "choice",
+          "difficulty": 3,
+          "stem": {
+            "zh": "在 settings.json 中不配置 matcher 字段，该 PreToolUse Hook 的触发范围是？",
+            "en": "If the matcher field is not configured in settings.json, what is the trigger scope of that PreToolUse Hook?",
+            "ja": "settings.json で matcher フィールドを設定しない場合、その PreToolUse Hook のトリガー範囲はどうなりますか？"
+          },
+          "options": [
+            {
+              "id": "a",
+              "text": {
+                "zh": "Hook 配置无效，不会触发",
+                "en": "Hook configuration is invalid and will not trigger",
+                "ja": "Hook 設定が無効でトリガーされない"
+              }
+            },
+            {
+              "id": "c",
+              "text": {
+                "zh": "只对默认工具（Bash 和 Write）生效",
+                "en": "Only applies to default tools (Bash and Write)",
+                "ja": "デフォルトツール（Bash と Write）のみに適用される"
+              }
+            },
+            {
+              "id": "d",
+              "text": {
+                "zh": "只对 MCP 工具生效",
+                "en": "Only applies to MCP tools",
+                "ja": "MCP ツールのみに適用される"
+              }
+            },
+            {
+              "id": "b",
+              "text": {
+                "zh": "对所有工具调用生效",
+                "en": "Applies to all tool calls",
+                "ja": "すべてのツール呼び出しに適用される"
+              }
+            }
+          ],
+          "answer": "b",
+          "explanation": {
+            "zh": "不配置 matcher 时，Hook 对所有工具调用都生效。这在需要全局拦截时很有用，但由于触发频率极高，需特别注意性能影响。",
+            "en": "Without a matcher, the Hook applies to all tool calls. This is useful for global interception, but since trigger frequency is very high, special attention to performance impact is needed.",
+            "ja": "matcher を設定しない場合、Hook はすべてのツール呼び出しに適用されます。グローバルな傍受に役立ちますが、トリガー頻度が非常に高いためパフォーマンスへの影響に特に注意が必要です。"
+          },
+          "reward_card": "card_bp04_004"
+        },
+        {
+          "id": "q_bp04_017",
+          "type": "choice",
+          "difficulty": 3,
+          "stem": {
+            "zh": "综合考虑四种 Hook 类型与三种事件频率，以下哪个场景的 Hook 设计最合理？",
+            "en": "Considering all four Hook types and three event frequencies, which scenario has the most reasonable Hook design?",
+            "ja": "4 種類の Hook タイプと 3 種類のイベント頻度を総合的に考慮した場合、最も合理的な Hook 設計はどのシナリオですか？"
+          },
+          "options": [
+            {
+              "id": "b",
+              "text": {
+                "zh": "每次工具调用时（PreToolUse）调用 agent 类型 Hook 进行安全审计",
+                "en": "Call an agent type Hook for security audit on every tool call (PreToolUse)",
+                "ja": "すべてのツール呼び出し時（PreToolUse）に agent タイプの Hook を呼び出してセキュリティ監査を行う"
+              }
+            },
+            {
+              "id": "d",
+              "text": {
+                "zh": "会话结束时（SessionEnd）用 command 类型 Hook 实时拦截危险命令",
+                "en": "Use a command type Hook at session end (SessionEnd) to intercept dangerous commands in real time",
+                "ja": "セッション終了時（SessionEnd）に command タイプの Hook を使ってリアルタイムで危険なコマンドをインターセプトする"
+              }
+            },
+            {
+              "id": "a",
+              "text": {
+                "zh": "会话开始时（SessionStart）用 http 类型 Hook 拦截每个文件写入操作",
+                "en": "Use an http type Hook at session start (SessionStart) to intercept every file write operation",
+                "ja": "セッション開始時（SessionStart）に http タイプの Hook を使ってすべてのファイル書き込み操作をインターセプトする"
+              }
+            },
+            {
+              "id": "c",
+              "text": {
+                "zh": "会话开始时（SessionStart）用 command 类型 Hook 加载项目上下文",
+                "en": "Use a command type Hook at session start (SessionStart) to load project context",
+                "ja": "セッション開始時（SessionStart）に command タイプの Hook を使ってプロジェクトコンテキストをロードする"
+              }
+            }
+          ],
+          "answer": "c",
+          "explanation": {
+            "zh": "SessionStart 频率最低（每次会话一次），适合做重一些的初始化工作如加载上下文；command 类型轻量无需推理能力。而用高频的 PreToolUse 调用 agent 会大幅拖慢响应。",
+            "en": "SessionStart has the lowest frequency (once per session), making it suitable for heavier initialization like loading context. The command type is lightweight without needing reasoning. Using high-frequency PreToolUse with agent would greatly slow responses.",
+            "ja": "SessionStart は最も低頻度（セッションごとに 1 回）で、コンテキストのロードなどの重い初期化作業に適しています。command タイプは推論能力を必要としない軽量なものです。"
+          },
+          "reward_card": "card_bp04_002"
+        },
+        {
+          "id": "q_bp04_018",
+          "type": "choice",
+          "difficulty": 3,
+          "stem": {
+            "zh": "以下哪项描述正确反映了退出码 2 与其他非零退出码的本质区别？",
+            "en": "Which description correctly reflects the essential difference between exit code 2 and other non-zero exit codes?",
+            "ja": "終了コード 2 と他のゼロ以外の終了コードの本質的な違いを正しく述べているのはどれですか？"
+          },
+          "options": [
+            {
+              "id": "b",
+              "text": {
+                "zh": "退出码 2 会终止整个会话，其他非零码只影响当前操作",
+                "en": "Exit code 2 terminates the entire session, other non-zero codes only affect the current operation",
+                "ja": "終了コード 2 はセッション全体を終了させ、他のゼロ以外のコードは現在の操作のみに影響する"
+              }
+            },
+            {
+              "id": "c",
+              "text": {
+                "zh": "退出码 2 触发重试，其他非零码直接失败",
+                "en": "Exit code 2 triggers a retry, other non-zero codes fail directly",
+                "ja": "終了コード 2 はリトライをトリガーし、他のゼロ以外のコードは直接失敗する"
+              }
+            },
+            {
+              "id": "a",
+              "text": {
+                "zh": "三者语义相同，区别仅在于错误日志级别不同",
+                "en": "All three have the same semantics, differing only in error log level",
+                "ja": "3 つはすべて同じ意味を持ち、エラーログレベルが異なるだけ"
+              }
+            },
+            {
+              "id": "d",
+              "text": {
+                "zh": "退出码 2 真正阻断操作，其他非零码仅记录错误后继续",
+                "en": "Exit code 2 truly blocks the operation, other non-zero codes only log an error and continue",
+                "ja": "終了コード 2 は操作を真にブロックし、他のゼロ以外のコードはエラーをログに記録するだけで継続する"
+              }
+            }
+          ],
+          "answer": "d",
+          "explanation": {
+            "zh": "这是退出码语义的核心：0 成功继续，2 阻断操作（唯一能真正拦截的码），其他任意非零值（如 1、3、127 等）均只记录错误日志，操作照常继续执行。",
+            "en": "This is the core of exit code semantics: 0 means success and continue, 2 blocks the operation (the only code that truly intercepts), and any other non-zero value (like 1, 3, 127, etc.) only logs an error while the operation continues normally.",
+            "ja": "これが終了コードのセマンティクスの核心です：0 は成功して継続、2 は操作をブロック（真にインターセプトできる唯一のコード）、その他のゼロ以外の値（1、3、127 など）はエラーをログに記録するだけで操作は通常通り継続します。"
+          },
+          "reward_card": "card_bp04_003"
         }
       ],
       "star_thresholds": [
