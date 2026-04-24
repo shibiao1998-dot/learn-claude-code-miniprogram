@@ -21737,55 +21737,55 @@ module.exports = {
         "en": "Subagent Orchestration",
         "ja": "サブエージェント編成"
       },
-      "questions": [
+            "questions": [
         {
           "id": "q_bp05_001",
           "type": "choice",
           "difficulty": 1,
           "stem": {
-            "zh": "以下哪个概念与「1. 什么是子代理」直接相关？",
-            "en": "Which concept is directly related to \"Frontmatter Fields (16)\"?",
-            "ja": "「Frontmatter Fields (16)」に直接関連する概念はどれですか？"
+            "zh": "子代理（subagent）在 Claude Code 中的核心定义是什么？",
+            "en": "What is the core definition of a subagent in Claude Code?",
+            "ja": "Claude Codeにおけるサブエージェントの中核的な定義は何ですか？"
           },
           "options": [
             {
-              "id": "b",
+              "id": "a",
               "text": {
-                "zh": "7. 实用示例",
-                "en": "Display & UX",
-                "ja": "Display & UX"
+                "zh": "专用 AI 代理，有自己的工具集、模型和权限",
+                "en": "A specialized AI agent with its own tools, model, and permissions",
+                "ja": "独自のツール、モデル、権限を持つ専用AIエージェント"
               }
             },
             {
-              "id": "d",
+              "id": "b",
               "text": {
-                "zh": "输出与格式",
-                "en": "AWS & Cloud Credentials",
-                "ja": "AWS & Cloud Credentials"
+                "zh": "Claude Code 的插件扩展机制",
+                "en": "A plugin extension mechanism for Claude Code",
+                "ja": "Claude Codeのプラグイン拡張機構"
               }
             },
             {
               "id": "c",
               "text": {
-                "zh": "WorktreeCreate / WorktreeRemove",
-                "en": "Effort Level",
-                "ja": "Effort Level"
+                "zh": "运行在服务器上的后台进程",
+                "en": "A background process running on the server",
+                "ja": "サーバー上で動作するバックグラウンドプロセス"
               }
             },
             {
-              "id": "a",
+              "id": "d",
               "text": {
-                "zh": "1. 什么是子代理",
-                "en": "Frontmatter Fields (16)",
-                "ja": "Frontmatter Fields (16)"
+                "zh": "用于存储会话历史的数据库",
+                "en": "A database for storing session history",
+                "ja": "セッション履歴を保存するデータベース"
               }
             }
           ],
           "answer": "a",
           "explanation": {
-            "zh": "1. 什么是子代理",
-            "en": "Frontmatter Fields (16)",
-            "ja": "Frontmatter Fields (16)"
+            "zh": "子代理是专用 AI 代理，有自己的工具集、模型和权限，可独立完成特定任务。",
+            "en": "A subagent is a specialized AI agent with its own toolset, model, and permissions, capable of independently completing specific tasks.",
+            "ja": "サブエージェントは独自のツールセット、モデル、権限を持つ専用AIエージェントで、特定のタスクを独立して完了できます。"
           },
           "reward_card": "card_bp05_001"
         },
@@ -21794,204 +21794,867 @@ module.exports = {
           "type": "choice",
           "difficulty": 1,
           "stem": {
-            "zh": "以下哪个概念与「2. Frontmatter 字段（16 个）」直接相关？",
-            "en": "Which concept is directly related to \"![Official](../!/tags/official.svg) **(5)**\"?",
-            "ja": "「![Official](../!/tags/official.svg) **(5)**」に直接関連する概念はどれですか？"
+            "zh": "子代理配置文件中，哪个字段用于指定该代理可以使用哪些工具？",
+            "en": "In a subagent config file, which field specifies what tools the agent can use?",
+            "ja": "サブエージェントの設定ファイルで、使用できるツールを指定するフィールドはどれですか？"
           },
           "options": [
             {
               "id": "a",
               "text": {
-                "zh": "2. Frontmatter 字段（16 个）",
-                "en": "![Official](../!/tags/official.svg) **(5)**",
-                "ja": "![Official](../!/tags/official.svg) **(5)**"
+                "zh": "model",
+                "en": "model",
+                "ja": "model"
               }
             },
             {
               "id": "b",
               "text": {
-                "zh": "模型别名",
-                "en": "Attribution Settings",
-                "ja": "Attribution Settings"
+                "zh": "skills",
+                "en": "skills",
+                "ja": "skills"
               }
             },
             {
               "id": "c",
               "text": {
-                "zh": "集成",
-                "en": "Quick Reference: Complete Example",
-                "ja": "Quick Reference: Complete Example"
+                "zh": "tools",
+                "en": "tools",
+                "ja": "tools"
               }
             },
             {
               "id": "d",
               "text": {
-                "zh": "文件写入后自动运行 Lint",
-                "en": "Global Config Settings (`~/.claude.json`)",
-                "ja": "Global Config Settings (`~/.claude.json`)"
+                "zh": "isolation",
+                "en": "isolation",
+                "ja": "isolation"
               }
             }
           ],
-          "answer": "a",
+          "answer": "c",
           "explanation": {
-            "zh": "2. Frontmatter 字段（16 个）",
-            "en": "![Official](../!/tags/official.svg) **(5)**",
-            "ja": "![Official](../!/tags/official.svg) **(5)**"
+            "zh": "frontmatter 中的 tools 字段用于声明该子代理可以使用的工具列表。",
+            "en": "The tools field in frontmatter declares the list of tools the subagent is allowed to use.",
+            "ja": "frontmatterのtoolsフィールドは、サブエージェントが使用できるツールのリストを宣言します。"
           },
-          "reward_card": "card_bp05_002"
+          "reward_card": "card_bp05_001"
         },
         {
           "id": "q_bp05_003",
           "type": "choice",
           "difficulty": 1,
           "stem": {
-            "zh": "以下哪个概念与「3. 内置代理类型（5 个）」直接相关？",
-            "en": "Which concept is directly related to \"Sources\"?",
-            "ja": "「Sources」に直接関連する概念はどれですか？"
+            "zh": "以下哪个选项是子代理 frontmatter 中「最关键」的 6 个字段之一？",
+            "en": "Which of the following is one of the 6 most critical subagent frontmatter fields?",
+            "ja": "次のうち、サブエージェントfrontmatterの最も重要な6フィールドの一つはどれですか？"
           },
           "options": [
             {
               "id": "a",
               "text": {
-                "zh": "3. 内置代理类型（5 个）",
-                "en": "Sources",
-                "ja": "Sources"
+                "zh": "permissionMode",
+                "en": "permissionMode",
+                "ja": "permissionMode"
               }
             },
             {
               "id": "b",
               "text": {
-                "zh": "10. 来源",
-                "en": "10. 来源",
-                "ja": "10. 来源"
+                "zh": "fontSize",
+                "en": "fontSize",
+                "ja": "fontSize"
               }
             },
             {
               "id": "c",
               "text": {
-                "zh": "Plans 和 Memory 目录",
-                "en": "Plugin Settings",
-                "ja": "Plugin Settings"
+                "zh": "language",
+                "en": "language",
+                "ja": "language"
               }
             },
             {
               "id": "d",
               "text": {
-                "zh": "3. 模型配置",
-                "en": "Worktree Settings",
-                "ja": "Worktree Settings"
+                "zh": "theme",
+                "en": "theme",
+                "ja": "theme"
               }
             }
           ],
           "answer": "a",
           "explanation": {
-            "zh": "3. 内置代理类型（5 个）",
-            "en": "Command → Agent → Skill",
-            "ja": "Command → Agent → Skill"
+            "zh": "permissionMode 是 16 个 frontmatter 字段中最关键的 6 个之一，控制代理的权限模式。",
+            "en": "permissionMode is one of the 6 most critical fields among the 16 frontmatter fields, controlling the agent's permission mode.",
+            "ja": "permissionModeは16のfrontmatterフィールドの中で最も重要な6つの一つで、エージェントの権限モードを制御します。"
           },
-          "reward_card": "card_bp05_003"
+          "reward_card": "card_bp05_002"
         },
         {
           "id": "q_bp05_004",
           "type": "choice",
           "difficulty": 1,
           "stem": {
-            "zh": "以下哪个概念与「4. 创建自定义子代理」直接相关？",
-            "en": "Which concept is directly related to \"Weather Agent\"?",
-            "ja": "「Weather Agent」に直接関連する概念はどれですか？"
+            "zh": "Claude Code 内置了几种代理类型？",
+            "en": "How many built-in agent types does Claude Code have?",
+            "ja": "Claude Codeには何種類の組み込みエージェントタイプがありますか？"
           },
           "options": [
             {
+              "id": "a",
+              "text": {
+                "zh": "3 种",
+                "en": "3 types",
+                "ja": "3種類"
+              }
+            },
+            {
               "id": "b",
               "text": {
-                "zh": "代理定义",
-                "en": "代理定义",
-                "ja": "代理定义"
+                "zh": "5 种",
+                "en": "5 types",
+                "ja": "5種類"
               }
             },
             {
               "id": "c",
               "text": {
-                "zh": "2. Frontmatter 字段（16 个）",
-                "en": "![Official](../!/tags/official.svg) **(5)**",
-                "ja": "![Official](../!/tags/official.svg) **(5)**"
+                "zh": "7 种",
+                "en": "7 types",
+                "ja": "7種類"
               }
             },
             {
               "id": "d",
               "text": {
-                "zh": "1. 编写优秀的 CLAUDE.md",
-                "en": "1. Writing a Good CLAUDE.md",
-                "ja": "1. Writing a Good CLAUDE.md"
-              }
-            },
-            {
-              "id": "a",
-              "text": {
-                "zh": "4. 创建自定义子代理",
-                "en": "Weather Agent",
-                "ja": "Weather Agent"
+                "zh": "10 种",
+                "en": "10 types",
+                "ja": "10種類"
               }
             }
           ],
-          "answer": "a",
+          "answer": "b",
           "explanation": {
-            "zh": "4. 创建自定义子代理",
-            "en": "File",
-            "ja": "File"
+            "zh": "Claude Code 内置 5 种代理类型，各有分工：通用 / 搜索 / 规划 / 配置 / 问答。",
+            "en": "Claude Code has 5 built-in agent types, each with a specific role: general / search / planning / config / Q&A.",
+            "ja": "Claude Codeには5種類の組み込みエージェントタイプがあり、それぞれ役割が異なります：汎用/検索/計画/設定/Q&A。"
           },
-          "reward_card": "card_bp05_004"
+          "reward_card": "card_bp05_003"
         },
         {
           "id": "q_bp05_005",
           "type": "choice",
-          "difficulty": 2,
+          "difficulty": 1,
           "stem": {
-            "zh": "在 Claude Code 中，关于「方式一：使用 `/agents` 命令」的正确理解是？",
-            "en": "What is the correct understanding of \"![How to Use](../!/tags/how-to-use.svg)\" in Claude Code?",
-            "ja": "Claude Code における「![How to Use](../!/tags/how-to-use.svg)」の正しい理解はどれですか？"
+            "zh": "在 Command→Agent→Skill 三层编排中，「Command」层的作用是什么？",
+            "en": "In the Command→Agent→Skill three-layer orchestration, what is the role of the Command layer?",
+            "ja": "Command→Agent→Skillの3層オーケストレーションで、Command層の役割は何ですか？"
           },
           "options": [
             {
-              "id": "c",
+              "id": "a",
               "text": {
-                "zh": "模型与配置",
-                "en": "Status Line Configuration",
-                "ja": "Status Line Configuration"
-              }
-            },
-            {
-              "id": "d",
-              "text": {
-                "zh": "Worktree（工作树）设置",
-                "en": "Model Configuration",
-                "ja": "Model Configuration"
+                "zh": "存储知识和技能",
+                "en": "Store knowledge and skills",
+                "ja": "知識とスキルを保存する"
               }
             },
             {
               "id": "b",
               "text": {
-                "zh": "1. 什么是子代理",
-                "en": "Frontmatter Fields (16)",
-                "ja": "Frontmatter Fields (16)"
+                "zh": "定义执行者",
+                "en": "Define the executor",
+                "ja": "実行者を定義する"
+              }
+            },
+            {
+              "id": "c",
+              "text": {
+                "zh": "管理用户会话",
+                "en": "Manage user sessions",
+                "ja": "ユーザーセッションを管理する"
+              }
+            },
+            {
+              "id": "d",
+              "text": {
+                "zh": "定义入口",
+                "en": "Define the entry point",
+                "ja": "エントリーポイントを定義する"
+              }
+            }
+          ],
+          "answer": "d",
+          "explanation": {
+            "zh": "Command 定义入口、Agent 定义执行者、Skill 定义知识——三层各司其职组合成完整工作流。",
+            "en": "Command defines the entry point, Agent defines the executor, and Skill defines the knowledge — three layers working together.",
+            "ja": "Commandはエントリーポイント、Agentは実行者、Skillは知識を定義します。"
+          },
+          "reward_card": "card_bp05_004"
+        },
+        {
+          "id": "q_bp05_006",
+          "type": "choice",
+          "difficulty": 2,
+          "stem": {
+            "zh": "子代理 frontmatter 中的 maxTurns 字段控制什么？",
+            "en": "What does the maxTurns field in subagent frontmatter control?",
+            "ja": "サブエージェントのfrontmatterにあるmaxTurnsフィールドは何を制御しますか？"
+          },
+          "options": [
+            {
+              "id": "a",
+              "text": {
+                "zh": "代理可以使用的最大工具数量",
+                "en": "The maximum number of tools the agent can use",
+                "ja": "エージェントが使用できるツールの最大数"
+              }
+            },
+            {
+              "id": "b",
+              "text": {
+                "zh": "代理运行的最大对话轮数",
+                "en": "The maximum number of conversation turns the agent can run",
+                "ja": "エージェントが実行できる最大会話ターン数"
+              }
+            },
+            {
+              "id": "c",
+              "text": {
+                "zh": "同时运行的子代理数量上限",
+                "en": "The maximum number of subagents that can run simultaneously",
+                "ja": "同時に実行できるサブエージェントの最大数"
+              }
+            },
+            {
+              "id": "d",
+              "text": {
+                "zh": "代理的内存缓存大小",
+                "en": "The memory cache size of the agent",
+                "ja": "エージェントのメモリキャッシュサイズ"
+              }
+            }
+          ],
+          "answer": "b",
+          "explanation": {
+            "zh": "maxTurns 限制代理运行的最大对话轮数，防止无限循环消耗资源。",
+            "en": "maxTurns limits the maximum number of conversation turns the agent can execute, preventing infinite loops.",
+            "ja": "maxTurnsはエージェントが実行できる最大会話ターン数を制限し、無限ループを防ぎます。"
+          },
+          "reward_card": "card_bp05_002"
+        },
+        {
+          "id": "q_bp05_007",
+          "type": "choice",
+          "difficulty": 2,
+          "stem": {
+            "zh": "子代理的 isolation 字段用于控制什么？",
+            "en": "What does the isolation field in a subagent config control?",
+            "ja": "サブエージェント設定のisolationフィールドは何を制御しますか？"
+          },
+          "options": [
+            {
+              "id": "c",
+              "text": {
+                "zh": "代理是否与主进程共享文件系统和环境",
+                "en": "Whether the agent shares the filesystem and environment with the main process",
+                "ja": "エージェントがメインプロセスとファイルシステムと環境を共有するかどうか"
               }
             },
             {
               "id": "a",
               "text": {
-                "zh": "方式一：使用 `/agents` 命令",
-                "en": "![How to Use](../!/tags/how-to-use.svg)",
-                "ja": "![How to Use](../!/tags/how-to-use.svg)"
+                "zh": "代理的网络访问策略",
+                "en": "The network access policy of the agent",
+                "ja": "エージェントのネットワークアクセスポリシー"
+              }
+            },
+            {
+              "id": "b",
+              "text": {
+                "zh": "代理调用外部 API 的频率限制",
+                "en": "Rate limiting for external API calls from the agent",
+                "ja": "エージェントからの外部API呼び出しのレート制限"
+              }
+            },
+            {
+              "id": "d",
+              "text": {
+                "zh": "代理的日志记录级别",
+                "en": "The logging level of the agent",
+                "ja": "エージェントのログ記録レベル"
+              }
+            }
+          ],
+          "answer": "c",
+          "explanation": {
+            "zh": "isolation 字段控制代理是否与主进程共享文件系统和环境，高 isolation 提供更强的安全隔离。",
+            "en": "The isolation field controls whether the agent shares the filesystem and environment with the main process, providing stronger security when set high.",
+            "ja": "isolationフィールドは、エージェントがメインプロセスとファイルシステムと環境を共有するかどうかを制御します。"
+          },
+          "reward_card": "card_bp05_002"
+        },
+        {
+          "id": "q_bp05_008",
+          "type": "choice",
+          "difficulty": 2,
+          "stem": {
+            "zh": "以下哪项正确描述了 5 个内置代理类型中「搜索代理」的职责？",
+            "en": "Which correctly describes the role of the search agent among the 5 built-in agent types?",
+            "ja": "5つの組み込みエージェントタイプの中で「検索エージェント」の役割を正しく説明しているのはどれですか？"
+          },
+          "options": [
+            {
+              "id": "d",
+              "text": {
+                "zh": "专注于代码库和文件系统的搜索与信息检索",
+                "en": "Focuses on searching the codebase and filesystem for information retrieval",
+                "ja": "コードベースとファイルシステムの検索と情報取得に特化"
+              }
+            },
+            {
+              "id": "b",
+              "text": {
+                "zh": "负责管理用户配置文件",
+                "en": "Responsible for managing user config files",
+                "ja": "ユーザー設定ファイルの管理を担当"
+              }
+            },
+            {
+              "id": "a",
+              "text": {
+                "zh": "负责生成最终的代码输出",
+                "en": "Responsible for generating the final code output",
+                "ja": "最終的なコード出力の生成を担当"
+              }
+            },
+            {
+              "id": "c",
+              "text": {
+                "zh": "处理用户的日常问答对话",
+                "en": "Handles everyday Q&A conversations with users",
+                "ja": "ユーザーとの日常的なQ&A会話を処理"
+              }
+            }
+          ],
+          "answer": "d",
+          "explanation": {
+            "zh": "搜索代理专注于代码库和文件系统的搜索与信息检索，是 5 种内置代理之一。",
+            "en": "The search agent specializes in searching the codebase and filesystem for information retrieval, one of the 5 built-in agent types.",
+            "ja": "検索エージェントはコードベースとファイルシステムの検索と情報取得に特化しており、5種類の組み込みエージェントの一つです。"
+          },
+          "reward_card": "card_bp05_003"
+        },
+        {
+          "id": "q_bp05_009",
+          "type": "choice",
+          "difficulty": 2,
+          "stem": {
+            "zh": "在 Command→Agent→Skill 三层编排中，「Skill」层的核心作用是什么？",
+            "en": "In the Command→Agent→Skill three-layer orchestration, what is the core role of the Skill layer?",
+            "ja": "Command→Agent→Skillの3層オーケストレーションで、Skill層の中核的な役割は何ですか？"
+          },
+          "options": [
+            {
+              "id": "b",
+              "text": {
+                "zh": "触发任务执行",
+                "en": "Trigger task execution",
+                "ja": "タスク実行をトリガーする"
+              }
+            },
+            {
+              "id": "c",
+              "text": {
+                "zh": "管理代理权限",
+                "en": "Manage agent permissions",
+                "ja": "エージェントの権限を管理する"
+              }
+            },
+            {
+              "id": "a",
+              "text": {
+                "zh": "定义知识与专业能力",
+                "en": "Define knowledge and expertise",
+                "ja": "知識と専門能力を定義する"
+              }
+            },
+            {
+              "id": "d",
+              "text": {
+                "zh": "记录执行日志",
+                "en": "Record execution logs",
+                "ja": "実行ログを記録する"
               }
             }
           ],
           "answer": "a",
           "explanation": {
-            "zh": "方式一：使用 `/agents` 命令",
-            "en": "![How to Use](../!/tags/how-to-use.svg)",
-            "ja": "![How to Use](../!/tags/how-to-use.svg)"
+            "zh": "Skill 层定义知识与专业能力，为 Agent 提供特定领域的专业知识支撑。",
+            "en": "The Skill layer defines knowledge and expertise, providing domain-specific knowledge support for Agents.",
+            "ja": "Skill層は知識と専門能力を定義し、特定ドメインの専門知識をAgentに提供します。"
           },
-          "reward_card": "card_bp05_005"
+          "reward_card": "card_bp05_004"
+        },
+        {
+          "id": "q_bp05_010",
+          "type": "choice",
+          "difficulty": 2,
+          "stem": {
+            "zh": "子代理 frontmatter 共有几个字段？",
+            "en": "How many fields does the subagent frontmatter have in total?",
+            "ja": "サブエージェントのfrontmatterには合計何個のフィールドがありますか？"
+          },
+          "options": [
+            {
+              "id": "a",
+              "text": {
+                "zh": "8 个",
+                "en": "8 fields",
+                "ja": "8個"
+              }
+            },
+            {
+              "id": "b",
+              "text": {
+                "zh": "12 个",
+                "en": "12 fields",
+                "ja": "12個"
+              }
+            },
+            {
+              "id": "c",
+              "text": {
+                "zh": "16 个",
+                "en": "16 fields",
+                "ja": "16個"
+              }
+            },
+            {
+              "id": "d",
+              "text": {
+                "zh": "20 个",
+                "en": "20 fields",
+                "ja": "20個"
+              }
+            }
+          ],
+          "answer": "c",
+          "explanation": {
+            "zh": "子代理 frontmatter 共有 16 个字段，其中最关键的是 tools、model、permissionMode、isolation、maxTurns、skills。",
+            "en": "The subagent frontmatter has 16 fields in total; the most critical are tools, model, permissionMode, isolation, maxTurns, and skills.",
+            "ja": "サブエージェントのfrontmatterには合計16個のフィールドがあり、最も重要なのはtools、model、permissionMode、isolation、maxTurns、skillsです。"
+          },
+          "reward_card": "card_bp05_002"
+        },
+        {
+          "id": "q_bp05_011",
+          "type": "choice",
+          "difficulty": 2,
+          "stem": {
+            "zh": "子代理与普通 Claude Code 调用的最根本区别是什么？",
+            "en": "What is the most fundamental difference between a subagent and a regular Claude Code invocation?",
+            "ja": "サブエージェントと通常のClaude Code呼び出しの最も根本的な違いは何ですか？"
+          },
+          "options": [
+            {
+              "id": "c",
+              "text": {
+                "zh": "子代理响应速度更快",
+                "en": "Subagents respond faster",
+                "ja": "サブエージェントの方が応答が速い"
+              }
+            },
+            {
+              "id": "a",
+              "text": {
+                "zh": "子代理拥有独立的工具集、模型和权限配置",
+                "en": "Subagents have independent toolset, model, and permission configuration",
+                "ja": "サブエージェントは独立したツールセット、モデル、権限設定を持つ"
+              }
+            },
+            {
+              "id": "b",
+              "text": {
+                "zh": "子代理只能执行只读操作",
+                "en": "Subagents can only perform read-only operations",
+                "ja": "サブエージェントは読み取り専用の操作のみ実行できる"
+              }
+            },
+            {
+              "id": "d",
+              "text": {
+                "zh": "子代理需要付费才能使用",
+                "en": "Subagents require payment to use",
+                "ja": "サブエージェントを使用するには料金が必要"
+              }
+            }
+          ],
+          "answer": "a",
+          "explanation": {
+            "zh": "子代理与普通调用的根本区别在于拥有独立的工具集、模型和权限配置，可以针对特定任务进行专门优化。",
+            "en": "The fundamental difference is that subagents have independent toolset, model, and permission configurations, enabling specialization for specific tasks.",
+            "ja": "根本的な違いは、サブエージェントが独立したツールセット、モデル、権限設定を持ち、特定のタスクに特化できることです。"
+          },
+          "reward_card": "card_bp05_001"
+        },
+        {
+          "id": "q_bp05_012",
+          "type": "choice",
+          "difficulty": 2,
+          "stem": {
+            "zh": "在三层编排中，若要新增一种「代码审查」能力，最应该在哪一层添加定义？",
+            "en": "In the three-layer orchestration, to add a new code review capability, which layer should you define it in?",
+            "ja": "3層オーケストレーションで、新しい「コードレビュー」能力を追加するには、どの層で定義すべきですか？"
+          },
+          "options": [
+            {
+              "id": "b",
+              "text": {
+                "zh": "Command 层",
+                "en": "Command layer",
+                "ja": "Command層"
+              }
+            },
+            {
+              "id": "c",
+              "text": {
+                "zh": "Skill 层",
+                "en": "Skill layer",
+                "ja": "Skill層"
+              }
+            },
+            {
+              "id": "d",
+              "text": {
+                "zh": "Agent 层",
+                "en": "Agent layer",
+                "ja": "Agent層"
+              }
+            },
+            {
+              "id": "a",
+              "text": {
+                "zh": "直接写入主 CLAUDE.md",
+                "en": "Write directly into the main CLAUDE.md",
+                "ja": "メインのCLAUDE.mdに直接書き込む"
+              }
+            }
+          ],
+          "answer": "c",
+          "explanation": {
+            "zh": "代码审查是一种「知识与专业能力」，应在 Skill 层定义，供 Agent 在执行时调用。",
+            "en": "Code review is a form of knowledge and expertise, so it should be defined in the Skill layer for Agents to invoke during execution.",
+            "ja": "コードレビューは「知識と専門能力」の一形態なので、Agentが実行時に呼び出せるようSkill層で定義すべきです。"
+          },
+          "reward_card": "card_bp05_004"
+        },
+        {
+          "id": "q_bp05_013",
+          "type": "choice",
+          "difficulty": 3,
+          "stem": {
+            "zh": "以下哪种场景最适合使用高 isolation 配置的子代理？",
+            "en": "Which scenario is most suitable for using a subagent with high isolation configuration?",
+            "ja": "次のどのシナリオが、高いisolation設定のサブエージェントを使用するのに最も適していますか？"
+          },
+          "options": [
+            {
+              "id": "d",
+              "text": {
+                "zh": "执行可能影响生产数据库的危险操作",
+                "en": "Executing risky operations that could affect production databases",
+                "ja": "本番データベースに影響を与える可能性がある危険な操作の実行"
+              }
+            },
+            {
+              "id": "b",
+              "text": {
+                "zh": "快速回答用户的简单问题",
+                "en": "Quickly answering simple user questions",
+                "ja": "ユーザーの簡単な質問に素早く答える"
+              }
+            },
+            {
+              "id": "a",
+              "text": {
+                "zh": "生成简单的文字摘要",
+                "en": "Generating simple text summaries",
+                "ja": "シンプルなテキスト要約の生成"
+              }
+            },
+            {
+              "id": "c",
+              "text": {
+                "zh": "读取本地配置文件",
+                "en": "Reading local config files",
+                "ja": "ローカル設定ファイルの読み取り"
+              }
+            }
+          ],
+          "answer": "d",
+          "explanation": {
+            "zh": "高 isolation 提供强安全隔离，最适合执行可能影响生产环境的危险操作，防止意外破坏主系统。",
+            "en": "High isolation provides strong security separation, most suitable for risky operations that could affect production environments.",
+            "ja": "高いisolationは強力なセキュリティ分離を提供し、本番環境に影響する危険な操作に最も適しています。"
+          },
+          "reward_card": "card_bp05_002"
+        },
+        {
+          "id": "q_bp05_014",
+          "type": "choice",
+          "difficulty": 3,
+          "stem": {
+            "zh": "如果你想让某个子代理只能读取文件而不能写入，应该优先配置哪个 frontmatter 字段组合？",
+            "en": "To make a subagent read-only (no file writes), which frontmatter field combination should you configure?",
+            "ja": "サブエージェントをファイルの読み取りのみに制限したい場合、どのfrontmatterフィールドの組み合わせを優先的に設定すべきですか？"
+          },
+          "options": [
+            {
+              "id": "a",
+              "text": {
+                "zh": "tools（限制为只读工具）+ permissionMode（只读模式）",
+                "en": "tools (restrict to read-only tools) + permissionMode (read-only mode)",
+                "ja": "tools（読み取り専用ツールに制限）+ permissionMode（読み取り専用モード）"
+              }
+            },
+            {
+              "id": "b",
+              "text": {
+                "zh": "maxTurns（设为 1）+ isolation（最高级别）",
+                "en": "maxTurns (set to 1) + isolation (highest level)",
+                "ja": "maxTurns（1に設定）+ isolation（最高レベル）"
+              }
+            },
+            {
+              "id": "c",
+              "text": {
+                "zh": "model（使用最小模型）+ skills（不加载任何技能）",
+                "en": "model (use smallest model) + skills (load no skills)",
+                "ja": "model（最小モデルを使用）+ skills（スキルを読み込まない）"
+              }
+            },
+            {
+              "id": "d",
+              "text": {
+                "zh": "直接删除代理配置文件中的所有写操作代码",
+                "en": "Directly delete all write-operation code from the agent config file",
+                "ja": "エージェント設定ファイルからすべての書き込み操作コードを直接削除する"
+              }
+            }
+          ],
+          "answer": "a",
+          "explanation": {
+            "zh": "限制子代理只读最有效的方式是：在 tools 中只列出只读工具，并通过 permissionMode 设置只读权限模式。",
+            "en": "The most effective way to make a subagent read-only is to list only read-only tools in tools, and set read-only permission mode via permissionMode.",
+            "ja": "サブエージェントを読み取り専用にする最も効果的な方法は、toolsに読み取り専用ツールのみを列挙し、permissionModeで読み取り専用権限モードを設定することです。"
+          },
+          "reward_card": "card_bp05_002"
+        },
+        {
+          "id": "q_bp05_015",
+          "type": "choice",
+          "difficulty": 3,
+          "stem": {
+            "zh": "一个「规划代理」（planning agent）在 5 种内置类型中的核心价值是什么？",
+            "en": "What is the core value of a planning agent among the 5 built-in agent types?",
+            "ja": "5種類の組み込みエージェントタイプの中で「計画エージェント」の中核的な価値は何ですか？"
+          },
+          "options": [
+            {
+              "id": "b",
+              "text": {
+                "zh": "直接执行代码变更",
+                "en": "Directly execute code changes",
+                "ja": "コード変更を直接実行する"
+              }
+            },
+            {
+              "id": "c",
+              "text": {
+                "zh": "将复杂任务分解为可执行步骤，再分发给其他代理",
+                "en": "Break down complex tasks into executable steps, then distribute to other agents",
+                "ja": "複雑なタスクを実行可能なステップに分解し、他のエージェントに配布する"
+              }
+            },
+            {
+              "id": "d",
+              "text": {
+                "zh": "管理用户的账号和配置",
+                "en": "Manage user accounts and configurations",
+                "ja": "ユーザーのアカウントと設定を管理する"
+              }
+            },
+            {
+              "id": "a",
+              "text": {
+                "zh": "存储项目的历史版本",
+                "en": "Store project version history",
+                "ja": "プロジェクトの履歴バージョンを保存する"
+              }
+            }
+          ],
+          "answer": "c",
+          "explanation": {
+            "zh": "规划代理的核心价值在于将复杂任务分解为可执行的步骤，再分发给专门的执行代理，实现任务的协同完成。",
+            "en": "The core value of a planning agent is breaking down complex tasks into executable steps and distributing them to specialized execution agents.",
+            "ja": "計画エージェントの中核的な価値は、複雑なタスクを実行可能なステップに分解し、専門の実行エージェントに配布することです。"
+          },
+          "reward_card": "card_bp05_003"
+        },
+        {
+          "id": "q_bp05_016",
+          "type": "choice",
+          "difficulty": 3,
+          "stem": {
+            "zh": "在 Command→Agent→Skill 编排中，若三层都有冲突的「权限要求」，以哪一层为准？",
+            "en": "In Command→Agent→Skill orchestration, if all three layers have conflicting permission requirements, which layer takes precedence?",
+            "ja": "Command→Agent→Skillオーケストレーションで、3層すべてに競合する「権限要件」がある場合、どの層が優先されますか？"
+          },
+          "options": [
+            {
+              "id": "b",
+              "text": {
+                "zh": "Agent 层（执行者的 frontmatter 权限配置为准）",
+                "en": "Agent layer (executor frontmatter permission config takes precedence)",
+                "ja": "Agent層（実行者のfrontmatter権限設定が優先）"
+              }
+            },
+            {
+              "id": "c",
+              "text": {
+                "zh": "Command 层（入口定义最终权限）",
+                "en": "Command layer (entry point defines final permissions)",
+                "ja": "Command層（エントリーポイントが最終権限を定義）"
+              }
+            },
+            {
+              "id": "a",
+              "text": {
+                "zh": "Skill 层（最底层知识优先）",
+                "en": "Skill layer (lowest-level knowledge takes precedence)",
+                "ja": "Skill層（最下層の知識が優先）"
+              }
+            },
+            {
+              "id": "d",
+              "text": {
+                "zh": "系统全局默认权限",
+                "en": "System global default permissions",
+                "ja": "システムグローバルデフォルト権限"
+              }
+            }
+          ],
+          "answer": "b",
+          "explanation": {
+            "zh": "权限由 Agent 层的 frontmatter 配置（permissionMode）决定，Agent 是实际执行者，其权限设置最终生效。",
+            "en": "Permissions are determined by the Agent layer's frontmatter configuration (permissionMode), as the Agent is the actual executor whose permission settings take final effect.",
+            "ja": "権限はAgent層のfrontmatter設定（permissionMode）によって決定されます。Agentが実際の実行者であり、その権限設定が最終的に有効になります。"
+          },
+          "reward_card": "card_bp05_004"
+        },
+        {
+          "id": "q_bp05_017",
+          "type": "choice",
+          "difficulty": 3,
+          "stem": {
+            "zh": "以下哪种多代理设计模式能最有效地提升并行处理效率？",
+            "en": "Which multi-agent design pattern most effectively improves parallel processing efficiency?",
+            "ja": "次のどのマルチエージェント設計パターンが並列処理効率を最も効果的に向上させますか？"
+          },
+          "options": [
+            {
+              "id": "c",
+              "text": {
+                "zh": "用一个通用代理顺序处理所有任务",
+                "en": "Use a single general agent to handle all tasks sequentially",
+                "ja": "単一の汎用エージェントですべてのタスクを順次処理する"
+              }
+            },
+            {
+              "id": "d",
+              "text": {
+                "zh": "增大 maxTurns 值让代理运行更多轮次",
+                "en": "Increase maxTurns so the agent runs more rounds",
+                "ja": "maxTurnsを増やしてエージェントをより多くのラウンド実行させる"
+              }
+            },
+            {
+              "id": "b",
+              "text": {
+                "zh": "将独立任务拆分给多个专用子代理并行执行",
+                "en": "Split independent tasks to multiple specialized subagents for parallel execution",
+                "ja": "独立したタスクを複数の専用サブエージェントに分割して並列実行する"
+              }
+            },
+            {
+              "id": "a",
+              "text": {
+                "zh": "把所有工具都加载到一个代理上",
+                "en": "Load all tools onto a single agent",
+                "ja": "すべてのツールを一つのエージェントに読み込む"
+              }
+            }
+          ],
+          "answer": "b",
+          "explanation": {
+            "zh": "将独立任务拆分给多个专用子代理并行执行，是多代理架构提升并行效率的核心模式。",
+            "en": "Splitting independent tasks to multiple specialized subagents for parallel execution is the core pattern for improving parallelism in multi-agent architectures.",
+            "ja": "独立したタスクを複数の専用サブエージェントに分割して並列実行することが、マルチエージェントアーキテクチャで並列効率を向上させる中核的なパターンです。"
+          },
+          "reward_card": "card_bp05_003"
+        },
+        {
+          "id": "q_bp05_018",
+          "type": "choice",
+          "difficulty": 3,
+          "stem": {
+            "zh": "当 Command→Agent→Skill 三层编排与直接写 CLAUDE.md 指令相比，其核心优势是什么？",
+            "en": "Compared to writing instructions directly in CLAUDE.md, what is the core advantage of Command→Agent→Skill three-layer orchestration?",
+            "ja": "CLAUDE.mdに直接指示を書く場合と比べて、Command→Agent→Skillの3層オーケストレーションの中核的な優位性は何ですか？"
+          },
+          "options": [
+            {
+              "id": "c",
+              "text": {
+                "zh": "语法更简单，学习成本低",
+                "en": "Simpler syntax with lower learning cost",
+                "ja": "より単純な構文で学習コストが低い"
+              }
+            },
+            {
+              "id": "b",
+              "text": {
+                "zh": "无需配置任何权限",
+                "en": "No permission configuration needed",
+                "ja": "権限設定が不要"
+              }
+            },
+            {
+              "id": "d",
+              "text": {
+                "zh": "关注点分离：入口、执行者、知识各自独立可复用",
+                "en": "Separation of concerns: entry point, executor, and knowledge are independent and reusable",
+                "ja": "関心の分離：エントリーポイント、実行者、知識がそれぞれ独立して再利用可能"
+              }
+            },
+            {
+              "id": "a",
+              "text": {
+                "zh": "响应速度比单 Agent 更快",
+                "en": "Response speed is faster than a single agent",
+                "ja": "単一エージェントより応答速度が速い"
+              }
+            }
+          ],
+          "answer": "d",
+          "explanation": {
+            "zh": "三层编排的核心优势是关注点分离：Command（入口）、Agent（执行者）、Skill（知识）各自独立可复用，比平铺在 CLAUDE.md 中更易维护和扩展。",
+            "en": "The core advantage of three-layer orchestration is separation of concerns: Command (entry), Agent (executor), and Skill (knowledge) are each independent and reusable, making it easier to maintain and extend than flat CLAUDE.md instructions.",
+            "ja": "3層オーケストレーションの中核的な優位性は関心の分離です：Command（エントリー）、Agent（実行者）、Skill（知識）がそれぞれ独立して再利用可能で、CLAUDE.mdにフラットに書くより保守・拡張が容易です。"
+          },
+          "reward_card": "card_bp05_004"
         }
       ],
       "star_thresholds": [
