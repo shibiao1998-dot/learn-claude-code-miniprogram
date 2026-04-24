@@ -1164,10 +1164,38 @@ module.exports = {
             "ja": "ツールディスパッチにおいて dispatch map の核心的な役割は何ですか？"
           },
           "options": [
-            { "id": "a", "text": { "zh": "把工具名映射到对应的处理函数", "en": "Map tool names to their handler functions", "ja": "ツール名をハンドラ関数にマッピングする" } },
-            { "id": "b", "text": { "zh": "在发给 API 前清理 messages 列表", "en": "Clean up the messages list before sending to the API", "ja": "API に送信する前に messages リストを整理する" } },
-            { "id": "c", "text": { "zh": "验证文件操作路径是否在工作目录内", "en": "Validate that file paths stay inside the workspace", "ja": "ファイルパスがワークスペース内にあるか検証する" } },
-            { "id": "d", "text": { "zh": "定义工具的名称、描述和参数格式", "en": "Define tool name, description, and parameter format", "ja": "ツールの名前・説明・パラメータ形式を定義する" } }
+            {
+              "id": "a",
+              "text": {
+                "zh": "把工具名映射到对应的处理函数",
+                "en": "Map tool names to their handler functions",
+                "ja": "ツール名をハンドラ関数にマッピングする"
+              }
+            },
+            {
+              "id": "b",
+              "text": {
+                "zh": "在发给 API 前清理 messages 列表",
+                "en": "Clean up the messages list before sending to the API",
+                "ja": "API に送信する前に messages リストを整理する"
+              }
+            },
+            {
+              "id": "c",
+              "text": {
+                "zh": "验证文件操作路径是否在工作目录内",
+                "en": "Validate that file paths stay inside the workspace",
+                "ja": "ファイルパスがワークスペース内にあるか検証する"
+              }
+            },
+            {
+              "id": "d",
+              "text": {
+                "zh": "定义工具的名称、描述和参数格式",
+                "en": "Define tool name, description, and parameter format",
+                "ja": "ツールの名前・説明・パラメータ形式を定義する"
+              }
+            }
           ],
           "answer": "a",
           "explanation": {
@@ -1187,10 +1215,38 @@ module.exports = {
             "ja": "エージェントに新しいツールを追加する正しい方法はどれですか？"
           },
           "options": [
-            { "id": "a", "text": { "zh": "修改主循环，加入 if/else 分支处理新工具", "en": "Modify the main loop with a new if/else branch", "ja": "メインループに if/else 分岐を追加して対応する" } },
-            { "id": "b", "text": { "zh": "在 dispatch map 加一条字典项，再写一个 handler 函数", "en": "Add one dict entry to the dispatch map and write one handler", "ja": "dispatch map に辞書エントリを追加し handler 関数を 1 つ書く" } },
-            { "id": "c", "text": { "zh": "更新消息规范化逻辑，允许新工具的字段通过", "en": "Update normalization logic to allow new tool fields through", "ja": "新しいツールのフィールドを通すよう正規化ロジックを更新する" } },
-            { "id": "d", "text": { "zh": "只写 schema，不需要 handler 函数", "en": "Only write a schema — no handler function needed", "ja": "schema だけ書けばよく handler 関数は不要" } }
+            {
+              "id": "a",
+              "text": {
+                "zh": "修改主循环，加入 if/else 分支处理新工具",
+                "en": "Modify the main loop with a new if/else branch",
+                "ja": "メインループに if/else 分岐を追加して対応する"
+              }
+            },
+            {
+              "id": "b",
+              "text": {
+                "zh": "在 dispatch map 加一条字典项，再写一个 handler 函数",
+                "en": "Add one dict entry to the dispatch map and write one handler",
+                "ja": "dispatch map に辞書エントリを追加し handler 関数を 1 つ書く"
+              }
+            },
+            {
+              "id": "c",
+              "text": {
+                "zh": "更新消息规范化逻辑，允许新工具的字段通过",
+                "en": "Update normalization logic to allow new tool fields through",
+                "ja": "新しいツールのフィールドを通すよう正規化ロジックを更新する"
+              }
+            },
+            {
+              "id": "d",
+              "text": {
+                "zh": "只写 schema，不需要 handler 函数",
+                "en": "Only write a schema — no handler function needed",
+                "ja": "schema だけ書けばよく handler 関数は不要"
+              }
+            }
           ],
           "answer": "b",
           "explanation": {
@@ -1210,10 +1266,38 @@ module.exports = {
             "ja": "dispatch map について誤った説明はどれですか？"
           },
           "options": [
-            { "id": "a", "text": { "zh": "每个工具名对应一个 handler 函数", "en": "Each tool name corresponds to one handler function", "ja": "各ツール名はハンドラ関数に対応する" } },
-            { "id": "b", "text": { "zh": "加新工具时主循环代码不需要改动", "en": "Adding a new tool requires no changes to the main loop", "ja": "新ツール追加時にメインループの変更は不要" } },
-            { "id": "c", "text": { "zh": "dispatch map 负责验证文件路径不超出工作目录", "en": "The dispatch map validates that file paths stay within the workspace", "ja": "dispatch map がファイルパスのサンドボックス検証を担う" } },
-            { "id": "d", "text": { "zh": "dispatch map 本质上是一个字典结构", "en": "A dispatch map is essentially a dictionary structure", "ja": "dispatch map は本質的に辞書構造である" } }
+            {
+              "id": "a",
+              "text": {
+                "zh": "每个工具名对应一个 handler 函数",
+                "en": "Each tool name corresponds to one handler function",
+                "ja": "各ツール名はハンドラ関数に対応する"
+              }
+            },
+            {
+              "id": "b",
+              "text": {
+                "zh": "加新工具时主循环代码不需要改动",
+                "en": "Adding a new tool requires no changes to the main loop",
+                "ja": "新ツール追加時にメインループの変更は不要"
+              }
+            },
+            {
+              "id": "c",
+              "text": {
+                "zh": "dispatch map 负责验证文件路径不超出工作目录",
+                "en": "The dispatch map validates that file paths stay within the workspace",
+                "ja": "dispatch map がファイルパスのサンドボックス検証を担う"
+              }
+            },
+            {
+              "id": "d",
+              "text": {
+                "zh": "dispatch map 本质上是一个字典结构",
+                "en": "A dispatch map is essentially a dictionary structure",
+                "ja": "dispatch map は本質的に辞書構造である"
+              }
+            }
           ],
           "answer": "c",
           "explanation": {
@@ -1233,10 +1317,38 @@ module.exports = {
             "ja": "パスサンドボックスの目的と実装レイヤーはどれですか？"
           },
           "options": [
-            { "id": "a", "text": { "zh": "靠模型自觉遵守工作目录限制，无需代码验证", "en": "Relies on the model to self-enforce workspace limits — no code validation needed", "ja": "モデルが自律的にワークスペース制限を守るため検証コードは不要" } },
-            { "id": "b", "text": { "zh": "在 API 消息规范化时过滤掉越界路径", "en": "Filters out out-of-bounds paths during API message normalization", "ja": "API メッセージ正規化時に範囲外パスをフィルタリングする" } },
-            { "id": "c", "text": { "zh": "在 tool schema 里限制参数格式，防止模型生成越界路径", "en": "Restricts parameter format in the tool schema to prevent out-of-bounds paths", "ja": "tool schema でパラメータ形式を制限し範囲外パスを防ぐ" } },
-            { "id": "d", "text": { "zh": "在工具层的 handler 中验证路径，确保文件操作限定在工作目录内", "en": "Validates paths inside the tool handler to keep file ops within the workspace", "ja": "ツール層の handler でパスを検証し、ファイル操作をワークスペース内に限定する" } }
+            {
+              "id": "a",
+              "text": {
+                "zh": "靠模型自觉遵守工作目录限制，无需代码验证",
+                "en": "Relies on the model to self-enforce workspace limits — no code validation needed",
+                "ja": "モデルが自律的にワークスペース制限を守るため検証コードは不要"
+              }
+            },
+            {
+              "id": "b",
+              "text": {
+                "zh": "在 API 消息规范化时过滤掉越界路径",
+                "en": "Filters out out-of-bounds paths during API message normalization",
+                "ja": "API メッセージ正規化時に範囲外パスをフィルタリングする"
+              }
+            },
+            {
+              "id": "c",
+              "text": {
+                "zh": "在 tool schema 里限制参数格式，防止模型生成越界路径",
+                "en": "Restricts parameter format in the tool schema to prevent out-of-bounds paths",
+                "ja": "tool schema でパラメータ形式を制限し範囲外パスを防ぐ"
+              }
+            },
+            {
+              "id": "d",
+              "text": {
+                "zh": "在工具层的 handler 中验证路径，确保文件操作限定在工作目录内",
+                "en": "Validates paths inside the tool handler to keep file ops within the workspace",
+                "ja": "ツール層の handler でパスを検証し、ファイル操作をワークスペース内に限定する"
+              }
+            }
           ],
           "answer": "d",
           "explanation": {
@@ -1256,10 +1368,38 @@ module.exports = {
             "ja": "ツール層でパス検証を行わない場合、最も起こりやすいリスクは何ですか？"
           },
           "options": [
-            { "id": "a", "text": { "zh": "模型生成的 tool schema 格式会出错", "en": "The model-generated tool schema format will be incorrect", "ja": "モデルが生成する tool schema の形式に誤りが生じる" } },
-            { "id": "b", "text": { "zh": "dispatch map 无法找到对应的 handler", "en": "The dispatch map will fail to find the corresponding handler", "ja": "dispatch map が対応する handler を見つけられなくなる" } },
-            { "id": "c", "text": { "zh": "API 会拒绝接受 messages，因为格式不符合规范", "en": "The API will reject the messages due to non-compliant format", "ja": "API が規格外の形式として messages を拒否する" } },
-            { "id": "d", "text": { "zh": "模型可能访问工作目录以外的系统文件", "en": "The model may access system files outside the workspace", "ja": "モデルがワークスペース外のシステムファイルにアクセスする可能性がある" } }
+            {
+              "id": "a",
+              "text": {
+                "zh": "模型生成的 tool schema 格式会出错",
+                "en": "The model-generated tool schema format will be incorrect",
+                "ja": "モデルが生成する tool schema の形式に誤りが生じる"
+              }
+            },
+            {
+              "id": "b",
+              "text": {
+                "zh": "dispatch map 无法找到对应的 handler",
+                "en": "The dispatch map will fail to find the corresponding handler",
+                "ja": "dispatch map が対応する handler を見つけられなくなる"
+              }
+            },
+            {
+              "id": "c",
+              "text": {
+                "zh": "API 会拒绝接受 messages，因为格式不符合规范",
+                "en": "The API will reject the messages due to non-compliant format",
+                "ja": "API が規格外の形式として messages を拒否する"
+              }
+            },
+            {
+              "id": "d",
+              "text": {
+                "zh": "模型可能访问工作目录以外的系统文件",
+                "en": "The model may access system files outside the workspace",
+                "ja": "モデルがワークスペース外のシステムファイルにアクセスする可能性がある"
+              }
+            }
           ],
           "answer": "d",
           "explanation": {
@@ -1279,10 +1419,38 @@ module.exports = {
             "ja": "パスサンドボックスをモデルのプロンプト層ではなくツール層に置く核心的な理由は何ですか？"
           },
           "options": [
-            { "id": "a", "text": { "zh": "工具层运行速度更快，减少延迟", "en": "The tool layer runs faster and reduces latency", "ja": "ツール層の方が高速でレイテンシを削減できる" } },
-            { "id": "b", "text": { "zh": "模型不可被完全信任，代码验证比提示约束更可靠", "en": "The model cannot be fully trusted; code validation is more reliable than prompt constraints", "ja": "モデルは完全には信頼できず、コード検証の方がプロンプト制約より信頼性が高い" } },
-            { "id": "c", "text": { "zh": "API 要求所有路径必须在工具层做格式检查", "en": "The API requires all paths to be format-checked at the tool layer", "ja": "API がすべてのパスをツール層で形式チェックすることを要求している" } },
-            { "id": "d", "text": { "zh": "dispatch map 字典查找只支持工具层的路径格式", "en": "The dispatch map dictionary lookup only supports tool-layer path formats", "ja": "dispatch map の辞書検索はツール層のパス形式のみをサポートする" } }
+            {
+              "id": "a",
+              "text": {
+                "zh": "工具层运行速度更快，减少延迟",
+                "en": "The tool layer runs faster and reduces latency",
+                "ja": "ツール層の方が高速でレイテンシを削減できる"
+              }
+            },
+            {
+              "id": "b",
+              "text": {
+                "zh": "模型不可被完全信任，代码验证比提示约束更可靠",
+                "en": "The model cannot be fully trusted; code validation is more reliable than prompt constraints",
+                "ja": "モデルは完全には信頼できず、コード検証の方がプロンプト制約より信頼性が高い"
+              }
+            },
+            {
+              "id": "c",
+              "text": {
+                "zh": "API 要求所有路径必须在工具层做格式检查",
+                "en": "The API requires all paths to be format-checked at the tool layer",
+                "ja": "API がすべてのパスをツール層で形式チェックすることを要求している"
+              }
+            },
+            {
+              "id": "d",
+              "text": {
+                "zh": "dispatch map 字典查找只支持工具层的路径格式",
+                "en": "The dispatch map dictionary lookup only supports tool-layer path formats",
+                "ja": "dispatch map の辞書検索はツール層のパス形式のみをサポートする"
+              }
+            }
           ],
           "answer": "b",
           "explanation": {
@@ -1302,10 +1470,38 @@ module.exports = {
             "ja": "Claude API に送る messages の形式要件はどれですか？"
           },
           "options": [
-            { "id": "a", "text": { "zh": "user/assistant 可以连续出现，顺序不限", "en": "user/assistant messages can appear consecutively in any order", "ja": "user/assistant は連続して任意の順番で現れてよい" } },
-            { "id": "b", "text": { "zh": "tool_use 块不需要对应的 tool_result，模型自动补全", "en": "tool_use blocks need no matching tool_result — the model fills them in", "ja": "tool_use ブロックに対応する tool_result は不要でモデルが補完する" } },
-            { "id": "c", "text": { "zh": "user/assistant 严格交替，每个 tool_use 有匹配 tool_result，只接受标准字段", "en": "Strict user/assistant alternation, each tool_use has a matching tool_result, only standard fields accepted", "ja": "user/assistant は厳密に交互、各 tool_use に tool_result が対応、標準フィールドのみ受け付ける" } },
-            { "id": "d", "text": { "zh": "只需要工具名和参数，不需要维护 role 字段", "en": "Only tool name and params are needed — the role field is not required", "ja": "ツール名とパラメータだけ必要で role フィールドは不要" } }
+            {
+              "id": "a",
+              "text": {
+                "zh": "user/assistant 可以连续出现，顺序不限",
+                "en": "user/assistant messages can appear consecutively in any order",
+                "ja": "user/assistant は連続して任意の順番で現れてよい"
+              }
+            },
+            {
+              "id": "b",
+              "text": {
+                "zh": "tool_use 块不需要对应的 tool_result，模型自动补全",
+                "en": "tool_use blocks need no matching tool_result — the model fills them in",
+                "ja": "tool_use ブロックに対応する tool_result は不要でモデルが補完する"
+              }
+            },
+            {
+              "id": "c",
+              "text": {
+                "zh": "user/assistant 严格交替，每个 tool_use 有匹配 tool_result，只接受标准字段",
+                "en": "Strict user/assistant alternation, each tool_use has a matching tool_result, only standard fields accepted",
+                "ja": "user/assistant は厳密に交互、各 tool_use に tool_result が対応、標準フィールドのみ受け付ける"
+              }
+            },
+            {
+              "id": "d",
+              "text": {
+                "zh": "只需要工具名和参数，不需要维护 role 字段",
+                "en": "Only tool name and params are needed — the role field is not required",
+                "ja": "ツール名とパラメータだけ必要で role フィールドは不要"
+              }
+            }
           ],
           "answer": "c",
           "explanation": {
@@ -1325,10 +1521,38 @@ module.exports = {
             "ja": "API に送信する前に messages を正規化する必要があるのはなぜですか？"
           },
           "options": [
-            { "id": "a", "text": { "zh": "内部 messages 可能包含 API 不接受的格式或字段", "en": "Internal messages may contain formats or fields the API does not accept", "ja": "内部の messages には API が受け付けない形式やフィールドが含まれる場合がある" } },
-            { "id": "b", "text": { "zh": "dispatch map 要求在调用 handler 前先规范化参数", "en": "The dispatch map requires parameters to be normalized before calling the handler", "ja": "dispatch map は handler 呼び出し前にパラメータの正規化を要求する" } },
-            { "id": "c", "text": { "zh": "路径沙箱验证需要规范化后的消息格式才能运行", "en": "Path sandbox validation requires normalized message format to run", "ja": "パスサンドボックス検証は正規化されたメッセージ形式を必要とする" } },
-            { "id": "d", "text": { "zh": "tool schema 生成依赖规范化后的 messages 结构", "en": "Tool schema generation depends on the normalized messages structure", "ja": "tool schema の生成は正規化された messages 構造に依存する" } }
+            {
+              "id": "a",
+              "text": {
+                "zh": "内部 messages 可能包含 API 不接受的格式或字段",
+                "en": "Internal messages may contain formats or fields the API does not accept",
+                "ja": "内部の messages には API が受け付けない形式やフィールドが含まれる場合がある"
+              }
+            },
+            {
+              "id": "b",
+              "text": {
+                "zh": "dispatch map 要求在调用 handler 前先规范化参数",
+                "en": "The dispatch map requires parameters to be normalized before calling the handler",
+                "ja": "dispatch map は handler 呼び出し前にパラメータの正規化を要求する"
+              }
+            },
+            {
+              "id": "c",
+              "text": {
+                "zh": "路径沙箱验证需要规范化后的消息格式才能运行",
+                "en": "Path sandbox validation requires normalized message format to run",
+                "ja": "パスサンドボックス検証は正規化されたメッセージ形式を必要とする"
+              }
+            },
+            {
+              "id": "d",
+              "text": {
+                "zh": "tool schema 生成依赖规范化后的 messages 结构",
+                "en": "Tool schema generation depends on the normalized messages structure",
+                "ja": "tool schema の生成は正規化された messages 構造に依存する"
+              }
+            }
           ],
           "answer": "a",
           "explanation": {
@@ -1348,10 +1572,38 @@ module.exports = {
             "ja": "Claude API がリクエストを拒否する原因となるのはどれですか？"
           },
           "options": [
-            { "id": "a", "text": { "zh": "消息列表里有一个 tool_use 块但没有对应的 tool_result", "en": "A tool_use block in the message list has no matching tool_result", "ja": "メッセージリストに対応する tool_result のない tool_use ブロックがある" } },
-            { "id": "b", "text": { "zh": "dispatch map 包含超过 10 个工具条目", "en": "The dispatch map contains more than 10 tool entries", "ja": "dispatch map に 10 個を超えるツールエントリがある" } },
-            { "id": "c", "text": { "zh": "文件 handler 在工具层做了路径验证", "en": "The file handler performs path validation at the tool layer", "ja": "ファイル handler がツール層でパス検証を実行する" } },
-            { "id": "d", "text": { "zh": "tool schema 描述字段超过 200 字符", "en": "The tool schema description field exceeds 200 characters", "ja": "tool schema の description フィールドが 200 文字を超える" } }
+            {
+              "id": "a",
+              "text": {
+                "zh": "消息列表里有一个 tool_use 块但没有对应的 tool_result",
+                "en": "A tool_use block in the message list has no matching tool_result",
+                "ja": "メッセージリストに対応する tool_result のない tool_use ブロックがある"
+              }
+            },
+            {
+              "id": "b",
+              "text": {
+                "zh": "dispatch map 包含超过 10 个工具条目",
+                "en": "The dispatch map contains more than 10 tool entries",
+                "ja": "dispatch map に 10 個を超えるツールエントリがある"
+              }
+            },
+            {
+              "id": "c",
+              "text": {
+                "zh": "文件 handler 在工具层做了路径验证",
+                "en": "The file handler performs path validation at the tool layer",
+                "ja": "ファイル handler がツール層でパス検証を実行する"
+              }
+            },
+            {
+              "id": "d",
+              "text": {
+                "zh": "tool schema 描述字段超过 200 字符",
+                "en": "The tool schema description field exceeds 200 characters",
+                "ja": "tool schema の description フィールドが 200 文字を超える"
+              }
+            }
           ],
           "answer": "a",
           "explanation": {
@@ -1371,10 +1623,38 @@ module.exports = {
             "ja": "エージェントがツール呼び出しを処理する際、内部 messages リストと API に送る messages リストの関係はどれですか？"
           },
           "options": [
-            { "id": "a", "text": { "zh": "完全相同，内部 messages 直接发给 API，无需任何处理", "en": "Identical — internal messages are sent to the API directly with no processing", "ja": "完全に同じで、内部 messages はそのまま API に送られる" } },
-            { "id": "b", "text": { "zh": "内部 messages 仅供 dispatch map 路由使用，不发给 API", "en": "Internal messages are only for dispatch map routing and never sent to the API", "ja": "内部 messages は dispatch map のルーティングにのみ使われ API には送らない" } },
-            { "id": "c", "text": { "zh": "内部 messages 可能包含额外状态，发送前需规范化以符合 API 要求", "en": "Internal messages may contain extra state; they must be normalized before sending to meet API requirements", "ja": "内部 messages には追加の状態が含まれる場合があり、API 要件を満たすために送信前に正規化が必要" } },
-            { "id": "d", "text": { "zh": "每次调用工具后必须清空 messages，重新向 API 发送对话历史", "en": "After each tool call, messages must be cleared and conversation history resent to the API from scratch", "ja": "ツール呼び出し後は messages をクリアし、API に会話履歴を最初から再送しなければならない" } }
+            {
+              "id": "a",
+              "text": {
+                "zh": "完全相同，内部 messages 直接发给 API，无需任何处理",
+                "en": "Identical — internal messages are sent to the API directly with no processing",
+                "ja": "完全に同じで、内部 messages はそのまま API に送られる"
+              }
+            },
+            {
+              "id": "b",
+              "text": {
+                "zh": "内部 messages 仅供 dispatch map 路由使用，不发给 API",
+                "en": "Internal messages are only for dispatch map routing and never sent to the API",
+                "ja": "内部 messages は dispatch map のルーティングにのみ使われ API には送らない"
+              }
+            },
+            {
+              "id": "c",
+              "text": {
+                "zh": "内部 messages 可能包含额外状态，发送前需规范化以符合 API 要求",
+                "en": "Internal messages may contain extra state; they must be normalized before sending to meet API requirements",
+                "ja": "内部 messages には追加の状態が含まれる場合があり、API 要件を満たすために送信前に正規化が必要"
+              }
+            },
+            {
+              "id": "d",
+              "text": {
+                "zh": "每次调用工具后必须清空 messages，重新向 API 发送对话历史",
+                "en": "After each tool call, messages must be cleared and conversation history resent to the API from scratch",
+                "ja": "ツール呼び出し後は messages をクリアし、API に会話履歴を最初から再送しなければならない"
+              }
+            }
           ],
           "answer": "c",
           "explanation": {
@@ -1394,10 +1674,38 @@ module.exports = {
             "ja": "tool schema の目的は何ですか？"
           },
           "options": [
-            { "id": "a", "text": { "zh": "定义工具名、描述和参数格式，告诉模型能调什么", "en": "Define tool name, description, and parameter format so the model knows what it can call", "ja": "ツール名・説明・パラメータ形式を定義し、モデルが呼び出せるものを知らせる" } },
-            { "id": "b", "text": { "zh": "在工具层验证文件路径，防止越界访问", "en": "Validate file paths at the tool layer to prevent out-of-bounds access", "ja": "ツール層でファイルパスを検証し、範囲外アクセスを防ぐ" } },
-            { "id": "c", "text": { "zh": "把工具名映射到 handler，实现 dispatch 路由", "en": "Map tool names to handlers for dispatch routing", "ja": "ツール名を handler にマッピングして dispatch ルーティングを実現する" } },
-            { "id": "d", "text": { "zh": "规范化 messages 中的字段，确保符合 API 标准", "en": "Normalize fields in messages to ensure API compliance", "ja": "messages のフィールドを正規化して API 標準に準拠させる" } }
+            {
+              "id": "a",
+              "text": {
+                "zh": "定义工具名、描述和参数格式，告诉模型能调什么",
+                "en": "Define tool name, description, and parameter format so the model knows what it can call",
+                "ja": "ツール名・説明・パラメータ形式を定義し、モデルが呼び出せるものを知らせる"
+              }
+            },
+            {
+              "id": "b",
+              "text": {
+                "zh": "在工具层验证文件路径，防止越界访问",
+                "en": "Validate file paths at the tool layer to prevent out-of-bounds access",
+                "ja": "ツール層でファイルパスを検証し、範囲外アクセスを防ぐ"
+              }
+            },
+            {
+              "id": "c",
+              "text": {
+                "zh": "把工具名映射到 handler，实现 dispatch 路由",
+                "en": "Map tool names to handlers for dispatch routing",
+                "ja": "ツール名を handler にマッピングして dispatch ルーティングを実現する"
+              }
+            },
+            {
+              "id": "d",
+              "text": {
+                "zh": "规范化 messages 中的字段，确保符合 API 标准",
+                "en": "Normalize fields in messages to ensure API compliance",
+                "ja": "messages のフィールドを正規化して API 標準に準拠させる"
+              }
+            }
           ],
           "answer": "a",
           "explanation": {
@@ -1417,10 +1725,38 @@ module.exports = {
             "ja": "tool schema と handler が一致しない場合、どのような問題が発生しますか？"
           },
           "options": [
-            { "id": "a", "text": { "zh": "API 会因为 messages 格式不合规而拒绝请求", "en": "The API rejects the request due to non-compliant message format", "ja": "messages の形式が不適切として API がリクエストを拒否する" } },
-            { "id": "b", "text": { "zh": "模型可能按照 schema 调用工具，但 handler 无法正确处理，导致错误", "en": "The model may call the tool per the schema, but the handler cannot process it correctly, causing errors", "ja": "モデルが schema に従いツールを呼び出しても handler が正しく処理できずエラーになる" } },
-            { "id": "c", "text": { "zh": "dispatch map 字典查找失败，主循环崩溃", "en": "The dispatch map lookup fails and the main loop crashes", "ja": "dispatch map の検索が失敗しメインループがクラッシュする" } },
-            { "id": "d", "text": { "zh": "路径沙箱无法初始化，工作目录访问被全部阻断", "en": "The path sandbox fails to initialize, blocking all workspace access", "ja": "パスサンドボックスが初期化できず、ワークスペースへのすべてのアクセスがブロックされる" } }
+            {
+              "id": "a",
+              "text": {
+                "zh": "API 会因为 messages 格式不合规而拒绝请求",
+                "en": "The API rejects the request due to non-compliant message format",
+                "ja": "messages の形式が不適切として API がリクエストを拒否する"
+              }
+            },
+            {
+              "id": "b",
+              "text": {
+                "zh": "模型可能按照 schema 调用工具，但 handler 无法正确处理，导致错误",
+                "en": "The model may call the tool per the schema, but the handler cannot process it correctly, causing errors",
+                "ja": "モデルが schema に従いツールを呼び出しても handler が正しく処理できずエラーになる"
+              }
+            },
+            {
+              "id": "c",
+              "text": {
+                "zh": "dispatch map 字典查找失败，主循环崩溃",
+                "en": "The dispatch map lookup fails and the main loop crashes",
+                "ja": "dispatch map の検索が失敗しメインループがクラッシュする"
+              }
+            },
+            {
+              "id": "d",
+              "text": {
+                "zh": "路径沙箱无法初始化，工作目录访问被全部阻断",
+                "en": "The path sandbox fails to initialize, blocking all workspace access",
+                "ja": "パスサンドボックスが初期化できず、ワークスペースへのすべてのアクセスがブロックされる"
+              }
+            }
           ],
           "answer": "b",
           "explanation": {
@@ -1440,10 +1776,38 @@ module.exports = {
             "ja": "モデルは tool schema に基づいて何をしますか？"
           },
           "options": [
-            { "id": "a", "text": { "zh": "直接执行工具的 handler 函数，绕过 dispatch map", "en": "Directly executes the tool handler, bypassing the dispatch map", "ja": "dispatch map を迂回してツールの handler を直接実行する" } },
-            { "id": "b", "text": { "zh": "生成符合 schema 定义的 tool_use 块，交由 dispatch map 路由执行", "en": "Generates tool_use blocks conforming to the schema, which the dispatch map routes for execution", "ja": "schema に適合した tool_use ブロックを生成し、dispatch map がルーティングして実行する" } },
-            { "id": "c", "text": { "zh": "验证 handler 函数的路径参数是否在工作目录内", "en": "Validates whether handler path parameters are within the workspace", "ja": "handler のパスパラメータがワークスペース内にあるか検証する" } },
-            { "id": "d", "text": { "zh": "在发送前自动规范化 messages 以满足 API 要求", "en": "Automatically normalizes messages before sending to satisfy API requirements", "ja": "API 要件を満たすため送信前に messages を自動的に正規化する" } }
+            {
+              "id": "a",
+              "text": {
+                "zh": "直接执行工具的 handler 函数，绕过 dispatch map",
+                "en": "Directly executes the tool handler, bypassing the dispatch map",
+                "ja": "dispatch map を迂回してツールの handler を直接実行する"
+              }
+            },
+            {
+              "id": "b",
+              "text": {
+                "zh": "生成符合 schema 定义的 tool_use 块，交由 dispatch map 路由执行",
+                "en": "Generates tool_use blocks conforming to the schema, which the dispatch map routes for execution",
+                "ja": "schema に適合した tool_use ブロックを生成し、dispatch map がルーティングして実行する"
+              }
+            },
+            {
+              "id": "c",
+              "text": {
+                "zh": "验证 handler 函数的路径参数是否在工作目录内",
+                "en": "Validates whether handler path parameters are within the workspace",
+                "ja": "handler のパスパラメータがワークスペース内にあるか検証する"
+              }
+            },
+            {
+              "id": "d",
+              "text": {
+                "zh": "在发送前自动规范化 messages 以满足 API 要求",
+                "en": "Automatically normalizes messages before sending to satisfy API requirements",
+                "ja": "API 要件を満たすため送信前に messages を自動的に正規化する"
+              }
+            }
           ],
           "answer": "b",
           "explanation": {
@@ -1463,10 +1827,38 @@ module.exports = {
             "ja": "完全なツールシステムにおいて、schema と handler それぞれの責務は何ですか？"
           },
           "options": [
-            { "id": "a", "text": { "zh": "schema 负责路径验证；handler 负责消息规范化", "en": "Schema handles path validation; handler handles message normalization", "ja": "schema がパス検証を担当し、handler がメッセージ正規化を担当する" } },
-            { "id": "b", "text": { "zh": "schema 负责把工具名路由到 handler；handler 负责定义工具参数格式", "en": "Schema routes tool names to handlers; handler defines tool parameter format", "ja": "schema がツール名を handler にルーティングし、handler がツールパラメータ形式を定義する" } },
-            { "id": "c", "text": { "zh": "schema 告诉模型工具的名称和参数格式；handler 真正执行工具逻辑", "en": "Schema tells the model the tool name and parameter format; handler actually executes the tool logic", "ja": "schema がモデルにツール名とパラメータ形式を伝え、handler がツールロジックを実際に実行する" } },
-            { "id": "d", "text": { "zh": "schema 和 handler 都负责路径沙箱，形成双重验证", "en": "Both schema and handler handle path sandboxing, forming double validation", "ja": "schema と handler の両方がパスサンドボックスを担当し、二重検証を形成する" } }
+            {
+              "id": "a",
+              "text": {
+                "zh": "schema 负责路径验证；handler 负责消息规范化",
+                "en": "Schema handles path validation; handler handles message normalization",
+                "ja": "schema がパス検証を担当し、handler がメッセージ正規化を担当する"
+              }
+            },
+            {
+              "id": "b",
+              "text": {
+                "zh": "schema 负责把工具名路由到 handler；handler 负责定义工具参数格式",
+                "en": "Schema routes tool names to handlers; handler defines tool parameter format",
+                "ja": "schema がツール名を handler にルーティングし、handler がツールパラメータ形式を定義する"
+              }
+            },
+            {
+              "id": "c",
+              "text": {
+                "zh": "schema 告诉模型工具的名称和参数格式；handler 真正执行工具逻辑",
+                "en": "Schema tells the model the tool name and parameter format; handler actually executes the tool logic",
+                "ja": "schema がモデルにツール名とパラメータ形式を伝え、handler がツールロジックを実際に実行する"
+              }
+            },
+            {
+              "id": "d",
+              "text": {
+                "zh": "schema 和 handler 都负责路径沙箱，形成双重验证",
+                "en": "Both schema and handler handle path sandboxing, forming double validation",
+                "ja": "schema と handler の両方がパスサンドボックスを担当し、二重検証を形成する"
+              }
+            }
           ],
           "answer": "c",
           "explanation": {
@@ -1486,10 +1878,38 @@ module.exports = {
             "ja": "s02 ツールディスパッチシステムの 3 つのコアメカニズムを正しく説明しているのはどれですか？"
           },
           "options": [
-            { "id": "a", "text": { "zh": "dispatch map（路由）+ 路径沙箱（安全）+ 消息规范化（API 合规）", "en": "Dispatch map (routing) + path sandbox (security) + message normalization (API compliance)", "ja": "dispatch map（ルーティング）+ パスサンドボックス（セキュリティ）+ メッセージ正規化（API 準拠）" } },
-            { "id": "b", "text": { "zh": "tool schema（路由）+ dispatch map（安全）+ handler（API 合规）", "en": "Tool schema (routing) + dispatch map (security) + handler (API compliance)", "ja": "tool schema（ルーティング）+ dispatch map（セキュリティ）+ handler（API 準拠）" } },
-            { "id": "c", "text": { "zh": "路径沙箱（路由）+ 消息规范化（安全）+ dispatch map（API 合规）", "en": "Path sandbox (routing) + message normalization (security) + dispatch map (API compliance)", "ja": "パスサンドボックス（ルーティング）+ メッセージ正規化（セキュリティ）+ dispatch map（API 準拠）" } },
-            { "id": "d", "text": { "zh": "tool schema（安全）+ 消息规范化（路由）+ 路径沙箱（API 合规）", "en": "Tool schema (security) + message normalization (routing) + path sandbox (API compliance)", "ja": "tool schema（セキュリティ）+ メッセージ正規化（ルーティング）+ パスサンドボックス（API 準拠）" } }
+            {
+              "id": "a",
+              "text": {
+                "zh": "dispatch map（路由）+ 路径沙箱（安全）+ 消息规范化（API 合规）",
+                "en": "Dispatch map (routing) + path sandbox (security) + message normalization (API compliance)",
+                "ja": "dispatch map（ルーティング）+ パスサンドボックス（セキュリティ）+ メッセージ正規化（API 準拠）"
+              }
+            },
+            {
+              "id": "b",
+              "text": {
+                "zh": "tool schema（路由）+ dispatch map（安全）+ handler（API 合规）",
+                "en": "Tool schema (routing) + dispatch map (security) + handler (API compliance)",
+                "ja": "tool schema（ルーティング）+ dispatch map（セキュリティ）+ handler（API 準拠）"
+              }
+            },
+            {
+              "id": "c",
+              "text": {
+                "zh": "路径沙箱（路由）+ 消息规范化（安全）+ dispatch map（API 合规）",
+                "en": "Path sandbox (routing) + message normalization (security) + dispatch map (API compliance)",
+                "ja": "パスサンドボックス（ルーティング）+ メッセージ正規化（セキュリティ）+ dispatch map（API 準拠）"
+              }
+            },
+            {
+              "id": "d",
+              "text": {
+                "zh": "tool schema（安全）+ 消息规范化（路由）+ 路径沙箱（API 合规）",
+                "en": "Tool schema (security) + message normalization (routing) + path sandbox (API compliance)",
+                "ja": "tool schema（セキュリティ）+ メッセージ正規化（ルーティング）+ パスサンドボックス（API 準拠）"
+              }
+            }
           ],
           "answer": "a",
           "explanation": {
@@ -1509,10 +1929,38 @@ module.exports = {
             "ja": "新しいエンジニアが聞きます：'新しいツールを追加するには何箇所変更が必要ですか？'正しい答えは？"
           },
           "options": [
-            { "id": "a", "text": { "zh": "只需要 1 处：在主循环加一个 if/else 分支", "en": "Only 1 place: add an if/else branch in the main loop", "ja": "1 箇所のみ：メインループに if/else 分岐を追加する" } },
-            { "id": "b", "text": { "zh": "至少 3 处：主循环 + 路径验证 + 消息规范化", "en": "At least 3 places: main loop + path validation + message normalization", "ja": "少なくとも 3 箇所：メインループ + パス検証 + メッセージ正規化" } },
-            { "id": "c", "text": { "zh": "不需要改任何代码，dispatch map 会自动发现新工具", "en": "No code changes needed — the dispatch map auto-discovers new tools", "ja": "コード変更不要、dispatch map が新しいツールを自動検出する" } },
-            { "id": "d", "text": { "zh": "2 处：加 handler 函数 + 在 dispatch map 加一条字典项；schema 视需要加", "en": "2 places: add handler + add one entry in dispatch map; schema is added as needed", "ja": "2 箇所：handler を追加 + dispatch map に 1 エントリ追加、schema は必要に応じて追加" } }
+            {
+              "id": "a",
+              "text": {
+                "zh": "只需要 1 处：在主循环加一个 if/else 分支",
+                "en": "Only 1 place: add an if/else branch in the main loop",
+                "ja": "1 箇所のみ：メインループに if/else 分岐を追加する"
+              }
+            },
+            {
+              "id": "b",
+              "text": {
+                "zh": "至少 3 处：主循环 + 路径验证 + 消息规范化",
+                "en": "At least 3 places: main loop + path validation + message normalization",
+                "ja": "少なくとも 3 箇所：メインループ + パス検証 + メッセージ正規化"
+              }
+            },
+            {
+              "id": "c",
+              "text": {
+                "zh": "不需要改任何代码，dispatch map 会自动发现新工具",
+                "en": "No code changes needed — the dispatch map auto-discovers new tools",
+                "ja": "コード変更不要、dispatch map が新しいツールを自動検出する"
+              }
+            },
+            {
+              "id": "d",
+              "text": {
+                "zh": "2 处：加 handler 函数 + 在 dispatch map 加一条字典项；schema 视需要加",
+                "en": "2 places: add handler + add one entry in dispatch map; schema is added as needed",
+                "ja": "2 箇所：handler を追加 + dispatch map に 1 エントリ追加、schema は必要に応じて追加"
+              }
+            }
           ],
           "answer": "d",
           "explanation": {
@@ -1532,10 +1980,38 @@ module.exports = {
             "ja": "tool schema が存在する前提は何ですか？schema が提供されない場合はどうなりますか？"
           },
           "options": [
-            { "id": "a", "text": { "zh": "schema 是可选的；不提供时 dispatch map 自动生成默认 schema", "en": "Schema is optional; the dispatch map auto-generates a default schema when absent", "ja": "schema はオプション；ない場合 dispatch map がデフォルト schema を自動生成する" } },
-            { "id": "b", "text": { "zh": "schema 是必须的；不提供时路径沙箱无法初始化，工具被禁用", "en": "Schema is required; without it the path sandbox cannot initialize and the tool is disabled", "ja": "schema は必須；ない場合パスサンドボックスが初期化できずツールが無効化される" } },
-            { "id": "c", "text": { "zh": "schema 仅用于消息规范化；不提供时 API 拒绝所有 tool_use 请求", "en": "Schema is only for message normalization; without it the API rejects all tool_use requests", "ja": "schema はメッセージ正規化のみに使われる；ない場合 API がすべての tool_use リクエストを拒否する" } },
-            { "id": "d", "text": { "zh": "schema 告诉模型工具存在；不提供时模型不知道可以调用该工具，不会生成对应 tool_use", "en": "Schema informs the model the tool exists; without it the model does not know it can call the tool and will not generate a tool_use", "ja": "schema がモデルにツールの存在を伝える；ない場合モデルはそのツールを呼び出せると知らず、tool_use を生成しない" } }
+            {
+              "id": "a",
+              "text": {
+                "zh": "schema 是可选的；不提供时 dispatch map 自动生成默认 schema",
+                "en": "Schema is optional; the dispatch map auto-generates a default schema when absent",
+                "ja": "schema はオプション；ない場合 dispatch map がデフォルト schema を自動生成する"
+              }
+            },
+            {
+              "id": "b",
+              "text": {
+                "zh": "schema 是必须的；不提供时路径沙箱无法初始化，工具被禁用",
+                "en": "Schema is required; without it the path sandbox cannot initialize and the tool is disabled",
+                "ja": "schema は必須；ない場合パスサンドボックスが初期化できずツールが無効化される"
+              }
+            },
+            {
+              "id": "c",
+              "text": {
+                "zh": "schema 仅用于消息规范化；不提供时 API 拒绝所有 tool_use 请求",
+                "en": "Schema is only for message normalization; without it the API rejects all tool_use requests",
+                "ja": "schema はメッセージ正規化のみに使われる；ない場合 API がすべての tool_use リクエストを拒否する"
+              }
+            },
+            {
+              "id": "d",
+              "text": {
+                "zh": "schema 告诉模型工具存在；不提供时模型不知道可以调用该工具，不会生成对应 tool_use",
+                "en": "Schema informs the model the tool exists; without it the model does not know it can call the tool and will not generate a tool_use",
+                "ja": "schema がモデルにツールの存在を伝える；ない場合モデルはそのツールを呼び出せると知らず、tool_use を生成しない"
+              }
+            }
           ],
           "answer": "d",
           "explanation": {
@@ -1555,10 +2031,38 @@ module.exports = {
             "ja": "s02 ツールシステムにおいて、schema と handler の境界を正しく区別しているのはどれですか？"
           },
           "options": [
-            { "id": "a", "text": { "zh": "schema 运行在工具层，handler 运行在 API 层", "en": "Schema runs at the tool layer; handler runs at the API layer", "ja": "schema はツール層で動作し、handler は API 層で動作する" } },
-            { "id": "b", "text": { "zh": "schema 是给模型看的声明，handler 是给运行时执行的实现", "en": "Schema is a declaration for the model; handler is an implementation for the runtime to execute", "ja": "schema はモデル向けの宣言であり、handler はランタイムが実行する実装である" } },
-            { "id": "c", "text": { "zh": "schema 负责路径安全验证，handler 负责消息规范化", "en": "Schema handles path security validation; handler handles message normalization", "ja": "schema がパスセキュリティ検証を担当し、handler がメッセージ正規化を担当する" } },
-            { "id": "d", "text": { "zh": "schema 和 handler 都存储在 dispatch map 字典中", "en": "Both schema and handler are stored in the dispatch map dictionary", "ja": "schema と handler の両方が dispatch map 辞書に格納されている" } }
+            {
+              "id": "a",
+              "text": {
+                "zh": "schema 运行在工具层，handler 运行在 API 层",
+                "en": "Schema runs at the tool layer; handler runs at the API layer",
+                "ja": "schema はツール層で動作し、handler は API 層で動作する"
+              }
+            },
+            {
+              "id": "b",
+              "text": {
+                "zh": "schema 是给模型看的声明，handler 是给运行时执行的实现",
+                "en": "Schema is a declaration for the model; handler is an implementation for the runtime to execute",
+                "ja": "schema はモデル向けの宣言であり、handler はランタイムが実行する実装である"
+              }
+            },
+            {
+              "id": "c",
+              "text": {
+                "zh": "schema 负责路径安全验证，handler 负责消息规范化",
+                "en": "Schema handles path security validation; handler handles message normalization",
+                "ja": "schema がパスセキュリティ検証を担当し、handler がメッセージ正規化を担当する"
+              }
+            },
+            {
+              "id": "d",
+              "text": {
+                "zh": "schema 和 handler 都存储在 dispatch map 字典中",
+                "en": "Both schema and handler are stored in the dispatch map dictionary",
+                "ja": "schema と handler の両方が dispatch map 辞書に格納されている"
+              }
+            }
           ],
           "answer": "b",
           "explanation": {
@@ -2529,7 +3033,7 @@ module.exports = {
         "en": "Fresh Context per Subtask",
         "ja": "サブタスクごとに新しい文脈を使う"
       },
-            "questions": [
+      "questions": [
         {
           "id": "q_s04_001",
           "type": "choice",
@@ -5532,8 +6036,7 @@ module.exports = {
           },
           "reward_card": "card_s06_005"
         }
-      ]
-,
+      ],
       "star_thresholds": [
         0.4,
         0.7,
@@ -8589,10 +9092,38 @@ module.exports = {
             "ja": "system prompt を構築する際の核心的な考え方は何ですか？"
           },
           "options": [
-            { "id": "a", "text": { "zh": "把所有说明写成一段超长的自然语言文本", "en": "Write all instructions as one long natural-language paragraph", "ja": "すべての指示を一つの長い自然言語テキストにまとめる" } },
-            { "id": "b", "text": { "zh": "把不同来源按清晰边界组装成一条流水线", "en": "Assemble different sources with clear boundaries into a pipeline", "ja": "異なるソースを明確な境界で組み立ててパイプラインにする" } },
-            { "id": "c", "text": { "zh": "只保留核心指令，其余来源在对话轮次中动态追加", "en": "Keep only core instructions and append other sources per turn", "ja": "コア指示のみを保持し、他のソースはターンごとに動的に追加する" } },
-            { "id": "d", "text": { "zh": "每次调用都随机打乱各段的顺序", "en": "Randomly shuffle the order of segments each time", "ja": "毎回呼び出すたびに各セグメントの順序をランダムにシャッフルする" } }
+            {
+              "id": "a",
+              "text": {
+                "zh": "把所有说明写成一段超长的自然语言文本",
+                "en": "Write all instructions as one long natural-language paragraph",
+                "ja": "すべての指示を一つの長い自然言語テキストにまとめる"
+              }
+            },
+            {
+              "id": "b",
+              "text": {
+                "zh": "把不同来源按清晰边界组装成一条流水线",
+                "en": "Assemble different sources with clear boundaries into a pipeline",
+                "ja": "異なるソースを明確な境界で組み立ててパイプラインにする"
+              }
+            },
+            {
+              "id": "c",
+              "text": {
+                "zh": "只保留核心指令，其余来源在对话轮次中动态追加",
+                "en": "Keep only core instructions and append other sources per turn",
+                "ja": "コア指示のみを保持し、他のソースはターンごとに動的に追加する"
+              }
+            },
+            {
+              "id": "d",
+              "text": {
+                "zh": "每次调用都随机打乱各段的顺序",
+                "en": "Randomly shuffle the order of segments each time",
+                "ja": "毎回呼び出すたびに各セグメントの順序をランダムにシャッフルする"
+              }
+            }
           ],
           "answer": "b",
           "explanation": {
@@ -8612,10 +9143,38 @@ module.exports = {
             "ja": "六段組み立て構造において、プロジェクトレベルの作業指示を格納するのはどのセグメントですか？"
           },
           "options": [
-            { "id": "a", "text": { "zh": "core（核心指令）", "en": "core (core instructions)", "ja": "core（コア指示）" } },
-            { "id": "b", "text": { "zh": "skills（技能目录）", "en": "skills (skill catalog)", "ja": "skills（スキルカタログ）" } },
-            { "id": "c", "text": { "zh": "memory（记忆）", "en": "memory (memory)", "ja": "memory（メモリ）" } },
-            { "id": "d", "text": { "zh": "claude_md（项目指令）", "en": "claude_md (project instructions)", "ja": "claude_md（プロジェクト指示）" } }
+            {
+              "id": "a",
+              "text": {
+                "zh": "core（核心指令）",
+                "en": "core (core instructions)",
+                "ja": "core（コア指示）"
+              }
+            },
+            {
+              "id": "b",
+              "text": {
+                "zh": "skills（技能目录）",
+                "en": "skills (skill catalog)",
+                "ja": "skills（スキルカタログ）"
+              }
+            },
+            {
+              "id": "c",
+              "text": {
+                "zh": "memory（记忆）",
+                "en": "memory (memory)",
+                "ja": "memory（メモリ）"
+              }
+            },
+            {
+              "id": "d",
+              "text": {
+                "zh": "claude_md（项目指令）",
+                "en": "claude_md (project instructions)",
+                "ja": "claude_md（プロジェクト指示）"
+              }
+            }
           ],
           "answer": "d",
           "explanation": {
@@ -8635,10 +9194,38 @@ module.exports = {
             "ja": "system prompt と system reminder の最も根本的な違いは何ですか？"
           },
           "options": [
-            { "id": "a", "text": { "zh": "system prompt 比 system reminder 长得多", "en": "A system prompt is much longer than a system reminder", "ja": "system prompt は system reminder よりもはるかに長い" } },
-            { "id": "b", "text": { "zh": "system prompt 只在首次对话时发送，system reminder 每轮必发", "en": "system prompt is sent only on the first turn; system reminder is sent every turn", "ja": "system prompt は最初のターンのみ送信され、system reminder は毎ターン送信される" } },
-            { "id": "c", "text": { "zh": "稳定说明很少变（system prompt），动态提醒每轮都可能变（system reminder）", "en": "Stable instructions rarely change (system prompt); dynamic reminders may change every turn (system reminder)", "ja": "安定した説明はほとんど変わらず（system prompt）、動的なリマインダーは毎ターン変わる可能性がある（system reminder）" } },
-            { "id": "d", "text": { "zh": "system reminder 只用于工具调用，system prompt 只用于文本生成", "en": "system reminder is only for tool calls; system prompt is only for text generation", "ja": "system reminder はツール呼び出しのみ、system prompt はテキスト生成のみに使用される" } }
+            {
+              "id": "a",
+              "text": {
+                "zh": "system prompt 比 system reminder 长得多",
+                "en": "A system prompt is much longer than a system reminder",
+                "ja": "system prompt は system reminder よりもはるかに長い"
+              }
+            },
+            {
+              "id": "b",
+              "text": {
+                "zh": "system prompt 只在首次对话时发送，system reminder 每轮必发",
+                "en": "system prompt is sent only on the first turn; system reminder is sent every turn",
+                "ja": "system prompt は最初のターンのみ送信され、system reminder は毎ターン送信される"
+              }
+            },
+            {
+              "id": "c",
+              "text": {
+                "zh": "稳定说明很少变（system prompt），动态提醒每轮都可能变（system reminder）",
+                "en": "Stable instructions rarely change (system prompt); dynamic reminders may change every turn (system reminder)",
+                "ja": "安定した説明はほとんど変わらず（system prompt）、動的なリマインダーは毎ターン変わる可能性がある（system reminder）"
+              }
+            },
+            {
+              "id": "d",
+              "text": {
+                "zh": "system reminder 只用于工具调用，system prompt 只用于文本生成",
+                "en": "system reminder is only for tool calls; system prompt is only for text generation",
+                "ja": "system reminder はツール呼び出しのみ、system prompt はテキスト生成のみに使用される"
+              }
+            }
           ],
           "answer": "c",
           "explanation": {
@@ -8658,10 +9245,38 @@ module.exports = {
             "ja": "次のうち、system prompt 組み立ての「明確な境界」原則に違反しているのはどれですか？"
           },
           "options": [
-            { "id": "a", "text": { "zh": "将 tools、skills 和 memory 分段拼接，每段有独立标签", "en": "Concatenate tools, skills, and memory in separate sections with distinct labels", "ja": "tools、skills、memory を独立したラベル付きで別々に結合する" } },
-            { "id": "b", "text": { "zh": "把 CLAUDE.md 内容和 core 指令直接混写在一个段落里", "en": "Merge CLAUDE.md content and core instructions into a single paragraph", "ja": "CLAUDE.md の内容とコア指示を一つの段落に混在させる" } },
-            { "id": "c", "text": { "zh": "dynamic 提醒只写当前轮次需要的临时信息", "en": "dynamic reminders contain only temporary info needed for the current turn", "ja": "dynamic リマインダーには現在のターンに必要な一時的な情報のみを記述する" } },
-            { "id": "d", "text": { "zh": "core 段只放极少变化的核心行为规则", "en": "core segment contains only rarely-changing core behavior rules", "ja": "core セグメントにはほとんど変化しないコアの動作ルールのみを配置する" } }
+            {
+              "id": "a",
+              "text": {
+                "zh": "将 tools、skills 和 memory 分段拼接，每段有独立标签",
+                "en": "Concatenate tools, skills, and memory in separate sections with distinct labels",
+                "ja": "tools、skills、memory を独立したラベル付きで別々に結合する"
+              }
+            },
+            {
+              "id": "b",
+              "text": {
+                "zh": "把 CLAUDE.md 内容和 core 指令直接混写在一个段落里",
+                "en": "Merge CLAUDE.md content and core instructions into a single paragraph",
+                "ja": "CLAUDE.md の内容とコア指示を一つの段落に混在させる"
+              }
+            },
+            {
+              "id": "c",
+              "text": {
+                "zh": "dynamic 提醒只写当前轮次需要的临时信息",
+                "en": "dynamic reminders contain only temporary info needed for the current turn",
+                "ja": "dynamic リマインダーには現在のターンに必要な一時的な情報のみを記述する"
+              }
+            },
+            {
+              "id": "d",
+              "text": {
+                "zh": "core 段只放极少变化的核心行为规则",
+                "en": "core segment contains only rarely-changing core behavior rules",
+                "ja": "core セグメントにはほとんど変化しないコアの動作ルールのみを配置する"
+              }
+            }
           ],
           "answer": "b",
           "explanation": {
@@ -8681,10 +9296,38 @@ module.exports = {
             "ja": "六段構造において「tools」セグメントの役割は何ですか？"
           },
           "options": [
-            { "id": "a", "text": { "zh": "存放模型可调用的工具描述", "en": "Hold descriptions of tools the model can invoke", "ja": "モデルが呼び出せるツールの説明を格納する" } },
-            { "id": "b", "text": { "zh": "存放当前任务的动态上下文提醒", "en": "Hold dynamic context reminders for the current task", "ja": "現在のタスクの動的なコンテキストリマインダーを格納する" } },
-            { "id": "c", "text": { "zh": "存放项目级别的 CLAUDE.md 内容", "en": "Hold project-level CLAUDE.md content", "ja": "プロジェクトレベルの CLAUDE.md コンテンツを格納する" } },
-            { "id": "d", "text": { "zh": "存放跨会话持久化的记忆片段", "en": "Hold cross-session persistent memory snippets", "ja": "セッションをまたぐ永続的なメモリスニペットを格納する" } }
+            {
+              "id": "a",
+              "text": {
+                "zh": "存放模型可调用的工具描述",
+                "en": "Hold descriptions of tools the model can invoke",
+                "ja": "モデルが呼び出せるツールの説明を格納する"
+              }
+            },
+            {
+              "id": "b",
+              "text": {
+                "zh": "存放当前任务的动态上下文提醒",
+                "en": "Hold dynamic context reminders for the current task",
+                "ja": "現在のタスクの動的なコンテキストリマインダーを格納する"
+              }
+            },
+            {
+              "id": "c",
+              "text": {
+                "zh": "存放项目级别的 CLAUDE.md 内容",
+                "en": "Hold project-level CLAUDE.md content",
+                "ja": "プロジェクトレベルの CLAUDE.md コンテンツを格納する"
+              }
+            },
+            {
+              "id": "d",
+              "text": {
+                "zh": "存放跨会话持久化的记忆片段",
+                "en": "Hold cross-session persistent memory snippets",
+                "ja": "セッションをまたぐ永続的なメモリスニペットを格納する"
+              }
+            }
           ],
           "answer": "a",
           "explanation": {
@@ -8704,10 +9347,38 @@ module.exports = {
             "ja": "CLAUDE.md の階層的な積み重ねについて、正しい説明はどれですか？"
           },
           "options": [
-            { "id": "a", "text": { "zh": "子目录的 CLAUDE.md 会覆盖项目根目录的同名规则", "en": "A subdirectory CLAUDE.md overrides same-named rules from the project root", "ja": "サブディレクトリの CLAUDE.md はプロジェクトルートの同名ルールを上書きする" } },
-            { "id": "b", "text": { "zh": "只有根目录的 CLAUDE.md 会被加载，子目录的会被忽略", "en": "Only the root CLAUDE.md is loaded; subdirectory files are ignored", "ja": "ルートの CLAUDE.md のみが読み込まれ、サブディレクトリのファイルは無視される" } },
-            { "id": "c", "text": { "zh": "全局、项目、子目录的 CLAUDE.md 全部拼进去，不互相覆盖", "en": "Global, project, and subdirectory CLAUDE.md files are all concatenated without overriding each other", "ja": "グローバル、プロジェクト、サブディレクトリの CLAUDE.md はすべて結合され、互いに上書きしない" } },
-            { "id": "d", "text": { "zh": "全局 CLAUDE.md 优先级最低，会被项目级覆盖", "en": "The global CLAUDE.md has lowest priority and is overridden by the project level", "ja": "グローバル CLAUDE.md は優先度が最も低く、プロジェクトレベルに上書きされる" } }
+            {
+              "id": "a",
+              "text": {
+                "zh": "子目录的 CLAUDE.md 会覆盖项目根目录的同名规则",
+                "en": "A subdirectory CLAUDE.md overrides same-named rules from the project root",
+                "ja": "サブディレクトリの CLAUDE.md はプロジェクトルートの同名ルールを上書きする"
+              }
+            },
+            {
+              "id": "b",
+              "text": {
+                "zh": "只有根目录的 CLAUDE.md 会被加载，子目录的会被忽略",
+                "en": "Only the root CLAUDE.md is loaded; subdirectory files are ignored",
+                "ja": "ルートの CLAUDE.md のみが読み込まれ、サブディレクトリのファイルは無視される"
+              }
+            },
+            {
+              "id": "c",
+              "text": {
+                "zh": "全局、项目、子目录的 CLAUDE.md 全部拼进去，不互相覆盖",
+                "en": "Global, project, and subdirectory CLAUDE.md files are all concatenated without overriding each other",
+                "ja": "グローバル、プロジェクト、サブディレクトリの CLAUDE.md はすべて結合され、互いに上書きしない"
+              }
+            },
+            {
+              "id": "d",
+              "text": {
+                "zh": "全局 CLAUDE.md 优先级最低，会被项目级覆盖",
+                "en": "The global CLAUDE.md has lowest priority and is overridden by the project level",
+                "ja": "グローバル CLAUDE.md は優先度が最も低く、プロジェクトレベルに上書きされる"
+              }
+            }
           ],
           "answer": "c",
           "explanation": {
@@ -8727,10 +9398,38 @@ module.exports = {
             "ja": "毎ターンの会話で現在時刻やタスク状態を渡す必要がある場合、どのセグメントに入れるべきですか？"
           },
           "options": [
-            { "id": "a", "text": { "zh": "core（核心指令）", "en": "core (core instructions)", "ja": "core（コア指示）" } },
-            { "id": "b", "text": { "zh": "memory（记忆）", "en": "memory (memory)", "ja": "memory（メモリ）" } },
-            { "id": "c", "text": { "zh": "skills（技能目录）", "en": "skills (skill catalog)", "ja": "skills（スキルカタログ）" } },
-            { "id": "d", "text": { "zh": "dynamic（动态提醒）", "en": "dynamic (dynamic reminders)", "ja": "dynamic（動的リマインダー）" } }
+            {
+              "id": "a",
+              "text": {
+                "zh": "core（核心指令）",
+                "en": "core (core instructions)",
+                "ja": "core（コア指示）"
+              }
+            },
+            {
+              "id": "b",
+              "text": {
+                "zh": "memory（记忆）",
+                "en": "memory (memory)",
+                "ja": "memory（メモリ）"
+              }
+            },
+            {
+              "id": "c",
+              "text": {
+                "zh": "skills（技能目录）",
+                "en": "skills (skill catalog)",
+                "ja": "skills（スキルカタログ）"
+              }
+            },
+            {
+              "id": "d",
+              "text": {
+                "zh": "dynamic（动态提醒）",
+                "en": "dynamic (dynamic reminders)",
+                "ja": "dynamic（動的リマインダー）"
+              }
+            }
           ],
           "answer": "d",
           "explanation": {
@@ -8750,10 +9449,38 @@ module.exports = {
             "ja": "チームがグローバル、プロジェクト、サブディレクトリの CLAUDE.md をすべて読み込んだところ、内容が重複していました。正しい対処法は何ですか？"
           },
           "options": [
-            { "id": "a", "text": { "zh": "这是正常行为，全部拼进去不覆盖，重复说明无害", "en": "This is normal; all files are concatenated without override, and duplicate instructions are harmless", "ja": "これは正常な動作で、すべて上書きなしに結合され、重複指示は無害です" } },
-            { "id": "b", "text": { "zh": "只保留子目录的 CLAUDE.md，删除另外两个", "en": "Keep only the subdirectory CLAUDE.md and delete the other two", "ja": "サブディレクトリの CLAUDE.md のみ残し、他の2つを削除する" } },
-            { "id": "c", "text": { "zh": "必须让三个文件内容完全相同才能正常工作", "en": "All three files must have identical content for the system to work properly", "ja": "システムが正常に動作するには、3つのファイルの内容がまったく同じでなければならない" } },
-            { "id": "d", "text": { "zh": "子目录 CLAUDE.md 会自动合并去重，不必担心", "en": "The subdirectory CLAUDE.md auto-deduplicates on merge, no action needed", "ja": "サブディレクトリの CLAUDE.md は自動的に重複を除去するので対処不要です" } }
+            {
+              "id": "a",
+              "text": {
+                "zh": "这是正常行为，全部拼进去不覆盖，重复说明无害",
+                "en": "This is normal; all files are concatenated without override, and duplicate instructions are harmless",
+                "ja": "これは正常な動作で、すべて上書きなしに結合され、重複指示は無害です"
+              }
+            },
+            {
+              "id": "b",
+              "text": {
+                "zh": "只保留子目录的 CLAUDE.md，删除另外两个",
+                "en": "Keep only the subdirectory CLAUDE.md and delete the other two",
+                "ja": "サブディレクトリの CLAUDE.md のみ残し、他の2つを削除する"
+              }
+            },
+            {
+              "id": "c",
+              "text": {
+                "zh": "必须让三个文件内容完全相同才能正常工作",
+                "en": "All three files must have identical content for the system to work properly",
+                "ja": "システムが正常に動作するには、3つのファイルの内容がまったく同じでなければならない"
+              }
+            },
+            {
+              "id": "d",
+              "text": {
+                "zh": "子目录 CLAUDE.md 会自动合并去重，不必担心",
+                "en": "The subdirectory CLAUDE.md auto-deduplicates on merge, no action needed",
+                "ja": "サブディレクトリの CLAUDE.md は自動的に重複を除去するので対処不要です"
+              }
+            }
           ],
           "answer": "a",
           "explanation": {
@@ -8773,10 +9500,38 @@ module.exports = {
             "ja": "六段組み立て構造において「memory」セグメントには何が格納されますか？"
           },
           "options": [
-            { "id": "a", "text": { "zh": "每轮对话生成的临时缓存", "en": "Temporary cache generated each conversation turn", "ja": "各会話ターンで生成される一時的なキャッシュ" } },
-            { "id": "b", "text": { "zh": "CLAUDE.md 文件的完整副本", "en": "A full copy of the CLAUDE.md file", "ja": "CLAUDE.md ファイルの完全なコピー" } },
-            { "id": "c", "text": { "zh": "工具调用的返回结果", "en": "Return values from tool calls", "ja": "ツール呼び出しの戻り値" } },
-            { "id": "d", "text": { "zh": "跨会话需要持续可见的记忆内容", "en": "Memory content that needs to stay visible across sessions", "ja": "セッションをまたいで見えている必要があるメモリコンテンツ" } }
+            {
+              "id": "a",
+              "text": {
+                "zh": "每轮对话生成的临时缓存",
+                "en": "Temporary cache generated each conversation turn",
+                "ja": "各会話ターンで生成される一時的なキャッシュ"
+              }
+            },
+            {
+              "id": "b",
+              "text": {
+                "zh": "CLAUDE.md 文件的完整副本",
+                "en": "A full copy of the CLAUDE.md file",
+                "ja": "CLAUDE.md ファイルの完全なコピー"
+              }
+            },
+            {
+              "id": "c",
+              "text": {
+                "zh": "工具调用的返回结果",
+                "en": "Return values from tool calls",
+                "ja": "ツール呼び出しの戻り値"
+              }
+            },
+            {
+              "id": "d",
+              "text": {
+                "zh": "跨会话需要持续可见的记忆内容",
+                "en": "Memory content that needs to stay visible across sessions",
+                "ja": "セッションをまたいで見えている必要があるメモリコンテンツ"
+              }
+            }
           ],
           "answer": "d",
           "explanation": {
@@ -8796,10 +9551,38 @@ module.exports = {
             "ja": "毎ターンのタスクリマインダーとコアシステムルールを同じセグメントに入れると何が問題ですか？"
           },
           "options": [
-            { "id": "a", "text": { "zh": "没有问题，混在一起也能正常运行", "en": "No problem; mixing them still works fine", "ja": "問題なし。混在していても正常に動作します" } },
-            { "id": "b", "text": { "zh": "稳定内容会随动态内容频繁刷新，增加维护难度和出错风险", "en": "Stable content gets refreshed frequently with dynamic content, increasing maintenance burden and error risk", "ja": "安定したコンテンツが動的コンテンツと一緒に頻繁に更新され、保守負担とエラーリスクが増大する" } },
-            { "id": "c", "text": { "zh": "模型无法同时理解两种类型的内容", "en": "The model cannot understand two types of content simultaneously", "ja": "モデルは2種類のコンテンツを同時に理解できない" } },
-            { "id": "d", "text": { "zh": "会超出 token 限制导致截断", "en": "It exceeds the token limit and causes truncation", "ja": "トークン制限を超えて切り捨てが発生する" } }
+            {
+              "id": "a",
+              "text": {
+                "zh": "没有问题，混在一起也能正常运行",
+                "en": "No problem; mixing them still works fine",
+                "ja": "問題なし。混在していても正常に動作します"
+              }
+            },
+            {
+              "id": "b",
+              "text": {
+                "zh": "稳定内容会随动态内容频繁刷新，增加维护难度和出错风险",
+                "en": "Stable content gets refreshed frequently with dynamic content, increasing maintenance burden and error risk",
+                "ja": "安定したコンテンツが動的コンテンツと一緒に頻繁に更新され、保守負担とエラーリスクが増大する"
+              }
+            },
+            {
+              "id": "c",
+              "text": {
+                "zh": "模型无法同时理解两种类型的内容",
+                "en": "The model cannot understand two types of content simultaneously",
+                "ja": "モデルは2種類のコンテンツを同時に理解できない"
+              }
+            },
+            {
+              "id": "d",
+              "text": {
+                "zh": "会超出 token 限制导致截断",
+                "en": "It exceeds the token limit and causes truncation",
+                "ja": "トークン制限を超えて切り捨てが発生する"
+              }
+            }
           ],
           "answer": "b",
           "explanation": {
@@ -8819,10 +9602,38 @@ module.exports = {
             "ja": "プロジェクトルートに CLAUDE.md があり、src/api/ サブディレクトリにも CLAUDE.md があります。Claude が src/api/ 下のファイルを処理する際、どの CLAUDE.md が読み込まれますか？"
           },
           "options": [
-            { "id": "a", "text": { "zh": "只加载 src/api/ 下的 CLAUDE.md", "en": "Only the CLAUDE.md under src/api/ is loaded", "ja": "src/api/ 下の CLAUDE.md のみが読み込まれる" } },
-            { "id": "b", "text": { "zh": "只加载项目根目录的 CLAUDE.md", "en": "Only the project root CLAUDE.md is loaded", "ja": "プロジェクトルートの CLAUDE.md のみが読み込まれる" } },
-            { "id": "c", "text": { "zh": "全局 + 项目根 + src/api/ 三层全部加载并拼接", "en": "Global + project root + src/api/ all three layers are loaded and concatenated", "ja": "グローバル + プロジェクトルート + src/api/ の3層すべてが読み込まれ結合される" } },
-            { "id": "d", "text": { "zh": "只有全局 CLAUDE.md 会被加载", "en": "Only the global CLAUDE.md is loaded", "ja": "グローバル CLAUDE.md のみが読み込まれる" } }
+            {
+              "id": "a",
+              "text": {
+                "zh": "只加载 src/api/ 下的 CLAUDE.md",
+                "en": "Only the CLAUDE.md under src/api/ is loaded",
+                "ja": "src/api/ 下の CLAUDE.md のみが読み込まれる"
+              }
+            },
+            {
+              "id": "b",
+              "text": {
+                "zh": "只加载项目根目录的 CLAUDE.md",
+                "en": "Only the project root CLAUDE.md is loaded",
+                "ja": "プロジェクトルートの CLAUDE.md のみが読み込まれる"
+              }
+            },
+            {
+              "id": "c",
+              "text": {
+                "zh": "全局 + 项目根 + src/api/ 三层全部加载并拼接",
+                "en": "Global + project root + src/api/ all three layers are loaded and concatenated",
+                "ja": "グローバル + プロジェクトルート + src/api/ の3層すべてが読み込まれ結合される"
+              }
+            },
+            {
+              "id": "d",
+              "text": {
+                "zh": "只有全局 CLAUDE.md 会被加载",
+                "en": "Only the global CLAUDE.md is loaded",
+                "ja": "グローバル CLAUDE.md のみが読み込まれる"
+              }
+            }
           ],
           "answer": "c",
           "explanation": {
@@ -8842,10 +9653,38 @@ module.exports = {
             "ja": "六段構造において「skills（スキルカタログ）」セグメントは何を説明しますか？"
           },
           "options": [
-            { "id": "a", "text": { "zh": "Claude 可以使用的、已注册的技能列表", "en": "The catalog of registered skills that Claude can invoke", "ja": "Claude が呼び出せる登録済みスキルのカタログ" } },
-            { "id": "b", "text": { "zh": "模型支持的所有工具函数签名", "en": "All tool function signatures supported by the model", "ja": "モデルがサポートするすべてのツール関数シグネチャ" } },
-            { "id": "c", "text": { "zh": "用户历史对话中涉及的技术栈信息", "en": "Tech stack information from the user's conversation history", "ja": "ユーザーの会話履歴に含まれる技術スタック情報" } },
-            { "id": "d", "text": { "zh": "项目代码的架构说明", "en": "Architecture description of the project codebase", "ja": "プロジェクトコードベースのアーキテクチャ説明" } }
+            {
+              "id": "a",
+              "text": {
+                "zh": "Claude 可以使用的、已注册的技能列表",
+                "en": "The catalog of registered skills that Claude can invoke",
+                "ja": "Claude が呼び出せる登録済みスキルのカタログ"
+              }
+            },
+            {
+              "id": "b",
+              "text": {
+                "zh": "模型支持的所有工具函数签名",
+                "en": "All tool function signatures supported by the model",
+                "ja": "モデルがサポートするすべてのツール関数シグネチャ"
+              }
+            },
+            {
+              "id": "c",
+              "text": {
+                "zh": "用户历史对话中涉及的技术栈信息",
+                "en": "Tech stack information from the user's conversation history",
+                "ja": "ユーザーの会話履歴に含まれる技術スタック情報"
+              }
+            },
+            {
+              "id": "d",
+              "text": {
+                "zh": "项目代码的架构说明",
+                "en": "Architecture description of the project codebase",
+                "ja": "プロジェクトコードベースのアーキテクチャ説明"
+              }
+            }
           ],
           "answer": "a",
           "explanation": {
@@ -8865,10 +9704,38 @@ module.exports = {
             "ja": "開発者が現在の日付、ユーザー名、タスク目標、コアの動作ルールをすべて core セグメントに入れました。潜在的な問題は何ですか？"
           },
           "options": [
-            { "id": "a", "text": { "zh": "没有问题，core 段没有内容限制", "en": "No issue; the core segment has no content restrictions", "ja": "問題なし。core セグメントにはコンテンツ制限がありません" } },
-            { "id": "b", "text": { "zh": "只有 memory 段才允许放用户信息", "en": "Only the memory segment is allowed to contain user information", "ja": "ユーザー情報は memory セグメントのみに入れることが許可されている" } },
-            { "id": "c", "text": { "zh": "模型会优先忽略 core 段中的动态信息", "en": "The model will preferentially ignore dynamic info in the core segment", "ja": "モデルは core セグメントの動的情報を優先的に無視する" } },
-            { "id": "d", "text": { "zh": "会让 core 段变成动态内容，需要每轮重建，失去稳定性优势", "en": "It turns core into dynamic content that must be rebuilt each turn, losing its stability benefit", "ja": "core を毎ターン再構築が必要な動的コンテンツにしてしまい、安定性の利点が失われる" } }
+            {
+              "id": "a",
+              "text": {
+                "zh": "没有问题，core 段没有内容限制",
+                "en": "No issue; the core segment has no content restrictions",
+                "ja": "問題なし。core セグメントにはコンテンツ制限がありません"
+              }
+            },
+            {
+              "id": "b",
+              "text": {
+                "zh": "只有 memory 段才允许放用户信息",
+                "en": "Only the memory segment is allowed to contain user information",
+                "ja": "ユーザー情報は memory セグメントのみに入れることが許可されている"
+              }
+            },
+            {
+              "id": "c",
+              "text": {
+                "zh": "模型会优先忽略 core 段中的动态信息",
+                "en": "The model will preferentially ignore dynamic info in the core segment",
+                "ja": "モデルは core セグメントの動的情報を優先的に無視する"
+              }
+            },
+            {
+              "id": "d",
+              "text": {
+                "zh": "会让 core 段变成动态内容，需要每轮重建，失去稳定性优势",
+                "en": "It turns core into dynamic content that must be rebuilt each turn, losing its stability benefit",
+                "ja": "core を毎ターン再構築が必要な動的コンテンツにしてしまい、安定性の利点が失われる"
+              }
+            }
           ],
           "answer": "d",
           "explanation": {
@@ -8888,10 +9755,38 @@ module.exports = {
             "ja": "六段構造において「core（コア指示）」セグメントに最も適したコンテンツの種類は何ですか？"
           },
           "options": [
-            { "id": "a", "text": { "zh": "每次对话开始前需要刷新的用户状态", "en": "User state that needs refreshing before each conversation", "ja": "各会話の前にリフレッシュが必要なユーザー状態" } },
-            { "id": "b", "text": { "zh": "模型的基础行为准则（极少改变）", "en": "Fundamental behavior rules for the model (rarely changes)", "ja": "モデルの基本的な動作ルール（めったに変わらない）" } },
-            { "id": "c", "text": { "zh": "CLAUDE.md 中的项目说明", "en": "Project descriptions from CLAUDE.md", "ja": "CLAUDE.md のプロジェクト説明" } },
-            { "id": "d", "text": { "zh": "可供调用的外部 API 接口目录", "en": "Catalog of external API endpoints available to call", "ja": "呼び出し可能な外部 API エンドポイントのカタログ" } }
+            {
+              "id": "a",
+              "text": {
+                "zh": "每次对话开始前需要刷新的用户状态",
+                "en": "User state that needs refreshing before each conversation",
+                "ja": "各会話の前にリフレッシュが必要なユーザー状態"
+              }
+            },
+            {
+              "id": "b",
+              "text": {
+                "zh": "模型的基础行为准则（极少改变）",
+                "en": "Fundamental behavior rules for the model (rarely changes)",
+                "ja": "モデルの基本的な動作ルール（めったに変わらない）"
+              }
+            },
+            {
+              "id": "c",
+              "text": {
+                "zh": "CLAUDE.md 中的项目说明",
+                "en": "Project descriptions from CLAUDE.md",
+                "ja": "CLAUDE.md のプロジェクト説明"
+              }
+            },
+            {
+              "id": "d",
+              "text": {
+                "zh": "可供调用的外部 API 接口目录",
+                "en": "Catalog of external API endpoints available to call",
+                "ja": "呼び出し可能な外部 API エンドポイントのカタログ"
+              }
+            }
           ],
           "answer": "b",
           "explanation": {
@@ -8911,10 +9806,38 @@ module.exports = {
             "ja": "CLAUDE.md ファイルの読み込み順序（外から内へ）はどれですか？"
           },
           "options": [
-            { "id": "a", "text": { "zh": "子目录 → 项目根目录 → 全局", "en": "Subdirectory → project root → global", "ja": "サブディレクトリ → プロジェクトルート → グローバル" } },
-            { "id": "b", "text": { "zh": "项目根目录 → 全局 → 子目录", "en": "Project root → global → subdirectory", "ja": "プロジェクトルート → グローバル → サブディレクトリ" } },
-            { "id": "c", "text": { "zh": "全局（~/.claude/CLAUDE.md）→ 项目根目录 → 子目录", "en": "Global (~/.claude/CLAUDE.md) → project root → subdirectory", "ja": "グローバル（~/.claude/CLAUDE.md）→ プロジェクトルート → サブディレクトリ" } },
-            { "id": "d", "text": { "zh": "只有一个 CLAUDE.md 会被使用，其余自动忽略", "en": "Only one CLAUDE.md is used; the rest are automatically ignored", "ja": "CLAUDE.md は1つだけ使用され、残りは自動的に無視される" } }
+            {
+              "id": "a",
+              "text": {
+                "zh": "子目录 → 项目根目录 → 全局",
+                "en": "Subdirectory → project root → global",
+                "ja": "サブディレクトリ → プロジェクトルート → グローバル"
+              }
+            },
+            {
+              "id": "b",
+              "text": {
+                "zh": "项目根目录 → 全局 → 子目录",
+                "en": "Project root → global → subdirectory",
+                "ja": "プロジェクトルート → グローバル → サブディレクトリ"
+              }
+            },
+            {
+              "id": "c",
+              "text": {
+                "zh": "全局（~/.claude/CLAUDE.md）→ 项目根目录 → 子目录",
+                "en": "Global (~/.claude/CLAUDE.md) → project root → subdirectory",
+                "ja": "グローバル（~/.claude/CLAUDE.md）→ プロジェクトルート → サブディレクトリ"
+              }
+            },
+            {
+              "id": "d",
+              "text": {
+                "zh": "只有一个 CLAUDE.md 会被使用，其余自动忽略",
+                "en": "Only one CLAUDE.md is used; the rest are automatically ignored",
+                "ja": "CLAUDE.md は1つだけ使用され、残りは自動的に無視される"
+              }
+            }
           ],
           "answer": "c",
           "explanation": {
@@ -8934,10 +9857,38 @@ module.exports = {
             "ja": "次のどのシナリオが「system prompt は組み立てパイプライン」の利点を最もよく示していますか？"
           },
           "options": [
-            { "id": "a", "text": { "zh": "想更新工具描述时，只需修改 tools 段，不影响其他段", "en": "To update tool descriptions, only the tools segment needs changing without affecting other segments", "ja": "ツールの説明を更新する際、tools セグメントのみ変更すればよく、他のセグメントに影響しない" } },
-            { "id": "b", "text": { "zh": "把所有内容写成一段文字，修改时直接全文替换", "en": "Write everything as one block and replace the whole text when updating", "ja": "すべてを1つのブロックにまとめ、更新時は全文を置き換える" } },
-            { "id": "c", "text": { "zh": "只用一个来源（core）就足够处理所有情况", "en": "Using only one source (core) is sufficient for all cases", "ja": "1つのソース（core）だけですべてのケースを処理するのに十分" } },
-            { "id": "d", "text": { "zh": "动态内容和稳定内容混在一起，统一管理更方便", "en": "Mixing dynamic and stable content together is more convenient to manage", "ja": "動的コンテンツと安定したコンテンツを混在させると管理がより便利" } }
+            {
+              "id": "a",
+              "text": {
+                "zh": "想更新工具描述时，只需修改 tools 段，不影响其他段",
+                "en": "To update tool descriptions, only the tools segment needs changing without affecting other segments",
+                "ja": "ツールの説明を更新する際、tools セグメントのみ変更すればよく、他のセグメントに影響しない"
+              }
+            },
+            {
+              "id": "b",
+              "text": {
+                "zh": "把所有内容写成一段文字，修改时直接全文替换",
+                "en": "Write everything as one block and replace the whole text when updating",
+                "ja": "すべてを1つのブロックにまとめ、更新時は全文を置き換える"
+              }
+            },
+            {
+              "id": "c",
+              "text": {
+                "zh": "只用一个来源（core）就足够处理所有情况",
+                "en": "Using only one source (core) is sufficient for all cases",
+                "ja": "1つのソース（core）だけですべてのケースを処理するのに十分"
+              }
+            },
+            {
+              "id": "d",
+              "text": {
+                "zh": "动态内容和稳定内容混在一起，统一管理更方便",
+                "en": "Mixing dynamic and stable content together is more convenient to manage",
+                "ja": "動的コンテンツと安定したコンテンツを混在させると管理がより便利"
+              }
+            }
           ],
           "answer": "a",
           "explanation": {
@@ -8957,10 +9908,38 @@ module.exports = {
             "ja": "CLAUDE.md のコンテンツと memory のコンテンツを同じセグメントに入れると、どのような混乱が生じますか？"
           },
           "options": [
-            { "id": "a", "text": { "zh": "项目级指令会被当作跨会话记忆来持久化，或记忆会被当作项目规则来遵循", "en": "Project instructions may be persisted as cross-session memory, or memory treated as project rules", "ja": "プロジェクト指示がセッションをまたぐメモリとして永続化されたり、メモリがプロジェクトルールとして扱われたりする可能性がある" } },
-            { "id": "b", "text": { "zh": "会导致 token 数量超标", "en": "It causes the token count to exceed limits", "ja": "トークン数が制限を超える原因となる" } },
-            { "id": "c", "text": { "zh": "模型无法同时处理两种类型的内容", "en": "The model cannot process two types of content simultaneously", "ja": "モデルは2種類のコンテンツを同時に処理できない" } },
-            { "id": "d", "text": { "zh": "不会有任何问题，因为它们最终都是文字", "en": "No issue since both are ultimately text", "ja": "どちらも最終的にはテキストなので問題ない" } }
+            {
+              "id": "a",
+              "text": {
+                "zh": "项目级指令会被当作跨会话记忆来持久化，或记忆会被当作项目规则来遵循",
+                "en": "Project instructions may be persisted as cross-session memory, or memory treated as project rules",
+                "ja": "プロジェクト指示がセッションをまたぐメモリとして永続化されたり、メモリがプロジェクトルールとして扱われたりする可能性がある"
+              }
+            },
+            {
+              "id": "b",
+              "text": {
+                "zh": "会导致 token 数量超标",
+                "en": "It causes the token count to exceed limits",
+                "ja": "トークン数が制限を超える原因となる"
+              }
+            },
+            {
+              "id": "c",
+              "text": {
+                "zh": "模型无法同时处理两种类型的内容",
+                "en": "The model cannot process two types of content simultaneously",
+                "ja": "モデルは2種類のコンテンツを同時に処理できない"
+              }
+            },
+            {
+              "id": "d",
+              "text": {
+                "zh": "不会有任何问题，因为它们最终都是文字",
+                "en": "No issue since both are ultimately text",
+                "ja": "どちらも最終的にはテキストなので問題ない"
+              }
+            }
           ],
           "answer": "a",
           "explanation": {
@@ -8980,10 +9959,38 @@ module.exports = {
             "ja": "六段組み立て構造についての以下の理解のうち、誤っているのはどれですか？"
           },
           "options": [
-            { "id": "a", "text": { "zh": "每段各管一种来源，职责明确", "en": "Each segment manages one source with a clear responsibility", "ja": "各セグメントは1つのソースを管理し、責任が明確" } },
-            { "id": "b", "text": { "zh": "dynamic 段的内容每轮都可以不同", "en": "The dynamic segment's content can differ each turn", "ja": "dynamic セグメントのコンテンツは毎ターン異なる可能性がある" } },
-            { "id": "c", "text": { "zh": "claude_md 段的内容等于当前项目目录下所有文件的汇总", "en": "The claude_md segment equals a summary of all files in the current project directory", "ja": "claude_md セグメントはカレントプロジェクトディレクトリ内のすべてのファイルの要約に等しい" } },
-            { "id": "d", "text": { "zh": "core 段存放极少变化的基础行为准则", "en": "The core segment holds rarely-changing fundamental behavior rules", "ja": "core セグメントにはめったに変わらない基本的な動作ルールが格納される" } }
+            {
+              "id": "a",
+              "text": {
+                "zh": "每段各管一种来源，职责明确",
+                "en": "Each segment manages one source with a clear responsibility",
+                "ja": "各セグメントは1つのソースを管理し、責任が明確"
+              }
+            },
+            {
+              "id": "b",
+              "text": {
+                "zh": "dynamic 段的内容每轮都可以不同",
+                "en": "The dynamic segment's content can differ each turn",
+                "ja": "dynamic セグメントのコンテンツは毎ターン異なる可能性がある"
+              }
+            },
+            {
+              "id": "c",
+              "text": {
+                "zh": "claude_md 段的内容等于当前项目目录下所有文件的汇总",
+                "en": "The claude_md segment equals a summary of all files in the current project directory",
+                "ja": "claude_md セグメントはカレントプロジェクトディレクトリ内のすべてのファイルの要約に等しい"
+              }
+            },
+            {
+              "id": "d",
+              "text": {
+                "zh": "core 段存放极少变化的基础行为准则",
+                "en": "The core segment holds rarely-changing fundamental behavior rules",
+                "ja": "core セグメントにはめったに変わらない基本的な動作ルールが格納される"
+              }
+            }
           ],
           "answer": "c",
           "explanation": {
@@ -9025,10 +10032,38 @@ module.exports = {
             "ja": "Claude Code のエラー回復システムはエラーをいくつのカテゴリに分けますか？"
           },
           "options": [
-            { "id": "a", "text": { "zh": "2 类：网络错误和模型错误", "en": "2 types: network errors and model errors", "ja": "2 種類：ネットワークエラーとモデルエラー" } },
-            { "id": "b", "text": { "zh": "3 类：输出截断、上下文溢出、网络/API 错误", "en": "3 types: output truncation, context overflow, network/API errors", "ja": "3 種類：出力切り捨て、コンテキストオーバーフロー、ネットワーク/API エラー" } },
-            { "id": "c", "text": { "zh": "4 类：截断、溢出、超时、权限错误", "en": "4 types: truncation, overflow, timeout, permission errors", "ja": "4 種類：切り捨て、オーバーフロー、タイムアウト、権限エラー" } },
-            { "id": "d", "text": { "zh": "不分类，所有错误统一用退避重试处理", "en": "No categories, all errors use backoff retry uniformly", "ja": "分類しない、すべてのエラーをバックオフリトライで統一処理" } }
+            {
+              "id": "a",
+              "text": {
+                "zh": "2 类：网络错误和模型错误",
+                "en": "2 types: network errors and model errors",
+                "ja": "2 種類：ネットワークエラーとモデルエラー"
+              }
+            },
+            {
+              "id": "b",
+              "text": {
+                "zh": "3 类：输出截断、上下文溢出、网络/API 错误",
+                "en": "3 types: output truncation, context overflow, network/API errors",
+                "ja": "3 種類：出力切り捨て、コンテキストオーバーフロー、ネットワーク/API エラー"
+              }
+            },
+            {
+              "id": "c",
+              "text": {
+                "zh": "4 类：截断、溢出、超时、权限错误",
+                "en": "4 types: truncation, overflow, timeout, permission errors",
+                "ja": "4 種類：切り捨て、オーバーフロー、タイムアウト、権限エラー"
+              }
+            },
+            {
+              "id": "d",
+              "text": {
+                "zh": "不分类，所有错误统一用退避重试处理",
+                "en": "No categories, all errors use backoff retry uniformly",
+                "ja": "分類しない、すべてのエラーをバックオフリトライで統一処理"
+              }
+            }
           ],
           "answer": "b",
           "explanation": {
@@ -9048,10 +10083,38 @@ module.exports = {
             "ja": "モデルの出力が切り捨てられた場合、正しい回復方法は何ですか？"
           },
           "options": [
-            { "id": "a", "text": { "zh": "压缩对话历史为摘要，然后重新发起请求", "en": "Compress conversation history into a summary, then restart the request", "ja": "会話履歴を要約に圧縮してからリクエストを再開する" } },
-            { "id": "b", "text": { "zh": "用指数退避重试同一条消息", "en": "Retry the same message with exponential backoff", "ja": "同じメッセージを指数バックオフでリトライする" } },
-            { "id": "c", "text": { "zh": "发送续写提示，告知不要重复、不要重来、直接从断点接着写", "en": "Send a continuation prompt telling the model not to repeat, not to restart, and to continue from the breakpoint", "ja": "繰り返さず、最初からやり直さず、ブレークポイントから続けるよう指示する継続プロンプトを送る" } },
-            { "id": "d", "text": { "zh": "忽略截断，将已有输出直接当作完整结果使用", "en": "Ignore truncation and use the existing output as the complete result", "ja": "切り捨てを無視して、既存の出力を完全な結果として使用する" } }
+            {
+              "id": "a",
+              "text": {
+                "zh": "压缩对话历史为摘要，然后重新发起请求",
+                "en": "Compress conversation history into a summary, then restart the request",
+                "ja": "会話履歴を要約に圧縮してからリクエストを再開する"
+              }
+            },
+            {
+              "id": "b",
+              "text": {
+                "zh": "用指数退避重试同一条消息",
+                "en": "Retry the same message with exponential backoff",
+                "ja": "同じメッセージを指数バックオフでリトライする"
+              }
+            },
+            {
+              "id": "c",
+              "text": {
+                "zh": "发送续写提示，告知不要重复、不要重来、直接从断点接着写",
+                "en": "Send a continuation prompt telling the model not to repeat, not to restart, and to continue from the breakpoint",
+                "ja": "繰り返さず、最初からやり直さず、ブレークポイントから続けるよう指示する継続プロンプトを送る"
+              }
+            },
+            {
+              "id": "d",
+              "text": {
+                "zh": "忽略截断，将已有输出直接当作完整结果使用",
+                "en": "Ignore truncation and use the existing output as the complete result",
+                "ja": "切り捨てを無視して、既存の出力を完全な結果として使用する"
+              }
+            }
           ],
           "answer": "c",
           "explanation": {
@@ -9071,10 +10134,38 @@ module.exports = {
             "ja": "コンテキストオーバーフローの正しい回復パスは何ですか？"
           },
           "options": [
-            { "id": "a", "text": { "zh": "发送续写提示，要求模型从断点继续", "en": "Send a continuation prompt asking the model to continue from the breakpoint", "ja": "ブレークポイントから続けるよう継続プロンプトを送る" } },
-            { "id": "b", "text": { "zh": "删除全部历史消息，重新开始对话", "en": "Delete all history messages and restart the conversation", "ja": "すべての履歴メッセージを削除して会話を再開する" } },
-            { "id": "c", "text": { "zh": "用指数退避重试，直到连接恢复", "en": "Use exponential backoff retry until connection is restored", "ja": "接続が回復するまで指数バックオフリトライを使用する" } },
-            { "id": "d", "text": { "zh": "将旧对话压缩成摘要，以摘要为新起点继续工作", "en": "Compress the old conversation into a summary and use it as a new starting point to continue", "ja": "古い会話を要約に圧縮し、その要約を新しい出発点として作業を続ける" } }
+            {
+              "id": "a",
+              "text": {
+                "zh": "发送续写提示，要求模型从断点继续",
+                "en": "Send a continuation prompt asking the model to continue from the breakpoint",
+                "ja": "ブレークポイントから続けるよう継続プロンプトを送る"
+              }
+            },
+            {
+              "id": "b",
+              "text": {
+                "zh": "删除全部历史消息，重新开始对话",
+                "en": "Delete all history messages and restart the conversation",
+                "ja": "すべての履歴メッセージを削除して会話を再開する"
+              }
+            },
+            {
+              "id": "c",
+              "text": {
+                "zh": "用指数退避重试，直到连接恢复",
+                "en": "Use exponential backoff retry until connection is restored",
+                "ja": "接続が回復するまで指数バックオフリトライを使用する"
+              }
+            },
+            {
+              "id": "d",
+              "text": {
+                "zh": "将旧对话压缩成摘要，以摘要为新起点继续工作",
+                "en": "Compress the old conversation into a summary and use it as a new starting point to continue",
+                "ja": "古い会話を要約に圧縮し、その要約を新しい出発点として作業を続ける"
+              }
+            }
           ],
           "answer": "d",
           "explanation": {
@@ -9094,10 +10185,38 @@ module.exports = {
             "ja": "ネットワークエラーまたは API エラーの正しい処理方法は何ですか？"
           },
           "options": [
-            { "id": "a", "text": { "zh": "将对话历史压缩为摘要，然后重新发请求", "en": "Compress conversation history into a summary, then resend the request", "ja": "会話履歴を要約に圧縮してからリクエストを再送する" } },
-            { "id": "b", "text": { "zh": "立即重试，重试次数不设上限", "en": "Retry immediately with no limit on retry count", "ja": "リトライ回数に制限を設けずに即座にリトライする" } },
-            { "id": "c", "text": { "zh": "发续写提示，告知不要重复已有内容", "en": "Send a continuation prompt saying not to repeat existing content", "ja": "既存のコンテンツを繰り返さないよう継続プロンプトを送る" } },
-            { "id": "d", "text": { "zh": "指数退避重试，并设置重试预算上限", "en": "Exponential backoff retry with a retry budget cap", "ja": "指数バックオフリトライを行い、リトライ予算の上限を設定する" } }
+            {
+              "id": "a",
+              "text": {
+                "zh": "将对话历史压缩为摘要，然后重新发请求",
+                "en": "Compress conversation history into a summary, then resend the request",
+                "ja": "会話履歴を要約に圧縮してからリクエストを再送する"
+              }
+            },
+            {
+              "id": "b",
+              "text": {
+                "zh": "立即重试，重试次数不设上限",
+                "en": "Retry immediately with no limit on retry count",
+                "ja": "リトライ回数に制限を設けずに即座にリトライする"
+              }
+            },
+            {
+              "id": "c",
+              "text": {
+                "zh": "发续写提示，告知不要重复已有内容",
+                "en": "Send a continuation prompt saying not to repeat existing content",
+                "ja": "既存のコンテンツを繰り返さないよう継続プロンプトを送る"
+              }
+            },
+            {
+              "id": "d",
+              "text": {
+                "zh": "指数退避重试，并设置重试预算上限",
+                "en": "Exponential backoff retry with a retry budget cap",
+                "ja": "指数バックオフリトライを行い、リトライ予算の上限を設定する"
+              }
+            }
           ],
           "answer": "d",
           "explanation": {
@@ -9117,10 +10236,38 @@ module.exports = {
             "ja": "リトライ予算なしでネットワークエラーを無限にリトライすると何が起きますか？"
           },
           "options": [
-            { "id": "a", "text": { "zh": "上下文窗口会溢出", "en": "The context window will overflow", "ja": "コンテキストウィンドウがオーバーフローする" } },
-            { "id": "b", "text": { "zh": "模型输出会被截断", "en": "Model output will be truncated", "ja": "モデルの出力が切り捨てられる" } },
-            { "id": "c", "text": { "zh": "主循环可能永远卡在重试里，无法向前推进", "en": "The main loop may get stuck retrying forever and cannot make progress", "ja": "メインループがリトライで永遠にスタックし、前進できなくなる可能性がある" } },
-            { "id": "d", "text": { "zh": "对话历史会自动压缩为摘要", "en": "Conversation history will automatically be compressed into a summary", "ja": "会話履歴が自動的に要約に圧縮される" } }
+            {
+              "id": "a",
+              "text": {
+                "zh": "上下文窗口会溢出",
+                "en": "The context window will overflow",
+                "ja": "コンテキストウィンドウがオーバーフローする"
+              }
+            },
+            {
+              "id": "b",
+              "text": {
+                "zh": "模型输出会被截断",
+                "en": "Model output will be truncated",
+                "ja": "モデルの出力が切り捨てられる"
+              }
+            },
+            {
+              "id": "c",
+              "text": {
+                "zh": "主循环可能永远卡在重试里，无法向前推进",
+                "en": "The main loop may get stuck retrying forever and cannot make progress",
+                "ja": "メインループがリトライで永遠にスタックし、前進できなくなる可能性がある"
+              }
+            },
+            {
+              "id": "d",
+              "text": {
+                "zh": "对话历史会自动压缩为摘要",
+                "en": "Conversation history will automatically be compressed into a summary",
+                "ja": "会話履歴が自動的に要約に圧縮される"
+              }
+            }
           ],
           "answer": "c",
           "explanation": {
@@ -9140,10 +10287,38 @@ module.exports = {
             "ja": "継続プロンプトに含めるべき3つの重要な指示は何ですか？"
           },
           "options": [
-            { "id": "a", "text": { "zh": "不要重复已有内容、不要从头开始、直接从断点接着写", "en": "Don't repeat existing content, don't restart, continue directly from the breakpoint", "ja": "既存のコンテンツを繰り返さない、最初からやり直さない、ブレークポイントから直接続ける" } },
-            { "id": "b", "text": { "zh": "压缩历史、清空上下文、重新发起对话", "en": "Compress history, clear context, restart the conversation", "ja": "履歴を圧縮し、コンテキストをクリアして、会話を再開する" } },
-            { "id": "c", "text": { "zh": "设置重试预算、启用退避、记录错误日志", "en": "Set retry budget, enable backoff, log errors", "ja": "リトライ予算を設定し、バックオフを有効にし、エラーをログに記録する" } },
-            { "id": "d", "text": { "zh": "告知当前上下文长度、剩余 token 数、目标输出格式", "en": "Inform the model of current context length, remaining tokens, and target output format", "ja": "現在のコンテキスト長、残りトークン数、目標出力形式をモデルに通知する" } }
+            {
+              "id": "a",
+              "text": {
+                "zh": "不要重复已有内容、不要从头开始、直接从断点接着写",
+                "en": "Don't repeat existing content, don't restart, continue directly from the breakpoint",
+                "ja": "既存のコンテンツを繰り返さない、最初からやり直さない、ブレークポイントから直接続ける"
+              }
+            },
+            {
+              "id": "b",
+              "text": {
+                "zh": "压缩历史、清空上下文、重新发起对话",
+                "en": "Compress history, clear context, restart the conversation",
+                "ja": "履歴を圧縮し、コンテキストをクリアして、会話を再開する"
+              }
+            },
+            {
+              "id": "c",
+              "text": {
+                "zh": "设置重试预算、启用退避、记录错误日志",
+                "en": "Set retry budget, enable backoff, log errors",
+                "ja": "リトライ予算を設定し、バックオフを有効にし、エラーをログに記録する"
+              }
+            },
+            {
+              "id": "d",
+              "text": {
+                "zh": "告知当前上下文长度、剩余 token 数、目标输出格式",
+                "en": "Inform the model of current context length, remaining tokens, and target output format",
+                "ja": "現在のコンテキスト長、残りトークン数、目標出力形式をモデルに通知する"
+              }
+            }
           ],
           "answer": "a",
           "explanation": {
@@ -9163,10 +10338,38 @@ module.exports = {
             "ja": "コンテキスト圧縮（compaction）の核心目標は何ですか？"
           },
           "options": [
-            { "id": "a", "text": { "zh": "彻底清空对话历史，让模型从零开始", "en": "Completely clear conversation history so the model starts from scratch", "ja": "会話履歴を完全にクリアしてモデルをゼロから始めさせる" } },
-            { "id": "b", "text": { "zh": "把旧对话变成仍然能继续工作的摘要", "en": "Transform old conversations into a summary that still enables continuing work", "ja": "古い会話を、作業を続けられる要約に変換する" } },
-            { "id": "c", "text": { "zh": "对每条消息单独重试直到成功", "en": "Retry each message individually until success", "ja": "各メッセージを個別に成功するまでリトライする" } },
-            { "id": "d", "text": { "zh": "删除最早的 N 条消息以释放 token 空间", "en": "Delete the earliest N messages to free up token space", "ja": "トークンスペースを確保するために最初のN件のメッセージを削除する" } }
+            {
+              "id": "a",
+              "text": {
+                "zh": "彻底清空对话历史，让模型从零开始",
+                "en": "Completely clear conversation history so the model starts from scratch",
+                "ja": "会話履歴を完全にクリアしてモデルをゼロから始めさせる"
+              }
+            },
+            {
+              "id": "b",
+              "text": {
+                "zh": "把旧对话变成仍然能继续工作的摘要",
+                "en": "Transform old conversations into a summary that still enables continuing work",
+                "ja": "古い会話を、作業を続けられる要約に変換する"
+              }
+            },
+            {
+              "id": "c",
+              "text": {
+                "zh": "对每条消息单独重试直到成功",
+                "en": "Retry each message individually until success",
+                "ja": "各メッセージを個別に成功するまでリトライする"
+              }
+            },
+            {
+              "id": "d",
+              "text": {
+                "zh": "删除最早的 N 条消息以释放 token 空间",
+                "en": "Delete the earliest N messages to free up token space",
+                "ja": "トークンスペースを確保するために最初のN件のメッセージを削除する"
+              }
+            }
           ],
           "answer": "b",
           "explanation": {
@@ -9186,10 +10389,38 @@ module.exports = {
             "ja": "次のシナリオのうち、継続プロンプトではなくコンテキスト圧縮を使うべきはどれですか？"
           },
           "options": [
-            { "id": "a", "text": { "zh": "对话消息总长度超过上下文窗口上限", "en": "Total conversation message length exceeds the context window limit", "ja": "会話メッセージの合計長がコンテキストウィンドウの上限を超える" } },
-            { "id": "b", "text": { "zh": "模型回复到一半突然停止，输出不完整", "en": "The model stops halfway through its reply and output is incomplete", "ja": "モデルが返答の途中で止まり、出力が不完全" } },
-            { "id": "c", "text": { "zh": "API 请求超时，连接中断", "en": "API request times out, connection interrupted", "ja": "API リクエストがタイムアウトし、接続が中断" } },
-            { "id": "d", "text": { "zh": "模型返回了一个格式错误的 JSON 响应", "en": "The model returned a malformed JSON response", "ja": "モデルが不正な形式の JSON レスポンスを返した" } }
+            {
+              "id": "a",
+              "text": {
+                "zh": "对话消息总长度超过上下文窗口上限",
+                "en": "Total conversation message length exceeds the context window limit",
+                "ja": "会話メッセージの合計長がコンテキストウィンドウの上限を超える"
+              }
+            },
+            {
+              "id": "b",
+              "text": {
+                "zh": "模型回复到一半突然停止，输出不完整",
+                "en": "The model stops halfway through its reply and output is incomplete",
+                "ja": "モデルが返答の途中で止まり、出力が不完全"
+              }
+            },
+            {
+              "id": "c",
+              "text": {
+                "zh": "API 请求超时，连接中断",
+                "en": "API request times out, connection interrupted",
+                "ja": "API リクエストがタイムアウトし、接続が中断"
+              }
+            },
+            {
+              "id": "d",
+              "text": {
+                "zh": "模型返回了一个格式错误的 JSON 响应",
+                "en": "The model returned a malformed JSON response",
+                "ja": "モデルが不正な形式の JSON レスポンスを返した"
+              }
+            }
           ],
           "answer": "a",
           "explanation": {
@@ -9209,10 +10440,38 @@ module.exports = {
             "ja": "なぜ「先にエラーを分類し、それから回復を実行する」が核心原則なのですか？"
           },
           "options": [
-            { "id": "a", "text": { "zh": "因为分类可以减少 API 调用次数", "en": "Because classification reduces the number of API calls", "ja": "分類することで API 呼び出し回数を削減できるから" } },
-            { "id": "b", "text": { "zh": "因为三类错误的恢复策略不同，用错策略会让问题更严重", "en": "Because the three error types have different recovery strategies, and using the wrong one makes the problem worse", "ja": "3種類のエラーに対して異なる回復戦略があり、間違った戦略を使うと問題が悪化するから" } },
-            { "id": "c", "text": { "zh": "因为上下文溢出是最常见的错误，应优先处理", "en": "Because context overflow is the most common error and should be prioritized", "ja": "コンテキストオーバーフローが最も一般的なエラーであり優先的に処理すべきだから" } },
-            { "id": "d", "text": { "zh": "因为所有错误最终都需要退避重试", "en": "Because all errors ultimately require backoff retry", "ja": "すべてのエラーは最終的にバックオフリトライが必要だから" } }
+            {
+              "id": "a",
+              "text": {
+                "zh": "因为分类可以减少 API 调用次数",
+                "en": "Because classification reduces the number of API calls",
+                "ja": "分類することで API 呼び出し回数を削減できるから"
+              }
+            },
+            {
+              "id": "b",
+              "text": {
+                "zh": "因为三类错误的恢复策略不同，用错策略会让问题更严重",
+                "en": "Because the three error types have different recovery strategies, and using the wrong one makes the problem worse",
+                "ja": "3種類のエラーに対して異なる回復戦略があり、間違った戦略を使うと問題が悪化するから"
+              }
+            },
+            {
+              "id": "c",
+              "text": {
+                "zh": "因为上下文溢出是最常见的错误，应优先处理",
+                "en": "Because context overflow is the most common error and should be prioritized",
+                "ja": "コンテキストオーバーフローが最も一般的なエラーであり優先的に処理すべきだから"
+              }
+            },
+            {
+              "id": "d",
+              "text": {
+                "zh": "因为所有错误最终都需要退避重试",
+                "en": "Because all errors ultimately require backoff retry",
+                "ja": "すべてのエラーは最終的にバックオフリトライが必要だから"
+              }
+            }
           ],
           "answer": "b",
           "explanation": {
@@ -9232,10 +10491,38 @@ module.exports = {
             "ja": "エラー回復における指数バックオフの役割は何ですか？"
           },
           "options": [
-            { "id": "a", "text": { "zh": "每次重试前等待递增的时间，避免在网络不稳定时频繁冲击服务器", "en": "Wait for increasing intervals before each retry to avoid hammering the server during network instability", "ja": "ネットワーク不安定時にサーバーへの頻繁なリクエストを避けるため、リトライ前に増加する間隔を待つ" } },
-            { "id": "b", "text": { "zh": "将旧对话压缩成摘要以节省 token", "en": "Compress old conversations into summaries to save tokens", "ja": "古い会話を要約に圧縮してトークンを節約する" } },
-            { "id": "c", "text": { "zh": "告诉模型从断点继续输出，避免重复", "en": "Tell the model to continue output from the breakpoint to avoid repetition", "ja": "ブレークポイントから出力を続けるようモデルに指示して繰り返しを避ける" } },
-            { "id": "d", "text": { "zh": "清空上下文窗口，让模型重新读取所有文件", "en": "Clear the context window so the model re-reads all files", "ja": "コンテキストウィンドウをクリアしてモデルがすべてのファイルを再読み込みできるようにする" } }
+            {
+              "id": "a",
+              "text": {
+                "zh": "每次重试前等待递增的时间，避免在网络不稳定时频繁冲击服务器",
+                "en": "Wait for increasing intervals before each retry to avoid hammering the server during network instability",
+                "ja": "ネットワーク不安定時にサーバーへの頻繁なリクエストを避けるため、リトライ前に増加する間隔を待つ"
+              }
+            },
+            {
+              "id": "b",
+              "text": {
+                "zh": "将旧对话压缩成摘要以节省 token",
+                "en": "Compress old conversations into summaries to save tokens",
+                "ja": "古い会話を要約に圧縮してトークンを節約する"
+              }
+            },
+            {
+              "id": "c",
+              "text": {
+                "zh": "告诉模型从断点继续输出，避免重复",
+                "en": "Tell the model to continue output from the breakpoint to avoid repetition",
+                "ja": "ブレークポイントから出力を続けるようモデルに指示して繰り返しを避ける"
+              }
+            },
+            {
+              "id": "d",
+              "text": {
+                "zh": "清空上下文窗口，让模型重新读取所有文件",
+                "en": "Clear the context window so the model re-reads all files",
+                "ja": "コンテキストウィンドウをクリアしてモデルがすべてのファイルを再読み込みできるようにする"
+              }
+            }
           ],
           "answer": "a",
           "explanation": {
@@ -9255,10 +10542,38 @@ module.exports = {
             "ja": "継続プロンプトに繰り返さないことが明示されていない場合、モデルが最もしそうなことは？"
           },
           "options": [
-            { "id": "a", "text": { "zh": "自动压缩上下文后继续", "en": "Automatically compress context and continue", "ja": "自動的にコンテキストを圧縮して続ける" } },
-            { "id": "b", "text": { "zh": "触发退避重试机制", "en": "Trigger the backoff retry mechanism", "ja": "バックオフリトライメカニズムをトリガーする" } },
-            { "id": "c", "text": { "zh": "重新生成整个内容或重复已有部分内容", "en": "Regenerate the entire content or repeat part of the existing content", "ja": "コンテンツ全体を再生成するか、既存のコンテンツの一部を繰り返す" } },
-            { "id": "d", "text": { "zh": "拒绝执行，返回错误信息", "en": "Refuse to execute and return an error message", "ja": "実行を拒否してエラーメッセージを返す" } }
+            {
+              "id": "a",
+              "text": {
+                "zh": "自动压缩上下文后继续",
+                "en": "Automatically compress context and continue",
+                "ja": "自動的にコンテキストを圧縮して続ける"
+              }
+            },
+            {
+              "id": "b",
+              "text": {
+                "zh": "触发退避重试机制",
+                "en": "Trigger the backoff retry mechanism",
+                "ja": "バックオフリトライメカニズムをトリガーする"
+              }
+            },
+            {
+              "id": "c",
+              "text": {
+                "zh": "重新生成整个内容或重复已有部分内容",
+                "en": "Regenerate the entire content or repeat part of the existing content",
+                "ja": "コンテンツ全体を再生成するか、既存のコンテンツの一部を繰り返す"
+              }
+            },
+            {
+              "id": "d",
+              "text": {
+                "zh": "拒绝执行，返回错误信息",
+                "en": "Refuse to execute and return an error message",
+                "ja": "実行を拒否してエラーメッセージを返す"
+              }
+            }
           ],
           "answer": "c",
           "explanation": {
@@ -9278,10 +10593,38 @@ module.exports = {
             "ja": "リトライ予算の目的は何ですか？"
           },
           "options": [
-            { "id": "a", "text": { "zh": "限制每次重试之间的等待时间", "en": "Limit the waiting time between retries", "ja": "リトライ間の待機時間を制限する" } },
-            { "id": "b", "text": { "zh": "为恢复路径设置上限，防止主循环永远卡在重试中", "en": "Set an upper limit on the recovery path to prevent the main loop from getting stuck retrying forever", "ja": "回復パスに上限を設定し、メインループがリトライで永遠にスタックするのを防ぐ" } },
-            { "id": "c", "text": { "zh": "决定何时将对话历史压缩为摘要", "en": "Determine when to compress conversation history into a summary", "ja": "会話履歴を要約に圧縮するタイミングを決定する" } },
-            { "id": "d", "text": { "zh": "计算续写提示中断点的精确位置", "en": "Calculate the exact breakpoint position in the continuation prompt", "ja": "継続プロンプトのブレークポイントの正確な位置を計算する" } }
+            {
+              "id": "a",
+              "text": {
+                "zh": "限制每次重试之间的等待时间",
+                "en": "Limit the waiting time between retries",
+                "ja": "リトライ間の待機時間を制限する"
+              }
+            },
+            {
+              "id": "b",
+              "text": {
+                "zh": "为恢复路径设置上限，防止主循环永远卡在重试中",
+                "en": "Set an upper limit on the recovery path to prevent the main loop from getting stuck retrying forever",
+                "ja": "回復パスに上限を設定し、メインループがリトライで永遠にスタックするのを防ぐ"
+              }
+            },
+            {
+              "id": "c",
+              "text": {
+                "zh": "决定何时将对话历史压缩为摘要",
+                "en": "Determine when to compress conversation history into a summary",
+                "ja": "会話履歴を要約に圧縮するタイミングを決定する"
+              }
+            },
+            {
+              "id": "d",
+              "text": {
+                "zh": "计算续写提示中断点的精确位置",
+                "en": "Calculate the exact breakpoint position in the continuation prompt",
+                "ja": "継続プロンプトのブレークポイントの正確な位置を計算する"
+              }
+            }
           ],
           "answer": "b",
           "explanation": {
@@ -9301,10 +10644,38 @@ module.exports = {
             "ja": "次のうち削除ではなく圧縮（compaction）を説明しているのはどれですか？"
           },
           "options": [
-            { "id": "a", "text": { "zh": "将旧对话提炼为能反映当前任务进展的摘要，作为新的起始上下文", "en": "Distill old conversations into a summary reflecting current task progress, used as the new starting context", "ja": "古い会話を現在のタスクの進捗を反映した要約に蒸留し、新しい開始コンテキストとして使用する" } },
-            { "id": "b", "text": { "zh": "清空所有历史消息，只保留当前用户请求", "en": "Clear all history messages, keeping only the current user request", "ja": "すべての履歴メッセージをクリアし、現在のユーザーリクエストのみを保持する" } },
-            { "id": "c", "text": { "zh": "删除最旧的 50% 消息以释放 token 空间", "en": "Delete the oldest 50% of messages to free up token space", "ja": "トークンスペースを確保するために最古の50%のメッセージを削除する" } },
-            { "id": "d", "text": { "zh": "对每条历史消息单独调用 API 进行摘要，逐条替换", "en": "Call the API to summarize each history message individually and replace them one by one", "ja": "各履歴メッセージを個別に API で要約し、1件ずつ置き換える" } }
+            {
+              "id": "a",
+              "text": {
+                "zh": "将旧对话提炼为能反映当前任务进展的摘要，作为新的起始上下文",
+                "en": "Distill old conversations into a summary reflecting current task progress, used as the new starting context",
+                "ja": "古い会話を現在のタスクの進捗を反映した要約に蒸留し、新しい開始コンテキストとして使用する"
+              }
+            },
+            {
+              "id": "b",
+              "text": {
+                "zh": "清空所有历史消息，只保留当前用户请求",
+                "en": "Clear all history messages, keeping only the current user request",
+                "ja": "すべての履歴メッセージをクリアし、現在のユーザーリクエストのみを保持する"
+              }
+            },
+            {
+              "id": "c",
+              "text": {
+                "zh": "删除最旧的 50% 消息以释放 token 空间",
+                "en": "Delete the oldest 50% of messages to free up token space",
+                "ja": "トークンスペースを確保するために最古の50%のメッセージを削除する"
+              }
+            },
+            {
+              "id": "d",
+              "text": {
+                "zh": "对每条历史消息单独调用 API 进行摘要，逐条替换",
+                "en": "Call the API to summarize each history message individually and replace them one by one",
+                "ja": "各履歴メッセージを個別に API で要約し、1件ずつ置き換える"
+              }
+            }
           ],
           "answer": "a",
           "explanation": {
@@ -9324,10 +10695,38 @@ module.exports = {
             "ja": "エージェントのメインループがコンテキストオーバーフローを誤ってバックオフリトライで処理した場合、どうなりますか？"
           },
           "options": [
-            { "id": "a", "text": { "zh": "上下文会被自动压缩为摘要", "en": "The context will be automatically compressed into a summary", "ja": "コンテキストが自動的に要約に圧縮される" } },
-            { "id": "b", "text": { "zh": "重试会成功，因为等待后上下文会自动缩短", "en": "Retry will succeed because the context automatically shortens after waiting", "ja": "待機後にコンテキストが自動的に短くなるのでリトライは成功する" } },
-            { "id": "c", "text": { "zh": "每次重试都会遇到同样的溢出错误，最终耗尽重试预算仍未解决", "en": "Every retry will encounter the same overflow error, eventually exhausting the retry budget without resolution", "ja": "毎回のリトライで同じオーバーフローエラーが発生し、最終的にリトライ予算を使い果たしても解決されない" } },
-            { "id": "d", "text": { "zh": "模型会自动切换到续写模式", "en": "The model will automatically switch to continuation mode", "ja": "モデルが自動的に継続モードに切り替わる" } }
+            {
+              "id": "a",
+              "text": {
+                "zh": "上下文会被自动压缩为摘要",
+                "en": "The context will be automatically compressed into a summary",
+                "ja": "コンテキストが自動的に要約に圧縮される"
+              }
+            },
+            {
+              "id": "b",
+              "text": {
+                "zh": "重试会成功，因为等待后上下文会自动缩短",
+                "en": "Retry will succeed because the context automatically shortens after waiting",
+                "ja": "待機後にコンテキストが自動的に短くなるのでリトライは成功する"
+              }
+            },
+            {
+              "id": "c",
+              "text": {
+                "zh": "每次重试都会遇到同样的溢出错误，最终耗尽重试预算仍未解决",
+                "en": "Every retry will encounter the same overflow error, eventually exhausting the retry budget without resolution",
+                "ja": "毎回のリトライで同じオーバーフローエラーが発生し、最終的にリトライ予算を使い果たしても解決されない"
+              }
+            },
+            {
+              "id": "d",
+              "text": {
+                "zh": "模型会自动切换到续写模式",
+                "en": "The model will automatically switch to continuation mode",
+                "ja": "モデルが自動的に継続モードに切り替わる"
+              }
+            }
           ],
           "answer": "c",
           "explanation": {
@@ -9347,10 +10746,38 @@ module.exports = {
             "ja": "次のうち継続プロンプトで処理すべきエラーはどれですか？"
           },
           "options": [
-            { "id": "a", "text": { "zh": "HTTP 503 服务不可用", "en": "HTTP 503 Service Unavailable", "ja": "HTTP 503 サービス利用不可" } },
-            { "id": "b", "text": { "zh": "连接超时，请求未到达服务器", "en": "Connection timeout, request did not reach the server", "ja": "接続タイムアウト、リクエストがサーバーに届かなかった" } },
-            { "id": "c", "text": { "zh": "消息历史累积过长，超过模型上下文窗口", "en": "Message history accumulated too long, exceeding the model context window", "ja": "メッセージ履歴が蓄積されすぎてモデルのコンテキストウィンドウを超えた" } },
-            { "id": "d", "text": { "zh": "模型在生成代码时中途停止，输出只完成了一半", "en": "Model stopped midway while generating code, output is only half complete", "ja": "モデルがコード生成中に途中で止まり、出力が半分しか完成していない" } }
+            {
+              "id": "a",
+              "text": {
+                "zh": "HTTP 503 服务不可用",
+                "en": "HTTP 503 Service Unavailable",
+                "ja": "HTTP 503 サービス利用不可"
+              }
+            },
+            {
+              "id": "b",
+              "text": {
+                "zh": "连接超时，请求未到达服务器",
+                "en": "Connection timeout, request did not reach the server",
+                "ja": "接続タイムアウト、リクエストがサーバーに届かなかった"
+              }
+            },
+            {
+              "id": "c",
+              "text": {
+                "zh": "消息历史累积过长，超过模型上下文窗口",
+                "en": "Message history accumulated too long, exceeding the model context window",
+                "ja": "メッセージ履歴が蓄積されすぎてモデルのコンテキストウィンドウを超えた"
+              }
+            },
+            {
+              "id": "d",
+              "text": {
+                "zh": "模型在生成代码时中途停止，输出只完成了一半",
+                "en": "Model stopped midway while generating code, output is only half complete",
+                "ja": "モデルがコード生成中に途中で止まり、出力が半分しか完成していない"
+              }
+            }
           ],
           "answer": "d",
           "explanation": {
@@ -9370,10 +10797,38 @@ module.exports = {
             "ja": "次のうち、3種類のエラーとその回復パスの対応として正しいのはどれですか？"
           },
           "options": [
-            { "id": "a", "text": { "zh": "截断→压缩，溢出→续写提示，网络错误→退避重试", "en": "Truncation to compaction, overflow to continuation prompt, network error to backoff retry", "ja": "切り捨て→圧縮、オーバーフロー→継続プロンプト、ネットワークエラー→バックオフリトライ" } },
-            { "id": "b", "text": { "zh": "截断→续写提示，溢出→压缩，网络错误→退避重试", "en": "Truncation to continuation prompt, overflow to compaction, network error to backoff retry", "ja": "切り捨て→継続プロンプト、オーバーフロー→圧縮、ネットワークエラー→バックオフリトライ" } },
-            { "id": "c", "text": { "zh": "截断→退避重试，溢出→续写提示，网络错误→压缩", "en": "Truncation to backoff retry, overflow to continuation prompt, network error to compaction", "ja": "切り捨て→バックオフリトライ、オーバーフロー→継続プロンプト、ネットワークエラー→圧縮" } },
-            { "id": "d", "text": { "zh": "截断→续写提示，溢出→退避重试，网络错误→压缩", "en": "Truncation to continuation prompt, overflow to backoff retry, network error to compaction", "ja": "切り捨て→継続プロンプト、オーバーフロー→バックオフリトライ、ネットワークエラー→圧縮" } }
+            {
+              "id": "a",
+              "text": {
+                "zh": "截断→压缩，溢出→续写提示，网络错误→退避重试",
+                "en": "Truncation to compaction, overflow to continuation prompt, network error to backoff retry",
+                "ja": "切り捨て→圧縮、オーバーフロー→継続プロンプト、ネットワークエラー→バックオフリトライ"
+              }
+            },
+            {
+              "id": "b",
+              "text": {
+                "zh": "截断→续写提示，溢出→压缩，网络错误→退避重试",
+                "en": "Truncation to continuation prompt, overflow to compaction, network error to backoff retry",
+                "ja": "切り捨て→継続プロンプト、オーバーフロー→圧縮、ネットワークエラー→バックオフリトライ"
+              }
+            },
+            {
+              "id": "c",
+              "text": {
+                "zh": "截断→退避重试，溢出→续写提示，网络错误→压缩",
+                "en": "Truncation to backoff retry, overflow to continuation prompt, network error to compaction",
+                "ja": "切り捨て→バックオフリトライ、オーバーフロー→継続プロンプト、ネットワークエラー→圧縮"
+              }
+            },
+            {
+              "id": "d",
+              "text": {
+                "zh": "截断→续写提示，溢出→退避重试，网络错误→压缩",
+                "en": "Truncation to continuation prompt, overflow to backoff retry, network error to compaction",
+                "ja": "切り捨て→継続プロンプト、オーバーフロー→バックオフリトライ、ネットワークエラー→圧縮"
+              }
+            }
           ],
           "answer": "b",
           "explanation": {
@@ -9393,10 +10848,38 @@ module.exports = {
             "ja": "エージェントが長いタスク実行中に連続ネットワークエラーに遭遇し、10回リトライしても成功しない。正しい対応は？"
           },
           "options": [
-            { "id": "a", "text": { "zh": "重试预算已耗尽，应停止并向上层报告失败，而不是继续卡在重试中", "en": "The retry budget is exhausted; stop and report failure to the upper layer rather than continuing to retry", "ja": "リトライ予算が尽きたので、リトライし続けるのではなく停止して上位層に失敗を報告する" } },
-            { "id": "b", "text": { "zh": "继续无限重试，直到网络恢复", "en": "Continue retrying indefinitely until the network recovers", "ja": "ネットワークが回復するまで無限にリトライし続ける" } },
-            { "id": "c", "text": { "zh": "改用续写提示，要求模型从最后一个断点继续", "en": "Switch to a continuation prompt asking the model to continue from the last breakpoint", "ja": "最後のブレークポイントから続けるよう継続プロンプトに切り替える" } },
-            { "id": "d", "text": { "zh": "压缩所有对话历史，然后重新发起整个任务", "en": "Compress all conversation history and restart the entire task", "ja": "すべての会話履歴を圧縮してタスク全体を再開する" } }
+            {
+              "id": "a",
+              "text": {
+                "zh": "重试预算已耗尽，应停止并向上层报告失败，而不是继续卡在重试中",
+                "en": "The retry budget is exhausted; stop and report failure to the upper layer rather than continuing to retry",
+                "ja": "リトライ予算が尽きたので、リトライし続けるのではなく停止して上位層に失敗を報告する"
+              }
+            },
+            {
+              "id": "b",
+              "text": {
+                "zh": "继续无限重试，直到网络恢复",
+                "en": "Continue retrying indefinitely until the network recovers",
+                "ja": "ネットワークが回復するまで無限にリトライし続ける"
+              }
+            },
+            {
+              "id": "c",
+              "text": {
+                "zh": "改用续写提示，要求模型从最后一个断点继续",
+                "en": "Switch to a continuation prompt asking the model to continue from the last breakpoint",
+                "ja": "最後のブレークポイントから続けるよう継続プロンプトに切り替える"
+              }
+            },
+            {
+              "id": "d",
+              "text": {
+                "zh": "压缩所有对话历史，然后重新发起整个任务",
+                "en": "Compress all conversation history and restart the entire task",
+                "ja": "すべての会話履歴を圧縮してタスク全体を再開する"
+              }
+            }
           ],
           "answer": "a",
           "explanation": {
@@ -9416,10 +10899,38 @@ module.exports = {
             "ja": "エラー回復設計において、すべての回復パスには予算が必要という原則はどのパスに適用されますか？"
           },
           "options": [
-            { "id": "a", "text": { "zh": "只适用于网络/API 错误的退避重试路径", "en": "Only applies to the backoff retry path for network/API errors", "ja": "ネットワーク/API エラーのバックオフリトライパスにのみ適用される" } },
-            { "id": "b", "text": { "zh": "只适用于上下文压缩路径", "en": "Only applies to the context compaction path", "ja": "コンテキスト圧縮パスにのみ適用される" } },
-            { "id": "c", "text": { "zh": "只适用于截断续写路径", "en": "Only applies to the truncation continuation path", "ja": "切り捨て継続パスにのみ適用される" } },
-            { "id": "d", "text": { "zh": "三条恢复路径都需要预算，否则任何一条都可能让主循环卡住", "en": "All three recovery paths need a budget; otherwise any one of them could cause the main loop to hang", "ja": "3つの回復パスすべてに予算が必要です。そうでないとどれかがメインループをハングさせる可能性があります" } }
+            {
+              "id": "a",
+              "text": {
+                "zh": "只适用于网络/API 错误的退避重试路径",
+                "en": "Only applies to the backoff retry path for network/API errors",
+                "ja": "ネットワーク/API エラーのバックオフリトライパスにのみ適用される"
+              }
+            },
+            {
+              "id": "b",
+              "text": {
+                "zh": "只适用于上下文压缩路径",
+                "en": "Only applies to the context compaction path",
+                "ja": "コンテキスト圧縮パスにのみ適用される"
+              }
+            },
+            {
+              "id": "c",
+              "text": {
+                "zh": "只适用于截断续写路径",
+                "en": "Only applies to the truncation continuation path",
+                "ja": "切り捨て継続パスにのみ適用される"
+              }
+            },
+            {
+              "id": "d",
+              "text": {
+                "zh": "三条恢复路径都需要预算，否则任何一条都可能让主循环卡住",
+                "en": "All three recovery paths need a budget; otherwise any one of them could cause the main loop to hang",
+                "ja": "3つの回復パスすべてに予算が必要です。そうでないとどれかがメインループをハングさせる可能性があります"
+              }
+            }
           ],
           "answer": "d",
           "explanation": {
@@ -11332,924 +12843,924 @@ module.exports = {
       },
       "questions": [
         {
-                "id": "q_s14_001",
-                "type": "choice",
-                "difficulty": 1,
-                "stem": {
-                        "zh": "后台任务与定时调度解决的核心问题分别是什么？",
-                        "en": "What core problems do background tasks and scheduled dispatch solve respectively?",
-                        "ja": "バックグラウンドタスクとスケジュール実行が解決する中核的な問題はそれぞれ何ですか？"
-                },
-                "options": [
-                        {
-                                "id": "a",
-                                "text": {
-                                        "zh": "两者都是解决「任务如何并发执行」的问题",
-                                        "en": "Both solve the problem of how tasks execute concurrently",
-                                        "ja": "両方ともタスクをどう並列実行するかの問題を解決する"
-                                }
-                        },
-                        {
-                                "id": "b",
-                                "text": {
-                                        "zh": "后台任务解决「什么时候开始」，定时调度解决「结果什么时候回来」",
-                                        "en": "Background tasks solve when to start; scheduled dispatch solves when results come back",
-                                        "ja": "バックグラウンドタスクはいつ開始するかを解決し、スケジュールは結果がいつ戻るかを解決する"
-                                }
-                        },
-                        {
-                                "id": "c",
-                                "text": {
-                                        "zh": "两者都是解决「结果什么时候回来」的问题",
-                                        "en": "Both solve the problem of when results come back",
-                                        "ja": "両方とも結果がいつ戻るかの問題を解決する"
-                                }
-                        },
-                        {
-                                "id": "d",
-                                "text": {
-                                        "zh": "后台任务解决「结果什么时候回来」，定时调度解决「什么时候开始」",
-                                        "en": "Background tasks solve when results come back; scheduled dispatch solves when to start",
-                                        "ja": "バックグラウンドタスクは結果がいつ戻るかを解決し、スケジュールはいつ開始するかを解決する"
-                                }
-                        }
-                ],
-                "answer": "d",
-                "explanation": {
-                        "zh": "后台任务是在等「已启动的慢操作」的结果，定时调度是在等「一件事应该在未来什么时候开始」。两者关注的时间维度不同。",
-                        "en": "Background tasks wait for results of already-started slow operations. Scheduled dispatch waits for when a future task should begin. They address different time dimensions.",
-                        "ja": "バックグラウンドタスクは既に開始した遅い処理の結果を待つもの。スケジュールは将来タスクがいつ開始すべきかを待つもの。両者は異なる時間軸に着目している。"
-                },
-                "reward_card": "card_s14_001"
+          "id": "q_s14_001",
+          "type": "choice",
+          "difficulty": 1,
+          "stem": {
+            "zh": "后台任务与定时调度解决的核心问题分别是什么？",
+            "en": "What core problems do background tasks and scheduled dispatch solve respectively?",
+            "ja": "バックグラウンドタスクとスケジュール実行が解決する中核的な問題はそれぞれ何ですか？"
+          },
+          "options": [
+            {
+              "id": "a",
+              "text": {
+                "zh": "两者都是解决「任务如何并发执行」的问题",
+                "en": "Both solve the problem of how tasks execute concurrently",
+                "ja": "両方ともタスクをどう並列実行するかの問題を解決する"
+              }
+            },
+            {
+              "id": "b",
+              "text": {
+                "zh": "后台任务解决「什么时候开始」，定时调度解决「结果什么时候回来」",
+                "en": "Background tasks solve when to start; scheduled dispatch solves when results come back",
+                "ja": "バックグラウンドタスクはいつ開始するかを解決し、スケジュールは結果がいつ戻るかを解決する"
+              }
+            },
+            {
+              "id": "c",
+              "text": {
+                "zh": "两者都是解决「结果什么时候回来」的问题",
+                "en": "Both solve the problem of when results come back",
+                "ja": "両方とも結果がいつ戻るかの問題を解決する"
+              }
+            },
+            {
+              "id": "d",
+              "text": {
+                "zh": "后台任务解决「结果什么时候回来」，定时调度解决「什么时候开始」",
+                "en": "Background tasks solve when results come back; scheduled dispatch solves when to start",
+                "ja": "バックグラウンドタスクは結果がいつ戻るかを解決し、スケジュールはいつ開始するかを解決する"
+              }
+            }
+          ],
+          "answer": "d",
+          "explanation": {
+            "zh": "后台任务是在等「已启动的慢操作」的结果，定时调度是在等「一件事应该在未来什么时候开始」。两者关注的时间维度不同。",
+            "en": "Background tasks wait for results of already-started slow operations. Scheduled dispatch waits for when a future task should begin. They address different time dimensions.",
+            "ja": "バックグラウンドタスクは既に開始した遅い処理の結果を待つもの。スケジュールは将来タスクがいつ開始すべきかを待つもの。両者は異なる時間軸に着目している。"
+          },
+          "reward_card": "card_s14_001"
         },
         {
-                "id": "q_s14_002",
-                "type": "choice",
-                "difficulty": 1,
-                "stem": {
-                        "zh": "调度器的核心职责用一句话描述最准确的是？",
-                        "en": "Which phrase best describes the core responsibility of a scheduler?",
-                        "ja": "スケジューラーの中心的な役割を一言で表すと最も正確なのはどれですか？"
-                },
-                "options": [
-                        {
-                                "id": "a",
-                                "text": {
-                                        "zh": "替代主循环，直接执行未来的任务",
-                                        "en": "Replace the main loop and directly execute future tasks",
-                                        "ja": "主ループを置き換えて、将来のタスクを直接実行する"
-                                }
-                        },
-                        {
-                                "id": "b",
-                                "text": {
-                                        "zh": "缓存模型的输出以供定时重用",
-                                        "en": "Cache model outputs for scheduled reuse",
-                                        "ja": "モデルの出力をキャッシュして定期的に再利用する"
-                                }
-                        },
-                        {
-                                "id": "c",
-                                "text": {
-                                        "zh": "管理并发任务的优先级队列",
-                                        "en": "Manage a priority queue of concurrent tasks",
-                                        "ja": "並列タスクの優先度キューを管理する"
-                                }
-                        },
-                        {
-                                "id": "d",
-                                "text": {
-                                        "zh": "记住未来，时间到了再触发",
-                                        "en": "Remember the future and trigger when the time comes",
-                                        "ja": "未来を記憶し、時刻が来たらトリガーする"
-                                }
-                        }
-                ],
-                "answer": "d",
-                "explanation": {
-                        "zh": "调度器做的是「记住未来」——把意图先记下来，等时间到了再把它变成新的触发事件。它不替代主循环，也不直接执行任务。",
-                        "en": "The scheduler remembers the future: record an intent now, and turn it into a trigger event when the time comes. It does not replace the main loop or execute tasks directly.",
-                        "ja": "スケジューラーの仕事は未来を記憶すること——今は意図を記録し、時刻が来たら新しいトリガーイベントに変換する。主ループを置き換えたりタスクを直接実行したりはしない。"
-                },
-                "reward_card": "card_s14_001"
+          "id": "q_s14_002",
+          "type": "choice",
+          "difficulty": 1,
+          "stem": {
+            "zh": "调度器的核心职责用一句话描述最准确的是？",
+            "en": "Which phrase best describes the core responsibility of a scheduler?",
+            "ja": "スケジューラーの中心的な役割を一言で表すと最も正確なのはどれですか？"
+          },
+          "options": [
+            {
+              "id": "a",
+              "text": {
+                "zh": "替代主循环，直接执行未来的任务",
+                "en": "Replace the main loop and directly execute future tasks",
+                "ja": "主ループを置き換えて、将来のタスクを直接実行する"
+              }
+            },
+            {
+              "id": "b",
+              "text": {
+                "zh": "缓存模型的输出以供定时重用",
+                "en": "Cache model outputs for scheduled reuse",
+                "ja": "モデルの出力をキャッシュして定期的に再利用する"
+              }
+            },
+            {
+              "id": "c",
+              "text": {
+                "zh": "管理并发任务的优先级队列",
+                "en": "Manage a priority queue of concurrent tasks",
+                "ja": "並列タスクの優先度キューを管理する"
+              }
+            },
+            {
+              "id": "d",
+              "text": {
+                "zh": "记住未来，时间到了再触发",
+                "en": "Remember the future and trigger when the time comes",
+                "ja": "未来を記憶し、時刻が来たらトリガーする"
+              }
+            }
+          ],
+          "answer": "d",
+          "explanation": {
+            "zh": "调度器做的是「记住未来」——把意图先记下来，等时间到了再把它变成新的触发事件。它不替代主循环，也不直接执行任务。",
+            "en": "The scheduler remembers the future: record an intent now, and turn it into a trigger event when the time comes. It does not replace the main loop or execute tasks directly.",
+            "ja": "スケジューラーの仕事は未来を記憶すること——今は意図を記録し、時刻が来たら新しいトリガーイベントに変換する。主ループを置き換えたりタスクを直接実行したりはしない。"
+          },
+          "reward_card": "card_s14_001"
         },
         {
-                "id": "q_s14_003",
-                "type": "choice",
-                "difficulty": 1,
-                "stem": {
-                        "zh": "以下关于调度器与主循环的关系，哪个说法正确？",
-                        "en": "Which statement correctly describes the relationship between the scheduler and the main loop?",
-                        "ja": "スケジューラーと主ループの関係について、正しい説明はどれですか？"
-                },
-                "options": [
-                        {
-                                "id": "a",
-                                "text": {
-                                        "zh": "调度器取代主循环处理定时任务",
-                                        "en": "The scheduler replaces the main loop to handle timed tasks",
-                                        "ja": "スケジューラーは主ループを置き換えてタイムドタスクを処理する"
-                                }
-                        },
-                        {
-                                "id": "b",
-                                "text": {
-                                        "zh": "调度器不取代主循环，而是在时间到时把 prompt 送回主循环",
-                                        "en": "The scheduler does not replace the main loop; it sends the prompt back to the main loop when the time comes",
-                                        "ja": "スケジューラーは主ループを置き換えず、時刻が来たらpromptを主ループに戻す"
-                                }
-                        },
-                        {
-                                "id": "c",
-                                "text": {
-                                        "zh": "调度器是独立于主循环运行的第二套系统",
-                                        "en": "The scheduler is a second system running independently of the main loop",
-                                        "ja": "スケジューラーは主ループとは独立して動作する第二のシステムである"
-                                }
-                        },
-                        {
-                                "id": "d",
-                                "text": {
-                                        "zh": "调度器直接调用模型 API，不经过主循环",
-                                        "en": "The scheduler calls the model API directly, bypassing the main loop",
-                                        "ja": "スケジューラーはモデルAPIを直接呼び出し、主ループをバイパスする"
-                                }
-                        }
-                ],
-                "answer": "b",
-                "explanation": {
-                        "zh": "调度器的作用是在时间到时把 prompt 放进通知队列，最终还是由主循环把它当成新消息喂给模型。调度器不是另起一套系统。",
-                        "en": "The scheduler places the prompt into a notification queue when the time comes. The main loop then feeds it to the model as a new user message. The scheduler is not a separate system.",
-                        "ja": "スケジューラーは時刻が来たらpromptを通知キューに入れる。主ループがそれを新しいユーザーメッセージとしてモデルに渡す。スケジューラーは独立したシステムではない。"
-                },
-                "reward_card": "card_s14_001"
+          "id": "q_s14_003",
+          "type": "choice",
+          "difficulty": 1,
+          "stem": {
+            "zh": "以下关于调度器与主循环的关系，哪个说法正确？",
+            "en": "Which statement correctly describes the relationship between the scheduler and the main loop?",
+            "ja": "スケジューラーと主ループの関係について、正しい説明はどれですか？"
+          },
+          "options": [
+            {
+              "id": "a",
+              "text": {
+                "zh": "调度器取代主循环处理定时任务",
+                "en": "The scheduler replaces the main loop to handle timed tasks",
+                "ja": "スケジューラーは主ループを置き換えてタイムドタスクを処理する"
+              }
+            },
+            {
+              "id": "b",
+              "text": {
+                "zh": "调度器不取代主循环，而是在时间到时把 prompt 送回主循环",
+                "en": "The scheduler does not replace the main loop; it sends the prompt back to the main loop when the time comes",
+                "ja": "スケジューラーは主ループを置き換えず、時刻が来たらpromptを主ループに戻す"
+              }
+            },
+            {
+              "id": "c",
+              "text": {
+                "zh": "调度器是独立于主循环运行的第二套系统",
+                "en": "The scheduler is a second system running independently of the main loop",
+                "ja": "スケジューラーは主ループとは独立して動作する第二のシステムである"
+              }
+            },
+            {
+              "id": "d",
+              "text": {
+                "zh": "调度器直接调用模型 API，不经过主循环",
+                "en": "The scheduler calls the model API directly, bypassing the main loop",
+                "ja": "スケジューラーはモデルAPIを直接呼び出し、主ループをバイパスする"
+              }
+            }
+          ],
+          "answer": "b",
+          "explanation": {
+            "zh": "调度器的作用是在时间到时把 prompt 放进通知队列，最终还是由主循环把它当成新消息喂给模型。调度器不是另起一套系统。",
+            "en": "The scheduler places the prompt into a notification queue when the time comes. The main loop then feeds it to the model as a new user message. The scheduler is not a separate system.",
+            "ja": "スケジューラーは時刻が来たらpromptを通知キューに入れる。主ループがそれを新しいユーザーメッセージとしてモデルに渡す。スケジューラーは独立したシステムではない。"
+          },
+          "reward_card": "card_s14_001"
         },
         {
-                "id": "q_s14_004",
-                "type": "choice",
-                "difficulty": 1,
-                "stem": {
-                        "zh": "Cron 表达式由几个字段组成，分别代表什么？",
-                        "en": "How many fields does a cron expression have, and what do they represent?",
-                        "ja": "cron式は何個のフィールドで構成され、それぞれ何を表しますか？"
-                },
-                "options": [
-                        {
-                                "id": "a",
-                                "text": {
-                                        "zh": "3 个字段：时、分、秒",
-                                        "en": "3 fields: hour, minute, second",
-                                        "ja": "3フィールド：時、分、秒"
-                                }
-                        },
-                        {
-                                "id": "b",
-                                "text": {
-                                        "zh": "4 个字段：分、时、日、月",
-                                        "en": "4 fields: minute, hour, day, month",
-                                        "ja": "4フィールド：分、時、日、月"
-                                }
-                        },
-                        {
-                                "id": "c",
-                                "text": {
-                                        "zh": "5 个字段：分、时、日、月、周",
-                                        "en": "5 fields: minute, hour, day-of-month, month, day-of-week",
-                                        "ja": "5フィールド：分、時、日、月、曜日"
-                                }
-                        },
-                        {
-                                "id": "d",
-                                "text": {
-                                        "zh": "6 个字段：秒、分、时、日、月、周",
-                                        "en": "6 fields: second, minute, hour, day, month, weekday",
-                                        "ja": "6フィールド：秒、分、時、日、月、曜日"
-                                }
-                        }
-                ],
-                "answer": "c",
-                "explanation": {
-                        "zh": "标准 Cron 表达式有 5 个字段，按顺序是：分钟、小时、日期（月中第几天）、月份、星期几。",
-                        "en": "A standard cron expression has 5 fields in order: minute, hour, day-of-month, month, day-of-week.",
-                        "ja": "標準的なcron式は5フィールド（分、時、日（月の何日目）、月、曜日）で構成される。"
-                },
-                "reward_card": "card_s14_002"
+          "id": "q_s14_004",
+          "type": "choice",
+          "difficulty": 1,
+          "stem": {
+            "zh": "Cron 表达式由几个字段组成，分别代表什么？",
+            "en": "How many fields does a cron expression have, and what do they represent?",
+            "ja": "cron式は何個のフィールドで構成され、それぞれ何を表しますか？"
+          },
+          "options": [
+            {
+              "id": "a",
+              "text": {
+                "zh": "3 个字段：时、分、秒",
+                "en": "3 fields: hour, minute, second",
+                "ja": "3フィールド：時、分、秒"
+              }
+            },
+            {
+              "id": "b",
+              "text": {
+                "zh": "4 个字段：分、时、日、月",
+                "en": "4 fields: minute, hour, day, month",
+                "ja": "4フィールド：分、時、日、月"
+              }
+            },
+            {
+              "id": "c",
+              "text": {
+                "zh": "5 个字段：分、时、日、月、周",
+                "en": "5 fields: minute, hour, day-of-month, month, day-of-week",
+                "ja": "5フィールド：分、時、日、月、曜日"
+              }
+            },
+            {
+              "id": "d",
+              "text": {
+                "zh": "6 个字段：秒、分、时、日、月、周",
+                "en": "6 fields: second, minute, hour, day, month, weekday",
+                "ja": "6フィールド：秒、分、時、日、月、曜日"
+              }
+            }
+          ],
+          "answer": "c",
+          "explanation": {
+            "zh": "标准 Cron 表达式有 5 个字段，按顺序是：分钟、小时、日期（月中第几天）、月份、星期几。",
+            "en": "A standard cron expression has 5 fields in order: minute, hour, day-of-month, month, day-of-week.",
+            "ja": "標準的なcron式は5フィールド（分、時、日（月の何日目）、月、曜日）で構成される。"
+          },
+          "reward_card": "card_s14_002"
         },
         {
-                "id": "q_s14_005",
-                "type": "choice",
-                "difficulty": 1,
-                "stem": {
-                        "zh": "调度记录中的 last_fired_at 字段的主要作用是什么？",
-                        "en": "What is the primary purpose of the last_fired_at field in a schedule record?",
-                        "ja": "スケジュールレコードのlast_fired_atフィールドの主な目的は何ですか？"
-                },
-                "options": [
-                        {
-                                "id": "a",
-                                "text": {
-                                        "zh": "存储上次任务的输出结果",
-                                        "en": "Store the output of the last task execution",
-                                        "ja": "最後のタスク実行の出力を保存する"
-                                }
-                        },
-                        {
-                                "id": "b",
-                                "text": {
-                                        "zh": "记录任务执行耗时",
-                                        "en": "Record task execution duration",
-                                        "ja": "タスクの実行時間を記録する"
-                                }
-                        },
-                        {
-                                "id": "c",
-                                "text": {
-                                        "zh": "标记任务是否已被用户手动取消",
-                                        "en": "Mark whether the task has been manually cancelled by the user",
-                                        "ja": "タスクがユーザーによって手動キャンセルされたかどうかを示す"
-                                }
-                        },
-                        {
-                                "id": "d",
-                                "text": {
-                                        "zh": "防止短时间内重复触发同一任务",
-                                        "en": "Prevent the same task from being triggered repeatedly in a short time",
-                                        "ja": "短時間に同じタスクが繰り返しトリガーされるのを防ぐ"
-                                }
-                        }
-                ],
-                "answer": "d",
-                "explanation": {
-                        "zh": "last_fired_at 记录上次触发时间，调度器在每次检查时对比当前时间，避免同一时间窗口内重复触发。",
-                        "en": "last_fired_at records when the task last fired. The scheduler compares it to the current time each check to avoid triggering the same task multiple times within the same window.",
-                        "ja": "last_fired_atは最後にトリガーされた時刻を記録する。スケジューラーは毎回チェック時に現在時刻と比較し、同じ時間窓内での重複トリガーを防ぐ。"
-                },
-                "reward_card": "card_s14_002"
+          "id": "q_s14_005",
+          "type": "choice",
+          "difficulty": 1,
+          "stem": {
+            "zh": "调度记录中的 last_fired_at 字段的主要作用是什么？",
+            "en": "What is the primary purpose of the last_fired_at field in a schedule record?",
+            "ja": "スケジュールレコードのlast_fired_atフィールドの主な目的は何ですか？"
+          },
+          "options": [
+            {
+              "id": "a",
+              "text": {
+                "zh": "存储上次任务的输出结果",
+                "en": "Store the output of the last task execution",
+                "ja": "最後のタスク実行の出力を保存する"
+              }
+            },
+            {
+              "id": "b",
+              "text": {
+                "zh": "记录任务执行耗时",
+                "en": "Record task execution duration",
+                "ja": "タスクの実行時間を記録する"
+              }
+            },
+            {
+              "id": "c",
+              "text": {
+                "zh": "标记任务是否已被用户手动取消",
+                "en": "Mark whether the task has been manually cancelled by the user",
+                "ja": "タスクがユーザーによって手動キャンセルされたかどうかを示す"
+              }
+            },
+            {
+              "id": "d",
+              "text": {
+                "zh": "防止短时间内重复触发同一任务",
+                "en": "Prevent the same task from being triggered repeatedly in a short time",
+                "ja": "短時間に同じタスクが繰り返しトリガーされるのを防ぐ"
+              }
+            }
+          ],
+          "answer": "d",
+          "explanation": {
+            "zh": "last_fired_at 记录上次触发时间，调度器在每次检查时对比当前时间，避免同一时间窗口内重复触发。",
+            "en": "last_fired_at records when the task last fired. The scheduler compares it to the current time each check to avoid triggering the same task multiple times within the same window.",
+            "ja": "last_fired_atは最後にトリガーされた時刻を記録する。スケジューラーは毎回チェック時に現在時刻と比較し、同じ時間窓内での重複トリガーを防ぐ。"
+          },
+          "reward_card": "card_s14_002"
         },
         {
-                "id": "q_s14_006",
-                "type": "choice",
-                "difficulty": 1,
-                "stem": {
-                        "zh": "一条最小的调度记录至少需要包含哪些字段？",
-                        "en": "What fields must a minimal schedule record contain at minimum?",
-                        "ja": "最小限のスケジュールレコードには最低どのフィールドが必要ですか？"
-                },
-                "options": [
-                        {
-                                "id": "a",
-                                "text": {
-                                        "zh": "cron 表达式、任务超时设置、重试次数",
-                                        "en": "cron expression, task timeout, retry count",
-                                        "ja": "cron式、タスクタイムアウト、リトライ回数"
-                                }
-                        },
-                        {
-                                "id": "b",
-                                "text": {
-                                        "zh": "id、触发时间戳、任务优先级",
-                                        "en": "id, trigger timestamp, task priority",
-                                        "ja": "id、トリガータイムスタンプ、タスク優先度"
-                                }
-                        },
-                        {
-                                "id": "c",
-                                "text": {
-                                        "zh": "id、cron 表达式、要执行的 prompt、是否重复、上次触发时间",
-                                        "en": "id, cron expression, prompt to execute, whether recurring, last fired time",
-                                        "ja": "id、cron式、実行するprompt、繰り返しかどうか、最終トリガー時刻"
-                                }
-                        },
-                        {
-                                "id": "d",
-                                "text": {
-                                        "zh": "只需要 id 和 cron 表达式",
-                                        "en": "Only id and cron expression are needed",
-                                        "ja": "idとcron式だけでよい"
-                                }
-                        }
-                ],
-                "answer": "c",
-                "explanation": {
-                        "zh": "一条调度记录至少要有：id（唯一标识）、cron 表达式（时间规则）、触发后要执行的 prompt、是否重复（区分单次和周期）、上次触发时间（防重复触发）。",
-                        "en": "A schedule record needs at minimum: id, cron expression, prompt to execute on trigger, whether it recurs, and last fired time to prevent duplicate triggers.",
-                        "ja": "スケジュールレコードに最低限必要なのは：id、cron式、トリガー時に実行するprompt、繰り返しかどうか、最終トリガー時刻（重複防止）。"
-                },
-                "reward_card": "card_s14_002"
+          "id": "q_s14_006",
+          "type": "choice",
+          "difficulty": 1,
+          "stem": {
+            "zh": "一条最小的调度记录至少需要包含哪些字段？",
+            "en": "What fields must a minimal schedule record contain at minimum?",
+            "ja": "最小限のスケジュールレコードには最低どのフィールドが必要ですか？"
+          },
+          "options": [
+            {
+              "id": "a",
+              "text": {
+                "zh": "cron 表达式、任务超时设置、重试次数",
+                "en": "cron expression, task timeout, retry count",
+                "ja": "cron式、タスクタイムアウト、リトライ回数"
+              }
+            },
+            {
+              "id": "b",
+              "text": {
+                "zh": "id、触发时间戳、任务优先级",
+                "en": "id, trigger timestamp, task priority",
+                "ja": "id、トリガータイムスタンプ、タスク優先度"
+              }
+            },
+            {
+              "id": "c",
+              "text": {
+                "zh": "id、cron 表达式、要执行的 prompt、是否重复、上次触发时间",
+                "en": "id, cron expression, prompt to execute, whether recurring, last fired time",
+                "ja": "id、cron式、実行するprompt、繰り返しかどうか、最終トリガー時刻"
+              }
+            },
+            {
+              "id": "d",
+              "text": {
+                "zh": "只需要 id 和 cron 表达式",
+                "en": "Only id and cron expression are needed",
+                "ja": "idとcron式だけでよい"
+              }
+            }
+          ],
+          "answer": "c",
+          "explanation": {
+            "zh": "一条调度记录至少要有：id（唯一标识）、cron 表达式（时间规则）、触发后要执行的 prompt、是否重复（区分单次和周期）、上次触发时间（防重复触发）。",
+            "en": "A schedule record needs at minimum: id, cron expression, prompt to execute on trigger, whether it recurs, and last fired time to prevent duplicate triggers.",
+            "ja": "スケジュールレコードに最低限必要なのは：id、cron式、トリガー時に実行するprompt、繰り返しかどうか、最終トリガー時刻（重複防止）。"
+          },
+          "reward_card": "card_s14_002"
         },
         {
-                "id": "q_s14_007",
-                "type": "choice",
-                "difficulty": 2,
-                "stem": {
-                        "zh": "定时任务触发后，prompt 是如何最终被模型处理的？",
-                        "en": "After a scheduled task triggers, how does the prompt ultimately get processed by the model?",
-                        "ja": "スケジュールタスクがトリガーされた後、promptは最終的にどうモデルに処理されますか？"
-                },
-                "options": [
-                        {
-                                "id": "a",
-                                "text": {
-                                        "zh": "调度器直接把 prompt 发给模型 API，绕过主循环",
-                                        "en": "The scheduler sends the prompt directly to the model API, bypassing the main loop",
-                                        "ja": "スケジューラーがpromptをモデルAPIに直接送り、主ループをバイパスする"
-                                }
-                        },
-                        {
-                                "id": "b",
-                                "text": {
-                                        "zh": "prompt 被放入通知队列，主循环在下一轮把它当新用户消息喂给模型",
-                                        "en": "The prompt is placed in a notification queue; the main loop feeds it to the model as a new user message in the next iteration",
-                                        "ja": "promptは通知キューに入れられ、主ループが次のイテレーションで新しいユーザーメッセージとしてモデルに渡す"
-                                }
-                        },
-                        {
-                                "id": "c",
-                                "text": {
-                                        "zh": "调度器在后台另起一个新的主循环实例来处理",
-                                        "en": "The scheduler starts a new main loop instance in the background to handle it",
-                                        "ja": "スケジューラーはバックグラウンドで新しい主ループインスタンスを起動して処理する"
-                                }
-                        },
-                        {
-                                "id": "d",
-                                "text": {
-                                        "zh": "prompt 被追加到当前对话历史末尾，等待用户确认后再执行",
-                                        "en": "The prompt is appended to the current conversation history and waits for user confirmation",
-                                        "ja": "promptは現在の会話履歴の末尾に追加され、ユーザーの確認後に実行される"
-                                }
-                        }
-                ],
-                "answer": "b",
-                "explanation": {
-                        "zh": "定时任务触发后，调度器把 prompt 放进通知队列；主循环在下一轮把它当成新的用户消息喂给模型。整个链路最终还是回到同一条主循环，不是另起一套系统。",
-                        "en": "After a scheduled task triggers, the scheduler places the prompt in a notification queue. The main loop then feeds it to the model as a new user message in the next iteration. The entire chain returns to the same main loop, not a separate system.",
-                        "ja": "スケジュールタスクがトリガーされると、スケジューラーはpromptを通知キューに入れる。主ループが次のイテレーションでそれを新しいユーザーメッセージとしてモデルに渡す。全体の流れは同じ主ループに戻る。"
-                },
-                "reward_card": "card_s14_003"
+          "id": "q_s14_007",
+          "type": "choice",
+          "difficulty": 2,
+          "stem": {
+            "zh": "定时任务触发后，prompt 是如何最终被模型处理的？",
+            "en": "After a scheduled task triggers, how does the prompt ultimately get processed by the model?",
+            "ja": "スケジュールタスクがトリガーされた後、promptは最終的にどうモデルに処理されますか？"
+          },
+          "options": [
+            {
+              "id": "a",
+              "text": {
+                "zh": "调度器直接把 prompt 发给模型 API，绕过主循环",
+                "en": "The scheduler sends the prompt directly to the model API, bypassing the main loop",
+                "ja": "スケジューラーがpromptをモデルAPIに直接送り、主ループをバイパスする"
+              }
+            },
+            {
+              "id": "b",
+              "text": {
+                "zh": "prompt 被放入通知队列，主循环在下一轮把它当新用户消息喂给模型",
+                "en": "The prompt is placed in a notification queue; the main loop feeds it to the model as a new user message in the next iteration",
+                "ja": "promptは通知キューに入れられ、主ループが次のイテレーションで新しいユーザーメッセージとしてモデルに渡す"
+              }
+            },
+            {
+              "id": "c",
+              "text": {
+                "zh": "调度器在后台另起一个新的主循环实例来处理",
+                "en": "The scheduler starts a new main loop instance in the background to handle it",
+                "ja": "スケジューラーはバックグラウンドで新しい主ループインスタンスを起動して処理する"
+              }
+            },
+            {
+              "id": "d",
+              "text": {
+                "zh": "prompt 被追加到当前对话历史末尾，等待用户确认后再执行",
+                "en": "The prompt is appended to the current conversation history and waits for user confirmation",
+                "ja": "promptは現在の会話履歴の末尾に追加され、ユーザーの確認後に実行される"
+              }
+            }
+          ],
+          "answer": "b",
+          "explanation": {
+            "zh": "定时任务触发后，调度器把 prompt 放进通知队列；主循环在下一轮把它当成新的用户消息喂给模型。整个链路最终还是回到同一条主循环，不是另起一套系统。",
+            "en": "After a scheduled task triggers, the scheduler places the prompt in a notification queue. The main loop then feeds it to the model as a new user message in the next iteration. The entire chain returns to the same main loop, not a separate system.",
+            "ja": "スケジュールタスクがトリガーされると、スケジューラーはpromptを通知キューに入れる。主ループが次のイテレーションでそれを新しいユーザーメッセージとしてモデルに渡す。全体の流れは同じ主ループに戻る。"
+          },
+          "reward_card": "card_s14_003"
         },
         {
-                "id": "q_s14_008",
-                "type": "choice",
-                "difficulty": 2,
-                "stem": {
-                        "zh": "cron 表达式「0 9 * * 1-5」代表什么含义？",
-                        "en": "What does the cron expression \"0 9 * * 1-5\" mean?",
-                        "ja": "cron式「0 9 * * 1-5」は何を意味しますか？"
-                },
-                "options": [
-                        {
-                                "id": "a",
-                                "text": {
-                                        "zh": "每月 1 日到 5 日的早上 9:00",
-                                        "en": "At 9:00 AM on the 1st through 5th of each month",
-                                        "ja": "毎月1日から5日の午前9時"
-                                }
-                        },
-                        {
-                                "id": "b",
-                                "text": {
-                                        "zh": "每天早上 9:00",
-                                        "en": "Every day at 9:00 AM",
-                                        "ja": "毎日午前9時"
-                                }
-                        },
-                        {
-                                "id": "c",
-                                "text": {
-                                        "zh": "每小时的第 9 分钟，周一到周五执行",
-                                        "en": "At minute 9 of every hour, on weekdays",
-                                        "ja": "毎時9分、月曜から金曜に実行"
-                                }
-                        },
-                        {
-                                "id": "d",
-                                "text": {
-                                        "zh": "周一到周五每天早上 9:00",
-                                        "en": "Every weekday (Mon-Fri) at 9:00 AM",
-                                        "ja": "月曜から金曜の毎日午前9時"
-                                }
-                        }
-                ],
-                "answer": "d",
-                "explanation": {
-                        "zh": "cron 5 个字段顺序是「分 时 日 月 周」。0 9 * * 1-5 表示：分=0，时=9，日=任意，月=任意，周=1到5（周一到周五）。即工作日每天早上 9 点整触发。",
-                        "en": "The 5 cron fields are: minute hour day month weekday. 0 9 * * 1-5 means minute=0, hour=9, day=any, month=any, weekday=1-5 (Mon-Fri). This fires at 9:00 AM every weekday.",
-                        "ja": "cron5フィールドの順序は分 時 日 月 曜日。0 9 * * 1-5は分=0、時=9、日=任意、月=任意、曜日=1〜5（月〜金）を意味する。つまり平日の毎朝9時ちょうどにトリガーされる。"
-                },
-                "reward_card": "card_s14_002"
+          "id": "q_s14_008",
+          "type": "choice",
+          "difficulty": 2,
+          "stem": {
+            "zh": "cron 表达式「0 9 * * 1-5」代表什么含义？",
+            "en": "What does the cron expression \"0 9 * * 1-5\" mean?",
+            "ja": "cron式「0 9 * * 1-5」は何を意味しますか？"
+          },
+          "options": [
+            {
+              "id": "a",
+              "text": {
+                "zh": "每月 1 日到 5 日的早上 9:00",
+                "en": "At 9:00 AM on the 1st through 5th of each month",
+                "ja": "毎月1日から5日の午前9時"
+              }
+            },
+            {
+              "id": "b",
+              "text": {
+                "zh": "每天早上 9:00",
+                "en": "Every day at 9:00 AM",
+                "ja": "毎日午前9時"
+              }
+            },
+            {
+              "id": "c",
+              "text": {
+                "zh": "每小时的第 9 分钟，周一到周五执行",
+                "en": "At minute 9 of every hour, on weekdays",
+                "ja": "毎時9分、月曜から金曜に実行"
+              }
+            },
+            {
+              "id": "d",
+              "text": {
+                "zh": "周一到周五每天早上 9:00",
+                "en": "Every weekday (Mon-Fri) at 9:00 AM",
+                "ja": "月曜から金曜の毎日午前9時"
+              }
+            }
+          ],
+          "answer": "d",
+          "explanation": {
+            "zh": "cron 5 个字段顺序是「分 时 日 月 周」。0 9 * * 1-5 表示：分=0，时=9，日=任意，月=任意，周=1到5（周一到周五）。即工作日每天早上 9 点整触发。",
+            "en": "The 5 cron fields are: minute hour day month weekday. 0 9 * * 1-5 means minute=0, hour=9, day=any, month=any, weekday=1-5 (Mon-Fri). This fires at 9:00 AM every weekday.",
+            "ja": "cron5フィールドの順序は分 時 日 月 曜日。0 9 * * 1-5は分=0、時=9、日=任意、月=任意、曜日=1〜5（月〜金）を意味する。つまり平日の毎朝9時ちょうどにトリガーされる。"
+          },
+          "reward_card": "card_s14_002"
         },
         {
-                "id": "q_s14_009",
-                "type": "choice",
-                "difficulty": 2,
-                "stem": {
-                        "zh": "如果调度记录没有 last_fired_at 字段，会产生什么问题？",
-                        "en": "What problem arises if a schedule record lacks the last_fired_at field?",
-                        "ja": "スケジュールレコードにlast_fired_atフィールドがない場合、どんな問題が起きますか？"
-                },
-                "options": [
-                        {
-                                "id": "a",
-                                "text": {
-                                        "zh": "调度记录无法持久化存储",
-                                        "en": "The schedule record cannot be persisted to storage",
-                                        "ja": "スケジュールレコードを永続的に保存できなくなる"
-                                }
-                        },
-                        {
-                                "id": "b",
-                                "text": {
-                                        "zh": "任务永远不会被触发",
-                                        "en": "The task will never be triggered",
-                                        "ja": "タスクが永遠にトリガーされなくなる"
-                                }
-                        },
-                        {
-                                "id": "c",
-                                "text": {
-                                        "zh": "调度器无法解析 cron 表达式",
-                                        "en": "The scheduler cannot parse the cron expression",
-                                        "ja": "スケジューラーがcron式を解析できなくなる"
-                                }
-                        },
-                        {
-                                "id": "d",
-                                "text": {
-                                        "zh": "同一时间窗口内可能重复触发，产生多余的任务",
-                                        "en": "The task may be triggered multiple times within the same time window, creating redundant tasks",
-                                        "ja": "同じ時間窓内でタスクが複数回トリガーされ、不要なタスクが生成される可能性がある"
-                                }
-                        }
-                ],
-                "answer": "d",
-                "explanation": {
-                        "zh": "last_fired_at 是防止重复触发的核心机制。没有它，调度器每次轮询时都可能因为「时间条件仍满足」而再次触发，在短时间内产生多个重复任务。",
-                        "en": "last_fired_at is the key mechanism preventing duplicate triggers. Without it, each scheduler poll could fire again because the time condition is still met, creating multiple redundant tasks in a short window.",
-                        "ja": "last_fired_atは重複トリガーを防ぐ中心的なメカニズム。それがなければ、スケジューラーは毎回のポーリングで時間条件がまだ満たされているとして再びトリガーし、短時間に複数の重複タスクを生成する可能性がある。"
-                },
-                "reward_card": "card_s14_002"
+          "id": "q_s14_009",
+          "type": "choice",
+          "difficulty": 2,
+          "stem": {
+            "zh": "如果调度记录没有 last_fired_at 字段，会产生什么问题？",
+            "en": "What problem arises if a schedule record lacks the last_fired_at field?",
+            "ja": "スケジュールレコードにlast_fired_atフィールドがない場合、どんな問題が起きますか？"
+          },
+          "options": [
+            {
+              "id": "a",
+              "text": {
+                "zh": "调度记录无法持久化存储",
+                "en": "The schedule record cannot be persisted to storage",
+                "ja": "スケジュールレコードを永続的に保存できなくなる"
+              }
+            },
+            {
+              "id": "b",
+              "text": {
+                "zh": "任务永远不会被触发",
+                "en": "The task will never be triggered",
+                "ja": "タスクが永遠にトリガーされなくなる"
+              }
+            },
+            {
+              "id": "c",
+              "text": {
+                "zh": "调度器无法解析 cron 表达式",
+                "en": "The scheduler cannot parse the cron expression",
+                "ja": "スケジューラーがcron式を解析できなくなる"
+              }
+            },
+            {
+              "id": "d",
+              "text": {
+                "zh": "同一时间窗口内可能重复触发，产生多余的任务",
+                "en": "The task may be triggered multiple times within the same time window, creating redundant tasks",
+                "ja": "同じ時間窓内でタスクが複数回トリガーされ、不要なタスクが生成される可能性がある"
+              }
+            }
+          ],
+          "answer": "d",
+          "explanation": {
+            "zh": "last_fired_at 是防止重复触发的核心机制。没有它，调度器每次轮询时都可能因为「时间条件仍满足」而再次触发，在短时间内产生多个重复任务。",
+            "en": "last_fired_at is the key mechanism preventing duplicate triggers. Without it, each scheduler poll could fire again because the time condition is still met, creating multiple redundant tasks in a short window.",
+            "ja": "last_fired_atは重複トリガーを防ぐ中心的なメカニズム。それがなければ、スケジューラーは毎回のポーリングで時間条件がまだ満たされているとして再びトリガーし、短時間に複数の重複タスクを生成する可能性がある。"
+          },
+          "reward_card": "card_s14_002"
         },
         {
-                "id": "q_s14_010",
-                "type": "choice",
-                "difficulty": 2,
-                "stem": {
-                        "zh": "定时触发的 prompt 最终由谁负责接手执行？",
-                        "en": "Who is ultimately responsible for executing a scheduled prompt after it triggers?",
-                        "ja": "定時トリガーされたpromptは最終的に誰が引き継いで実行しますか？"
-                },
-                "options": [
-                        {
-                                "id": "a",
-                                "text": {
-                                        "zh": "调度器本身直接处理",
-                                        "en": "The scheduler itself handles it directly",
-                                        "ja": "スケジューラー自身が直接処理する"
-                                }
-                        },
-                        {
-                                "id": "b",
-                                "text": {
-                                        "zh": "操作系统的进程调度器",
-                                        "en": "The operating system process scheduler",
-                                        "ja": "オペレーティングシステムのプロセススケジューラー"
-                                }
-                        },
-                        {
-                                "id": "c",
-                                "text": {
-                                        "zh": "模型（由主循环将 prompt 喂给模型）",
-                                        "en": "The model (the main loop feeds the prompt to the model)",
-                                        "ja": "モデル（主ループがpromptをモデルに渡す）"
-                                }
-                        },
-                        {
-                                "id": "d",
-                                "text": {
-                                        "zh": "一个专门的定时任务执行引擎",
-                                        "en": "A dedicated scheduled task execution engine",
-                                        "ja": "専用のスケジュールタスク実行エンジン"
-                                }
-                        }
-                ],
-                "answer": "c",
-                "explanation": {
-                        "zh": "定时任务最终还是由模型接手。调度器只是把 prompt 送进通知队列，主循环把它当新用户消息喂给模型。不是另起一套系统，而是回到同一条主循环。",
-                        "en": "The model ultimately handles the scheduled task. The scheduler only places the prompt in the notification queue; the main loop feeds it to the model as a new user message. It returns to the same main loop, not a separate system.",
-                        "ja": "定時タスクは最終的にモデルが引き継ぐ。スケジューラーはpromptを通知キューに入れるだけで、主ループがそれを新しいユーザーメッセージとしてモデルに渡す。独立したシステムではなく、同じ主ループに戻る。"
-                },
-                "reward_card": "card_s14_003"
+          "id": "q_s14_010",
+          "type": "choice",
+          "difficulty": 2,
+          "stem": {
+            "zh": "定时触发的 prompt 最终由谁负责接手执行？",
+            "en": "Who is ultimately responsible for executing a scheduled prompt after it triggers?",
+            "ja": "定時トリガーされたpromptは最終的に誰が引き継いで実行しますか？"
+          },
+          "options": [
+            {
+              "id": "a",
+              "text": {
+                "zh": "调度器本身直接处理",
+                "en": "The scheduler itself handles it directly",
+                "ja": "スケジューラー自身が直接処理する"
+              }
+            },
+            {
+              "id": "b",
+              "text": {
+                "zh": "操作系统的进程调度器",
+                "en": "The operating system process scheduler",
+                "ja": "オペレーティングシステムのプロセススケジューラー"
+              }
+            },
+            {
+              "id": "c",
+              "text": {
+                "zh": "模型（由主循环将 prompt 喂给模型）",
+                "en": "The model (the main loop feeds the prompt to the model)",
+                "ja": "モデル（主ループがpromptをモデルに渡す）"
+              }
+            },
+            {
+              "id": "d",
+              "text": {
+                "zh": "一个专门的定时任务执行引擎",
+                "en": "A dedicated scheduled task execution engine",
+                "ja": "専用のスケジュールタスク実行エンジン"
+              }
+            }
+          ],
+          "answer": "c",
+          "explanation": {
+            "zh": "定时任务最终还是由模型接手。调度器只是把 prompt 送进通知队列，主循环把它当新用户消息喂给模型。不是另起一套系统，而是回到同一条主循环。",
+            "en": "The model ultimately handles the scheduled task. The scheduler only places the prompt in the notification queue; the main loop feeds it to the model as a new user message. It returns to the same main loop, not a separate system.",
+            "ja": "定時タスクは最終的にモデルが引き継ぐ。スケジューラーはpromptを通知キューに入れるだけで、主ループがそれを新しいユーザーメッセージとしてモデルに渡す。独立したシステムではなく、同じ主ループに戻る。"
+          },
+          "reward_card": "card_s14_003"
         },
         {
-                "id": "q_s14_011",
-                "type": "choice",
-                "difficulty": 2,
-                "stem": {
-                        "zh": "通知队列在定时调度中扮演什么角色？",
-                        "en": "What role does the notification queue play in scheduled dispatch?",
-                        "ja": "通知キューはスケジュール実行においてどんな役割を担いますか？"
-                },
-                "options": [
-                        {
-                                "id": "a",
-                                "text": {
-                                        "zh": "直接触发模型 API 调用",
-                                        "en": "Directly trigger model API calls",
-                                        "ja": "モデルAPIコールを直接トリガーする"
-                                }
-                        },
-                        {
-                                "id": "b",
-                                "text": {
-                                        "zh": "连接调度器与主循环，承载时间到了后的 prompt",
-                                        "en": "Connect the scheduler to the main loop, carrying the prompt once the time arrives",
-                                        "ja": "スケジューラーと主ループをつなぎ、時刻が来たpromptを運ぶ"
-                                }
-                        },
-                        {
-                                "id": "c",
-                                "text": {
-                                        "zh": "存储模型的历史输出供后续定时任务复用",
-                                        "en": "Store historical model outputs for reuse by future scheduled tasks",
-                                        "ja": "モデルの過去の出力を保存して将来のスケジュールタスクで再利用する"
-                                }
-                        },
-                        {
-                                "id": "d",
-                                "text": {
-                                        "zh": "记录每次触发的审计日志",
-                                        "en": "Record an audit log of each trigger event",
-                                        "ja": "各トリガーイベントの監査ログを記録する"
-                                }
-                        }
-                ],
-                "answer": "b",
-                "explanation": {
-                        "zh": "通知队列是调度器与主循环之间的桥梁。时间到了，调度器把 prompt 放进队列；主循环在下一轮读取队列，把它当成新用户消息处理。",
-                        "en": "The notification queue bridges the scheduler and the main loop. When the time comes, the scheduler places the prompt in the queue; the main loop reads it in the next iteration and processes it as a new user message.",
-                        "ja": "通知キューはスケジューラーと主ループの橋渡し役。時刻が来たらスケジューラーがpromptをキューに入れ、主ループが次のイテレーションでそれを読み取り新しいユーザーメッセージとして処理する。"
-                },
-                "reward_card": "card_s14_003"
+          "id": "q_s14_011",
+          "type": "choice",
+          "difficulty": 2,
+          "stem": {
+            "zh": "通知队列在定时调度中扮演什么角色？",
+            "en": "What role does the notification queue play in scheduled dispatch?",
+            "ja": "通知キューはスケジュール実行においてどんな役割を担いますか？"
+          },
+          "options": [
+            {
+              "id": "a",
+              "text": {
+                "zh": "直接触发模型 API 调用",
+                "en": "Directly trigger model API calls",
+                "ja": "モデルAPIコールを直接トリガーする"
+              }
+            },
+            {
+              "id": "b",
+              "text": {
+                "zh": "连接调度器与主循环，承载时间到了后的 prompt",
+                "en": "Connect the scheduler to the main loop, carrying the prompt once the time arrives",
+                "ja": "スケジューラーと主ループをつなぎ、時刻が来たpromptを運ぶ"
+              }
+            },
+            {
+              "id": "c",
+              "text": {
+                "zh": "存储模型的历史输出供后续定时任务复用",
+                "en": "Store historical model outputs for reuse by future scheduled tasks",
+                "ja": "モデルの過去の出力を保存して将来のスケジュールタスクで再利用する"
+              }
+            },
+            {
+              "id": "d",
+              "text": {
+                "zh": "记录每次触发的审计日志",
+                "en": "Record an audit log of each trigger event",
+                "ja": "各トリガーイベントの監査ログを記録する"
+              }
+            }
+          ],
+          "answer": "b",
+          "explanation": {
+            "zh": "通知队列是调度器与主循环之间的桥梁。时间到了，调度器把 prompt 放进队列；主循环在下一轮读取队列，把它当成新用户消息处理。",
+            "en": "The notification queue bridges the scheduler and the main loop. When the time comes, the scheduler places the prompt in the queue; the main loop reads it in the next iteration and processes it as a new user message.",
+            "ja": "通知キューはスケジューラーと主ループの橋渡し役。時刻が来たらスケジューラーがpromptをキューに入れ、主ループが次のイテレーションでそれを読み取り新しいユーザーメッセージとして処理する。"
+          },
+          "reward_card": "card_s14_003"
         },
         {
-                "id": "q_s14_012",
-                "type": "choice",
-                "difficulty": 2,
-                "stem": {
-                        "zh": "以下哪个场景最适合用定时调度而非后台任务来处理？",
-                        "en": "Which scenario is best handled with scheduled dispatch rather than a background task?",
-                        "ja": "次のシナリオのうち、バックグラウンドタスクではなくスケジュール実行で処理するのに最も適しているのはどれですか？"
-                },
-                "options": [
-                        {
-                                "id": "a",
-                                "text": {
-                                        "zh": "并发执行多个文件的格式化操作",
-                                        "en": "Concurrently formatting multiple files",
-                                        "ja": "複数ファイルのフォーマット操作を並列実行する"
-                                }
-                        },
-                        {
-                                "id": "b",
-                                "text": {
-                                        "zh": "等待一个耗时 30 秒的代码分析任务完成",
-                                        "en": "Waiting for a code analysis task that takes 30 seconds to complete",
-                                        "ja": "30秒かかるコード分析タスクの完了を待つ"
-                                }
-                        },
-                        {
-                                "id": "c",
-                                "text": {
-                                        "zh": "每天早上 8 点自动生成当日工作计划",
-                                        "en": "Automatically generating a daily work plan every morning at 8 AM",
-                                        "ja": "毎朝8時に自動的にその日の作業計画を生成する"
-                                }
-                        },
-                        {
-                                "id": "d",
-                                "text": {
-                                        "zh": "等待一个已经发出的 HTTP 请求返回结果",
-                                        "en": "Waiting for a previously sent HTTP request to return a result",
-                                        "ja": "既に送信したHTTPリクエストの結果が返ってくるのを待つ"
-                                }
-                        }
-                ],
-                "answer": "c",
-                "explanation": {
-                        "zh": "「每天早上 8 点自动生成计划」是典型的「等开始时间」问题，适合用定时调度。其他选项都是「等结果」问题，属于后台任务范畴。",
-                        "en": "Generating a daily plan every morning at 8 AM is a classic waiting-for-start-time problem suited for scheduled dispatch. The other options are waiting-for-results problems that fall under background tasks.",
-                        "ja": "毎朝8時に計画を自動生成するは典型的な開始時刻を待つ問題でスケジュール実行に適している。他の選択肢は結果を待つ問題でバックグラウンドタスクの範疇に入る。"
-                },
-                "reward_card": "card_s14_001"
+          "id": "q_s14_012",
+          "type": "choice",
+          "difficulty": 2,
+          "stem": {
+            "zh": "以下哪个场景最适合用定时调度而非后台任务来处理？",
+            "en": "Which scenario is best handled with scheduled dispatch rather than a background task?",
+            "ja": "次のシナリオのうち、バックグラウンドタスクではなくスケジュール実行で処理するのに最も適しているのはどれですか？"
+          },
+          "options": [
+            {
+              "id": "a",
+              "text": {
+                "zh": "并发执行多个文件的格式化操作",
+                "en": "Concurrently formatting multiple files",
+                "ja": "複数ファイルのフォーマット操作を並列実行する"
+              }
+            },
+            {
+              "id": "b",
+              "text": {
+                "zh": "等待一个耗时 30 秒的代码分析任务完成",
+                "en": "Waiting for a code analysis task that takes 30 seconds to complete",
+                "ja": "30秒かかるコード分析タスクの完了を待つ"
+              }
+            },
+            {
+              "id": "c",
+              "text": {
+                "zh": "每天早上 8 点自动生成当日工作计划",
+                "en": "Automatically generating a daily work plan every morning at 8 AM",
+                "ja": "毎朝8時に自動的にその日の作業計画を生成する"
+              }
+            },
+            {
+              "id": "d",
+              "text": {
+                "zh": "等待一个已经发出的 HTTP 请求返回结果",
+                "en": "Waiting for a previously sent HTTP request to return a result",
+                "ja": "既に送信したHTTPリクエストの結果が返ってくるのを待つ"
+              }
+            }
+          ],
+          "answer": "c",
+          "explanation": {
+            "zh": "「每天早上 8 点自动生成计划」是典型的「等开始时间」问题，适合用定时调度。其他选项都是「等结果」问题，属于后台任务范畴。",
+            "en": "Generating a daily plan every morning at 8 AM is a classic waiting-for-start-time problem suited for scheduled dispatch. The other options are waiting-for-results problems that fall under background tasks.",
+            "ja": "毎朝8時に計画を自動生成するは典型的な開始時刻を待つ問題でスケジュール実行に適している。他の選択肢は結果を待つ問題でバックグラウンドタスクの範疇に入る。"
+          },
+          "reward_card": "card_s14_001"
         },
         {
-                "id": "q_s14_013",
-                "type": "choice",
-                "difficulty": 3,
-                "stem": {
-                        "zh": "如果想让调度任务每 15 分钟执行一次，cron 表达式应该怎么写？",
-                        "en": "To run a scheduled task every 15 minutes, how should the cron expression be written?",
-                        "ja": "スケジュールタスクを15分ごとに実行するには、cron式をどう書けばよいですか？"
-                },
-                "options": [
-                        {
-                                "id": "a",
-                                "text": {
-                                        "zh": "15 * * * *",
-                                        "en": "15 * * * *",
-                                        "ja": "15 * * * *"
-                                }
-                        },
-                        {
-                                "id": "b",
-                                "text": {
-                                        "zh": "0 */15 * * *",
-                                        "en": "0 */15 * * *",
-                                        "ja": "0 */15 * * *"
-                                }
-                        },
-                        {
-                                "id": "c",
-                                "text": {
-                                        "zh": "*/15 * * * *",
-                                        "en": "*/15 * * * *",
-                                        "ja": "*/15 * * * *"
-                                }
-                        },
-                        {
-                                "id": "d",
-                                "text": {
-                                        "zh": "* 15 * * *",
-                                        "en": "* 15 * * *",
-                                        "ja": "* 15 * * *"
-                                }
-                        }
-                ],
-                "answer": "c",
-                "explanation": {
-                        "zh": "「*/15」在分钟字段表示「每隔 15 分钟」，即 0、15、30、45 分时触发。「15 * * * *」只在每小时第 15 分钟触发；「* 15 * * *」在第 15 小时的每分钟触发；「0 */15 * * *」在每 15 小时的整点触发。",
-                        "en": "*/15 in the minute field means every 15 minutes, firing at 0, 15, 30, 45. The expression 15 * * * * fires only at minute 15 of each hour; * 15 * * * fires every minute during hour 15; 0 */15 * * * fires at the top of every 15th hour.",
-                        "ja": "分フィールドの*/15は15分ごと（0、15、30、45分にトリガー）を意味する。15 * * * *は毎時15分のみ；* 15 * * *は15時の毎分；0 */15 * * *は15時間ごとの00分。"
-                },
-                "reward_card": "card_s14_002"
+          "id": "q_s14_013",
+          "type": "choice",
+          "difficulty": 3,
+          "stem": {
+            "zh": "如果想让调度任务每 15 分钟执行一次，cron 表达式应该怎么写？",
+            "en": "To run a scheduled task every 15 minutes, how should the cron expression be written?",
+            "ja": "スケジュールタスクを15分ごとに実行するには、cron式をどう書けばよいですか？"
+          },
+          "options": [
+            {
+              "id": "a",
+              "text": {
+                "zh": "15 * * * *",
+                "en": "15 * * * *",
+                "ja": "15 * * * *"
+              }
+            },
+            {
+              "id": "b",
+              "text": {
+                "zh": "0 */15 * * *",
+                "en": "0 */15 * * *",
+                "ja": "0 */15 * * *"
+              }
+            },
+            {
+              "id": "c",
+              "text": {
+                "zh": "*/15 * * * *",
+                "en": "*/15 * * * *",
+                "ja": "*/15 * * * *"
+              }
+            },
+            {
+              "id": "d",
+              "text": {
+                "zh": "* 15 * * *",
+                "en": "* 15 * * *",
+                "ja": "* 15 * * *"
+              }
+            }
+          ],
+          "answer": "c",
+          "explanation": {
+            "zh": "「*/15」在分钟字段表示「每隔 15 分钟」，即 0、15、30、45 分时触发。「15 * * * *」只在每小时第 15 分钟触发；「* 15 * * *」在第 15 小时的每分钟触发；「0 */15 * * *」在每 15 小时的整点触发。",
+            "en": "*/15 in the minute field means every 15 minutes, firing at 0, 15, 30, 45. The expression 15 * * * * fires only at minute 15 of each hour; * 15 * * * fires every minute during hour 15; 0 */15 * * * fires at the top of every 15th hour.",
+            "ja": "分フィールドの*/15は15分ごと（0、15、30、45分にトリガー）を意味する。15 * * * *は毎時15分のみ；* 15 * * *は15時の毎分；0 */15 * * *は15時間ごとの00分。"
+          },
+          "reward_card": "card_s14_002"
         },
         {
-                "id": "q_s14_014",
-                "type": "choice",
-                "difficulty": 3,
-                "stem": {
-                        "zh": "在实现调度器时，为什么时间检查应该有一定的容差（比如±30秒），而不是要求精确匹配？",
-                        "en": "When implementing a scheduler, why should time checks have tolerance rather than requiring exact matches?",
-                        "ja": "スケジューラーを実装する際、時刻チェックに許容範囲を設けるべき理由は何ですか？"
-                },
-                "options": [
-                        {
-                                "id": "a",
-                                "text": {
-                                        "zh": "轮询本身有时间间隔，精确匹配会因轮询时机错过触发窗口",
-                                        "en": "Polling has a time interval; exact matching could miss trigger windows between polls",
-                                        "ja": "ポーリングには時間間隔があり、正確な一致ではポーリングのタイミングによってトリガー窓を見逃す可能性がある"
-                                }
-                        },
-                        {
-                                "id": "b",
-                                "text": {
-                                        "zh": "容差可以降低 CPU 使用率",
-                                        "en": "Tolerance reduces CPU usage",
-                                        "ja": "許容範囲によりCPU使用率が下がる"
-                                }
-                        },
-                        {
-                                "id": "c",
-                                "text": {
-                                        "zh": "容差让多个任务可以并发执行",
-                                        "en": "Tolerance allows multiple tasks to execute concurrently",
-                                        "ja": "許容範囲により複数タスクの並列実行が可能になる"
-                                }
-                        },
-                        {
-                                "id": "d",
-                                "text": {
-                                        "zh": "微信小程序的计时器不够精确",
-                                        "en": "WeChat Mini Program timers are not precise enough",
-                                        "ja": "WeChatミニプログラムのタイマーが十分精確でない"
-                                }
-                        }
-                ],
-                "answer": "a",
-                "explanation": {
-                        "zh": "调度器通常每隔一段时间（如每秒或每分钟）轮询一次。如果要求精确在「09:00:00」触发，而上次轮询是 08:59:58，下次轮询是 09:00:02，就会错过。容差确保轮询间隔内的触发窗口不被遗漏。",
-                        "en": "Schedulers typically poll at intervals. If an exact match at 09:00:00 is required but the last poll was at 08:59:58 and the next at 09:00:02, the trigger is missed. Tolerance ensures trigger windows are not skipped between polls.",
-                        "ja": "スケジューラーは通常一定間隔でポーリングする。09:00:00での正確な一致が必要な場合、前のポーリングが08:59:58で次が09:00:02なら見逃す。許容範囲によりポーリング間のトリガー窓が漏れなくなる。"
-                },
-                "reward_card": "card_s14_002"
+          "id": "q_s14_014",
+          "type": "choice",
+          "difficulty": 3,
+          "stem": {
+            "zh": "在实现调度器时，为什么时间检查应该有一定的容差（比如±30秒），而不是要求精确匹配？",
+            "en": "When implementing a scheduler, why should time checks have tolerance rather than requiring exact matches?",
+            "ja": "スケジューラーを実装する際、時刻チェックに許容範囲を設けるべき理由は何ですか？"
+          },
+          "options": [
+            {
+              "id": "a",
+              "text": {
+                "zh": "轮询本身有时间间隔，精确匹配会因轮询时机错过触发窗口",
+                "en": "Polling has a time interval; exact matching could miss trigger windows between polls",
+                "ja": "ポーリングには時間間隔があり、正確な一致ではポーリングのタイミングによってトリガー窓を見逃す可能性がある"
+              }
+            },
+            {
+              "id": "b",
+              "text": {
+                "zh": "容差可以降低 CPU 使用率",
+                "en": "Tolerance reduces CPU usage",
+                "ja": "許容範囲によりCPU使用率が下がる"
+              }
+            },
+            {
+              "id": "c",
+              "text": {
+                "zh": "容差让多个任务可以并发执行",
+                "en": "Tolerance allows multiple tasks to execute concurrently",
+                "ja": "許容範囲により複数タスクの並列実行が可能になる"
+              }
+            },
+            {
+              "id": "d",
+              "text": {
+                "zh": "微信小程序的计时器不够精确",
+                "en": "WeChat Mini Program timers are not precise enough",
+                "ja": "WeChatミニプログラムのタイマーが十分精確でない"
+              }
+            }
+          ],
+          "answer": "a",
+          "explanation": {
+            "zh": "调度器通常每隔一段时间（如每秒或每分钟）轮询一次。如果要求精确在「09:00:00」触发，而上次轮询是 08:59:58，下次轮询是 09:00:02，就会错过。容差确保轮询间隔内的触发窗口不被遗漏。",
+            "en": "Schedulers typically poll at intervals. If an exact match at 09:00:00 is required but the last poll was at 08:59:58 and the next at 09:00:02, the trigger is missed. Tolerance ensures trigger windows are not skipped between polls.",
+            "ja": "スケジューラーは通常一定間隔でポーリングする。09:00:00での正確な一致が必要な場合、前のポーリングが08:59:58で次が09:00:02なら見逃す。許容範囲によりポーリング間のトリガー窓が漏れなくなる。"
+          },
+          "reward_card": "card_s14_002"
         },
         {
-                "id": "q_s14_015",
-                "type": "choice",
-                "difficulty": 3,
-                "stem": {
-                        "zh": "假设一个调度任务的 cron 为「0 9 * * *」，last_fired_at 是今天 08:50，现在轮询时间是 09:05。调度器应该如何处理？",
-                        "en": "A task has cron \"0 9 * * *\", last_fired_at is today at 08:50, and the current poll time is 09:05. What should the scheduler do?",
-                        "ja": "cronが0 9 * * *のタスクで、last_fired_atが今日8:50、現在のポーリング時刻が9:05です。スケジューラーはどう処理すべきですか？"
-                },
-                "options": [
-                        {
-                                "id": "a",
-                                "text": {
-                                        "zh": "触发，因为当前时间在 09:00 窗口内且 last_fired_at 早于今天 09:00",
-                                        "en": "Trigger, because current time is within the 09:00 window and last_fired_at is before today 09:00",
-                                        "ja": "トリガーする。現在時刻が9:00の窓内にあり、last_fired_atが今日の9:00より前だから"
-                                }
-                        },
-                        {
-                                "id": "b",
-                                "text": {
-                                        "zh": "先等到 09:00 整再触发",
-                                        "en": "Wait until exactly 09:00 before triggering",
-                                        "ja": "9:00ちょうどまで待ってからトリガーする"
-                                }
-                        },
-                        {
-                                "id": "c",
-                                "text": {
-                                        "zh": "不触发，因为 09:05 不等于 09:00",
-                                        "en": "Do not trigger, because 09:05 does not equal 09:00",
-                                        "ja": "トリガーしない。09:05は09:00と等しくないから"
-                                }
-                        },
-                        {
-                                "id": "d",
-                                "text": {
-                                        "zh": "不触发，因为 last_fired_at 已经是今天的记录",
-                                        "en": "Do not trigger, because last_fired_at already has a record from today",
-                                        "ja": "トリガーしない。last_fired_atにはすでに今日の記録があるから"
-                                }
-                        }
-                ],
-                "answer": "a",
-                "explanation": {
-                        "zh": "调度器判断逻辑：当前时间（09:05）在目标时间（09:00）的容差范围内，且 last_fired_at（08:50）早于今天 09:00，说明今天这次还没触发过，应该触发。触发后更新 last_fired_at 为 09:05。",
-                        "en": "The scheduler checks: current time 09:05 is within tolerance of target 09:00, and last_fired_at 08:50 is before today 09:00, meaning the task has not fired today yet. It should trigger. After triggering, update last_fired_at to 09:05.",
-                        "ja": "スケジューラーの判断ロジック：現在時刻（9:05）がターゲット（9:00）の許容範囲内にあり、last_fired_at（8:50）が今日の9:00より前なので今日はまだトリガーされていない。トリガーすべき。トリガー後、last_fired_atを9:05に更新する。"
-                },
-                "reward_card": "card_s14_002"
+          "id": "q_s14_015",
+          "type": "choice",
+          "difficulty": 3,
+          "stem": {
+            "zh": "假设一个调度任务的 cron 为「0 9 * * *」，last_fired_at 是今天 08:50，现在轮询时间是 09:05。调度器应该如何处理？",
+            "en": "A task has cron \"0 9 * * *\", last_fired_at is today at 08:50, and the current poll time is 09:05. What should the scheduler do?",
+            "ja": "cronが0 9 * * *のタスクで、last_fired_atが今日8:50、現在のポーリング時刻が9:05です。スケジューラーはどう処理すべきですか？"
+          },
+          "options": [
+            {
+              "id": "a",
+              "text": {
+                "zh": "触发，因为当前时间在 09:00 窗口内且 last_fired_at 早于今天 09:00",
+                "en": "Trigger, because current time is within the 09:00 window and last_fired_at is before today 09:00",
+                "ja": "トリガーする。現在時刻が9:00の窓内にあり、last_fired_atが今日の9:00より前だから"
+              }
+            },
+            {
+              "id": "b",
+              "text": {
+                "zh": "先等到 09:00 整再触发",
+                "en": "Wait until exactly 09:00 before triggering",
+                "ja": "9:00ちょうどまで待ってからトリガーする"
+              }
+            },
+            {
+              "id": "c",
+              "text": {
+                "zh": "不触发，因为 09:05 不等于 09:00",
+                "en": "Do not trigger, because 09:05 does not equal 09:00",
+                "ja": "トリガーしない。09:05は09:00と等しくないから"
+              }
+            },
+            {
+              "id": "d",
+              "text": {
+                "zh": "不触发，因为 last_fired_at 已经是今天的记录",
+                "en": "Do not trigger, because last_fired_at already has a record from today",
+                "ja": "トリガーしない。last_fired_atにはすでに今日の記録があるから"
+              }
+            }
+          ],
+          "answer": "a",
+          "explanation": {
+            "zh": "调度器判断逻辑：当前时间（09:05）在目标时间（09:00）的容差范围内，且 last_fired_at（08:50）早于今天 09:00，说明今天这次还没触发过，应该触发。触发后更新 last_fired_at 为 09:05。",
+            "en": "The scheduler checks: current time 09:05 is within tolerance of target 09:00, and last_fired_at 08:50 is before today 09:00, meaning the task has not fired today yet. It should trigger. After triggering, update last_fired_at to 09:05.",
+            "ja": "スケジューラーの判断ロジック：現在時刻（9:05）がターゲット（9:00）の許容範囲内にあり、last_fired_at（8:50）が今日の9:00より前なので今日はまだトリガーされていない。トリガーすべき。トリガー後、last_fired_atを9:05に更新する。"
+          },
+          "reward_card": "card_s14_002"
         },
         {
-                "id": "q_s14_016",
-                "type": "choice",
-                "difficulty": 3,
-                "stem": {
-                        "zh": "定时触发后，「通知队列 → 主循环 → 模型」这条链路带来的最重要设计好处是什么？",
-                        "en": "What is the most important design benefit of the notification queue to main loop to model chain after a scheduled trigger?",
-                        "ja": "定時トリガー後の通知キューから主ループそしてモデルへという経路がもたらす最も重要な設計上の利点は何ですか？"
-                },
-                "options": [
-                        {
-                                "id": "a",
-                                "text": {
-                                        "zh": "调度逻辑与执行逻辑解耦，统一复用主循环的对话管理能力",
-                                        "en": "Scheduling logic is decoupled from execution logic, uniformly reusing the main loop conversation management capability",
-                                        "ja": "スケジューリングロジックと実行ロジックが分離され、主ループの会話管理能力を統一して再利用できる"
-                                }
-                        },
-                        {
-                                "id": "b",
-                                "text": {
-                                        "zh": "定时任务的优先级高于普通用户消息",
-                                        "en": "Scheduled tasks have higher priority than regular user messages",
-                                        "ja": "スケジュールタスクは通常のユーザーメッセージより優先度が高い"
-                                }
-                        },
-                        {
-                                "id": "c",
-                                "text": {
-                                        "zh": "减少了每次调度检查的计算开销",
-                                        "en": "Reduces the computational overhead of each scheduling check",
-                                        "ja": "各スケジュールチェックの計算オーバーヘッドを削減する"
-                                }
-                        },
-                        {
-                                "id": "d",
-                                "text": {
-                                        "zh": "可以让定时任务绕过上下文长度限制",
-                                        "en": "Scheduled tasks can bypass context length limits",
-                                        "ja": "スケジュールタスクがコンテキスト長制限を回避できる"
-                                }
-                        }
-                ],
-                "answer": "a",
-                "explanation": {
-                        "zh": "通过通知队列回到主循环，调度逻辑（「什么时候触发」）与执行逻辑（「如何对话、如何调用模型」）完全解耦。执行侧只需复用主循环原有的对话管理和模型调用能力，不需要另建一套处理栈。",
-                        "en": "By returning to the main loop via the notification queue, scheduling logic (when to trigger) is fully decoupled from execution logic (how to converse, how to call the model). The execution side simply reuses the main loop existing capabilities without building a separate stack.",
-                        "ja": "通知キューを通じて主ループに戻ることで、スケジューリングロジック（いつトリガーするか）と実行ロジック（どう会話するか、モデルをどう呼ぶか）が完全に分離される。実行側は主ループの既存能力を再利用するだけで、別のスタックを構築する必要がない。"
-                },
-                "reward_card": "card_s14_003"
+          "id": "q_s14_016",
+          "type": "choice",
+          "difficulty": 3,
+          "stem": {
+            "zh": "定时触发后，「通知队列 → 主循环 → 模型」这条链路带来的最重要设计好处是什么？",
+            "en": "What is the most important design benefit of the notification queue to main loop to model chain after a scheduled trigger?",
+            "ja": "定時トリガー後の通知キューから主ループそしてモデルへという経路がもたらす最も重要な設計上の利点は何ですか？"
+          },
+          "options": [
+            {
+              "id": "a",
+              "text": {
+                "zh": "调度逻辑与执行逻辑解耦，统一复用主循环的对话管理能力",
+                "en": "Scheduling logic is decoupled from execution logic, uniformly reusing the main loop conversation management capability",
+                "ja": "スケジューリングロジックと実行ロジックが分離され、主ループの会話管理能力を統一して再利用できる"
+              }
+            },
+            {
+              "id": "b",
+              "text": {
+                "zh": "定时任务的优先级高于普通用户消息",
+                "en": "Scheduled tasks have higher priority than regular user messages",
+                "ja": "スケジュールタスクは通常のユーザーメッセージより優先度が高い"
+              }
+            },
+            {
+              "id": "c",
+              "text": {
+                "zh": "减少了每次调度检查的计算开销",
+                "en": "Reduces the computational overhead of each scheduling check",
+                "ja": "各スケジュールチェックの計算オーバーヘッドを削減する"
+              }
+            },
+            {
+              "id": "d",
+              "text": {
+                "zh": "可以让定时任务绕过上下文长度限制",
+                "en": "Scheduled tasks can bypass context length limits",
+                "ja": "スケジュールタスクがコンテキスト長制限を回避できる"
+              }
+            }
+          ],
+          "answer": "a",
+          "explanation": {
+            "zh": "通过通知队列回到主循环，调度逻辑（「什么时候触发」）与执行逻辑（「如何对话、如何调用模型」）完全解耦。执行侧只需复用主循环原有的对话管理和模型调用能力，不需要另建一套处理栈。",
+            "en": "By returning to the main loop via the notification queue, scheduling logic (when to trigger) is fully decoupled from execution logic (how to converse, how to call the model). The execution side simply reuses the main loop existing capabilities without building a separate stack.",
+            "ja": "通知キューを通じて主ループに戻ることで、スケジューリングロジック（いつトリガーするか）と実行ロジック（どう会話するか、モデルをどう呼ぶか）が完全に分離される。実行側は主ループの既存能力を再利用するだけで、別のスタックを構築する必要がない。"
+          },
+          "reward_card": "card_s14_003"
         },
         {
-                "id": "q_s14_017",
-                "type": "choice",
-                "difficulty": 3,
-                "stem": {
-                        "zh": "设计一个支持「一次性触发」和「周期性触发」的调度系统，最简洁的区分方式是什么？",
-                        "en": "When designing a scheduler supporting both one-shot and recurring triggers, what is the simplest way to distinguish them?",
-                        "ja": "単発トリガーと周期的トリガーの両方をサポートするスケジューラーを設計する場合、最もシンプルな区別方法は何ですか？"
-                },
-                "options": [
-                        {
-                                "id": "a",
-                                "text": {
-                                        "zh": "在调度记录中加入一个布尔字段（如 recurring）：false 触发后删除记录，true 则保留",
-                                        "en": "Add a boolean field like recurring to the record: delete after triggering if false, keep if true",
-                                        "ja": "レコードにrecurringのようなbooleanフィールドを追加する：falseならトリガー後に削除、trueなら保持"
-                                }
-                        },
-                        {
-                                "id": "b",
-                                "text": {
-                                        "zh": "为两种任务分别建立独立的存储表",
-                                        "en": "Create separate storage tables for each type of task",
-                                        "ja": "2種類のタスクにそれぞれ独立したストレージテーブルを作成する"
-                                }
-                        },
-                        {
-                                "id": "c",
-                                "text": {
-                                        "zh": "为周期性任务设置更短的轮询间隔",
-                                        "en": "Set a shorter polling interval for recurring tasks",
-                                        "ja": "繰り返しタスクには短いポーリング間隔を設定する"
-                                }
-                        },
-                        {
-                                "id": "d",
-                                "text": {
-                                        "zh": "一次性触发使用时间戳，周期性触发使用 cron 表达式",
-                                        "en": "Use timestamps for one-shot triggers and cron expressions for recurring triggers",
-                                        "ja": "単発トリガーにはタイムスタンプ、周期的トリガーにはcron式を使う"
-                                }
-                        }
-                ],
-                "answer": "a",
-                "explanation": {
-                        "zh": "在调度记录中加一个 recurring 布尔字段是最简洁的方式：触发后若 recurring=false 则删除该记录（一次性），若 recurring=true 则更新 last_fired_at 并保留（周期性）。无需两套存储，也无需两套处理逻辑。",
-                        "en": "Adding a recurring boolean field is the simplest approach: delete the record after triggering if recurring=false (one-shot); update last_fired_at and keep it if recurring=true (periodic). No separate storage or logic needed.",
-                        "ja": "recurring booleanフィールドを追加するのが最もシンプル：recurring=falseならトリガー後にレコードを削除（単発）、recurring=trueならlast_fired_atを更新して保持（定期）。別のストレージも別のロジックも不要。"
-                },
-                "reward_card": "card_s14_002"
+          "id": "q_s14_017",
+          "type": "choice",
+          "difficulty": 3,
+          "stem": {
+            "zh": "设计一个支持「一次性触发」和「周期性触发」的调度系统，最简洁的区分方式是什么？",
+            "en": "When designing a scheduler supporting both one-shot and recurring triggers, what is the simplest way to distinguish them?",
+            "ja": "単発トリガーと周期的トリガーの両方をサポートするスケジューラーを設計する場合、最もシンプルな区別方法は何ですか？"
+          },
+          "options": [
+            {
+              "id": "a",
+              "text": {
+                "zh": "在调度记录中加入一个布尔字段（如 recurring）：false 触发后删除记录，true 则保留",
+                "en": "Add a boolean field like recurring to the record: delete after triggering if false, keep if true",
+                "ja": "レコードにrecurringのようなbooleanフィールドを追加する：falseならトリガー後に削除、trueなら保持"
+              }
+            },
+            {
+              "id": "b",
+              "text": {
+                "zh": "为两种任务分别建立独立的存储表",
+                "en": "Create separate storage tables for each type of task",
+                "ja": "2種類のタスクにそれぞれ独立したストレージテーブルを作成する"
+              }
+            },
+            {
+              "id": "c",
+              "text": {
+                "zh": "为周期性任务设置更短的轮询间隔",
+                "en": "Set a shorter polling interval for recurring tasks",
+                "ja": "繰り返しタスクには短いポーリング間隔を設定する"
+              }
+            },
+            {
+              "id": "d",
+              "text": {
+                "zh": "一次性触发使用时间戳，周期性触发使用 cron 表达式",
+                "en": "Use timestamps for one-shot triggers and cron expressions for recurring triggers",
+                "ja": "単発トリガーにはタイムスタンプ、周期的トリガーにはcron式を使う"
+              }
+            }
+          ],
+          "answer": "a",
+          "explanation": {
+            "zh": "在调度记录中加一个 recurring 布尔字段是最简洁的方式：触发后若 recurring=false 则删除该记录（一次性），若 recurring=true 则更新 last_fired_at 并保留（周期性）。无需两套存储，也无需两套处理逻辑。",
+            "en": "Adding a recurring boolean field is the simplest approach: delete the record after triggering if recurring=false (one-shot); update last_fired_at and keep it if recurring=true (periodic). No separate storage or logic needed.",
+            "ja": "recurring booleanフィールドを追加するのが最もシンプル：recurring=falseならトリガー後にレコードを削除（単発）、recurring=trueならlast_fired_atを更新して保持（定期）。別のストレージも別のロジックも不要。"
+          },
+          "reward_card": "card_s14_002"
         },
         {
-                "id": "q_s14_018",
-                "type": "choice",
-                "difficulty": 3,
-                "stem": {
-                        "zh": "从「后台任务（s13）→定时调度（s14）」这两章的学习顺序中，最能体现的架构设计原则是什么？",
-                        "en": "The learning order from background tasks s13 to scheduled dispatch s14 best illustrates which architectural design principle?",
-                        "ja": "バックグラウンドタスクs13からスケジュール実行s14への学習順序が最もよく体現しているアーキテクチャ設計原則は何ですか？"
-                },
-                "options": [
-                        {
-                                "id": "a",
-                                "text": {
-                                        "zh": "后台任务比定时调度更重要，应优先掌握",
-                                        "en": "Background tasks are more important than scheduled dispatch and should be mastered first",
-                                        "ja": "バックグラウンドタスクはスケジュール実行より重要で、先に習得すべき"
-                                }
-                        },
-                        {
-                                "id": "b",
-                                "text": {
-                                        "zh": "不同的等待问题用不同的机制解决，而不是让主循环承担所有时间语义",
-                                        "en": "Different waiting problems are solved with different mechanisms, rather than making the main loop handle all time semantics",
-                                        "ja": "異なる待機問題は異なるメカニズムで解決し、主ループにすべての時間的語義を負わせない"
-                                }
-                        },
-                        {
-                                "id": "c",
-                                "text": {
-                                        "zh": "定时调度是后台任务的特例，可以完全替代",
-                                        "en": "Scheduled dispatch is a special case of background tasks and can fully replace them",
-                                        "ja": "スケジュール実行はバックグラウンドタスクの特殊ケースで、完全に置き換えられる"
-                                }
-                        },
-                        {
-                                "id": "d",
-                                "text": {
-                                        "zh": "所有异步问题最终都可以统一为一种解决方案",
-                                        "en": "All async problems can ultimately be unified into one solution",
-                                        "ja": "すべての非同期問題は最終的に一つの解決策に統一できる"
-                                }
-                        }
-                ],
-                "answer": "b",
-                "explanation": {
-                        "zh": "s13 解决「等结果」，s14 解决「等开始」——两者都是时间相关问题，但机制不同。这体现了「针对不同问题形状匹配不同解法」的设计原则，而不是用一个大而全的主循环承担所有时间语义。",
-                        "en": "s13 solves waiting for results, s14 solves waiting for a start time. Both are time-related problems but with different mechanisms. This reflects the design principle of matching different solutions to different problem shapes rather than making one main loop handle all time semantics.",
-                        "ja": "s13は結果を待つを解決し、s14は開始時刻を待つを解決する。両者とも時間に関連する問題だがメカニズムが異なる。これは問題の形状に異なる解決策を対応させるという設計原則を体現しており、一つの主ループにすべての時間的語義を負わせないことを示している。"
-                },
-                "reward_card": "card_s14_001"
+          "id": "q_s14_018",
+          "type": "choice",
+          "difficulty": 3,
+          "stem": {
+            "zh": "从「后台任务（s13）→定时调度（s14）」这两章的学习顺序中，最能体现的架构设计原则是什么？",
+            "en": "The learning order from background tasks s13 to scheduled dispatch s14 best illustrates which architectural design principle?",
+            "ja": "バックグラウンドタスクs13からスケジュール実行s14への学習順序が最もよく体現しているアーキテクチャ設計原則は何ですか？"
+          },
+          "options": [
+            {
+              "id": "a",
+              "text": {
+                "zh": "后台任务比定时调度更重要，应优先掌握",
+                "en": "Background tasks are more important than scheduled dispatch and should be mastered first",
+                "ja": "バックグラウンドタスクはスケジュール実行より重要で、先に習得すべき"
+              }
+            },
+            {
+              "id": "b",
+              "text": {
+                "zh": "不同的等待问题用不同的机制解决，而不是让主循环承担所有时间语义",
+                "en": "Different waiting problems are solved with different mechanisms, rather than making the main loop handle all time semantics",
+                "ja": "異なる待機問題は異なるメカニズムで解決し、主ループにすべての時間的語義を負わせない"
+              }
+            },
+            {
+              "id": "c",
+              "text": {
+                "zh": "定时调度是后台任务的特例，可以完全替代",
+                "en": "Scheduled dispatch is a special case of background tasks and can fully replace them",
+                "ja": "スケジュール実行はバックグラウンドタスクの特殊ケースで、完全に置き換えられる"
+              }
+            },
+            {
+              "id": "d",
+              "text": {
+                "zh": "所有异步问题最终都可以统一为一种解决方案",
+                "en": "All async problems can ultimately be unified into one solution",
+                "ja": "すべての非同期問題は最終的に一つの解決策に統一できる"
+              }
+            }
+          ],
+          "answer": "b",
+          "explanation": {
+            "zh": "s13 解决「等结果」，s14 解决「等开始」——两者都是时间相关问题，但机制不同。这体现了「针对不同问题形状匹配不同解法」的设计原则，而不是用一个大而全的主循环承担所有时间语义。",
+            "en": "s13 solves waiting for results, s14 solves waiting for a start time. Both are time-related problems but with different mechanisms. This reflects the design principle of matching different solutions to different problem shapes rather than making one main loop handle all time semantics.",
+            "ja": "s13は結果を待つを解決し、s14は開始時刻を待つを解決する。両者とも時間に関連する問題だがメカニズムが異なる。これは問題の形状に異なる解決策を対応させるという設計原則を体現しており、一つの主ループにすべての時間的語義を負わせないことを示している。"
+          },
+          "reward_card": "card_s14_001"
         }
-],
+      ],
       "star_thresholds": [
         0.4,
         0.7,
@@ -13214,51 +14725,51 @@ module.exports = {
         {
           "id": "q_s16_001",
           "type": "choice",
-          "difficulty": 2,
+          "difficulty": 1,
           "stem": {
-            "zh": "在 Claude Code 中，关于「这一章要解决什么问题」的正确理解是？",
-            "en": "What is the correct understanding of \"What You'll Learn\" in Claude Code?",
-            "ja": "Claude Code における「この章が解く問題」の正しい理解はどれですか？"
+            "zh": "结构化协议消息中，request_id 字段的主要作用是什么？",
+            "en": "What is the main purpose of the request_id field in a structured protocol message?",
+            "ja": "構造化プロトコルメッセージにおける request_id フィールドの主な役割は何ですか？"
           },
           "options": [
             {
               "id": "a",
               "text": {
-                "zh": "这一章要解决什么问题",
-                "en": "What You'll Learn",
-                "ja": "この章が解く問題"
-              }
-            },
-            {
-              "id": "c",
-              "text": {
-                "zh": "3. 只会 `worktree_remove`，不会解释 closeout 的含义",
-                "en": "3. 只会 `worktree_remove`，不会解释 closeout 的含义",
-                "ja": "3. `remove` だけを覚えて closeout の意味を教えない"
-              }
-            },
-            {
-              "id": "d",
-              "text": {
-                "zh": "第四步：认领后先补身份，再把任务提示塞回主循环",
-                "en": "第四步：认领后先补身份，再把任务提示塞回主循环",
-                "ja": "第 4 段階: claim 後は identity と task hint を両方戻す"
+                "zh": "唯一标识一次请求，让响应能与请求准确对应",
+                "en": "Uniquely identify a request so the response can be accurately matched to it",
+                "ja": "リクエストを一意に識別し、レスポンスと正確に対応させる"
               }
             },
             {
               "id": "b",
               "text": {
-                "zh": "先解释几个名词",
-                "en": "The Solution",
-                "ja": "先に言葉をそろえる"
+                "zh": "标记消息的发送顺序，方便日志排序",
+                "en": "Mark the order of messages for log sorting",
+                "ja": "メッセージの送信順序をログ整理のためにマークする"
+              }
+            },
+            {
+              "id": "c",
+              "text": {
+                "zh": "加密消息内容，防止其他 Agent 读取",
+                "en": "Encrypt the message content to prevent other agents from reading it",
+                "ja": "メッセージ内容を暗号化して他の Agent が読めないようにする"
+              }
+            },
+            {
+              "id": "d",
+              "text": {
+                "zh": "记录发送方的身份，用于权限校验",
+                "en": "Record the sender's identity for permission verification",
+                "ja": "送信者の ID を記録して権限チェックに使う"
               }
             }
           ],
           "answer": "a",
           "explanation": {
-            "zh": "一层结构化协议。",
-            "en": "What You'll Learn",
-            "ja": "追跡可能な request-response protocol"
+            "zh": "request_id 是结构化协议的核心追踪字段。有了它，响应方才能把「这个 approve: true」精确映射回对应的请求，而不是泛指某个模糊的历史操作。",
+            "en": "request_id is the core tracking field of a structured protocol. It lets the responder map 'this approve: true' precisely back to the original request, rather than some vague historical action.",
+            "ja": "request_id は構造化プロトコルの核心追跡フィールドです。これがあることで、レスポンダーは「この approve: true」を曖昧な過去の操作ではなく、対応するリクエストに正確にマッピングできます。"
           },
           "reward_card": "card_s16_001"
         },
@@ -13267,49 +14778,49 @@ module.exports = {
           "type": "choice",
           "difficulty": 1,
           "stem": {
-            "zh": "以下哪个概念与「建议联读」直接相关？",
-            "en": "Which concept is directly related to \"The Problem\"?",
-            "ja": "「併読すると楽になる資料」に直接関連する概念はどれですか？"
+            "zh": "优雅关机（graceful shutdown）协议的正确执行顺序是？",
+            "en": "What is the correct execution order of a graceful shutdown protocol?",
+            "ja": "グレースフルシャットダウンプロトコルの正しい実行順序はどれですか？"
           },
           "options": [
             {
-              "id": "c",
-              "text": {
-                "zh": "什么叫绑定",
-                "en": "What Changed From s17",
-                "ja": "binding とは何か"
-              }
-            },
-            {
               "id": "a",
               "text": {
-                "zh": "建议联读",
-                "en": "The Problem",
-                "ja": "併読すると楽になる資料"
-              }
-            },
-            {
-              "id": "d",
-              "text": {
-                "zh": "关键数据结构",
-                "en": "What You've Mastered",
-                "ja": "この章の核になるデータ構造"
+                "zh": "协调者发送 shutdown_request → Agent 回复 shutdown_response → Agent 完成收尾后退出",
+                "en": "Coordinator sends shutdown_request → Agent replies shutdown_response → Agent exits after cleanup",
+                "ja": "コーディネーターが shutdown_request を送信 → Agent が shutdown_response を返信 → Agent がクリーンアップ後に終了"
               }
             },
             {
               "id": "b",
               "text": {
-                "zh": "2. 协议消息",
-                "en": "2. 协议消息",
-                "ja": "`s15` から何が増えたか"
+                "zh": "直接杀进程 → 记录日志 → 通知协调者",
+                "en": "Kill process directly → log → notify coordinator",
+                "ja": "プロセスを直接kill → ログ → コーディネーターに通知"
+              }
+            },
+            {
+              "id": "c",
+              "text": {
+                "zh": "Agent 自行决定退出时机 → 发消息告知协调者 → 协调者确认",
+                "en": "Agent decides when to exit → sends message to coordinator → coordinator confirms",
+                "ja": "Agent が退出タイミングを自分で決める → コーディネーターにメッセージ → コーディネーターが確認"
+              }
+            },
+            {
+              "id": "d",
+              "text": {
+                "zh": "发送 shutdown_request → 等待超时 → 强制终止",
+                "en": "Send shutdown_request → wait for timeout → force terminate",
+                "ja": "shutdown_request を送信 → タイムアウトを待つ → 強制終了"
               }
             }
           ],
           "answer": "a",
           "explanation": {
-            "zh": "建议联读",
-            "en": "Shutdown.",
-            "ja": "併読すると楽になる資料"
+            "zh": "优雅关机的关键是：请求方发出 shutdown_request，被关机方明确回复 shutdown_response（告知已批准），再进行收尾工作后退出。这与「直接杀进程」的本质区别在于被关机方有机会清理状态。",
+            "en": "The key to graceful shutdown: the requester sends shutdown_request, the shutting-down party explicitly replies with shutdown_response (indicating approval), then cleans up and exits. The essential difference from 'just kill the process' is that the party being shut down gets to clean up state.",
+            "ja": "グレースフルシャットダウンの要点：リクエスト側が shutdown_request を送り、シャットダウンされる側が shutdown_response で明示的に返信し（承認を示す）、クリーンアップ後に終了します。「プロセスを直接kill」との本質的な違いは、シャットダウンされる側が状態をクリーンアップできることです。"
           },
           "reward_card": "card_s16_002"
         },
@@ -13318,153 +14829,816 @@ module.exports = {
           "type": "choice",
           "difficulty": 1,
           "stem": {
-            "zh": "以下哪个概念与「先把几个词讲明白」直接相关？",
-            "en": "Which concept is directly related to \"The Solution\"?",
-            "ja": "「先に言葉をそろえる」に直接関連する概念はどれですか？"
+            "zh": "下列哪个场景属于「协议消息」而非「普通消息」？",
+            "en": "Which of the following scenarios is a 'protocol message' rather than a 'plain message'?",
+            "ja": "次のシナリオのうち、「普通のメッセージ」ではなく「プロトコルメッセージ」に該当するものはどれですか？"
           },
           "options": [
             {
-              "id": "d",
+              "id": "a",
               "text": {
-                "zh": "第二步：在 IDLE 里先看邮箱",
-                "en": "第二步：在 IDLE 里先看邮箱",
-                "ja": "第 2 段階: idle では先に inbox を見る"
+                "zh": "协调者向 Agent 发送带有 request_id 和 type: shutdown_request 的 JSON，等待 Agent 回复带有相同 request_id 的 shutdown_response",
+                "en": "Coordinator sends JSON with request_id and type: shutdown_request to Agent, waits for Agent to reply with shutdown_response containing the same request_id",
+                "ja": "コーディネーターが request_id と type: shutdown_request を含む JSON を Agent に送り、同じ request_id を持つ shutdown_response の返信を待つ"
               }
             },
             {
               "id": "b",
               "text": {
-                "zh": "1. 只看 `pending`，不看 `blockedBy`",
-                "en": "1. 只看 `pending`，不看 `blockedBy`",
-                "ja": "1. `pending` だけ見て `blockedBy` を見ない"
+                "zh": "Agent A 询问 Agent B：「你负责哪个模块？」",
+                "en": "Agent A asks Agent B: 'Which module are you responsible for?'",
+                "ja": "Agent A が Agent B に「どのモジュールを担当していますか？」と尋ねる"
               }
             },
             {
               "id": "c",
               "text": {
-                "zh": "协议请求不是普通消息",
-                "en": "协议请求不是普通消息",
-                "ja": "第 3 段階: plan approval も同じ骨格で扱う"
-              }
-            },
-            {
-              "id": "a",
-              "text": {
-                "zh": "先把几个词讲明白",
-                "en": "The Solution",
-                "ja": "先に言葉をそろえる"
-              }
-            }
-          ],
-          "answer": "a",
-          "explanation": {
-            "zh": "先把几个词讲明白",
-            "en": "The Solution",
-            "ja": "先に言葉をそろえる"
-          },
-          "reward_card": "card_s16_003"
-        },
-        {
-          "id": "q_s16_004",
-          "type": "choice",
-          "difficulty": 1,
-          "stem": {
-            "zh": "以下哪个概念与「什么是协议」直接相关？",
-            "en": "Which concept is directly related to \"How It Works\"?",
-            "ja": "「protocol とは何か」に直接関連する概念はどれですか？"
-          },
-          "options": [
-            {
-              "id": "c",
-              "text": {
-                "zh": "4. 把协议消息和普通消息混成一种结构",
-                "en": "4. 把协议消息和普通消息混成一种结构",
-                "ja": "前の章とどうつながるか"
-              }
-            },
-            {
-              "id": "a",
-              "text": {
-                "zh": "什么是协议",
-                "en": "How It Works",
-                "ja": "protocol とは何か"
-              }
-            },
-            {
-              "id": "b",
-              "text": {
-                "zh": "1. 没有 `request_id`",
-                "en": "1. 没有 `request_id`",
-                "ja": "3. request の状態を memory 内 dict にしか置かない"
+                "zh": "Agent A 告知 Agent B：「文件已经写完了」",
+                "en": "Agent A tells Agent B: 'The file has been written'",
+                "ja": "Agent A が Agent B に「ファイルの書き込みが完了しました」と伝える"
               }
             },
             {
               "id": "d",
               "text": {
-                "zh": "什么是 worktree",
-                "en": "The Solution",
-                "ja": "worktree とは何か"
+                "zh": "Agent B 向协调者报告当前任务进度",
+                "en": "Agent B reports current task progress to the coordinator",
+                "ja": "Agent B がコーディネーターに現在のタスク進捗を報告する"
               }
             }
           ],
           "answer": "a",
           "explanation": {
-            "zh": "什么是协议",
-            "en": "Step 1.",
-            "ja": "protocol とは何か"
+            "zh": "协议消息的特征是：有固定的 type 字段、有 request_id 追踪、有明确的请求-响应配对，并管理一个可追踪的状态（「批没批准」）。选项 c 完整体现了这三个要素，而其他选项都是单向的状态通知或问询，属于普通消息。",
+            "en": "Protocol messages are characterized by: a fixed type field, request_id tracking, clear request-response pairing, and managing a trackable state ('approved or not'). Option c fully embodies all three elements, while the other options are one-way status notifications or queries — plain messages.",
+            "ja": "プロトコルメッセージの特徴：固定の type フィールド、request_id による追跡、明確なリクエスト-レスポンスのペアリング、追跡可能な状態の管理（「承認されたかどうか」）。選択肢cはこれら3つの要素を完全に体現しており、他の選択肢は一方向の状態通知や問い合わせで、普通のメッセージです。"
           },
           "reward_card": "card_s16_004"
         },
         {
-          "id": "q_s16_005",
+          "id": "q_s16_004",
           "type": "choice",
-          "difficulty": 1,
+          "difficulty": 2,
           "stem": {
-            "zh": "以下哪个概念与「什么是 request_id」直接相关？",
-            "en": "Which concept is directly related to \"Read Together\"?",
-            "ja": "「request_id とは何か」に直接関連する概念はどれですか？"
+            "zh": "关机协议和计划审批协议都使用 request-response 模板，这样设计的核心好处是？",
+            "en": "Both the shutdown protocol and plan approval protocol use the request-response template. What is the core benefit of this design?",
+            "ja": "シャットダウンプロトコルと計画承認プロトコルはどちらも request-response テンプレートを使用しています。この設計の核心的なメリットは何ですか？"
           },
           "options": [
             {
               "id": "a",
               "text": {
-                "zh": "什么是 request_id",
-                "en": "Read Together",
-                "ja": "request_id とは何か"
+                "zh": "减少代码行数，让实现更简洁",
+                "en": "Reduce code lines, making the implementation more concise",
+                "ja": "コード行数を減らし、実装をより簡潔にする"
               }
             },
             {
               "id": "b",
               "text": {
-                "zh": "第二步：创建 worktree 并写入注册表",
-                "en": "第二步：创建 worktree 并写入注册表",
-                "ja": "第 2 段階: worktree を作り、registry に書く"
+                "zh": "统一结构降低认知成本：Agent 只需学会一套 request-response 骨架，即可处理所有需要「明确确认」的场景",
+                "en": "Unified structure reduces cognitive cost: Agent only needs to learn one request-response skeleton to handle all scenarios requiring explicit confirmation",
+                "ja": "統一構造が認知コストを下げる：Agent は一つの request-response 骨格を学ぶだけで、明確な確認が必要なすべてのシナリオに対応できる"
               }
             },
             {
               "id": "c",
               "text": {
-                "zh": "3. Claim Event Log",
-                "en": "3. Claim Event Log",
-                "ja": "3. Claim Event Log"
+                "zh": "强制所有消息都必须有响应，防止消息丢失",
+                "en": "Force all messages to have a response, preventing message loss",
+                "ja": "すべてのメッセージに応答を強制し、メッセージの損失を防ぐ"
               }
             },
             {
               "id": "d",
               "text": {
-                "zh": "3. CloseoutRecord",
-                "en": "3. CloseoutRecord",
-                "ja": "3. CloseoutRecord"
+                "zh": "让协调者可以批量处理多个请求，提高并发效率",
+                "en": "Allow the coordinator to batch process multiple requests, improving concurrency",
+                "ja": "コーディネーターが複数のリクエストをバッチ処理でき、並行効率を向上させる"
+              }
+            }
+          ],
+          "answer": "b",
+          "explanation": {
+            "zh": "共用同一套 request-response 骨架的核心价值是「复用认知」：Agent 学会处理关机请求的模式后，不需要重新学习，直接把同一个状态机套用到计划审批场景。这降低了整个团队协作系统的心智负担。",
+            "en": "The core value of sharing the same request-response skeleton is 'cognitive reuse': once an Agent learns the pattern for handling shutdown requests, it can directly apply the same state machine to the plan approval scenario without relearning. This reduces the mental burden of the entire team collaboration system.",
+            "ja": "同じ request-response 骨格を共有する核心的な価値は「認知の再利用」です：Agent がシャットダウンリクエストの処理パターンを学んだ後、再学習なしに同じステートマシンを計画承認シナリオに直接適用できます。これにより、チーム協働システム全体の認知的負担が軽減されます。"
+          },
+          "reward_card": "card_s16_003"
+        },
+        {
+          "id": "q_s16_005",
+          "type": "choice",
+          "difficulty": 2,
+          "stem": {
+            "zh": "一个 Agent 收到 shutdown_request 后，应该在何时回复 shutdown_response？",
+            "en": "After an Agent receives a shutdown_request, when should it reply with shutdown_response?",
+            "ja": "Agent が shutdown_request を受け取った後、いつ shutdown_response を返信すべきですか？"
+          },
+          "options": [
+            {
+              "id": "a",
+              "text": {
+                "zh": "先回复 shutdown_response 确认已收到，再进行收尾操作，完成后退出",
+                "en": "First reply with shutdown_response confirming receipt, then perform cleanup, then exit",
+                "ja": "まず shutdown_response で受信を確認し、次にクリーンアップを実行し、最後に終了する"
+              }
+            },
+            {
+              "id": "b",
+              "text": {
+                "zh": "完成所有收尾工作后再回复，确保回复时已经干净退出",
+                "en": "Reply only after completing all cleanup work, ensuring a clean exit before replying",
+                "ja": "すべてのクリーンアップ作業を完了してから返信し、返信時にはクリーンに終了していることを確認する"
+              }
+            },
+            {
+              "id": "c",
+              "text": {
+                "zh": "立刻回复，然后继续完成当前任务，任务完成后再退出",
+                "en": "Reply immediately, then continue completing the current task, exit after the task is done",
+                "ja": "すぐに返信し、現在のタスクを完了してから終了する"
+              }
+            },
+            {
+              "id": "d",
+              "text": {
+                "zh": "忽略请求，等待协调者再次发送后才回复",
+                "en": "Ignore the request and wait for the coordinator to send it again before replying",
+                "ja": "リクエストを無視し、コーディネーターが再送信してから返信する"
               }
             }
           ],
           "answer": "a",
           "explanation": {
-            "zh": "什么是 request_id",
-            "en": "Read Together",
-            "ja": "request_id とは何か"
+            "zh": "正确顺序是：收到 → 回复确认（让协调者知道消息没有丢失）→ 执行收尾 → 退出。先回复再收尾的好处是：协调者不需要等待不确定的收尾时间，它知道 Agent 已经「确认在走关机流程」了。",
+            "en": "The correct order is: receive → reply to confirm (letting the coordinator know the message wasn't lost) → perform cleanup → exit. The benefit of replying before cleanup: the coordinator doesn't need to wait for an uncertain cleanup time; it knows the Agent has 'confirmed it's in the shutdown process'.",
+            "ja": "正しい順序：受信 → 確認返信（コーディネーターにメッセージが失われていないことを知らせる）→ クリーンアップ実行 → 終了。クリーンアップ前に返信する利点：コーディネーターは不確定なクリーンアップ時間を待つ必要がなく、Agent が「シャットダウンプロセスに入ったことを確認した」ことがわかります。"
           },
-          "reward_card": "card_s16_005"
+          "reward_card": "card_s16_002"
+        },
+        {
+          "id": "q_s16_006",
+          "type": "choice",
+          "difficulty": 2,
+          "stem": {
+            "zh": "普通消息和协议消息的本质区别是什么？",
+            "en": "What is the essential difference between a plain message and a protocol message?",
+            "ja": "普通のメッセージとプロトコルメッセージの本質的な違いは何ですか？"
+          },
+          "options": [
+            {
+              "id": "a",
+              "text": {
+                "zh": "普通消息用文本，协议消息用 JSON",
+                "en": "Plain messages use text, protocol messages use JSON",
+                "ja": "普通のメッセージはテキストを使い、プロトコルメッセージは JSON を使う"
+              }
+            },
+            {
+              "id": "b",
+              "text": {
+                "zh": "普通消息由 Agent 发送，协议消息只由协调者发送",
+                "en": "Plain messages are sent by agents, protocol messages are only sent by the coordinator",
+                "ja": "普通のメッセージは Agent が送り、プロトコルメッセージはコーディネーターのみが送る"
+              }
+            },
+            {
+              "id": "c",
+              "text": {
+                "zh": "普通消息解决「说了什么内容」，协议消息解决「这件事走到哪一步了」",
+                "en": "Plain messages address 'what was said', protocol messages address 'where this matter has reached in the process'",
+                "ja": "普通のメッセージは「何が言われたか」を解決し、プロトコルメッセージは「この件がどの段階まで進んだか」を解決する"
+              }
+            },
+            {
+              "id": "d",
+              "text": {
+                "zh": "普通消息不需要回复，协议消息必须在 5 秒内回复",
+                "en": "Plain messages don't need replies, protocol messages must be replied to within 5 seconds",
+                "ja": "普通のメッセージは返信不要で、プロトコルメッセージは5秒以内に返信しなければならない"
+              }
+            }
+          ],
+          "answer": "c",
+          "explanation": {
+            "zh": "这是 s16 最核心的概念对比。普通消息传递信息（「任务完成了」「文件写好了」），但它无法追踪状态流转；协议消息用 request_id + 状态机，让「批没批准」「走到哪步了」有明确记录。",
+            "en": "This is the most fundamental conceptual contrast in s16. Plain messages convey information ('task done', 'file written'), but they can't track state transitions; protocol messages use request_id + state machine, giving clear records of 'approved or not' and 'which step we're at'.",
+            "ja": "これは s16 の最も核心的な概念の対比です。普通のメッセージは情報を伝えます（「タスク完了」「ファイル書き込み完了」）が、状態遷移を追跡できません。プロトコルメッセージは request_id + ステートマシンを使用し、「承認されたかどうか」「どのステップにいるか」を明確に記録します。"
+          },
+          "reward_card": "card_s16_004"
+        },
+        {
+          "id": "q_s16_007",
+          "type": "choice",
+          "difficulty": 1,
+          "stem": {
+            "zh": "在关机协议中，如果 Agent 回复了 shutdown_response 但 approve 为 false，意味着什么？",
+            "en": "In the shutdown protocol, if an Agent replies with shutdown_response but approve is false, what does that mean?",
+            "ja": "シャットダウンプロトコルで、Agent が shutdown_response を返信したが approve が false だった場合、それは何を意味しますか？"
+          },
+          "options": [
+            {
+              "id": "a",
+              "text": {
+                "zh": "Agent 没有收到关机请求",
+                "en": "The Agent did not receive the shutdown request",
+                "ja": "Agent がシャットダウンリクエストを受信しなかった"
+              }
+            },
+            {
+              "id": "b",
+              "text": {
+                "zh": "Agent 暂时无法关机，拒绝了这次请求",
+                "en": "The Agent cannot shut down at this time and rejected the request",
+                "ja": "Agent は現時点でシャットダウンできず、リクエストを拒否した"
+              }
+            },
+            {
+              "id": "c",
+              "text": {
+                "zh": "协议传输出现了错误",
+                "en": "A transmission error occurred in the protocol",
+                "ja": "プロトコルの伝送でエラーが発生した"
+              }
+            },
+            {
+              "id": "d",
+              "text": {
+                "zh": "关机请求的 request_id 不匹配",
+                "en": "The request_id of the shutdown request doesn't match",
+                "ja": "シャットダウンリクエストの request_id が一致しない"
+              }
+            }
+          ],
+          "answer": "b",
+          "explanation": {
+            "zh": "结构化协议设计的关键是：Agent 有权拒绝请求（approve: false），这让协议不是单向命令，而是真正的「请求-响应」交互。Agent 可能正在处理关键任务，需要稍后再关机。",
+            "en": "A key aspect of structured protocol design: the Agent has the right to reject a request (approve: false), making the protocol not a one-way command but a true 'request-response' interaction. The Agent may be handling a critical task and need to shut down later.",
+            "ja": "構造化プロトコル設計の重要点：Agent はリクエストを拒否する権限があり（approve: false）、これによりプロトコルは一方的なコマンドではなく、真の「リクエスト-レスポンス」インタラクションになります。Agent が重要なタスクを処理中で、後でシャットダウンする必要があるかもしれません。"
+          },
+          "reward_card": "card_s16_002"
+        },
+        {
+          "id": "q_s16_008",
+          "type": "choice",
+          "difficulty": 2,
+          "stem": {
+            "zh": "计划审批协议（plan_approval_request）和关机协议（shutdown_request）共用一套骨架，以下哪个字段是两者都必须包含的？",
+            "en": "The plan approval protocol and shutdown protocol share the same skeleton. Which field must both include?",
+            "ja": "計画承認プロトコルとシャットダウンプロトコルは同じ骨格を共有しています。両方が必ず含めなければならないフィールドはどれですか？"
+          },
+          "options": [
+            {
+              "id": "a",
+              "text": {
+                "zh": "plan_content（计划内容）",
+                "en": "plan_content (plan content)",
+                "ja": "plan_content（計画内容）"
+              }
+            },
+            {
+              "id": "b",
+              "text": {
+                "zh": "reason（拒绝原因）",
+                "en": "reason (rejection reason)",
+                "ja": "reason（拒否理由）"
+              }
+            },
+            {
+              "id": "c",
+              "text": {
+                "zh": "timestamp（时间戳）",
+                "en": "timestamp",
+                "ja": "timestamp（タイムスタンプ）"
+              }
+            },
+            {
+              "id": "d",
+              "text": {
+                "zh": "request_id 和 type",
+                "en": "request_id and type",
+                "ja": "request_id と type"
+              }
+            }
+          ],
+          "answer": "d",
+          "explanation": {
+            "zh": "request_id 用于追踪（让响应能对应到请求），type 用于区分协议类型（shutdown vs plan_approval）。这两个字段是 request-response 骨架的最小必要元素，在所有协议消息中都存在。",
+            "en": "request_id is for tracking (linking responses to requests), type is for distinguishing protocol types (shutdown vs plan_approval). These two fields are the minimal necessary elements of the request-response skeleton, present in all protocol messages.",
+            "ja": "request_id は追跡用（レスポンスをリクエストに紐付ける）、type はプロトコルタイプの区別用（shutdown vs plan_approval）です。この2つのフィールドは request-response 骨格の最小必要要素で、すべてのプロトコルメッセージに存在します。"
+          },
+          "reward_card": "card_s16_003"
+        },
+        {
+          "id": "q_s16_009",
+          "type": "choice",
+          "difficulty": 3,
+          "stem": {
+            "zh": "如果把「关机」和「计划审批」都用普通消息实现而不用协议，最可能出现的问题是？",
+            "en": "If both 'shutdown' and 'plan approval' were implemented with plain messages instead of protocols, what problem would most likely arise?",
+            "ja": "「シャットダウン」と「計画承認」をプロトコルではなく普通のメッセージで実装した場合、最も起こりやすい問題は何ですか？"
+          },
+          "options": [
+            {
+              "id": "a",
+              "text": {
+                "zh": "消息传输延迟变高",
+                "en": "Message transmission latency increases",
+                "ja": "メッセージ伝送レイテンシが増加する"
+              }
+            },
+            {
+              "id": "b",
+              "text": {
+                "zh": "Agent 的代码量会翻倍",
+                "en": "Agent code volume doubles",
+                "ja": "Agent のコード量が倍増する"
+              }
+            },
+            {
+              "id": "c",
+              "text": {
+                "zh": "无法追踪「这件事走到哪一步了」，协调者不知道某个关机/审批请求是否已被确认处理",
+                "en": "Unable to track 'where this matter has reached', the coordinator doesn't know if a shutdown/approval request has been confirmed as processed",
+                "ja": "「この件がどの段階まで進んだか」を追跡できず、コーディネーターはシャットダウン/承認リクエストが確認・処理されたかどうかわからない"
+              }
+            },
+            {
+              "id": "d",
+              "text": {
+                "zh": "消息格式不统一导致解析出错",
+                "en": "Inconsistent message formats cause parsing errors",
+                "ja": "メッセージフォーマットの不一致によりパースエラーが発生する"
+              }
+            }
+          ],
+          "answer": "c",
+          "explanation": {
+            "zh": "普通消息解决不了「状态追踪」问题。协调者发出「请关机」普通消息后，无法分辨「Agent 是没收到、收到了但在忙、还是已经在关机了」。协议消息的 request_id + 明确的 approve 回复，让这些状态变得可见。",
+            "en": "Plain messages can't solve the 'state tracking' problem. After the coordinator sends a plain 'please shut down' message, it can't distinguish whether 'the Agent didn't receive it, received it but is busy, or is already shutting down'. Protocol messages with request_id + explicit approve replies make these states visible.",
+            "ja": "普通のメッセージは「状態追跡」問題を解決できません。コーディネーターが「シャットダウンしてください」という普通のメッセージを送った後、「Agent が受信しなかったのか、受信したが忙しいのか、すでにシャットダウン中なのか」を区別できません。request_id と明示的な approve 返信を持つプロトコルメッセージにより、これらの状態が可視化されます。"
+          },
+          "reward_card": "card_s16_004"
+        },
+        {
+          "id": "q_s16_010",
+          "type": "choice",
+          "difficulty": 3,
+          "stem": {
+            "zh": "以下哪个描述最准确地体现了「结构化协议 = request_id + 状态机」的设计理念？",
+            "en": "Which description most accurately reflects the design philosophy of 'structured protocol = request_id + state machine'?",
+            "ja": "「構造化プロトコル = request_id + ステートマシン」の設計思想を最も正確に表しているのはどれですか？"
+          },
+          "options": [
+            {
+              "id": "a",
+              "text": {
+                "zh": "用数字 ID 编号消息，用状态枚举代替文字描述",
+                "en": "Number messages with numeric IDs, use state enumerations instead of text descriptions",
+                "ja": "数値IDでメッセージに番号を付け、状態列挙でテキスト説明を置き換える"
+              }
+            },
+            {
+              "id": "b",
+              "text": {
+                "zh": "每个请求有唯一标识（request_id），每次交互的状态变化（pending → approved/rejected）是明确可追踪的",
+                "en": "Each request has a unique identifier (request_id), and the state change of each interaction (pending → approved/rejected) is explicitly trackable",
+                "ja": "各リクエストに一意の識別子（request_id）があり、各インタラクションの状態変化（pending → approved/rejected）が明示的に追跡可能"
+              }
+            },
+            {
+              "id": "c",
+              "text": {
+                "zh": "把所有消息都放进一个有序队列，按顺序处理",
+                "en": "Put all messages into an ordered queue and process them in order",
+                "ja": "すべてのメッセージを順序付きキューに入れて順番に処理する"
+              }
+            },
+            {
+              "id": "d",
+              "text": {
+                "zh": "用数据库持久化所有协议消息，防止消息丢失",
+                "en": "Persist all protocol messages in a database to prevent message loss",
+                "ja": "すべてのプロトコルメッセージをデータベースに永続化してメッセージの損失を防ぐ"
+              }
+            }
+          ],
+          "answer": "b",
+          "explanation": {
+            "zh": "「request_id + 状态机」的本质是让协议交互具有确定性：request_id 保证了每次交互的唯一性和可追溯性，状态机（pending → approved/rejected）保证了每次交互的结果是明确的、可验证的，而不是模糊的「应该批了吧」。",
+            "en": "The essence of 'request_id + state machine' is to make protocol interactions deterministic: request_id ensures each interaction's uniqueness and traceability, the state machine (pending → approved/rejected) ensures each interaction's outcome is explicit and verifiable, not a vague 'should have been approved'.",
+            "ja": "「request_id + ステートマシン」の本質は、プロトコルインタラクションを決定論的にすることです：request_id は各インタラクションの一意性と追跡可能性を保証し、ステートマシン（pending → approved/rejected）は各インタラクションの結果が明示的で検証可能であることを保証し、「たぶん承認されたはず」という曖昧さをなくします。"
+          },
+          "reward_card": "card_s16_001"
+        },
+        {
+          "id": "q_s16_011",
+          "type": "choice",
+          "difficulty": 2,
+          "stem": {
+            "zh": "在协议消息的 response 端，为什么必须回传 request_id？",
+            "en": "On the response side of a protocol message, why must the request_id be echoed back?",
+            "ja": "プロトコルメッセージのレスポンス側で、なぜ request_id を返送しなければならないのですか？"
+          },
+          "options": [
+            {
+              "id": "a",
+              "text": {
+                "zh": "证明响应方已经解析了请求的完整内容",
+                "en": "Prove the responder has parsed the full content of the request",
+                "ja": "レスポンダーがリクエストの完全な内容を解析したことを証明する"
+              }
+            },
+            {
+              "id": "b",
+              "text": {
+                "zh": "便于日志系统按 ID 索引和归档",
+                "en": "Facilitate log systems to index and archive by ID",
+                "ja": "ログシステムがIDでインデックス化とアーカイブを行いやすくする"
+              }
+            },
+            {
+              "id": "c",
+              "text": {
+                "zh": "用于加密校验，防止伪造响应",
+                "en": "Used for encryption verification to prevent forged responses",
+                "ja": "暗号化検証に使用し、偽造レスポンスを防ぐ"
+              }
+            },
+            {
+              "id": "d",
+              "text": {
+                "zh": "让请求方可以把「这个 approve: true」和「那个具体的请求」精确对应，而不是泛指",
+                "en": "Allow the requester to precisely match 'this approve: true' to 'that specific request', not a vague reference",
+                "ja": "リクエスト側が「この approve: true」を「あの特定のリクエスト」と正確に対応付けられるようにし、曖昧な参照を避ける"
+              }
+            }
+          ],
+          "answer": "d",
+          "explanation": {
+            "zh": "这是 request_id 设计的核心价值。如果请求方同时发出了多个关机请求（或者请求之间有时间间隔），响应中回传 request_id 才能让请求方知道「这个 approve 是针对哪个请求的」，避免了「批了哪个」的歧义。",
+            "en": "This is the core value of request_id design. If the requester sends multiple shutdown requests simultaneously (or with time intervals between them), echoing request_id in the response lets the requester know 'which request this approve is for', avoiding the ambiguity of 'which one was approved'.",
+            "ja": "これが request_id 設計の核心的な価値です。リクエスト側が複数のシャットダウンリクエストを同時に（または時間をおいて）送信した場合、レスポンスで request_id を返送することで、「この approve はどのリクエストに対するものか」をリクエスト側が知ることができ、「どれが承認されたか」の曖昧さを避けられます。"
+          },
+          "reward_card": "card_s16_001"
+        },
+        {
+          "id": "q_s16_012",
+          "type": "choice",
+          "difficulty": 3,
+          "stem": {
+            "zh": "协调者向 Agent 发送了 plan_approval_request，但长时间没有收到 plan_approval_response。根据协议设计原则，协调者最合理的处理方式是？",
+            "en": "The coordinator sent a plan_approval_request to an Agent but hasn't received a plan_approval_response for a long time. Based on protocol design principles, what is the most reasonable action for the coordinator?",
+            "ja": "コーディネーターが Agent に plan_approval_request を送ったが、長時間 plan_approval_response を受信しません。プロトコル設計原則に基づき、コーディネーターの最も合理的な対応は？"
+          },
+          "options": [
+            {
+              "id": "a",
+              "text": {
+                "zh": "认为 Agent 已经隐式批准，直接开始执行计划",
+                "en": "Assume the Agent has implicitly approved and start executing the plan",
+                "ja": "Agent が暗黙的に承認したと見なし、計画を実行開始する"
+              }
+            },
+            {
+              "id": "b",
+              "text": {
+                "zh": "认为 Agent 已经隐式拒绝，放弃计划",
+                "en": "Assume the Agent has implicitly rejected and abandon the plan",
+                "ja": "Agent が暗黙的に拒否したと見なし、計画を放棄する"
+              }
+            },
+            {
+              "id": "c",
+              "text": {
+                "zh": "用新的 request_id 重新发送请求，或发出告警，不能假设对方的意图",
+                "en": "Resend the request with a new request_id, or raise an alert — cannot assume the other party's intent",
+                "ja": "新しい request_id でリクエストを再送するか、アラートを発する — 相手の意図を仮定してはならない"
+              }
+            },
+            {
+              "id": "d",
+              "text": {
+                "zh": "直接强制关闭 Agent，重新启动一个新 Agent",
+                "en": "Force close the Agent and start a new one",
+                "ja": "Agent を強制終了し、新しい Agent を起動する"
+              }
+            }
+          ],
+          "answer": "c",
+          "explanation": {
+            "zh": "协议设计的核心原则是「明确确认，不假设意图」。没有收到响应可能是：消息丢失、Agent 繁忙、Agent 崩溃等多种原因，不能把沉默当作批准或拒绝。正确做法是用新的 request_id 重发，或告警等待人工介入。",
+            "en": "The core principle of protocol design is 'explicit confirmation, don't assume intent'. Not receiving a response could be due to: message loss, Agent busy, Agent crash, etc. — you cannot treat silence as approval or rejection. The correct approach is to resend with a new request_id, or alert and wait for manual intervention.",
+            "ja": "プロトコル設計の核心原則は「明示的な確認、意図を仮定しない」です。レスポンスを受信しないのは、メッセージの損失、Agent のビジー状態、Agent のクラッシュなど様々な原因が考えられます。沈黙を承認や拒否として扱うことはできません。正しい対応は、新しい request_id で再送するか、アラートを出して手動介入を待つことです。"
+          },
+          "reward_card": "card_s16_003"
+        },
+        {
+          "id": "q_s16_013",
+          "type": "choice",
+          "difficulty": 1,
+          "stem": {
+            "zh": "为什么说「协议消息」比「普通消息」更适合处理关机这类操作？",
+            "en": "Why is a 'protocol message' more suitable than a 'plain message' for handling operations like shutdown?",
+            "ja": "なぜ「プロトコルメッセージ」は「普通のメッセージ」よりシャットダウンのような操作の処理に適しているのですか？"
+          },
+          "options": [
+            {
+              "id": "a",
+              "text": {
+                "zh": "协议消息传输速度更快",
+                "en": "Protocol messages transmit faster",
+                "ja": "プロトコルメッセージは伝送速度が速い"
+              }
+            },
+            {
+              "id": "b",
+              "text": {
+                "zh": "协议消息内容更短，节省带宽",
+                "en": "Protocol messages are shorter, saving bandwidth",
+                "ja": "プロトコルメッセージは短く、帯域幅を節約する"
+              }
+            },
+            {
+              "id": "c",
+              "text": {
+                "zh": "关机等操作需要「明确确认对方收到并同意」，协议消息的 request-response 结构保证了这个确认是可追踪的",
+                "en": "Operations like shutdown require 'explicit confirmation that the other party received and agreed', and the request-response structure of protocol messages ensures this confirmation is trackable",
+                "ja": "シャットダウンのような操作は「相手が受信して同意したことの明示的な確認」が必要で、プロトコルメッセージの request-response 構造がこの確認を追跡可能にする"
+              }
+            },
+            {
+              "id": "d",
+              "text": {
+                "zh": "微信小程序的通信 API 只支持协议消息格式",
+                "en": "The WeChat Mini Program communication API only supports protocol message format",
+                "ja": "WeChat ミニプログラムの通信 API はプロトコルメッセージ形式のみをサポートする"
+              }
+            }
+          ],
+          "answer": "c",
+          "explanation": {
+            "zh": "关机、计划审批等操作有「高后果性」——执行错了会产生严重影响。普通消息的「发了就算」无法满足这类场景的安全要求，必须有明确的 request-response 往返来确认「对方收到、理解并同意了」。",
+            "en": "Operations like shutdown and plan approval have 'high consequences' — executing them incorrectly has serious impact. The 'fire and forget' nature of plain messages can't meet the safety requirements for these scenarios; there must be an explicit request-response exchange to confirm 'the other party received, understood, and agreed'.",
+            "ja": "シャットダウンや計画承認などの操作は「高い影響度」があり、誤って実行すると深刻な影響が生じます。普通のメッセージの「送ったら終わり」という性質は、こうしたシナリオの安全要件を満たせません。「相手が受信し、理解し、同意した」ことを確認するための明示的な request-response の往復が必要です。"
+          },
+          "reward_card": "card_s16_004"
+        },
+        {
+          "id": "q_s16_014",
+          "type": "choice",
+          "difficulty": 3,
+          "stem": {
+            "zh": "一个多 Agent 系统中，协调者同时向三个 Agent 发送了 shutdown_request，每个请求有不同的 request_id。Agent B 回复了 approve: true，但没有包含 request_id。这会导致什么问题？",
+            "en": "In a multi-agent system, the coordinator sends shutdown_request to three agents simultaneously, each with a different request_id. Agent B replies with approve: true but without including request_id. What problem does this cause?",
+            "ja": "マルチエージェントシステムで、コーディネーターが3つの Agent に同時に shutdown_request を送り、それぞれ異なる request_id を持っています。Agent B が request_id を含めずに approve: true を返信しました。どんな問題が生じますか？"
+          },
+          "options": [
+            {
+              "id": "a",
+              "text": {
+                "zh": "协调者无法判断 approve: true 对应的是哪个 request_id，无法确定是哪个 Agent 同意了关机",
+                "en": "The coordinator cannot determine which request_id the approve: true corresponds to, unable to confirm which Agent agreed to shut down",
+                "ja": "コーディネーターは approve: true がどの request_id に対応するかを判断できず、どの Agent がシャットダウンに同意したかを確認できない"
+              }
+            },
+            {
+              "id": "b",
+              "text": {
+                "zh": "消息会被拒绝，Agent B 需要重新发送",
+                "en": "The message will be rejected and Agent B needs to resend",
+                "ja": "メッセージが拒否され、Agent B は再送信する必要がある"
+              }
+            },
+            {
+              "id": "c",
+              "text": {
+                "zh": "系统会自动匹配发送时间最近的 request_id",
+                "en": "The system automatically matches the most recently sent request_id",
+                "ja": "システムは最も最近送信された request_id を自動的に照合する"
+              }
+            },
+            {
+              "id": "d",
+              "text": {
+                "zh": "协调者会把这个 approve: true 应用到所有三个请求",
+                "en": "The coordinator applies this approve: true to all three requests",
+                "ja": "コーディネーターはこの approve: true を3つのリクエストすべてに適用する"
+              }
+            }
+          ],
+          "answer": "a",
+          "explanation": {
+            "zh": "这正是 request_id 的存在意义。在并发场景下，没有 request_id 的响应是「悬空的同意」——协调者无法知道这个 approve 指向哪个请求。这也解释了为什么 response 端必须回传原始 request_id，而不是生成新的。",
+            "en": "This is exactly why request_id exists. In concurrent scenarios, a response without request_id is a 'dangling approval' — the coordinator can't know which request this approve refers to. This also explains why the response side must echo the original request_id rather than generating a new one.",
+            "ja": "これがまさに request_id が存在する理由です。並行シナリオでは、request_id のないレスポンスは「宙ぶらりんの承認」であり、コーディネーターはこの approve がどのリクエストを指しているかわかりません。これはまた、レスポンス側が新しいものを生成するのではなく、元の request_id を返送しなければならない理由も説明しています。"
+          },
+          "reward_card": "card_s16_001"
+        },
+        {
+          "id": "q_s16_015",
+          "type": "choice",
+          "difficulty": 2,
+          "stem": {
+            "zh": "s16 的「共享 request-response 规则」对 s15 团队协作系统的哪个方面做了扩展？",
+            "en": "How does s16's 'shared request-response rules' extend the team collaboration system from s15?",
+            "ja": "s16 の「共有 request-response ルール」は、s15 のチーム協働システムのどの側面を拡張していますか？"
+          },
+          "options": [
+            {
+              "id": "a",
+              "text": {
+                "zh": "增加了更多 Agent 类型，支持更大规模的团队",
+                "en": "Added more Agent types to support larger teams",
+                "ja": "より多くの Agent タイプを追加し、より大規模なチームをサポートする"
+              }
+            },
+            {
+              "id": "b",
+              "text": {
+                "zh": "在普通消息基础上，为需要「明确确认」的高后果操作（关机、计划审批）引入了结构化的 request-response 协议",
+                "en": "On top of plain messaging, introduced structured request-response protocols for high-consequence operations (shutdown, plan approval) that require 'explicit confirmation'",
+                "ja": "普通のメッセージングに加えて、「明示的な確認」が必要な高影響度の操作（シャットダウン、計画承認）のための構造化 request-response プロトコルを導入した"
+              }
+            },
+            {
+              "id": "c",
+              "text": {
+                "zh": "替换了 s15 的任务队列系统，用协议消息管理所有任务",
+                "en": "Replaced s15's task queue system with protocol messages managing all tasks",
+                "ja": "s15 のタスクキューシステムを置き換え、プロトコルメッセージですべてのタスクを管理する"
+              }
+            },
+            {
+              "id": "d",
+              "text": {
+                "zh": "为 Agent 增加了持久化存储，让协议消息可以跨重启保留",
+                "en": "Added persistent storage for Agents so protocol messages survive restarts",
+                "ja": "Agent に永続ストレージを追加し、プロトコルメッセージが再起動後も保持されるようにした"
+              }
+            }
+          ],
+          "answer": "b",
+          "explanation": {
+            "zh": "s16 不是替换 s15，而是在其基础上补充了一层「协议层」。s15 解决了团队成员的组织和任务分配问题，s16 在此基础上针对「高后果操作」引入了结构化的确认机制，让这类操作有明确的状态追踪。",
+            "en": "s16 doesn't replace s15 — it adds a 'protocol layer' on top of it. s15 solved team member organization and task assignment; s16 builds on this by introducing a structured confirmation mechanism for 'high-consequence operations', giving these operations explicit state tracking.",
+            "ja": "s16 は s15 を置き換えるのではなく、その上に「プロトコル層」を追加します。s15 がチームメンバーの組織とタスク割り当ての問題を解決したのに対し、s16 はその上に「高影響度操作」のための構造化確認メカニズムを導入し、これらの操作に明示的な状態追跡を提供します。"
+          },
+          "reward_card": "card_s16_003"
+        },
+        {
+          "id": "q_s16_016",
+          "type": "choice",
+          "difficulty": 1,
+          "stem": {
+            "zh": "优雅关机协议中，Agent 收到 shutdown_request 后可以做的最重要的事是？",
+            "en": "In the graceful shutdown protocol, the most important thing an Agent can do after receiving shutdown_request is?",
+            "ja": "グレースフルシャットダウンプロトコルで、Agent が shutdown_request を受け取った後にできる最も重要なことは？"
+          },
+          "options": [
+            {
+              "id": "a",
+              "text": {
+                "zh": "立即停止所有操作，防止数据损坏",
+                "en": "Immediately stop all operations to prevent data corruption",
+                "ja": "データ破損を防ぐためにすべての操作を即座に停止する"
+              }
+            },
+            {
+              "id": "b",
+              "text": {
+                "zh": "通知所有依赖自己的其他 Agent",
+                "en": "Notify all other Agents that depend on it",
+                "ja": "自分に依存するすべての他の Agent に通知する"
+              }
+            },
+            {
+              "id": "c",
+              "text": {
+                "zh": "备份当前所有内存状态",
+                "en": "Back up all current memory state",
+                "ja": "現在のすべてのメモリ状態をバックアップする"
+              }
+            },
+            {
+              "id": "d",
+              "text": {
+                "zh": "有机会完成当前工作的收尾，而不是被强制中断——这是「优雅」的核心含义",
+                "en": "Have the opportunity to complete current work cleanly rather than being forcefully interrupted — this is the core meaning of 'graceful'",
+                "ja": "強制的に中断されるのではなく、現在の作業をクリーンに完了する機会を得ること — これが「グレースフル」の核心的な意味"
+              }
+            }
+          ],
+          "answer": "d",
+          "explanation": {
+            "zh": "「优雅关机」的「优雅」就在于：Agent 不是被直接杀死，而是收到请求后有机会把手头的事情做完、清理状态、保存必要数据，然后体面地退出。这与操作系统的 SIGTERM（优雅关机）vs SIGKILL（强制杀死）是同一个思想。",
+            "en": "The 'graceful' in 'graceful shutdown' means: the Agent isn't just killed; after receiving the request, it has the opportunity to finish what it's doing, clean up state, save necessary data, and then exit cleanly. This is the same philosophy as SIGTERM (graceful shutdown) vs SIGKILL (force kill) in operating systems.",
+            "ja": "「グレースフルシャットダウン」の「グレースフル」の意味：Agent は単に殺されるのではなく、リクエストを受け取った後、進行中の作業を完了し、状態をクリーンアップし、必要なデータを保存してから、クリーンに終了する機会を得ます。これはオペレーティングシステムの SIGTERM（グレースフルシャットダウン）vs SIGKILL（強制終了）と同じ思想です。"
+          },
+          "reward_card": "card_s16_002"
+        },
+        {
+          "id": "q_s16_017",
+          "type": "choice",
+          "difficulty": 3,
+          "stem": {
+            "zh": "某团队 Agent 系统中，协调者需要同时处理两类操作：（1）日常任务进度汇报（2）Agent 关机确认。以下哪种消息架构最合理？",
+            "en": "In a team Agent system, the coordinator needs to handle two types of operations: (1) daily task progress reports (2) Agent shutdown confirmation. Which message architecture is most reasonable?",
+            "ja": "チーム Agent システムで、コーディネーターは2種類の操作を処理する必要があります：(1) 日常タスクの進捗報告 (2) Agent のシャットダウン確認。どのメッセージアーキテクチャが最も合理的ですか？"
+          },
+          "options": [
+            {
+              "id": "a",
+              "text": {
+                "zh": "全部用协议消息，统一结构便于解析",
+                "en": "Use protocol messages for everything, unified structure for easy parsing",
+                "ja": "すべてにプロトコルメッセージを使用し、統一構造で解析を容易にする"
+              }
+            },
+            {
+              "id": "b",
+              "text": {
+                "zh": "全部用普通消息，保持简单",
+                "en": "Use plain messages for everything to keep it simple",
+                "ja": "すべてに普通のメッセージを使用してシンプルに保つ"
+              }
+            },
+            {
+              "id": "c",
+              "text": {
+                "zh": "进度汇报用普通消息（不需要明确确认），关机确认用协议消息（需要追踪状态和明确批准）",
+                "en": "Progress reports use plain messages (no explicit confirmation needed), shutdown confirmation uses protocol messages (need to track state and explicit approval)",
+                "ja": "進捗報告は普通のメッセージを使用（明示的な確認不要）、シャットダウン確認はプロトコルメッセージを使用（状態追跡と明示的な承認が必要）"
+              }
+            },
+            {
+              "id": "d",
+              "text": {
+                "zh": "进度汇报用协议消息，关机确认用普通消息，两者互换以降低关机操作的仪式感",
+                "en": "Progress reports use protocol messages, shutdown confirmation uses plain messages, swapping them to reduce the ceremony of shutdown operations",
+                "ja": "進捗報告はプロトコルメッセージ、シャットダウン確認は普通のメッセージ、2つを入れ替えてシャットダウン操作の形式性を下げる"
+              }
+            }
+          ],
+          "answer": "c",
+          "explanation": {
+            "zh": "这是 s16 对消息类型分层的核心思想：不是所有消息都需要协议级别的追踪。进度汇报是低后果的单向通知，用普通消息即可；关机确认是高后果的双向确认，必须用协议消息。「按需选用工具」比「一律套用最重的机制」更合理。",
+            "en": "This is the core idea of s16's message type layering: not all messages need protocol-level tracking. Progress reports are low-consequence one-way notifications that work fine as plain messages; shutdown confirmation is a high-consequence two-way confirmation that requires protocol messages. 'Using the right tool for the job' is more reasonable than 'applying the heaviest mechanism to everything'.",
+            "ja": "これが s16 のメッセージタイプの階層化の核心思想です：すべてのメッセージがプロトコルレベルの追跡を必要とするわけではありません。進捗報告は低影響度の一方向通知であり、普通のメッセージで十分です。シャットダウン確認は高影響度の双方向確認であり、プロトコルメッセージが必要です。「目的に合ったツールを使う」ことが「すべてに最も重いメカニズムを適用する」よりも合理的です。"
+          },
+          "reward_card": "card_s16_004"
+        },
+        {
+          "id": "q_s16_018",
+          "type": "choice",
+          "difficulty": 2,
+          "stem": {
+            "zh": "s16 的团队协议规则的设计，体现了软件工程中哪个经典原则？",
+            "en": "The design of s16's team protocol rules reflects which classic principle in software engineering?",
+            "ja": "s16 のチームプロトコルルールの設計は、ソフトウェアエンジニアリングのどの古典的な原則を反映していますか？"
+          },
+          "options": [
+            {
+              "id": "a",
+              "text": {
+                "zh": "DRY（Don't Repeat Yourself）——不重复代码",
+                "en": "DRY (Don't Repeat Yourself) — no repeated code",
+                "ja": "DRY（Don't Repeat Yourself）— コードを繰り返さない"
+              }
+            },
+            {
+              "id": "b",
+              "text": {
+                "zh": "Be conservative in what you send, be liberal in what you accept（发送时保守，接受时宽容）",
+                "en": "Be conservative in what you send, be liberal in what you accept",
+                "ja": "送信するものには保守的に、受信するものには寛容に"
+              }
+            },
+            {
+              "id": "c",
+              "text": {
+                "zh": "Fail-fast（尽早失败）——遇到问题立即报错",
+                "en": "Fail-fast — report errors immediately when problems occur",
+                "ja": "フェイルファスト — 問題が発生したら即座にエラーを報告する"
+              }
+            },
+            {
+              "id": "d",
+              "text": {
+                "zh": "明确优于隐含（Explicit is better than implicit）——让「批没批准」有明确的结构化记录，而不是靠推断",
+                "en": "Explicit is better than implicit — giving 'approved or not' an explicit structured record rather than relying on inference",
+                "ja": "明示的であることは暗黙的であることより良い — 「承認されたかどうか」を推測に頼るのではなく、明示的な構造化記録で表す"
+              }
+            }
+          ],
+          "answer": "d",
+          "explanation": {
+            "zh": "这来自 Python 的禅：「Explicit is better than implicit.」s16 的协议设计正是这个原则的体现——用 request_id + 明确的 approve 字段，让「这件事走到哪一步」从隐含的上下文推断变成了显式的可查询状态，这让多 Agent 协作中的「批没批准」有了确定性。",
+            "en": "This comes from the Zen of Python: 'Explicit is better than implicit.' s16's protocol design embodies this principle — using request_id + explicit approve field, turning 'where has this matter reached' from implicit contextual inference into an explicit queryable state, giving 'approved or not' in multi-agent collaboration a deterministic answer.",
+            "ja": "これは Python の禅から来ています：「明示的であることは暗黙的であることより良い」。s16 のプロトコル設計はこの原則を体現しています — request_id と明示的な approve フィールドを使用することで、「この件がどの段階まで進んだか」を暗黙的な文脈の推測から明示的な照会可能な状態へと変換し、マルチエージェント協働における「承認されたかどうか」に決定論的な答えを与えます。"
+          },
+          "reward_card": "card_s16_001"
         }
       ],
       "star_thresholds": [
