@@ -12274,51 +12274,51 @@ module.exports = {
         {
           "id": "q_s15_001",
           "type": "choice",
-          "difficulty": 2,
+          "difficulty": 1,
           "stem": {
-            "zh": "在 Claude Code 中，关于「这一章要解决什么问题」的正确理解是？",
-            "en": "What is the correct understanding of \"What You'll Learn\" in Claude Code?",
-            "ja": "Claude Code における「この章が本当に解きたい問題」の正しい理解はどれですか？"
+            "zh": "Subagent 和 Teammate 最根本的区别是什么？",
+            "en": "What is the most fundamental difference between a Subagent and a Teammate?",
+            "ja": "Subagent と Teammate の最も根本的な違いは何ですか？"
           },
           "options": [
             {
-              "id": "d",
+              "id": "a",
               "text": {
-                "zh": "2. 认领后的任务记录",
-                "en": "Key Takeaway",
-                "ja": "2. Claim 後の TaskRecord"
+                "zh": "Subagent 不能写文件，Teammate 可以",
+                "en": "Subagent cannot write files, Teammate can",
+                "ja": "Subagent はファイルを書けないが、Teammate は書ける"
               }
             },
             {
               "id": "b",
               "text": {
-                "zh": "最小实现",
-                "en": "最小实现",
-                "ja": "最小実装を段階で追う"
+                "zh": "Subagent 需要名册，Teammate 不需要",
+                "en": "Subagent requires a roster, Teammate does not",
+                "ja": "Subagent は名簿が必要だが、Teammate は不要"
               }
             },
             {
               "id": "c",
               "text": {
-                "zh": "这一章和全仓库的关系",
-                "en": "这一章和全仓库的关系",
-                "ja": "这一章和全仓库的关系"
+                "zh": "Teammate 比 Subagent 速度更快",
+                "en": "Teammate is faster than Subagent",
+                "ja": "Teammate の方が Subagent より速い"
               }
             },
             {
-              "id": "a",
+              "id": "d",
               "text": {
-                "zh": "这一章要解决什么问题",
-                "en": "What You'll Learn",
-                "ja": "この章が本当に解きたい問題"
+                "zh": "Subagent 执行完任务后消失，Teammate 长期存在可反复接活",
+                "en": "Subagent disappears after finishing a task; Teammate persists and can take on work repeatedly",
+                "ja": "Subagent はタスク完了後に消えるが、Teammate は長期存在して繰り返し作業を受け取れる"
               }
             }
           ],
-          "answer": "a",
+          "answer": "d",
           "explanation": {
-            "zh": "一批有身份、能长期存在、能反复协作的队友。",
-            "en": "What You'll Learn",
-            "ja": "名前・役割・inbox・状態を持った、長期的に存在する実行者の集まり"
+            "zh": "生命周期是核心区别：Subagent 干完就消失，是一次性的；Teammate 长期在线、有身份，能反复接收并处理新任务。",
+            "en": "Lifecycle is the key distinction: Subagent is ephemeral (gone after one task); Teammate is persistent with an identity, able to receive and handle tasks repeatedly.",
+            "ja": "ライフサイクルが核心の違いです。Subagent は一度のタスクで消えますが、Teammate はアイデンティティを持ち長期存在して繰り返しタスクを処理できます。"
           },
           "reward_card": "card_s15_001"
         },
@@ -12327,204 +12327,867 @@ module.exports = {
           "type": "choice",
           "difficulty": 1,
           "stem": {
-            "zh": "以下哪个概念与「建议联读」直接相关？",
-            "en": "Which concept is directly related to \"The Problem\"?",
-            "ja": "「併読のすすめ」に直接関連する概念はどれですか？"
+            "zh": "以下哪种场景更适合使用 Teammate 而非 Subagent？",
+            "en": "Which scenario is better suited for a Teammate rather than a Subagent?",
+            "ja": "次のどのシナリオが Subagent よりも Teammate に適していますか？"
           },
           "options": [
             {
-              "id": "d",
+              "id": "a",
               "text": {
-                "zh": "2. 收到请求以后只回一句自然语言",
-                "en": "2. 收到请求以后只回一句自然语言",
-                "ja": "4. approved / rejected を曖昧な文章だけで表す"
+                "zh": "对一个文件做一次性格式转换",
+                "en": "One-time format conversion on a file",
+                "ja": "ファイルへの一回限りの形式変換"
               }
             },
             {
               "id": "b",
               "text": {
-                "zh": "4. 把协议消息和普通消息混成一种结构",
-                "en": "4. 把协议消息和普通消息混成一种结构",
-                "ja": "前の章とどうつながるか"
-              }
-            },
-            {
-              "id": "a",
-              "text": {
-                "zh": "建议联读",
-                "en": "The Problem",
-                "ja": "併読のすすめ"
+                "zh": "执行单条 shell 命令并返回结果",
+                "en": "Execute a single shell command and return the result",
+                "ja": "単一の shell コマンドを実行して結果を返す"
               }
             },
             {
               "id": "c",
               "text": {
-                "zh": "这一章要解决什么问题",
-                "en": "What You'll Learn",
-                "ja": "この章が解く問題"
+                "zh": "作为代码审查专家持续接收不同 PR 的审查请求",
+                "en": "Persistently receiving review requests for different PRs as a code review specialist",
+                "ja": "コードレビュー専門家として異なる PR のレビュー依頼を継続的に受け取る"
+              }
+            },
+            {
+              "id": "d",
+              "text": {
+                "zh": "读取一个配置文件的内容",
+                "en": "Read the content of a configuration file",
+                "ja": "設定ファイルの内容を読み取る"
               }
             }
           ],
-          "answer": "a",
+          "answer": "c",
           "explanation": {
-            "zh": "建议联读",
-            "en": "The Problem",
-            "ja": "併読のすすめ"
+            "zh": "Teammate 的价值在于「长期在线反复接活」。持续接收 PR 审查请求正是需要一个有身份、能多轮协作的角色，而其他选项都是一次性任务，更适合 Subagent。",
+            "en": "Teammate's value lies in persistent availability. Continuously receiving PR review requests requires an identity-bearing, multi-round collaborator. The other options are one-off tasks better suited for Subagents.",
+            "ja": "Teammate の価値は「継続的な稼働」にあります。PR レビュー依頼を継続受取るには、アイデンティティを持つ多ラウンド協力者が必要です。他の選択肢は Subagent 向きの一回限りのタスクです。"
           },
-          "reward_card": "card_s15_002"
+          "reward_card": "card_s15_001"
         },
         {
           "id": "q_s15_003",
           "type": "choice",
-          "difficulty": 1,
+          "difficulty": 2,
           "stem": {
-            "zh": "以下哪个概念与「先把几个词讲明白」直接相关？",
-            "en": "Which concept is directly related to \"The Solution\"?",
-            "ja": "「まず用語をはっきり分ける」に直接関連する概念はどれですか？"
+            "zh": "Subagent 生命周期结束后，如果需要再次执行同类任务，应该怎么做？",
+            "en": "Once a Subagent's lifecycle ends, what should you do to perform the same type of task again?",
+            "ja": "Subagent のライフサイクルが終了した後、同種のタスクを再度実行するにはどうすればよいですか？"
           },
           "options": [
             {
-              "id": "b",
+              "id": "a",
               "text": {
-                "zh": "1. server 配置",
-                "en": "1. server 配置",
-                "ja": "2. MCP を別世界だと思う"
+                "zh": "向已结束的 Subagent 发送消息唤醒它",
+                "en": "Send a message to the ended Subagent to wake it up",
+                "ja": "終了した Subagent にメッセージを送って起こす"
               }
             },
             {
-              "id": "a",
+              "id": "b",
               "text": {
-                "zh": "先把几个词讲明白",
-                "en": "The Solution",
-                "ja": "まず用語をはっきり分ける"
+                "zh": "重新创建一个新的 Subagent",
+                "en": "Create a new Subagent",
+                "ja": "新しい Subagent を作成する"
               }
             },
             {
               "id": "c",
               "text": {
-                "zh": "最小心智模型",
-                "en": "Message vs Protocol vs Request vs Task",
-                "ja": "最小心智モデル"
+                "zh": "调用原 Subagent 的 resume() 方法",
+                "en": "Call the original Subagent's resume() method",
+                "ja": "元の Subagent の resume() メソッドを呼び出す"
               }
             },
             {
               "id": "d",
               "text": {
-                "zh": "下一章学什么",
-                "en": "下一章学什么",
-                "ja": "下一章学什么"
+                "zh": "将 Subagent 升级为 Teammate",
+                "en": "Upgrade the Subagent to a Teammate",
+                "ja": "Subagent を Teammate にアップグレードする"
               }
             }
           ],
-          "answer": "a",
+          "answer": "b",
           "explanation": {
-            "zh": "先把几个词讲明白",
-            "en": "The Solution",
-            "ja": "まず用語をはっきり分ける"
+            "zh": "Subagent 是一次性的——干完就消失，没有恢复机制。需要再次执行同类任务时，必须重新创建一个新的 Subagent。这正是 Teammate（长期存在）存在的原因之一。",
+            "en": "Subagents are ephemeral—they disappear after finishing, with no recovery mechanism. To run the same type of task again, you must create a new Subagent. This is precisely why Teammates (persistent) exist.",
+            "ja": "Subagent は使い捨てで、終了後に回復メカニズムはありません。同種タスクを再実行するには新しい Subagent を作成する必要があります。これが Teammate（持続）が存在する理由の一つです。"
           },
-          "reward_card": "card_s15_003"
+          "reward_card": "card_s15_001"
         },
         {
           "id": "q_s15_004",
           "type": "choice",
           "difficulty": 1,
           "stem": {
-            "zh": "以下哪个概念与「什么是队友」直接相关？",
-            "en": "Which concept is directly related to \"How It Works\"?",
-            "ja": "「teammate とは何か」に直接関連する概念はどれですか？"
+            "zh": "在 Agent 团队系统中，「团队三要素」是哪三个？",
+            "en": "What are the three essential elements of an Agent team?",
+            "ja": "エージェントチームシステムにおける「チームの三要素」は何ですか？"
           },
           "options": [
             {
               "id": "a",
               "text": {
-                "zh": "什么是队友",
-                "en": "How It Works",
-                "ja": "teammate とは何か"
+                "zh": "名册 + 邮箱 + 独立循环",
+                "en": "Roster + Inbox + Independent loop",
+                "ja": "名簿 + 受信箱 + 独立ループ"
               }
             },
             {
               "id": "b",
               "text": {
-                "zh": "第二步：在 IDLE 里先看邮箱",
-                "en": "第二步：在 IDLE 里先看邮箱",
-                "ja": "第 2 段階: idle では先に inbox を見る"
-              }
-            },
-            {
-              "id": "d",
-              "text": {
-                "zh": "协议 2：计划审批",
-                "en": "协议 2：计划审批",
-                "ja": "第 2 段階: shutdown protocol を作る"
+                "zh": "任务 + 工具 + 权限",
+                "en": "Task + Tool + Permission",
+                "ja": "タスク + ツール + 権限"
               }
             },
             {
               "id": "c",
               "text": {
-                "zh": "最小心智模型",
-                "en": "Message vs Protocol vs Request vs Task",
-                "ja": "最小心智モデル"
+                "zh": "主代理 + 子代理 + 协调器",
+                "en": "Primary agent + Sub-agent + Coordinator",
+                "ja": "プライマリエージェント + サブエージェント + コーディネーター"
+              }
+            },
+            {
+              "id": "d",
+              "text": {
+                "zh": "输入 + 处理 + 输出",
+                "en": "Input + Processing + Output",
+                "ja": "入力 + 処理 + 出力"
               }
             }
           ],
           "answer": "a",
           "explanation": {
-            "zh": "什么是队友",
-            "en": "Step 1.",
-            "ja": "持続する actor"
+            "zh": "团队三要素：名册（成员身份记录）+ 邮箱（消息通道）+ 独立循环（每个 Teammate 有自己的运行循环），缺一不可。",
+            "en": "The three team essentials: Roster (member identity record) + Inbox (message channel) + Independent loop (each Teammate has its own run loop). All three are required.",
+            "ja": "チームの三要素：名簿（メンバーのアイデンティティ記録）+ 受信箱（メッセージチャンネル）+ 独立ループ（各 Teammate が独自の実行ループを持つ）。三つとも欠かせません。"
           },
-          "reward_card": "card_s15_004"
+          "reward_card": "card_s15_002"
         },
         {
           "id": "q_s15_005",
           "type": "choice",
-          "difficulty": 1,
+          "difficulty": 2,
           "stem": {
-            "zh": "以下哪个概念与「什么是名册」直接相关？",
-            "en": "Which concept is directly related to \"Read Together\"?",
-            "ja": "「roster とは何か」に直接関連する概念はどれですか？"
+            "zh": "为什么「独立循环」是团队三要素之一？",
+            "en": "Why is an \"independent loop\" one of the three team essentials?",
+            "ja": "なぜ「独立ループ」がチームの三要素の一つなのですか？"
           },
           "options": [
             {
-              "id": "c",
-              "text": {
-                "zh": "关键数据结构",
-                "en": "What You've Mastered",
-                "ja": "この章の核になるデータ構造"
-              }
-            },
-            {
-              "id": "d",
-              "text": {
-                "zh": "初学者最容易犯的错",
-                "en": "初学者最容易犯的错",
-                "ja": "2. autonomous claim layer"
-              }
-            },
-            {
               "id": "a",
               "text": {
-                "zh": "什么是名册",
-                "en": "Read Together",
-                "ja": "roster とは何か"
+                "zh": "因为没有循环就无法创建 TeamConfig",
+                "en": "Because TeamConfig cannot be created without a loop",
+                "ja": "ループがなければ TeamConfig を作成できないから"
               }
             },
             {
               "id": "b",
               "text": {
-                "zh": "4. EventRecord",
-                "en": "4. EventRecord",
-                "ja": "4. Event Record"
+                "zh": "因为循环能防止 Teammate 占用过多内存",
+                "en": "Because loops prevent Teammates from using too much memory",
+                "ja": "ループが Teammate のメモリ使用量を抑えるから"
+              }
+            },
+            {
+              "id": "c",
+              "text": {
+                "zh": "因为循环是发送消息的唯一方式",
+                "en": "Because the loop is the only way to send messages",
+                "ja": "ループがメッセージを送る唯一の手段だから"
+              }
+            },
+            {
+              "id": "d",
+              "text": {
+                "zh": "因为只有独立循环才能让 Teammate 并行执行任务，互不阻塞",
+                "en": "Because only an independent loop allows Teammates to execute tasks in parallel without blocking each other",
+                "ja": "独立ループによってのみ Teammate が並列にタスクを実行し互いをブロックしないから"
+              }
+            }
+          ],
+          "answer": "d",
+          "explanation": {
+            "zh": "每个 Teammate 拥有独立的运行循环，意味着它们可以并行处理各自的任务，不会互相等待。这正是团队协作比单一 Agent 高效的根本原因。",
+            "en": "Each Teammate having an independent loop means they can process their tasks in parallel without waiting for each other. This is the fundamental reason why team collaboration is more efficient than a single Agent.",
+            "ja": "各 Teammate が独立ループを持つことで、互いを待たずに並列でタスクを処理できます。これがチーム協力が単一エージェントより効率的な根本的な理由です。"
+          },
+          "reward_card": "card_s15_002"
+        },
+        {
+          "id": "q_s15_006",
+          "type": "choice",
+          "difficulty": 2,
+          "stem": {
+            "zh": "如果一个团队没有「邮箱」机制，会出现什么问题？",
+            "en": "What problem arises if a team lacks an \"inbox\" mechanism?",
+            "ja": "チームに「受信箱」の仕組みがない場合、どんな問題が起きますか？"
+          },
+          "options": [
+            {
+              "id": "c",
+              "text": {
+                "zh": "Teammate 无法接收新任务，只能由 Orchestrator 反复重建 Teammate",
+                "en": "Teammates cannot receive new tasks; the Orchestrator must repeatedly recreate Teammates",
+                "ja": "Teammate は新しいタスクを受け取れず、Orchestrator が Teammate を繰り返し再作成しなければならない"
+              }
+            },
+            {
+              "id": "a",
+              "text": {
+                "zh": "名册无法记录成员",
+                "en": "The roster cannot record members",
+                "ja": "名簿がメンバーを記録できない"
+              }
+            },
+            {
+              "id": "b",
+              "text": {
+                "zh": "TeamConfig 会损坏",
+                "en": "TeamConfig will be corrupted",
+                "ja": "TeamConfig が破損する"
+              }
+            },
+            {
+              "id": "d",
+              "text": {
+                "zh": "独立循环无法启动",
+                "en": "Independent loops cannot start",
+                "ja": "独立ループが起動できない"
+              }
+            }
+          ],
+          "answer": "c",
+          "explanation": {
+            "zh": "邮箱是 Teammate 接收新任务的通道。没有邮箱，Teammate 就无法感知新工作，Orchestrator 只能通过反复重建 Teammate（即退化为 Subagent 模式）来分配任务，失去了长期存在的价值。",
+            "en": "The inbox is the channel through which Teammates receive new tasks. Without it, Teammates cannot detect new work, forcing the Orchestrator to repeatedly recreate Teammates (reverting to Subagent mode), losing the value of persistence.",
+            "ja": "受信箱は Teammate が新タスクを受け取るチャンネルです。なければ Teammate は新しい作業を感知できず、Orchestrator は Teammate を繰り返し再作成する（Subagent モードに退化）しかなくなり、長期存在の価値が失われます。"
+          },
+          "reward_card": "card_s15_002"
+        },
+        {
+          "id": "q_s15_007",
+          "type": "choice",
+          "difficulty": 3,
+          "stem": {
+            "zh": "团队的「名册」缺失会直接导致哪个核心功能失效？",
+            "en": "What core functionality directly breaks when the team roster is missing?",
+            "ja": "チームの「名簿」が欠けると、どのコア機能が直接失われますか？"
+          },
+          "options": [
+            {
+              "id": "b",
+              "text": {
+                "zh": "消息路由——发送方无法知道用哪个名字寻址收件人",
+                "en": "Message routing — the sender cannot know which name to use to address the recipient",
+                "ja": "メッセージルーティング——送信側が受信者のアドレス指定に使う名前を知れない"
+              }
+            },
+            {
+              "id": "c",
+              "text": {
+                "zh": "代码执行——Teammate 无法运行 JavaScript",
+                "en": "Code execution — Teammates cannot run JavaScript",
+                "ja": "コード実行——Teammate が JavaScript を実行できない"
+              }
+            },
+            {
+              "id": "d",
+              "text": {
+                "zh": "文件读写——所有 I/O 操作中断",
+                "en": "File I/O — all I/O operations are interrupted",
+                "ja": "ファイル読み書き——すべての I/O 操作が中断する"
+              }
+            },
+            {
+              "id": "a",
+              "text": {
+                "zh": "循环调度——独立循环无法启动",
+                "en": "Loop scheduling — independent loops cannot start",
+                "ja": "ループスケジューリング——独立ループが起動できない"
+              }
+            }
+          ],
+          "answer": "b",
+          "explanation": {
+            "zh": "名册记录了「谁在团队里」以及「如何称呼他们」。没有名册，消息无法按名字路由到正确的 Teammate，整个通信体系崩溃。",
+            "en": "The roster records who is on the team and how to address them. Without it, messages cannot be routed by name to the correct Teammate, causing the entire communication system to break down.",
+            "ja": "名簿は「誰がチームにいるか」と「どう呼ぶか」を記録します。なければメッセージを名前で正しい Teammate にルーティングできず、通信体系全体が崩壊します。"
+          },
+          "reward_card": "card_s15_002"
+        },
+        {
+          "id": "q_s15_008",
+          "type": "choice",
+          "difficulty": 1,
+          "stem": {
+            "zh": "TeamConfig 的主要职责是什么？",
+            "en": "What is the main responsibility of TeamConfig?",
+            "ja": "TeamConfig の主な役割は何ですか？"
+          },
+          "options": [
+            {
+              "id": "d",
+              "text": {
+                "zh": "存储所有 Teammate 执行过的历史任务",
+                "en": "Store all historical tasks executed by Teammates",
+                "ja": "Teammate が実行したすべての過去タスクを保存する"
+              }
+            },
+            {
+              "id": "a",
+              "text": {
+                "zh": "记录团队成员名册（谁在团队里、如何联系他们）",
+                "en": "Record the team member roster (who's on the team, how to reach them)",
+                "ja": "チームメンバーの名簿を記録する（誰がチームにいて、どう連絡するか）"
+              }
+            },
+            {
+              "id": "b",
+              "text": {
+                "zh": "管理每个 Teammate 的工具调用权限",
+                "en": "Manage tool call permissions for each Teammate",
+                "ja": "各 Teammate のツール呼び出し権限を管理する"
+              }
+            },
+            {
+              "id": "c",
+              "text": {
+                "zh": "控制 Teammate 的代码执行速度",
+                "en": "Control the code execution speed of Teammates",
+                "ja": "Teammate のコード実行速度を制御する"
               }
             }
           ],
           "answer": "a",
           "explanation": {
-            "zh": "什么是名册",
-            "en": "Read Together",
-            "ja": "roster とは何か"
+            "zh": "TeamConfig 是团队的名册，记录了所有 Teammate 的身份信息（名字、角色等），让 Orchestrator 和其他 Teammate 知道「团队里有谁」以及「怎么联系他们」。",
+            "en": "TeamConfig is the team roster, recording the identity information (name, role, etc.) of all Teammates, letting the Orchestrator and other Teammates know who's on the team and how to contact them.",
+            "ja": "TeamConfig はチームの名簿で、すべての Teammate のアイデンティティ情報（名前、役割など）を記録し、Orchestrator と他の Teammate が「チームに誰がいるか」と「どう連絡するか」を把握できます。"
           },
-          "reward_card": "card_s15_005"
+          "reward_card": "card_s15_003"
+        },
+        {
+          "id": "q_s15_009",
+          "type": "choice",
+          "difficulty": 2,
+          "stem": {
+            "zh": "MessageEnvelope 中必须包含哪两个核心字段？",
+            "en": "What two core fields must a MessageEnvelope contain?",
+            "ja": "MessageEnvelope に含まれなければならない二つのコアフィールドは何ですか？"
+          },
+          "options": [
+            {
+              "id": "a",
+              "text": {
+                "zh": "时间戳（timestamp）和内容（content）",
+                "en": "Timestamp and content",
+                "ja": "タイムスタンプ（timestamp）と内容（content）"
+              }
+            },
+            {
+              "id": "b",
+              "text": {
+                "zh": "任务 ID（taskId）和优先级（priority）",
+                "en": "Task ID and priority",
+                "ja": "タスク ID（taskId）と優先度（priority）"
+              }
+            },
+            {
+              "id": "c",
+              "text": {
+                "zh": "加密密钥（key）和签名（signature）",
+                "en": "Encryption key and signature",
+                "ja": "暗号化キー（key）と署名（signature）"
+              }
+            },
+            {
+              "id": "d",
+              "text": {
+                "zh": "来源（from）和去向（to）",
+                "en": "Source (from) and destination (to)",
+                "ja": "送信元（from）と宛先（to）"
+              }
+            }
+          ],
+          "answer": "d",
+          "explanation": {
+            "zh": "MessageEnvelope 就像信封，核心是「来源」（谁发的）和「去向」（发给谁）。有了这两个字段，系统才能正确路由每条消息。",
+            "en": "MessageEnvelope is like an envelope — the core fields are 'from' (who sent it) and 'to' (who it's for). With these two fields, the system can correctly route each message.",
+            "ja": "MessageEnvelope は封筒のようなもので、コアは「送信元」（誰が送ったか）と「宛先」（誰宛か）です。この二つのフィールドがあって初めてシステムが各メッセージを正しくルーティングできます。"
+          },
+          "reward_card": "card_s15_003"
+        },
+        {
+          "id": "q_s15_010",
+          "type": "choice",
+          "difficulty": 2,
+          "stem": {
+            "zh": "TeamConfig 和 MessageEnvelope 在协作系统中分别承担什么角色？",
+            "en": "What roles do TeamConfig and MessageEnvelope each play in a collaboration system?",
+            "ja": "TeamConfig と MessageEnvelope はそれぞれ協力システムでどんな役割を担いますか？"
+          },
+          "options": [
+            {
+              "id": "a",
+              "text": {
+                "zh": "TeamConfig 是通讯录，MessageEnvelope 是每封信的信封",
+                "en": "TeamConfig is the address book; MessageEnvelope is the envelope for each letter",
+                "ja": "TeamConfig はアドレス帳、MessageEnvelope は各手紙の封筒"
+              }
+            },
+            {
+              "id": "d",
+              "text": {
+                "zh": "TeamConfig 是任务队列，MessageEnvelope 是任务描述",
+                "en": "TeamConfig is the task queue; MessageEnvelope is the task description",
+                "ja": "TeamConfig はタスクキュー、MessageEnvelope はタスクの説明"
+              }
+            },
+            {
+              "id": "b",
+              "text": {
+                "zh": "TeamConfig 是加密算法，MessageEnvelope 是解密密钥",
+                "en": "TeamConfig is the encryption algorithm; MessageEnvelope is the decryption key",
+                "ja": "TeamConfig は暗号化アルゴリズム、MessageEnvelope は復号キー"
+              }
+            },
+            {
+              "id": "c",
+              "text": {
+                "zh": "TeamConfig 是执行引擎，MessageEnvelope 是执行结果",
+                "en": "TeamConfig is the execution engine; MessageEnvelope is the execution result",
+                "ja": "TeamConfig は実行エンジン、MessageEnvelope は実行結果"
+              }
+            }
+          ],
+          "answer": "a",
+          "explanation": {
+            "zh": "类比很直观：TeamConfig 就像通讯录，记录每个人是谁；MessageEnvelope 就像每封信的信封，标明发件人和收件人。两者配合才能让消息精准投递。",
+            "en": "The analogy is intuitive: TeamConfig is the address book recording who each person is; MessageEnvelope is the envelope for each letter, specifying sender and recipient. Together they enable precise message delivery.",
+            "ja": "比喩はわかりやすい：TeamConfig は各人が誰かを記録するアドレス帳、MessageEnvelope は差出人と宛先を明記する封筒です。二つが組み合わさって正確な配信が可能になります。"
+          },
+          "reward_card": "card_s15_003"
+        },
+        {
+          "id": "q_s15_011",
+          "type": "choice",
+          "difficulty": 3,
+          "stem": {
+            "zh": "在消息路由时，系统先查 TeamConfig 再查 MessageEnvelope，顺序颠倒会有什么后果？",
+            "en": "In message routing, the system first checks TeamConfig then MessageEnvelope. What happens if the order is reversed?",
+            "ja": "メッセージルーティングでシステムは TeamConfig を先に確認し次に MessageEnvelope を確認します。順序を逆にするとどうなりますか？"
+          },
+          "options": [
+            {
+              "id": "b",
+              "text": {
+                "zh": "无法验证收件人是否在团队中，消息可能投递到不存在的 Teammate",
+                "en": "Cannot verify if the recipient is on the team; the message may be delivered to a non-existent Teammate",
+                "ja": "受信者がチームにいるか確認できず、存在しない Teammate にメッセージが届く可能性がある"
+              }
+            },
+            {
+              "id": "a",
+              "text": {
+                "zh": "消息会加密失败",
+                "en": "Message encryption will fail",
+                "ja": "メッセージの暗号化が失敗する"
+              }
+            },
+            {
+              "id": "c",
+              "text": {
+                "zh": "独立循环会立即停止",
+                "en": "Independent loops will immediately stop",
+                "ja": "独立ループが即座に停止する"
+              }
+            },
+            {
+              "id": "d",
+              "text": {
+                "zh": "名册会被清空",
+                "en": "The roster will be wiped",
+                "ja": "名簿が消去される"
+              }
+            }
+          ],
+          "answer": "b",
+          "explanation": {
+            "zh": "正确顺序是：先查 TeamConfig（验证「to」字段的收件人是否存在于名册），再解析 MessageEnvelope 内容。若颠倒，系统在没有验证收件人合法性的情况下就尝试投递，可能导致消息发往根本不存在的 Teammate。",
+            "en": "The correct order: first check TeamConfig (verify the 'to' field recipient exists in the roster), then parse MessageEnvelope content. If reversed, the system attempts delivery without validating recipient legitimacy, potentially sending messages to nonexistent Teammates.",
+            "ja": "正しい順序：まず TeamConfig を確認して（'to' フィールドの受信者が名簿に存在するか確認）、次に MessageEnvelope 内容を解析します。逆にすると、受信者の正当性を確認せずに配信を試みて、存在しない Teammate にメッセージを送る可能性があります。"
+          },
+          "reward_card": "card_s15_003"
+        },
+        {
+          "id": "q_s15_012",
+          "type": "choice",
+          "difficulty": 1,
+          "stem": {
+            "zh": "Teammate 是如何接收新的工作任务的？",
+            "en": "How does a Teammate receive new work assignments?",
+            "ja": "Teammate はどのように新しい仕事の割り当てを受け取りますか？"
+          },
+          "options": [
+            {
+              "id": "d",
+              "text": {
+                "zh": "Orchestrator 直接调用 Teammate 的 execute() 方法",
+                "en": "Orchestrator directly calls the Teammate's execute() method",
+                "ja": "Orchestrator が Teammate の execute() メソッドを直接呼び出す"
+              }
+            },
+            {
+              "id": "c",
+              "text": {
+                "zh": "通过全局变量共享任务队列",
+                "en": "Via a globally shared task queue",
+                "ja": "グローバルな共有タスクキューを通じて"
+              }
+            },
+            {
+              "id": "a",
+              "text": {
+                "zh": "靠检查邮箱（inbox）来接收新任务",
+                "en": "By checking the inbox to receive new tasks",
+                "ja": "受信箱（inbox）を確認することで新しいタスクを受け取る"
+              }
+            },
+            {
+              "id": "b",
+              "text": {
+                "zh": "Teammate 在每次循环开始时自动生成新任务",
+                "en": "Teammates auto-generate new tasks at the start of each loop",
+                "ja": "Teammate は各ループの開始時に自動で新しいタスクを生成する"
+              }
+            }
+          ],
+          "answer": "a",
+          "explanation": {
+            "zh": "邮箱驱动工作分配是核心机制：Teammate 不是靠被重新创建来接收新工作，而是在每次循环中主动检查邮箱，如果有新消息就处理。",
+            "en": "Inbox-driven work assignment is the core mechanism: Teammates don't receive new work by being recreated, but by actively checking their inbox each loop iteration and processing any new messages.",
+            "ja": "受信箱駆動の作業割り当てがコアメカニズムです：Teammate は再作成されるのではなく、各ループで積極的に受信箱を確認し、新しいメッセージがあれば処理します。"
+          },
+          "reward_card": "card_s15_004"
+        },
+        {
+          "id": "q_s15_013",
+          "type": "choice",
+          "difficulty": 2,
+          "stem": {
+            "zh": "邮箱驱动机制相比「Orchestrator 直接调用」有什么关键优势？",
+            "en": "What is the key advantage of inbox-driven mechanism compared to 'Orchestrator direct call'?",
+            "ja": "受信箱駆動メカニズムが「Orchestrator の直接呼び出し」に比べてどんな重要な利点がありますか？"
+          },
+          "options": [
+            {
+              "id": "a",
+              "text": {
+                "zh": "邮箱比直接调用传输速度更快",
+                "en": "Inbox transmits faster than direct calls",
+                "ja": "受信箱は直接呼び出しより伝送速度が速い"
+              }
+            },
+            {
+              "id": "b",
+              "text": {
+                "zh": "邮箱机制让 Teammate 数量不受限制",
+                "en": "Inbox mechanism removes limits on the number of Teammates",
+                "ja": "受信箱メカニズムが Teammate 数の制限をなくす"
+              }
+            },
+            {
+              "id": "c",
+              "text": {
+                "zh": "直接调用无法传递字符串类型的参数",
+                "en": "Direct calls cannot pass string-type arguments",
+                "ja": "直接呼び出しは文字列型の引数を渡せない"
+              }
+            },
+            {
+              "id": "d",
+              "text": {
+                "zh": "Teammate 可以在方便时处理任务，Orchestrator 无需等待同步响应",
+                "en": "Teammates can process tasks when ready; Orchestrator doesn't need to wait for synchronous responses",
+                "ja": "Teammate は都合の良い時にタスクを処理でき、Orchestrator は同期レスポンスを待つ必要がない"
+              }
+            }
+          ],
+          "answer": "d",
+          "explanation": {
+            "zh": "邮箱驱动实现了解耦：Orchestrator 把任务放入邮箱后可以继续做别的事，不用阻塞等待；Teammate 在自己的循环中检查邮箱，时机成熟时处理。这是异步协作的核心价值。",
+            "en": "Inbox-driven design achieves decoupling: the Orchestrator can continue other work after placing a task in the inbox without blocking to wait; the Teammate checks its inbox in its own loop and processes when ready. This is the core value of asynchronous collaboration.",
+            "ja": "受信箱駆動は分離を実現します：Orchestrator はタスクを受信箱に入れた後、ブロックせずに他のことを続けられます。Teammate は自分のループで受信箱を確認し、準備ができた時に処理します。これが非同期協力のコアバリューです。"
+          },
+          "reward_card": "card_s15_004"
+        },
+        {
+          "id": "q_s15_014",
+          "type": "choice",
+          "difficulty": 2,
+          "stem": {
+            "zh": "在 Teammate 的循环中，检查邮箱的步骤应该放在什么位置？",
+            "en": "In a Teammate's loop, where should the inbox check step be placed?",
+            "ja": "Teammate のループ内で、受信箱の確認ステップはどこに置くべきですか？"
+          },
+          "options": [
+            {
+              "id": "c",
+              "text": {
+                "zh": "每次循环迭代的开始，处理其他任何逻辑之前",
+                "en": "At the start of each loop iteration, before any other logic",
+                "ja": "各ループイテレーションの開始時、他のロジックより前"
+              }
+            },
+            {
+              "id": "a",
+              "text": {
+                "zh": "只在 Teammate 刚启动时检查一次",
+                "en": "Check only once when Teammate first starts",
+                "ja": "Teammate が最初に起動した時に一度だけ確認する"
+              }
+            },
+            {
+              "id": "b",
+              "text": {
+                "zh": "在当前任务执行完毕后的空闲阶段检查",
+                "en": "Check during the idle phase after current task finishes",
+                "ja": "現在のタスクが完了した後のアイドル段階で確認する"
+              }
+            },
+            {
+              "id": "d",
+              "text": {
+                "zh": "由 Orchestrator 决定何时触发邮箱检查",
+                "en": "The Orchestrator decides when to trigger inbox checks",
+                "ja": "Orchestrator が受信箱チェックのタイミングを決める"
+              }
+            }
+          ],
+          "answer": "c",
+          "explanation": {
+            "zh": "邮箱检查应放在每次循环迭代的最开始——先看邮箱，再决定本轮做什么。这样才能保证 Teammate 不会错过任何新任务，实现「随时待命」的效果。",
+            "en": "Inbox check should be placed at the very start of each loop iteration — check inbox first, then decide what to do this round. This ensures Teammates never miss new tasks and remain always ready.",
+            "ja": "受信箱の確認は各ループイテレーションの最初に置くべきです——まず受信箱を確認してから、今回何をするかを決めます。これにより Teammate が新しいタスクを見逃さず、常に準備万端の状態を実現します。"
+          },
+          "reward_card": "card_s15_004"
+        },
+        {
+          "id": "q_s15_015",
+          "type": "choice",
+          "difficulty": 3,
+          "stem": {
+            "zh": "一个 Teammate 的邮箱积压了 5 条未处理消息，但它当前正在执行一个长任务。这说明了什么设计权衡？",
+            "en": "A Teammate's inbox has 5 unprocessed messages, but it's currently executing a long task. What design tradeoff does this illustrate?",
+            "ja": "Teammate の受信箱に 5 通の未処理メッセージがあるが、現在長いタスクを実行中です。これはどんな設計上のトレードオフを示していますか？"
+          },
+          "options": [
+            {
+              "id": "d",
+              "text": {
+                "zh": "邮箱驱动要求 Teammate 在处理消息时必须立即中断当前任务",
+                "en": "Inbox-driven requires Teammates to immediately interrupt current tasks when processing messages",
+                "ja": "受信箱駆動は Teammate がメッセージ処理時に現在のタスクを直ちに中断することを要求する"
+              }
+            },
+            {
+              "id": "a",
+              "text": {
+                "zh": "邮箱机制失效，应改用直接调用",
+                "en": "Inbox mechanism has failed; should switch to direct calls",
+                "ja": "受信箱メカニズムが失敗したため、直接呼び出しに切り替えるべき"
+              }
+            },
+            {
+              "id": "b",
+              "text": {
+                "zh": "长任务应强制拆分，确保每次循环不超过一步",
+                "en": "Long tasks should be forcibly split to ensure each loop does no more than one step",
+                "ja": "長いタスクは強制的に分割して各ループが一ステップを超えないようにすべき"
+              }
+            },
+            {
+              "id": "c",
+              "text": {
+                "zh": "邮箱提供了缓冲：消息不丢失，Teammate 完成当前任务后自然处理积压，这是顺序执行和消息保留的正常权衡",
+                "en": "The inbox provides buffering: messages aren't lost; Teammate naturally handles the backlog after finishing the current task — a normal tradeoff between sequential execution and message retention",
+                "ja": "受信箱はバッファを提供します：メッセージは失われず、Teammate は現在のタスク完了後に自然に積み残しを処理します——これは順次実行とメッセージ保持の正常なトレードオフです"
+              }
+            }
+          ],
+          "answer": "c",
+          "explanation": {
+            "zh": "邮箱的核心价值之一是「缓冲」——消息不会因为 Teammate 暂时忙碌而丢失。积压是暂时的；Teammate 完成当前任务后会在下次循环中依次处理。这是顺序执行（不中断当前任务）和消息保留（不丢弃）之间的合理权衡。",
+            "en": "One of the inbox's core values is 'buffering' — messages aren't lost because a Teammate is temporarily busy. Backlog is temporary; the Teammate will process queued messages in subsequent loops after finishing the current task. This is a reasonable tradeoff between sequential execution (not interrupting current task) and message retention (not discarding).",
+            "ja": "受信箱のコアバリューの一つは「バッファリング」です——Teammate が一時的に忙しくてもメッセージは失われません。積み残しは一時的なもので、Teammate は現在のタスク完了後の次のループで順次処理します。これは順次実行（現在のタスクを中断しない）とメッセージ保持（廃棄しない）の合理的なトレードオフです。"
+          },
+          "reward_card": "card_s15_004"
+        },
+        {
+          "id": "q_s15_016",
+          "type": "choice",
+          "difficulty": 3,
+          "stem": {
+            "zh": "以下哪种设计违反了「邮箱驱动工作分配」的原则？",
+            "en": "Which design violates the principle of 'inbox-driven work assignment'?",
+            "ja": "次のどの設計が「受信箱駆動の作業割り当て」の原則に違反していますか？"
+          },
+          "options": [
+            {
+              "id": "a",
+              "text": {
+                "zh": "每次需要 Teammate 处理新任务时，Orchestrator 都先销毁旧 Teammate 再创建新 Teammate",
+                "en": "Every time Teammates need to process new tasks, the Orchestrator destroys the old Teammate and creates a new one",
+                "ja": "Teammate が新しいタスクを処理するたびに、Orchestrator は古い Teammate を破棄して新しい Teammate を作成する"
+              }
+            },
+            {
+              "id": "b",
+              "text": {
+                "zh": "Orchestrator 将任务消息放入 Teammate 的邮箱，Teammate 在下次循环中取出并处理",
+                "en": "Orchestrator places task messages in Teammate's inbox; Teammate picks up and processes in the next loop",
+                "ja": "Orchestrator がタスクメッセージを Teammate の受信箱に入れ、Teammate が次のループで取り出して処理する"
+              }
+            },
+            {
+              "id": "c",
+              "text": {
+                "zh": "多个任务消息排队等候，Teammate 按顺序逐一处理",
+                "en": "Multiple task messages queue up; Teammate processes them one by one in order",
+                "ja": "複数のタスクメッセージが並んで待ち、Teammate が順番に一つずつ処理する"
+              }
+            },
+            {
+              "id": "d",
+              "text": {
+                "zh": "Teammate 处理完邮箱消息后将结果发回 Orchestrator 的邮箱",
+                "en": "Teammate sends results back to Orchestrator's inbox after processing inbox messages",
+                "ja": "Teammate が受信箱メッセージを処理した後、結果を Orchestrator の受信箱に送り返す"
+              }
+            }
+          ],
+          "answer": "a",
+          "explanation": {
+            "zh": "「每次销毁旧 Teammate 再创建新 Teammate」正是把 Teammate 用成了 Subagent 的方式——退化成了一次性模式。邮箱驱动的核心是：Teammate 长期存在，靠检查邮箱接收新工作，而不是靠重新创建。",
+            "en": "'Destroy and recreate Teammate each time' is exactly using a Teammate like a Subagent — reverting to the one-shot pattern. The core of inbox-driven: Teammates persist and receive new work by checking their inbox, not by being recreated.",
+            "ja": "「毎回古い Teammate を破棄して新しい Teammate を作成する」は、Teammate を Subagent のように使っています——使い捨てパターンへの退化です。受信箱駆動のコアは：Teammate は長期存在し、再作成ではなく受信箱を確認することで新しい作業を受け取ります。"
+          },
+          "reward_card": "card_s15_004"
+        },
+        {
+          "id": "q_s15_017",
+          "type": "choice",
+          "difficulty": 3,
+          "stem": {
+            "zh": "团队系统的四个组件（TeamConfig、MessageEnvelope、名册、邮箱）中，哪个组合构成了「消息能被正确投递」的最小必要条件？",
+            "en": "Among the four team system components (TeamConfig, MessageEnvelope, Roster, Inbox), which combination is the minimum necessary condition for messages to be correctly delivered?",
+            "ja": "チームシステムの四つのコンポーネント（TeamConfig、MessageEnvelope、名簿、受信箱）の中で、「メッセージが正しく配信される」最小必要条件となる組み合わせはどれですか？"
+          },
+          "options": [
+            {
+              "id": "b",
+              "text": {
+                "zh": "名册（知道谁在）+ MessageEnvelope（知道发给谁）+ 邮箱（消息落地处）",
+                "en": "Roster (know who's present) + MessageEnvelope (know recipient) + Inbox (message landing point)",
+                "ja": "名簿（誰がいるかわかる）+ MessageEnvelope（誰に送るかわかる）+ 受信箱（メッセージの着地点）"
+              }
+            },
+            {
+              "id": "c",
+              "text": {
+                "zh": "仅需 MessageEnvelope，其余是冗余的",
+                "en": "Only MessageEnvelope is needed; the rest are redundant",
+                "ja": "MessageEnvelope のみ必要で、残りは冗長"
+              }
+            },
+            {
+              "id": "a",
+              "text": {
+                "zh": "仅需 TeamConfig 和邮箱",
+                "en": "Only TeamConfig and Inbox are needed",
+                "ja": "TeamConfig と受信箱のみ必要"
+              }
+            },
+            {
+              "id": "d",
+              "text": {
+                "zh": "四个都需要且缺一不可，去掉任何一个消息投递都会失败",
+                "en": "All four are needed with none expendable; removing any one causes delivery failure",
+                "ja": "四つすべてが必要で欠かせない；どれか一つを取り除くと配信失敗"
+              }
+            }
+          ],
+          "answer": "b",
+          "explanation": {
+            "zh": "消息正确投递需要三个条件：1) 名册（验证收件人存在，来自 TeamConfig）；2) MessageEnvelope（标明 from/to）；3) 邮箱（消息的实际落地处，Teammate 从这里取消息）。TeamConfig 本身是名册的宿主，不是独立于名册之外的第四要素。",
+            "en": "Correct message delivery requires three conditions: 1) Roster (verify recipient exists, from TeamConfig); 2) MessageEnvelope (specify from/to); 3) Inbox (actual landing point, where Teammate retrieves messages). TeamConfig is the host of the roster, not a fourth element independent of the roster.",
+            "ja": "メッセージの正しい配信には三つの条件が必要です：1) 名簿（受信者の存在確認、TeamConfig から）；2) MessageEnvelope（from/to を指定）；3) 受信箱（実際の着地点、Teammate がメッセージを取り出す場所）。TeamConfig は名簿のホストであり、名簿とは独立した第四の要素ではありません。"
+          },
+          "reward_card": "card_s15_003"
+        },
+        {
+          "id": "q_s15_018",
+          "type": "choice",
+          "difficulty": 3,
+          "stem": {
+            "zh": "以下关于 Teammate 生命周期管理的描述，哪个最准确？",
+            "en": "Which description of Teammate lifecycle management is most accurate?",
+            "ja": "Teammate のライフサイクル管理についての次の説明のうち、最も正確なものはどれですか？"
+          },
+          "options": [
+            {
+              "id": "d",
+              "text": {
+                "zh": "Teammate 每完成一个任务就需要重启以清空状态",
+                "en": "Teammates need to restart after each task to clear state",
+                "ja": "Teammate はタスクを完了するたびに状態をクリアするために再起動が必要"
+              }
+            },
+            {
+              "id": "c",
+              "text": {
+                "zh": "Teammate 的生命周期与单次任务绑定，任务结束即销毁",
+                "en": "Teammate lifecycle is tied to a single task; destroyed when task ends",
+                "ja": "Teammate のライフサイクルは単一タスクに紐づけられ、タスク終了時に破棄される"
+              }
+            },
+            {
+              "id": "a",
+              "text": {
+                "zh": "Teammate 跨越多个任务持续存在，通过邮箱循环接收工作，直到被显式关闭",
+                "en": "Teammates persist across multiple tasks, receiving work through inbox loops until explicitly shut down",
+                "ja": "Teammate は複数のタスクにわたって持続し、明示的にシャットダウンされるまで受信箱ループを通じて作業を受け取る"
+              }
+            },
+            {
+              "id": "b",
+              "text": {
+                "zh": "Teammate 只能被 Orchestrator 创建，无法自行终止",
+                "en": "Teammates can only be created by the Orchestrator and cannot terminate themselves",
+                "ja": "Teammate は Orchestrator にのみ作成でき、自ら終了できない"
+              }
+            }
+          ],
+          "answer": "a",
+          "explanation": {
+            "zh": "这是对「Subagent 干完就消失，Teammate 长期在线反复接活」的完整表述：Teammate 跨越多个任务持续存在，通过邮箱循环不断接收和处理工作，直到收到显式的关闭信号才结束生命周期。",
+            "en": "This is the complete description of 'Subagent disappears after finishing, Teammate stays online to take repeated work': Teammates persist across multiple tasks, continuously receiving and processing work through inbox loops, ending their lifecycle only when an explicit shutdown signal is received.",
+            "ja": "これは「Subagent は終了後に消えるが、Teammate はオンラインであり続け繰り返し作業を受け取る」の完全な説明です：Teammate は複数のタスクにわたって持続し、受信箱ループを通じて継続的に作業を受け取って処理し、明示的なシャットダウン信号を受けてのみライフサイクルを終了します。"
+          },
+          "reward_card": "card_s15_001"
         }
       ],
       "star_thresholds": [
