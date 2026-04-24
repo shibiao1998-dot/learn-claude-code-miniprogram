@@ -1159,255 +1159,414 @@ module.exports = {
           "type": "choice",
           "difficulty": 1,
           "stem": {
-            "zh": "以下哪个概念与「问题」直接相关？",
-            "en": "Which concept is directly related to \"What You'll Learn\"?",
-            "ja": "「問題」に直接関連する概念はどれですか？"
+            "zh": "在工具分发（tool dispatch）中，dispatch map 的核心作用是什么？",
+            "en": "What is the core role of a dispatch map in tool dispatch?",
+            "ja": "ツールディスパッチにおいて dispatch map の核心的な役割は何ですか？"
           },
           "options": [
-            {
-              "id": "a",
-              "text": {
-                "zh": "问题",
-                "en": "What You'll Learn",
-                "ja": "問題"
-              }
-            },
-            {
-              "id": "c",
-              "text": {
-                "zh": "2. 只保存用户消息，不保存 assistant 消息",
-                "en": "2. 只保存用户消息，不保存 assistant 消息",
-                "ja": "2. 只保存用户消息，不保存 assistant 消息"
-              }
-            },
-            {
-              "id": "b",
-              "text": {
-                "zh": "第五步：让 skill 正文只在当前需要时进入上下文",
-                "en": "第五步：让 skill 正文只在当前需要时进入上下文",
-                "ja": "第五步：让 skill 正文只在当前需要时进入上下文"
-              }
-            },
-            {
-              "id": "d",
-              "text": {
-                "zh": "先解释几个名词",
-                "en": "The Problem",
-                "ja": "解決策"
-              }
-            }
+            { "id": "a", "text": { "zh": "把工具名映射到对应的处理函数", "en": "Map tool names to their handler functions", "ja": "ツール名をハンドラ関数にマッピングする" } },
+            { "id": "b", "text": { "zh": "在发给 API 前清理 messages 列表", "en": "Clean up the messages list before sending to the API", "ja": "API に送信する前に messages リストを整理する" } },
+            { "id": "c", "text": { "zh": "验证文件操作路径是否在工作目录内", "en": "Validate that file paths stay inside the workspace", "ja": "ファイルパスがワークスペース内にあるか検証する" } },
+            { "id": "d", "text": { "zh": "定义工具的名称、描述和参数格式", "en": "Define tool name, description, and parameter format", "ja": "ツールの名前・説明・パラメータ形式を定義する" } }
           ],
           "answer": "a",
           "explanation": {
-            "zh": "问题",
-            "en": "What You'll Learn",
-            "ja": "問題"
+            "zh": "dispatch map 是一个字典，把工具名（字符串）映射到具体的 handler 函数。加新工具只需加一条字典项和一个 handler，循环体本身完全不变。",
+            "en": "A dispatch map is a dictionary that maps tool names to handler functions. Adding a tool only requires one new dict entry plus one handler — the loop body never changes.",
+            "ja": "dispatch map はツール名をハンドラ関数に対応付ける辞書です。新しいツールを追加するには辞書エントリとハンドラを 1 つ追加するだけで、ループ本体は変わりません。"
           },
           "reward_card": "card_s02_001"
         },
         {
           "id": "q_s02_002",
           "type": "choice",
-          "difficulty": 2,
+          "difficulty": 1,
           "stem": {
-            "zh": "在 Claude Code 中，关于「解决方案」的正确理解是？",
-            "en": "What is the correct understanding of \"The Problem\" in Claude Code?",
-            "ja": "Claude Code における「解決策」の正しい理解はどれですか？"
+            "zh": "要给 agent 新增一个工具，正确做法是什么？",
+            "en": "What is the correct way to add a new tool to the agent?",
+            "ja": "エージェントに新しいツールを追加する正しい方法はどれですか？"
           },
           "options": [
-            {
-              "id": "a",
-              "text": {
-                "zh": "解决方案",
-                "en": "The Problem",
-                "ja": "解決策"
-              }
-            },
-            {
-              "id": "c",
-              "text": {
-                "zh": "2. skill 目录信息写得太弱",
-                "en": "2. skill 目录信息写得太弱",
-                "ja": "2. skill 目录信息写得太弱"
-              }
-            },
-            {
-              "id": "d",
-              "text": {
-                "zh": "什么是 active step",
-                "en": "What Changed From s02",
-                "ja": "active step とは何か"
-              }
-            },
-            {
-              "id": "b",
-              "text": {
-                "zh": "最小心智模型",
-                "en": "What's Next",
-                "ja": "最小心智モデル"
-              }
-            }
+            { "id": "a", "text": { "zh": "修改主循环，加入 if/else 分支处理新工具", "en": "Modify the main loop with a new if/else branch", "ja": "メインループに if/else 分岐を追加して対応する" } },
+            { "id": "b", "text": { "zh": "在 dispatch map 加一条字典项，再写一个 handler 函数", "en": "Add one dict entry to the dispatch map and write one handler", "ja": "dispatch map に辞書エントリを追加し handler 関数を 1 つ書く" } },
+            { "id": "c", "text": { "zh": "更新消息规范化逻辑，允许新工具的字段通过", "en": "Update normalization logic to allow new tool fields through", "ja": "新しいツールのフィールドを通すよう正規化ロジックを更新する" } },
+            { "id": "d", "text": { "zh": "只写 schema，不需要 handler 函数", "en": "Only write a schema — no handler function needed", "ja": "schema だけ書けばよく handler 関数は不要" } }
           ],
-          "answer": "a",
+          "answer": "b",
           "explanation": {
-            "zh": "解决方案",
-            "en": "The Problem",
-            "ja": "解決策"
+            "zh": "dispatch map 设计让扩展和循环解耦：加工具 = 加 handler + 加字典项，主循环永远不变。只写 schema 没有 handler 会导致工具被调用时找不到执行入口。",
+            "en": "The dispatch map decouples extension from the loop: adding a tool means one handler + one dict entry, and the loop never changes. A schema without a handler would crash at call time.",
+            "ja": "dispatch map の設計により拡張とループが分離されます。ツール追加 = handler + 辞書エントリ 1 つ、ループは変わりません。handler のない schema は呼び出し時にクラッシュします。"
           },
-          "reward_card": "card_s02_002"
+          "reward_card": "card_s02_001"
         },
         {
           "id": "q_s02_003",
           "type": "choice",
           "difficulty": 2,
           "stem": {
-            "zh": "在 Claude Code 中，关于「工作原理」的正确理解是？",
-            "en": "What is the correct understanding of \"The Solution\" in Claude Code?",
-            "ja": "Claude Code における「仕組み」の正しい理解はどれですか？"
+            "zh": "下列关于 dispatch map 的说法，哪一条是错误的？",
+            "en": "Which of the following statements about the dispatch map is INCORRECT?",
+            "ja": "dispatch map について誤った説明はどれですか？"
           },
           "options": [
-            {
-              "id": "c",
-              "text": {
-                "zh": "什么是 todo",
-                "en": "How It Works",
-                "ja": "todo とは何か"
-              }
-            },
-            {
-              "id": "d",
-              "text": {
-                "zh": "版本 1：空白上下文子智能体",
-                "en": "版本 1：空白上下文子智能体",
-                "ja": "Version 1: blank-context subagent"
-              }
-            },
-            {
-              "id": "b",
-              "text": {
-                "zh": "最小实现",
-                "en": "最小实现",
-                "ja": "最小実装を段階で追う"
-              }
-            },
-            {
-              "id": "a",
-              "text": {
-                "zh": "工作原理",
-                "en": "The Solution",
-                "ja": "仕組み"
-              }
-            }
+            { "id": "a", "text": { "zh": "每个工具名对应一个 handler 函数", "en": "Each tool name corresponds to one handler function", "ja": "各ツール名はハンドラ関数に対応する" } },
+            { "id": "b", "text": { "zh": "加新工具时主循环代码不需要改动", "en": "Adding a new tool requires no changes to the main loop", "ja": "新ツール追加時にメインループの変更は不要" } },
+            { "id": "c", "text": { "zh": "dispatch map 负责验证文件路径不超出工作目录", "en": "The dispatch map validates that file paths stay within the workspace", "ja": "dispatch map がファイルパスのサンドボックス検証を担う" } },
+            { "id": "d", "text": { "zh": "dispatch map 本质上是一个字典结构", "en": "A dispatch map is essentially a dictionary structure", "ja": "dispatch map は本質的に辞書構造である" } }
           ],
-          "answer": "a",
+          "answer": "c",
           "explanation": {
-            "zh": "kw: run_bash(kw[\"command\"]),\n    \"read_file\":  lambda",
-            "en": "The Solution",
-            "ja": "kw: run_bash(kw[\"command\"]),\n    \"read_file\":  lambda"
+            "zh": "路径沙箱是各文件工具自己的 handler 内部做的，不是 dispatch map 的职责。dispatch map 只负责把工具名路由到正确的 handler。",
+            "en": "Path sandboxing is done inside each file tool's handler, not by the dispatch map itself. The dispatch map only routes tool names to the right handler.",
+            "ja": "パスのサンドボックス検証は各ファイルツールの handler 内で行われ、dispatch map の責務ではありません。dispatch map はツール名を適切な handler にルーティングするだけです。"
           },
-          "reward_card": "card_s02_003"
+          "reward_card": "card_s02_001"
         },
         {
           "id": "q_s02_004",
           "type": "choice",
-          "difficulty": 1,
+          "difficulty": 2,
           "stem": {
-            "zh": "以下哪个概念与「消息规范化」直接相关？",
-            "en": "Which concept is directly related to \"How It Works\"?",
-            "ja": "「s01からの変更点」に直接関連する概念はどれですか？"
+            "zh": "路径沙箱（path sandbox）的作用是什么？它在哪一层实现？",
+            "en": "What does path sandboxing do, and at which layer is it implemented?",
+            "ja": "パスサンドボックスの目的と実装レイヤーはどれですか？"
           },
           "options": [
-            {
-              "id": "b",
-              "text": {
-                "zh": "第三步：子智能体只拿必要工具",
-                "en": "第三步：子智能体只拿必要工具",
-                "ja": "第 3 段階: 子に渡す tool は絞る"
-              }
-            },
-            {
-              "id": "d",
-              "text": {
-                "zh": "2. Tool Result Block",
-                "en": "2. Tool Result Block",
-                "ja": "2. Tool Result Block"
-              }
-            },
-            {
-              "id": "c",
-              "text": {
-                "zh": "CLAUDE.md",
-                "en": "CLAUDE.md",
-                "ja": "CLAUDE.md"
-              }
-            },
-            {
-              "id": "a",
-              "text": {
-                "zh": "消息规范化",
-                "en": "How It Works",
-                "ja": "s01からの変更点"
-              }
-            }
+            { "id": "a", "text": { "zh": "靠模型自觉遵守工作目录限制，无需代码验证", "en": "Relies on the model to self-enforce workspace limits — no code validation needed", "ja": "モデルが自律的にワークスペース制限を守るため検証コードは不要" } },
+            { "id": "b", "text": { "zh": "在 API 消息规范化时过滤掉越界路径", "en": "Filters out out-of-bounds paths during API message normalization", "ja": "API メッセージ正規化時に範囲外パスをフィルタリングする" } },
+            { "id": "c", "text": { "zh": "在 tool schema 里限制参数格式，防止模型生成越界路径", "en": "Restricts parameter format in the tool schema to prevent out-of-bounds paths", "ja": "tool schema でパラメータ形式を制限し範囲外パスを防ぐ" } },
+            { "id": "d", "text": { "zh": "在工具层的 handler 中验证路径，确保文件操作限定在工作目录内", "en": "Validates paths inside the tool handler to keep file ops within the workspace", "ja": "ツール層の handler でパスを検証し、ファイル操作をワークスペース内に限定する" } }
           ],
-          "answer": "a",
+          "answer": "d",
           "explanation": {
-            "zh": "消息规范化",
-            "en": "Step 1.",
-            "ja": "s01からの変更点"
+            "zh": "路径沙箱在工具层的 handler 中实现，而不是依靠模型自觉或 schema 约束。这是防止模型越界访问系统文件的关键安全机制。",
+            "en": "Path sandboxing is implemented in the tool-layer handler, not by relying on model self-control or schema constraints. This is the key security mechanism preventing out-of-bounds file access.",
+            "ja": "パスサンドボックスはツール層の handler で実装され、モデルの自律制御や schema 制約に依存しません。これがシステムファイルへの範囲外アクセスを防ぐ重要なセキュリティ機構です。"
           },
-          "reward_card": "card_s02_004"
+          "reward_card": "card_s02_002"
         },
         {
           "id": "q_s02_005",
           "type": "choice",
           "difficulty": 1,
           "stem": {
-            "zh": "以下哪个概念与「为什么需要」直接相关？",
-            "en": "Which concept is directly related to \"What Changed From s01\"?",
-            "ja": "「試してみる」に直接関連する概念はどれですか？"
+            "zh": "如果不在工具层做路径验证，最可能出现什么风险？",
+            "en": "If path validation is not done at the tool layer, what risk is most likely?",
+            "ja": "ツール層でパス検証を行わない場合、最も起こりやすいリスクは何ですか？"
           },
           "options": [
-            {
-              "id": "a",
-              "text": {
-                "zh": "为什么需要",
-                "en": "What Changed From s01",
-                "ja": "試してみる"
-              }
-            },
-            {
-              "id": "c",
-              "text": {
-                "zh": "5. 一上来就讲太多多源加载细节",
-                "en": "5. 一上来就讲太多多源加载细节",
-                "ja": "5. 一上来就讲太多多源加载细节"
-              }
-            },
-            {
-              "id": "d",
-              "text": {
-                "zh": "1. 把所有 skill 正文永远塞进 system prompt",
-                "en": "1. 把所有 skill 正文永远塞进 system prompt",
-                "ja": "1. 把所有 skill 正文永远塞进 system prompt"
-              }
-            },
-            {
-              "id": "b",
-              "text": {
-                "zh": "1. 把工具结果打印出来，但不写回 `messages`",
-                "en": "1. 把工具结果打印出来，但不写回 `messages`",
-                "ja": "一文で覚える"
-              }
-            }
+            { "id": "a", "text": { "zh": "模型生成的 tool schema 格式会出错", "en": "The model-generated tool schema format will be incorrect", "ja": "モデルが生成する tool schema の形式に誤りが生じる" } },
+            { "id": "b", "text": { "zh": "dispatch map 无法找到对应的 handler", "en": "The dispatch map will fail to find the corresponding handler", "ja": "dispatch map が対応する handler を見つけられなくなる" } },
+            { "id": "c", "text": { "zh": "API 会拒绝接受 messages，因为格式不符合规范", "en": "The API will reject the messages due to non-compliant format", "ja": "API が規格外の形式として messages を拒否する" } },
+            { "id": "d", "text": { "zh": "模型可能访问工作目录以外的系统文件", "en": "The model may access system files outside the workspace", "ja": "モデルがワークスペース外のシステムファイルにアクセスする可能性がある" } }
+          ],
+          "answer": "d",
+          "explanation": {
+            "zh": "路径沙箱的核心目的是防止模型越界访问系统文件。如果工具层不做验证，模型可以生成任意路径，访问工作目录之外的敏感文件。",
+            "en": "The core purpose of path sandboxing is to prevent the model from accessing system files outside the workspace. Without tool-layer validation, the model can generate arbitrary paths reaching sensitive files.",
+            "ja": "パスサンドボックスの核心目的は、モデルがワークスペース外のシステムファイルにアクセスするのを防ぐことです。ツール層での検証がなければ、任意のパスで機密ファイルにアクセスできます。"
+          },
+          "reward_card": "card_s02_002"
+        },
+        {
+          "id": "q_s02_006",
+          "type": "choice",
+          "difficulty": 2,
+          "stem": {
+            "zh": "路径沙箱放在工具层而不是模型提示层，核心原因是？",
+            "en": "Why is path sandboxing placed at the tool layer rather than in the model prompt?",
+            "ja": "パスサンドボックスをモデルのプロンプト層ではなくツール層に置く核心的な理由は何ですか？"
+          },
+          "options": [
+            { "id": "a", "text": { "zh": "工具层运行速度更快，减少延迟", "en": "The tool layer runs faster and reduces latency", "ja": "ツール層の方が高速でレイテンシを削減できる" } },
+            { "id": "b", "text": { "zh": "模型不可被完全信任，代码验证比提示约束更可靠", "en": "The model cannot be fully trusted; code validation is more reliable than prompt constraints", "ja": "モデルは完全には信頼できず、コード検証の方がプロンプト制約より信頼性が高い" } },
+            { "id": "c", "text": { "zh": "API 要求所有路径必须在工具层做格式检查", "en": "The API requires all paths to be format-checked at the tool layer", "ja": "API がすべてのパスをツール層で形式チェックすることを要求している" } },
+            { "id": "d", "text": { "zh": "dispatch map 字典查找只支持工具层的路径格式", "en": "The dispatch map dictionary lookup only supports tool-layer path formats", "ja": "dispatch map の辞書検索はツール層のパス形式のみをサポートする" } }
+          ],
+          "answer": "b",
+          "explanation": {
+            "zh": "模型可能被越狱或误导，不能作为安全边界的唯一保障。将路径沙箱放在代码层（工具 handler）是确定性的强制约束，不依赖模型的自觉性。",
+            "en": "Models can be jailbroken or misled and cannot be the sole security boundary. Placing path sandboxing in code (tool handler) provides deterministic enforcement that does not rely on model self-restraint.",
+            "ja": "モデルはジェイルブレイクや誘導を受ける可能性があり、唯一のセキュリティ境界にはなれません。コード（ツール handler）にパスサンドボックスを置くことで、モデルの自制心に依存しない確定的な強制が実現します。"
+          },
+          "reward_card": "card_s02_002"
+        },
+        {
+          "id": "q_s02_007",
+          "type": "choice",
+          "difficulty": 1,
+          "stem": {
+            "zh": "发给 Claude API 的 messages 有哪些格式要求？",
+            "en": "What are the format requirements for messages sent to the Claude API?",
+            "ja": "Claude API に送る messages の形式要件はどれですか？"
+          },
+          "options": [
+            { "id": "a", "text": { "zh": "user/assistant 可以连续出现，顺序不限", "en": "user/assistant messages can appear consecutively in any order", "ja": "user/assistant は連続して任意の順番で現れてよい" } },
+            { "id": "b", "text": { "zh": "tool_use 块不需要对应的 tool_result，模型自动补全", "en": "tool_use blocks need no matching tool_result — the model fills them in", "ja": "tool_use ブロックに対応する tool_result は不要でモデルが補完する" } },
+            { "id": "c", "text": { "zh": "user/assistant 严格交替，每个 tool_use 有匹配 tool_result，只接受标准字段", "en": "Strict user/assistant alternation, each tool_use has a matching tool_result, only standard fields accepted", "ja": "user/assistant は厳密に交互、各 tool_use に tool_result が対応、標準フィールドのみ受け付ける" } },
+            { "id": "d", "text": { "zh": "只需要工具名和参数，不需要维护 role 字段", "en": "Only tool name and params are needed — the role field is not required", "ja": "ツール名とパラメータだけ必要で role フィールドは不要" } }
+          ],
+          "answer": "c",
+          "explanation": {
+            "zh": "Claude API 要求 messages 满足三个条件：user/assistant 严格交替、每个 tool_use 块有匹配的 tool_result、只接受标准字段。内部 messages 不满足这些条件时需要在发送前做规范化。",
+            "en": "The Claude API requires three conditions: strict user/assistant alternation, each tool_use matched by a tool_result, and only standard fields. When internal messages violate these, normalization is needed before sending.",
+            "ja": "Claude API は 3 つの条件を要求します：user/assistant の厳密な交互配置、各 tool_use に対応する tool_result、標準フィールドのみ。内部 messages がこれらを満たさない場合、送信前に正規化が必要です。"
+          },
+          "reward_card": "card_s02_003"
+        },
+        {
+          "id": "q_s02_008",
+          "type": "choice",
+          "difficulty": 2,
+          "stem": {
+            "zh": "为什么需要在发给 API 之前对 messages 做规范化？",
+            "en": "Why must messages be normalized before being sent to the API?",
+            "ja": "API に送信する前に messages を正規化する必要があるのはなぜですか？"
+          },
+          "options": [
+            { "id": "a", "text": { "zh": "内部 messages 可能包含 API 不接受的格式或字段", "en": "Internal messages may contain formats or fields the API does not accept", "ja": "内部の messages には API が受け付けない形式やフィールドが含まれる場合がある" } },
+            { "id": "b", "text": { "zh": "dispatch map 要求在调用 handler 前先规范化参数", "en": "The dispatch map requires parameters to be normalized before calling the handler", "ja": "dispatch map は handler 呼び出し前にパラメータの正規化を要求する" } },
+            { "id": "c", "text": { "zh": "路径沙箱验证需要规范化后的消息格式才能运行", "en": "Path sandbox validation requires normalized message format to run", "ja": "パスサンドボックス検証は正規化されたメッセージ形式を必要とする" } },
+            { "id": "d", "text": { "zh": "tool schema 生成依赖规范化后的 messages 结构", "en": "Tool schema generation depends on the normalized messages structure", "ja": "tool schema の生成は正規化された messages 構造に依存する" } }
           ],
           "answer": "a",
           "explanation": {
-            "zh": "严格交替",
-            "en": "What Changed From s01",
-            "ja": "試してみる"
+            "zh": "agent 内部的 messages 和发给 API 的 messages 可以不同。内部可能包含调试字段、未配对的 tool_use 等，发送前需规范化以满足 API 的严格要求。",
+            "en": "Internal messages and API-bound messages can differ. Internally you may have debug fields, unpaired tool_use blocks, etc. Normalization before sending ensures strict API compliance.",
+            "ja": "エージェント内部の messages と API に送る messages は異なる場合があります。内部にはデバッグフィールドや未対応の tool_use などが含まれる可能性があり、送信前の正規化で API の厳格な要件を満たします。"
           },
-          "reward_card": "card_s02_005"
+          "reward_card": "card_s02_003"
+        },
+        {
+          "id": "q_s02_009",
+          "type": "choice",
+          "difficulty": 2,
+          "stem": {
+            "zh": "下列哪种情况会导致 Claude API 拒绝请求？",
+            "en": "Which of the following would cause the Claude API to reject a request?",
+            "ja": "Claude API がリクエストを拒否する原因となるのはどれですか？"
+          },
+          "options": [
+            { "id": "a", "text": { "zh": "消息列表里有一个 tool_use 块但没有对应的 tool_result", "en": "A tool_use block in the message list has no matching tool_result", "ja": "メッセージリストに対応する tool_result のない tool_use ブロックがある" } },
+            { "id": "b", "text": { "zh": "dispatch map 包含超过 10 个工具条目", "en": "The dispatch map contains more than 10 tool entries", "ja": "dispatch map に 10 個を超えるツールエントリがある" } },
+            { "id": "c", "text": { "zh": "文件 handler 在工具层做了路径验证", "en": "The file handler performs path validation at the tool layer", "ja": "ファイル handler がツール層でパス検証を実行する" } },
+            { "id": "d", "text": { "zh": "tool schema 描述字段超过 200 字符", "en": "The tool schema description field exceeds 200 characters", "ja": "tool schema の description フィールドが 200 文字を超える" } }
+          ],
+          "answer": "a",
+          "explanation": {
+            "zh": "API 要求每个 tool_use 都必须有匹配的 tool_result。如果 agent 在内部记录了一个 tool_use 但没有补全对应的结果，发给 API 之前必须规范化修正，否则请求会被拒绝。",
+            "en": "The API requires every tool_use to have a matching tool_result. If the agent recorded a tool_use internally without a matching result, it must be corrected during normalization before sending, or the request will be rejected.",
+            "ja": "API はすべての tool_use に対応する tool_result を要求します。エージェントが内部で tool_use を記録したが対応する結果がない場合、送信前の正規化で修正しなければリクエストが拒否されます。"
+          },
+          "reward_card": "card_s02_003"
+        },
+        {
+          "id": "q_s02_010",
+          "type": "choice",
+          "difficulty": 3,
+          "stem": {
+            "zh": "agent 在处理工具调用时，内部 messages 列表和发给 API 的 messages 列表有什么关系？",
+            "en": "When the agent processes tool calls, what is the relationship between its internal messages list and the messages sent to the API?",
+            "ja": "エージェントがツール呼び出しを処理する際、内部 messages リストと API に送る messages リストの関係はどれですか？"
+          },
+          "options": [
+            { "id": "a", "text": { "zh": "完全相同，内部 messages 直接发给 API，无需任何处理", "en": "Identical — internal messages are sent to the API directly with no processing", "ja": "完全に同じで、内部 messages はそのまま API に送られる" } },
+            { "id": "b", "text": { "zh": "内部 messages 仅供 dispatch map 路由使用，不发给 API", "en": "Internal messages are only for dispatch map routing and never sent to the API", "ja": "内部 messages は dispatch map のルーティングにのみ使われ API には送らない" } },
+            { "id": "c", "text": { "zh": "内部 messages 可能包含额外状态，发送前需规范化以符合 API 要求", "en": "Internal messages may contain extra state; they must be normalized before sending to meet API requirements", "ja": "内部 messages には追加の状態が含まれる場合があり、API 要件を満たすために送信前に正規化が必要" } },
+            { "id": "d", "text": { "zh": "每次调用工具后必须清空 messages，重新向 API 发送对话历史", "en": "After each tool call, messages must be cleared and conversation history resent to the API from scratch", "ja": "ツール呼び出し後は messages をクリアし、API に会話履歴を最初から再送しなければならない" } }
+          ],
+          "answer": "c",
+          "explanation": {
+            "zh": "内部 messages 可以包含调试信息、未对齐的 tool_use/tool_result 等 API 不接受的内容。发送前做规范化是标准实践，保证两者可以不同，但发出去的必须合规。",
+            "en": "Internal messages can contain debug info, misaligned tool_use/tool_result pairs, and other content the API rejects. Normalization before sending is standard practice — internal and outbound messages can differ, but what goes out must comply.",
+            "ja": "内部 messages にはデバッグ情報や不整合の tool_use/tool_result ペアなど API が拒否するコンテンツが含まれる場合があります。送信前の正規化は標準的な実践で、内部と送信 messages は異なってよいが、送信するものは準拠しなければなりません。"
+          },
+          "reward_card": "card_s02_003"
+        },
+        {
+          "id": "q_s02_011",
+          "type": "choice",
+          "difficulty": 1,
+          "stem": {
+            "zh": "tool schema 的作用是什么？",
+            "en": "What is the purpose of a tool schema?",
+            "ja": "tool schema の目的は何ですか？"
+          },
+          "options": [
+            { "id": "a", "text": { "zh": "定义工具名、描述和参数格式，告诉模型能调什么", "en": "Define tool name, description, and parameter format so the model knows what it can call", "ja": "ツール名・説明・パラメータ形式を定義し、モデルが呼び出せるものを知らせる" } },
+            { "id": "b", "text": { "zh": "在工具层验证文件路径，防止越界访问", "en": "Validate file paths at the tool layer to prevent out-of-bounds access", "ja": "ツール層でファイルパスを検証し、範囲外アクセスを防ぐ" } },
+            { "id": "c", "text": { "zh": "把工具名映射到 handler，实现 dispatch 路由", "en": "Map tool names to handlers for dispatch routing", "ja": "ツール名を handler にマッピングして dispatch ルーティングを実現する" } },
+            { "id": "d", "text": { "zh": "规范化 messages 中的字段，确保符合 API 标准", "en": "Normalize fields in messages to ensure API compliance", "ja": "messages のフィールドを正規化して API 標準に準拠させる" } }
+          ],
+          "answer": "a",
+          "explanation": {
+            "zh": "tool schema 是给模型看的说明书，描述工具名、用途和参数格式。模型根据 schema 生成合法的 tool_use 块。每个工具 = schema（告诉模型）+ handler（真正执行）。",
+            "en": "A tool schema is a specification for the model, describing the tool name, purpose, and parameter format. The model uses schemas to generate valid tool_use blocks. Each tool = schema (tells the model) + handler (does the work).",
+            "ja": "tool schema はモデルへの仕様書で、ツール名・用途・パラメータ形式を説明します。モデルは schema を使って正しい tool_use ブロックを生成します。各ツール = schema（モデルへの通知）+ handler（実際の実行）。"
+          },
+          "reward_card": "card_s02_001"
+        },
+        {
+          "id": "q_s02_012",
+          "type": "choice",
+          "difficulty": 2,
+          "stem": {
+            "zh": "如果 tool schema 和 handler 不一一对应，会出现什么问题？",
+            "en": "What problem arises when a tool schema and its handler do not match?",
+            "ja": "tool schema と handler が一致しない場合、どのような問題が発生しますか？"
+          },
+          "options": [
+            { "id": "a", "text": { "zh": "API 会因为 messages 格式不合规而拒绝请求", "en": "The API rejects the request due to non-compliant message format", "ja": "messages の形式が不適切として API がリクエストを拒否する" } },
+            { "id": "b", "text": { "zh": "模型可能按照 schema 调用工具，但 handler 无法正确处理，导致错误", "en": "The model may call the tool per the schema, but the handler cannot process it correctly, causing errors", "ja": "モデルが schema に従いツールを呼び出しても handler が正しく処理できずエラーになる" } },
+            { "id": "c", "text": { "zh": "dispatch map 字典查找失败，主循环崩溃", "en": "The dispatch map lookup fails and the main loop crashes", "ja": "dispatch map の検索が失敗しメインループがクラッシュする" } },
+            { "id": "d", "text": { "zh": "路径沙箱无法初始化，工作目录访问被全部阻断", "en": "The path sandbox fails to initialize, blocking all workspace access", "ja": "パスサンドボックスが初期化できず、ワークスペースへのすべてのアクセスがブロックされる" } }
+          ],
+          "answer": "b",
+          "explanation": {
+            "zh": "schema 告诉模型工具的参数格式，handler 负责实际执行。如果两者不一致，模型会按照 schema 生成 tool_use，但 handler 收到的参数结构不匹配，执行时会出错或行为异常。",
+            "en": "The schema tells the model the parameter format; the handler does the work. If they mismatch, the model generates tool_use per the schema, but the handler receives mismatched parameters and fails or behaves incorrectly.",
+            "ja": "schema はモデルにパラメータ形式を伝え、handler が実際の処理を行います。両者が一致しない場合、モデルは schema に従い tool_use を生成しますが、handler が受け取るパラメータ構造が合わず、エラーや異常動作が発生します。"
+          },
+          "reward_card": "card_s02_001"
+        },
+        {
+          "id": "q_s02_013",
+          "type": "choice",
+          "difficulty": 3,
+          "stem": {
+            "zh": "模型依据 tool schema 做了什么？",
+            "en": "What does the model do based on tool schemas?",
+            "ja": "モデルは tool schema に基づいて何をしますか？"
+          },
+          "options": [
+            { "id": "a", "text": { "zh": "直接执行工具的 handler 函数，绕过 dispatch map", "en": "Directly executes the tool handler, bypassing the dispatch map", "ja": "dispatch map を迂回してツールの handler を直接実行する" } },
+            { "id": "b", "text": { "zh": "生成符合 schema 定义的 tool_use 块，交由 dispatch map 路由执行", "en": "Generates tool_use blocks conforming to the schema, which the dispatch map routes for execution", "ja": "schema に適合した tool_use ブロックを生成し、dispatch map がルーティングして実行する" } },
+            { "id": "c", "text": { "zh": "验证 handler 函数的路径参数是否在工作目录内", "en": "Validates whether handler path parameters are within the workspace", "ja": "handler のパスパラメータがワークスペース内にあるか検証する" } },
+            { "id": "d", "text": { "zh": "在发送前自动规范化 messages 以满足 API 要求", "en": "Automatically normalizes messages before sending to satisfy API requirements", "ja": "API 要件を満たすため送信前に messages を自動的に正規化する" } }
+          ],
+          "answer": "b",
+          "explanation": {
+            "zh": "模型只负责生成 tool_use 块（其格式由 schema 约束），真正的执行由 dispatch map 路由到对应 handler 完成。模型不直接执行任何代码，也不做路径验证或消息规范化。",
+            "en": "The model only generates tool_use blocks (constrained by the schema); actual execution is routed via the dispatch map to the appropriate handler. The model does not directly execute code, validate paths, or normalize messages.",
+            "ja": "モデルは tool_use ブロックを生成するだけで（形式は schema で制約）、実際の実行は dispatch map が適切な handler にルーティングして行います。モデルはコードを直接実行せず、パス検証やメッセージ正規化も行いません。"
+          },
+          "reward_card": "card_s02_001"
+        },
+        {
+          "id": "q_s02_014",
+          "type": "choice",
+          "difficulty": 3,
+          "stem": {
+            "zh": "一个完整的工具系统，schema 和 handler 分别承担什么职责？",
+            "en": "In a complete tool system, what are the respective responsibilities of the schema and the handler?",
+            "ja": "完全なツールシステムにおいて、schema と handler それぞれの責務は何ですか？"
+          },
+          "options": [
+            { "id": "a", "text": { "zh": "schema 负责路径验证；handler 负责消息规范化", "en": "Schema handles path validation; handler handles message normalization", "ja": "schema がパス検証を担当し、handler がメッセージ正規化を担当する" } },
+            { "id": "b", "text": { "zh": "schema 负责把工具名路由到 handler；handler 负责定义工具参数格式", "en": "Schema routes tool names to handlers; handler defines tool parameter format", "ja": "schema がツール名を handler にルーティングし、handler がツールパラメータ形式を定義する" } },
+            { "id": "c", "text": { "zh": "schema 告诉模型工具的名称和参数格式；handler 真正执行工具逻辑", "en": "Schema tells the model the tool name and parameter format; handler actually executes the tool logic", "ja": "schema がモデルにツール名とパラメータ形式を伝え、handler がツールロジックを実際に実行する" } },
+            { "id": "d", "text": { "zh": "schema 和 handler 都负责路径沙箱，形成双重验证", "en": "Both schema and handler handle path sandboxing, forming double validation", "ja": "schema と handler の両方がパスサンドボックスを担当し、二重検証を形成する" } }
+          ],
+          "answer": "c",
+          "explanation": {
+            "zh": "schema 是给模型的接口声明，告诉模型可以调用什么以及参数格式；handler 是运行时的实现，接收参数并真正执行逻辑。两者缺一不可，必须一一对应。",
+            "en": "The schema is an interface declaration for the model, telling it what to call and with what parameters; the handler is the runtime implementation that receives parameters and executes the logic. Both are required and must match 1:1.",
+            "ja": "schema はモデルへのインターフェース宣言で、何を呼び出すかとパラメータ形式を伝えます。handler は実行時の実装でパラメータを受け取りロジックを実行します。両方が必須で 1 対 1 で対応しなければなりません。"
+          },
+          "reward_card": "card_s02_001"
+        },
+        {
+          "id": "q_s02_015",
+          "type": "choice",
+          "difficulty": 3,
+          "stem": {
+            "zh": "以下哪种组合正确描述了 s02 工具分发系统的三个核心机制？",
+            "en": "Which combination correctly describes the three core mechanisms of the s02 tool dispatch system?",
+            "ja": "s02 ツールディスパッチシステムの 3 つのコアメカニズムを正しく説明しているのはどれですか？"
+          },
+          "options": [
+            { "id": "a", "text": { "zh": "dispatch map（路由）+ 路径沙箱（安全）+ 消息规范化（API 合规）", "en": "Dispatch map (routing) + path sandbox (security) + message normalization (API compliance)", "ja": "dispatch map（ルーティング）+ パスサンドボックス（セキュリティ）+ メッセージ正規化（API 準拠）" } },
+            { "id": "b", "text": { "zh": "tool schema（路由）+ dispatch map（安全）+ handler（API 合规）", "en": "Tool schema (routing) + dispatch map (security) + handler (API compliance)", "ja": "tool schema（ルーティング）+ dispatch map（セキュリティ）+ handler（API 準拠）" } },
+            { "id": "c", "text": { "zh": "路径沙箱（路由）+ 消息规范化（安全）+ dispatch map（API 合规）", "en": "Path sandbox (routing) + message normalization (security) + dispatch map (API compliance)", "ja": "パスサンドボックス（ルーティング）+ メッセージ正規化（セキュリティ）+ dispatch map（API 準拠）" } },
+            { "id": "d", "text": { "zh": "tool schema（安全）+ 消息规范化（路由）+ 路径沙箱（API 合规）", "en": "Tool schema (security) + message normalization (routing) + path sandbox (API compliance)", "ja": "tool schema（セキュリティ）+ メッセージ正規化（ルーティング）+ パスサンドボックス（API 準拠）" } }
+          ],
+          "answer": "a",
+          "explanation": {
+            "zh": "s02 的三大机制各司其职：dispatch map 负责把工具名路由到 handler，路径沙箱在工具层保障安全，消息规范化确保发给 API 的格式合规。",
+            "en": "The three s02 mechanisms each have a distinct role: dispatch map routes tool names to handlers, path sandbox enforces security at the tool layer, and message normalization ensures API-compliant format.",
+            "ja": "s02 の 3 つのメカニズムはそれぞれ独自の役割を持ちます：dispatch map がツール名を handler にルーティング、パスサンドボックスがツール層でセキュリティを確保、メッセージ正規化が API 準拠の形式を保証します。"
+          },
+          "reward_card": "card_s02_002"
+        },
+        {
+          "id": "q_s02_016",
+          "type": "choice",
+          "difficulty": 2,
+          "stem": {
+            "zh": "新来的工程师问：'加一个新工具需要改多少地方？'正确答案是？",
+            "en": "A new engineer asks: 'How many places need to change when adding a new tool?' What is the correct answer?",
+            "ja": "新しいエンジニアが聞きます：'新しいツールを追加するには何箇所変更が必要ですか？'正しい答えは？"
+          },
+          "options": [
+            { "id": "a", "text": { "zh": "只需要 1 处：在主循环加一个 if/else 分支", "en": "Only 1 place: add an if/else branch in the main loop", "ja": "1 箇所のみ：メインループに if/else 分岐を追加する" } },
+            { "id": "b", "text": { "zh": "至少 3 处：主循环 + 路径验证 + 消息规范化", "en": "At least 3 places: main loop + path validation + message normalization", "ja": "少なくとも 3 箇所：メインループ + パス検証 + メッセージ正規化" } },
+            { "id": "c", "text": { "zh": "不需要改任何代码，dispatch map 会自动发现新工具", "en": "No code changes needed — the dispatch map auto-discovers new tools", "ja": "コード変更不要、dispatch map が新しいツールを自動検出する" } },
+            { "id": "d", "text": { "zh": "2 处：加 handler 函数 + 在 dispatch map 加一条字典项；schema 视需要加", "en": "2 places: add handler + add one entry in dispatch map; schema is added as needed", "ja": "2 箇所：handler を追加 + dispatch map に 1 エントリ追加、schema は必要に応じて追加" } }
+          ],
+          "answer": "d",
+          "explanation": {
+            "zh": "加新工具需要：1 个 handler 函数（真正执行逻辑）+ dispatch map 加一条字典项（路由）+ tool schema（告诉模型，视需要）。主循环永远不变，这是 dispatch map 设计的核心价值。",
+            "en": "Adding a new tool requires: 1 handler function (logic) + 1 dispatch map entry (routing) + a tool schema (to inform the model, as needed). The main loop never changes — that is the core value of the dispatch map design.",
+            "ja": "新しいツールの追加に必要なもの：handler 関数 1 つ（ロジック）+ dispatch map エントリ 1 つ（ルーティング）+ tool schema（必要に応じてモデルに通知）。メインループは変わりません。これが dispatch map 設計の核心的な価値です。"
+          },
+          "reward_card": "card_s02_001"
+        },
+        {
+          "id": "q_s02_017",
+          "type": "choice",
+          "difficulty": 3,
+          "stem": {
+            "zh": "tool schema 存在的前提是什么？如果不提供 schema，会发生什么？",
+            "en": "What is the premise for a tool schema to exist? What happens if no schema is provided?",
+            "ja": "tool schema が存在する前提は何ですか？schema が提供されない場合はどうなりますか？"
+          },
+          "options": [
+            { "id": "a", "text": { "zh": "schema 是可选的；不提供时 dispatch map 自动生成默认 schema", "en": "Schema is optional; the dispatch map auto-generates a default schema when absent", "ja": "schema はオプション；ない場合 dispatch map がデフォルト schema を自動生成する" } },
+            { "id": "b", "text": { "zh": "schema 是必须的；不提供时路径沙箱无法初始化，工具被禁用", "en": "Schema is required; without it the path sandbox cannot initialize and the tool is disabled", "ja": "schema は必須；ない場合パスサンドボックスが初期化できずツールが無効化される" } },
+            { "id": "c", "text": { "zh": "schema 仅用于消息规范化；不提供时 API 拒绝所有 tool_use 请求", "en": "Schema is only for message normalization; without it the API rejects all tool_use requests", "ja": "schema はメッセージ正規化のみに使われる；ない場合 API がすべての tool_use リクエストを拒否する" } },
+            { "id": "d", "text": { "zh": "schema 告诉模型工具存在；不提供时模型不知道可以调用该工具，不会生成对应 tool_use", "en": "Schema informs the model the tool exists; without it the model does not know it can call the tool and will not generate a tool_use", "ja": "schema がモデルにツールの存在を伝える；ない場合モデルはそのツールを呼び出せると知らず、tool_use を生成しない" } }
+          ],
+          "answer": "d",
+          "explanation": {
+            "zh": "schema 是模型和工具系统之间的契约。模型在生成 tool_use 前必须知道工具存在及其参数格式，这些信息来自 schema。没有 schema，模型不会调用对应工具；有 schema 无 handler，调用时会报错。",
+            "en": "The schema is the contract between the model and the tool system. The model must know a tool exists and its parameter format before generating tool_use — that information comes from the schema. No schema means no call; schema without handler means a runtime error.",
+            "ja": "schema はモデルとツールシステム間の契約です。モデルは tool_use を生成する前にツールの存在とパラメータ形式を知る必要があり、その情報は schema から来ます。schema がなければ呼び出しは発生せず、schema があっても handler がなければ実行時エラーになります。"
+          },
+          "reward_card": "card_s02_001"
+        },
+        {
+          "id": "q_s02_018",
+          "type": "choice",
+          "difficulty": 2,
+          "stem": {
+            "zh": "在 s02 工具系统中，下列哪个说法正确区分了 schema 和 handler 的边界？",
+            "en": "In the s02 tool system, which statement correctly distinguishes the boundary between schema and handler?",
+            "ja": "s02 ツールシステムにおいて、schema と handler の境界を正しく区別しているのはどれですか？"
+          },
+          "options": [
+            { "id": "a", "text": { "zh": "schema 运行在工具层，handler 运行在 API 层", "en": "Schema runs at the tool layer; handler runs at the API layer", "ja": "schema はツール層で動作し、handler は API 層で動作する" } },
+            { "id": "b", "text": { "zh": "schema 是给模型看的声明，handler 是给运行时执行的实现", "en": "Schema is a declaration for the model; handler is an implementation for the runtime to execute", "ja": "schema はモデル向けの宣言であり、handler はランタイムが実行する実装である" } },
+            { "id": "c", "text": { "zh": "schema 负责路径安全验证，handler 负责消息规范化", "en": "Schema handles path security validation; handler handles message normalization", "ja": "schema がパスセキュリティ検証を担当し、handler がメッセージ正規化を担当する" } },
+            { "id": "d", "text": { "zh": "schema 和 handler 都存储在 dispatch map 字典中", "en": "Both schema and handler are stored in the dispatch map dictionary", "ja": "schema と handler の両方が dispatch map 辞書に格納されている" } }
+          ],
+          "answer": "b",
+          "explanation": {
+            "zh": "schema 是接口声明，告诉模型工具的名称、描述和参数格式，决定模型'看到什么'。handler 是实现，决定工具'做什么'。两者分工明确，缺少任意一方工具都无法正常工作。",
+            "en": "Schema is an interface declaration telling the model what a tool is named, what it does, and what parameters it takes — it decides what the model 'sees'. Handler is the implementation deciding what the tool 'does'. Each is necessary; neither alone suffices.",
+            "ja": "schema はインターフェース宣言で、ツール名・説明・パラメータ形式をモデルに伝え、モデルが'何を見るか'を決めます。handler は実装で、ツールが'何をするか'を決めます。両方が必要で、どちらか一方だけでは機能しません。"
+          },
+          "reward_card": "card_s02_003"
         }
       ],
       "star_thresholds": [
