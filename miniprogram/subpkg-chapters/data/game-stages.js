@@ -3475,49 +3475,49 @@ module.exports = {
           "type": "choice",
           "difficulty": 1,
           "stem": {
-            "zh": "以下哪个概念与「这一章要解决什么问题」直接相关？",
-            "en": "Which concept is directly related to \"What You'll Learn\"?",
-            "ja": "「問題」に直接関連する概念はどれですか？"
+            "zh": "Skill 的核心定义是什么？",
+            "en": "What is the core definition of a Skill?",
+            "ja": "Skill の核心的な定義は何ですか？"
           },
           "options": [
             {
               "id": "a",
               "text": {
-                "zh": "这一章要解决什么问题",
-                "en": "What You'll Learn",
-                "ja": "問題"
-              }
-            },
-            {
-              "id": "c",
-              "text": {
-                "zh": "第四步：如果模型调用了工具，就执行",
-                "en": "第四步：如果模型调用了工具，就执行",
-                "ja": "第 4 段階: tool_use があればจริง行する"
+                "zh": "跨会话持久化的用户偏好记录",
+                "en": "A persistent cross-session record of user preferences",
+                "ja": "セッションをまたいで永続化されるユーザー設定の記録"
               }
             },
             {
               "id": "b",
               "text": {
-                "zh": "什么是上下文窗口",
-                "en": "The Solution",
-                "ja": "仕組み"
+                "zh": "项目根目录下的持久配置指令文件",
+                "en": "A persistent configuration file at the project root",
+                "ja": "プロジェクトルートに置く永続的な設定指示ファイル"
+              }
+            },
+            {
+              "id": "c",
+              "text": {
+                "zh": "围绕某类任务的可复用说明书，平时只展示目录，需要时才加载全文",
+                "en": "A reusable instruction set for a task type, showing only a summary until full content is needed",
+                "ja": "特定タスク向けの再利用可能な手順書。普段は目次だけ見せ、必要時に全文をロードする"
               }
             },
             {
               "id": "d",
               "text": {
-                "zh": "3. 摘要只写成一句空话",
-                "en": "3. 摘要只写成一句空话",
-                "ja": "3. 摘要只写成一句空话"
+                "zh": "模型的长期记忆模块，自动积累历史对话",
+                "en": "A long-term memory module that automatically accumulates conversation history",
+                "ja": "会話履歴を自動蓄積するモデルの長期記憶モジュール"
               }
             }
           ],
-          "answer": "a",
+          "answer": "c",
           "explanation": {
-            "zh": "把“长期可选知识”从 system prompt 主体里拆出来，改成按需加载。",
-            "en": "What You'll Learn",
-            "ja": "問題"
+            "zh": "Skill 是围绕某类任务的可复用说明书，不是记忆也不是 CLAUDE.md。它的关键特性是平时只展示目录（轻量），需要时才把全文注入上下文（按需加载）。",
+            "en": "A Skill is a reusable instruction set for a task type, not memory or CLAUDE.md. Its key property is showing only a lightweight summary by default and loading the full content on demand.",
+            "ja": "Skill は特定タスク向けの再利用可能な手順書であり、記憶でも CLAUDE.md でもありません。普段は軽量な目次だけ見せ、必要時に全文をロードするのが特徴です。"
           },
           "reward_card": "card_s05_001"
         },
@@ -3526,204 +3526,867 @@ module.exports = {
           "type": "choice",
           "difficulty": 1,
           "stem": {
-            "zh": "以下哪个概念与「先解释几个名词」直接相关？",
-            "en": "Which concept is directly related to \"The Problem\"?",
-            "ja": "「解決策」に直接関連する概念はどれですか？"
+            "zh": "Discovery 阶段放在 system prompt 里的信息是什么？",
+            "en": "What information is placed in the system prompt during the Discovery phase?",
+            "ja": "Discovery フェーズで system prompt に入れる情報は何ですか？"
           },
           "options": [
             {
-              "id": "d",
+              "id": "a",
               "text": {
-                "zh": "什么是 loading",
-                "en": "What Changed From s04",
-                "ja": "試してみる"
+                "zh": "Skill 的完整正文内容",
+                "en": "The full body content of the Skill",
+                "ja": "Skill の全文コンテンツ"
               }
             },
             {
               "id": "b",
               "text": {
-                "zh": "消息规范化",
-                "en": "How It Works",
-                "ja": "s01からの変更点"
+                "zh": "通过 tool_result 注入的 JSON 数据",
+                "en": "JSON data injected via tool_result",
+                "ja": "tool_result 経由で注入される JSON データ"
               }
             },
             {
               "id": "c",
               "text": {
-                "zh": "什么是 state",
-                "en": "Try It",
-                "ja": "state とは何か"
+                "zh": "CLAUDE.md 项目指令的摘要副本",
+                "en": "A summary copy of CLAUDE.md project instructions",
+                "ja": "CLAUDE.md プロジェクト指示のサマリーコピー"
               }
             },
             {
-              "id": "a",
+              "id": "d",
               "text": {
-                "zh": "先解释几个名词",
-                "en": "The Problem",
-                "ja": "解決策"
+                "zh": "Skill 的名称和简短描述（轻量目录）",
+                "en": "The Skill name and short description (lightweight index)",
+                "ja": "Skill の名前と短い説明（軽量な目次）"
               }
             }
           ],
-          "answer": "a",
+          "answer": "d",
           "explanation": {
-            "zh": "先解释几个名词",
-            "en": "The Problem",
-            "ja": "解決策"
+            "zh": "Discovery 只需要轻量信息：Skill 的名称和描述放在 system prompt 里，让模型知道有哪些 Skill 可用。完整正文是 Loading 阶段通过 tool_result 注入的，成本更高。",
+            "en": "Discovery only needs lightweight info: the Skill name and description go in the system prompt so the model knows what Skills are available. The full body is injected via tool_result during Loading, which is more expensive.",
+            "ja": "Discovery に必要なのは軽量情報のみ。Skill の名前と説明を system prompt に入れてモデルに利用可能な Skill を知らせます。全文は Loading フェーズで tool_result 経由で注入され、コストが高くなります。"
           },
           "reward_card": "card_s05_002"
         },
         {
           "id": "q_s05_003",
           "type": "choice",
-          "difficulty": 1,
+          "difficulty": 2,
           "stem": {
-            "zh": "以下哪个概念与「什么是 skill」直接相关？",
-            "en": "Which concept is directly related to \"The Solution\"?",
-            "ja": "「仕組み」に直接関連する概念はどれですか？"
+            "zh": "为什么 Loading 比 Discovery 「昂贵」？",
+            "en": "Why is Loading more 'expensive' than Discovery?",
+            "ja": "なぜ Loading は Discovery より「コストが高い」のですか？"
           },
           "options": [
             {
-              "id": "c",
-              "text": {
-                "zh": "最小实现",
-                "en": "最小实现",
-                "ja": "最小実装を段階で追う"
-              }
-            },
-            {
               "id": "a",
               "text": {
-                "zh": "什么是 skill",
-                "en": "The Solution",
-                "ja": "仕組み"
+                "zh": "Loading 需要写入磁盘，Discovery 只在内存里",
+                "en": "Loading writes to disk while Discovery stays in memory",
+                "ja": "Loading はディスク書き込みが必要で Discovery はメモリ内だけ"
               }
             },
             {
               "id": "b",
               "text": {
-                "zh": "3. SkillRegistry",
-                "en": "3. SkillRegistry",
-                "ja": "3. SkillRegistry"
+                "zh": "Loading 把完整正文通过 tool_result 注入上下文，消耗大量 token",
+                "en": "Loading injects the full body via tool_result into the context window, consuming many tokens",
+                "ja": "Loading は tool_result 経由で全文をコンテキストに注入するため大量のトークンを消費する"
+              }
+            },
+            {
+              "id": "c",
+              "text": {
+                "zh": "Loading 会同时调用多个 API，有网络延迟",
+                "en": "Loading calls multiple APIs simultaneously, causing network latency",
+                "ja": "Loading は複数の API を同時呼び出すのでネットワーク遅延が生じる"
               }
             },
             {
               "id": "d",
               "text": {
-                "zh": "这一章要解决什么问题",
-                "en": "What You'll Learn",
-                "ja": "問題"
+                "zh": "Loading 需要更新 CLAUDE.md，触发文件 I/O",
+                "en": "Loading needs to update CLAUDE.md, triggering file I/O",
+                "ja": "Loading は CLAUDE.md を更新するためファイル I/O が発生する"
               }
             }
           ],
-          "answer": "a",
+          "answer": "b",
           "explanation": {
-            "zh": "什么是 skill",
-            "en": "The Solution",
-            "ja": "仕組み"
+            "zh": "Loading 的代价是把 Skill 完整正文通过 tool_result 注入上下文窗口，这会占用大量 token。Discovery 只需把名称和描述放进 system prompt，开销极小，两者分离正是为了避免 prompt 臃肿。",
+            "en": "The cost of Loading is injecting the Skill's full body via tool_result into the context window, consuming many tokens. Discovery only puts name and description in the system prompt at minimal cost. This separation avoids bloating the prompt.",
+            "ja": "Loading のコストは Skill の全文を tool_result 経由でコンテキストウィンドウに注入することで大量のトークンを消費します。Discovery は名前と説明を system prompt に入れるだけで低コスト。この分離がプロンプトの肥大化を防ぎます。"
           },
           "reward_card": "card_s05_003"
         },
         {
           "id": "q_s05_004",
           "type": "choice",
-          "difficulty": 1,
+          "difficulty": 2,
           "stem": {
-            "zh": "以下哪个概念与「什么是 discovery」直接相关？",
-            "en": "Which concept is directly related to \"How It Works\"?",
-            "ja": "「s04からの変更点」に直接関連する概念はどれですか？"
+            "zh": "SkillRegistry 负责回答哪两个核心问题？",
+            "en": "What two core questions does SkillRegistry answer?",
+            "ja": "SkillRegistry が答える 2 つの核心的な問いは何ですか？"
           },
           "options": [
             {
-              "id": "d",
-              "text": {
-                "zh": "5. 一上来就讲太多多源加载细节",
-                "en": "5. 一上来就讲太多多源加载细节",
-                "ja": "5. 一上来就讲太多多源加载细节"
-              }
-            },
-            {
               "id": "a",
               "text": {
-                "zh": "什么是 discovery",
-                "en": "How It Works",
-                "ja": "s04からの変更点"
-              }
-            },
-            {
-              "id": "c",
-              "text": {
-                "zh": "第五步：把工具结果作为新消息写回去",
-                "en": "第五步：把工具结果作为新消息写回去",
-                "ja": "第 5 段階: tool_result を user-side message として write-back する"
+                "zh": "用户是谁，以及他们有什么权限",
+                "en": "Who the user is and what permissions they have",
+                "ja": "ユーザーが誰で、どんな権限を持つか"
               }
             },
             {
               "id": "b",
               "text": {
-                "zh": "第三步：追加 assistant 回复",
-                "en": "第三步：追加 assistant 回复",
-                "ja": "第 3 段階: assistant response 自体も history へ戻す"
+                "zh": "有哪些 Skill 可用，以及某个 Skill 的完整内容是什么",
+                "en": "What Skills are available and what is the full content of a specific Skill",
+                "ja": "どの Skill が利用可能か、および特定の Skill の全文は何か"
+              }
+            },
+            {
+              "id": "c",
+              "text": {
+                "zh": "上一次会话何时结束，以及记忆里存了什么",
+                "en": "When the last session ended and what is stored in memory",
+                "ja": "前回セッションがいつ終わったか、記憶に何が保存されているか"
+              }
+            },
+            {
+              "id": "d",
+              "text": {
+                "zh": "CLAUDE.md 何时修改，以及修改了哪些行",
+                "en": "When CLAUDE.md was modified and which lines changed",
+                "ja": "CLAUDE.md がいつ変更され、どの行が変わったか"
               }
             }
           ],
-          "answer": "a",
+          "answer": "b",
           "explanation": {
-            "zh": "什么是 discovery",
-            "en": "Step 1.",
-            "ja": "s04からの変更点"
+            "zh": "SkillRegistry 统一管理所有 Skill，回答两个问题：有哪些 Skill 可用（目录）以及某个 Skill 的完整内容是什么（全文）。前者用于 Discovery，后者用于 Loading。",
+            "en": "SkillRegistry manages all Skills and answers two questions: what Skills are available (the index for Discovery) and what is the full content of a specific Skill (for Loading).",
+            "ja": "SkillRegistry は全 Skill を一元管理し、「どの Skill が使えるか（目次、Discovery 用）」と「特定 Skill の全文は何か（Loading 用）」の 2 問に答えます。"
           },
-          "reward_card": "card_s05_004"
+          "reward_card": "card_s05_001"
         },
         {
           "id": "q_s05_005",
           "type": "choice",
           "difficulty": 1,
           "stem": {
-            "zh": "以下哪个概念与「什么是 loading」直接相关？",
-            "en": "Which concept is directly related to \"What Changed From s04\"?",
-            "ja": "「試してみる」に直接関連する概念はどれですか？"
+            "zh": "Skill 和「记忆（Memory）」最本质的区别是什么？",
+            "en": "What is the most fundamental difference between a Skill and Memory?",
+            "ja": "Skill と Memory（記憶）の最も本質的な違いは何ですか？"
           },
           "options": [
             {
-              "id": "c",
+              "id": "a",
               "text": {
-                "zh": "先解释几个名词",
-                "en": "The Problem",
-                "ja": "先に言葉をそろえる"
+                "zh": "Skill 存在文件里，记忆存在数据库里",
+                "en": "Skills are stored in files while memory is stored in a database",
+                "ja": "Skill はファイルに、記憶はデータベースに保存される"
               }
             },
             {
               "id": "b",
               "text": {
-                "zh": "3. 摘要只写成一句空话",
-                "en": "3. 摘要只写成一句空话",
-                "ja": "3. 摘要只写成一句空话"
+                "zh": "Skill 是针对特定任务类型的操作指南（按需加载），记忆是跨会话持久化的信息",
+                "en": "A Skill is an on-demand operation guide for a task type; Memory is information persisted across sessions",
+                "ja": "Skill は特定タスク向けのオンデマンド操作手順書、Memory はセッション間で永続化される情報"
+              }
+            },
+            {
+              "id": "c",
+              "text": {
+                "zh": "Skill 只在主包运行，记忆只在分包运行",
+                "en": "Skills run only in the main package; memory runs only in sub-packages",
+                "ja": "Skill はメインパッケージだけで動き、記憶はサブパッケージだけで動く"
               }
             },
             {
               "id": "d",
               "text": {
-                "zh": "5. 以为 reminder 是可有可无的小装饰",
-                "en": "5. 以为 reminder 是可有可无的小装饰",
-                "ja": "5. session plan と durable task graph を同一視する"
+                "zh": "两者本质相同，只是命名不同",
+                "en": "They are essentially the same, just named differently",
+                "ja": "本質的には同じで名前が違うだけ"
               }
-            },
+            }
+          ],
+          "answer": "b",
+          "explanation": {
+            "zh": "Skill 是针对特定任务的操作指南，按需加载一次性使用。记忆是跨会话持久化的信息，两者目的和生命周期完全不同。混淆两者会导致误以为 Skill 能记住历史对话。",
+            "en": "A Skill is an operation guide for a specific task type, loaded on demand. Memory is information that persists across sessions. Their purposes and lifecycles are completely different.",
+            "ja": "Skill は特定タスク向けの操作手順書でオンデマンドにロードされます。Memory はセッション間で永続化される情報です。目的とライフサイクルが全く異なります。"
+          },
+          "reward_card": "card_s05_002"
+        },
+        {
+          "id": "q_s05_006",
+          "type": "choice",
+          "difficulty": 2,
+          "stem": {
+            "zh": "如果把所有 Skill 的完整正文都直接放进 system prompt，会产生什么问题？",
+            "en": "What problem occurs if all Skill full-text content is placed directly in the system prompt?",
+            "ja": "全 Skill の全文を system prompt に直接入れるとどんな問題が生じますか？"
+          },
+          "options": [
             {
               "id": "a",
               "text": {
-                "zh": "什么是 loading",
-                "en": "What Changed From s04",
-                "ja": "試してみる"
+                "zh": "SkillRegistry 无法初始化，系统崩溃",
+                "en": "SkillRegistry cannot initialize and the system crashes",
+                "ja": "SkillRegistry が初期化できずシステムがクラッシュする"
+              }
+            },
+            {
+              "id": "b",
+              "text": {
+                "zh": "CLAUDE.md 文件会被覆盖",
+                "en": "The CLAUDE.md file gets overwritten",
+                "ja": "CLAUDE.md ファイルが上書きされる"
+              }
+            },
+            {
+              "id": "c",
+              "text": {
+                "zh": "跨会话记忆丢失",
+                "en": "Cross-session memory is lost",
+                "ja": "セッション間の記憶が失われる"
+              }
+            },
+            {
+              "id": "d",
+              "text": {
+                "zh": "prompt 臃肿，大量 token 被不常用的 Skill 内容占用，浪费上下文空间",
+                "en": "The prompt becomes bloated, with many tokens wasted on rarely used Skill content",
+                "ja": "プロンプトが肥大化し、めったに使わない Skill 内容で多くのトークンが無駄になる"
+              }
+            }
+          ],
+          "answer": "d",
+          "explanation": {
+            "zh": "Discovery 和 Loading 分离的根本原因就是避免 prompt 臃肿。如果所有 Skill 全文都放进 system prompt，每次对话都要消耗大量 token，而大多数 Skill 可能根本用不上。",
+            "en": "The fundamental reason for separating Discovery and Loading is to avoid prompt bloat. If all Skill full text is in the system prompt, every conversation wastes many tokens on Skills that may never be used.",
+            "ja": "Discovery と Loading を分離する根本的な理由はプロンプトの肥大化を防ぐことです。全 Skill の全文を system prompt に入れると、使われない Skill のために毎回大量のトークンが無駄になります。"
+          },
+          "reward_card": "card_s05_003"
+        },
+        {
+          "id": "q_s05_007",
+          "type": "choice",
+          "difficulty": 2,
+          "stem": {
+            "zh": "Skill 的全文内容通过哪种机制注入上下文？",
+            "en": "Through what mechanism is a Skill's full content injected into the context?",
+            "ja": "Skill の全文コンテンツはどのメカニズムでコンテキストに注入されますか？"
+          },
+          "options": [
+            {
+              "id": "a",
+              "text": {
+                "zh": "直接写入 CLAUDE.md 项目配置文件",
+                "en": "Written directly into the CLAUDE.md project config file",
+                "ja": "CLAUDE.md プロジェクト設定ファイルに直接書き込む"
+              }
+            },
+            {
+              "id": "b",
+              "text": {
+                "zh": "通过跨会话记忆模块自动恢复",
+                "en": "Automatically restored via the cross-session memory module",
+                "ja": "セッション間記憶モジュールで自動復元される"
+              }
+            },
+            {
+              "id": "c",
+              "text": {
+                "zh": "通过 tool_result 注入上下文",
+                "en": "Injected into the context via tool_result",
+                "ja": "tool_result 経由でコンテキストに注入される"
+              }
+            },
+            {
+              "id": "d",
+              "text": {
+                "zh": "在 system prompt 初始化时一次性全部加载",
+                "en": "All loaded at once during system prompt initialization",
+                "ja": "system prompt 初期化時に一括でロードされる"
+              }
+            }
+          ],
+          "answer": "c",
+          "explanation": {
+            "zh": "Loading 阶段把 Skill 完整正文通过 tool_result 注入上下文，这是 Discovery/Loading 两层分离设计的关键。Discovery 用 system prompt，Loading 用 tool_result，各司其职。",
+            "en": "In the Loading phase, the full Skill content is injected via tool_result. This is the key to the two-layer Discovery/Loading design: Discovery uses system prompt, Loading uses tool_result.",
+            "ja": "Loading フェーズでは Skill の全文が tool_result 経由でコンテキストに注入されます。これが Discovery/Loading 二層設計の要点です。Discovery は system prompt、Loading は tool_result を使います。"
+          },
+          "reward_card": "card_s05_002"
+        },
+        {
+          "id": "q_s05_008",
+          "type": "choice",
+          "difficulty": 1,
+          "stem": {
+            "zh": "CLAUDE.md 和 Skill 最主要的区别是什么？",
+            "en": "What is the main difference between CLAUDE.md and a Skill?",
+            "ja": "CLAUDE.md と Skill の最大の違いは何ですか？"
+          },
+          "options": [
+            {
+              "id": "a",
+              "text": {
+                "zh": "CLAUDE.md 是项目级持久指令，始终加载；Skill 是任务专项操作指南，按需加载",
+                "en": "CLAUDE.md is a persistent project-level directive always loaded; Skills are task-specific guides loaded on demand",
+                "ja": "CLAUDE.md は常時ロードされるプロジェクトレベルの永続指示、Skill は必要時にロードされるタスク専用ガイド"
+              }
+            },
+            {
+              "id": "b",
+              "text": {
+                "zh": "两者完全相同，只是放置位置不同",
+                "en": "They are identical, just placed in different locations",
+                "ja": "内容は同じで置き場所が違うだけ"
+              }
+            },
+            {
+              "id": "c",
+              "text": {
+                "zh": "CLAUDE.md 按需加载，Skill 始终在 system prompt 里",
+                "en": "CLAUDE.md is loaded on demand, Skills are always in the system prompt",
+                "ja": "CLAUDE.md はオンデマンドで、Skill は常に system prompt にある"
+              }
+            },
+            {
+              "id": "d",
+              "text": {
+                "zh": "CLAUDE.md 用于跨会话记忆，Skill 用于实时推理",
+                "en": "CLAUDE.md is for cross-session memory, Skills are for real-time reasoning",
+                "ja": "CLAUDE.md はセッション間記憶用、Skill はリアルタイム推論用"
               }
             }
           ],
           "answer": "a",
           "explanation": {
-            "zh": "什么是 loading",
-            "en": "What Changed From s04",
-            "ja": "試してみる"
+            "zh": "CLAUDE.md 是项目级持久指令，每次会话都会加载。Skill 是针对特定任务类型的操作指南，按需加载。两者生命周期和用途都不同，不能混淆。",
+            "en": "CLAUDE.md is a persistent project-level directive loaded every session. Skills are operation guides for specific task types, loaded on demand. Their lifecycles and purposes differ.",
+            "ja": "CLAUDE.md は毎セッションでロードされるプロジェクトレベルの永続指示です。Skill は特定タスク向けの操作手順書でオンデマンドにロードされます。ライフサイクルと用途が異なります。"
           },
-          "reward_card": "card_s05_005"
+          "reward_card": "card_s05_003"
+        },
+        {
+          "id": "q_s05_009",
+          "type": "choice",
+          "difficulty": 2,
+          "stem": {
+            "zh": "SkillRegistry 在 Discovery 和 Loading 中分别提供什么？",
+            "en": "What does SkillRegistry provide for Discovery vs Loading respectively?",
+            "ja": "SkillRegistry は Discovery と Loading にそれぞれ何を提供しますか？"
+          },
+          "options": [
+            {
+              "id": "a",
+              "text": {
+                "zh": "Discovery 提供完整正文，Loading 提供轻量目录",
+                "en": "Discovery gets full body, Loading gets lightweight index",
+                "ja": "Discovery に全文、Loading に軽量目次を提供"
+              }
+            },
+            {
+              "id": "b",
+              "text": {
+                "zh": "Discovery 提供跨会话记忆，Loading 提供 CLAUDE.md 副本",
+                "en": "Discovery provides cross-session memory, Loading provides a CLAUDE.md copy",
+                "ja": "Discovery はセッション間記憶を、Loading は CLAUDE.md のコピーを提供"
+              }
+            },
+            {
+              "id": "c",
+              "text": {
+                "zh": "Discovery 提供轻量目录（名称+描述），Loading 提供完整正文",
+                "en": "Discovery provides a lightweight index (name + description), Loading provides the full body",
+                "ja": "Discovery に軽量目次（名前+説明）、Loading に全文を提供"
+              }
+            },
+            {
+              "id": "d",
+              "text": {
+                "zh": "两者都提供相同数据，只是调用方式不同",
+                "en": "Both provide the same data, just called differently",
+                "ja": "両方とも同じデータを提供し、呼び出し方が違うだけ"
+              }
+            }
+          ],
+          "answer": "c",
+          "explanation": {
+            "zh": "SkillRegistry 统一管理所有 Skill，对 Discovery 提供轻量目录（名称+描述）放入 system prompt；对 Loading 提供完整正文，通过 tool_result 注入。这正是其统一管理的价值所在。",
+            "en": "SkillRegistry manages all Skills centrally: for Discovery it provides a lightweight index (name+description) for the system prompt; for Loading it provides the full body injected via tool_result.",
+            "ja": "SkillRegistry は全 Skill を一元管理します。Discovery には system prompt 用の軽量目次（名前+説明）を、Loading には tool_result で注入する全文を提供します。"
+          },
+          "reward_card": "card_s05_001"
+        },
+        {
+          "id": "q_s05_010",
+          "type": "choice",
+          "difficulty": 3,
+          "stem": {
+            "zh": "以下哪个场景最能说明 Discovery/Loading 两层分离设计的价值？",
+            "en": "Which scenario best illustrates the value of the two-layer Discovery/Loading design?",
+            "ja": "Discovery/Loading 二層設計の価値を最もよく示すシナリオはどれですか？"
+          },
+          "options": [
+            {
+              "id": "a",
+              "text": {
+                "zh": "模型有 50 个注册的 Skill，但本次对话只调用了其中 2 个，上下文 token 没有被 48 个未用 Skill 的全文占满",
+                "en": "The model has 50 registered Skills but only 2 are called in this session; the context is not filled with 48 unused Skills' full text",
+                "ja": "モデルに 50 個の Skill が登録されているが今回のセッションで使ったのは 2 つだけ、残り 48 個の全文でコンテキストが埋まらない"
+              }
+            },
+            {
+              "id": "b",
+              "text": {
+                "zh": "CLAUDE.md 文件变大后，记忆模块自动压缩它",
+                "en": "When CLAUDE.md grows large, the memory module auto-compresses it",
+                "ja": "CLAUDE.md が大きくなると記憶モジュールが自動圧縮する"
+              }
+            },
+            {
+              "id": "c",
+              "text": {
+                "zh": "SkillRegistry 崩溃后，系统自动切换到跨会话记忆作为备份",
+                "en": "When SkillRegistry crashes, the system switches to cross-session memory as backup",
+                "ja": "SkillRegistry がクラッシュするとシステムがセッション間記憶にフォールバックする"
+              }
+            },
+            {
+              "id": "d",
+              "text": {
+                "zh": "tool_result 失败时，Discovery 接管并完成全文加载",
+                "en": "When tool_result fails, Discovery takes over to complete full-text loading",
+                "ja": "tool_result が失敗すると Discovery が引き継いで全文ロードを完了させる"
+              }
+            }
+          ],
+          "answer": "a",
+          "explanation": {
+            "zh": "Discovery/Loading 两层分离的核心价值就是：注册再多的 Skill，Discovery 只把轻量目录放进 system prompt，只有被实际调用的 Skill 才触发 Loading 消耗 token。这样上下文空间被高效利用。",
+            "en": "The core value of the two-layer design: no matter how many Skills are registered, Discovery only puts a lightweight index in the system prompt. Only actually invoked Skills trigger Loading and consume tokens, keeping context efficient.",
+            "ja": "二層設計の核心的価値は、どれだけ多くの Skill が登録されていても Discovery は軽量目次を system prompt に入れるだけで、実際に呼ばれた Skill だけが Loading をトリガーしトークンを消費することです。"
+          },
+          "reward_card": "card_s05_002"
+        },
+        {
+          "id": "q_s05_011",
+          "type": "choice",
+          "difficulty": 3,
+          "stem": {
+            "zh": "一个新同学说：'我把常用的 Skill 直接写进 CLAUDE.md，这样更方便。'这种做法的问题是什么？",
+            "en": "A new team member says: 'I just write common Skills directly into CLAUDE.md for convenience.' What is the problem with this?",
+            "ja": "新しいチームメンバーが「よく使う Skill を CLAUDE.md に直接書いた方が便利」と言います。この方法の問題は何ですか？"
+          },
+          "options": [
+            {
+              "id": "a",
+              "text": {
+                "zh": "CLAUDE.md 不支持多语言，Skill 内容会乱码",
+                "en": "CLAUDE.md does not support multilingual content, causing garbled Skill content",
+                "ja": "CLAUDE.md は多言語をサポートしていないので Skill 内容が文字化けする"
+              }
+            },
+            {
+              "id": "b",
+              "text": {
+                "zh": "SkillRegistry 无法读取 CLAUDE.md 里的内容",
+                "en": "SkillRegistry cannot read content inside CLAUDE.md",
+                "ja": "SkillRegistry は CLAUDE.md の内容を読めない"
+              }
+            },
+            {
+              "id": "c",
+              "text": {
+                "zh": "CLAUDE.md 每次都全量加载，把 Skill 写进去等于放弃了按需加载的优势，每次会话都浪费大量 token",
+                "en": "CLAUDE.md is fully loaded every session; putting Skills there abandons on-demand loading and wastes tokens every session",
+                "ja": "CLAUDE.md は毎セッションで全量ロードされるため、Skill を書き込むとオンデマンドの利点を捨てて毎回トークンを無駄にする"
+              }
+            },
+            {
+              "id": "d",
+              "text": {
+                "zh": "这样 Skill 就变成了跨会话记忆，破坏了记忆模块的完整性",
+                "en": "This turns Skills into cross-session memory, breaking the memory module's integrity",
+                "ja": "これにより Skill がセッション間記憶になり記憶モジュールの整合性が壊れる"
+              }
+            }
+          ],
+          "answer": "c",
+          "explanation": {
+            "zh": "CLAUDE.md 是项目级持久指令，每次会话都全量加载。把 Skill 写进去意味着即使本次根本不需要这些 Skill，它们的全文也会占用 token。这正是 Discovery/Loading 分离要解决的问题。",
+            "en": "CLAUDE.md is loaded in full every session. Writing Skills there means their full text occupies tokens even when not needed. This is exactly the problem the Discovery/Loading separation solves.",
+            "ja": "CLAUDE.md は毎セッションで全量ロードされます。Skill を書き込むと、使わなくても全文がトークンを占有します。これこそ Discovery/Loading 分離が解決する問題です。"
+          },
+          "reward_card": "card_s05_003"
+        },
+        {
+          "id": "q_s05_012",
+          "type": "choice",
+          "difficulty": 2,
+          "stem": {
+            "zh": "以下对 Skill、记忆、CLAUDE.md 三者关系的描述，哪项最准确？",
+            "en": "Which description of the relationship between Skills, Memory, and CLAUDE.md is most accurate?",
+            "ja": "Skill、Memory、CLAUDE.md の三者関係について最も正確な説明はどれですか？"
+          },
+          "options": [
+            {
+              "id": "a",
+              "text": {
+                "zh": "三者本质相同，都是持久化信息，只是粒度不同",
+                "en": "All three are essentially persistent information, just at different granularities",
+                "ja": "三者は本質的に同じ永続情報で粒度が違うだけ"
+              }
+            },
+            {
+              "id": "b",
+              "text": {
+                "zh": "Skill 是按需加载的操作指南；记忆是跨会话持久化数据；CLAUDE.md 是项目级持久指令",
+                "en": "Skills are on-demand operation guides; Memory is cross-session persistent data; CLAUDE.md is a persistent project-level directive",
+                "ja": "Skill はオンデマンドの操作手順書、Memory はセッション間永続データ、CLAUDE.md はプロジェクトレベルの永続指示"
+              }
+            },
+            {
+              "id": "c",
+              "text": {
+                "zh": "Skill 和 CLAUDE.md 相同，记忆是独立的第三类",
+                "en": "Skills and CLAUDE.md are the same; Memory is a separate third category",
+                "ja": "Skill と CLAUDE.md は同じで、Memory だけが独立した第三のカテゴリ"
+              }
+            },
+            {
+              "id": "d",
+              "text": {
+                "zh": "记忆和 Skill 相同，CLAUDE.md 是独立的第三类",
+                "en": "Memory and Skills are the same; CLAUDE.md is a separate third category",
+                "ja": "Memory と Skill は同じで、CLAUDE.md だけが独立した第三のカテゴリ"
+              }
+            }
+          ],
+          "answer": "b",
+          "explanation": {
+            "zh": "三者各有明确定位：Skill 是按需加载的任务操作指南；记忆是跨会话持久化的信息；CLAUDE.md 是项目级持久指令。混淆三者是学习 s05 最常见的错误。",
+            "en": "Each has a clear role: Skills are on-demand task guides; Memory is cross-session persistent data; CLAUDE.md is a persistent project directive. Confusing the three is the most common mistake when learning s05.",
+            "ja": "三者は明確な役割を持ちます。Skill はオンデマンドのタスク手順書、Memory はセッション間永続データ、CLAUDE.md はプロジェクト永続指示です。三者を混同するのが s05 学習で最もよくある間違いです。"
+          },
+          "reward_card": "card_s05_001"
+        },
+        {
+          "id": "q_s05_013",
+          "type": "choice",
+          "difficulty": 3,
+          "stem": {
+            "zh": "如果 SkillRegistry 不存在，Discovery 和 Loading 会面临什么问题？",
+            "en": "If SkillRegistry did not exist, what problem would Discovery and Loading face?",
+            "ja": "SkillRegistry がなければ、Discovery と Loading はどんな問題に直面しますか？"
+          },
+          "options": [
+            {
+              "id": "a",
+              "text": {
+                "zh": "Discovery 无法区分哪些是 Skill，Loading 不知道去哪里取完整正文",
+                "en": "Discovery cannot distinguish Skills, and Loading does not know where to fetch full content",
+                "ja": "Discovery はどれが Skill か判別できず、Loading は全文をどこから取得するかわからない"
+              }
+            },
+            {
+              "id": "b",
+              "text": {
+                "zh": "跨会话记忆会覆盖所有 Skill 内容",
+                "en": "Cross-session memory would overwrite all Skill content",
+                "ja": "セッション間記憶がすべての Skill 内容を上書きする"
+              }
+            },
+            {
+              "id": "c",
+              "text": {
+                "zh": "CLAUDE.md 会自动接管 Skill 的管理职责",
+                "en": "CLAUDE.md would automatically take over Skill management",
+                "ja": "CLAUDE.md が自動的に Skill 管理を引き継ぐ"
+              }
+            },
+            {
+              "id": "d",
+              "text": {
+                "zh": "tool_result 会直接把所有 Skill 注入进 system prompt",
+                "en": "tool_result would inject all Skills directly into the system prompt",
+                "ja": "tool_result がすべての Skill を直接 system prompt に注入する"
+              }
+            }
+          ],
+          "answer": "a",
+          "explanation": {
+            "zh": "SkillRegistry 是统一的管理层：它提供目录（让 Discovery 知道有哪些 Skill）和完整正文（让 Loading 知道去哪里取内容）。没有它，两层设计都会失效。",
+            "en": "SkillRegistry is the unified management layer: it provides the index (so Discovery knows what Skills exist) and the full body (so Loading knows where to fetch content). Without it, both layers break down.",
+            "ja": "SkillRegistry は統一管理層で、目次（Discovery がどの Skill があるか知るため）と全文（Loading がどこからコンテンツを取得するか知るため）を提供します。なければ両層とも機能しません。"
+          },
+          "reward_card": "card_s05_002"
+        },
+        {
+          "id": "q_s05_014",
+          "type": "choice",
+          "difficulty": 2,
+          "stem": {
+            "zh": "Skill 的「轻量目录」包含哪些信息？",
+            "en": "What information does a Skill's 'lightweight index' contain?",
+            "ja": "Skill の「軽量目次」にはどんな情報が含まれますか？"
+          },
+          "options": [
+            {
+              "id": "a",
+              "text": {
+                "zh": "Skill 的完整正文和所有子步骤",
+                "en": "The full body and all sub-steps of the Skill",
+                "ja": "Skill の全文とすべてのサブステップ"
+              }
+            },
+            {
+              "id": "b",
+              "text": {
+                "zh": "上次调用 Skill 的时间戳和结果",
+                "en": "Timestamp and result of the last Skill invocation",
+                "ja": "最後に Skill を呼び出したタイムスタンプと結果"
+              }
+            },
+            {
+              "id": "c",
+              "text": {
+                "zh": "CLAUDE.md 中与该 Skill 相关的段落",
+                "en": "Paragraphs in CLAUDE.md related to this Skill",
+                "ja": "CLAUDE.md のその Skill に関連する段落"
+              }
+            },
+            {
+              "id": "d",
+              "text": {
+                "zh": "Skill 的名称和简短描述",
+                "en": "The Skill's name and short description",
+                "ja": "Skill の名前と短い説明"
+              }
+            }
+          ],
+          "answer": "d",
+          "explanation": {
+            "zh": "轻量目录只包含名称和简短描述，这些信息足够让模型知道有哪些 Skill 可用，同时不会大量占用 token。完整正文只在 Loading 阶段才会出现。",
+            "en": "The lightweight index only contains name and short description - enough for the model to know what Skills are available without consuming many tokens. Full content only appears at Loading time.",
+            "ja": "軽量目次には名前と短い説明だけが含まれます。これだけでモデルはどの Skill が使えるかを把握でき、トークンを大量消費しません。全文は Loading フェーズにのみ現れます。"
+          },
+          "reward_card": "card_s05_003"
+        },
+        {
+          "id": "q_s05_015",
+          "type": "choice",
+          "difficulty": 1,
+          "stem": {
+            "zh": "Skill 解决的核心问题是什么？",
+            "en": "What core problem does Skill solve?",
+            "ja": "Skill が解決する核心的な問題は何ですか？"
+          },
+          "options": [
+            {
+              "id": "a",
+              "text": {
+                "zh": "如何在多个会话之间持久化用户数据",
+                "en": "How to persist user data across multiple sessions",
+                "ja": "複数のセッション間でユーザーデータを永続化する方法"
+              }
+            },
+            {
+              "id": "b",
+              "text": {
+                "zh": "如何减少模型的推理错误率",
+                "en": "How to reduce the model's reasoning error rate",
+                "ja": "モデルの推論エラー率を下げる方法"
+              }
+            },
+            {
+              "id": "c",
+              "text": {
+                "zh": "如何把长期可选知识从 system prompt 里拆出来，改成按需加载，节省上下文空间",
+                "en": "How to extract optional long-term knowledge from the system prompt and load it on demand to save context space",
+                "ja": "長期的なオプション知識を system prompt から切り出してオンデマンドでロードし、コンテキスト空間を節約する方法"
+              }
+            },
+            {
+              "id": "d",
+              "text": {
+                "zh": "如何让 CLAUDE.md 在多项目之间共享",
+                "en": "How to share CLAUDE.md across multiple projects",
+                "ja": "CLAUDE.md を複数プロジェクト間で共有する方法"
+              }
+            }
+          ],
+          "answer": "c",
+          "explanation": {
+            "zh": "Skill 的核心价值在于把长期可选知识从 system prompt 里拆出来，通过 Discovery/Loading 两层设计实现按需加载，避免每次都让不相关的内容占用宝贵的上下文空间。",
+            "en": "The core value of Skills is extracting optional long-term knowledge from the system prompt and enabling on-demand loading via the Discovery/Loading two-layer design, preventing irrelevant content from occupying precious context space.",
+            "ja": "Skill の核心的価値は、長期的なオプション知識を system prompt から切り出し、Discovery/Loading の二層設計でオンデマンドロードを実現し、無関係なコンテンツが貴重なコンテキスト空間を占有しないようにすることです。"
+          },
+          "reward_card": "card_s05_001"
+        },
+        {
+          "id": "q_s05_016",
+          "type": "choice",
+          "difficulty": 3,
+          "stem": {
+            "zh": "以下哪种情况下，Skill 的 Discovery 信息会更新，但 Loading 不需要触发？",
+            "en": "In which situation is Skill's Discovery information updated but Loading does not need to be triggered?",
+            "ja": "Skill の Discovery 情報は更新されるが Loading をトリガーする必要がない状況はどれですか？"
+          },
+          "options": [
+            {
+              "id": "a",
+              "text": {
+                "zh": "向 SkillRegistry 新增一个 Skill，但本次对话没有使用它",
+                "en": "A new Skill is added to SkillRegistry but not used in the current session",
+                "ja": "SkillRegistry に新しい Skill が追加されたが今回のセッションでは使用しない"
+              }
+            },
+            {
+              "id": "b",
+              "text": {
+                "zh": "用户要求查看某个 Skill 的完整操作步骤",
+                "en": "The user requests to see the full operation steps of a Skill",
+                "ja": "ユーザーが特定の Skill の完全な操作手順を見たいと要求する"
+              }
+            },
+            {
+              "id": "c",
+              "text": {
+                "zh": "模型判断当前任务需要调用某个 Skill",
+                "en": "The model determines the current task requires invoking a specific Skill",
+                "ja": "モデルが現在のタスクに特定の Skill の呼び出しが必要と判断する"
+              }
+            },
+            {
+              "id": "d",
+              "text": {
+                "zh": "CLAUDE.md 发生了变更，需要同步到 SkillRegistry",
+                "en": "CLAUDE.md changed and needs to be synced to SkillRegistry",
+                "ja": "CLAUDE.md が変更されて SkillRegistry に同期する必要がある"
+              }
+            }
+          ],
+          "answer": "a",
+          "explanation": {
+            "zh": "向 SkillRegistry 添加新 Skill 会更新 Discovery 目录（system prompt 里多出一个条目），但如果本次对话根本不使用它，就不会触发 Loading，全文内容不会注入上下文。这正体现了两层分离的效率优势。",
+            "en": "Adding a new Skill to SkillRegistry updates the Discovery index (one more entry in the system prompt), but if it is never used in this session, Loading is never triggered and the full content never enters the context. This shows the efficiency advantage of the two-layer design.",
+            "ja": "SkillRegistry に新 Skill を追加すると Discovery 目次が更新されます（system prompt に 1 エントリ追加）が、今回のセッションで使わなければ Loading はトリガーされず全文はコンテキストに入りません。これが二層設計の効率優位性です。"
+          },
+          "reward_card": "card_s05_002"
+        },
+        {
+          "id": "q_s05_017",
+          "type": "choice",
+          "difficulty": 2,
+          "stem": {
+            "zh": "以下对 SkillRegistry 作用的描述，哪项是正确的？",
+            "en": "Which description of SkillRegistry's role is correct?",
+            "ja": "SkillRegistry の役割についての正しい説明はどれですか？"
+          },
+          "options": [
+            {
+              "id": "a",
+              "text": {
+                "zh": "SkillRegistry 只负责存储 Skill，不参与 Discovery 或 Loading",
+                "en": "SkillRegistry only stores Skills and does not participate in Discovery or Loading",
+                "ja": "SkillRegistry は Skill を保存するだけで Discovery や Loading には関与しない"
+              }
+            },
+            {
+              "id": "b",
+              "text": {
+                "zh": "SkillRegistry 是跨会话记忆的存储后端",
+                "en": "SkillRegistry is the storage backend for cross-session memory",
+                "ja": "SkillRegistry はセッション間記憶のストレージバックエンド"
+              }
+            },
+            {
+              "id": "c",
+              "text": {
+                "zh": "SkillRegistry 是 CLAUDE.md 的运行时解析器",
+                "en": "SkillRegistry is the runtime parser for CLAUDE.md",
+                "ja": "SkillRegistry は CLAUDE.md のランタイムパーサー"
+              }
+            },
+            {
+              "id": "d",
+              "text": {
+                "zh": "SkillRegistry 统一管理所有 Skill，既提供目录供 Discovery 使用，也提供全文供 Loading 使用",
+                "en": "SkillRegistry centrally manages all Skills, providing the index for Discovery and the full body for Loading",
+                "ja": "SkillRegistry は全 Skill を一元管理し、Discovery 用の目次と Loading 用の全文の両方を提供する"
+              }
+            }
+          ],
+          "answer": "d",
+          "explanation": {
+            "zh": "SkillRegistry 的价值在于统一管理：它是 Discovery（提供目录）和 Loading（提供全文）两个阶段的统一入口，而不仅仅是一个被动存储。",
+            "en": "SkillRegistry's value lies in unified management: it is the single entry point for both Discovery (providing the index) and Loading (providing full content), not just passive storage.",
+            "ja": "SkillRegistry の価値は一元管理にあります。Discovery（目次の提供）と Loading（全文の提供）両フェーズへの統一入口であり、単なるパッシブなストレージではありません。"
+          },
+          "reward_card": "card_s05_003"
+        },
+        {
+          "id": "q_s05_018",
+          "type": "choice",
+          "difficulty": 3,
+          "stem": {
+            "zh": "在 s05 的设计中，哪种说法最能概括 Discovery 和 Loading 分离带来的最终好处？",
+            "en": "In the s05 design, which statement best summarizes the ultimate benefit of separating Discovery and Loading?",
+            "ja": "s05 の設計において、Discovery と Loading の分離がもたらす最終的なメリットを最もよく表す説明はどれですか？"
+          },
+          "options": [
+            {
+              "id": "a",
+              "text": {
+                "zh": "模型可以注册无限多的 Skill，同时保持上下文窗口只装当前任务真正需要的内容",
+                "en": "The model can register unlimited Skills while keeping the context window containing only what the current task truly needs",
+                "ja": "モデルは無限に Skill を登録でき、同時にコンテキストウィンドウには今のタスクに本当に必要なものだけを保持できる"
+              }
+            },
+            {
+              "id": "b",
+              "text": {
+                "zh": "记忆模块的存储容量提高了 10 倍",
+                "en": "The memory module's storage capacity increases 10x",
+                "ja": "記憶モジュールのストレージ容量が 10 倍になる"
+              }
+            },
+            {
+              "id": "c",
+              "text": {
+                "zh": "CLAUDE.md 的解析速度提升，每次加载更快",
+                "en": "CLAUDE.md parsing speed improves, loading faster each time",
+                "ja": "CLAUDE.md のパース速度が上がり毎回のロードが速くなる"
+              }
+            },
+            {
+              "id": "d",
+              "text": {
+                "zh": "SkillRegistry 不再需要维护，自动与记忆同步",
+                "en": "SkillRegistry no longer needs maintenance and auto-syncs with memory",
+                "ja": "SkillRegistry のメンテナンスが不要になり自動的に記憶と同期する"
+              }
+            }
+          ],
+          "answer": "a",
+          "explanation": {
+            "zh": "Discovery/Loading 两层分离让 Skill 的「注册数量」和「上下文消耗」解耦：无论注册多少 Skill，上下文里只有本次任务实际用到的全文，这才是整个设计的终极价值。",
+            "en": "The two-layer separation decouples 'number of registered Skills' from 'context consumption': no matter how many Skills are registered, only the full text of those actually used in the current task enters the context. This is the ultimate value of the design.",
+            "ja": "二層分離により「登録 Skill 数」と「コンテキスト消費」が切り離されます。どれだけ多くの Skill を登録しても、現在のタスクで実際に使われたものの全文だけがコンテキストに入ります。これが設計の究極の価値です。"
+          },
+          "reward_card": "card_s05_001"
         }
       ],
       "star_thresholds": [
