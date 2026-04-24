@@ -1593,51 +1593,51 @@ module.exports = {
         {
           "id": "q_s03_001",
           "type": "choice",
-          "difficulty": 2,
+          "difficulty": 1,
           "stem": {
-            "zh": "在 Claude Code 中，关于「这一章要解决什么问题」的正确理解是？",
-            "en": "What is the correct understanding of \"What You'll Learn\" in Claude Code?",
-            "ja": "Claude Code における「この章が解く問題」の正しい理解はどれですか？"
+            "zh": "TodoWrite 工具的作用范围是什么？",
+            "en": "What is the scope of the TodoWrite tool?",
+            "ja": "TodoWrite ツールの有効範囲はどれですか？"
           },
           "options": [
             {
               "id": "a",
               "text": {
-                "zh": "这一章要解决什么问题",
-                "en": "What You'll Learn",
-                "ja": "この章が解く問題"
+                "zh": "跨会话持久化，重启后任务仍在",
+                "en": "Persists across sessions; tasks survive restarts",
+                "ja": "セッションをまたいで永続化し、再起動後も残る"
               }
             },
             {
               "id": "b",
               "text": {
-                "zh": "第四步：如果模型调用了工具，就执行",
-                "en": "第四步：如果模型调用了工具，就执行",
-                "ja": "第 4 段階: tool_use があればจริง行する"
-              }
-            },
-            {
-              "id": "d",
-              "text": {
-                "zh": "版本 3：加入最大轮数和失败保护",
-                "en": "版本 3：加入最大轮数和失败保护",
-                "ja": "Version 3: safety bound を足す"
+                "zh": "仅在当前会话内生效，会话结束后消失",
+                "en": "Only active in the current session; disappears when the session ends",
+                "ja": "現在のセッション内のみ有効で、セッション終了後に消える"
               }
             },
             {
               "id": "c",
               "text": {
-                "zh": "第一步：准备一个计划管理器",
-                "en": "第一步：准备一个计划管理器",
-                "ja": "第 1 段階: plan manager を用意する"
+                "zh": "在所有并行 agent 之间共享",
+                "en": "Shared across all parallel agents",
+                "ja": "すべての並列エージェント間で共有される"
+              }
+            },
+            {
+              "id": "d",
+              "text": {
+                "zh": "写入磁盘，作为项目级任务板使用",
+                "en": "Written to disk as a project-level task board",
+                "ja": "ディスクに書き込まれ、プロジェクト級タスクボードとして使われる"
               }
             }
           ],
-          "answer": "a",
+          "answer": "b",
           "explanation": {
-            "zh": "显式、稳定、可反复更新",
-            "en": "What You'll Learn",
-            "ja": "現在の plan を explicit に置いておく stable state がないこと"
+            "zh": "TodoWrite 是会话内的轻量计划工具，帮助模型聚焦下一步。任务完成后随会话一起消失，既不持久化，也不跨 agent 共享。",
+            "en": "TodoWrite is a lightweight in-session planning tool that keeps the model focused on the next step. Tasks vanish with the session and are neither persisted nor shared across agents.",
+            "ja": "TodoWrite はセッション内の軽量計画ツールで、モデルを次のステップに集中させます。タスクはセッションと共に消え、永続化もエージェント間共有もされません。"
           },
           "reward_card": "card_s03_001"
         },
@@ -1646,204 +1646,867 @@ module.exports = {
           "type": "choice",
           "difficulty": 1,
           "stem": {
-            "zh": "以下哪个概念与「先解释几个名词」直接相关？",
-            "en": "Which concept is directly related to \"The Problem\"?",
-            "ja": "「先に言葉をそろえる」に直接関連する概念はどれですか？"
+            "zh": "关于 TodoWrite，以下哪个描述最准确？",
+            "en": "Which description best fits TodoWrite?",
+            "ja": "TodoWrite を最も正確に表す説明はどれですか？"
           },
           "options": [
             {
-              "id": "c",
-              "text": {
-                "zh": "组合成一个完整循环",
-                "en": "组合成一个完整循环",
-                "ja": "全体を 1 つの loop にまとめる"
-              }
-            },
-            {
               "id": "a",
               "text": {
-                "zh": "先解释几个名词",
-                "en": "The Problem",
-                "ja": "先に言葉をそろえる"
+                "zh": "多 agent 协作的工作流编排系统",
+                "en": "A workflow orchestration system for multi-agent collaboration",
+                "ja": "マルチエージェント連携のワークフロー編成システム"
               }
             },
             {
               "id": "b",
               "text": {
-                "zh": "1. PlanItem",
-                "en": "1. PlanItem",
-                "ja": "1. PlanItem"
+                "zh": "后台异步任务的管理队列",
+                "en": "A management queue for background async tasks",
+                "ja": "バックグラウンド非同期タスクの管理キュー"
+              }
+            },
+            {
+              "id": "c",
+              "text": {
+                "zh": "当前会话的轻量计划，帮助模型聚焦下一步",
+                "en": "A lightweight plan for the current session that helps the model focus on the next step",
+                "ja": "現在のセッションの軽量プランで、モデルを次のステップに集中させる"
               }
             },
             {
               "id": "d",
               "text": {
-                "zh": "什么是 skill",
-                "en": "The Solution",
-                "ja": "仕組み"
+                "zh": "可供团队成员查看的持久化任务板",
+                "en": "A persistent task board visible to team members",
+                "ja": "チームメンバーが参照できる永続タスクボード"
               }
             }
           ],
-          "answer": "a",
+          "answer": "c",
           "explanation": {
-            "zh": "先解释几个名词",
-            "en": "The Problem",
-            "ja": "先に言葉をそろえる"
+            "zh": "TodoWrite 的核心定位是当前会话的轻量计划，不是持久化任务板、不是多 agent 工作图、不是后台任务管理。它只帮模型在当前会话里聚焦下一步。",
+            "en": "TodoWrite is fundamentally a lightweight in-session plan. It is not a persistent task board, a multi-agent workflow graph, or a background task manager. It only helps the model stay focused within the current session.",
+            "ja": "TodoWrite の本質は現在セッション内の軽量プランです。永続タスクボードでも、マルチエージェントワークフローグラフでも、バックグラウンドタスク管理でもなく、現在セッション内でモデルを集中させるだけです。"
           },
-          "reward_card": "card_s03_002"
+          "reward_card": "card_s03_001"
         },
         {
           "id": "q_s03_003",
           "type": "choice",
-          "difficulty": 1,
+          "difficulty": 2,
           "stem": {
-            "zh": "以下哪个概念与「什么是会话内规划」直接相关？",
-            "en": "Which concept is directly related to \"The Solution\"?",
-            "ja": "「session 内 planning とは何か」に直接関連する概念はどれですか？"
+            "zh": "同一时刻 todo 列表里允许存在几个 in_progress 状态的任务？",
+            "en": "How many tasks can be in the in_progress state at the same time?",
+            "ja": "todo リストで同時に in_progress 状態にできるタスクはいくつですか？"
           },
           "options": [
             {
               "id": "a",
               "text": {
-                "zh": "什么是会话内规划",
-                "en": "The Solution",
-                "ja": "session 内 planning とは何か"
-              }
-            },
-            {
-              "id": "d",
-              "text": {
-                "zh": "什么是 state",
-                "en": "Try It",
-                "ja": "state とは何か"
+                "zh": "没有限制，可以同时标记多个",
+                "en": "No limit; multiple tasks can be marked at once",
+                "ja": "制限なし、複数同時にマークできる"
               }
             },
             {
               "id": "b",
               "text": {
-                "zh": "什么是 turn",
-                "en": "How It Works",
-                "ja": "turn とは何か"
+                "zh": "最多两个，对应当前步骤和下一步",
+                "en": "At most two, for the current step and the next step",
+                "ja": "最大 2 つ、現在ステップと次ステップに対応"
               }
             },
             {
               "id": "c",
               "text": {
-                "zh": "什么是 loading",
-                "en": "What Changed From s04",
-                "ja": "試してみる"
+                "zh": "只能有一个",
+                "en": "Exactly one",
+                "ja": "ちょうど 1 つだけ"
+              }
+            },
+            {
+              "id": "d",
+              "text": {
+                "zh": "取决于当前会话的并行 agent 数量",
+                "en": "Depends on the number of parallel agents in the session",
+                "ja": "現在セッションの並列エージェント数による"
               }
             }
           ],
-          "answer": "a",
+          "answer": "c",
           "explanation": {
-            "zh": "什么是会话内规划",
-            "en": "The Solution",
-            "ja": "session 内 planning とは何か"
+            "zh": "关键约束：同一时刻只能有一个 in_progress，这强制模型聚焦当前一步，防止同时推进多件事导致计划模糊。",
+            "en": "The key constraint is exactly one in_progress at any moment, forcing the model to focus on one step and preventing plan drift from parallel progress.",
+            "ja": "重要な制約として、同時に in_progress にできるのは 1 つだけで、モデルは現在のステップに集中し、並行進行によるプラン拡散を防ぎます。"
           },
-          "reward_card": "card_s03_003"
+          "reward_card": "card_s03_002"
         },
         {
           "id": "q_s03_004",
           "type": "choice",
           "difficulty": 1,
           "stem": {
-            "zh": "以下哪个概念与「什么是 todo」直接相关？",
-            "en": "Which concept is directly related to \"How It Works\"?",
-            "ja": "「todo とは何か」に直接関連する概念はどれですか？"
+            "zh": "todo 列表的三种合法状态是哪些？",
+            "en": "What are the three valid states for a todo item?",
+            "ja": "todo アイテムの 3 つの有効な状態はどれですか？"
           },
           "options": [
             {
-              "id": "c",
-              "text": {
-                "zh": "和后续章节的关系",
-                "en": "和后续章节的关系",
-                "ja": "5. `max_turns` のような safety bound を持たない"
-              }
-            },
-            {
-              "id": "d",
-              "text": {
-                "zh": "3. 摘要只写成一句空话",
-                "en": "3. 摘要只写成一句空话",
-                "ja": "3. 摘要只写成一句空话"
-              }
-            },
-            {
               "id": "a",
               "text": {
-                "zh": "什么是 todo",
-                "en": "How It Works",
-                "ja": "todo とは何か"
+                "zh": "pending / in_progress / completed",
+                "en": "pending / in_progress / completed",
+                "ja": "pending / in_progress / completed"
               }
             },
             {
               "id": "b",
               "text": {
-                "zh": "3. 把会话计划当成长期任务系统",
-                "en": "3. 把会话计划当成长期任务系统",
-                "ja": "3. plan を一度書いたら更新しない"
+                "zh": "todo / doing / done",
+                "en": "todo / doing / done",
+                "ja": "todo / doing / done"
+              }
+            },
+            {
+              "id": "c",
+              "text": {
+                "zh": "queued / running / finished",
+                "en": "queued / running / finished",
+                "ja": "queued / running / finished"
+              }
+            },
+            {
+              "id": "d",
+              "text": {
+                "zh": "open / active / closed",
+                "en": "open / active / closed",
+                "ja": "open / active / closed"
               }
             }
           ],
           "answer": "a",
           "explanation": {
-            "zh": "什么是 todo",
-            "en": "Step 1.",
-            "ja": "todo とは何か"
+            "zh": "三种状态为 pending（待处理）、in_progress（进行中）、completed（已完成）。其中 in_progress 同一时刻只允许一个，强制模型一次只做一件事。",
+            "en": "The three states are pending, in_progress, and completed. Only one task may be in_progress at a time, enforcing single-focus execution.",
+            "ja": "3 つの状態は pending、in_progress、completed です。in_progress は同時に 1 つだけで、モデルの単一集中実行を強制します。"
           },
-          "reward_card": "card_s03_004"
+          "reward_card": "card_s03_002"
         },
         {
           "id": "q_s03_005",
           "type": "choice",
-          "difficulty": 1,
+          "difficulty": 2,
           "stem": {
-            "zh": "以下哪个概念与「什么是 active step」直接相关？",
-            "en": "Which concept is directly related to \"What Changed From s02\"?",
-            "ja": "「active step とは何か」に直接関連する概念はどれですか？"
+            "zh": "为什么 in_progress 状态同一时刻只能有一个？",
+            "en": "Why can only one task be in_progress at a time?",
+            "ja": "なぜ in_progress は同時に 1 つだけなのですか？"
           },
           "options": [
             {
-              "id": "c",
-              "text": {
-                "zh": "实现",
-                "en": "Try It",
-                "ja": "教学上の簡略化"
-              }
-            },
-            {
               "id": "a",
               "text": {
-                "zh": "什么是 active step",
-                "en": "What Changed From s02",
-                "ja": "active step とは何か"
-              }
-            },
-            {
-              "id": "d",
-              "text": {
-                "zh": "3. 把 skill 当成“绝对规则”",
-                "en": "3. 把 skill 当成“绝对规则”",
-                "ja": "3. 把 skill 当成“绝对规则”"
+                "zh": "为了节省内存，避免状态对象过多",
+                "en": "To save memory by avoiding too many state objects",
+                "ja": "状態オブジェクトが増えすぎてメモリを節約するため"
               }
             },
             {
               "id": "b",
               "text": {
-                "zh": "消息规范化",
-                "en": "How It Works",
-                "ja": "s01からの変更点"
+                "zh": "微信小程序不支持并发写入",
+                "en": "WeChat Mini Programs do not support concurrent writes",
+                "ja": "WeChat ミニプログラムが並行書き込みをサポートしないため"
+              }
+            },
+            {
+              "id": "c",
+              "text": {
+                "zh": "强制模型聚焦当前一步，防止同时推进多件事导致计划漂移",
+                "en": "To force the model to focus on one step at a time and prevent plan drift",
+                "ja": "モデルを現在のステップに集中させ、複数同時進行によるプラン漂流を防ぐため"
+              }
+            },
+            {
+              "id": "d",
+              "text": {
+                "zh": "因为 TodoWrite 每次只能接受一条更新指令",
+                "en": "Because TodoWrite can only accept one update instruction at a time",
+                "ja": "TodoWrite が一度に 1 つの更新命令しか受け付けないため"
+              }
+            }
+          ],
+          "answer": "c",
+          "explanation": {
+            "zh": "一次只做一件事是 TodoWrite 的核心设计原则。in_progress 唯一性强制模型聚焦，防止同时推进多个任务导致计划模糊。",
+            "en": "Doing one thing at a time is the core design principle of TodoWrite. The single in_progress constraint forces model focus and prevents plan ambiguity from parallel progress.",
+            "ja": "一度に一つだけというのが TodoWrite の核心設計原則です。in_progress の一意性制約によりモデルは集中し、並行進行によるプランの曖昧化を防ぎます。"
+          },
+          "reward_card": "card_s03_002"
+        },
+        {
+          "id": "q_s03_006",
+          "type": "choice",
+          "difficulty": 3,
+          "stem": {
+            "zh": "模型连续几轮没有更新 todo 计划时，系统会做什么？",
+            "en": "What does the system do when the model goes several turns without updating the todo plan?",
+            "ja": "モデルが数ターン todo プランを更新しない場合、システムは何をしますか？"
+          },
+          "options": [
+            {
+              "id": "a",
+              "text": {
+                "zh": "自动提醒模型，把它的注意力拉回到计划上",
+                "en": "Automatically reminds the model and redirects its attention to the plan",
+                "ja": "自動でモデルにリマインドし、注意をプランに引き戻す"
+              }
+            },
+            {
+              "id": "b",
+              "text": {
+                "zh": "自动终止当前会话，要求用户重新开始",
+                "en": "Automatically terminates the session and asks the user to restart",
+                "ja": "現在のセッションを自動終了し、ユーザーに再開を求める"
+              }
+            },
+            {
+              "id": "c",
+              "text": {
+                "zh": "替模型补写后续的计划步骤",
+                "en": "Writes the remaining plan steps on behalf of the model",
+                "ja": "モデルの代わりに残りのプランステップを書く"
+              }
+            },
+            {
+              "id": "d",
+              "text": {
+                "zh": "把所有 in_progress 任务强制标记为 completed",
+                "en": "Forcibly marks all in_progress tasks as completed",
+                "ja": "すべての in_progress タスクを強制的に completed にマークする"
               }
             }
           ],
           "answer": "a",
           "explanation": {
-            "zh": "什么是 active step",
-            "en": "What Changed From s02",
-            "ja": "同時にあれもこれも進めて plan をぼかさないこと"
+            "zh": "提醒机制是防漂移的安全网：连续几轮没更新计划时系统自动提醒，把模型注意力拉回计划。它不替模型思考，不终止会话，只是防止计划被遗忘。",
+            "en": "The reminder mechanism is an anti-drift safety net: when several turns pass without a plan update, the system reminds the model and redirects its attention to the plan. It does not plan for the model or terminate the session; it only prevents the plan from being forgotten.",
+            "ja": "リマインド機構は漂流防止のセーフティネットです。数ターン更新しないとシステムが自動でリマインドし、注意をプランに引き戻します。モデルの代わりに計画したりセッションを終了したりせず、計画が忘れられるのを防ぐだけです。"
           },
-          "reward_card": "card_s03_005"
+          "reward_card": "card_s03_003"
+        },
+        {
+          "id": "q_s03_007",
+          "type": "choice",
+          "difficulty": 2,
+          "stem": {
+            "zh": "TodoWrite 的提醒机制目的是什么？",
+            "en": "What is the purpose of the TodoWrite reminder mechanism?",
+            "ja": "TodoWrite のリマインド機構の目的は何ですか？"
+          },
+          "options": [
+            {
+              "id": "a",
+              "text": {
+                "zh": "替模型规划接下来应该做什么",
+                "en": "To plan the next steps on behalf of the model",
+                "ja": "モデルの代わりに次のステップを計画する"
+              }
+            },
+            {
+              "id": "b",
+              "text": {
+                "zh": "把模型拉回到已有计划，防止执行漂离计划",
+                "en": "To pull the model back to the existing plan and prevent execution from drifting",
+                "ja": "モデルを既存プランに引き戻し、実行が計画から離れるのを防ぐ"
+              }
+            },
+            {
+              "id": "c",
+              "text": {
+                "zh": "强制模型每轮都必须更新 todo 状态",
+                "en": "To force the model to update the todo state every turn",
+                "ja": "毎ターン必ず todo 状態を更新するようモデルに強制する"
+              }
+            },
+            {
+              "id": "d",
+              "text": {
+                "zh": "记录模型执行过程，供事后审计",
+                "en": "To record the model execution process for later auditing",
+                "ja": "後の監査のためにモデルの実行プロセスを記録する"
+              }
+            }
+          ],
+          "answer": "b",
+          "explanation": {
+            "zh": "提醒机制是防漂移的安全网，不是替模型思考的工具。它只在模型连续几轮没更新计划时触发，把模型的注意力拉回到已有计划上。",
+            "en": "The reminder mechanism is an anti-drift safety net, not a planning substitute. It only triggers when the model skips updates for several turns, redirecting attention back to the existing plan.",
+            "ja": "リマインド機構は漂流防止のセーフティネットであり、計画代替ツールではありません。数ターン更新をスキップしたときだけ発動し、注意を既存プランに向け直します。"
+          },
+          "reward_card": "card_s03_003"
+        },
+        {
+          "id": "q_s03_008",
+          "type": "choice",
+          "difficulty": 1,
+          "stem": {
+            "zh": "提醒机制触发的条件是什么？",
+            "en": "What condition triggers the reminder mechanism?",
+            "ja": "リマインド機構が発動する条件は何ですか？"
+          },
+          "options": [
+            {
+              "id": "a",
+              "text": {
+                "zh": "每当模型输出超过一定长度",
+                "en": "Whenever the model output exceeds a certain length",
+                "ja": "モデルの出力が一定の長さを超えるたびに"
+              }
+            },
+            {
+              "id": "b",
+              "text": {
+                "zh": "所有任务都变成 completed 状态",
+                "en": "All tasks reach the completed state",
+                "ja": "すべてのタスクが completed 状態になる"
+              }
+            },
+            {
+              "id": "c",
+              "text": {
+                "zh": "模型调用了非 TodoWrite 的工具",
+                "en": "The model calls a tool other than TodoWrite",
+                "ja": "モデルが TodoWrite 以外のツールを呼び出す"
+              }
+            },
+            {
+              "id": "d",
+              "text": {
+                "zh": "模型连续几轮没有更新 todo 计划",
+                "en": "The model goes several turns without updating the todo plan",
+                "ja": "モデルが数ターン todo プランを更新しない"
+              }
+            }
+          ],
+          "answer": "d",
+          "explanation": {
+            "zh": "提醒机制在模型连续几轮没更新计划时自动触发，这是防止执行过程中计划漂移的安全网机制。",
+            "en": "The reminder triggers automatically when the model goes multiple turns without updating the plan, serving as a safety net against execution drift.",
+            "ja": "リマインドはモデルが複数ターンプランを更新しないときに自動発動し、実行中の計画漂流を防ぐセーフティネットとして機能します。"
+          },
+          "reward_card": "card_s03_003"
+        },
+        {
+          "id": "q_s03_009",
+          "type": "choice",
+          "difficulty": 3,
+          "stem": {
+            "zh": "下列关于提醒机制的说法，哪个是错误的？",
+            "en": "Which statement about the reminder mechanism is incorrect?",
+            "ja": "リマインド機構に関する次の説明のうち、誤っているものはどれですか？"
+          },
+          "options": [
+            {
+              "id": "a",
+              "text": {
+                "zh": "提醒机制是防漂移的安全网",
+                "en": "The reminder mechanism is an anti-drift safety net",
+                "ja": "リマインド機構は漂流防止のセーフティネットである"
+              }
+            },
+            {
+              "id": "b",
+              "text": {
+                "zh": "提醒机制在模型连续几轮没更新计划时自动触发",
+                "en": "The reminder triggers automatically when the model skips plan updates for several turns",
+                "ja": "モデルが数ターンプランを更新しないとリマインドが自動発動する"
+              }
+            },
+            {
+              "id": "c",
+              "text": {
+                "zh": "提醒机制会替模型决定下一步要做什么",
+                "en": "The reminder mechanism decides what the model should do next",
+                "ja": "リマインド機構がモデルの次のステップを決定する"
+              }
+            },
+            {
+              "id": "d",
+              "text": {
+                "zh": "提醒机制把模型的注意力拉回到已有计划上",
+                "en": "The reminder mechanism redirects the model's attention back to the existing plan",
+                "ja": "リマインド機構はモデルの注意を既存プランに引き戻す"
+              }
+            }
+          ],
+          "answer": "c",
+          "explanation": {
+            "zh": "提醒机制不替模型思考，它只是把模型的注意力拉回到已有计划上。决定下一步做什么仍然是模型自己的职责。",
+            "en": "The reminder mechanism does not think for the model. It only redirects attention back to the existing plan. Deciding what to do next remains the model's own responsibility.",
+            "ja": "リマインド機構はモデルの代わりに考えません。既存プランへモデルの注意を向け直すだけです。次のステップを決めるのは依然としてモデル自身の責任です。"
+          },
+          "reward_card": "card_s03_003"
+        },
+        {
+          "id": "q_s03_010",
+          "type": "choice",
+          "difficulty": 2,
+          "stem": {
+            "zh": "TodoWrite 每次调用时如何更新计划列表？",
+            "en": "How does TodoWrite update the plan list on each call?",
+            "ja": "TodoWrite は毎回の呼び出しでプランリストをどう更新しますか？"
+          },
+          "options": [
+            {
+              "id": "a",
+              "text": {
+                "zh": "只追加新任务，不修改已有任务",
+                "en": "Only appends new tasks without modifying existing ones",
+                "ja": "既存タスクを変更せず新しいタスクだけを追加する"
+              }
+            },
+            {
+              "id": "b",
+              "text": {
+                "zh": "只删除已完成的任务，保留其余不变",
+                "en": "Only removes completed tasks and leaves the rest unchanged",
+                "ja": "完了済みタスクだけを削除し、残りはそのまま"
+              }
+            },
+            {
+              "id": "c",
+              "text": {
+                "zh": "提交整份最新计划列表，旧内容被覆盖",
+                "en": "Submits the entire latest plan list; old content is overwritten",
+                "ja": "最新のプランリスト全体を送信し、古い内容は上書きされる"
+              }
+            },
+            {
+              "id": "d",
+              "text": {
+                "zh": "对单个任务做局部 patch，其他任务不受影响",
+                "en": "Applies a partial patch to a single task without affecting others",
+                "ja": "単一タスクに部分パッチを当て、他のタスクには影響しない"
+              }
+            }
+          ],
+          "answer": "c",
+          "explanation": {
+            "zh": "每次调用 TodoWrite 时直接提交整份最新计划列表，旧内容被覆盖。整份重写比局部增删改更简单，也不容易出错。",
+            "en": "Each TodoWrite call submits the entire latest plan list and overwrites old content. Full rewrites are simpler and less error-prone than incremental operations.",
+            "ja": "TodoWrite を呼び出すたびに最新のプランリスト全体を送信し、古い内容を上書きします。全体書き換えは部分的な追加・削除・変更よりシンプルでエラーが少ないです。"
+          },
+          "reward_card": "card_s03_001"
+        },
+        {
+          "id": "q_s03_011",
+          "type": "choice",
+          "difficulty": 1,
+          "stem": {
+            "zh": "与局部增删改相比，整份重写 todo 列表的优点是什么？",
+            "en": "Compared to incremental add/delete/update, what is the advantage of full-rewrite?",
+            "ja": "部分的な追加・削除・変更と比べて、全体書き換えの利点は何ですか？"
+          },
+          "options": [
+            {
+              "id": "a",
+              "text": {
+                "zh": "更简单且不容易出错",
+                "en": "Simpler and less error-prone",
+                "ja": "よりシンプルでエラーが少ない"
+              }
+            },
+            {
+              "id": "b",
+              "text": {
+                "zh": "节省网络带宽，传输数据更少",
+                "en": "Saves network bandwidth by transmitting less data",
+                "ja": "ネットワーク帯域幅を節約し、転送データが少ない"
+              }
+            },
+            {
+              "id": "c",
+              "text": {
+                "zh": "可以保留历史版本，支持回滚",
+                "en": "Preserves history for rollback support",
+                "ja": "履歴を保持してロールバックをサポートする"
+              }
+            },
+            {
+              "id": "d",
+              "text": {
+                "zh": "允许多个 agent 同时写入而不冲突",
+                "en": "Allows multiple agents to write simultaneously without conflicts",
+                "ja": "複数のエージェントが競合なしに同時に書き込める"
+              }
+            }
+          ],
+          "answer": "a",
+          "explanation": {
+            "zh": "整份重写比局部增删改更简单不易出错：每次直接提交当前完整状态，不需要追踪每一步的差异操作，逻辑更清晰。",
+            "en": "Full rewrites are simpler and less error-prone than incremental operations because you submit the complete current state each time without tracking individual diff operations.",
+            "ja": "全体書き換えは部分操作よりシンプルでエラーが少ないです。毎回完全な現在状態を送信するだけで、個々の差分操作を追跡する必要がありません。"
+          },
+          "reward_card": "card_s03_001"
+        },
+        {
+          "id": "q_s03_012",
+          "type": "choice",
+          "difficulty": 3,
+          "stem": {
+            "zh": "以下关于整份重写策略的说法，哪个是错误的？",
+            "en": "Which statement about the full-rewrite strategy is incorrect?",
+            "ja": "全体書き換え戦略に関する次の説明のうち、誤っているものはどれですか？"
+          },
+          "options": [
+            {
+              "id": "a",
+              "text": {
+                "zh": "每次调用 TodoWrite 时提交整份最新计划列表",
+                "en": "Each call to TodoWrite submits the entire latest plan list",
+                "ja": "TodoWrite を呼び出すたびに最新のプランリスト全体を送信する"
+              }
+            },
+            {
+              "id": "b",
+              "text": {
+                "zh": "旧内容在新内容写入时被覆盖",
+                "en": "Old content is overwritten when new content is written",
+                "ja": "新しい内容が書き込まれるときに古い内容が上書きされる"
+              }
+            },
+            {
+              "id": "c",
+              "text": {
+                "zh": "整份重写比局部增删改更简单不易出错",
+                "en": "Full rewrites are simpler and less error-prone than incremental operations",
+                "ja": "全体書き換えは部分的な追加・削除・変更よりシンプルでエラーが少ない"
+              }
+            },
+            {
+              "id": "d",
+              "text": {
+                "zh": "整份重写会保存每次更新的历史记录，方便回溯",
+                "en": "Full rewrites save a history of each update for easy backtracking",
+                "ja": "全体書き換えは各更新の履歴を保存し、遡りを容易にする"
+              }
+            }
+          ],
+          "answer": "d",
+          "explanation": {
+            "zh": "整份重写不保存历史：每次调用都用最新的整份列表覆盖旧内容，不支持回溯。它的优点是简单不易出错，而不是历史追踪。",
+            "en": "Full rewrite does not save history. Each call overwrites old content with the latest complete list, with no rollback support. Its advantage is simplicity and reduced error risk, not history tracking.",
+            "ja": "全体書き換えは履歴を保存しません。毎回の呼び出しで古い内容を最新の完全リストで上書きし、ロールバックはサポートされません。利点はシンプルさとエラー減少であり、履歴追跡ではありません。"
+          },
+          "reward_card": "card_s03_001"
+        },
+        {
+          "id": "q_s03_013",
+          "type": "choice",
+          "difficulty": 2,
+          "stem": {
+            "zh": "TodoWrite 不适合用来做什么？",
+            "en": "What is TodoWrite NOT suitable for?",
+            "ja": "TodoWrite は何に適していませんか？"
+          },
+          "options": [
+            {
+              "id": "a",
+              "text": {
+                "zh": "跨会话的长期项目任务管理",
+                "en": "Long-term project task management across sessions",
+                "ja": "セッションをまたぐ長期プロジェクトタスク管理"
+              }
+            },
+            {
+              "id": "b",
+              "text": {
+                "zh": "在当前会话中规划接下来的步骤",
+                "en": "Planning the next steps in the current session",
+                "ja": "現在のセッションで次のステップを計画する"
+              }
+            },
+            {
+              "id": "c",
+              "text": {
+                "zh": "追踪当前会话内的任务完成状态",
+                "en": "Tracking task completion status within the current session",
+                "ja": "現在のセッション内のタスク完了状態を追跡する"
+              }
+            },
+            {
+              "id": "d",
+              "text": {
+                "zh": "帮助模型聚焦在下一个执行步骤",
+                "en": "Helping the model focus on the next execution step",
+                "ja": "モデルが次の実行ステップに集中するのを助ける"
+              }
+            }
+          ],
+          "answer": "a",
+          "explanation": {
+            "zh": "TodoWrite 仅在当前会话内生效，会话结束后消失。它不适合跨会话的长期项目管理，那需要使用持久化存储方案。",
+            "en": "TodoWrite only works within the current session and disappears when the session ends. It is not suitable for cross-session long-term project management, which requires a persistent storage solution.",
+            "ja": "TodoWrite は現在のセッション内でのみ有効で、セッション終了後に消えます。セッションをまたぐ長期プロジェクト管理には適しておらず、永続化ストレージが必要です。"
+          },
+          "reward_card": "card_s03_001"
+        },
+        {
+          "id": "q_s03_014",
+          "type": "choice",
+          "difficulty": 3,
+          "stem": {
+            "zh": "一个任务被标记为 in_progress 期间，正确的操作流程是什么？",
+            "en": "While a task is marked in_progress, what is the correct operation flow?",
+            "ja": "タスクが in_progress の間、正しい操作フローは何ですか？"
+          },
+          "options": [
+            {
+              "id": "a",
+              "text": {
+                "zh": "可以同时把其他任务也标记为 in_progress，以提高效率",
+                "en": "You can mark other tasks as in_progress simultaneously to improve efficiency",
+                "ja": "効率を上げるために他のタスクも同時に in_progress にできる"
+              }
+            },
+            {
+              "id": "b",
+              "text": {
+                "zh": "完成该任务后，先将其标记为 completed，再开始下一个",
+                "en": "After finishing, mark it completed first, then start the next one",
+                "ja": "タスクを完了したら先に completed にマークし、次を始める"
+              }
+            },
+            {
+              "id": "c",
+              "text": {
+                "zh": "系统会自动将其标记为 completed，无需手动更新",
+                "en": "The system automatically marks it completed; no manual update is needed",
+                "ja": "システムが自動的に completed にマークするので手動更新は不要"
+              }
+            },
+            {
+              "id": "d",
+              "text": {
+                "zh": "不能再调用 TodoWrite，只能等到会话结束",
+                "en": "TodoWrite cannot be called again until the session ends",
+                "ja": "セッションが終わるまで TodoWrite を再度呼び出せない"
+              }
+            }
+          ],
+          "answer": "b",
+          "explanation": {
+            "zh": "正确流程是：完成当前 in_progress 任务 → 将其标记为 completed → 再将下一个任务标记为 in_progress。同一时刻只能有一个 in_progress，这是核心约束。",
+            "en": "The correct flow: finish the current in_progress task, mark it completed, then mark the next task as in_progress. Only one task can be in_progress at a time; this is the core constraint.",
+            "ja": "正しいフロー：現在の in_progress タスクを完了 → completed にマーク → 次のタスクを in_progress にマーク。同時に in_progress は 1 つだけというのが核心制約です。"
+          },
+          "reward_card": "card_s03_002"
+        },
+        {
+          "id": "q_s03_015",
+          "type": "choice",
+          "difficulty": 2,
+          "stem": {
+            "zh": "TodoWrite 的整份重写策略和以下哪种工程实践最类似？",
+            "en": "The full-rewrite strategy of TodoWrite is most similar to which engineering practice?",
+            "ja": "TodoWrite の全体書き換え戦略は、次のどのエンジニアリング実践に最も似ていますか？"
+          },
+          "options": [
+            {
+              "id": "a",
+              "text": {
+                "zh": "git merge，合并两个分支的差异",
+                "en": "git merge, combining diffs from two branches",
+                "ja": "2 つのブランチの差分を統合する git merge"
+              }
+            },
+            {
+              "id": "b",
+              "text": {
+                "zh": "数据库事务，对多步操作原子性保证",
+                "en": "Database transaction guaranteeing atomicity for multi-step operations",
+                "ja": "複数ステップの操作に原子性を保証するデータベーストランザクション"
+              }
+            },
+            {
+              "id": "c",
+              "text": {
+                "zh": "增量编译，只重新编译变更的文件",
+                "en": "Incremental compilation that only recompiles changed files",
+                "ja": "変更されたファイルだけを再コンパイルする増分コンパイル"
+              }
+            },
+            {
+              "id": "d",
+              "text": {
+                "zh": "无状态 HTTP 请求，每次发送完整参数",
+                "en": "Stateless HTTP requests where full parameters are sent each time",
+                "ja": "毎回完全なパラメータを送信するステートレス HTTP リクエスト"
+              }
+            }
+          ],
+          "answer": "d",
+          "explanation": {
+            "zh": "整份重写类似无状态 HTTP 请求：每次都提交完整的当前状态，服务端不需要维护上一次的差量，逻辑简单可靠。",
+            "en": "Full rewrite is similar to stateless HTTP requests: you submit the complete current state each time, and the receiver does not need to maintain previous diffs, making the logic simple and reliable.",
+            "ja": "全体書き換えはステートレス HTTP リクエストに似ています。毎回完全な現在状態を送信し、受け手は前回の差分を維持する必要がなく、ロジックがシンプルで信頼性があります。"
+          },
+          "reward_card": "card_s03_001"
+        },
+        {
+          "id": "q_s03_016",
+          "type": "choice",
+          "difficulty": 3,
+          "stem": {
+            "zh": "有 5 个任务，当前第 3 个是 in_progress，要添加新任务，应该怎么做？",
+            "en": "You have 5 tasks, task 3 is in_progress. You need to add a new task. What should you do?",
+            "ja": "5 つのタスクがあり、第 3 番が in_progress です。新しいタスクを追加するにはどうすればよいですか？"
+          },
+          "options": [
+            {
+              "id": "a",
+              "text": {
+                "zh": "调用 TodoWrite 一次，提交包含新任务的完整 6 个任务列表",
+                "en": "Call TodoWrite once, submitting the complete 6-task list including the new one",
+                "ja": "TodoWrite を 1 回呼び出し、新しいタスクを含む 6 タスクの完全リストを送信する"
+              }
+            },
+            {
+              "id": "b",
+              "text": {
+                "zh": "先调用 TodoWrite 删除旧列表，再调用 TodoWrite 写入新列表",
+                "en": "First call TodoWrite to delete the old list, then call again to write the new list",
+                "ja": "まず TodoWrite を呼んで古いリストを削除し、次に新しいリストを書き込む"
+              }
+            },
+            {
+              "id": "c",
+              "text": {
+                "zh": "先完成当前 in_progress 任务才能添加新任务",
+                "en": "You must finish the current in_progress task before adding a new one",
+                "ja": "新しいタスクを追加する前に現在の in_progress タスクを完了しなければならない"
+              }
+            },
+            {
+              "id": "d",
+              "text": {
+                "zh": "只调用 TodoWrite 一次，只传入新任务，其他任务不变",
+                "en": "Call TodoWrite once, passing only the new task; other tasks remain unchanged",
+                "ja": "TodoWrite を 1 回呼び出し、新しいタスクだけを渡す。他のタスクは変わらない"
+              }
+            }
+          ],
+          "answer": "a",
+          "explanation": {
+            "zh": "TodoWrite 采用整份重写策略：每次调用都提交完整的当前计划列表。要添加新任务，只需一次调用，提交包含所有原有任务和新任务的完整列表即可。",
+            "en": "TodoWrite uses a full-rewrite strategy: each call submits the complete current plan list. To add a new task, make one call submitting a complete list that includes all existing tasks plus the new one.",
+            "ja": "TodoWrite は全体書き換え戦略を採用しています。毎回の呼び出しで完全な現在プランリストを送信します。新しいタスクを追加するには、既存すべてのタスクと新タスクを含む完全リストを 1 回の呼び出しで送信するだけです。"
+          },
+          "reward_card": "card_s03_001"
+        },
+        {
+          "id": "q_s03_017",
+          "type": "choice",
+          "difficulty": 2,
+          "stem": {
+            "zh": "以下哪种情形说明 TodoWrite 的提醒机制发挥了作用？",
+            "en": "Which scenario demonstrates the TodoWrite reminder mechanism working correctly?",
+            "ja": "TodoWrite のリマインド機構が正しく機能している状況はどれですか？"
+          },
+          "options": [
+            {
+              "id": "a",
+              "text": {
+                "zh": "模型在执行第 3 步时，系统自动把第 4 步拆分成更小的子任务",
+                "en": "While executing step 3, the system automatically breaks step 4 into smaller subtasks",
+                "ja": "ステップ 3 の実行中に、システムがステップ 4 をより小さなサブタスクに分割する"
+              }
+            },
+            {
+              "id": "b",
+              "text": {
+                "zh": "模型连续 3 轮只写代码没更新 todo，系统提示模型检查并更新计划",
+                "en": "After 3 turns of writing code without updating todo, the system prompts the model to check and update the plan",
+                "ja": "3 ターン連続でコードだけ書いて todo を更新しないとき、システムがモデルに計画の確認・更新を促す"
+              }
+            },
+            {
+              "id": "c",
+              "text": {
+                "zh": "模型把一个 completed 任务重新改回 pending，系统自动拒绝该操作",
+                "en": "The model changes a completed task back to pending, and the system automatically rejects it",
+                "ja": "モデルが completed タスクを pending に戻そうとしたとき、システムが自動的に拒否する"
+              }
+            },
+            {
+              "id": "d",
+              "text": {
+                "zh": "会话结束时，系统将未完成的任务自动转移到下一个会话",
+                "en": "At session end, the system automatically transfers incomplete tasks to the next session",
+                "ja": "セッション終了時に、システムが未完了タスクを次のセッションに自動転送する"
+              }
+            }
+          ],
+          "answer": "b",
+          "explanation": {
+            "zh": "提醒机制在模型连续几轮没更新 todo 时触发，把注意力拉回计划。选项 A 是替模型规划（不符合定义），C 和 D 描述的功能不存在。",
+            "en": "The reminder triggers when the model goes several turns without updating the todo, pulling attention back to the plan. Option A describes planning on behalf of the model. Options C and D describe non-existent features.",
+            "ja": "リマインドはモデルが数ターン todo を更新しないときに発動し、注意をプランに引き戻します。A はモデルの代わりに計画する（定義に反する）。C と D は存在しない機能です。"
+          },
+          "reward_card": "card_s03_003"
+        },
+        {
+          "id": "q_s03_018",
+          "type": "choice",
+          "difficulty": 3,
+          "stem": {
+            "zh": "下列哪个选项最准确地描述了 TodoWrite 的四个核心特征？",
+            "en": "Which option most accurately describes the four core characteristics of TodoWrite?",
+            "ja": "TodoWrite の 4 つの核心特性を最も正確に説明している選択肢はどれですか？"
+          },
+          "options": [
+            {
+              "id": "a",
+              "text": {
+                "zh": "持久化、多 agent 共享、局部增删改、无状态约束",
+                "en": "Persistent, shared across agents, incremental updates, no state constraints",
+                "ja": "永続化、エージェント間共有、部分更新、状態制約なし"
+              }
+            },
+            {
+              "id": "b",
+              "text": {
+                "zh": "跨会话持久、无状态限制、支持并发写入、增量更新",
+                "en": "Cross-session persistent, no state limits, supports concurrent writes, incremental updates",
+                "ja": "セッション横断永続、状態制限なし、並行書き込みサポート、増分更新"
+              }
+            },
+            {
+              "id": "c",
+              "text": {
+                "zh": "会话内生效、五种状态、多个 in_progress 允许、局部增删改",
+                "en": "Session-scoped, five states, multiple in_progress allowed, incremental updates",
+                "ja": "セッション内有効、5 状態、複数 in_progress 許可、部分更新"
+              }
+            },
+            {
+              "id": "d",
+              "text": {
+                "zh": "会话内生效、三种状态（pending/in_progress/completed）、in_progress 唯一、整份重写",
+                "en": "Session-scoped, three states (pending/in_progress/completed), single in_progress, full rewrite",
+                "ja": "セッション内有効、3 状態（pending/in_progress/completed）、in_progress 一意、全体書き換え"
+              }
+            }
+          ],
+          "answer": "d",
+          "explanation": {
+            "zh": "TodoWrite 的四个核心特征：①只在当前会话内生效；②三种状态 pending/in_progress/completed；③同一时刻只能有一个 in_progress；④每次整份重写，旧内容被覆盖。",
+            "en": "TodoWrite has four core characteristics: (1) session-scoped only; (2) three states: pending/in_progress/completed; (3) only one in_progress at a time; (4) full rewrite on every call, overwriting old content.",
+            "ja": "TodoWrite の 4 つの核心特性：(1)現在セッション内のみ有効；(2)3 状態 pending/in_progress/completed；(3)同時に in_progress は 1 つだけ；(4)毎回全体書き換えで古い内容を上書き。"
+          },
+          "reward_card": "card_s03_002"
         }
       ],
       "star_thresholds": [
