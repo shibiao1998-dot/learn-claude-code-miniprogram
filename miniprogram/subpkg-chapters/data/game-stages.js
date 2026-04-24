@@ -23621,51 +23621,51 @@ module.exports = {
         {
           "id": "q_bp07_001",
           "type": "choice",
-          "difficulty": 2,
+          "difficulty": 1,
           "stem": {
-            "zh": "在 Claude Code 中，关于「1. 设置层级」的正确理解是？",
-            "en": "What is the correct understanding of \"Table of Contents\" in Claude Code?",
-            "ja": "Claude Code における「Table of Contents」の正しい理解はどれですか？"
+            "zh": "Claude Code 设置系统共有几个优先级层级？",
+            "en": "How many priority levels does the Claude Code settings system have?",
+            "ja": "Claude Code の設定システムには何段階の優先レベルがありますか？"
           },
           "options": [
             {
-              "id": "c",
-              "text": {
-                "zh": "会话管理",
-                "en": "Global Config Settings (`~/.claude.json`)",
-                "ja": "Global Config Settings (`~/.claude.json`)"
-              }
-            },
-            {
               "id": "a",
               "text": {
-                "zh": "1. 设置层级",
-                "en": "Table of Contents",
-                "ja": "Table of Contents"
-              }
-            },
-            {
-              "id": "d",
-              "text": {
-                "zh": "核心要点",
-                "en": "Key Takeaways",
-                "ja": "Key Takeaways"
+                "zh": "5 层",
+                "en": "5 levels",
+                "ja": "5 段階"
               }
             },
             {
               "id": "b",
               "text": {
-                "zh": "预算与限制",
-                "en": "Useful Commands",
-                "ja": "Useful Commands"
+                "zh": "3 层",
+                "en": "3 levels",
+                "ja": "3 段階"
+              }
+            },
+            {
+              "id": "c",
+              "text": {
+                "zh": "7 层",
+                "en": "7 levels",
+                "ja": "7 段階"
+              }
+            },
+            {
+              "id": "d",
+              "text": {
+                "zh": "2 层",
+                "en": "2 levels",
+                "ja": "2 段階"
               }
             }
           ],
           "answer": "a",
           "explanation": {
-            "zh": "受管设置",
-            "en": "Table of Contents",
-            "ja": "Table of Contents"
+            "zh": "五层优先级从高到低：受管 > CLI > local > project > global，优先级高的设置会覆盖低的。",
+            "en": "Five priority levels from high to low: managed > CLI > local > project > global.",
+            "ja": "優先度が高い順に: managed > CLI > local > project > global の 5 段階です。"
           },
           "reward_card": "card_bp07_001"
         },
@@ -23674,204 +23674,867 @@ module.exports = {
           "type": "choice",
           "difficulty": 1,
           "stem": {
-            "zh": "以下哪个概念与「2. 权限系统」直接相关？",
-            "en": "Which concept is directly related to \"Settings Hierarchy\"?",
-            "ja": "「Settings Hierarchy」に直接関連する概念はどれですか？"
+            "zh": "在五层设置优先级中，哪一层优先级最高？",
+            "en": "Which layer has the highest priority in the five-layer settings hierarchy?",
+            "ja": "5 段階の設定優先度で、最も優先度が高い層はどれですか？"
           },
           "options": [
             {
-              "id": "a",
-              "text": {
-                "zh": "2. 权限系统",
-                "en": "Settings Hierarchy",
-                "ja": "Settings Hierarchy"
-              }
-            },
-            {
-              "id": "d",
-              "text": {
-                "zh": "Stop",
-                "en": "Plugin Settings",
-                "ja": "Plugin Settings"
-              }
-            },
-            {
               "id": "b",
               "text": {
-                "zh": "6. 插件系统",
-                "en": "MCP Settings",
-                "ja": "MCP Settings"
+                "zh": "受管设置（Managed）",
+                "en": "Managed settings",
+                "ja": "Managed 設定"
+              }
+            },
+            {
+              "id": "a",
+              "text": {
+                "zh": "全局设置（Global）",
+                "en": "Global settings",
+                "ja": "Global 設定"
               }
             },
             {
               "id": "c",
               "text": {
-                "zh": "SessionStart",
-                "en": "MCP Server Matching (Managed Settings)",
-                "ja": "MCP Server Matching (Managed Settings)"
+                "zh": "项目设置（Project）",
+                "en": "Project settings",
+                "ja": "Project 設定"
+              }
+            },
+            {
+              "id": "d",
+              "text": {
+                "zh": "CLI 参数",
+                "en": "CLI arguments",
+                "ja": "CLI 引数"
               }
             }
           ],
-          "answer": "a",
+          "answer": "b",
           "explanation": {
-            "zh": "2. 权限系统",
-            "en": "Managed settings",
-            "ja": "Managed settings"
+            "zh": "受管设置（Managed）优先级最高，通常由企业 IT 管理员通过 MDM 下发，用户无法覆盖。",
+            "en": "Managed settings have the highest priority, typically deployed by enterprise IT via MDM and cannot be overridden.",
+            "ja": "Managed 設定は最優先度で、企業 IT が MDM 経由で展開し、ユーザーが上書きできません。"
           },
-          "reward_card": "card_bp07_002"
+          "reward_card": "card_bp07_001"
         },
         {
           "id": "q_bp07_003",
           "type": "choice",
           "difficulty": 2,
           "stem": {
-            "zh": "在 Claude Code 中，关于「权限结构」的正确理解是？",
-            "en": "What is the correct understanding of \"Core Configuration\" in Claude Code?",
-            "ja": "Claude Code における「Core Configuration」の正しい理解はどれですか？"
+            "zh": "关于 deny 规则，以下说法哪个是正确的？",
+            "en": "Which statement about deny rules is correct?",
+            "ja": "deny ルールについて、正しい説明はどれですか？"
           },
           "options": [
             {
               "id": "c",
               "text": {
-                "zh": "禁用 Hooks",
-                "en": "Worktree Settings",
-                "ja": "Worktree Settings"
+                "zh": "deny 规则不可被任何更高优先级设置覆盖",
+                "en": "deny rules cannot be overridden by any higher-priority settings",
+                "ja": "deny ルールはいかなる高優先度の設定によっても上書きできない"
               }
             },
             {
               "id": "a",
               "text": {
-                "zh": "权限结构",
-                "en": "Core Configuration",
-                "ja": "Core Configuration"
-              }
-            },
-            {
-              "id": "d",
-              "text": {
-                "zh": "PermissionRequest",
-                "en": "Model Aliases",
-                "ja": "Model Aliases"
+                "zh": "deny 规则可以被 CLI 参数覆盖",
+                "en": "deny rules can be overridden by CLI arguments",
+                "ja": "deny ルールは CLI 引数で上書きできる"
               }
             },
             {
               "id": "b",
               "text": {
-                "zh": "工具权限语法",
-                "en": "Plans & Memory Directories",
-                "ja": "Plans & Memory Directories"
+                "zh": "deny 规则只在 global 层有效",
+                "en": "deny rules only work at the global layer",
+                "ja": "deny ルールは global 層でのみ有効"
+              }
+            },
+            {
+              "id": "d",
+              "text": {
+                "zh": "deny 规则与 allow 规则优先级相同",
+                "en": "deny rules have the same priority as allow rules",
+                "ja": "deny ルールと allow ルールは同じ優先度を持つ"
               }
             }
           ],
-          "answer": "a",
+          "answer": "c",
           "explanation": {
-            "zh": "权限结构",
-            "en": "Core Configuration",
-            "ja": "Core Configuration"
+            "zh": "deny 规则具有绝对性，不可被覆盖。无论哪层设置了 deny，该操作都会被拒绝，这是安全保障的核心机制。",
+            "en": "deny rules are absolute and cannot be overridden. Once set at any layer, the operation is always denied.",
+            "ja": "deny ルールは絶対的で上書き不可。どの層に設定されていても常に拒否されます。"
           },
-          "reward_card": "card_bp07_003"
+          "reward_card": "card_bp07_001"
         },
         {
           "id": "q_bp07_004",
           "type": "choice",
-          "difficulty": 1,
+          "difficulty": 2,
           "stem": {
-            "zh": "以下哪个概念与「权限模式」直接相关？",
-            "en": "Which concept is directly related to \"General Settings\"?",
-            "ja": "「General Settings」に直接関連する概念はどれですか？"
+            "zh": "project 设置文件通常存放在哪个位置？",
+            "en": "Where is the project settings file typically stored?",
+            "ja": "project 設定ファイルは通常どこに保存されますか？"
           },
           "options": [
             {
-              "id": "c",
+              "id": "a",
               "text": {
-                "zh": "Spinner 自定义示例",
-                "en": "Tool Permission Syntax",
-                "ja": "Tool Permission Syntax"
+                "zh": ".claude/settings.json（项目根目录）",
+                "en": ".claude/settings.json (project root)",
+                "ja": ".claude/settings.json（プロジェクトルート）"
               }
             },
             {
               "id": "b",
               "text": {
-                "zh": "官方内置命令（69 个）",
-                "en": "![Official](../!/tags/official.svg) **(69)**",
-                "ja": "![Official](../!/tags/official.svg) **(69)**"
+                "zh": "~/.claude/settings.json（用户主目录）",
+                "en": "~/.claude/settings.json (home directory)",
+                "ja": "~/.claude/settings.json（ホームディレクトリ）"
               }
             },
             {
-              "id": "a",
+              "id": "c",
               "text": {
-                "zh": "权限模式",
-                "en": "General Settings",
-                "ja": "General Settings"
+                "zh": "/etc/claude/settings.json（系统目录）",
+                "en": "/etc/claude/settings.json (system directory)",
+                "ja": "/etc/claude/settings.json（システムディレクトリ）"
               }
             },
             {
               "id": "d",
               "text": {
-                "zh": "2. 大型 Monorepo 中的 CLAUDE.md",
-                "en": "2. CLAUDE.md in Large Monorepos",
-                "ja": "2. CLAUDE.md in Large Monorepos"
+                "zh": "CLAUDE.md 文件内嵌配置",
+                "en": "Embedded config inside CLAUDE.md",
+                "ja": "CLAUDE.md 内に埋め込まれた設定"
               }
             }
           ],
           "answer": "a",
           "explanation": {
-            "zh": "权限模式",
-            "en": "(Managed only)",
-            "ja": "(Managed only)"
+            "zh": "project 设置存放在项目根目录的 .claude/settings.json，可以提交到 Git，让团队共享同一套权限配置。",
+            "en": "Project settings live at .claude/settings.json in the project root and can be committed to Git for team sharing.",
+            "ja": "project 設定はプロジェクトルートの .claude/settings.json に保存され、Git にコミットしてチームで共有できます。"
           },
-          "reward_card": "card_bp07_004"
+          "reward_card": "card_bp07_001"
         },
         {
           "id": "q_bp07_005",
           "type": "choice",
-          "difficulty": 3,
+          "difficulty": 1,
           "stem": {
-            "zh": "以下关于「工具权限语法」的说法，哪个是正确的？",
-            "en": "Which statement about \"Plans & Memory Directories\" is correct?",
-            "ja": "「Plans & Memory Directories」について正しい説明はどれですか？"
+            "zh": "Claude Code 提供几种权限模式（permission mode）？",
+            "en": "How many permission modes does Claude Code provide?",
+            "ja": "Claude Code には何種類のパーミッションモードがありますか？"
           },
           "options": [
             {
-              "id": "c",
+              "id": "d",
               "text": {
-                "zh": "使用 HTTP Hook",
-                "en": "File Suggestion Configuration",
-                "ja": "File Suggestion Configuration"
-              }
-            },
-            {
-              "id": "b",
-              "text": {
-                "zh": "使用方式",
-                "en": "使用方式",
-                "ja": "使用方式"
+                "zh": "4 种",
+                "en": "4 modes",
+                "ja": "4 種類"
               }
             },
             {
               "id": "a",
               "text": {
-                "zh": "工具权限语法",
-                "en": "Plans & Memory Directories",
-                "ja": "Plans & Memory Directories"
+                "zh": "2 种",
+                "en": "2 modes",
+                "ja": "2 種類"
+              }
+            },
+            {
+              "id": "b",
+              "text": {
+                "zh": "3 种",
+                "en": "3 modes",
+                "ja": "3 種類"
+              }
+            },
+            {
+              "id": "c",
+              "text": {
+                "zh": "6 种",
+                "en": "6 modes",
+                "ja": "6 種類"
+              }
+            }
+          ],
+          "answer": "d",
+          "explanation": {
+            "zh": "Claude Code 提供 4 种权限模式：plan（仅规划）、default（默认交互）、acceptEdits（自动接受编辑）、auto（全自动）；bypass 是一种特殊的绕过机制，不算常规模式。",
+            "en": "Claude Code has 4 permission modes: plan, default, acceptEdits, and auto. bypass is a special mechanism.",
+            "ja": "Claude Code には plan、default、acceptEdits、auto の 4 種類のモードがあります。bypass は特殊な仕組みです。"
+          },
+          "reward_card": "card_bp07_002"
+        },
+        {
+          "id": "q_bp07_006",
+          "type": "choice",
+          "difficulty": 1,
+          "stem": {
+            "zh": "哪种权限模式下 Claude 只能规划，不能执行任何工具？",
+            "en": "In which permission mode can Claude only plan and cannot execute any tools?",
+            "ja": "Claude が計画のみ行い、ツールを一切実行できないパーミッションモードはどれですか？"
+          },
+          "options": [
+            {
+              "id": "c",
+              "text": {
+                "zh": "plan 模式",
+                "en": "plan mode",
+                "ja": "plan モード"
+              }
+            },
+            {
+              "id": "a",
+              "text": {
+                "zh": "auto 模式",
+                "en": "auto mode",
+                "ja": "auto モード"
+              }
+            },
+            {
+              "id": "b",
+              "text": {
+                "zh": "default 模式",
+                "en": "default mode",
+                "ja": "default モード"
               }
             },
             {
               "id": "d",
               "text": {
-                "zh": "SessionStart",
-                "en": "MCP Server Matching (Managed Settings)",
-                "ja": "MCP Server Matching (Managed Settings)"
+                "zh": "acceptEdits 模式",
+                "en": "acceptEdits mode",
+                "ja": "acceptEdits モード"
+              }
+            }
+          ],
+          "answer": "c",
+          "explanation": {
+            "zh": "plan 模式是最谨慎的模式，Claude 只能制定计划并与用户讨论，不能执行任何文件操作或 Bash 命令。",
+            "en": "plan mode is the most cautious — Claude can only plan and discuss with the user, without executing any tools.",
+            "ja": "plan モードは最も慎重なモードで、Claude は計画の立案とユーザーとの議論のみ行い、ツールは実行できません。"
+          },
+          "reward_card": "card_bp07_002"
+        },
+        {
+          "id": "q_bp07_007",
+          "type": "choice",
+          "difficulty": 2,
+          "stem": {
+            "zh": "acceptEdits 模式与 default 模式的主要区别是什么？",
+            "en": "What is the main difference between acceptEdits mode and default mode?",
+            "ja": "acceptEdits モードと default モードの主な違いは何ですか？"
+          },
+          "options": [
+            {
+              "id": "b",
+              "text": {
+                "zh": "acceptEdits 自动接受文件编辑，无需每次确认；default 每次都需确认",
+                "en": "acceptEdits auto-accepts file edits without confirmation; default requires confirmation each time",
+                "ja": "acceptEdits はファイル編集を自動承認し確認不要; default は毎回確認が必要"
+              }
+            },
+            {
+              "id": "a",
+              "text": {
+                "zh": "两者完全相同，只是名称不同",
+                "en": "They are identical, just different names",
+                "ja": "両者は全く同じで、名称が異なるだけ"
+              }
+            },
+            {
+              "id": "c",
+              "text": {
+                "zh": "acceptEdits 可以运行任意 Bash 命令，default 不能",
+                "en": "acceptEdits can run arbitrary Bash commands; default cannot",
+                "ja": "acceptEdits は任意の Bash コマンドを実行できる; default はできない"
+              }
+            },
+            {
+              "id": "d",
+              "text": {
+                "zh": "default 比 acceptEdits 自动化程度更高",
+                "en": "default is more automated than acceptEdits",
+                "ja": "default は acceptEdits より自動化レベルが高い"
+              }
+            }
+          ],
+          "answer": "b",
+          "explanation": {
+            "zh": "acceptEdits 模式会自动接受所有文件编辑操作，但 Bash 命令仍需手动确认。适合对代码修改放心但仍想审查命令的场景。",
+            "en": "acceptEdits auto-approves file edits but still requires manual confirmation for Bash commands.",
+            "ja": "acceptEdits はファイル編集を自動承認しますが、Bash コマンドは手動確認が必要です。"
+          },
+          "reward_card": "card_bp07_002"
+        },
+        {
+          "id": "q_bp07_008",
+          "type": "choice",
+          "difficulty": 3,
+          "stem": {
+            "zh": "bypass 机制与 auto 模式的本质区别是什么？",
+            "en": "What is the fundamental difference between the bypass mechanism and auto mode?",
+            "ja": "bypass の仕組みと auto モードの本質的な違いは何ですか？"
+          },
+          "options": [
+            {
+              "id": "a",
+              "text": {
+                "zh": "bypass 只能通过 CLI 参数启用，auto 可以在配置文件中设置",
+                "en": "bypass can only be enabled via CLI; auto can be set in config files",
+                "ja": "bypass は CLI 引数でのみ有効化でき、auto は設定ファイルで設定可能"
+              }
+            },
+            {
+              "id": "b",
+              "text": {
+                "zh": "两者功能完全相同",
+                "en": "Both have exactly the same function",
+                "ja": "両者は全く同じ機能を持つ"
+              }
+            },
+            {
+              "id": "c",
+              "text": {
+                "zh": "auto 比 bypass 权限更高",
+                "en": "auto has higher privileges than bypass",
+                "ja": "auto は bypass より高い権限を持つ"
+              }
+            },
+            {
+              "id": "d",
+              "text": {
+                "zh": "bypass 绕过权限检查本身；auto 仍在权限框架内自动批准所有请求",
+                "en": "bypass skips the permission check itself; auto still auto-approves all requests within the permission framework",
+                "ja": "bypass はパーミッションチェック自体をスキップ; auto はフレームワーク内で全リクエストを自動承認"
+              }
+            }
+          ],
+          "answer": "d",
+          "explanation": {
+            "zh": "auto 模式在权限框架内自动批准所有请求；bypass 则完全跳过权限检查逻辑，适用于受信任的 CI/CD 自动化场景，需谨慎使用。",
+            "en": "auto mode auto-approves within the permission framework; bypass skips the permission check entirely, for trusted CI/CD automation.",
+            "ja": "auto モードはフレームワーク内で全て自動承認; bypass はパーミッションチェック自体をスキップし、信頼できる CI/CD 向けです。"
+          },
+          "reward_card": "card_bp07_002"
+        },
+        {
+          "id": "q_bp07_009",
+          "type": "choice",
+          "difficulty": 1,
+          "stem": {
+            "zh": "工具权限规则的求值顺序是什么？",
+            "en": "What is the evaluation order of tool permission rules?",
+            "ja": "ツールパーミッションルールの評価順序はどれですか？"
+          },
+          "options": [
+            {
+              "id": "c",
+              "text": {
+                "zh": "deny → ask → allow",
+                "en": "deny → ask → allow",
+                "ja": "deny → ask → allow"
+              }
+            },
+            {
+              "id": "a",
+              "text": {
+                "zh": "allow → ask → deny",
+                "en": "allow → ask → deny",
+                "ja": "allow → ask → deny"
+              }
+            },
+            {
+              "id": "b",
+              "text": {
+                "zh": "ask → allow → deny",
+                "en": "ask → allow → deny",
+                "ja": "ask → allow → deny"
+              }
+            },
+            {
+              "id": "d",
+              "text": {
+                "zh": "allow → deny → ask",
+                "en": "allow → deny → ask",
+                "ja": "allow → deny → ask"
+              }
+            }
+          ],
+          "answer": "c",
+          "explanation": {
+            "zh": "规则按 deny → ask → allow 顺序求值：先检查是否被明确拒绝，再检查是否需要询问，最后检查是否被允许。deny 优先确保安全。",
+            "en": "Rules are evaluated deny → ask → allow: first check explicit denials, then ask, then allow. deny-first ensures safety.",
+            "ja": "ルールは deny → ask → allow の順で評価: 拒否を先にチェックし安全を確保します。"
+          },
+          "reward_card": "card_bp07_003"
+        },
+        {
+          "id": "q_bp07_010",
+          "type": "choice",
+          "difficulty": 2,
+          "stem": {
+            "zh": "以下哪个是正确的 Bash 工具权限语法，用于允许在 src/ 目录下运行 grep？",
+            "en": "Which is the correct Bash tool permission syntax to allow running grep under src/?",
+            "ja": "src/ 以下で grep を許可する正しい Bash ツールパーミッション構文はどれですか？"
+          },
+          "options": [
+            {
+              "id": "a",
+              "text": {
+                "zh": "Bash(grep src/*)",
+                "en": "Bash(grep src/*)",
+                "ja": "Bash(grep src/*)"
+              }
+            },
+            {
+              "id": "b",
+              "text": {
+                "zh": "allow: grep(src/)",
+                "en": "allow: grep(src/)",
+                "ja": "allow: grep(src/)"
+              }
+            },
+            {
+              "id": "c",
+              "text": {
+                "zh": "Tool.Bash(\"grep\", \"src/**\")",
+                "en": "Tool.Bash(\"grep\", \"src/**\")",
+                "ja": "Tool.Bash(\"grep\", \"src/**\")"
+              }
+            },
+            {
+              "id": "d",
+              "text": {
+                "zh": "permission(bash, grep, src/)",
+                "en": "permission(bash, grep, src/)",
+                "ja": "permission(bash, grep, src/)"
               }
             }
           ],
           "answer": "a",
           "explanation": {
-            "zh": ")` |\n| `Edit` | `Edit(path pattern)` | `Edit(src/",
-            "en": "Example:",
-            "ja": "Example:"
+            "zh": "工具权限语法格式为 ToolName(pattern)，例如 Bash(grep src/*) 表示允许在 src/ 下运行 grep 命令。",
+            "en": "Tool permission syntax is ToolName(pattern), e.g. Bash(grep src/*) allows running grep under src/.",
+            "ja": "ツールパーミッション構文は ToolName(pattern) 形式で、例えば Bash(grep src/*) は src/ 以下での grep を許可します。"
           },
-          "reward_card": "card_bp07_005"
+          "reward_card": "card_bp07_003"
+        },
+        {
+          "id": "q_bp07_011",
+          "type": "choice",
+          "difficulty": 2,
+          "stem": {
+            "zh": "以下哪个配置正确表示「只读允许读取 src/ 下的文件，但禁止编辑」？",
+            "en": "Which configuration correctly means \"allow reading files under src/ but deny editing\"?",
+            "ja": "「src/ 以下のファイルの読み取りは許可するが編集は禁止」を正しく表す設定はどれですか？"
+          },
+          "options": [
+            {
+              "id": "b",
+              "text": {
+                "zh": "allow: [\"Read(src/**)\"]，deny: [\"Edit(src/**)\"]",
+                "en": "allow: [\"Read(src/**)\"], deny: [\"Edit(src/**)\"]",
+                "ja": "allow: [\"Read(src/**)\"], deny: [\"Edit(src/**)\" ]"
+              }
+            },
+            {
+              "id": "a",
+              "text": {
+                "zh": "allow: [\"src/**\"]，deny: [\"edit:src/**\"]",
+                "en": "allow: [\"src/**\"], deny: [\"edit:src/**\"]",
+                "ja": "allow: [\"src/**\"], deny: [\"edit:src/**\"]"
+              }
+            },
+            {
+              "id": "c",
+              "text": {
+                "zh": "readonly: true，path: \"src/**\"",
+                "en": "readonly: true, path: \"src/**\"",
+                "ja": "readonly: true, path: \"src/**\""
+              }
+            },
+            {
+              "id": "d",
+              "text": {
+                "zh": "permissions: { read: \"src/**\", write: false }",
+                "en": "permissions: { read: \"src/**\", write: false }",
+                "ja": "permissions: { read: \"src/**\", write: false }"
+              }
+            }
+          ],
+          "answer": "b",
+          "explanation": {
+            "zh": "正确语法：allow 数组中填 Read(path)，deny 数组中填 Edit(path)，工具名首字母大写，路径支持 glob 模式。",
+            "en": "Correct syntax: Read(path) in allow array, Edit(path) in deny array. Tool names are capitalized and paths support glob.",
+            "ja": "正しい構文: allow に Read(path)、deny に Edit(path)。ツール名は大文字始まり、パスは glob をサポートします。"
+          },
+          "reward_card": "card_bp07_003"
+        },
+        {
+          "id": "q_bp07_012",
+          "type": "choice",
+          "difficulty": 3,
+          "stem": {
+            "zh": "在 settings.json 中，如何设置「禁止对 .env 文件的所有操作」？",
+            "en": "How do you configure \"deny all operations on .env files\" in settings.json?",
+            "ja": "settings.json で「.env ファイルへの全操作を禁止」するにはどう設定しますか？"
+          },
+          "options": [
+            {
+              "id": "c",
+              "text": {
+                "zh": "在 deny 数组中添加 \"Bash(**/.env)\"、\"Read(**/.env)\"、\"Edit(**/.env)\"",
+                "en": "Add \"Bash(**/.env)\", \"Read(**/.env)\", \"Edit(**/.env)\" to the deny array",
+                "ja": "deny 配列に \"Bash(**/.env)\"、\"Read(**/.env)\"、\"Edit(**/.env)\" を追加"
+              }
+            },
+            {
+              "id": "a",
+              "text": {
+                "zh": "设置 blockFiles: [\".env\"]",
+                "en": "Set blockFiles: [\".env\"]",
+                "ja": "blockFiles: [\".env\"] を設定"
+              }
+            },
+            {
+              "id": "b",
+              "text": {
+                "zh": "在 deny 数组中添加 \"*.env\"",
+                "en": "Add \"*.env\" to the deny array",
+                "ja": "deny 配列に \"*.env\" を追加"
+              }
+            },
+            {
+              "id": "d",
+              "text": {
+                "zh": "设置 protectedFiles: [\"**/.env\"]",
+                "en": "Set protectedFiles: [\"**/.env\"]",
+                "ja": "protectedFiles: [\"**/.env\"] を設定"
+              }
+            }
+          ],
+          "answer": "c",
+          "explanation": {
+            "zh": "需要分别对每种工具类型（Bash、Read、Edit）设置 deny 规则，使用通配符 **/.env 匹配所有目录下的 .env 文件。",
+            "en": "You need separate deny rules for each tool type (Bash, Read, Edit) using **/.env to match .env files in any directory.",
+            "ja": "各ツールタイプ（Bash、Read、Edit）に個別の deny ルールを設定し、**/.env で全ディレクトリの .env を対象にします。"
+          },
+          "reward_card": "card_bp07_003"
+        },
+        {
+          "id": "q_bp07_013",
+          "type": "choice",
+          "difficulty": 3,
+          "stem": {
+            "zh": "工具权限语法中，Read 与 Edit 的路径参数有什么区别？",
+            "en": "In tool permission syntax, what is the difference between the path parameters for Read and Edit?",
+            "ja": "ツールパーミッション構文で、Read と Edit のパス引数はどう違いますか？"
+          },
+          "options": [
+            {
+              "id": "a",
+              "text": {
+                "zh": "Read 路径匹配读取目标文件，Edit 路径匹配被修改的文件",
+                "en": "Read path matches the target file to read; Edit path matches the file being modified",
+                "ja": "Read パスは読み取り対象ファイルに一致し、Edit パスは変更対象ファイルに一致する"
+              }
+            },
+            {
+              "id": "b",
+              "text": {
+                "zh": "两者路径参数完全相同，没有区别",
+                "en": "Their path parameters are identical with no difference",
+                "ja": "両者のパス引数は全く同じで違いはない"
+              }
+            },
+            {
+              "id": "c",
+              "text": {
+                "zh": "Read 只支持文件路径，Edit 支持正则表达式",
+                "en": "Read only supports file paths; Edit supports regular expressions",
+                "ja": "Read はファイルパスのみ対応; Edit は正規表現に対応"
+              }
+            },
+            {
+              "id": "d",
+              "text": {
+                "zh": "Edit 路径参数是可选的，Read 路径参数是必填的",
+                "en": "Edit path parameter is optional; Read path parameter is required",
+                "ja": "Edit のパス引数はオプション; Read のパス引数は必須"
+              }
+            }
+          ],
+          "answer": "a",
+          "explanation": {
+            "zh": "Read(path) 中的 path 指定哪些文件可以被读取；Edit(path) 中的 path 指定哪些文件可以被编辑。两者都支持 glob 模式，但语义不同。",
+            "en": "Read(path) specifies which files can be read; Edit(path) specifies which files can be edited. Both support glob patterns but have different semantics.",
+            "ja": "Read(path) は読み取り可能なファイルを指定し、Edit(path) は編集可能なファイルを指定します。両者とも glob をサポートしますが意味が異なります。"
+          },
+          "reward_card": "card_bp07_003"
+        },
+        {
+          "id": "q_bp07_014",
+          "type": "choice",
+          "difficulty": 1,
+          "stem": {
+            "zh": "CLI 启动 Claude Code 时，用哪个参数指定使用的模型？",
+            "en": "Which CLI flag specifies the model to use when launching Claude Code?",
+            "ja": "CLI で Claude Code を起動する際、使用モデルを指定するフラグはどれですか？"
+          },
+          "options": [
+            {
+              "id": "d",
+              "text": {
+                "zh": "--model",
+                "en": "--model",
+                "ja": "--model"
+              }
+            },
+            {
+              "id": "a",
+              "text": {
+                "zh": "--engine",
+                "en": "--engine",
+                "ja": "--engine"
+              }
+            },
+            {
+              "id": "b",
+              "text": {
+                "zh": "--use-model",
+                "en": "--use-model",
+                "ja": "--use-model"
+              }
+            },
+            {
+              "id": "c",
+              "text": {
+                "zh": "--llm",
+                "en": "--llm",
+                "ja": "--llm"
+              }
+            }
+          ],
+          "answer": "d",
+          "explanation": {
+            "zh": "--model 是指定模型的 CLI 标志，例如 claude --model claude-opus-4-5。这是最常用的 CLI 标志之一。",
+            "en": "--model is the CLI flag to specify the model, e.g. claude --model claude-opus-4-5.",
+            "ja": "--model はモデルを指定する CLI フラグで、例: claude --model claude-opus-4-5 です。"
+          },
+          "reward_card": "card_bp07_004"
+        },
+        {
+          "id": "q_bp07_015",
+          "type": "choice",
+          "difficulty": 1,
+          "stem": {
+            "zh": "--print 标志的作用是什么？",
+            "en": "What does the --print flag do?",
+            "ja": "--print フラグの役割は何ですか？"
+          },
+          "options": [
+            {
+              "id": "a",
+              "text": {
+                "zh": "以非交互模式运行，将输出打印到 stdout",
+                "en": "Runs in non-interactive mode, printing output to stdout",
+                "ja": "非インタラクティブモードで実行し、出力を stdout に表示する"
+              }
+            },
+            {
+              "id": "b",
+              "text": {
+                "zh": "打印当前配置文件内容",
+                "en": "Prints the current configuration file contents",
+                "ja": "現在の設定ファイルの内容を表示する"
+              }
+            },
+            {
+              "id": "c",
+              "text": {
+                "zh": "打印调试日志到控制台",
+                "en": "Prints debug logs to the console",
+                "ja": "デバッグログをコンソールに表示する"
+              }
+            },
+            {
+              "id": "d",
+              "text": {
+                "zh": "将对话历史打印到文件",
+                "en": "Prints conversation history to a file",
+                "ja": "会話履歴をファイルに出力する"
+              }
+            }
+          ],
+          "answer": "a",
+          "explanation": {
+            "zh": "--print 使 Claude Code 以非交互模式运行，适合脚本集成和 CI/CD 管道，结果输出到 stdout 可供后续处理。",
+            "en": "--print runs Claude Code non-interactively, suitable for scripts and CI/CD pipelines, with output going to stdout.",
+            "ja": "--print は非インタラクティブモードで実行し、スクリプトや CI/CD パイプラインに適しており、出力は stdout に送られます。"
+          },
+          "reward_card": "card_bp07_004"
+        },
+        {
+          "id": "q_bp07_016",
+          "type": "choice",
+          "difficulty": 2,
+          "stem": {
+            "zh": "--resume 标志的用途是什么？",
+            "en": "What is the purpose of the --resume flag?",
+            "ja": "--resume フラグの用途は何ですか？"
+          },
+          "options": [
+            {
+              "id": "b",
+              "text": {
+                "zh": "恢复之前中断的会话，继续上次的对话",
+                "en": "Resumes a previously interrupted session to continue the last conversation",
+                "ja": "以前中断したセッションを再開し、前回の会話を続ける"
+              }
+            },
+            {
+              "id": "a",
+              "text": {
+                "zh": "恢复被暂停的 Bash 命令",
+                "en": "Resumes a paused Bash command",
+                "ja": "一時停止した Bash コマンドを再開する"
+              }
+            },
+            {
+              "id": "c",
+              "text": {
+                "zh": "重新加载配置文件",
+                "en": "Reloads the configuration file",
+                "ja": "設定ファイルを再読み込みする"
+              }
+            },
+            {
+              "id": "d",
+              "text": {
+                "zh": "从上次 Git 提交点恢复代码",
+                "en": "Restores code from the last Git commit",
+                "ja": "最後の Git コミットからコードを復元する"
+              }
+            }
+          ],
+          "answer": "b",
+          "explanation": {
+            "zh": "--resume [session-id] 可以恢复之前的会话，Claude 会记住之前的上下文，适合长时间任务中断后继续工作。",
+            "en": "--resume [session-id] restores a previous session with full context, useful for resuming long tasks after interruption.",
+            "ja": "--resume [session-id] は以前のセッションをコンテキストごと復元し、長時間タスクの中断後に便利です。"
+          },
+          "reward_card": "card_bp07_004"
+        },
+        {
+          "id": "q_bp07_017",
+          "type": "choice",
+          "difficulty": 2,
+          "stem": {
+            "zh": "使用 --permission-mode auto 启动 Claude Code 意味着什么？",
+            "en": "What does launching Claude Code with --permission-mode auto mean?",
+            "ja": "--permission-mode auto で Claude Code を起動するとどういう意味ですか？"
+          },
+          "options": [
+            {
+              "id": "c",
+              "text": {
+                "zh": "Claude 自动批准所有工具调用，无需手动确认",
+                "en": "Claude auto-approves all tool calls without manual confirmation",
+                "ja": "Claude は全てのツール呼び出しを自動承認し、手動確認が不要"
+              }
+            },
+            {
+              "id": "a",
+              "text": {
+                "zh": "Claude 只能读取文件，不能执行命令",
+                "en": "Claude can only read files and cannot execute commands",
+                "ja": "Claude はファイルの読み取りのみ可能でコマンドは実行できない"
+              }
+            },
+            {
+              "id": "b",
+              "text": {
+                "zh": "Claude 自动选择最合适的权限模式",
+                "en": "Claude automatically selects the most appropriate permission mode",
+                "ja": "Claude が最適なパーミッションモードを自動選択する"
+              }
+            },
+            {
+              "id": "d",
+              "text": {
+                "zh": "Claude 每次操作前都会询问用户",
+                "en": "Claude asks the user before every operation",
+                "ja": "Claude は全ての操作前にユーザーに確認する"
+              }
+            }
+          ],
+          "answer": "c",
+          "explanation": {
+            "zh": "--permission-mode auto 启用全自动模式，Claude 自动批准所有工具调用。适合受信任的自动化任务，但需谨慎使用。",
+            "en": "--permission-mode auto enables fully automatic mode where all tool calls are auto-approved. Use with caution in trusted automation contexts.",
+            "ja": "--permission-mode auto は完全自動モードを有効にし、全ツール呼び出しが自動承認されます。信頼できる自動化環境で慎重に使用してください。"
+          },
+          "reward_card": "card_bp07_004"
+        },
+        {
+          "id": "q_bp07_018",
+          "type": "choice",
+          "difficulty": 3,
+          "stem": {
+            "zh": "在 CI/CD 流水线中，以下哪种 CLI 标志组合最适合安全地自动运行 Claude Code？",
+            "en": "In a CI/CD pipeline, which CLI flag combination is best for safely running Claude Code automatically?",
+            "ja": "CI/CD パイプラインで Claude Code を安全に自動実行するのに最適な CLI フラグの組み合わせはどれですか？"
+          },
+          "options": [
+            {
+              "id": "a",
+              "text": {
+                "zh": "不使用任何权限参数，依赖默认交互确认",
+                "en": "No permission flags, rely on default interactive confirmation",
+                "ja": "権限フラグなし、デフォルトのインタラクティブ確認に依存"
+              }
+            },
+            {
+              "id": "b",
+              "text": {
+                "zh": "--permission-mode bypass，不设置任何 deny 规则",
+                "en": "--permission-mode bypass with no deny rules",
+                "ja": "--permission-mode bypass で deny ルールなし"
+              }
+            },
+            {
+              "id": "c",
+              "text": {
+                "zh": "--permission-mode plan，禁止 Claude 执行任何操作",
+                "en": "--permission-mode plan, preventing Claude from executing any operations",
+                "ja": "--permission-mode plan で Claude の全操作を禁止"
+              }
+            },
+            {
+              "id": "d",
+              "text": {
+                "zh": "--print --permission-mode auto 配合 settings.json 中细粒度 deny 规则",
+                "en": "--print --permission-mode auto combined with fine-grained deny rules in settings.json",
+                "ja": "--print --permission-mode auto と settings.json の細粒度 deny ルールを組み合わせる"
+              }
+            }
+          ],
+          "answer": "d",
+          "explanation": {
+            "zh": "CI/CD 最佳实践：--print 实现非交互输出，--permission-mode auto 省去确认提示，配合 settings.json 的 deny 规则限制危险操作（如禁止操作 .env 和生产配置）。",
+            "en": "CI/CD best practice: --print for non-interactive output, --permission-mode auto to skip prompts, combined with deny rules in settings.json to block dangerous operations like .env access.",
+            "ja": "CI/CD のベストプラクティス: --print で非インタラクティブ出力、--permission-mode auto で確認をスキップ、settings.json の deny ルールで .env などの危険な操作をブロックします。"
+          },
+          "reward_card": "card_bp07_004"
         }
       ],
       "star_thresholds": [
