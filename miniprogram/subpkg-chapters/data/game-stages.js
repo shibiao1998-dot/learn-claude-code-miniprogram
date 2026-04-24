@@ -6500,49 +6500,49 @@ module.exports = {
           "type": "choice",
           "difficulty": 1,
           "stem": {
-            "zh": "以下哪个概念与「这章要解决什么问题」直接相关？",
-            "en": "Which concept is directly related to \"What You'll Learn\"?",
-            "ja": "「この章が解決する問題」に直接関連する概念はどれですか？"
+            "zh": "Hook 在 Claude Code 主循环中扮演什么角色？",
+            "en": "What role does a Hook play in the Claude Code main loop?",
+            "ja": "Claude Code のメインループで Hook はどのような役割を担いますか？"
           },
           "options": [
             {
-              "id": "b",
-              "text": {
-                "zh": "第三步：给 bash 加最小安全检查",
-                "en": "第三步：给 bash 加最小安全检查",
-                "ja": "1. permission を yes/no の 2 値で考える"
-              }
-            },
-            {
-              "id": "d",
-              "text": {
-                "zh": "为什么不能把所有东西都硬塞进一个大字符串",
-                "en": "Try It",
-                "ja": "2. 部分ごとにテストしやすい"
-              }
-            },
-            {
               "id": "a",
               "text": {
-                "zh": "这章要解决什么问题",
-                "en": "What You'll Learn",
-                "ja": "この章が解決する問題"
+                "zh": "主循环在固定时机暴露的调用接口，让扩展行为在外部实现",
+                "en": "A call interface exposed at fixed moments, letting extension logic live outside the main loop",
+                "ja": "固定タイミングで公開される呼び出し口で、拡張動作を外部に実装させる"
+              }
+            },
+            {
+              "id": "b",
+              "text": {
+                "zh": "主循环内部的 if/else 分支，用于判断不同工具请求",
+                "en": "An if/else branch inside the main loop for handling different tool requests",
+                "ja": "メインループ内部の if/else 分岐で異なるツールリクエストを処理する"
               }
             },
             {
               "id": "c",
               "text": {
-                "zh": "什么叫恢复",
-                "en": "How It Works",
-                "ja": "recovery とは何か"
+                "zh": "一个独立进程，与主循环并行运行并共享状态",
+                "en": "A separate process running in parallel with the main loop, sharing state",
+                "ja": "メインループと並行して動作し状態を共有する独立プロセス"
+              }
+            },
+            {
+              "id": "d",
+              "text": {
+                "zh": "主循环结束后才运行的清理函数",
+                "en": "A cleanup function that runs only after the main loop finishes",
+                "ja": "メインループ終了後にのみ実行されるクリーンアップ関数"
               }
             }
           ],
           "answer": "a",
           "explanation": {
-            "zh": "主循环只负责暴露“时机”，真正的附加行为交给 hook。",
-            "en": "What You'll Learn",
-            "ja": "この章が解決する問題"
+            "zh": "Hook 不是主循环内的 if/else，而是主循环在固定时机暴露的调用接口。主循环只需知道：什么事件、交出什么上下文、收到结果怎么处理。",
+            "en": "A Hook is not an if/else inside the main loop but a call interface exposed at fixed moments. The main loop only needs to know: what event, what context to pass, and how to handle the result.",
+            "ja": "Hook はメインループ内の if/else ではなく、固定タイミングで公開される呼び出し口です。メインループはイベント種別・渡すコンテキスト・結果の処理方法だけを知っていれば十分です。"
           },
           "reward_card": "card_s08_001"
         },
@@ -6551,49 +6551,49 @@ module.exports = {
           "type": "choice",
           "difficulty": 1,
           "stem": {
-            "zh": "以下哪个概念与「建议联读」直接相关？",
-            "en": "Which concept is directly related to \"The Problem\"?",
-            "ja": "「主線とどう併読するか」に直接関連する概念はどれですか？"
+            "zh": "使用 Hook 而不是在主循环中直接写 if/else 的核心优势是什么？",
+            "en": "What is the core advantage of using Hooks instead of writing if/else directly in the main loop?",
+            "ja": "メインループに直接 if/else を書く代わりに Hook を使う核心的な利点は何ですか？"
           },
           "options": [
             {
-              "id": "b",
-              "text": {
-                "zh": "第 4 步才 ask",
-                "en": "第 4 步才 ask",
-                "ja": "4. ask を最後に置く理由"
-              }
-            },
-            {
-              "id": "d",
-              "text": {
-                "zh": "1. 不是所有 memory 都该放在同一个作用域",
-                "en": "1. 不是所有 memory 都该放在同一个作用域",
-                "ja": "1. 不是所有 memory 都该放在同一个作用域"
-              }
-            },
-            {
               "id": "a",
               "text": {
-                "zh": "建议联读",
-                "en": "The Problem",
-                "ja": "主線とどう併読するか"
+                "zh": "执行速度更快，减少函数调用开销",
+                "en": "Faster execution by reducing function call overhead",
+                "ja": "関数呼び出しのオーバーヘッドを減らし実行速度が上がる"
+              }
+            },
+            {
+              "id": "b",
+              "text": {
+                "zh": "系统可扩展，且主循环无需理解每个扩展需求",
+                "en": "System becomes extensible and the main loop does not need to understand each extension requirement",
+                "ja": "システムが拡張可能になり、メインループは各拡張要件を理解しなくてよい"
               }
             },
             {
               "id": "c",
               "text": {
-                "zh": "教学版统一返回约定",
-                "en": "How It Works",
-                "ja": "まず教えるべき 3 つのイベント"
+                "zh": "避免工具执行出错，提高稳定性",
+                "en": "Prevents tool execution errors and improves stability",
+                "ja": "ツール実行エラーを防ぎ安定性を向上させる"
+              }
+            },
+            {
+              "id": "d",
+              "text": {
+                "zh": "Hook 可以直接修改主循环的内部状态",
+                "en": "Hooks can directly modify the main loop's internal state",
+                "ja": "Hook がメインループの内部状態を直接変更できる"
               }
             }
           ],
-          "answer": "a",
+          "answer": "b",
           "explanation": {
-            "zh": "建议联读",
-            "en": "The Problem",
-            "ja": "主線とどう併読するか"
+            "zh": "Hook 让系统可扩展，但不要求主循环理解每个扩展需求。每个新扩展只需注册自己的 hook，主循环代码保持不变。",
+            "en": "Hooks make the system extensible without requiring the main loop to understand each extension. Each new extension just registers its hook and the main loop code stays unchanged.",
+            "ja": "Hook によってシステムは拡張可能になり、メインループは各拡張を理解する必要がありません。新しい拡張は hook を登録するだけで、メインループのコードは変わりません。"
           },
           "reward_card": "card_s08_002"
         },
@@ -6602,153 +6602,816 @@ module.exports = {
           "type": "choice",
           "difficulty": 1,
           "stem": {
-            "zh": "以下哪个概念与「什么是 hook」直接相关？",
-            "en": "Which concept is directly related to \"The Solution\"?",
-            "ja": "「Hook を最も簡単に言うと」に直接関連する概念はどれですか？"
+            "zh": "SessionStart Hook 在什么时候触发？",
+            "en": "When does the SessionStart Hook fire?",
+            "ja": "SessionStart Hook はいつ発火しますか？"
           },
           "options": [
             {
-              "id": "c",
-              "text": {
-                "zh": "2. 没有重试预算",
-                "en": "2. 没有重试预算",
-                "ja": "1. すべての failure に同じ retry をかける"
-              }
-            },
-            {
-              "id": "d",
-              "text": {
-                "zh": "1. `user`",
-                "en": "3. `project` -- Durable project facts not obvious from the repo",
-                "ja": "4. `reference`"
-              }
-            },
-            {
               "id": "a",
               "text": {
-                "zh": "什么是 hook",
-                "en": "The Solution",
-                "ja": "Hook を最も簡単に言うと"
+                "zh": "每次工具执行前",
+                "en": "Before each tool execution",
+                "ja": "ツール実行のたびに実行前"
               }
             },
             {
               "id": "b",
               "text": {
-                "zh": "2. HookResult",
-                "en": "What You've Mastered",
-                "ja": "Hook には整ったイベント情報を渡す"
+                "zh": "每次工具执行后",
+                "en": "After each tool execution",
+                "ja": "ツール実行のたびに実行後"
+              }
+            },
+            {
+              "id": "c",
+              "text": {
+                "zh": "会话开始时触发一次",
+                "en": "Once when the session starts",
+                "ja": "セッション開始時に一度だけ"
+              }
+            },
+            {
+              "id": "d",
+              "text": {
+                "zh": "主循环每次迭代结束时",
+                "en": "At the end of each main loop iteration",
+                "ja": "メインループの各イテレーション終了時"
               }
             }
           ],
-          "answer": "a",
+          "answer": "c",
           "explanation": {
-            "zh": "hook 让系统可扩展，但不要求主循环理解每个扩展需求。",
-            "en": "The Solution",
-            "ja": "主ループの決まった節目で、追加動作を差し込む拡張点"
+            "zh": "SessionStart 在会话开始时触发，适合做初始化操作。PreToolUse 在工具执行前触发，PostToolUse 在工具执行后触发。",
+            "en": "SessionStart fires once when the session starts, suitable for initialization. PreToolUse fires before tool execution and PostToolUse fires after.",
+            "ja": "SessionStart はセッション開始時に一度発火し、初期化に適しています。PreToolUse はツール実行前、PostToolUse はツール実行後に発火します。"
           },
-          "reward_card": "card_s08_003"
+          "reward_card": "card_s08_002"
         },
         {
           "id": "q_s08_004",
           "type": "choice",
-          "difficulty": 2,
+          "difficulty": 1,
           "stem": {
-            "zh": "在 Claude Code 中，关于「最小心智模型」的正确理解是？",
-            "en": "What is the correct understanding of \"Read Together\" in Claude Code?",
-            "ja": "Claude Code における「最小の心智モデル」の正しい理解はどれですか？"
+            "zh": "PreToolUse Hook 的主要用途是什么？",
+            "en": "What is the main purpose of the PreToolUse Hook?",
+            "ja": "PreToolUse Hook の主な用途は何ですか？"
           },
           "options": [
             {
-              "id": "d",
+              "id": "a",
               "text": {
-                "zh": "什么是动态信息",
-                "en": "Read Together",
-                "ja": "1 本の大文字列より良い理由"
+                "zh": "工具执行后做审计记录",
+                "en": "Audit logging after tool execution",
+                "ja": "ツール実行後に監査ログを記録する"
               }
             },
             {
               "id": "b",
               "text": {
-                "zh": "4. memory 会漂移，所以回答前要先核对当前状态",
-                "en": "4. memory 会漂移，所以回答前要先核对当前状态",
-                "ja": "4. memory 会漂移，所以回答前要先核对当前状态"
-              }
-            },
-            {
-              "id": "a",
-              "text": {
-                "zh": "最小心智模型",
-                "en": "Read Together",
-                "ja": "最小の心智モデル"
+                "zh": "会话初始化，加载配置文件",
+                "en": "Session initialization and loading config files",
+                "ja": "セッション初期化と設定ファイルの読み込み"
               }
             },
             {
               "id": "c",
               "text": {
-                "zh": "错误 1：把代码结构也存进 memory",
-                "en": "错误 1：把代码结构也存进 memory",
-                "ja": "错误 1：把代码结构也存进 memory"
+                "zh": "追加补充说明消息到上下文",
+                "en": "Appending supplemental messages to context",
+                "ja": "補足メッセージをコンテキストに追加する"
+              }
+            },
+            {
+              "id": "d",
+              "text": {
+                "zh": "工具执行前检查或拦截，阻止危险操作",
+                "en": "Checking or intercepting before tool execution to block dangerous operations",
+                "ja": "ツール実行前に検査または割り込み、危険な操作をブロックする"
               }
             }
           ],
-          "answer": "a",
+          "answer": "d",
           "explanation": {
-            "zh": "最小心智模型",
-            "en": "Read Together",
-            "ja": "最小の心智モデル"
+            "zh": "PreToolUse 在工具执行前触发，主要用于检查或拦截。如果返回退出码 1，可以阻止该工具被执行。",
+            "en": "PreToolUse fires before tool execution and is mainly used for checking or intercepting. Returning exit code 1 blocks the tool from executing.",
+            "ja": "PreToolUse はツール実行前に発火し、主に検査または割り込みに使われます。終了コード 1 を返すとツールの実行をブロックできます。"
           },
-          "reward_card": "card_s08_004"
+          "reward_card": "card_s08_002"
         },
         {
           "id": "q_s08_005",
           "type": "choice",
           "difficulty": 1,
           "stem": {
-            "zh": "以下哪个概念与「教学版统一返回约定」直接相关？",
-            "en": "Which concept is directly related to \"How It Works\"?",
-            "ja": "「まず教えるべき 3 つのイベント」に直接関連する概念はどれですか？"
+            "zh": "PostToolUse Hook 最适合做什么？",
+            "en": "What is PostToolUse Hook best suited for?",
+            "ja": "PostToolUse Hook は何に最も適していますか？"
           },
           "options": [
             {
-              "id": "d",
+              "id": "c",
               "text": {
-                "zh": "位置 2：拿到 response 以后",
-                "en": "位置 2：拿到 response 以后",
-                "ja": "compact と recovery を混ぜない"
+                "zh": "拦截危险工具调用，阻止其执行",
+                "en": "Intercepting dangerous tool calls to block execution",
+                "ja": "危険なツール呼び出しを割り込んで実行をブロックする"
               }
             },
             {
               "id": "b",
               "text": {
-                "zh": "最小实现结构",
-                "en": "最小实现结构",
-                "ja": "memory とこの章の関係"
+                "zh": "在会话开始前加载全局配置",
+                "en": "Loading global config before the session starts",
+                "ja": "セッション開始前にグローバル設定を読み込む"
               }
             },
             {
               "id": "a",
               "text": {
-                "zh": "教学版统一返回约定",
-                "en": "How It Works",
-                "ja": "まず教えるべき 3 つのイベント"
+                "zh": "工具执行后审计或追加补充说明",
+                "en": "Auditing or appending supplemental notes after tool execution",
+                "ja": "ツール実行後に監査したり補足説明を追加したりする"
               }
             },
             {
-              "id": "c",
+              "id": "d",
               "text": {
-                "zh": "4. 压缩后没有告诉模型“这是续场”",
-                "en": "4. 压缩后没有告诉模型“这是续场”",
-                "ja": "3. compact と recovery を 1 つの話にしてしまう"
+                "zh": "修改工具的返回值再交给主循环",
+                "en": "Modifying the tool return value before passing it back to the main loop",
+                "ja": "ツールの戻り値を変更してメインループに返す"
               }
             }
           ],
           "answer": "a",
           "explanation": {
-            "zh": "教学版统一返回约定",
-            "en": "Step 1.",
-            "ja": "まず教えるべき 3 つのイベント"
+            "zh": "PostToolUse 在工具执行后触发，适合做审计记录或追加补充说明。拦截操作应在 PreToolUse 阶段完成。",
+            "en": "PostToolUse fires after tool execution and is suited for audit logging or appending supplemental notes. Interception should be done in the PreToolUse stage.",
+            "ja": "PostToolUse はツール実行後に発火し、監査記録や補足説明の追加に適しています。割り込み操作は PreToolUse 段階で行うべきです。"
           },
-          "reward_card": "card_s08_005"
+          "reward_card": "card_s08_002"
+        },
+        {
+          "id": "q_s08_006",
+          "type": "choice",
+          "difficulty": 2,
+          "stem": {
+            "zh": "Hook 返回退出码 0 时，主循环会怎么处理？",
+            "en": "When a Hook returns exit code 0, what does the main loop do?",
+            "ja": "Hook が終了コード 0 を返したとき、メインループはどう処理しますか？"
+          },
+          "options": [
+            {
+              "id": "d",
+              "text": {
+                "zh": "阻止当前工具执行，跳过该步骤",
+                "en": "Block the current tool execution and skip the step",
+                "ja": "現在のツール実行をブロックしてステップをスキップする"
+              }
+            },
+            {
+              "id": "b",
+              "text": {
+                "zh": "先注入一条补充消息，再继续执行",
+                "en": "Inject a supplemental message first, then continue execution",
+                "ja": "補足メッセージを先に注入してから実行を続ける"
+              }
+            },
+            {
+              "id": "c",
+              "text": {
+                "zh": "终止整个会话，退出主循环",
+                "en": "Terminate the entire session and exit the main loop",
+                "ja": "セッション全体を終了しメインループを抜ける"
+              }
+            },
+            {
+              "id": "a",
+              "text": {
+                "zh": "正常继续（观察模式），不做额外处理",
+                "en": "Continue normally (observe mode) with no extra handling",
+                "ja": "通常通り続行（観察モード）し、追加処理なし"
+              }
+            }
+          ],
+          "answer": "a",
+          "explanation": {
+            "zh": "退出码约定：0 = 正常继续（观察），1 = 阻止当前动作（拦截），2 = 注入补充消息再继续（补充）。0 是最轻量的结果。",
+            "en": "Exit code convention: 0 = continue normally (observe), 1 = block current action (intercept), 2 = inject supplemental message then continue (supplement). 0 is the lightest outcome.",
+            "ja": "終了コード規約: 0 = 通常続行（観察）、1 = 現在のアクションをブロック（割り込み）、2 = 補足メッセージを注入してから続行（補足）。0 が最も軽量な結果です。"
+          },
+          "reward_card": "card_s08_003"
+        },
+        {
+          "id": "q_s08_007",
+          "type": "choice",
+          "difficulty": 2,
+          "stem": {
+            "zh": "当 Hook 需要阻止一个危险的工具调用时，应该返回哪个退出码？",
+            "en": "When a Hook needs to block a dangerous tool call, which exit code should it return?",
+            "ja": "Hook が危険なツール呼び出しをブロックする必要があるとき、どの終了コードを返すべきですか？"
+          },
+          "options": [
+            {
+              "id": "a",
+              "text": {
+                "zh": "0",
+                "en": "0",
+                "ja": "0"
+              }
+            },
+            {
+              "id": "b",
+              "text": {
+                "zh": "1",
+                "en": "1",
+                "ja": "1"
+              }
+            },
+            {
+              "id": "c",
+              "text": {
+                "zh": "2",
+                "en": "2",
+                "ja": "2"
+              }
+            },
+            {
+              "id": "d",
+              "text": {
+                "zh": "-1",
+                "en": "-1",
+                "ja": "-1"
+              }
+            }
+          ],
+          "answer": "b",
+          "explanation": {
+            "zh": "退出码 1 = 阻止当前动作（拦截）。0 是继续，2 是注入补充消息后继续，-1 不在约定内。",
+            "en": "Exit code 1 = block the current action (intercept). 0 means continue, 2 means inject a supplemental message then continue, -1 is not part of the convention.",
+            "ja": "終了コード 1 = 現在のアクションをブロック（割り込み）。0 は続行、2 は補足メッセージを注入して続行、-1 は規約外です。"
+          },
+          "reward_card": "card_s08_003"
+        },
+        {
+          "id": "q_s08_008",
+          "type": "choice",
+          "difficulty": 2,
+          "stem": {
+            "zh": "Hook 返回退出码 2 时，主循环会采取什么行动？",
+            "en": "When a Hook returns exit code 2, what action does the main loop take?",
+            "ja": "Hook が終了コード 2 を返したとき、メインループはどのような行動をとりますか？"
+          },
+          "options": [
+            {
+              "id": "a",
+              "text": {
+                "zh": "继续执行，不做任何额外处理",
+                "en": "Continue execution with no extra handling",
+                "ja": "追加処理なしで実行を続ける"
+              }
+            },
+            {
+              "id": "b",
+              "text": {
+                "zh": "跳过当前工具，直接进入下一步",
+                "en": "Skip the current tool and proceed to the next step",
+                "ja": "現在のツールをスキップして次のステップに進む"
+              }
+            },
+            {
+              "id": "d",
+              "text": {
+                "zh": "先注入一条补充消息，再继续执行工具",
+                "en": "Inject a supplemental message first, then continue tool execution",
+                "ja": "先に補足メッセージを注入し、その後ツール実行を続ける"
+              }
+            },
+            {
+              "id": "c",
+              "text": {
+                "zh": "重试当前工具，最多重试 3 次",
+                "en": "Retry the current tool up to 3 times",
+                "ja": "現在のツールを最大 3 回リトライする"
+              }
+            }
+          ],
+          "answer": "d",
+          "explanation": {
+            "zh": "退出码 2 = 注入补充消息再继续。主循环先把 hook 提供的额外信息追加到上下文，然后照常执行工具。",
+            "en": "Exit code 2 = inject a supplemental message then continue. The main loop appends the extra information provided by the hook to the context, then executes the tool as normal.",
+            "ja": "終了コード 2 = 補足メッセージを注入してから続行。メインループは hook が提供した追加情報をコンテキストに追加し、その後通常通りツールを実行します。"
+          },
+          "reward_card": "card_s08_003"
+        },
+        {
+          "id": "q_s08_009",
+          "type": "choice",
+          "difficulty": 2,
+          "stem": {
+            "zh": "下列关于退出码 0、1、2 的描述，哪一项是正确的？",
+            "en": "Which of the following descriptions of exit codes 0, 1, and 2 is correct?",
+            "ja": "終了コード 0・1・2 についての以下の説明のうち、正しいものはどれですか？"
+          },
+          "options": [
+            {
+              "id": "c",
+              "text": {
+                "zh": "0 = 拦截，1 = 继续，2 = 补充",
+                "en": "0 = intercept, 1 = continue, 2 = supplement",
+                "ja": "0 = 割り込み、1 = 続行、2 = 補足"
+              }
+            },
+            {
+              "id": "b",
+              "text": {
+                "zh": "0 = 继续，1 = 补充，2 = 拦截",
+                "en": "0 = continue, 1 = supplement, 2 = intercept",
+                "ja": "0 = 続行、1 = 補足、2 = 割り込み"
+              }
+            },
+            {
+              "id": "a",
+              "text": {
+                "zh": "0 = 继续，1 = 拦截，2 = 补充",
+                "en": "0 = continue, 1 = intercept, 2 = supplement",
+                "ja": "0 = 続行、1 = 割り込み、2 = 補足"
+              }
+            },
+            {
+              "id": "d",
+              "text": {
+                "zh": "0 = 补充，1 = 拦截，2 = 继续",
+                "en": "0 = supplement, 1 = intercept, 2 = continue",
+                "ja": "0 = 補足、1 = 割り込み、2 = 続行"
+              }
+            }
+          ],
+          "answer": "a",
+          "explanation": {
+            "zh": "退出码约定：0 = 继续（观察），1 = 拦截（阻止当前动作），2 = 补充（注入消息再继续）。这是 Hook 系统的核心约定。",
+            "en": "Exit code convention: 0 = continue (observe), 1 = intercept (block current action), 2 = supplement (inject message then continue). This is the core convention of the Hook system.",
+            "ja": "終了コード規約: 0 = 続行（観察）、1 = 割り込み（現在のアクションをブロック）、2 = 補足（メッセージを注入してから続行）。これは Hook システムの核心的な規約です。"
+          },
+          "reward_card": "card_s08_003"
+        },
+        {
+          "id": "q_s08_010",
+          "type": "choice",
+          "difficulty": 2,
+          "stem": {
+            "zh": "主循环在哪两个位置调用 run_hooks 来接入 Hook 系统？",
+            "en": "At which two positions does the main loop call run_hooks to integrate the Hook system?",
+            "ja": "メインループはどの 2 箇所で run_hooks を呼び出して Hook システムと連携しますか？"
+          },
+          "options": [
+            {
+              "id": "a",
+              "text": {
+                "zh": "会话开始前和会话结束后",
+                "en": "Before the session starts and after the session ends",
+                "ja": "セッション開始前とセッション終了後"
+              }
+            },
+            {
+              "id": "b",
+              "text": {
+                "zh": "模型响应前和模型响应后",
+                "en": "Before the model responds and after the model responds",
+                "ja": "モデルが応答する前と応答した後"
+              }
+            },
+            {
+              "id": "c",
+              "text": {
+                "zh": "工具执行前（PreToolUse）和工具执行后（PostToolUse）",
+                "en": "Before tool execution (PreToolUse) and after tool execution (PostToolUse)",
+                "ja": "ツール実行前（PreToolUse）とツール実行後（PostToolUse）"
+              }
+            },
+            {
+              "id": "d",
+              "text": {
+                "zh": "用户输入前和工具执行前",
+                "en": "Before user input and before tool execution",
+                "ja": "ユーザー入力前とツール実行前"
+              }
+            }
+          ],
+          "answer": "c",
+          "explanation": {
+            "zh": "工具执行前调 run_hooks('PreToolUse')，返回 1 跳过执行、返回 2 先追加消息。执行后调 run_hooks('PostToolUse') 做补充。主循环结构几乎不变。",
+            "en": "Call run_hooks('PreToolUse') before tool execution (return 1 skips execution, return 2 appends a message first), and call run_hooks('PostToolUse') after execution for supplementation. The main loop structure barely changes.",
+            "ja": "ツール実行前に run_hooks('PreToolUse') を呼び（1 を返すと実行をスキップ、2 を返すと先にメッセージを追加）、実行後に run_hooks('PostToolUse') を呼んで補足します。メインループの構造はほとんど変わりません。"
+          },
+          "reward_card": "card_s08_001"
+        },
+        {
+          "id": "q_s08_011",
+          "type": "choice",
+          "difficulty": 2,
+          "stem": {
+            "zh": "在主循环中接入 Hook 后，主循环本身的结构会发生什么变化？",
+            "en": "After integrating Hooks into the main loop, what happens to the main loop structure itself?",
+            "ja": "メインループに Hook を組み込んだ後、メインループ自体の構造はどう変化しますか？"
+          },
+          "options": [
+            {
+              "id": "a",
+              "text": {
+                "zh": "需要大规模重构，为每种 hook 类型添加分支",
+                "en": "Requires large-scale refactoring to add branches for each hook type",
+                "ja": "各 hook タイプに分岐を追加するために大規模なリファクタリングが必要"
+              }
+            },
+            {
+              "id": "b",
+              "text": {
+                "zh": "只需在工具执行前后各插入一行 run_hooks，结构几乎不变",
+                "en": "Only needs one run_hooks call inserted before and after tool execution; structure barely changes",
+                "ja": "ツール実行の前後に run_hooks を 1 行ずつ挿入するだけで、構造はほとんど変わらない"
+              }
+            },
+            {
+              "id": "c",
+              "text": {
+                "zh": "主循环需要了解并处理每种扩展的逻辑",
+                "en": "The main loop needs to understand and handle the logic of each extension",
+                "ja": "メインループは各拡張のロジックを理解して処理する必要がある"
+              }
+            },
+            {
+              "id": "d",
+              "text": {
+                "zh": "主循环变为事件驱动模型，完全重写",
+                "en": "The main loop becomes an event-driven model and is completely rewritten",
+                "ja": "メインループはイベント駆動モデルに変わり、完全に書き直される"
+              }
+            }
+          ],
+          "answer": "b",
+          "explanation": {
+            "zh": "主循环只需在工具执行前后各插一行 run_hooks，结构几乎不变。这正是 Hook 设计的优雅之处——扩展不影响主干。",
+            "en": "The main loop only needs one run_hooks call inserted before and after tool execution; the structure barely changes. This is the elegance of Hook design — extensions do not affect the main trunk.",
+            "ja": "メインループはツール実行の前後に run_hooks を 1 行ずつ挿入するだけで、構造はほとんど変わりません。これが Hook 設計の優雅さで、拡張がメインの流れに影響しません。"
+          },
+          "reward_card": "card_s08_001"
+        },
+        {
+          "id": "q_s08_012",
+          "type": "choice",
+          "difficulty": 2,
+          "stem": {
+            "zh": "如果希望在执行某个工具后，自动向上下文追加一段安全提示，应该用哪个 Hook 事件配合哪个退出码？",
+            "en": "To automatically append a safety note to context after a tool executes, which Hook event and exit code should you use?",
+            "ja": "ツール実行後に安全上の注意をコンテキストに自動追加するには、どの Hook イベントとどの終了コードを使うべきですか？"
+          },
+          "options": [
+            {
+              "id": "a",
+              "text": {
+                "zh": "PreToolUse + 退出码 1",
+                "en": "PreToolUse + exit code 1",
+                "ja": "PreToolUse + 終了コード 1"
+              }
+            },
+            {
+              "id": "b",
+              "text": {
+                "zh": "SessionStart + 退出码 0",
+                "en": "SessionStart + exit code 0",
+                "ja": "SessionStart + 終了コード 0"
+              }
+            },
+            {
+              "id": "c",
+              "text": {
+                "zh": "PostToolUse + 退出码 2",
+                "en": "PostToolUse + exit code 2",
+                "ja": "PostToolUse + 終了コード 2"
+              }
+            },
+            {
+              "id": "d",
+              "text": {
+                "zh": "PreToolUse + 退出码 2",
+                "en": "PreToolUse + exit code 2",
+                "ja": "PreToolUse + 終了コード 2"
+              }
+            }
+          ],
+          "answer": "c",
+          "explanation": {
+            "zh": "PostToolUse 在工具执行后触发，退出码 2 表示注入补充消息再继续。两者组合正好实现'执行后自动追加说明'的需求。",
+            "en": "PostToolUse fires after tool execution and exit code 2 means inject a supplemental message then continue. The combination achieves the requirement of automatically appending notes after execution.",
+            "ja": "PostToolUse はツール実行後に発火し、終了コード 2 は補足メッセージを注入して続行することを意味します。この組み合わせが実行後に自動で注釈を追加する要件を実現します。"
+          },
+          "reward_card": "card_s08_003"
+        },
+        {
+          "id": "q_s08_013",
+          "type": "choice",
+          "difficulty": 3,
+          "stem": {
+            "zh": "以下哪种场景最适合使用 PreToolUse Hook 配合退出码 1？",
+            "en": "Which scenario is best handled by a PreToolUse Hook with exit code 1?",
+            "ja": "次のシナリオのうち、PreToolUse Hook と終了コード 1 の組み合わせに最も適しているのはどれですか？"
+          },
+          "options": [
+            {
+              "id": "c",
+              "text": {
+                "zh": "会话开始时自动打印欢迎语",
+                "en": "Automatically printing a welcome message when the session starts",
+                "ja": "セッション開始時にウェルカムメッセージを自動表示する"
+              }
+            },
+            {
+              "id": "b",
+              "text": {
+                "zh": "记录每次工具调用的结果到日志文件",
+                "en": "Logging the result of each tool call to a log file",
+                "ja": "各ツール呼び出しの結果をログファイルに記録する"
+              }
+            },
+            {
+              "id": "a",
+              "text": {
+                "zh": "检测到 rm -rf / 命令时立即阻止执行",
+                "en": "Immediately blocking execution when rm -rf / is detected",
+                "ja": "rm -rf / コマンドを検出したときに即座に実行をブロックする"
+              }
+            },
+            {
+              "id": "d",
+              "text": {
+                "zh": "在工具执行成功后注入一条总结消息",
+                "en": "Injecting a summary message after successful tool execution",
+                "ja": "ツール実行成功後に要約メッセージを注入する"
+              }
+            }
+          ],
+          "answer": "a",
+          "explanation": {
+            "zh": "PreToolUse 在工具执行前触发，退出码 1 阻止执行，两者组合完美匹配'检测危险命令并阻止'的需求。记录日志适合 PostToolUse+0，注入总结适合 PostToolUse+2，打印欢迎语适合 SessionStart+0。",
+            "en": "PreToolUse fires before tool execution and exit code 1 blocks it. The combination perfectly matches the requirement to detect a dangerous command and block it. Logging suits PostToolUse+0, injecting a summary suits PostToolUse+2, and printing a welcome message suits SessionStart+0.",
+            "ja": "PreToolUse はツール実行前に発火し、終了コード 1 でブロックします。この組み合わせは危険なコマンドを検出してブロックする要件にぴったりです。ログ記録は PostToolUse+0、要約注入は PostToolUse+2、ウェルカムメッセージは SessionStart+0 が適しています。"
+          },
+          "reward_card": "card_s08_003"
+        },
+        {
+          "id": "q_s08_014",
+          "type": "choice",
+          "difficulty": 3,
+          "stem": {
+            "zh": "下列关于 Hook 系统设计原则的说法，哪一项是错误的？",
+            "en": "Which of the following statements about the Hook system design principle is incorrect?",
+            "ja": "Hook システムの設計原則に関する以下の記述のうち、誤っているのはどれですか？"
+          },
+          "options": [
+            {
+              "id": "a",
+              "text": {
+                "zh": "主循环只需知道：什么事件、交出什么上下文、收到结果怎么处理",
+                "en": "The main loop only needs to know: what event, what context to pass, and how to handle the result",
+                "ja": "メインループが知るべきは、イベント種別・渡すコンテキスト・結果の処理方法だけ"
+              }
+            },
+            {
+              "id": "b",
+              "text": {
+                "zh": "每添加一个新 hook，主循环必须增加对应的 if/else 分支",
+                "en": "Every new hook added requires a corresponding if/else branch to be added to the main loop",
+                "ja": "新しい hook を追加するたびに、メインループに対応する if/else 分岐を追加しなければならない"
+              }
+            },
+            {
+              "id": "c",
+              "text": {
+                "zh": "Hook 让系统可扩展，同时不要求主循环理解每个扩展需求",
+                "en": "Hooks make the system extensible while not requiring the main loop to understand each extension need",
+                "ja": "Hook はシステムを拡張可能にし、メインループは各拡張要件を理解しなくてよい"
+              }
+            },
+            {
+              "id": "d",
+              "text": {
+                "zh": "先学 SessionStart / PreToolUse / PostToolUse 就能搭出最小 hook 机制",
+                "en": "Learning SessionStart / PreToolUse / PostToolUse first is enough to build a minimal hook mechanism",
+                "ja": "SessionStart / PreToolUse / PostToolUse を先に学べば最小の hook 機構を構築できる"
+              }
+            }
+          ],
+          "answer": "b",
+          "explanation": {
+            "zh": "Hook 的设计目标恰恰是避免每次扩展都要改主循环。新 hook 注册到 hook 列表即可，主循环通过 run_hooks 统一调用，无需任何新的 if/else 分支。",
+            "en": "The whole point of Hook design is to avoid modifying the main loop with every extension. A new hook is simply registered in the hook list; the main loop calls it uniformly via run_hooks with no new if/else branches needed.",
+            "ja": "Hook 設計の目的はまさに、拡張のたびにメインループを変更することを避けることです。新しい hook は hook リストに登録するだけで、メインループは run_hooks で一括呼び出しし、新しい if/else 分岐は不要です。"
+          },
+          "reward_card": "card_s08_001"
+        },
+        {
+          "id": "q_s08_015",
+          "type": "choice",
+          "difficulty": 3,
+          "stem": {
+            "zh": "一个 Hook 想在工具执行前做权限检查，允许则继续、拒绝则阻止。正确的退出码逻辑是？",
+            "en": "A Hook wants to do a permission check before tool execution: allow means continue, deny means block. What is the correct exit code logic?",
+            "ja": "Hook がツール実行前に権限チェックをして、許可なら続行・拒否ならブロックしたい。正しい終了コードのロジックは？"
+          },
+          "options": [
+            {
+              "id": "a",
+              "text": {
+                "zh": "允许返回 2，拒绝返回 0",
+                "en": "Allow returns 2, deny returns 0",
+                "ja": "許可は 2 を返す、拒否は 0 を返す"
+              }
+            },
+            {
+              "id": "b",
+              "text": {
+                "zh": "允许返回 1，拒绝返回 2",
+                "en": "Allow returns 1, deny returns 2",
+                "ja": "許可は 1 を返す、拒否は 2 を返す"
+              }
+            },
+            {
+              "id": "c",
+              "text": {
+                "zh": "允许返回 0，拒绝返回 2",
+                "en": "Allow returns 0, deny returns 2",
+                "ja": "許可は 0 を返す、拒否は 2 を返す"
+              }
+            },
+            {
+              "id": "d",
+              "text": {
+                "zh": "允许返回 0，拒绝返回 1",
+                "en": "Allow returns 0, deny returns 1",
+                "ja": "許可は 0 を返す、拒否は 1 を返す"
+              }
+            }
+          ],
+          "answer": "d",
+          "explanation": {
+            "zh": "0 = 正常继续（允许通过），1 = 阻止当前动作（拒绝执行）。这是退出码约定的直接应用：允许→0，拒绝→1。",
+            "en": "0 = continue normally (allow through), 1 = block current action (deny execution). This is a direct application of the exit code convention: allow -> 0, deny -> 1.",
+            "ja": "0 = 通常続行（許可）、1 = 現在のアクションをブロック（拒否）。これは終了コード規約の直接的な適用です: 許可 -> 0、拒否 -> 1。"
+          },
+          "reward_card": "card_s08_003"
+        },
+        {
+          "id": "q_s08_016",
+          "type": "choice",
+          "difficulty": 3,
+          "stem": {
+            "zh": "下列四种说法中，哪一种准确描述了 Hook 系统中三个核心事件的触发时机？",
+            "en": "Which of the following accurately describes the trigger timing of the three core Hook events?",
+            "ja": "以下の 4 つの記述のうち、3 つのコア Hook イベントの発火タイミングを正確に説明しているのはどれですか？"
+          },
+          "options": [
+            {
+              "id": "a",
+              "text": {
+                "zh": "SessionStart 每次工具调用前、PreToolUse 会话开始时、PostToolUse 会话结束时",
+                "en": "SessionStart before each tool call, PreToolUse when the session starts, PostToolUse when the session ends",
+                "ja": "SessionStart はツール呼び出しのたびに実行前、PreToolUse はセッション開始時、PostToolUse はセッション終了時"
+              }
+            },
+            {
+              "id": "b",
+              "text": {
+                "zh": "SessionStart 会话开始时、PreToolUse 工具执行前、PostToolUse 工具执行后",
+                "en": "SessionStart when the session starts, PreToolUse before tool execution, PostToolUse after tool execution",
+                "ja": "SessionStart はセッション開始時、PreToolUse はツール実行前、PostToolUse はツール実行後"
+              }
+            },
+            {
+              "id": "c",
+              "text": {
+                "zh": "SessionStart 工具执行后、PreToolUse 会话开始时、PostToolUse 工具执行前",
+                "en": "SessionStart after tool execution, PreToolUse when the session starts, PostToolUse before tool execution",
+                "ja": "SessionStart はツール実行後、PreToolUse はセッション開始時、PostToolUse はツール実行前"
+              }
+            },
+            {
+              "id": "d",
+              "text": {
+                "zh": "SessionStart 工具执行前、PreToolUse 工具执行后、PostToolUse 会话开始时",
+                "en": "SessionStart before tool execution, PreToolUse after tool execution, PostToolUse when the session starts",
+                "ja": "SessionStart はツール実行前、PreToolUse はツール実行後、PostToolUse はセッション開始時"
+              }
+            }
+          ],
+          "answer": "b",
+          "explanation": {
+            "zh": "SessionStart 会话开始触发，PreToolUse 工具执行前触发（检查或拦截），PostToolUse 工具执行后触发（审计或追加说明）。先记住这三个事件就能搭出最小 hook 机制。",
+            "en": "SessionStart fires when the session starts, PreToolUse fires before tool execution (check or intercept), PostToolUse fires after tool execution (audit or append notes). Memorizing these three events is enough to build a minimal hook mechanism.",
+            "ja": "SessionStart はセッション開始時、PreToolUse はツール実行前（検査または割り込み）、PostToolUse はツール実行後（監査または補足追加）に発火します。この 3 つを覚えれば最小の hook 機構を構築できます。"
+          },
+          "reward_card": "card_s08_002"
+        },
+        {
+          "id": "q_s08_017",
+          "type": "choice",
+          "difficulty": 3,
+          "stem": {
+            "zh": "以下哪种场景需要同时用到两个不同的 Hook 事件？",
+            "en": "Which scenario requires using two different Hook events at the same time?",
+            "ja": "以下のシナリオのうち、2 つの異なる Hook イベントを同時に使う必要があるのはどれですか？"
+          },
+          "options": [
+            {
+              "id": "a",
+              "text": {
+                "zh": "拦截包含 sudo 的 bash 命令",
+                "en": "Intercepting bash commands that contain sudo",
+                "ja": "sudo を含む bash コマンドを割り込んでブロックする"
+              }
+            },
+            {
+              "id": "b",
+              "text": {
+                "zh": "记录所有工具调用的耗时到日志",
+                "en": "Logging the execution time of all tool calls",
+                "ja": "全ツール呼び出しの実行時間をログに記録する"
+              }
+            },
+            {
+              "id": "d",
+              "text": {
+                "zh": "会话开始时打印欢迎语，同时拦截危险工具",
+                "en": "Printing a welcome message when the session starts while also intercepting dangerous tools",
+                "ja": "セッション開始時にウェルカムメッセージを表示しつつ、危険なツールも割り込んでブロックする"
+              }
+            },
+            {
+              "id": "c",
+              "text": {
+                "zh": "工具执行后追加一条安全提示",
+                "en": "Appending a safety note after tool execution",
+                "ja": "ツール実行後に安全上の注意を追加する"
+              }
+            }
+          ],
+          "answer": "d",
+          "explanation": {
+            "zh": "打印欢迎语需要 SessionStart，拦截危险工具需要 PreToolUse，两个需求对应两个不同事件。单个需求只需一个事件即可满足。",
+            "en": "Printing a welcome message needs SessionStart; intercepting dangerous tools needs PreToolUse. Two requirements correspond to two different events. A single requirement only needs one event.",
+            "ja": "ウェルカムメッセージの表示は SessionStart が必要で、危険なツールのブロックは PreToolUse が必要です。2 つの要件が 2 つの異なるイベントに対応します。単一の要件は 1 つのイベントで十分です。"
+          },
+          "reward_card": "card_s08_002"
+        },
+        {
+          "id": "q_s08_018",
+          "type": "choice",
+          "difficulty": 3,
+          "stem": {
+            "zh": "有人说 Hook 就是主循环里为每种扩展写的 if/else，这种说法错在哪里？",
+            "en": "Someone says a Hook is just an if/else written in the main loop for each extension. What is wrong with this statement?",
+            "ja": "Hook とはメインループの中に各拡張のために書かれた if/else だという主張の誤りはどこにありますか？"
+          },
+          "options": [
+            {
+              "id": "a",
+              "text": {
+                "zh": "Hook 只能在会话开始时执行，不能在工具执行前后触发",
+                "en": "Hooks can only execute at session start, not before or after tool execution",
+                "ja": "Hook はセッション開始時にしか実行できず、ツール実行の前後では発火しない"
+              }
+            },
+            {
+              "id": "b",
+              "text": {
+                "zh": "Hook 必须返回退出码，if/else 不需要",
+                "en": "Hooks must return an exit code; if/else does not",
+                "ja": "Hook は終了コードを返さなければならないが、if/else は不要"
+              }
+            },
+            {
+              "id": "c",
+              "text": {
+                "zh": "Hook 是主循环暴露的调用接口，扩展逻辑在外部实现，主循环无需理解每个扩展",
+                "en": "Hooks are call interfaces exposed by the main loop; extension logic lives outside, and the main loop does not need to understand each extension",
+                "ja": "Hook はメインループが公開する呼び出し口で、拡張ロジックは外部に実装され、メインループは各拡張を理解しなくてよい"
+              }
+            },
+            {
+              "id": "d",
+              "text": {
+                "zh": "if/else 比 Hook 执行速度慢，所以不推荐",
+                "en": "if/else is slower than Hooks, so it is not recommended",
+                "ja": "if/else は Hook より実行速度が遅いため推奨されない"
+              }
+            }
+          ],
+          "answer": "c",
+          "explanation": {
+            "zh": "Hook 不是主循环里的 if/else。Hook 是主循环在固定时机暴露的调用接口，真正的扩展逻辑在外部实现。主循环只需知道事件、上下文和如何处理结果，不需要理解每个扩展的具体需求。",
+            "en": "A Hook is not an if/else inside the main loop. It is a call interface the main loop exposes at fixed moments; the actual extension logic lives outside. The main loop only needs to know the event, the context, and how to handle the result — it does not need to understand each extension's specifics.",
+            "ja": "Hook はメインループ内の if/else ではありません。固定タイミングでメインループが公開する呼び出し口であり、実際の拡張ロジックは外部に実装されます。メインループはイベント・コンテキスト・結果の処理方法だけを知ればよく、各拡張の詳細を理解する必要はありません。"
+          },
+          "reward_card": "card_s08_001"
         }
       ],
       "star_thresholds": [
