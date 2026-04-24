@@ -11332,261 +11332,924 @@ module.exports = {
       },
       "questions": [
         {
-          "id": "q_s14_001",
-          "type": "choice",
-          "difficulty": 1,
-          "stem": {
-            "zh": "以下哪个概念与「这一章要解决什么问题」直接相关？",
-            "en": "Which concept is directly related to \"What You'll Learn\"?",
-            "ja": "「この章が解決する問題」に直接関連する概念はどれですか？"
-          },
-          "options": [
-            {
-              "id": "b",
-              "text": {
-                "zh": "为什么这章放在后台任务之后",
-                "en": "为什么这章放在后台任务之后",
-                "ja": "为什么这章放在后台任务之后"
-              }
-            },
-            {
-              "id": "d",
-              "text": {
-                "zh": "第三步：时间到了就发通知",
-                "en": "第三步：时间到了就发通知",
-                "ja": "4. 未来トリガーの仕事を裏で黙って全部実行する"
-              }
-            },
-            {
-              "id": "a",
-              "text": {
-                "zh": "这一章要解决什么问题",
-                "en": "What You'll Learn",
-                "ja": "この章が解決する問題"
-              }
-            },
-            {
-              "id": "c",
-              "text": {
-                "zh": "第四步：下一轮前排空通知",
-                "en": "第四步：下一轮前排空通知",
-                "ja": "第 4 段階: 次の model call 前に queue を drain する"
-              }
-            }
-          ],
-          "answer": "a",
-          "explanation": {
-            "zh": "把一条未来要执行的意图，先记下来，等时间到了再触发。",
-            "en": "What You'll Learn",
-            "ja": "未来の意図を今記録して、時刻が来たら新しい仕事として戻す"
-          },
-          "reward_card": "card_s14_001"
+                "id": "q_s14_001",
+                "type": "choice",
+                "difficulty": 1,
+                "stem": {
+                        "zh": "后台任务与定时调度解决的核心问题分别是什么？",
+                        "en": "What core problems do background tasks and scheduled dispatch solve respectively?",
+                        "ja": "バックグラウンドタスクとスケジュール実行が解決する中核的な問題はそれぞれ何ですか？"
+                },
+                "options": [
+                        {
+                                "id": "a",
+                                "text": {
+                                        "zh": "两者都是解决「任务如何并发执行」的问题",
+                                        "en": "Both solve the problem of how tasks execute concurrently",
+                                        "ja": "両方ともタスクをどう並列実行するかの問題を解決する"
+                                }
+                        },
+                        {
+                                "id": "b",
+                                "text": {
+                                        "zh": "后台任务解决「什么时候开始」，定时调度解决「结果什么时候回来」",
+                                        "en": "Background tasks solve when to start; scheduled dispatch solves when results come back",
+                                        "ja": "バックグラウンドタスクはいつ開始するかを解決し、スケジュールは結果がいつ戻るかを解決する"
+                                }
+                        },
+                        {
+                                "id": "c",
+                                "text": {
+                                        "zh": "两者都是解决「结果什么时候回来」的问题",
+                                        "en": "Both solve the problem of when results come back",
+                                        "ja": "両方とも結果がいつ戻るかの問題を解決する"
+                                }
+                        },
+                        {
+                                "id": "d",
+                                "text": {
+                                        "zh": "后台任务解决「结果什么时候回来」，定时调度解决「什么时候开始」",
+                                        "en": "Background tasks solve when results come back; scheduled dispatch solves when to start",
+                                        "ja": "バックグラウンドタスクは結果がいつ戻るかを解決し、スケジュールはいつ開始するかを解決する"
+                                }
+                        }
+                ],
+                "answer": "d",
+                "explanation": {
+                        "zh": "后台任务是在等「已启动的慢操作」的结果，定时调度是在等「一件事应该在未来什么时候开始」。两者关注的时间维度不同。",
+                        "en": "Background tasks wait for results of already-started slow operations. Scheduled dispatch waits for when a future task should begin. They address different time dimensions.",
+                        "ja": "バックグラウンドタスクは既に開始した遅い処理の結果を待つもの。スケジュールは将来タスクがいつ開始すべきかを待つもの。両者は異なる時間軸に着目している。"
+                },
+                "reward_card": "card_s14_001"
         },
         {
-          "id": "q_s14_002",
-          "type": "choice",
-          "difficulty": 1,
-          "stem": {
-            "zh": "以下哪个概念与「建议联读」直接相关？",
-            "en": "Which concept is directly related to \"The Problem\"?",
-            "ja": "「教学上の境界」に直接関連する概念はどれですか？"
-          },
-          "options": [
-            {
-              "id": "b",
-              "text": {
-                "zh": "下一章学什么",
-                "en": "下一章学什么",
-                "ja": "教学上の境界"
-              }
-            },
-            {
-              "id": "a",
-              "text": {
-                "zh": "建议联读",
-                "en": "The Problem",
-                "ja": "教学上の境界"
-              }
-            },
-            {
-              "id": "d",
-              "text": {
-                "zh": "最小心智模型",
-                "en": "What You've Mastered",
-                "ja": "最小心智模型"
-              }
-            },
-            {
-              "id": "c",
-              "text": {
-                "zh": "为什么这章放在后台任务之后",
-                "en": "为什么这章放在后台任务之后",
-                "ja": "为什么这章放在后台任务之后"
-              }
-            }
-          ],
-          "answer": "a",
-          "explanation": {
-            "zh": "建议联读",
-            "en": "The Problem",
-            "ja": "schedule record が通知になり、通知が主ループへ戻る流れ"
-          },
-          "reward_card": "card_s14_002"
+                "id": "q_s14_002",
+                "type": "choice",
+                "difficulty": 1,
+                "stem": {
+                        "zh": "调度器的核心职责用一句话描述最准确的是？",
+                        "en": "Which phrase best describes the core responsibility of a scheduler?",
+                        "ja": "スケジューラーの中心的な役割を一言で表すと最も正確なのはどれですか？"
+                },
+                "options": [
+                        {
+                                "id": "a",
+                                "text": {
+                                        "zh": "替代主循环，直接执行未来的任务",
+                                        "en": "Replace the main loop and directly execute future tasks",
+                                        "ja": "主ループを置き換えて、将来のタスクを直接実行する"
+                                }
+                        },
+                        {
+                                "id": "b",
+                                "text": {
+                                        "zh": "缓存模型的输出以供定时重用",
+                                        "en": "Cache model outputs for scheduled reuse",
+                                        "ja": "モデルの出力をキャッシュして定期的に再利用する"
+                                }
+                        },
+                        {
+                                "id": "c",
+                                "text": {
+                                        "zh": "管理并发任务的优先级队列",
+                                        "en": "Manage a priority queue of concurrent tasks",
+                                        "ja": "並列タスクの優先度キューを管理する"
+                                }
+                        },
+                        {
+                                "id": "d",
+                                "text": {
+                                        "zh": "记住未来，时间到了再触发",
+                                        "en": "Remember the future and trigger when the time comes",
+                                        "ja": "未来を記憶し、時刻が来たらトリガーする"
+                                }
+                        }
+                ],
+                "answer": "d",
+                "explanation": {
+                        "zh": "调度器做的是「记住未来」——把意图先记下来，等时间到了再把它变成新的触发事件。它不替代主循环，也不直接执行任务。",
+                        "en": "The scheduler remembers the future: record an intent now, and turn it into a trigger event when the time comes. It does not replace the main loop or execute tasks directly.",
+                        "ja": "スケジューラーの仕事は未来を記憶すること——今は意図を記録し、時刻が来たら新しいトリガーイベントに変換する。主ループを置き換えたりタスクを直接実行したりはしない。"
+                },
+                "reward_card": "card_s14_001"
         },
         {
-          "id": "q_s14_003",
-          "type": "choice",
-          "difficulty": 1,
-          "stem": {
-            "zh": "以下哪个概念与「先解释几个名词」直接相关？",
-            "en": "Which concept is directly related to \"The Solution\"?",
-            "ja": "「主線とどう併読するか」に直接関連する概念はどれですか？"
-          },
-          "options": [
-            {
-              "id": "a",
-              "text": {
-                "zh": "先解释几个名词",
-                "en": "The Solution",
-                "ja": "主線とどう併読するか"
-              }
-            },
-            {
-              "id": "d",
-              "text": {
-                "zh": "2. TaskStatus",
-                "en": "2. TaskStatus",
-                "ja": "2. TaskStatus"
-              }
-            },
-            {
-              "id": "b",
-              "text": {
-                "zh": "1. 以为“后台”就是更复杂的主循环",
-                "en": "1. 以为“后台”就是更复杂的主循环",
-                "ja": "2. result を queue ではなく即座に messages へ乱暴に書き込む"
-              }
-            },
-            {
-              "id": "c",
-              "text": {
-                "zh": "这一章和 s03、s13 的边界",
-                "en": "这一章和 s03、s13 的边界",
-                "ja": "这一章和 s03、s13 的边界"
-              }
-            }
-          ],
-          "answer": "a",
-          "explanation": {
-            "zh": "先解释几个名词",
-            "en": "The Solution",
-            "ja": "主線とどう併読するか"
-          },
-          "reward_card": "card_s14_003"
+                "id": "q_s14_003",
+                "type": "choice",
+                "difficulty": 1,
+                "stem": {
+                        "zh": "以下关于调度器与主循环的关系，哪个说法正确？",
+                        "en": "Which statement correctly describes the relationship between the scheduler and the main loop?",
+                        "ja": "スケジューラーと主ループの関係について、正しい説明はどれですか？"
+                },
+                "options": [
+                        {
+                                "id": "a",
+                                "text": {
+                                        "zh": "调度器取代主循环处理定时任务",
+                                        "en": "The scheduler replaces the main loop to handle timed tasks",
+                                        "ja": "スケジューラーは主ループを置き換えてタイムドタスクを処理する"
+                                }
+                        },
+                        {
+                                "id": "b",
+                                "text": {
+                                        "zh": "调度器不取代主循环，而是在时间到时把 prompt 送回主循环",
+                                        "en": "The scheduler does not replace the main loop; it sends the prompt back to the main loop when the time comes",
+                                        "ja": "スケジューラーは主ループを置き換えず、時刻が来たらpromptを主ループに戻す"
+                                }
+                        },
+                        {
+                                "id": "c",
+                                "text": {
+                                        "zh": "调度器是独立于主循环运行的第二套系统",
+                                        "en": "The scheduler is a second system running independently of the main loop",
+                                        "ja": "スケジューラーは主ループとは独立して動作する第二のシステムである"
+                                }
+                        },
+                        {
+                                "id": "d",
+                                "text": {
+                                        "zh": "调度器直接调用模型 API，不经过主循环",
+                                        "en": "The scheduler calls the model API directly, bypassing the main loop",
+                                        "ja": "スケジューラーはモデルAPIを直接呼び出し、主ループをバイパスする"
+                                }
+                        }
+                ],
+                "answer": "b",
+                "explanation": {
+                        "zh": "调度器的作用是在时间到时把 prompt 放进通知队列，最终还是由主循环把它当成新消息喂给模型。调度器不是另起一套系统。",
+                        "en": "The scheduler places the prompt into a notification queue when the time comes. The main loop then feeds it to the model as a new user message. The scheduler is not a separate system.",
+                        "ja": "スケジューラーは時刻が来たらpromptを通知キューに入れる。主ループがそれを新しいユーザーメッセージとしてモデルに渡す。スケジューラーは独立したシステムではない。"
+                },
+                "reward_card": "card_s14_001"
         },
         {
-          "id": "q_s14_004",
-          "type": "choice",
-          "difficulty": 1,
-          "stem": {
-            "zh": "以下哪个概念与「什么是调度器」直接相关？",
-            "en": "Which concept is directly related to \"How It Works\"?",
-            "ja": "「最小の心智モデル」に直接関連する概念はどれですか？"
-          },
-          "options": [
-            {
-              "id": "b",
-              "text": {
-                "zh": "`s13` 的 background task 是什么",
-                "en": "`s13` 的 background task 是什么",
-                "ja": "初学者が混ぜやすいポイント"
-              }
-            },
-            {
-              "id": "d",
-              "text": {
-                "zh": "最小实现",
-                "en": "最小实现",
-                "ja": "1. cron 構文だけに意識を取られる"
-              }
-            },
-            {
-              "id": "c",
-              "text": {
-                "zh": "5. 误以为定时任务必须绝对准点",
-                "en": "5. 误以为定时任务必须绝对准点",
-                "ja": "5. 误以为定时任务必须绝对准点"
-              }
-            },
-            {
-              "id": "a",
-              "text": {
-                "zh": "什么是调度器",
-                "en": "How It Works",
-                "ja": "最小の心智モデル"
-              }
-            }
-          ],
-          "answer": "a",
-          "explanation": {
-            "zh": "什么是调度器",
-            "en": "Step 1.",
-            "ja": "scheduler 自体は第二の agent ではない"
-          },
-          "reward_card": "card_s14_004"
+                "id": "q_s14_004",
+                "type": "choice",
+                "difficulty": 1,
+                "stem": {
+                        "zh": "Cron 表达式由几个字段组成，分别代表什么？",
+                        "en": "How many fields does a cron expression have, and what do they represent?",
+                        "ja": "cron式は何個のフィールドで構成され、それぞれ何を表しますか？"
+                },
+                "options": [
+                        {
+                                "id": "a",
+                                "text": {
+                                        "zh": "3 个字段：时、分、秒",
+                                        "en": "3 fields: hour, minute, second",
+                                        "ja": "3フィールド：時、分、秒"
+                                }
+                        },
+                        {
+                                "id": "b",
+                                "text": {
+                                        "zh": "4 个字段：分、时、日、月",
+                                        "en": "4 fields: minute, hour, day, month",
+                                        "ja": "4フィールド：分、時、日、月"
+                                }
+                        },
+                        {
+                                "id": "c",
+                                "text": {
+                                        "zh": "5 个字段：分、时、日、月、周",
+                                        "en": "5 fields: minute, hour, day-of-month, month, day-of-week",
+                                        "ja": "5フィールド：分、時、日、月、曜日"
+                                }
+                        },
+                        {
+                                "id": "d",
+                                "text": {
+                                        "zh": "6 个字段：秒、分、时、日、月、周",
+                                        "en": "6 fields: second, minute, hour, day, month, weekday",
+                                        "ja": "6フィールド：秒、分、時、日、月、曜日"
+                                }
+                        }
+                ],
+                "answer": "c",
+                "explanation": {
+                        "zh": "标准 Cron 表达式有 5 个字段，按顺序是：分钟、小时、日期（月中第几天）、月份、星期几。",
+                        "en": "A standard cron expression has 5 fields in order: minute, hour, day-of-month, month, day-of-week.",
+                        "ja": "標準的なcron式は5フィールド（分、時、日（月の何日目）、月、曜日）で構成される。"
+                },
+                "reward_card": "card_s14_002"
         },
         {
-          "id": "q_s14_005",
-          "type": "choice",
-          "difficulty": 2,
-          "stem": {
-            "zh": "在 Claude Code 中，关于「什么是 cron 表达式」的正确理解是？",
-            "en": "What is the correct understanding of \"Read Together\" in Claude Code?",
-            "ja": "Claude Code における「重要なデータ構造」の正しい理解はどれですか？"
-          },
-          "options": [
-            {
-              "id": "b",
-              "text": {
-                "zh": "3. 只放内存，不支持落盘",
-                "en": "3. 只放内存，不支持落盘",
-                "ja": "3. 只放内存，不支持落盘"
-              }
-            },
-            {
-              "id": "c",
-              "text": {
-                "zh": "为什么完整输出不要直接塞回 prompt",
-                "en": "为什么完整输出不要直接塞回 prompt",
-                "ja": "第 5 段階: preview と full output を分ける"
-              }
-            },
-            {
-              "id": "d",
-              "text": {
-                "zh": "第一步：让任务落盘",
-                "en": "第一步：让任务落盘",
-                "ja": "第一步：让任务落盘"
-              }
-            },
-            {
-              "id": "a",
-              "text": {
-                "zh": "什么是 cron 表达式",
-                "en": "Read Together",
-                "ja": "重要なデータ構造"
-              }
-            }
-          ],
-          "answer": "a",
-          "explanation": {
-            "zh": "什么是 cron 表达式",
-            "en": "Read Together",
-            "ja": "重要なデータ構造"
-          },
-          "reward_card": "card_s14_005"
+                "id": "q_s14_005",
+                "type": "choice",
+                "difficulty": 1,
+                "stem": {
+                        "zh": "调度记录中的 last_fired_at 字段的主要作用是什么？",
+                        "en": "What is the primary purpose of the last_fired_at field in a schedule record?",
+                        "ja": "スケジュールレコードのlast_fired_atフィールドの主な目的は何ですか？"
+                },
+                "options": [
+                        {
+                                "id": "a",
+                                "text": {
+                                        "zh": "存储上次任务的输出结果",
+                                        "en": "Store the output of the last task execution",
+                                        "ja": "最後のタスク実行の出力を保存する"
+                                }
+                        },
+                        {
+                                "id": "b",
+                                "text": {
+                                        "zh": "记录任务执行耗时",
+                                        "en": "Record task execution duration",
+                                        "ja": "タスクの実行時間を記録する"
+                                }
+                        },
+                        {
+                                "id": "c",
+                                "text": {
+                                        "zh": "标记任务是否已被用户手动取消",
+                                        "en": "Mark whether the task has been manually cancelled by the user",
+                                        "ja": "タスクがユーザーによって手動キャンセルされたかどうかを示す"
+                                }
+                        },
+                        {
+                                "id": "d",
+                                "text": {
+                                        "zh": "防止短时间内重复触发同一任务",
+                                        "en": "Prevent the same task from being triggered repeatedly in a short time",
+                                        "ja": "短時間に同じタスクが繰り返しトリガーされるのを防ぐ"
+                                }
+                        }
+                ],
+                "answer": "d",
+                "explanation": {
+                        "zh": "last_fired_at 记录上次触发时间，调度器在每次检查时对比当前时间，避免同一时间窗口内重复触发。",
+                        "en": "last_fired_at records when the task last fired. The scheduler compares it to the current time each check to avoid triggering the same task multiple times within the same window.",
+                        "ja": "last_fired_atは最後にトリガーされた時刻を記録する。スケジューラーは毎回チェック時に現在時刻と比較し、同じ時間窓内での重複トリガーを防ぐ。"
+                },
+                "reward_card": "card_s14_002"
+        },
+        {
+                "id": "q_s14_006",
+                "type": "choice",
+                "difficulty": 1,
+                "stem": {
+                        "zh": "一条最小的调度记录至少需要包含哪些字段？",
+                        "en": "What fields must a minimal schedule record contain at minimum?",
+                        "ja": "最小限のスケジュールレコードには最低どのフィールドが必要ですか？"
+                },
+                "options": [
+                        {
+                                "id": "a",
+                                "text": {
+                                        "zh": "cron 表达式、任务超时设置、重试次数",
+                                        "en": "cron expression, task timeout, retry count",
+                                        "ja": "cron式、タスクタイムアウト、リトライ回数"
+                                }
+                        },
+                        {
+                                "id": "b",
+                                "text": {
+                                        "zh": "id、触发时间戳、任务优先级",
+                                        "en": "id, trigger timestamp, task priority",
+                                        "ja": "id、トリガータイムスタンプ、タスク優先度"
+                                }
+                        },
+                        {
+                                "id": "c",
+                                "text": {
+                                        "zh": "id、cron 表达式、要执行的 prompt、是否重复、上次触发时间",
+                                        "en": "id, cron expression, prompt to execute, whether recurring, last fired time",
+                                        "ja": "id、cron式、実行するprompt、繰り返しかどうか、最終トリガー時刻"
+                                }
+                        },
+                        {
+                                "id": "d",
+                                "text": {
+                                        "zh": "只需要 id 和 cron 表达式",
+                                        "en": "Only id and cron expression are needed",
+                                        "ja": "idとcron式だけでよい"
+                                }
+                        }
+                ],
+                "answer": "c",
+                "explanation": {
+                        "zh": "一条调度记录至少要有：id（唯一标识）、cron 表达式（时间规则）、触发后要执行的 prompt、是否重复（区分单次和周期）、上次触发时间（防重复触发）。",
+                        "en": "A schedule record needs at minimum: id, cron expression, prompt to execute on trigger, whether it recurs, and last fired time to prevent duplicate triggers.",
+                        "ja": "スケジュールレコードに最低限必要なのは：id、cron式、トリガー時に実行するprompt、繰り返しかどうか、最終トリガー時刻（重複防止）。"
+                },
+                "reward_card": "card_s14_002"
+        },
+        {
+                "id": "q_s14_007",
+                "type": "choice",
+                "difficulty": 2,
+                "stem": {
+                        "zh": "定时任务触发后，prompt 是如何最终被模型处理的？",
+                        "en": "After a scheduled task triggers, how does the prompt ultimately get processed by the model?",
+                        "ja": "スケジュールタスクがトリガーされた後、promptは最終的にどうモデルに処理されますか？"
+                },
+                "options": [
+                        {
+                                "id": "a",
+                                "text": {
+                                        "zh": "调度器直接把 prompt 发给模型 API，绕过主循环",
+                                        "en": "The scheduler sends the prompt directly to the model API, bypassing the main loop",
+                                        "ja": "スケジューラーがpromptをモデルAPIに直接送り、主ループをバイパスする"
+                                }
+                        },
+                        {
+                                "id": "b",
+                                "text": {
+                                        "zh": "prompt 被放入通知队列，主循环在下一轮把它当新用户消息喂给模型",
+                                        "en": "The prompt is placed in a notification queue; the main loop feeds it to the model as a new user message in the next iteration",
+                                        "ja": "promptは通知キューに入れられ、主ループが次のイテレーションで新しいユーザーメッセージとしてモデルに渡す"
+                                }
+                        },
+                        {
+                                "id": "c",
+                                "text": {
+                                        "zh": "调度器在后台另起一个新的主循环实例来处理",
+                                        "en": "The scheduler starts a new main loop instance in the background to handle it",
+                                        "ja": "スケジューラーはバックグラウンドで新しい主ループインスタンスを起動して処理する"
+                                }
+                        },
+                        {
+                                "id": "d",
+                                "text": {
+                                        "zh": "prompt 被追加到当前对话历史末尾，等待用户确认后再执行",
+                                        "en": "The prompt is appended to the current conversation history and waits for user confirmation",
+                                        "ja": "promptは現在の会話履歴の末尾に追加され、ユーザーの確認後に実行される"
+                                }
+                        }
+                ],
+                "answer": "b",
+                "explanation": {
+                        "zh": "定时任务触发后，调度器把 prompt 放进通知队列；主循环在下一轮把它当成新的用户消息喂给模型。整个链路最终还是回到同一条主循环，不是另起一套系统。",
+                        "en": "After a scheduled task triggers, the scheduler places the prompt in a notification queue. The main loop then feeds it to the model as a new user message in the next iteration. The entire chain returns to the same main loop, not a separate system.",
+                        "ja": "スケジュールタスクがトリガーされると、スケジューラーはpromptを通知キューに入れる。主ループが次のイテレーションでそれを新しいユーザーメッセージとしてモデルに渡す。全体の流れは同じ主ループに戻る。"
+                },
+                "reward_card": "card_s14_003"
+        },
+        {
+                "id": "q_s14_008",
+                "type": "choice",
+                "difficulty": 2,
+                "stem": {
+                        "zh": "cron 表达式「0 9 * * 1-5」代表什么含义？",
+                        "en": "What does the cron expression \"0 9 * * 1-5\" mean?",
+                        "ja": "cron式「0 9 * * 1-5」は何を意味しますか？"
+                },
+                "options": [
+                        {
+                                "id": "a",
+                                "text": {
+                                        "zh": "每月 1 日到 5 日的早上 9:00",
+                                        "en": "At 9:00 AM on the 1st through 5th of each month",
+                                        "ja": "毎月1日から5日の午前9時"
+                                }
+                        },
+                        {
+                                "id": "b",
+                                "text": {
+                                        "zh": "每天早上 9:00",
+                                        "en": "Every day at 9:00 AM",
+                                        "ja": "毎日午前9時"
+                                }
+                        },
+                        {
+                                "id": "c",
+                                "text": {
+                                        "zh": "每小时的第 9 分钟，周一到周五执行",
+                                        "en": "At minute 9 of every hour, on weekdays",
+                                        "ja": "毎時9分、月曜から金曜に実行"
+                                }
+                        },
+                        {
+                                "id": "d",
+                                "text": {
+                                        "zh": "周一到周五每天早上 9:00",
+                                        "en": "Every weekday (Mon-Fri) at 9:00 AM",
+                                        "ja": "月曜から金曜の毎日午前9時"
+                                }
+                        }
+                ],
+                "answer": "d",
+                "explanation": {
+                        "zh": "cron 5 个字段顺序是「分 时 日 月 周」。0 9 * * 1-5 表示：分=0，时=9，日=任意，月=任意，周=1到5（周一到周五）。即工作日每天早上 9 点整触发。",
+                        "en": "The 5 cron fields are: minute hour day month weekday. 0 9 * * 1-5 means minute=0, hour=9, day=any, month=any, weekday=1-5 (Mon-Fri). This fires at 9:00 AM every weekday.",
+                        "ja": "cron5フィールドの順序は分 時 日 月 曜日。0 9 * * 1-5は分=0、時=9、日=任意、月=任意、曜日=1〜5（月〜金）を意味する。つまり平日の毎朝9時ちょうどにトリガーされる。"
+                },
+                "reward_card": "card_s14_002"
+        },
+        {
+                "id": "q_s14_009",
+                "type": "choice",
+                "difficulty": 2,
+                "stem": {
+                        "zh": "如果调度记录没有 last_fired_at 字段，会产生什么问题？",
+                        "en": "What problem arises if a schedule record lacks the last_fired_at field?",
+                        "ja": "スケジュールレコードにlast_fired_atフィールドがない場合、どんな問題が起きますか？"
+                },
+                "options": [
+                        {
+                                "id": "a",
+                                "text": {
+                                        "zh": "调度记录无法持久化存储",
+                                        "en": "The schedule record cannot be persisted to storage",
+                                        "ja": "スケジュールレコードを永続的に保存できなくなる"
+                                }
+                        },
+                        {
+                                "id": "b",
+                                "text": {
+                                        "zh": "任务永远不会被触发",
+                                        "en": "The task will never be triggered",
+                                        "ja": "タスクが永遠にトリガーされなくなる"
+                                }
+                        },
+                        {
+                                "id": "c",
+                                "text": {
+                                        "zh": "调度器无法解析 cron 表达式",
+                                        "en": "The scheduler cannot parse the cron expression",
+                                        "ja": "スケジューラーがcron式を解析できなくなる"
+                                }
+                        },
+                        {
+                                "id": "d",
+                                "text": {
+                                        "zh": "同一时间窗口内可能重复触发，产生多余的任务",
+                                        "en": "The task may be triggered multiple times within the same time window, creating redundant tasks",
+                                        "ja": "同じ時間窓内でタスクが複数回トリガーされ、不要なタスクが生成される可能性がある"
+                                }
+                        }
+                ],
+                "answer": "d",
+                "explanation": {
+                        "zh": "last_fired_at 是防止重复触发的核心机制。没有它，调度器每次轮询时都可能因为「时间条件仍满足」而再次触发，在短时间内产生多个重复任务。",
+                        "en": "last_fired_at is the key mechanism preventing duplicate triggers. Without it, each scheduler poll could fire again because the time condition is still met, creating multiple redundant tasks in a short window.",
+                        "ja": "last_fired_atは重複トリガーを防ぐ中心的なメカニズム。それがなければ、スケジューラーは毎回のポーリングで時間条件がまだ満たされているとして再びトリガーし、短時間に複数の重複タスクを生成する可能性がある。"
+                },
+                "reward_card": "card_s14_002"
+        },
+        {
+                "id": "q_s14_010",
+                "type": "choice",
+                "difficulty": 2,
+                "stem": {
+                        "zh": "定时触发的 prompt 最终由谁负责接手执行？",
+                        "en": "Who is ultimately responsible for executing a scheduled prompt after it triggers?",
+                        "ja": "定時トリガーされたpromptは最終的に誰が引き継いで実行しますか？"
+                },
+                "options": [
+                        {
+                                "id": "a",
+                                "text": {
+                                        "zh": "调度器本身直接处理",
+                                        "en": "The scheduler itself handles it directly",
+                                        "ja": "スケジューラー自身が直接処理する"
+                                }
+                        },
+                        {
+                                "id": "b",
+                                "text": {
+                                        "zh": "操作系统的进程调度器",
+                                        "en": "The operating system process scheduler",
+                                        "ja": "オペレーティングシステムのプロセススケジューラー"
+                                }
+                        },
+                        {
+                                "id": "c",
+                                "text": {
+                                        "zh": "模型（由主循环将 prompt 喂给模型）",
+                                        "en": "The model (the main loop feeds the prompt to the model)",
+                                        "ja": "モデル（主ループがpromptをモデルに渡す）"
+                                }
+                        },
+                        {
+                                "id": "d",
+                                "text": {
+                                        "zh": "一个专门的定时任务执行引擎",
+                                        "en": "A dedicated scheduled task execution engine",
+                                        "ja": "専用のスケジュールタスク実行エンジン"
+                                }
+                        }
+                ],
+                "answer": "c",
+                "explanation": {
+                        "zh": "定时任务最终还是由模型接手。调度器只是把 prompt 送进通知队列，主循环把它当新用户消息喂给模型。不是另起一套系统，而是回到同一条主循环。",
+                        "en": "The model ultimately handles the scheduled task. The scheduler only places the prompt in the notification queue; the main loop feeds it to the model as a new user message. It returns to the same main loop, not a separate system.",
+                        "ja": "定時タスクは最終的にモデルが引き継ぐ。スケジューラーはpromptを通知キューに入れるだけで、主ループがそれを新しいユーザーメッセージとしてモデルに渡す。独立したシステムではなく、同じ主ループに戻る。"
+                },
+                "reward_card": "card_s14_003"
+        },
+        {
+                "id": "q_s14_011",
+                "type": "choice",
+                "difficulty": 2,
+                "stem": {
+                        "zh": "通知队列在定时调度中扮演什么角色？",
+                        "en": "What role does the notification queue play in scheduled dispatch?",
+                        "ja": "通知キューはスケジュール実行においてどんな役割を担いますか？"
+                },
+                "options": [
+                        {
+                                "id": "a",
+                                "text": {
+                                        "zh": "直接触发模型 API 调用",
+                                        "en": "Directly trigger model API calls",
+                                        "ja": "モデルAPIコールを直接トリガーする"
+                                }
+                        },
+                        {
+                                "id": "b",
+                                "text": {
+                                        "zh": "连接调度器与主循环，承载时间到了后的 prompt",
+                                        "en": "Connect the scheduler to the main loop, carrying the prompt once the time arrives",
+                                        "ja": "スケジューラーと主ループをつなぎ、時刻が来たpromptを運ぶ"
+                                }
+                        },
+                        {
+                                "id": "c",
+                                "text": {
+                                        "zh": "存储模型的历史输出供后续定时任务复用",
+                                        "en": "Store historical model outputs for reuse by future scheduled tasks",
+                                        "ja": "モデルの過去の出力を保存して将来のスケジュールタスクで再利用する"
+                                }
+                        },
+                        {
+                                "id": "d",
+                                "text": {
+                                        "zh": "记录每次触发的审计日志",
+                                        "en": "Record an audit log of each trigger event",
+                                        "ja": "各トリガーイベントの監査ログを記録する"
+                                }
+                        }
+                ],
+                "answer": "b",
+                "explanation": {
+                        "zh": "通知队列是调度器与主循环之间的桥梁。时间到了，调度器把 prompt 放进队列；主循环在下一轮读取队列，把它当成新用户消息处理。",
+                        "en": "The notification queue bridges the scheduler and the main loop. When the time comes, the scheduler places the prompt in the queue; the main loop reads it in the next iteration and processes it as a new user message.",
+                        "ja": "通知キューはスケジューラーと主ループの橋渡し役。時刻が来たらスケジューラーがpromptをキューに入れ、主ループが次のイテレーションでそれを読み取り新しいユーザーメッセージとして処理する。"
+                },
+                "reward_card": "card_s14_003"
+        },
+        {
+                "id": "q_s14_012",
+                "type": "choice",
+                "difficulty": 2,
+                "stem": {
+                        "zh": "以下哪个场景最适合用定时调度而非后台任务来处理？",
+                        "en": "Which scenario is best handled with scheduled dispatch rather than a background task?",
+                        "ja": "次のシナリオのうち、バックグラウンドタスクではなくスケジュール実行で処理するのに最も適しているのはどれですか？"
+                },
+                "options": [
+                        {
+                                "id": "a",
+                                "text": {
+                                        "zh": "并发执行多个文件的格式化操作",
+                                        "en": "Concurrently formatting multiple files",
+                                        "ja": "複数ファイルのフォーマット操作を並列実行する"
+                                }
+                        },
+                        {
+                                "id": "b",
+                                "text": {
+                                        "zh": "等待一个耗时 30 秒的代码分析任务完成",
+                                        "en": "Waiting for a code analysis task that takes 30 seconds to complete",
+                                        "ja": "30秒かかるコード分析タスクの完了を待つ"
+                                }
+                        },
+                        {
+                                "id": "c",
+                                "text": {
+                                        "zh": "每天早上 8 点自动生成当日工作计划",
+                                        "en": "Automatically generating a daily work plan every morning at 8 AM",
+                                        "ja": "毎朝8時に自動的にその日の作業計画を生成する"
+                                }
+                        },
+                        {
+                                "id": "d",
+                                "text": {
+                                        "zh": "等待一个已经发出的 HTTP 请求返回结果",
+                                        "en": "Waiting for a previously sent HTTP request to return a result",
+                                        "ja": "既に送信したHTTPリクエストの結果が返ってくるのを待つ"
+                                }
+                        }
+                ],
+                "answer": "c",
+                "explanation": {
+                        "zh": "「每天早上 8 点自动生成计划」是典型的「等开始时间」问题，适合用定时调度。其他选项都是「等结果」问题，属于后台任务范畴。",
+                        "en": "Generating a daily plan every morning at 8 AM is a classic waiting-for-start-time problem suited for scheduled dispatch. The other options are waiting-for-results problems that fall under background tasks.",
+                        "ja": "毎朝8時に計画を自動生成するは典型的な開始時刻を待つ問題でスケジュール実行に適している。他の選択肢は結果を待つ問題でバックグラウンドタスクの範疇に入る。"
+                },
+                "reward_card": "card_s14_001"
+        },
+        {
+                "id": "q_s14_013",
+                "type": "choice",
+                "difficulty": 3,
+                "stem": {
+                        "zh": "如果想让调度任务每 15 分钟执行一次，cron 表达式应该怎么写？",
+                        "en": "To run a scheduled task every 15 minutes, how should the cron expression be written?",
+                        "ja": "スケジュールタスクを15分ごとに実行するには、cron式をどう書けばよいですか？"
+                },
+                "options": [
+                        {
+                                "id": "a",
+                                "text": {
+                                        "zh": "15 * * * *",
+                                        "en": "15 * * * *",
+                                        "ja": "15 * * * *"
+                                }
+                        },
+                        {
+                                "id": "b",
+                                "text": {
+                                        "zh": "0 */15 * * *",
+                                        "en": "0 */15 * * *",
+                                        "ja": "0 */15 * * *"
+                                }
+                        },
+                        {
+                                "id": "c",
+                                "text": {
+                                        "zh": "*/15 * * * *",
+                                        "en": "*/15 * * * *",
+                                        "ja": "*/15 * * * *"
+                                }
+                        },
+                        {
+                                "id": "d",
+                                "text": {
+                                        "zh": "* 15 * * *",
+                                        "en": "* 15 * * *",
+                                        "ja": "* 15 * * *"
+                                }
+                        }
+                ],
+                "answer": "c",
+                "explanation": {
+                        "zh": "「*/15」在分钟字段表示「每隔 15 分钟」，即 0、15、30、45 分时触发。「15 * * * *」只在每小时第 15 分钟触发；「* 15 * * *」在第 15 小时的每分钟触发；「0 */15 * * *」在每 15 小时的整点触发。",
+                        "en": "*/15 in the minute field means every 15 minutes, firing at 0, 15, 30, 45. The expression 15 * * * * fires only at minute 15 of each hour; * 15 * * * fires every minute during hour 15; 0 */15 * * * fires at the top of every 15th hour.",
+                        "ja": "分フィールドの*/15は15分ごと（0、15、30、45分にトリガー）を意味する。15 * * * *は毎時15分のみ；* 15 * * *は15時の毎分；0 */15 * * *は15時間ごとの00分。"
+                },
+                "reward_card": "card_s14_002"
+        },
+        {
+                "id": "q_s14_014",
+                "type": "choice",
+                "difficulty": 3,
+                "stem": {
+                        "zh": "在实现调度器时，为什么时间检查应该有一定的容差（比如±30秒），而不是要求精确匹配？",
+                        "en": "When implementing a scheduler, why should time checks have tolerance rather than requiring exact matches?",
+                        "ja": "スケジューラーを実装する際、時刻チェックに許容範囲を設けるべき理由は何ですか？"
+                },
+                "options": [
+                        {
+                                "id": "a",
+                                "text": {
+                                        "zh": "轮询本身有时间间隔，精确匹配会因轮询时机错过触发窗口",
+                                        "en": "Polling has a time interval; exact matching could miss trigger windows between polls",
+                                        "ja": "ポーリングには時間間隔があり、正確な一致ではポーリングのタイミングによってトリガー窓を見逃す可能性がある"
+                                }
+                        },
+                        {
+                                "id": "b",
+                                "text": {
+                                        "zh": "容差可以降低 CPU 使用率",
+                                        "en": "Tolerance reduces CPU usage",
+                                        "ja": "許容範囲によりCPU使用率が下がる"
+                                }
+                        },
+                        {
+                                "id": "c",
+                                "text": {
+                                        "zh": "容差让多个任务可以并发执行",
+                                        "en": "Tolerance allows multiple tasks to execute concurrently",
+                                        "ja": "許容範囲により複数タスクの並列実行が可能になる"
+                                }
+                        },
+                        {
+                                "id": "d",
+                                "text": {
+                                        "zh": "微信小程序的计时器不够精确",
+                                        "en": "WeChat Mini Program timers are not precise enough",
+                                        "ja": "WeChatミニプログラムのタイマーが十分精確でない"
+                                }
+                        }
+                ],
+                "answer": "a",
+                "explanation": {
+                        "zh": "调度器通常每隔一段时间（如每秒或每分钟）轮询一次。如果要求精确在「09:00:00」触发，而上次轮询是 08:59:58，下次轮询是 09:00:02，就会错过。容差确保轮询间隔内的触发窗口不被遗漏。",
+                        "en": "Schedulers typically poll at intervals. If an exact match at 09:00:00 is required but the last poll was at 08:59:58 and the next at 09:00:02, the trigger is missed. Tolerance ensures trigger windows are not skipped between polls.",
+                        "ja": "スケジューラーは通常一定間隔でポーリングする。09:00:00での正確な一致が必要な場合、前のポーリングが08:59:58で次が09:00:02なら見逃す。許容範囲によりポーリング間のトリガー窓が漏れなくなる。"
+                },
+                "reward_card": "card_s14_002"
+        },
+        {
+                "id": "q_s14_015",
+                "type": "choice",
+                "difficulty": 3,
+                "stem": {
+                        "zh": "假设一个调度任务的 cron 为「0 9 * * *」，last_fired_at 是今天 08:50，现在轮询时间是 09:05。调度器应该如何处理？",
+                        "en": "A task has cron \"0 9 * * *\", last_fired_at is today at 08:50, and the current poll time is 09:05. What should the scheduler do?",
+                        "ja": "cronが0 9 * * *のタスクで、last_fired_atが今日8:50、現在のポーリング時刻が9:05です。スケジューラーはどう処理すべきですか？"
+                },
+                "options": [
+                        {
+                                "id": "a",
+                                "text": {
+                                        "zh": "触发，因为当前时间在 09:00 窗口内且 last_fired_at 早于今天 09:00",
+                                        "en": "Trigger, because current time is within the 09:00 window and last_fired_at is before today 09:00",
+                                        "ja": "トリガーする。現在時刻が9:00の窓内にあり、last_fired_atが今日の9:00より前だから"
+                                }
+                        },
+                        {
+                                "id": "b",
+                                "text": {
+                                        "zh": "先等到 09:00 整再触发",
+                                        "en": "Wait until exactly 09:00 before triggering",
+                                        "ja": "9:00ちょうどまで待ってからトリガーする"
+                                }
+                        },
+                        {
+                                "id": "c",
+                                "text": {
+                                        "zh": "不触发，因为 09:05 不等于 09:00",
+                                        "en": "Do not trigger, because 09:05 does not equal 09:00",
+                                        "ja": "トリガーしない。09:05は09:00と等しくないから"
+                                }
+                        },
+                        {
+                                "id": "d",
+                                "text": {
+                                        "zh": "不触发，因为 last_fired_at 已经是今天的记录",
+                                        "en": "Do not trigger, because last_fired_at already has a record from today",
+                                        "ja": "トリガーしない。last_fired_atにはすでに今日の記録があるから"
+                                }
+                        }
+                ],
+                "answer": "a",
+                "explanation": {
+                        "zh": "调度器判断逻辑：当前时间（09:05）在目标时间（09:00）的容差范围内，且 last_fired_at（08:50）早于今天 09:00，说明今天这次还没触发过，应该触发。触发后更新 last_fired_at 为 09:05。",
+                        "en": "The scheduler checks: current time 09:05 is within tolerance of target 09:00, and last_fired_at 08:50 is before today 09:00, meaning the task has not fired today yet. It should trigger. After triggering, update last_fired_at to 09:05.",
+                        "ja": "スケジューラーの判断ロジック：現在時刻（9:05）がターゲット（9:00）の許容範囲内にあり、last_fired_at（8:50）が今日の9:00より前なので今日はまだトリガーされていない。トリガーすべき。トリガー後、last_fired_atを9:05に更新する。"
+                },
+                "reward_card": "card_s14_002"
+        },
+        {
+                "id": "q_s14_016",
+                "type": "choice",
+                "difficulty": 3,
+                "stem": {
+                        "zh": "定时触发后，「通知队列 → 主循环 → 模型」这条链路带来的最重要设计好处是什么？",
+                        "en": "What is the most important design benefit of the notification queue to main loop to model chain after a scheduled trigger?",
+                        "ja": "定時トリガー後の通知キューから主ループそしてモデルへという経路がもたらす最も重要な設計上の利点は何ですか？"
+                },
+                "options": [
+                        {
+                                "id": "a",
+                                "text": {
+                                        "zh": "调度逻辑与执行逻辑解耦，统一复用主循环的对话管理能力",
+                                        "en": "Scheduling logic is decoupled from execution logic, uniformly reusing the main loop conversation management capability",
+                                        "ja": "スケジューリングロジックと実行ロジックが分離され、主ループの会話管理能力を統一して再利用できる"
+                                }
+                        },
+                        {
+                                "id": "b",
+                                "text": {
+                                        "zh": "定时任务的优先级高于普通用户消息",
+                                        "en": "Scheduled tasks have higher priority than regular user messages",
+                                        "ja": "スケジュールタスクは通常のユーザーメッセージより優先度が高い"
+                                }
+                        },
+                        {
+                                "id": "c",
+                                "text": {
+                                        "zh": "减少了每次调度检查的计算开销",
+                                        "en": "Reduces the computational overhead of each scheduling check",
+                                        "ja": "各スケジュールチェックの計算オーバーヘッドを削減する"
+                                }
+                        },
+                        {
+                                "id": "d",
+                                "text": {
+                                        "zh": "可以让定时任务绕过上下文长度限制",
+                                        "en": "Scheduled tasks can bypass context length limits",
+                                        "ja": "スケジュールタスクがコンテキスト長制限を回避できる"
+                                }
+                        }
+                ],
+                "answer": "a",
+                "explanation": {
+                        "zh": "通过通知队列回到主循环，调度逻辑（「什么时候触发」）与执行逻辑（「如何对话、如何调用模型」）完全解耦。执行侧只需复用主循环原有的对话管理和模型调用能力，不需要另建一套处理栈。",
+                        "en": "By returning to the main loop via the notification queue, scheduling logic (when to trigger) is fully decoupled from execution logic (how to converse, how to call the model). The execution side simply reuses the main loop existing capabilities without building a separate stack.",
+                        "ja": "通知キューを通じて主ループに戻ることで、スケジューリングロジック（いつトリガーするか）と実行ロジック（どう会話するか、モデルをどう呼ぶか）が完全に分離される。実行側は主ループの既存能力を再利用するだけで、別のスタックを構築する必要がない。"
+                },
+                "reward_card": "card_s14_003"
+        },
+        {
+                "id": "q_s14_017",
+                "type": "choice",
+                "difficulty": 3,
+                "stem": {
+                        "zh": "设计一个支持「一次性触发」和「周期性触发」的调度系统，最简洁的区分方式是什么？",
+                        "en": "When designing a scheduler supporting both one-shot and recurring triggers, what is the simplest way to distinguish them?",
+                        "ja": "単発トリガーと周期的トリガーの両方をサポートするスケジューラーを設計する場合、最もシンプルな区別方法は何ですか？"
+                },
+                "options": [
+                        {
+                                "id": "a",
+                                "text": {
+                                        "zh": "在调度记录中加入一个布尔字段（如 recurring）：false 触发后删除记录，true 则保留",
+                                        "en": "Add a boolean field like recurring to the record: delete after triggering if false, keep if true",
+                                        "ja": "レコードにrecurringのようなbooleanフィールドを追加する：falseならトリガー後に削除、trueなら保持"
+                                }
+                        },
+                        {
+                                "id": "b",
+                                "text": {
+                                        "zh": "为两种任务分别建立独立的存储表",
+                                        "en": "Create separate storage tables for each type of task",
+                                        "ja": "2種類のタスクにそれぞれ独立したストレージテーブルを作成する"
+                                }
+                        },
+                        {
+                                "id": "c",
+                                "text": {
+                                        "zh": "为周期性任务设置更短的轮询间隔",
+                                        "en": "Set a shorter polling interval for recurring tasks",
+                                        "ja": "繰り返しタスクには短いポーリング間隔を設定する"
+                                }
+                        },
+                        {
+                                "id": "d",
+                                "text": {
+                                        "zh": "一次性触发使用时间戳，周期性触发使用 cron 表达式",
+                                        "en": "Use timestamps for one-shot triggers and cron expressions for recurring triggers",
+                                        "ja": "単発トリガーにはタイムスタンプ、周期的トリガーにはcron式を使う"
+                                }
+                        }
+                ],
+                "answer": "a",
+                "explanation": {
+                        "zh": "在调度记录中加一个 recurring 布尔字段是最简洁的方式：触发后若 recurring=false 则删除该记录（一次性），若 recurring=true 则更新 last_fired_at 并保留（周期性）。无需两套存储，也无需两套处理逻辑。",
+                        "en": "Adding a recurring boolean field is the simplest approach: delete the record after triggering if recurring=false (one-shot); update last_fired_at and keep it if recurring=true (periodic). No separate storage or logic needed.",
+                        "ja": "recurring booleanフィールドを追加するのが最もシンプル：recurring=falseならトリガー後にレコードを削除（単発）、recurring=trueならlast_fired_atを更新して保持（定期）。別のストレージも別のロジックも不要。"
+                },
+                "reward_card": "card_s14_002"
+        },
+        {
+                "id": "q_s14_018",
+                "type": "choice",
+                "difficulty": 3,
+                "stem": {
+                        "zh": "从「后台任务（s13）→定时调度（s14）」这两章的学习顺序中，最能体现的架构设计原则是什么？",
+                        "en": "The learning order from background tasks s13 to scheduled dispatch s14 best illustrates which architectural design principle?",
+                        "ja": "バックグラウンドタスクs13からスケジュール実行s14への学習順序が最もよく体現しているアーキテクチャ設計原則は何ですか？"
+                },
+                "options": [
+                        {
+                                "id": "a",
+                                "text": {
+                                        "zh": "后台任务比定时调度更重要，应优先掌握",
+                                        "en": "Background tasks are more important than scheduled dispatch and should be mastered first",
+                                        "ja": "バックグラウンドタスクはスケジュール実行より重要で、先に習得すべき"
+                                }
+                        },
+                        {
+                                "id": "b",
+                                "text": {
+                                        "zh": "不同的等待问题用不同的机制解决，而不是让主循环承担所有时间语义",
+                                        "en": "Different waiting problems are solved with different mechanisms, rather than making the main loop handle all time semantics",
+                                        "ja": "異なる待機問題は異なるメカニズムで解決し、主ループにすべての時間的語義を負わせない"
+                                }
+                        },
+                        {
+                                "id": "c",
+                                "text": {
+                                        "zh": "定时调度是后台任务的特例，可以完全替代",
+                                        "en": "Scheduled dispatch is a special case of background tasks and can fully replace them",
+                                        "ja": "スケジュール実行はバックグラウンドタスクの特殊ケースで、完全に置き換えられる"
+                                }
+                        },
+                        {
+                                "id": "d",
+                                "text": {
+                                        "zh": "所有异步问题最终都可以统一为一种解决方案",
+                                        "en": "All async problems can ultimately be unified into one solution",
+                                        "ja": "すべての非同期問題は最終的に一つの解決策に統一できる"
+                                }
+                        }
+                ],
+                "answer": "b",
+                "explanation": {
+                        "zh": "s13 解决「等结果」，s14 解决「等开始」——两者都是时间相关问题，但机制不同。这体现了「针对不同问题形状匹配不同解法」的设计原则，而不是用一个大而全的主循环承担所有时间语义。",
+                        "en": "s13 solves waiting for results, s14 solves waiting for a start time. Both are time-related problems but with different mechanisms. This reflects the design principle of matching different solutions to different problem shapes rather than making one main loop handle all time semantics.",
+                        "ja": "s13は結果を待つを解決し、s14は開始時刻を待つを解決する。両者とも時間に関連する問題だがメカニズムが異なる。これは問題の形状に異なる解決策を対応させるという設計原則を体現しており、一つの主ループにすべての時間的語義を負わせないことを示している。"
+                },
+                "reward_card": "card_s14_001"
         }
-      ],
+],
       "star_thresholds": [
         0.4,
         0.7,
