@@ -17983,49 +17983,49 @@ module.exports = {
           "type": "choice",
           "difficulty": 1,
           "stem": {
-            "zh": "以下哪个概念与「1. 编写优秀的 CLAUDE.md」直接相关？",
-            "en": "Which concept is directly related to \"1. Writing a Good CLAUDE.md\"?",
-            "ja": "「1. Writing a Good CLAUDE.md」に直接関連する概念はどれですか？"
+            "zh": "CLAUDE.md 被称为「最高性价比的质量提升手段」，原因是什么？",
+            "en": "Why is CLAUDE.md considered the highest return-on-investment quality improvement?",
+            "ja": "CLAUDE.md が「最高コスパの品質向上手段」と呼ばれる理由は何ですか？"
           },
           "options": [
             {
+              "id": "a",
+              "text": {
+                "zh": "它是 Claude 唯一认可的文件格式",
+                "en": "It is the only file format Claude recognizes",
+                "ja": "Claude が認識できる唯一のファイル形式だから"
+              }
+            },
+            {
               "id": "b",
               "text": {
-                "zh": "工具调用前验证 Bash 命令",
-                "en": "Display Settings",
-                "ja": "Display Settings"
+                "zh": "写一次，每次会话自动生效，无需重复输入",
+                "en": "Write once, auto-applied every session without repeating",
+                "ja": "一度書けば毎回のセッションに自動適用され、繰り返し入力不要"
               }
             },
             {
               "id": "c",
               "text": {
-                "zh": "Frontmatter 字段（13 个）",
-                "en": "Frontmatter Fields (13)",
-                "ja": "Frontmatter Fields (13)"
+                "zh": "它能让 Claude 访问互联网上的最新内容",
+                "en": "It lets Claude access the latest content online",
+                "ja": "Claude がオンラインの最新情報にアクセスできるようになるから"
               }
             },
             {
               "id": "d",
               "text": {
-                "zh": "工作流程",
-                "en": "工作流程",
-                "ja": "工作流程"
-              }
-            },
-            {
-              "id": "a",
-              "text": {
-                "zh": "1. 编写优秀的 CLAUDE.md",
-                "en": "1. Writing a Good CLAUDE.md",
-                "ja": "1. Writing a Good CLAUDE.md"
+                "zh": "写入 CLAUDE.md 的内容会永久保存到模型权重中",
+                "en": "Content in CLAUDE.md is permanently saved into model weights",
+                "ja": "CLAUDE.md の内容がモデルの重みに永続的に保存されるから"
               }
             }
           ],
-          "answer": "a",
+          "answer": "b",
           "explanation": {
-            "zh": "1. 编写优秀的 CLAUDE.md",
-            "en": "1. Writing a Good CLAUDE.md",
-            "ja": "1. Writing a Good CLAUDE.md"
+            "zh": "CLAUDE.md 的价值在于「写一次，每次会话自动生效」——无需在每次对话开头重复说明项目规范，Claude 启动时就已经加载了这些上下文。",
+            "en": "CLAUDE.md's value is 'write once, auto-applied every session' — no need to repeat project conventions at the start of each conversation.",
+            "ja": "CLAUDE.md の価値は「一度書けば毎回のセッションに自動適用される」点にあります。毎回会話の冒頭でプロジェクトの規約を繰り返す必要がありません。"
           },
           "reward_card": "card_bp01_001"
         },
@@ -18034,204 +18034,867 @@ module.exports = {
           "type": "choice",
           "difficulty": 1,
           "stem": {
-            "zh": "以下哪个概念与「2. 大型 Monorepo 中的 CLAUDE.md」直接相关？",
-            "en": "Which concept is directly related to \"2. CLAUDE.md in Large Monorepos\"?",
-            "ja": "「2. CLAUDE.md in Large Monorepos」に直接関連する概念はどれですか？"
+            "zh": "CLAUDE.md 最适合用来记录哪类信息？",
+            "en": "What type of information is CLAUDE.md best suited to document?",
+            "ja": "CLAUDE.md に記録するのに最も適した情報の種類はどれですか？"
           },
           "options": [
             {
               "id": "a",
               "text": {
-                "zh": "2. 大型 Monorepo 中的 CLAUDE.md",
-                "en": "2. CLAUDE.md in Large Monorepos",
-                "ja": "2. CLAUDE.md in Large Monorepos"
-              }
-            },
-            {
-              "id": "d",
-              "text": {
-                "zh": "官方捆绑技能（5 个）",
-                "en": "![Official](../!/tags/official.svg) **(5)**",
-                "ja": "![Official](../!/tags/official.svg) **(5)**"
+                "zh": "每次运行的调试日志和错误堆栈",
+                "en": "Debug logs and error stacks from each run",
+                "ja": "毎回の実行デバッグログとエラースタック"
               }
             },
             {
               "id": "b",
               "text": {
-                "zh": "模型覆盖",
-                "en": "Company Announcements",
-                "ja": "Company Announcements"
+                "zh": "用户的个人账号密码",
+                "en": "User account credentials",
+                "ja": "ユーザーの個人アカウントのパスワード"
               }
             },
             {
               "id": "c",
               "text": {
-                "zh": "4. 显示与用户体验",
-                "en": "Permission Structure",
-                "ja": "Permission Structure"
+                "zh": "项目构建命令、代码规范、架构约定等团队共用知识",
+                "en": "Build commands, code style, architecture conventions shared by the team",
+                "ja": "ビルドコマンド、コードスタイル、アーキテクチャ規約などチーム共有の知識"
+              }
+            },
+            {
+              "id": "d",
+              "text": {
+                "zh": "Claude 当前会话的对话历史",
+                "en": "Conversation history from the current Claude session",
+                "ja": "Claude の現在のセッションの会話履歴"
               }
             }
           ],
-          "answer": "a",
+          "answer": "c",
           "explanation": {
-            "zh": "2. 大型 Monorepo 中的 CLAUDE.md",
-            "en": "2. CLAUDE.md in Large Monorepos",
-            "ja": "2. CLAUDE.md in Large Monorepos"
+            "zh": "CLAUDE.md 用来记录团队共用的项目知识：构建命令、测试方式、代码风格规范、架构约定等——这些信息每次会话都需要，写进去就不用重复说了。",
+            "en": "CLAUDE.md is for team-shared project knowledge: build commands, testing steps, code style, and architecture conventions — things needed every session.",
+            "ja": "CLAUDE.md はチーム共有のプロジェクト知識（ビルドコマンド、テスト手順、コードスタイル、アーキテクチャ規約）を記録するためのものです。"
           },
-          "reward_card": "card_bp01_002"
+          "reward_card": "card_bp01_001"
         },
         {
           "id": "q_bp01_003",
           "type": "choice",
-          "difficulty": 2,
+          "difficulty": 1,
           "stem": {
-            "zh": "在 Claude Code 中，关于「两种加载机制」的正确理解是？",
-            "en": "What is the correct understanding of \"The Two Loading Mechanisms\" in Claude Code?",
-            "ja": "Claude Code における「The Two Loading Mechanisms」の正しい理解はどれですか？"
+            "zh": "以下哪个说法正确描述了 CLAUDE.md 的作用范围？",
+            "en": "Which statement correctly describes the scope of CLAUDE.md?",
+            "ja": "CLAUDE.md の適用範囲を正しく説明している文はどれですか？"
           },
           "options": [
             {
-              "id": "d",
+              "id": "a",
               "text": {
-                "zh": "受管设置中的服务器匹配",
-                "en": "Sources",
-                "ja": "Sources"
+                "zh": "只对当次会话生效，关闭终端后自动失效",
+                "en": "Only affects the current session; expires when terminal closes",
+                "ja": "現在のセッションにのみ有効で、ターミナルを閉じると無効になる"
               }
             },
             {
               "id": "b",
               "text": {
-                "zh": "预算与限制",
-                "en": "Useful Commands",
-                "ja": "Useful Commands"
+                "zh": "只在使用 --verbose 参数时才被读取",
+                "en": "Only read when using the --verbose flag",
+                "ja": "--verbose フラグを使用した場合にのみ読み込まれる"
               }
             },
             {
               "id": "c",
               "text": {
-                "zh": "3. 内置代理类型（5 个）",
-                "en": "Sources",
-                "ja": "Sources"
+                "zh": "只对 Claude Code 的 API 调用生效，对 CLI 无效",
+                "en": "Only affects API calls, not CLI usage",
+                "ja": "API 呼び出しにのみ有効で、CLI 使用には無効"
               }
             },
             {
-              "id": "a",
+              "id": "d",
               "text": {
-                "zh": "两种加载机制",
-                "en": "The Two Loading Mechanisms",
-                "ja": "The Two Loading Mechanisms"
+                "zh": "对该目录下所有 Claude Code 会话持续生效",
+                "en": "Persistently applies to all Claude Code sessions in that directory",
+                "ja": "そのディレクトリ内のすべての Claude Code セッションに継続的に適用される"
               }
             }
           ],
-          "answer": "a",
+          "answer": "d",
           "explanation": {
-            "zh": "启动时立即加载",
-            "en": "upward",
-            "ja": "upward"
+            "zh": "CLAUDE.md 的核心价值就是持久性——只要文件在，每次在该目录启动 Claude Code 都会自动加载它，无需任何额外操作。",
+            "en": "The core value of CLAUDE.md is persistence — as long as the file exists, every Claude Code session in that directory auto-loads it.",
+            "ja": "CLAUDE.md の核心的な価値は永続性にあります。ファイルが存在する限り、そのディレクトリで起動するすべての Claude Code セッションに自動的に読み込まれます。"
           },
-          "reward_card": "card_bp01_003"
+          "reward_card": "card_bp01_001"
         },
         {
           "id": "q_bp01_004",
           "type": "choice",
           "difficulty": 2,
           "stem": {
-            "zh": "在 Claude Code 中，关于「Monorepo 结构示例」的正确理解是？",
-            "en": "What is the correct understanding of \"Example Monorepo Structure\" in Claude Code?",
-            "ja": "Claude Code における「Example Monorepo Structure」の正しい理解はどれですか？"
+            "zh": "Claude Code 中「祖先目录的 CLAUDE.md」和「子目录的 CLAUDE.md」在加载时机上有何区别？",
+            "en": "How do ancestor-directory CLAUDE.md and subdirectory CLAUDE.md differ in loading timing?",
+            "ja": "「祖先ディレクトリの CLAUDE.md」と「サブディレクトリの CLAUDE.md」はロードタイミングにどのような違いがありますか？"
           },
           "options": [
             {
-              "id": "c",
-              "text": {
-                "zh": "5. 关键事件详解",
-                "en": "MCP Settings",
-                "ja": "MCP Settings"
-              }
-            },
-            {
               "id": "a",
               "text": {
-                "zh": "Monorepo 结构示例",
-                "en": "Example Monorepo Structure",
-                "ja": "Example Monorepo Structure"
-              }
-            },
-            {
-              "id": "d",
-              "text": {
-                "zh": "代理定义",
-                "en": "代理定义",
-                "ja": "代理定义"
+                "zh": "祖先目录的启动时立即加载；子目录的只在访问时才懒加载",
+                "en": "Ancestor: loaded immediately at startup; subdirectory: lazy-loaded only when accessed",
+                "ja": "祖先: 起動時に即座にロード；サブディレクトリ: アクセス時にのみ遅延ロード"
               }
             },
             {
               "id": "b",
               "text": {
-                "zh": "Frontmatter 字段（13 个）",
-                "en": "Frontmatter Fields (13)",
-                "ja": "Frontmatter Fields (13)"
+                "zh": "两者都在启动时立即加载，没有区别",
+                "en": "Both are loaded immediately at startup, no difference",
+                "ja": "両方とも起動時に即座にロードされ、違いはない"
+              }
+            },
+            {
+              "id": "c",
+              "text": {
+                "zh": "子目录的优先于祖先目录的，并在启动时覆盖它",
+                "en": "Subdirectory takes priority and overrides ancestor at startup",
+                "ja": "サブディレクトリの方が優先され、起動時に祖先のものを上書きする"
+              }
+            },
+            {
+              "id": "d",
+              "text": {
+                "zh": "两者都是懒加载，只在 Claude 实际需要读取文件时才加载",
+                "en": "Both are lazy-loaded, only when Claude actually needs to read files",
+                "ja": "両方とも遅延ロードで、Claude が実際にファイルを読む必要があるときにのみロードされる"
               }
             }
           ],
           "answer": "a",
           "explanation": {
-            "zh": "Monorepo 结构示例",
-            "en": "Example Monorepo Structure",
-            "ja": "Example Monorepo Structure"
+            "zh": "两种加载机制：祖先目录（包括工作目录本身）的 CLAUDE.md 启动时立即加载进上下文；子目录的 CLAUDE.md 只在 Claude 实际访问该目录时才懒加载，节省了上下文窗口空间。",
+            "en": "Two loading mechanisms: ancestor-directory CLAUDE.md (including CWD) is loaded immediately at startup; subdirectory CLAUDE.md is lazy-loaded only when Claude accesses that directory, saving context window space.",
+            "ja": "2つのロードメカニズム：祖先ディレクトリ（CWD を含む）の CLAUDE.md は起動時に即座にロードされ；サブディレクトリの CLAUDE.md は Claude がそのディレクトリにアクセスした時にのみ遅延ロードされ、コンテキストウィンドウの節約になります。"
           },
-          "reward_card": "card_bp01_004"
+          "reward_card": "card_bp01_002"
         },
         {
           "id": "q_bp01_005",
           "type": "choice",
-          "difficulty": 2,
+          "difficulty": 1,
           "stem": {
-            "zh": "在 Claude Code 中，关于「场景 1：从根目录启动 Claude Code」的正确理解是？",
-            "en": "What is the correct understanding of \"Scenario 1: Running Claude Code from the Root Directory\" in Claude Code?",
-            "ja": "Claude Code における「Scenario 1: Running Claude Code from the Root Directory」の正しい理解はどれですか？"
+            "zh": "子目录的 CLAUDE.md 采用懒加载机制，主要好处是什么？",
+            "en": "What is the main benefit of lazy-loading subdirectory CLAUDE.md files?",
+            "ja": "サブディレクトリの CLAUDE.md を遅延ロードする主なメリットは何ですか？"
           },
           "options": [
             {
+              "id": "b",
+              "text": {
+                "zh": "节省上下文窗口空间，只加载当前任务相关的指令",
+                "en": "Saves context window space by only loading instructions relevant to the current task",
+                "ja": "現在のタスクに関連する指示のみをロードし、コンテキストウィンドウの空間を節約する"
+              }
+            },
+            {
               "id": "a",
               "text": {
-                "zh": "场景 1：从根目录启动 Claude Code",
-                "en": "Scenario 1: Running Claude Code from the Root Directory",
-                "ja": "Scenario 1: Running Claude Code from the Root Directory"
+                "zh": "防止多个 CLAUDE.md 文件之间产生循环依赖",
+                "en": "Prevents circular dependencies between multiple CLAUDE.md files",
+                "ja": "複数の CLAUDE.md ファイル間の循環依存を防ぐ"
               }
             },
             {
               "id": "c",
               "text": {
-                "zh": "Frontmatter 字段（13 个）",
-                "en": "Frontmatter Fields (13)",
-                "ja": "Frontmatter Fields (13)"
+                "zh": "让子目录的指令优先于根目录的指令",
+                "en": "Makes subdirectory instructions take priority over root instructions",
+                "ja": "サブディレクトリの指示をルートの指示より優先させる"
               }
             },
             {
               "id": "d",
               "text": {
-                "zh": "模型与配置",
-                "en": "Status Line Configuration",
-                "ja": "Status Line Configuration"
+                "zh": "允许在运行时动态修改 CLAUDE.md 内容",
+                "en": "Allows dynamically modifying CLAUDE.md content at runtime",
+                "ja": "実行時に CLAUDE.md の内容を動的に変更できる"
+              }
+            }
+          ],
+          "answer": "b",
+          "explanation": {
+            "zh": "懒加载的核心好处是节省上下文窗口——大型 Monorepo 中可能有几十个子目录各有 CLAUDE.md，全部启动时加载会消耗大量上下文；懒加载确保只有访问到的目录指令才占用上下文空间。",
+            "en": "The core benefit of lazy-loading is context window savings — a large monorepo may have dozens of subdirectories each with CLAUDE.md; lazy-loading ensures only accessed directory instructions consume context space.",
+            "ja": "遅延ロードの核心的なメリットはコンテキストウィンドウの節約です。大規模なモノレポには多数のサブディレクトリがあり、すべて起動時にロードすると大量のコンテキストを消費します。"
+          },
+          "reward_card": "card_bp01_002"
+        },
+        {
+          "id": "q_bp01_006",
+          "type": "choice",
+          "difficulty": 2,
+          "stem": {
+            "zh": "关于 CLAUDE.md 的加载范围，下列哪个描述是正确的？",
+            "en": "Which description correctly explains the loading scope of CLAUDE.md?",
+            "ja": "CLAUDE.md のロード範囲について、正しい説明はどれですか？"
+          },
+          "options": [
+            {
+              "id": "a",
+              "text": {
+                "zh": "只有放在项目根目录的 CLAUDE.md 才会被加载",
+                "en": "Only CLAUDE.md in the project root is loaded",
+                "ja": "プロジェクトルートの CLAUDE.md のみがロードされる"
+              }
+            },
+            {
+              "id": "d",
+              "text": {
+                "zh": "Claude 会在整个文件系统中搜索所有 CLAUDE.md 并全部加载",
+                "en": "Claude searches the entire filesystem for all CLAUDE.md files and loads them all",
+                "ja": "Claude はファイルシステム全体を検索してすべての CLAUDE.md を読み込む"
+              }
+            },
+            {
+              "id": "c",
+              "text": {
+                "zh": "从工作目录向上搜索祖先目录，加上访问到的子目录，共同构成加载集合",
+                "en": "Search upward from CWD through ancestor dirs, plus accessed subdirs, together form the loaded set",
+                "ja": "CWD から祖先ディレクトリを上方向に検索し、アクセスしたサブディレクトリも含めてロードセットを構成する"
               }
             },
             {
               "id": "b",
               "text": {
-                "zh": "9. CLI 启动标志",
-                "en": "Display Settings",
-                "ja": "Display Settings"
+                "zh": "只加载当前工作目录中的 CLAUDE.md，不往上也不往下查找",
+                "en": "Only load CLAUDE.md in the current working directory, neither up nor down",
+                "ja": "現在の作業ディレクトリの CLAUDE.md のみをロードし、上下方向には検索しない"
+              }
+            }
+          ],
+          "answer": "c",
+          "explanation": {
+            "zh": "Claude Code 的 CLAUDE.md 加载逻辑：从当前工作目录向上遍历所有祖先目录（立即加载），同时在会话中访问子目录时懒加载该目录的 CLAUDE.md。这两部分共同构成完整的指令集。",
+            "en": "CLAUDE.md loading: traverse all ancestor directories from CWD upward (immediate load), plus lazy-load subdirectory CLAUDE.md when accessed during the session. Both parts form the full instruction set.",
+            "ja": "CLAUDE.md のロードロジック：CWD から祖先ディレクトリを上方向にトラバース（即時ロード）、セッション中にサブディレクトリにアクセスした際に遅延ロード。両方を合わせて完全な指示セットを構成します。"
+          },
+          "reward_card": "card_bp01_002"
+        },
+        {
+          "id": "q_bp01_007",
+          "type": "choice",
+          "difficulty": 2,
+          "stem": {
+            "zh": "在 Monorepo 中，根级 CLAUDE.md 和组件目录 CLAUDE.md 应该分别放什么内容？",
+            "en": "In a monorepo, what should go in the root CLAUDE.md vs component-directory CLAUDE.md?",
+            "ja": "モノレポにおいて、ルートの CLAUDE.md とコンポーネントディレクトリの CLAUDE.md にはそれぞれ何を記述すべきですか？"
+          },
+          "options": [
+            {
+              "id": "b",
+              "text": {
+                "zh": "根级放所有内容，组件目录的 CLAUDE.md 留空",
+                "en": "Root holds everything; component-level CLAUDE.md stays empty",
+                "ja": "ルートにすべてを記述し、コンポーネントレベルの CLAUDE.md は空にする"
+              }
+            },
+            {
+              "id": "c",
+              "text": {
+                "zh": "组件目录放所有内容，根级 CLAUDE.md 留空",
+                "en": "Component dirs hold everything; root CLAUDE.md stays empty",
+                "ja": "コンポーネントディレクトリにすべてを記述し、ルートの CLAUDE.md は空にする"
+              }
+            },
+            {
+              "id": "d",
+              "text": {
+                "zh": "两者内容完全相同，互为备份",
+                "en": "Both have identical content as backups of each other",
+                "ja": "両方に同じ内容を記述し、お互いのバックアップとする"
+              }
+            },
+            {
+              "id": "a",
+              "text": {
+                "zh": "根级放跨组件的共享约定；组件目录放该组件的专用指令，各自隔离互不干扰",
+                "en": "Root: cross-component shared conventions; component dirs: component-specific instructions, isolated from each other",
+                "ja": "ルート：コンポーネント横断の共有規約；コンポーネントディレクトリ：そのコンポーネント専用の指示で、互いに独立"
               }
             }
           ],
           "answer": "a",
           "explanation": {
-            "zh": "场景 1：从根目录启动 Claude Code",
-            "en": "Scenario 1: Running Claude Code from the Root Directory",
-            "ja": "Scenario 1: Running Claude Code from the Root Directory"
+            "zh": "Monorepo 分层指令的核心原则：根级 CLAUDE.md 放适用于整个仓库的共享约定（如 commit 格式、CI 规范）；各组件目录的 CLAUDE.md 只放该组件专属的指令（如特定的测试命令、框架约定）。各自隔离，互不干扰。",
+            "en": "Core principle of monorepo layered instructions: root CLAUDE.md holds repo-wide shared conventions (commit format, CI rules); component-level CLAUDE.md holds component-specific instructions (test commands, framework conventions). Each is isolated.",
+            "ja": "モノレポ階層化指示の核心原則：ルート CLAUDE.md にはリポジトリ全体の共有規約（コミット形式、CI ルール）を記述し；コンポーネントレベルには各コンポーネント固有の指示（テストコマンド、フレームワーク規約）を記述します。"
           },
-          "reward_card": "card_bp01_005"
+          "reward_card": "card_bp01_003"
+        },
+        {
+          "id": "q_bp01_008",
+          "type": "choice",
+          "difficulty": 1,
+          "stem": {
+            "zh": "Monorepo 中有多个 CLAUDE.md 文件（根级 + 各组件目录），Claude Code 如何处理它们？",
+            "en": "With multiple CLAUDE.md files in a monorepo (root + component dirs), how does Claude Code handle them?",
+            "ja": "モノレポに複数の CLAUDE.md（ルート＋各コンポーネントディレクトリ）がある場合、Claude Code はどのように処理しますか？"
+          },
+          "options": [
+            {
+              "id": "b",
+              "text": {
+                "zh": "只读取最近访问的那个，忽略其余",
+                "en": "Only reads the most recently accessed one, ignores the rest",
+                "ja": "最後にアクセスされたものだけを読み込み、残りは無視する"
+              }
+            },
+            {
+              "id": "d",
+              "text": {
+                "zh": "累积加载所有相关的 CLAUDE.md，指令叠加生效",
+                "en": "Cumulatively loads all relevant CLAUDE.md files; instructions stack and apply together",
+                "ja": "関連するすべての CLAUDE.md を累積してロードし、指示が積み重なって適用される"
+              }
+            },
+            {
+              "id": "a",
+              "text": {
+                "zh": "发现多个文件时报错，要求用户合并成一个",
+                "en": "Errors when finding multiple files, requiring the user to merge them",
+                "ja": "複数のファイルが見つかるとエラーになり、ユーザーに統合を求める"
+              }
+            },
+            {
+              "id": "c",
+              "text": {
+                "zh": "只使用层级最深的那个，覆盖所有上层文件",
+                "en": "Only uses the deepest-level one, overriding all upper-level files",
+                "ja": "最も深いレベルのものだけを使用し、上位レベルのすべてを上書きする"
+              }
+            }
+          ],
+          "answer": "d",
+          "explanation": {
+            "zh": "Claude Code 会累积加载所有相关的 CLAUDE.md 文件——祖先目录的立即加载，子目录的懒加载。所有指令叠加生效，而不是互相覆盖。这就是分层指令体系的核心。",
+            "en": "Claude Code cumulatively loads all relevant CLAUDE.md files — ancestor dirs immediately, subdirs lazily. All instructions stack and apply together, not override each other. This is the core of the layered instruction system.",
+            "ja": "Claude Code は関連するすべての CLAUDE.md ファイルを累積してロードします。祖先ディレクトリは即時、サブディレクトリは遅延ロード。すべての指示が積み重なって適用され、互いに上書きしません。"
+          },
+          "reward_card": "card_bp01_003"
+        },
+        {
+          "id": "q_bp01_009",
+          "type": "choice",
+          "difficulty": 3,
+          "stem": {
+            "zh": "一个 Monorepo 中，frontend/ 和 backend/ 都有各自的 CLAUDE.md。当 Claude 在 frontend/ 目录工作时，以下哪些指令会生效？",
+            "en": "In a monorepo where frontend/ and backend/ each have a CLAUDE.md, which instructions apply when Claude works in frontend/?",
+            "ja": "frontend/ と backend/ にそれぞれ CLAUDE.md があるモノレポで、Claude が frontend/ で作業する際、どの指示が有効になりますか？"
+          },
+          "options": [
+            {
+              "id": "c",
+              "text": {
+                "zh": "根级 + frontend/ + backend/ 所有指令同时生效",
+                "en": "Root + frontend/ + backend/ instructions all apply simultaneously",
+                "ja": "ルート＋frontend/＋backend/ のすべての指示が同時に有効"
+              }
+            },
+            {
+              "id": "a",
+              "text": {
+                "zh": "只有 frontend/ 的指令生效，根级被覆盖",
+                "en": "Only frontend/ instructions apply; root is overridden",
+                "ja": "frontend/ の指示のみが有効で、ルートは上書きされる"
+              }
+            },
+            {
+              "id": "b",
+              "text": {
+                "zh": "只有根级指令生效，frontend/ 的被忽略",
+                "en": "Only root instructions apply; frontend/ is ignored",
+                "ja": "ルートの指示のみが有効で、frontend/ は無視される"
+              }
+            },
+            {
+              "id": "d",
+              "text": {
+                "zh": "根级 + frontend/ 的指令叠加生效，backend/ 的不生效",
+                "en": "Root + frontend/ instructions stack and apply; backend/ does not apply",
+                "ja": "ルート＋frontend/ の指示が積み重なって有効になり、backend/ は有効にならない"
+              }
+            }
+          ],
+          "answer": "d",
+          "explanation": {
+            "zh": "当 Claude 在 frontend/ 工作时：根级 CLAUDE.md（启动时已加载）+ frontend/ 的 CLAUDE.md（访问时懒加载）叠加生效。backend/ 的 CLAUDE.md 未被访问，不会加载。分层隔离的核心：各组件目录指令互不干扰。",
+            "en": "When Claude works in frontend/: root CLAUDE.md (loaded at startup) + frontend/ CLAUDE.md (lazy-loaded on access) stack and apply. backend/ CLAUDE.md is not accessed and not loaded. Core of layered isolation: component dirs don't interfere with each other.",
+            "ja": "Claude が frontend/ で作業する場合：ルート CLAUDE.md（起動時ロード済み）＋ frontend/ の CLAUDE.md（アクセス時遅延ロード）が積み重なって有効になります。backend/ の CLAUDE.md はアクセスされないためロードされません。"
+          },
+          "reward_card": "card_bp01_003"
+        },
+        {
+          "id": "q_bp01_010",
+          "type": "choice",
+          "difficulty": 3,
+          "stem": {
+            "zh": "在大型 Monorepo 中，为什么将所有指令堆在根级 CLAUDE.md 中是一个不好的做法？",
+            "en": "Why is putting all instructions in the root-level CLAUDE.md a bad practice in large monorepos?",
+            "ja": "大規模なモノレポで、すべての指示をルートレベルの CLAUDE.md に集約するのが良くない理由は何ですか？"
+          },
+          "options": [
+            {
+              "id": "a",
+              "text": {
+                "zh": "Claude 不支持读取超过 100 行的 CLAUDE.md",
+                "en": "Claude does not support reading CLAUDE.md files over 100 lines",
+                "ja": "Claude は 100 行を超える CLAUDE.md の読み取りをサポートしていない"
+              }
+            },
+            {
+              "id": "c",
+              "text": {
+                "zh": "会导致 Claude 无法识别 Monorepo 结构",
+                "en": "Causes Claude to fail to recognize the monorepo structure",
+                "ja": "Claude がモノレポ構造を認識できなくなる"
+              }
+            },
+            {
+              "id": "b",
+              "text": {
+                "zh": "所有任务都会加载所有组件指令，浪费上下文，且不同组件的规范混在一起容易冲突",
+                "en": "Every task loads all component instructions, wasting context; mixed component specs can conflict",
+                "ja": "すべてのタスクですべてのコンポーネント指示がロードされ、コンテキストが無駄になり、異なるコンポーネントの仕様が混在して競合しやすい"
+              }
+            },
+            {
+              "id": "d",
+              "text": {
+                "zh": "根级 CLAUDE.md 的内容不允许包含代码片段",
+                "en": "Root-level CLAUDE.md is not allowed to contain code snippets",
+                "ja": "ルートレベルの CLAUDE.md にはコードスニペットを含めることができない"
+              }
+            }
+          ],
+          "answer": "b",
+          "explanation": {
+            "zh": "将所有指令堆在根级的问题：(1) 无论做什么任务都会加载全部指令，大量消耗上下文窗口；(2) 不同组件的规范混在一起，容易出现冲突或干扰。分层放置让指令只在需要时才加载，更精确。",
+            "en": "Problems with piling all instructions at root: (1) every task loads everything, consuming context window; (2) specs from different components mix and can conflict. Layered placement loads instructions only when needed, more precise.",
+            "ja": "すべての指示をルートに集約する問題：(1) どのタスクでもすべてがロードされコンテキストを大量消費；(2) 異なるコンポーネントの仕様が混在して競合しやすい。階層化により必要な時だけロードされ、より正確。"
+          },
+          "reward_card": "card_bp01_003"
+        },
+        {
+          "id": "q_bp01_011",
+          "type": "choice",
+          "difficulty": 2,
+          "stem": {
+            "zh": "CLAUDE.md 和 CLAUDE.local.md 的主要区别是什么？",
+            "en": "What is the main difference between CLAUDE.md and CLAUDE.local.md?",
+            "ja": "CLAUDE.md と CLAUDE.local.md の主な違いは何ですか？"
+          },
+          "options": [
+            {
+              "id": "a",
+              "text": {
+                "zh": "CLAUDE.md 用于配置 API；CLAUDE.local.md 用于配置 CLI",
+                "en": "CLAUDE.md configures the API; CLAUDE.local.md configures the CLI",
+                "ja": "CLAUDE.md は API の設定用；CLAUDE.local.md は CLI の設定用"
+              }
+            },
+            {
+              "id": "c",
+              "text": {
+                "zh": "CLAUDE.md 提交到 git（团队共享）；CLAUDE.local.md 不提交（个人偏好）",
+                "en": "CLAUDE.md is committed to git (team-shared); CLAUDE.local.md is not committed (personal preferences)",
+                "ja": "CLAUDE.md は git にコミット（チーム共有）；CLAUDE.local.md はコミットしない（個人の設定）"
+              }
+            },
+            {
+              "id": "b",
+              "text": {
+                "zh": "CLAUDE.md 只能放根目录；CLAUDE.local.md 可以放任意目录",
+                "en": "CLAUDE.md can only be in the root; CLAUDE.local.md can be in any directory",
+                "ja": "CLAUDE.md はルートにのみ配置可能；CLAUDE.local.md はどのディレクトリにも配置可能"
+              }
+            },
+            {
+              "id": "d",
+              "text": {
+                "zh": "两者功能相同，CLAUDE.local.md 是 CLAUDE.md 的别名",
+                "en": "They have identical functionality; CLAUDE.local.md is just an alias for CLAUDE.md",
+                "ja": "機能は同じで、CLAUDE.local.md は CLAUDE.md の別名に過ぎない"
+              }
+            }
+          ],
+          "answer": "c",
+          "explanation": {
+            "zh": "核心区别：CLAUDE.md 包含团队规则（提交规范、测试命令、架构约定），应提交到 git 与团队共享；CLAUDE.local.md 包含个人偏好（喜欢的输出格式、个人工作习惯），应加入 .gitignore 不提交。",
+            "en": "Core difference: CLAUDE.md has team rules (commit conventions, test commands, architecture) and should be committed to git; CLAUDE.local.md has personal preferences (output format, work habits) and should be in .gitignore.",
+            "ja": "核心的な違い：CLAUDE.md にはチームルール（コミット規約、テストコマンド、アーキテクチャ）を記述して git にコミット；CLAUDE.local.md には個人設定（出力形式、作業習慣）を記述して .gitignore に追加。"
+          },
+          "reward_card": "card_bp01_004"
+        },
+        {
+          "id": "q_bp01_012",
+          "type": "choice",
+          "difficulty": 1,
+          "stem": {
+            "zh": "以下哪类内容应该放在 CLAUDE.local.md 而不是 CLAUDE.md？",
+            "en": "Which type of content belongs in CLAUDE.local.md rather than CLAUDE.md?",
+            "ja": "次のどのコンテンツを CLAUDE.md ではなく CLAUDE.local.md に記述すべきですか？"
+          },
+          "options": [
+            {
+              "id": "b",
+              "text": {
+                "zh": "「运行测试请用 npm test，不要用 yarn」",
+                "en": "'Run tests with npm test, not yarn'",
+                "ja": "「テストは yarn ではなく npm test で実行すること」"
+              }
+            },
+            {
+              "id": "d",
+              "text": {
+                "zh": "「所有 commit 必须遵循 Conventional Commits 格式」",
+                "en": "'All commits must follow Conventional Commits format'",
+                "ja": "「すべてのコミットは Conventional Commits 形式に従うこと」"
+              }
+            },
+            {
+              "id": "a",
+              "text": {
+                "zh": "「我喜欢回答简洁直接，不要加多余的解释」",
+                "en": "'I prefer concise, direct answers without extra explanation'",
+                "ja": "「回答は簡潔で直接的にし、余分な説明は不要」"
+              }
+            },
+            {
+              "id": "c",
+              "text": {
+                "zh": "「项目使用 TypeScript strict 模式，不允许 any 类型」",
+                "en": "'Project uses TypeScript strict mode, no any types allowed'",
+                "ja": "「プロジェクトは TypeScript の strict モードを使用し、any 型は禁止」"
+              }
+            }
+          ],
+          "answer": "a",
+          "explanation": {
+            "zh": "「我喜欢回答简洁直接」是个人偏好，不适合强加给整个团队，应放 CLAUDE.local.md 不提交。其他三个都是团队共用规范（测试命令、commit 格式、TypeScript 配置），应放 CLAUDE.md 提交共享。",
+            "en": "'I prefer concise answers' is a personal preference, shouldn't be imposed on the whole team — put it in CLAUDE.local.md. The other three are team conventions (test commands, commit format, TypeScript config) that belong in CLAUDE.md.",
+            "ja": "「簡潔な回答が好み」は個人の好みであり、チーム全体に強制すべきではありません。CLAUDE.local.md に記述します。他の3つはチーム共通の規範（テストコマンド、コミット形式、TypeScript 設定）なので CLAUDE.md に記述します。"
+          },
+          "reward_card": "card_bp01_004"
+        },
+        {
+          "id": "q_bp01_013",
+          "type": "choice",
+          "difficulty": 3,
+          "stem": {
+            "zh": "CLAUDE.local.md 应该如何处理版本控制？最佳实践是什么？",
+            "en": "How should CLAUDE.local.md be handled in version control? What is the best practice?",
+            "ja": "CLAUDE.local.md のバージョン管理はどのように処理すべきですか？ベストプラクティスは何ですか？"
+          },
+          "options": [
+            {
+              "id": "b",
+              "text": {
+                "zh": "提交到 git 但标记为只读，团队成员不能修改",
+                "en": "Commit to git but mark as read-only; team members cannot modify it",
+                "ja": "git にコミットするが読み取り専用としてマーク；チームメンバーは変更不可"
+              }
+            },
+            {
+              "id": "a",
+              "text": {
+                "zh": "每次提交前自动删除，push 后重新生成",
+                "en": "Automatically deleted before each commit, regenerated after push",
+                "ja": "コミット前に自動削除され、プッシュ後に再生成される"
+              }
+            },
+            {
+              "id": "c",
+              "text": {
+                "zh": "加入 .gitignore，不提交到 git，保留在本地",
+                "en": "Add to .gitignore, do not commit to git, keep it local only",
+                "ja": ".gitignore に追加して git にコミットせず、ローカルにのみ保持する"
+              }
+            },
+            {
+              "id": "d",
+              "text": {
+                "zh": "提交到单独的 local 分支，从不合并到 main",
+                "en": "Commit to a separate local branch that is never merged to main",
+                "ja": "独立したローカルブランチにコミットし、main にはマージしない"
+              }
+            }
+          ],
+          "answer": "c",
+          "explanation": {
+            "zh": "最佳实践：将 CLAUDE.local.md 加入项目的 .gitignore，使其只存在于本地，不提交到 git 仓库。这样每个开发者可以有自己的个人偏好配置，而不会影响其他团队成员的工作流程。",
+            "en": "Best practice: add CLAUDE.local.md to .gitignore so it only exists locally, never committed to git. This lets each developer maintain personal preferences without affecting other team members' workflows.",
+            "ja": "ベストプラクティス：CLAUDE.local.md を .gitignore に追加してローカルにのみ存在させ、git にコミットしません。これにより各開発者が個人の設定を持ちながら、他のチームメンバーのワークフローに影響を与えません。"
+          },
+          "reward_card": "card_bp01_004"
+        },
+        {
+          "id": "q_bp01_014",
+          "type": "choice",
+          "difficulty": 2,
+          "stem": {
+            "zh": "一个新加入项目的开发者想立即获得 Claude 的最佳辅助效果，最应该先做什么？",
+            "en": "A new developer wants Claude to work at peak effectiveness immediately. What should they do first?",
+            "ja": "プロジェクトに新しく加わった開発者が Claude の最高の支援効果をすぐに得たい場合、最初に何をすべきですか？"
+          },
+          "options": [
+            {
+              "id": "a",
+              "text": {
+                "zh": "在每次会话开头手动粘贴项目 README",
+                "en": "Manually paste the project README at the start of each session",
+                "ja": "毎回のセッションの冒頭にプロジェクトの README を手動で貼り付ける"
+              }
+            },
+            {
+              "id": "d",
+              "text": {
+                "zh": "读取项目仓库中的 CLAUDE.md，了解团队已经沉淀的共用指令",
+                "en": "Read the CLAUDE.md in the project repo to understand team-accumulated shared instructions",
+                "ja": "プロジェクトリポジトリの CLAUDE.md を読んで、チームが蓄積した共有指示を理解する"
+              }
+            },
+            {
+              "id": "b",
+              "text": {
+                "zh": "升级到最新版 Claude 模型",
+                "en": "Upgrade to the latest Claude model version",
+                "ja": "最新バージョンの Claude モデルにアップグレードする"
+              }
+            },
+            {
+              "id": "c",
+              "text": {
+                "zh": "重新创建一个空白的 CLAUDE.md，避免被前任开发者的设置影响",
+                "en": "Create a new blank CLAUDE.md to avoid being affected by previous developers' settings",
+                "ja": "前の開発者の設定に影響されないよう、新しい空の CLAUDE.md を作成する"
+              }
+            }
+          ],
+          "answer": "d",
+          "explanation": {
+            "zh": "CLAUDE.md 的一大价值在于团队知识传承——项目中积累的规范、约定和最佳实践已经沉淀在 CLAUDE.md 里。新开发者克隆仓库后，Claude 立即就有了完整的项目上下文，无需从头摸索。",
+            "en": "A key value of CLAUDE.md is team knowledge transfer — accumulated conventions and best practices are already in CLAUDE.md. A new developer who clones the repo immediately gives Claude full project context without starting from scratch.",
+            "ja": "CLAUDE.md の重要な価値はチームの知識継承にあります。プロジェクトで蓄積された規約とベストプラクティスがすでに CLAUDE.md に記録されています。リポジトリをクローンすれば、Claude はすぐに完全なプロジェクトコンテキストを持ちます。"
+          },
+          "reward_card": "card_bp01_001"
+        },
+        {
+          "id": "q_bp01_015",
+          "type": "choice",
+          "difficulty": 3,
+          "stem": {
+            "zh": "在团队协作中，关于 CLAUDE.md 和 CLAUDE.local.md 的分工，以下哪个场景配置是正确的？",
+            "en": "In team collaboration, which scenario correctly shows the division of responsibility between CLAUDE.md and CLAUDE.local.md?",
+            "ja": "チームコラボレーションにおいて、CLAUDE.md と CLAUDE.local.md の分担として正しいシナリオはどれですか？"
+          },
+          "options": [
+            {
+              "id": "b",
+              "text": {
+                "zh": "两个文件都提交到 git，CLAUDE.md 由 team lead 维护，CLAUDE.local.md 由每个成员维护",
+                "en": "Both committed to git; CLAUDE.md maintained by team lead, CLAUDE.local.md by each member",
+                "ja": "両方を git にコミット；CLAUDE.md はチームリードが管理し、CLAUDE.local.md は各メンバーが管理"
+              }
+            },
+            {
+              "id": "c",
+              "text": {
+                "zh": "CLAUDE.md 不提交（太大），CLAUDE.local.md 提交（方便共享）",
+                "en": "CLAUDE.md not committed (too large); CLAUDE.local.md committed (easier to share)",
+                "ja": "CLAUDE.md はコミットしない（大きすぎる）；CLAUDE.local.md はコミット（共有しやすい）"
+              }
+            },
+            {
+              "id": "a",
+              "text": {
+                "zh": "CLAUDE.md 提交到 git（团队规范）；CLAUDE.local.md 在 .gitignore 中（个人偏好）",
+                "en": "CLAUDE.md committed to git (team standards); CLAUDE.local.md in .gitignore (personal preferences)",
+                "ja": "CLAUDE.md は git にコミット（チーム標準）；CLAUDE.local.md は .gitignore に記載（個人設定）"
+              }
+            },
+            {
+              "id": "d",
+              "text": {
+                "zh": "两个文件都不提交，通过内部 wiki 共享",
+                "en": "Neither file is committed; shared via internal wiki",
+                "ja": "どちらのファイルもコミットせず、社内 wiki で共有する"
+              }
+            }
+          ],
+          "answer": "a",
+          "explanation": {
+            "zh": "正确的团队配置：CLAUDE.md 包含团队共同遵守的规范，提交到 git 让所有人共享；CLAUDE.local.md 包含个人偏好，加入 .gitignore 不提交。这样既保证了团队一致性，又尊重了个人工作方式。",
+            "en": "Correct team setup: CLAUDE.md has team-wide standards, committed to git for everyone to share; CLAUDE.local.md has personal preferences, in .gitignore and not committed. This ensures team consistency while respecting individual work styles.",
+            "ja": "正しいチーム設定：CLAUDE.md にはチーム全体の標準を記述して git にコミットし全員で共有；CLAUDE.local.md には個人設定を記述して .gitignore に追加しコミットしない。チームの一貫性を保ちながら個人の作業スタイルを尊重します。"
+          },
+          "reward_card": "card_bp01_004"
+        },
+        {
+          "id": "q_bp01_016",
+          "type": "choice",
+          "difficulty": 2,
+          "stem": {
+            "zh": "以下哪个比喻最准确地描述了 CLAUDE.md 的作用？",
+            "en": "Which analogy best describes the role of CLAUDE.md?",
+            "ja": "CLAUDE.md の役割を最も正確に表現している例えはどれですか？"
+          },
+          "options": [
+            {
+              "id": "a",
+              "text": {
+                "zh": "像 .env 文件一样存储敏感配置（API 密钥等）",
+                "en": "Like a .env file storing sensitive configuration (API keys, etc.)",
+                "ja": ".env ファイルのように機密設定（API キーなど）を保存する"
+              }
+            },
+            {
+              "id": "c",
+              "text": {
+                "zh": "像新员工入职培训手册——让 Claude 快速了解这个「工作环境」的规则",
+                "en": "Like a new employee onboarding guide — helping Claude quickly learn the rules of this 'work environment'",
+                "ja": "新入社員のオンボーディングガイドのように——Claude がこの「作業環境」のルールを素早く把握できるようにする"
+              }
+            },
+            {
+              "id": "b",
+              "text": {
+                "zh": "像 Makefile 一样定义可执行的构建步骤",
+                "en": "Like a Makefile defining executable build steps",
+                "ja": "Makefile のように実行可能なビルドステップを定義する"
+              }
+            },
+            {
+              "id": "d",
+              "text": {
+                "zh": "像 package.json 一样声明依赖关系",
+                "en": "Like a package.json declaring dependencies",
+                "ja": "package.json のように依存関係を宣言する"
+              }
+            }
+          ],
+          "answer": "c",
+          "explanation": {
+            "zh": "CLAUDE.md 就像新员工入职培训手册——它告诉 Claude 这个项目的「工作规则」：用什么命令、遵循什么规范、了解什么约定。Claude 每次启动就相当于「入职」，CLAUDE.md 让它迅速进入工作状态。",
+            "en": "CLAUDE.md is like a new-employee onboarding guide — it tells Claude the project's 'work rules': what commands to use, what conventions to follow. Each startup is like 'onboarding'; CLAUDE.md gets Claude up to speed immediately.",
+            "ja": "CLAUDE.md は新入社員のオンボーディングガイドのようなものです。プロジェクトの「作業ルール」（使用するコマンド、従う規約）を Claude に伝えます。毎回の起動が「入社初日」で、CLAUDE.md がすぐに作業状態に入れるようにします。"
+          },
+          "reward_card": "card_bp01_001"
+        },
+        {
+          "id": "q_bp01_017",
+          "type": "choice",
+          "difficulty": 3,
+          "stem": {
+            "zh": "以下哪个 CLAUDE.md 内容写法是「写了等于没写」——Claude 无法从中获得有效指引？",
+            "en": "Which CLAUDE.md content is effectively useless — Claude gains no useful guidance from it?",
+            "ja": "次のどの CLAUDE.md の内容が「書いても意味がない」もので、Claude が有効な指針を得られないものですか？"
+          },
+          "options": [
+            {
+              "id": "b",
+              "text": {
+                "zh": "「构建命令：npm run build。测试命令：npm test。代码风格：2 空格缩进，单引号字符串」",
+                "en": "'Build: npm run build. Test: npm test. Style: 2-space indent, single quotes'",
+                "ja": "「ビルドコマンド：npm run build。テスト：npm test。スタイル：2スペースインデント、シングルクォート」"
+              }
+            },
+            {
+              "id": "d",
+              "text": {
+                "zh": "「提交规范：feat:/fix:/docs: 开头，body 不超过 72 字符」",
+                "en": "'Commit convention: feat:/fix:/docs: prefix, body max 72 chars'",
+                "ja": "「コミット規約：feat:/fix:/docs: プレフィックス、本文は 72 文字以内」"
+              }
+            },
+            {
+              "id": "a",
+              "text": {
+                "zh": "「请尽力提供高质量的代码。始终遵循最佳实践。确保代码可维护」",
+                "en": "'Please provide high-quality code. Always follow best practices. Ensure code is maintainable'",
+                "ja": "「高品質なコードを提供してください。常にベストプラクティスに従ってください。コードが保守可能であることを確認してください」"
+              }
+            },
+            {
+              "id": "c",
+              "text": {
+                "zh": "「数据库迁移使用 Flyway，文件命名格式：V{版本号}__{描述}.sql」",
+                "en": "'DB migrations use Flyway, file name format: V{version}__{description}.sql'",
+                "ja": "「データベースマイグレーションは Flyway を使用し、ファイル命名形式：V{バージョン番号}__{説明}.sql」"
+              }
+            }
+          ],
+          "answer": "a",
+          "explanation": {
+            "zh": "「高质量代码」「最佳实践」「可维护」都是模糊的废话——Claude 本来就会尝试做到这些，写在 CLAUDE.md 里没有任何额外价值。有效的 CLAUDE.md 应该写具体的、可操作的项目特定规则，比如命令、命名格式、工具选择等。",
+            "en": "'High-quality code', 'best practices', 'maintainable' are vague platitudes — Claude already tries to do these; writing them in CLAUDE.md adds zero value. Effective CLAUDE.md should have specific, actionable project-specific rules: commands, naming formats, tool choices.",
+            "ja": "「高品質なコード」「ベストプラクティス」「保守可能」は曖昧な決まり文句で、Claude は元々これらを実現しようとします。CLAUDE.md に書いても何も付加価値がありません。効果的な CLAUDE.md には具体的で実行可能なプロジェクト固有のルールを記述すべきです。"
+          },
+          "reward_card": "card_bp01_001"
+        },
+        {
+          "id": "q_bp01_018",
+          "type": "choice",
+          "difficulty": 2,
+          "stem": {
+            "zh": "如果你在一个有 CLAUDE.local.md 的项目中工作，但该文件未在 .gitignore 中，会有什么风险？",
+            "en": "If you work in a project with CLAUDE.local.md that is not in .gitignore, what risk exists?",
+            "ja": ".gitignore に追加されていない CLAUDE.local.md があるプロジェクトで作業する場合、どのようなリスクがありますか？"
+          },
+          "options": [
+            {
+              "id": "d",
+              "text": {
+                "zh": "CLAUDE.local.md 会与 CLAUDE.md 合并，导致指令重复",
+                "en": "CLAUDE.local.md merges with CLAUDE.md, causing duplicated instructions",
+                "ja": "CLAUDE.local.md が CLAUDE.md と統合されて指示が重複する"
+              }
+            },
+            {
+              "id": "b",
+              "text": {
+                "zh": "个人偏好配置意外提交到仓库，干扰其他团队成员的 Claude 使用体验",
+                "en": "Personal preferences accidentally committed, disrupting other team members' Claude experience",
+                "ja": "個人設定が誤ってリポジトリにコミットされ、他のチームメンバーの Claude 使用体験を妨げる"
+              }
+            },
+            {
+              "id": "a",
+              "text": {
+                "zh": "Claude 会拒绝加载 CLAUDE.local.md，因为它被视为危险文件",
+                "en": "Claude refuses to load CLAUDE.local.md because it is treated as a dangerous file",
+                "ja": "CLAUDE.local.md が危険なファイルとみなされて Claude が読み込みを拒否する"
+              }
+            },
+            {
+              "id": "c",
+              "text": {
+                "zh": "CLAUDE.local.md 的内容会自动同步到所有团队成员的机器",
+                "en": "CLAUDE.local.md content automatically syncs to all team members' machines",
+                "ja": "CLAUDE.local.md の内容がすべてのチームメンバーのマシンに自動同期される"
+              }
+            }
+          ],
+          "answer": "b",
+          "explanation": {
+            "zh": "CLAUDE.local.md 未加入 .gitignore 的风险：个人偏好设置（如「回答要简短」「用中文」等）意外被 git commit 推送到仓库，其他团队成员拉取后，他们的 Claude 也会受到这些个人偏好的影响，干扰正常协作。",
+            "en": "Risk of CLAUDE.local.md not in .gitignore: personal preferences (e.g., 'keep answers short', 'use Chinese') accidentally committed and pushed; when other team members pull, their Claude is also affected by these personal preferences, disrupting collaboration.",
+            "ja": ".gitignore に追加されていない場合のリスク：個人設定（「回答は短く」「中国語を使って」など）が誤ってコミット・プッシュされ、他のチームメンバーがプルするとその Claude も影響を受け、通常のコラボレーションが妨げられます。"
+          },
+          "reward_card": "card_bp01_004"
         }
       ],
       "star_thresholds": [
