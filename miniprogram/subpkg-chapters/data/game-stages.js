@@ -22683,49 +22683,49 @@ module.exports = {
           "type": "choice",
           "difficulty": 1,
           "stem": {
-            "zh": "以下哪个概念与「1. 什么是 MCP」直接相关？",
-            "en": "Which concept is directly related to \"MCP Servers for Daily Use\"?",
-            "ja": "「MCP Servers for Daily Use」に直接関連する概念はどれですか？"
+            "zh": "日常使用 Claude Code 时，推荐配置几个 MCP 服务器最为合适？",
+            "en": "How many MCP servers are recommended for daily Claude Code use?",
+            "ja": "日常の Claude Code 利用では、MCP サーバーは何個が推奨されますか？"
           },
           "options": [
             {
-              "id": "b",
+              "id": "c",
               "text": {
-                "zh": "2. 推荐的日常 MCP 服务器",
-                "en": "Configuration",
-                "ja": "Configuration"
+                "zh": "5 个左右",
+                "en": "Around 5",
+                "ja": "5 個程度"
               }
             },
             {
-              "id": "d",
+              "id": "b",
               "text": {
-                "zh": "匹配器参考",
-                "en": "MCP Servers",
-                "ja": "MCP Servers"
+                "zh": "20 个以上",
+                "en": "20 or more",
+                "ja": "20 個以上"
               }
             },
             {
               "id": "a",
               "text": {
-                "zh": "1. 什么是 MCP",
-                "en": "MCP Servers for Daily Use",
-                "ja": "MCP Servers for Daily Use"
+                "zh": "越多越好，全部启用",
+                "en": "As many as possible",
+                "ja": "できるだけ多く"
               }
             },
             {
-              "id": "c",
+              "id": "d",
               "text": {
-                "zh": "4. Settings 中的 MCP 配置",
-                "en": "MCP Scopes",
-                "ja": "MCP Scopes"
+                "zh": "只需要 1 个",
+                "en": "Only 1",
+                "ja": "1 個だけ"
               }
             }
           ],
-          "answer": "a",
+          "answer": "c",
           "explanation": {
-            "zh": "1. 什么是 MCP",
-            "en": "Context7",
-            "ja": "Context7"
+            "zh": "推荐日常 5 个就够：Context7、Playwright、Chrome、DeepWiki、Excalidraw，精而不滥。",
+            "en": "5 well-chosen servers cover daily needs: Context7, Playwright, Chrome, DeepWiki, Excalidraw.",
+            "ja": "Context7・Playwright・Chrome・DeepWiki・Excalidraw の 5 つで日常は十分です。"
           },
           "reward_card": "card_bp06_001"
         },
@@ -22734,204 +22734,867 @@ module.exports = {
           "type": "choice",
           "difficulty": 1,
           "stem": {
-            "zh": "以下哪个概念与「2. 推荐的日常 MCP 服务器」直接相关？",
-            "en": "Which concept is directly related to \"Configuration\"?",
-            "ja": "「Configuration」に直接関連する概念はどれですか？"
+            "zh": "Context7 MCP 服务器的主要用途是什么？",
+            "en": "What is the main purpose of the Context7 MCP server?",
+            "ja": "Context7 MCP サーバーの主な用途は何ですか？"
           },
           "options": [
             {
-              "id": "d",
-              "text": {
-                "zh": "HTTP 响应处理",
-                "en": "Permission Modes",
-                "ja": "Permission Modes"
-              }
-            },
-            {
               "id": "a",
               "text": {
-                "zh": "2. 推荐的日常 MCP 服务器",
-                "en": "Configuration",
-                "ja": "Configuration"
-              }
-            },
-            {
-              "id": "b",
-              "text": {
-                "zh": "方式二：让 Claude 帮你创建",
-                "en": "![How to Implement](../!/tags/how-to-implement.svg)",
-                "ja": "![How to Implement](../!/tags/how-to-implement.svg)"
+                "zh": "控制浏览器进行 UI 测试",
+                "en": "Control browser for UI testing",
+                "ja": "UI テスト用ブラウザ操作"
               }
             },
             {
               "id": "c",
               "text": {
-                "zh": "3. 配置",
-                "en": "Server Types",
-                "ja": "Server Types"
+                "zh": "绘制流程图与白板图",
+                "en": "Draw diagrams and whiteboards",
+                "ja": "フローチャートや図の描画"
+              }
+            },
+            {
+              "id": "b",
+              "text": {
+                "zh": "获取最新的库文档与 API 参考",
+                "en": "Fetch up-to-date library docs and API references",
+                "ja": "最新のライブラリドキュメントと API リファレンスの取得"
+              }
+            },
+            {
+              "id": "d",
+              "text": {
+                "zh": "管理 Git 提交与分支",
+                "en": "Manage git commits and branches",
+                "ja": "Git コミットとブランチの管理"
               }
             }
           ],
-          "answer": "a",
+          "answer": "b",
           "explanation": {
-            "zh": "文档化",
-            "en": "Configuration",
-            "ja": "Configuration"
+            "zh": "Context7 专门用于获取最新的库文档，避免 Claude 使用过时的 API 信息。",
+            "en": "Context7 fetches up-to-date library docs so Claude doesn't rely on stale API knowledge.",
+            "ja": "Context7 は最新ライブラリドキュメントを取得し、Claude が古い API 知識を使わないようにします。"
           },
-          "reward_card": "card_bp06_002"
+          "reward_card": "card_bp06_001"
         },
         {
           "id": "q_bp06_003",
           "type": "choice",
           "difficulty": 1,
           "stem": {
-            "zh": "以下哪个概念与「3. 配置」直接相关？",
-            "en": "Which concept is directly related to \"Server Types\"?",
-            "ja": "「Server Types」に直接関連する概念はどれですか？"
+            "zh": "Playwright MCP 服务器和 Chrome MCP 服务器的共同作用是什么？",
+            "en": "What do Playwright and Chrome MCP servers have in common?",
+            "ja": "Playwright MCP と Chrome MCP の共通の役割は何ですか？"
           },
           "options": [
             {
-              "id": "b",
-              "text": {
-                "zh": "7. 实用示例",
-                "en": "Display & UX",
-                "ja": "Display & UX"
-              }
-            },
-            {
               "id": "c",
               "text": {
-                "zh": "调试与诊断",
-                "en": "Usage",
-                "ja": "Usage"
+                "zh": "提供代码补全功能",
+                "en": "Provide code completion",
+                "ja": "コード補完を提供する"
               }
             },
             {
               "id": "a",
               "text": {
-                "zh": "3. 配置",
-                "en": "Server Types",
-                "ja": "Server Types"
+                "zh": "都能让 Claude 操控浏览器",
+                "en": "Both allow Claude to control a browser",
+                "ja": "どちらも Claude がブラウザを操作できるようにする"
               }
             },
             {
               "id": "d",
               "text": {
-                "zh": "7. 权限控制",
-                "en": "7. 权限控制",
-                "ja": "7. 权限控制"
+                "zh": "都用于读取本地文件系统",
+                "en": "Both read local filesystem",
+                "ja": "どちらもローカルファイルシステムを読み取る"
+              }
+            },
+            {
+              "id": "b",
+              "text": {
+                "zh": "都用于连接数据库",
+                "en": "Both connect to databases",
+                "ja": "どちらもデータベースに接続する"
               }
             }
           ],
           "answer": "a",
           "explanation": {
-            "zh": "3. 配置",
-            "en": "stdio",
-            "ja": "stdio"
+            "zh": "Playwright 和 Chrome MCP 都让 Claude 能操控浏览器，区别在于底层实现方式不同。",
+            "en": "Both Playwright and Chrome MCP enable Claude to control a browser, differing in their underlying implementation.",
+            "ja": "Playwright と Chrome MCP はどちらも Claude がブラウザを操作できるようにしますが、実装方法が異なります。"
           },
-          "reward_card": "card_bp06_003"
+          "reward_card": "card_bp06_001"
         },
         {
           "id": "q_bp06_004",
           "type": "choice",
-          "difficulty": 2,
+          "difficulty": 1,
           "stem": {
-            "zh": "在 Claude Code 中，关于「传输类型」的正确理解是？",
-            "en": "What is the correct understanding of \"Example `.mcp.json`\" in Claude Code?",
-            "ja": "Claude Code における「Example `.mcp.json`」の正しい理解はどれですか？"
+            "zh": "DeepWiki MCP 服务器最适合用来做什么？",
+            "en": "What is DeepWiki MCP server best used for?",
+            "ja": "DeepWiki MCP サーバーは何に最も適していますか？"
           },
           "options": [
             {
-              "id": "d",
-              "text": {
-                "zh": "模型与配置",
-                "en": "Status Line Configuration",
-                "ja": "Status Line Configuration"
-              }
-            },
-            {
               "id": "a",
               "text": {
-                "zh": "传输类型",
-                "en": "Example `.mcp.json`",
-                "ja": "Example `.mcp.json`"
-              }
-            },
-            {
-              "id": "c",
-              "text": {
-                "zh": "Hook 类型",
-                "en": "Core Configuration",
-                "ja": "Core Configuration"
+                "zh": "发布 npm 包",
+                "en": "Publishing npm packages",
+                "ja": "npm パッケージの公開"
               }
             },
             {
               "id": "b",
               "text": {
-                "zh": "工作流程",
-                "en": "工作流程",
-                "ja": "工作流程"
+                "zh": "运行终端命令",
+                "en": "Running terminal commands",
+                "ja": "ターミナルコマンドの実行"
+              }
+            },
+            {
+              "id": "c",
+              "text": {
+                "zh": "格式化代码风格",
+                "en": "Formatting code style",
+                "ja": "コードスタイルのフォーマット"
+              }
+            },
+            {
+              "id": "d",
+              "text": {
+                "zh": "深度阅读 GitHub 仓库与文档",
+                "en": "Deep reading of GitHub repos and documentation",
+                "ja": "GitHub リポジトリとドキュメントの深い読み込み"
               }
             }
           ],
-          "answer": "a",
+          "answer": "d",
           "explanation": {
-            "zh": "stdio",
-            "en": "Example `.mcp.json`",
-            "ja": "Example `.mcp.json`"
+            "zh": "DeepWiki 能深度阅读 GitHub 仓库内容，帮助 Claude 理解复杂项目结构和文档。",
+            "en": "DeepWiki reads GitHub repos deeply, helping Claude understand complex project structures and docs.",
+            "ja": "DeepWiki は GitHub リポジトリを深く読み込み、Claude が複雑なプロジェクト構造を理解するのを助けます。"
           },
-          "reward_card": "card_bp06_004"
+          "reward_card": "card_bp06_001"
         },
         {
           "id": "q_bp06_005",
           "type": "choice",
-          "difficulty": 2,
+          "difficulty": 1,
           "stem": {
-            "zh": "在 Claude Code 中，关于「`.mcp.json` 配置示例」的正确理解是？",
-            "en": "What is the correct understanding of \"Settings for MCP Servers\" in Claude Code?",
-            "ja": "Claude Code における「Settings for MCP Servers」の正しい理解はどれですか？"
+            "zh": "Excalidraw MCP 服务器主要用于什么场景？",
+            "en": "What is the main use case for the Excalidraw MCP server?",
+            "ja": "Excalidraw MCP サーバーの主な用途は何ですか？"
           },
           "options": [
             {
               "id": "b",
               "text": {
-                "zh": "模型别名",
-                "en": "Attribution Settings",
-                "ja": "Attribution Settings"
-              }
-            },
-            {
-              "id": "c",
-              "text": {
-                "zh": "2. Frontmatter 字段（16 个）",
-                "en": "![Official](../!/tags/official.svg) **(5)**",
-                "ja": "![Official](../!/tags/official.svg) **(5)**"
+                "zh": "搜索网络信息",
+                "en": "Searching the web",
+                "ja": "ウェブ検索"
               }
             },
             {
               "id": "a",
               "text": {
-                "zh": "`.mcp.json` 配置示例",
-                "en": "Settings for MCP Servers",
-                "ja": "Settings for MCP Servers"
+                "zh": "管理环境变量",
+                "en": "Managing environment variables",
+                "ja": "環境変数の管理"
               }
             },
             {
               "id": "d",
               "text": {
-                "zh": "官方内置命令（69 个）",
-                "en": "![Official](../!/tags/official.svg) **(69)**",
-                "ja": "![Official](../!/tags/official.svg) **(69)**"
+                "zh": "调试运行时错误",
+                "en": "Debugging runtime errors",
+                "ja": "ランタイムエラーのデバッグ"
+              }
+            },
+            {
+              "id": "c",
+              "text": {
+                "zh": "让 Claude 生成和编辑白板图与流程图",
+                "en": "Let Claude generate and edit whiteboard diagrams and flowcharts",
+                "ja": "Claude がホワイトボード図やフローチャートを生成・編集できるようにする"
+              }
+            }
+          ],
+          "answer": "c",
+          "explanation": {
+            "zh": "Excalidraw MCP 让 Claude 能创建和修改 Excalidraw 白板图，方便可视化架构与流程。",
+            "en": "Excalidraw MCP lets Claude create and modify Excalidraw diagrams for visualizing architecture and flows.",
+            "ja": "Excalidraw MCP により Claude は Excalidraw 図を作成・修正でき、アーキテクチャやフローの可視化が可能になります。"
+          },
+          "reward_card": "card_bp06_001"
+        },
+        {
+          "id": "q_bp06_006",
+          "type": "choice",
+          "difficulty": 2,
+          "stem": {
+            "zh": "日常推荐的 5 个 MCP 服务器中，哪个侧重「绘图与可视化」？",
+            "en": "Among the 5 recommended daily MCP servers, which one focuses on drawing and visualization?",
+            "ja": "日常推奨の 5 つの MCP サーバーの中で、描画と可視化に特化しているのはどれですか？"
+          },
+          "options": [
+            {
+              "id": "c",
+              "text": {
+                "zh": "Context7",
+                "en": "Context7",
+                "ja": "Context7"
+              }
+            },
+            {
+              "id": "a",
+              "text": {
+                "zh": "DeepWiki",
+                "en": "DeepWiki",
+                "ja": "DeepWiki"
+              }
+            },
+            {
+              "id": "d",
+              "text": {
+                "zh": "Playwright",
+                "en": "Playwright",
+                "ja": "Playwright"
+              }
+            },
+            {
+              "id": "b",
+              "text": {
+                "zh": "Excalidraw",
+                "en": "Excalidraw",
+                "ja": "Excalidraw"
+              }
+            }
+          ],
+          "answer": "b",
+          "explanation": {
+            "zh": "Excalidraw 专注于绘图与可视化，其他四个分别侧重文档获取、浏览器操控和仓库阅读。",
+            "en": "Excalidraw focuses on drawing and visualization; the other four cover docs, browser control, and repo reading.",
+            "ja": "Excalidraw は描画と可視化に特化し、残り 4 つはドキュメント取得・ブラウザ操作・リポジトリ読み込みを担います。"
+          },
+          "reward_card": "card_bp06_001"
+        },
+        {
+          "id": "q_bp06_007",
+          "type": "choice",
+          "difficulty": 1,
+          "stem": {
+            "zh": "MCP 服务器的配置文件名是什么？",
+            "en": "What is the configuration file name for MCP servers?",
+            "ja": "MCP サーバーの設定ファイル名は何ですか？"
+          },
+          "options": [
+            {
+              "id": "c",
+              "text": {
+                "zh": "mcp-config.yaml",
+                "en": "mcp-config.yaml",
+                "ja": "mcp-config.yaml"
+              }
+            },
+            {
+              "id": "b",
+              "text": {
+                "zh": "claude.json",
+                "en": "claude.json",
+                "ja": "claude.json"
+              }
+            },
+            {
+              "id": "a",
+              "text": {
+                "zh": ".mcp.json",
+                "en": ".mcp.json",
+                "ja": ".mcp.json"
+              }
+            },
+            {
+              "id": "d",
+              "text": {
+                "zh": "servers.toml",
+                "en": "servers.toml",
+                "ja": "servers.toml"
               }
             }
           ],
           "answer": "a",
           "explanation": {
-            "zh": "`.mcp.json` 配置示例",
-            "en": "Settings for MCP Servers",
-            "ja": "Settings for MCP Servers"
+            "zh": ".mcp.json 是 MCP 服务器的配置文件，通常放在项目根目录。",
+            "en": ".mcp.json is the MCP server configuration file, typically placed in the project root.",
+            "ja": ".mcp.json は MCP サーバーの設定ファイルで、通常はプロジェクトルートに配置します。"
           },
-          "reward_card": "card_bp06_005"
+          "reward_card": "card_bp06_002"
+        },
+        {
+          "id": "q_bp06_008",
+          "type": "choice",
+          "difficulty": 1,
+          "stem": {
+            "zh": ".mcp.json 中，「stdio」传输类型连接的是什么？",
+            "en": "In .mcp.json, what does the 'stdio' transport type connect to?",
+            "ja": ".mcp.json において、'stdio' トランスポートは何に接続しますか？"
+          },
+          "options": [
+            {
+              "id": "a",
+              "text": {
+                "zh": "远程 WebSocket 端点",
+                "en": "Remote WebSocket endpoint",
+                "ja": "リモート WebSocket エンドポイント"
+              }
+            },
+            {
+              "id": "c",
+              "text": {
+                "zh": "云端 API 服务",
+                "en": "Cloud API service",
+                "ja": "クラウド API サービス"
+              }
+            },
+            {
+              "id": "b",
+              "text": {
+                "zh": "远程 HTTP URL",
+                "en": "Remote HTTP URL",
+                "ja": "リモート HTTP URL"
+              }
+            },
+            {
+              "id": "d",
+              "text": {
+                "zh": "本地进程（本机运行的程序）",
+                "en": "Local process running on the machine",
+                "ja": "マシン上で動作するローカルプロセス"
+              }
+            }
+          ],
+          "answer": "d",
+          "explanation": {
+            "zh": "stdio 传输类型接本地进程，通过标准输入输出与 MCP 服务器通信。",
+            "en": "The stdio transport connects to a local process, communicating via standard input/output.",
+            "ja": "stdio トランスポートはローカルプロセスに接続し、標準入出力で MCP サーバーと通信します。"
+          },
+          "reward_card": "card_bp06_002"
+        },
+        {
+          "id": "q_bp06_009",
+          "type": "choice",
+          "difficulty": 2,
+          "stem": {
+            "zh": ".mcp.json 中，「http」传输类型连接的是什么？",
+            "en": "In .mcp.json, what does the 'http' transport type connect to?",
+            "ja": ".mcp.json において、'http' トランスポートは何に接続しますか？"
+          },
+          "options": [
+            {
+              "id": "c",
+              "text": {
+                "zh": "本地文件系统路径",
+                "en": "Local filesystem path",
+                "ja": "ローカルファイルシステムパス"
+              }
+            },
+            {
+              "id": "b",
+              "text": {
+                "zh": "本地 Unix socket",
+                "en": "Local Unix socket",
+                "ja": "ローカル Unix ソケット"
+              }
+            },
+            {
+              "id": "d",
+              "text": {
+                "zh": "本地子进程的标准输出",
+                "en": "stdout of a local subprocess",
+                "ja": "ローカルサブプロセスの標準出力"
+              }
+            },
+            {
+              "id": "a",
+              "text": {
+                "zh": "远程 URL（如云端托管的 MCP 服务）",
+                "en": "Remote URL (e.g. cloud-hosted MCP service)",
+                "ja": "リモート URL（クラウドホストの MCP サービスなど）"
+              }
+            }
+          ],
+          "answer": "a",
+          "explanation": {
+            "zh": "http 传输类型用于连接远程 URL，适合云端托管的 MCP 服务器。",
+            "en": "The http transport connects to a remote URL, suitable for cloud-hosted MCP servers.",
+            "ja": "http トランスポートはリモート URL に接続し、クラウドホストの MCP サーバーに適しています。"
+          },
+          "reward_card": "card_bp06_002"
+        },
+        {
+          "id": "q_bp06_010",
+          "type": "choice",
+          "difficulty": 2,
+          "stem": {
+            "zh": "在 .mcp.json 中配置一个本地 Context7 服务器，应该使用哪种传输类型？",
+            "en": "When configuring a local Context7 server in .mcp.json, which transport type should you use?",
+            "ja": ".mcp.json でローカルの Context7 サーバーを設定する場合、どのトランスポートタイプを使うべきですか？"
+          },
+          "options": [
+            {
+              "id": "d",
+              "text": {
+                "zh": "websocket",
+                "en": "websocket",
+                "ja": "websocket"
+              }
+            },
+            {
+              "id": "b",
+              "text": {
+                "zh": "http",
+                "en": "http",
+                "ja": "http"
+              }
+            },
+            {
+              "id": "a",
+              "text": {
+                "zh": "grpc",
+                "en": "grpc",
+                "ja": "grpc"
+              }
+            },
+            {
+              "id": "c",
+              "text": {
+                "zh": "stdio",
+                "en": "stdio",
+                "ja": "stdio"
+              }
+            }
+          ],
+          "answer": "c",
+          "explanation": {
+            "zh": "本地进程用 stdio，远程 URL 用 http。Context7 作为本地安装的工具，应使用 stdio。",
+            "en": "Local processes use stdio; remote URLs use http. Context7 as a locally installed tool should use stdio.",
+            "ja": "ローカルプロセスは stdio、リモート URL は http を使います。ローカルツールの Context7 は stdio を使うべきです。"
+          },
+          "reward_card": "card_bp06_002"
+        },
+        {
+          "id": "q_bp06_011",
+          "type": "choice",
+          "difficulty": 2,
+          "stem": {
+            "zh": "在 .mcp.json 的 stdio 配置中，「command」字段指定的是什么？",
+            "en": "In a stdio configuration in .mcp.json, what does the 'command' field specify?",
+            "ja": ".mcp.json の stdio 設定において、'command' フィールドは何を指定しますか？"
+          },
+          "options": [
+            {
+              "id": "c",
+              "text": {
+                "zh": "服务器的版本号",
+                "en": "The server version number",
+                "ja": "サーバーのバージョン番号"
+              }
+            },
+            {
+              "id": "d",
+              "text": {
+                "zh": "连接超时时间（秒）",
+                "en": "Connection timeout in seconds",
+                "ja": "接続タイムアウト（秒）"
+              }
+            },
+            {
+              "id": "a",
+              "text": {
+                "zh": "要监听的端口号",
+                "en": "The port number to listen on",
+                "ja": "リッスンするポート番号"
+              }
+            },
+            {
+              "id": "b",
+              "text": {
+                "zh": "启动 MCP 服务器进程的可执行命令",
+                "en": "The executable command to launch the MCP server process",
+                "ja": "MCP サーバープロセスを起動する実行コマンド"
+              }
+            }
+          ],
+          "answer": "b",
+          "explanation": {
+            "zh": "stdio 配置中，command 字段指定启动本地 MCP 服务器进程的可执行程序和参数。",
+            "en": "In stdio config, the command field specifies the executable and arguments to launch the local MCP server process.",
+            "ja": "stdio 設定では、command フィールドにローカル MCP サーバープロセスを起動する実行ファイルと引数を指定します。"
+          },
+          "reward_card": "card_bp06_002"
+        },
+        {
+          "id": "q_bp06_012",
+          "type": "choice",
+          "difficulty": 3,
+          "stem": {
+            "zh": "如果想在 .mcp.json 中配置一个远程托管的 MCP 服务，正确的配置是？",
+            "en": "To configure a remotely hosted MCP service in .mcp.json, which is correct?",
+            "ja": ".mcp.json にリモートホストの MCP サービスを設定する場合、正しい設定はどれですか？"
+          },
+          "options": [
+            {
+              "id": "a",
+              "text": {
+                "zh": "type: \"stdio\", command: \"curl https://api.example.com\"",
+                "en": "type: \"stdio\", command: \"curl https://api.example.com\"",
+                "ja": "type: \"stdio\", command: \"curl https://api.example.com\""
+              }
+            },
+            {
+              "id": "d",
+              "text": {
+                "zh": "type: \"local\", path: \"/usr/local/bin/server\"",
+                "en": "type: \"local\", path: \"/usr/local/bin/server\"",
+                "ja": "type: \"local\", path: \"/usr/local/bin/server\""
+              }
+            },
+            {
+              "id": "b",
+              "text": {
+                "zh": "type: \"websocket\", url: \"wss://api.example.com\"",
+                "en": "type: \"websocket\", url: \"wss://api.example.com\"",
+                "ja": "type: \"websocket\", url: \"wss://api.example.com\""
+              }
+            },
+            {
+              "id": "c",
+              "text": {
+                "zh": "type: \"http\", url: \"https://api.example.com/mcp\"",
+                "en": "type: \"http\", url: \"https://api.example.com/mcp\"",
+                "ja": "type: \"http\", url: \"https://api.example.com/mcp\""
+              }
+            }
+          ],
+          "answer": "c",
+          "explanation": {
+            "zh": "远程服务用 http 传输类型，并提供 url 字段指向远程端点；stdio 只用于本地进程。",
+            "en": "Remote services use http transport with a url field pointing to the remote endpoint; stdio is for local processes only.",
+            "ja": "リモートサービスは http トランスポートと url フィールドを使います。stdio はローカルプロセス専用です。"
+          },
+          "reward_card": "card_bp06_002"
+        },
+        {
+          "id": "q_bp06_013",
+          "type": "choice",
+          "difficulty": 2,
+          "stem": {
+            "zh": "在 Claude Code Settings 中，MCP 工具审批控制提供几种粒度？",
+            "en": "How many approval granularity levels does MCP tool approval control provide in Claude Code Settings?",
+            "ja": "Claude Code Settings の MCP ツール承認制御は何段階の粒度を提供しますか？"
+          },
+          "options": [
+            {
+              "id": "c",
+              "text": {
+                "zh": "5 种",
+                "en": "5 levels",
+                "ja": "5 段階"
+              }
+            },
+            {
+              "id": "a",
+              "text": {
+                "zh": "只有 1 种（全部批准或全部拒绝）",
+                "en": "Only 1 (all approve or all deny)",
+                "ja": "1 種類（全承認または全拒否）のみ"
+              }
+            },
+            {
+              "id": "b",
+              "text": {
+                "zh": "2 种",
+                "en": "2 levels",
+                "ja": "2 段階"
+              }
+            },
+            {
+              "id": "d",
+              "text": {
+                "zh": "3 种",
+                "en": "3 levels",
+                "ja": "3 段階"
+              }
+            }
+          ],
+          "answer": "d",
+          "explanation": {
+            "zh": "Settings 提供三种粒度：白名单批准（指定工具允许）、黑名单拒绝（指定工具禁止）、全量批准。",
+            "en": "Settings offers 3 granularities: whitelist approval, blacklist denial, and full approval.",
+            "ja": "Settings は 3 段階の粒度を提供します：ホワイトリスト承認、ブラックリスト拒否、全量承認。"
+          },
+          "reward_card": "card_bp06_003"
+        },
+        {
+          "id": "q_bp06_014",
+          "type": "choice",
+          "difficulty": 2,
+          "stem": {
+            "zh": "「白名单批准」在 MCP 审批控制中的含义是？",
+            "en": "What does 'whitelist approval' mean in MCP approval control?",
+            "ja": "MCP 承認制御における「ホワイトリスト承認」の意味は？"
+          },
+          "options": [
+            {
+              "id": "d",
+              "text": {
+                "zh": "关闭所有 MCP 工具",
+                "en": "Disable all MCP tools",
+                "ja": "すべての MCP ツールを無効にする"
+              }
+            },
+            {
+              "id": "b",
+              "text": {
+                "zh": "只拒绝名单上的特定工具",
+                "en": "Deny only the specific tools on the list",
+                "ja": "リスト上の特定ツールのみ拒否する"
+              }
+            },
+            {
+              "id": "c",
+              "text": {
+                "zh": "无需审批，自动批准全部工具",
+                "en": "Auto-approve all tools without review",
+                "ja": "審査なしですべてのツールを自動承認する"
+              }
+            },
+            {
+              "id": "a",
+              "text": {
+                "zh": "只有名单中列出的工具被允许执行",
+                "en": "Only tools listed on the whitelist are allowed to execute",
+                "ja": "ホワイトリストに記載されたツールのみ実行が許可される"
+              }
+            }
+          ],
+          "answer": "a",
+          "explanation": {
+            "zh": "白名单批准：明确列出允许的工具，其他未列出的工具默认需要用户确认。",
+            "en": "Whitelist approval explicitly lists allowed tools; unlisted tools require user confirmation by default.",
+            "ja": "ホワイトリスト承認は許可するツールを明示し、リスト外のツールはデフォルトでユーザー確認が必要です。"
+          },
+          "reward_card": "card_bp06_003"
+        },
+        {
+          "id": "q_bp06_015",
+          "type": "choice",
+          "difficulty": 2,
+          "stem": {
+            "zh": "「黑名单拒绝」在 MCP 审批控制中适用于什么场景？",
+            "en": "When is 'blacklist denial' appropriate in MCP approval control?",
+            "ja": "MCP 承認制御で「ブラックリスト拒否」が適切なのはどのような場面ですか？"
+          },
+          "options": [
+            {
+              "id": "c",
+              "text": {
+                "zh": "需要最高安全级别，禁止所有 MCP 工具",
+                "en": "Need maximum security, disabling all MCP tools",
+                "ja": "最高セキュリティレベルが必要で、すべての MCP ツールを無効にする場合"
+              }
+            },
+            {
+              "id": "d",
+              "text": {
+                "zh": "完全信任所有 MCP 服务器，无需任何限制",
+                "en": "Fully trust all MCP servers with no restrictions",
+                "ja": "すべての MCP サーバーを完全に信頼し、制限が不要な場合"
+              }
+            },
+            {
+              "id": "a",
+              "text": {
+                "zh": "只允许极少数经过严格审查的工具",
+                "en": "Allow only a few strictly vetted tools",
+                "ja": "厳格に審査された少数のツールのみ許可する場合"
+              }
+            },
+            {
+              "id": "b",
+              "text": {
+                "zh": "大多数工具可信，只需禁止少数危险操作",
+                "en": "Most tools are trusted, only a few dangerous operations need blocking",
+                "ja": "ほとんどのツールは信頼できるが、少数の危険な操作だけをブロックしたい場合"
+              }
+            }
+          ],
+          "answer": "b",
+          "explanation": {
+            "zh": "黑名单拒绝适用于大多数工具可信的场景，只需明确禁止少数危险或不需要的操作。",
+            "en": "Blacklist denial suits scenarios where most tools are trusted and only a few dangerous operations need blocking.",
+            "ja": "ブラックリスト拒否は、ほとんどのツールが信頼できる環境で少数の危険な操作だけをブロックしたい場合に適しています。"
+          },
+          "reward_card": "card_bp06_003"
+        },
+        {
+          "id": "q_bp06_016",
+          "type": "choice",
+          "difficulty": 3,
+          "stem": {
+            "zh": "在生产环境中部署 Claude Code 时，MCP 审批策略应优先选择？",
+            "en": "When deploying Claude Code in a production environment, which MCP approval strategy should be preferred?",
+            "ja": "本番環境で Claude Code をデプロイする場合、MCP 承認戦略はどれを優先すべきですか？"
+          },
+          "options": [
+            {
+              "id": "d",
+              "text": {
+                "zh": "关闭所有 MCP，避免安全风险",
+                "en": "Disable all MCP to avoid security risks",
+                "ja": "セキュリティリスクを避けるためすべての MCP を無効にする"
+              }
+            },
+            {
+              "id": "a",
+              "text": {
+                "zh": "全量批准，提高工作效率",
+                "en": "Full approval for better efficiency",
+                "ja": "作業効率向上のために全量承認する"
+              }
+            },
+            {
+              "id": "b",
+              "text": {
+                "zh": "黑名单拒绝，屏蔽危险工具",
+                "en": "Blacklist denial to block dangerous tools",
+                "ja": "ブラックリスト拒否で危険なツールをブロックする"
+              }
+            },
+            {
+              "id": "c",
+              "text": {
+                "zh": "白名单批准，只允许经过审查的工具",
+                "en": "Whitelist approval, only permitting vetted tools",
+                "ja": "ホワイトリスト承認で審査済みのツールのみ許可する"
+              }
+            }
+          ],
+          "answer": "c",
+          "explanation": {
+            "zh": "生产环境应使用白名单批准——明确列出允许的工具，遵循最小权限原则，比黑名单更安全。",
+            "en": "Production should use whitelist approval — explicitly listing allowed tools follows least-privilege principle, safer than blacklisting.",
+            "ja": "本番環境ではホワイトリスト承認を使用し、許可するツールを明示することで最小権限原則を守り、ブラックリストより安全です。"
+          },
+          "reward_card": "card_bp06_003"
+        },
+        {
+          "id": "q_bp06_017",
+          "type": "choice",
+          "difficulty": 3,
+          "stem": {
+            "zh": "「全量批准」适合在什么场景下使用？",
+            "en": "When is 'full approval' appropriate for MCP tools?",
+            "ja": "MCP ツールの「全量承認」はどのような場面に適していますか？"
+          },
+          "options": [
+            {
+              "id": "b",
+              "text": {
+                "zh": "公司内部所有员工共用的服务器环境",
+                "en": "Company server shared by all employees",
+                "ja": "全社員が共用する会社サーバー環境"
+              }
+            },
+            {
+              "id": "c",
+              "text": {
+                "zh": "处理敏感用户数据的生产系统",
+                "en": "Production system handling sensitive user data",
+                "ja": "機密ユーザーデータを扱う本番システム"
+              }
+            },
+            {
+              "id": "d",
+              "text": {
+                "zh": "CI/CD 流水线自动化部署",
+                "en": "CI/CD pipeline automated deployment",
+                "ja": "CI/CD パイプラインの自動デプロイ"
+              }
+            },
+            {
+              "id": "a",
+              "text": {
+                "zh": "个人开发机器，完全信任已配置的 MCP 服务器",
+                "en": "Personal dev machine, fully trusting all configured MCP servers",
+                "ja": "個人の開発マシンで、設定済みの MCP サーバーをすべて信頼している場合"
+              }
+            }
+          ],
+          "answer": "a",
+          "explanation": {
+            "zh": "全量批准适合个人开发环境，开发者对自己配置的 MCP 完全信任，避免频繁弹出审批提示。",
+            "en": "Full approval suits personal dev machines where the developer fully trusts their configured MCPs, avoiding repeated approval prompts.",
+            "ja": "全量承認は個人の開発環境に適しており、設定した MCP を完全に信頼し、承認プロンプトの繰り返しを避けられます。"
+          },
+          "reward_card": "card_bp06_003"
+        },
+        {
+          "id": "q_bp06_018",
+          "type": "choice",
+          "difficulty": 3,
+          "stem": {
+            "zh": "下列关于 MCP 服务器配置与审批的描述，哪个是错误的？",
+            "en": "Which of the following statements about MCP server configuration and approval is incorrect?",
+            "ja": "MCP サーバーの設定と承認に関する次の説明のうち、誤っているのはどれですか？"
+          },
+          "options": [
+            {
+              "id": "b",
+              "text": {
+                "zh": "stdio 传输类型用于连接本地进程",
+                "en": "stdio transport connects to local processes",
+                "ja": "stdio トランスポートはローカルプロセスに接続する"
+              }
+            },
+            {
+              "id": "c",
+              "text": {
+                "zh": "白名单批准比黑名单拒绝权限控制更严格",
+                "en": "Whitelist approval is stricter than blacklist denial",
+                "ja": "ホワイトリスト承認はブラックリスト拒否より厳格な権限制御を提供する"
+              }
+            },
+            {
+              "id": "a",
+              "text": {
+                "zh": "MCP 配置保存在 .mcp.json 文件中",
+                "en": "MCP configuration is stored in .mcp.json",
+                "ja": "MCP 設定は .mcp.json ファイルに保存される"
+              }
+            },
+            {
+              "id": "d",
+              "text": {
+                "zh": "http 传输类型只能连接局域网内的服务器，不支持公网地址",
+                "en": "http transport can only connect to servers on the local network, not public addresses",
+                "ja": "http トランスポートはローカルネットワーク内のサーバーにしか接続できず、公開アドレスはサポートしない"
+              }
+            }
+          ],
+          "answer": "d",
+          "explanation": {
+            "zh": "http 传输类型支持任意远程 URL，包括公网地址，并非仅限局域网。其他选项均正确。",
+            "en": "http transport supports any remote URL including public addresses, not just local network. The other statements are all correct.",
+            "ja": "http トランスポートは公開アドレスを含む任意のリモート URL をサポートし、ローカルネットワーク限定ではありません。他の選択肢はすべて正しいです。"
+          },
+          "reward_card": "card_bp06_003"
         }
       ],
       "star_thresholds": [
