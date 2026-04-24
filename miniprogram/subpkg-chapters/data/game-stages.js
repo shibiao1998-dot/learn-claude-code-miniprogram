@@ -9018,102 +9018,46 @@ module.exports = {
         {
           "id": "q_s11_001",
           "type": "choice",
-          "difficulty": 2,
+          "difficulty": 1,
           "stem": {
-            "zh": "在 Claude Code 中，关于「这一章要解决什么问题」的正确理解是？",
-            "en": "What is the correct understanding of \"What You'll Learn\" in Claude Code?",
-            "ja": "Claude Code における「この章が解く問題」の正しい理解はどれですか？"
+            "zh": "Claude Code 的错误恢复将错误分为几类？",
+            "en": "How many error categories does Claude Code's error recovery system define?",
+            "ja": "Claude Code のエラー回復システムはエラーをいくつのカテゴリに分けますか？"
           },
           "options": [
-            {
-              "id": "a",
-              "text": {
-                "zh": "这一章要解决什么问题",
-                "en": "What You'll Learn",
-                "ja": "この章が解く問題"
-              }
-            },
-            {
-              "id": "b",
-              "text": {
-                "zh": "第 2 步看 mode",
-                "en": "Key Takeaway",
-                "ja": "2. mode を次に見る理由"
-              }
-            },
-            {
-              "id": "d",
-              "text": {
-                "zh": "什么叫重试预算",
-                "en": "What Changed from s10",
-                "ja": "retry budget とは何か"
-              }
-            },
-            {
-              "id": "c",
-              "text": {
-                "zh": "初学者最容易犯的错",
-                "en": "初学者最容易犯的错",
-                "ja": "初学者最容易犯的错"
-              }
-            }
+            { "id": "a", "text": { "zh": "2 类：网络错误和模型错误", "en": "2 types: network errors and model errors", "ja": "2 種類：ネットワークエラーとモデルエラー" } },
+            { "id": "b", "text": { "zh": "3 类：输出截断、上下文溢出、网络/API 错误", "en": "3 types: output truncation, context overflow, network/API errors", "ja": "3 種類：出力切り捨て、コンテキストオーバーフロー、ネットワーク/API エラー" } },
+            { "id": "c", "text": { "zh": "4 类：截断、溢出、超时、权限错误", "en": "4 types: truncation, overflow, timeout, permission errors", "ja": "4 種類：切り捨て、オーバーフロー、タイムアウト、権限エラー" } },
+            { "id": "d", "text": { "zh": "不分类，所有错误统一用退避重试处理", "en": "No categories, all errors use backoff retry uniformly", "ja": "分類しない、すべてのエラーをバックオフリトライで統一処理" } }
           ],
-          "answer": "a",
+          "answer": "b",
           "explanation": {
-            "zh": "这一轮需要换一种继续方式。",
-            "en": "What You'll Learn",
-            "ja": "task そのものが失敗したのではなく、この turn の続け方を変える必要があるだけ"
+            "zh": "错误分三类：输出截断（模型回复不完整）、上下文溢出（消息太长）、网络/API 错误（连接中断）。每类有不同的恢复策略，不能混为一谈。",
+            "en": "Errors fall into 3 categories: output truncation (incomplete model reply), context overflow (messages too long), and network/API errors (connection interrupted). Each has a different recovery strategy.",
+            "ja": "エラーは3種類に分類されます：出力切り捨て、コンテキストオーバーフロー、ネットワーク/API エラー。それぞれ異なる回復戦略が必要です。"
           },
           "reward_card": "card_s11_001"
         },
         {
           "id": "q_s11_002",
           "type": "choice",
-          "difficulty": 1,
+          "difficulty": 2,
           "stem": {
-            "zh": "以下哪个概念与「建议联读」直接相关？",
-            "en": "Which concept is directly related to \"The Problem\"?",
-            "ja": "「併読すると楽になる資料」に直接関連する概念はどれですか？"
+            "zh": "模型输出被截断时，正确的恢复方式是？",
+            "en": "When model output is truncated, what is the correct recovery approach?",
+            "ja": "モデルの出力が切り捨てられた場合、正しい回復方法は何ですか？"
           },
           "options": [
-            {
-              "id": "d",
-              "text": {
-                "zh": "5. 用户说“忽略 memory”时，就当它是空的",
-                "en": "5. 用户说“忽略 memory”时，就当它是空的",
-                "ja": "5. 用户说“忽略 memory”时，就当它是空的"
-              }
-            },
-            {
-              "id": "a",
-              "text": {
-                "zh": "建议联读",
-                "en": "The Problem",
-                "ja": "併読すると楽になる資料"
-              }
-            },
-            {
-              "id": "b",
-              "text": {
-                "zh": "为什么不能把所有东西都硬塞进一个大字符串",
-                "en": "Try It",
-                "ja": "2. 部分ごとにテストしやすい"
-              }
-            },
-            {
-              "id": "c",
-              "text": {
-                "zh": "边界 2：system prompt vs system reminder",
-                "en": "边界 2：system prompt vs system reminder",
-                "ja": "Try It"
-              }
-            }
+            { "id": "a", "text": { "zh": "压缩对话历史为摘要，然后重新发起请求", "en": "Compress conversation history into a summary, then restart the request", "ja": "会話履歴を要約に圧縮してからリクエストを再開する" } },
+            { "id": "b", "text": { "zh": "用指数退避重试同一条消息", "en": "Retry the same message with exponential backoff", "ja": "同じメッセージを指数バックオフでリトライする" } },
+            { "id": "c", "text": { "zh": "发送续写提示，告知不要重复、不要重来、直接从断点接着写", "en": "Send a continuation prompt telling the model not to repeat, not to restart, and to continue from the breakpoint", "ja": "繰り返さず、最初からやり直さず、ブレークポイントから続けるよう指示する継続プロンプトを送る" } },
+            { "id": "d", "text": { "zh": "忽略截断，将已有输出直接当作完整结果使用", "en": "Ignore truncation and use the existing output as the complete result", "ja": "切り捨てを無視して、既存の出力を完全な結果として使用する" } }
           ],
-          "answer": "a",
+          "answer": "c",
           "explanation": {
-            "zh": "建议联读",
-            "en": "The Problem",
-            "ja": "併読すると楽になる資料"
+            "zh": "输出截断时应发续写提示，明确告诉模型三点：不要重复已有内容、不要从头开始、直接从断点接着写。压缩摘要是处理上下文溢出的方法，退避重试是处理网络错误的方法。",
+            "en": "For output truncation, send a continuation prompt that explicitly states: don't repeat existing content, don't restart, continue from the breakpoint. Compression handles context overflow; backoff retry handles network errors.",
+            "ja": "出力切り捨ての場合は、既存のコンテンツを繰り返さない、最初からやり直さない、ブレークポイントから続けるという3点を明示した継続プロンプトを送ります。"
           },
           "reward_card": "card_s11_002"
         },
@@ -9122,153 +9066,368 @@ module.exports = {
           "type": "choice",
           "difficulty": 1,
           "stem": {
-            "zh": "以下哪个概念与「先解释几个名词」直接相关？",
-            "en": "Which concept is directly related to \"The Solution\"?",
-            "ja": "「先に言葉をそろえる」に直接関連する概念はどれですか？"
+            "zh": "上下文溢出（context overflow）的正确恢复路径是？",
+            "en": "What is the correct recovery path for context overflow?",
+            "ja": "コンテキストオーバーフローの正しい回復パスは何ですか？"
           },
           "options": [
-            {
-              "id": "a",
-              "text": {
-                "zh": "先解释几个名词",
-                "en": "The Solution",
-                "ja": "先に言葉をそろえる"
-              }
-            },
-            {
-              "id": "d",
-              "text": {
-                "zh": "推荐先实现的 3 种模式",
-                "en": "推荐先实现的 3 种模式",
-                "ja": "最初に実装すると良い 3 つの mode"
-              }
-            },
-            {
-              "id": "b",
-              "text": {
-                "zh": "什么是“组装流水线”",
-                "en": "What Changed from s09",
-                "ja": "最小 builder"
-              }
-            },
-            {
-              "id": "c",
-              "text": {
-                "zh": "1. 恢复状态",
-                "en": "Try It",
-                "ja": "1. Recovery State"
-              }
-            }
+            { "id": "a", "text": { "zh": "发送续写提示，要求模型从断点继续", "en": "Send a continuation prompt asking the model to continue from the breakpoint", "ja": "ブレークポイントから続けるよう継続プロンプトを送る" } },
+            { "id": "b", "text": { "zh": "删除全部历史消息，重新开始对话", "en": "Delete all history messages and restart the conversation", "ja": "すべての履歴メッセージを削除して会話を再開する" } },
+            { "id": "c", "text": { "zh": "用指数退避重试，直到连接恢复", "en": "Use exponential backoff retry until connection is restored", "ja": "接続が回復するまで指数バックオフリトライを使用する" } },
+            { "id": "d", "text": { "zh": "将旧对话压缩成摘要，以摘要为新起点继续工作", "en": "Compress the old conversation into a summary and use it as a new starting point to continue", "ja": "古い会話を要約に圧縮し、その要約を新しい出発点として作業を続ける" } }
           ],
-          "answer": "a",
+          "answer": "d",
           "explanation": {
-            "zh": "先解释几个名词",
-            "en": "The Solution",
-            "ja": "先に言葉をそろえる"
+            "zh": "上下文溢出时，把旧对话压缩成摘要作为新起点继续。压缩不是删除历史，而是保留继续工作所需的关键信息。续写提示是处理截断的方法，退避重试是处理网络错误的方法。",
+            "en": "For context overflow, compress the old conversation into a summary and use it as a new starting point. Compaction retains key information needed to continue, not simply truncating history. Continuation prompts handle truncation; backoff retry handles network errors.",
+            "ja": "コンテキストオーバーフローの場合、古い会話を要約に圧縮して新しい出発点にします。圧縮は履歴を削除することではなく、作業を続けるために必要な重要情報を保持することです。"
           },
           "reward_card": "card_s11_003"
         },
         {
           "id": "q_s11_004",
           "type": "choice",
-          "difficulty": 1,
+          "difficulty": 2,
           "stem": {
-            "zh": "以下哪个概念与「什么叫恢复」直接相关？",
-            "en": "Which concept is directly related to \"How It Works\"?",
-            "ja": "「recovery とは何か」に直接関連する概念はどれですか？"
+            "zh": "网络或 API 错误的正确处理方式是？",
+            "en": "What is the correct way to handle network or API errors?",
+            "ja": "ネットワークエラーまたは API エラーの正しい処理方法は何ですか？"
           },
           "options": [
-            {
-              "id": "b",
-              "text": {
-                "zh": "1. 恢复状态",
-                "en": "Try It",
-                "ja": "1. Recovery State"
-              }
-            },
-            {
-              "id": "a",
-              "text": {
-                "zh": "什么叫恢复",
-                "en": "How It Works",
-                "ja": "recovery とは何か"
-              }
-            },
-            {
-              "id": "c",
-              "text": {
-                "zh": "第一步：先做 3 个模式",
-                "en": "第一步：先做 3 个模式",
-                "ja": "`bash` を特別に気にする理由"
-              }
-            },
-            {
-              "id": "d",
-              "text": {
-                "zh": "最小心智模型",
-                "en": "Read Together",
-                "ja": "最小心智モデル"
-              }
-            }
+            { "id": "a", "text": { "zh": "将对话历史压缩为摘要，然后重新发请求", "en": "Compress conversation history into a summary, then resend the request", "ja": "会話履歴を要約に圧縮してからリクエストを再送する" } },
+            { "id": "b", "text": { "zh": "立即重试，重试次数不设上限", "en": "Retry immediately with no limit on retry count", "ja": "リトライ回数に制限を設けずに即座にリトライする" } },
+            { "id": "c", "text": { "zh": "发续写提示，告知不要重复已有内容", "en": "Send a continuation prompt saying not to repeat existing content", "ja": "既存のコンテンツを繰り返さないよう継続プロンプトを送る" } },
+            { "id": "d", "text": { "zh": "指数退避重试，并设置重试预算上限", "en": "Exponential backoff retry with a retry budget cap", "ja": "指数バックオフリトライを行い、リトライ予算の上限を設定する" } }
           ],
-          "answer": "a",
+          "answer": "d",
           "explanation": {
-            "zh": "什么叫恢复",
-            "en": "Step 1. Track recovery state.",
-            "ja": "recovery とは何か"
+            "zh": "网络错误用指数退避重试，但必须设置重试预算。不限次数重试会导致主循环永远卡住。压缩摘要是上下文溢出的方案，续写提示是截断的方案。",
+            "en": "Network errors use exponential backoff retry, but a retry budget must be set. Unlimited retries can cause the main loop to hang forever. Compaction handles context overflow; continuation prompts handle truncation.",
+            "ja": "ネットワークエラーには指数バックオフリトライを使用しますが、リトライ予算を設定する必要があります。無制限のリトライはメインループを永遠にハングさせる可能性があります。"
           },
-          "reward_card": "card_s11_004"
+          "reward_card": "card_s11_001"
         },
         {
           "id": "q_s11_005",
           "type": "choice",
-          "difficulty": 1,
+          "difficulty": 3,
           "stem": {
-            "zh": "以下哪个概念与「什么叫重试预算」直接相关？",
-            "en": "Which concept is directly related to \"What Changed from s10\"?",
-            "ja": "「retry budget とは何か」に直接関連する概念はどれですか？"
+            "zh": "如果对网络错误使用无预算的无限重试，会导致什么后果？",
+            "en": "What happens if network errors are retried indefinitely without a retry budget?",
+            "ja": "リトライ予算なしでネットワークエラーを無限にリトライすると何が起きますか？"
           },
           "options": [
-            {
-              "id": "b",
-              "text": {
-                "zh": "什么是权限系统",
-                "en": "Read Together",
-                "ja": "permission system とは何か"
-              }
-            },
-            {
-              "id": "a",
-              "text": {
-                "zh": "什么叫重试预算",
-                "en": "What Changed from s10",
-                "ja": "retry budget とは何か"
-              }
-            },
-            {
-              "id": "d",
-              "text": {
-                "zh": "3. 一上来就把所有事件做全",
-                "en": "3. 一上来就把所有事件做全",
-                "ja": "3. 一上来就把所有事件做全"
-              }
-            },
-            {
-              "id": "c",
-              "text": {
-                "zh": "一个实用的教学版本",
-                "en": "一个实用的教学版本",
-                "ja": "一个实用的教学版本"
-              }
-            }
+            { "id": "a", "text": { "zh": "上下文窗口会溢出", "en": "The context window will overflow", "ja": "コンテキストウィンドウがオーバーフローする" } },
+            { "id": "b", "text": { "zh": "模型输出会被截断", "en": "Model output will be truncated", "ja": "モデルの出力が切り捨てられる" } },
+            { "id": "c", "text": { "zh": "主循环可能永远卡在重试里，无法向前推进", "en": "The main loop may get stuck retrying forever and cannot make progress", "ja": "メインループがリトライで永遠にスタックし、前進できなくなる可能性がある" } },
+            { "id": "d", "text": { "zh": "对话历史会自动压缩为摘要", "en": "Conversation history will automatically be compressed into a summary", "ja": "会話履歴が自動的に要約に圧縮される" } }
+          ],
+          "answer": "c",
+          "explanation": {
+            "zh": "每条恢复路径都要有预算限制，否则主循环可能永远卡在重试里。没有预算，Agent 会无限循环却无法推进任务。上下文溢出和截断是另外两类错误，与重试预算无关。",
+            "en": "Every recovery path needs a budget limit, otherwise the main loop may get stuck retrying forever. Without a budget, the agent loops infinitely without advancing the task.",
+            "ja": "すべての回復パスには予算制限が必要です。そうでないと、メインループがリトライで永遠にスタックする可能性があります。予算がないと、エージェントはタスクを進めることなく無限ループします。"
+          },
+          "reward_card": "card_s11_004"
+        },
+        {
+          "id": "q_s11_006",
+          "type": "choice",
+          "difficulty": 2,
+          "stem": {
+            "zh": "续写提示（continuation prompt）必须包含哪三个关键指令？",
+            "en": "What three key instructions must a continuation prompt include?",
+            "ja": "継続プロンプトに含めるべき3つの重要な指示は何ですか？"
+          },
+          "options": [
+            { "id": "a", "text": { "zh": "不要重复已有内容、不要从头开始、直接从断点接着写", "en": "Don't repeat existing content, don't restart, continue directly from the breakpoint", "ja": "既存のコンテンツを繰り返さない、最初からやり直さない、ブレークポイントから直接続ける" } },
+            { "id": "b", "text": { "zh": "压缩历史、清空上下文、重新发起对话", "en": "Compress history, clear context, restart the conversation", "ja": "履歴を圧縮し、コンテキストをクリアして、会話を再開する" } },
+            { "id": "c", "text": { "zh": "设置重试预算、启用退避、记录错误日志", "en": "Set retry budget, enable backoff, log errors", "ja": "リトライ予算を設定し、バックオフを有効にし、エラーをログに記録する" } },
+            { "id": "d", "text": { "zh": "告知当前上下文长度、剩余 token 数、目标输出格式", "en": "Inform the model of current context length, remaining tokens, and target output format", "ja": "現在のコンテキスト長、残りトークン数、目標出力形式をモデルに通知する" } }
           ],
           "answer": "a",
           "explanation": {
-            "zh": "什么叫重试预算",
-            "en": "What Changed from s10",
-            "ja": "retry budget とは何か"
+            "zh": "续写提示必须说三件事：不要重复已有内容、不要从头开始、直接从断点接着写。这三条缺一不可，否则模型会重复输出或重新生成全部内容。",
+            "en": "A continuation prompt must state three things: don't repeat existing content, don't restart, continue directly from the breakpoint. All three are required, otherwise the model may repeat output or regenerate everything.",
+            "ja": "継続プロンプトは3つのことを述べる必要があります：既存のコンテンツを繰り返さない、最初からやり直さない、ブレークポイントから直接続ける。3つすべてが必要です。"
           },
-          "reward_card": "card_s11_005"
+          "reward_card": "card_s11_002"
+        },
+        {
+          "id": "q_s11_007",
+          "type": "choice",
+          "difficulty": 1,
+          "stem": {
+            "zh": "上下文压缩（compaction）的核心目标是什么？",
+            "en": "What is the core goal of context compaction?",
+            "ja": "コンテキスト圧縮（compaction）の核心目標は何ですか？"
+          },
+          "options": [
+            { "id": "a", "text": { "zh": "彻底清空对话历史，让模型从零开始", "en": "Completely clear conversation history so the model starts from scratch", "ja": "会話履歴を完全にクリアしてモデルをゼロから始めさせる" } },
+            { "id": "b", "text": { "zh": "把旧对话变成仍然能继续工作的摘要", "en": "Transform old conversations into a summary that still enables continuing work", "ja": "古い会話を、作業を続けられる要約に変換する" } },
+            { "id": "c", "text": { "zh": "对每条消息单独重试直到成功", "en": "Retry each message individually until success", "ja": "各メッセージを個別に成功するまでリトライする" } },
+            { "id": "d", "text": { "zh": "删除最早的 N 条消息以释放 token 空间", "en": "Delete the earliest N messages to free up token space", "ja": "トークンスペースを確保するために最初のN件のメッセージを削除する" } }
+          ],
+          "answer": "b",
+          "explanation": {
+            "zh": "压缩不是删除历史，而是把旧对话变成仍然能继续工作的摘要。关键是保留继续工作所需的关键信息，而不是简单地截断或清空历史。",
+            "en": "Compaction is not deleting history but transforming old conversations into a summary that still enables continuing work. The key is retaining information needed to continue, not simply truncating or clearing history.",
+            "ja": "圧縮は履歴を削除することではなく、古い会話を作業を続けられる要約に変換することです。重要なのは、単純に切り捨てや削除をするのではなく、継続に必要な情報を保持することです。"
+          },
+          "reward_card": "card_s11_003"
+        },
+        {
+          "id": "q_s11_008",
+          "type": "choice",
+          "difficulty": 2,
+          "stem": {
+            "zh": "以下场景哪个应该用上下文压缩而不是续写提示？",
+            "en": "In which scenario should you use context compaction instead of a continuation prompt?",
+            "ja": "次のシナリオのうち、継続プロンプトではなくコンテキスト圧縮を使うべきはどれですか？"
+          },
+          "options": [
+            { "id": "a", "text": { "zh": "对话消息总长度超过上下文窗口上限", "en": "Total conversation message length exceeds the context window limit", "ja": "会話メッセージの合計長がコンテキストウィンドウの上限を超える" } },
+            { "id": "b", "text": { "zh": "模型回复到一半突然停止，输出不完整", "en": "The model stops halfway through its reply and output is incomplete", "ja": "モデルが返答の途中で止まり、出力が不完全" } },
+            { "id": "c", "text": { "zh": "API 请求超时，连接中断", "en": "API request times out, connection interrupted", "ja": "API リクエストがタイムアウトし、接続が中断" } },
+            { "id": "d", "text": { "zh": "模型返回了一个格式错误的 JSON 响应", "en": "The model returned a malformed JSON response", "ja": "モデルが不正な形式の JSON レスポンスを返した" } }
+          ],
+          "answer": "a",
+          "explanation": {
+            "zh": "上下文压缩用于对话消息总长度超过上下文窗口上限（上下文溢出）的情况。模型中途停止是截断，应用续写提示；API 超时是网络错误，应用退避重试。",
+            "en": "Context compaction is for when total conversation length exceeds the context window (context overflow). Mid-reply stopping is truncation requiring a continuation prompt; API timeout is a network error requiring backoff retry.",
+            "ja": "コンテキスト圧縮は会話の総長がコンテキストウィンドウを超えた場合に使用します。返答途中での停止は切り捨てで継続プロンプトが必要、API タイムアウトはネットワークエラーでバックオフリトライが必要です。"
+          },
+          "reward_card": "card_s11_003"
+        },
+        {
+          "id": "q_s11_009",
+          "type": "choice",
+          "difficulty": 3,
+          "stem": {
+            "zh": "为什么说「错误先分类，恢复再执行」是核心原则？",
+            "en": "Why is 'classify errors first, then execute recovery' the core principle?",
+            "ja": "なぜ「先にエラーを分類し、それから回復を実行する」が核心原則なのですか？"
+          },
+          "options": [
+            { "id": "a", "text": { "zh": "因为分类可以减少 API 调用次数", "en": "Because classification reduces the number of API calls", "ja": "分類することで API 呼び出し回数を削減できるから" } },
+            { "id": "b", "text": { "zh": "因为三类错误的恢复策略不同，用错策略会让问题更严重", "en": "Because the three error types have different recovery strategies, and using the wrong one makes the problem worse", "ja": "3種類のエラーに対して異なる回復戦略があり、間違った戦略を使うと問題が悪化するから" } },
+            { "id": "c", "text": { "zh": "因为上下文溢出是最常见的错误，应优先处理", "en": "Because context overflow is the most common error and should be prioritized", "ja": "コンテキストオーバーフローが最も一般的なエラーであり優先的に処理すべきだから" } },
+            { "id": "d", "text": { "zh": "因为所有错误最终都需要退避重试", "en": "Because all errors ultimately require backoff retry", "ja": "すべてのエラーは最終的にバックオフリトライが必要だから" } }
+          ],
+          "answer": "b",
+          "explanation": {
+            "zh": "三类错误的恢复路径完全不同：截断用续写提示，溢出用压缩，网络错误用退避重试。如果把截断当网络错误处理（用退避重试），或把网络错误当溢出处理（用压缩），都无法解决问题甚至恶化。",
+            "en": "The three error types have completely different recovery paths: truncation uses continuation prompts, overflow uses compaction, and network errors use backoff retry. Applying the wrong strategy cannot solve the problem and may worsen it.",
+            "ja": "3種類のエラーの回復パスはまったく異なります：切り捨てには継続プロンプト、オーバーフローには圧縮、ネットワークエラーにはバックオフリトライ。間違った戦略を適用すると問題が解決されないどころか悪化します。"
+          },
+          "reward_card": "card_s11_001"
+        },
+        {
+          "id": "q_s11_010",
+          "type": "choice",
+          "difficulty": 2,
+          "stem": {
+            "zh": "指数退避（exponential backoff）在错误恢复中的作用是什么？",
+            "en": "What is the role of exponential backoff in error recovery?",
+            "ja": "エラー回復における指数バックオフの役割は何ですか？"
+          },
+          "options": [
+            { "id": "a", "text": { "zh": "每次重试前等待递增的时间，避免在网络不稳定时频繁冲击服务器", "en": "Wait for increasing intervals before each retry to avoid hammering the server during network instability", "ja": "ネットワーク不安定時にサーバーへの頻繁なリクエストを避けるため、リトライ前に増加する間隔を待つ" } },
+            { "id": "b", "text": { "zh": "将旧对话压缩成摘要以节省 token", "en": "Compress old conversations into summaries to save tokens", "ja": "古い会話を要約に圧縮してトークンを節約する" } },
+            { "id": "c", "text": { "zh": "告诉模型从断点继续输出，避免重复", "en": "Tell the model to continue output from the breakpoint to avoid repetition", "ja": "ブレークポイントから出力を続けるようモデルに指示して繰り返しを避ける" } },
+            { "id": "d", "text": { "zh": "清空上下文窗口，让模型重新读取所有文件", "en": "Clear the context window so the model re-reads all files", "ja": "コンテキストウィンドウをクリアしてモデルがすべてのファイルを再読み込みできるようにする" } }
+          ],
+          "answer": "a",
+          "explanation": {
+            "zh": "指数退避让每次重试前等待递增的时间（如 1s、2s、4s），避免在网络不稳定时频繁冲击服务器。它是网络/API 错误的专属策略，与截断和溢出处理无关。",
+            "en": "Exponential backoff waits for increasing intervals before each retry (e.g., 1s, 2s, 4s) to avoid hammering the server during network instability. It is the dedicated strategy for network/API errors.",
+            "ja": "指数バックオフは各リトライ前に増加する間隔（例：1秒、2秒、4秒）を待ち、ネットワーク不安定時にサーバーへの頻繁なリクエストを避けます。ネットワーク/API エラー専用の戦略です。"
+          },
+          "reward_card": "card_s11_004"
+        },
+        {
+          "id": "q_s11_011",
+          "type": "choice",
+          "difficulty": 3,
+          "stem": {
+            "zh": "如果续写提示没有明确说不要重复，模型最可能的行为是？",
+            "en": "If a continuation prompt does not explicitly say do not repeat, what is the model most likely to do?",
+            "ja": "継続プロンプトに繰り返さないことが明示されていない場合、モデルが最もしそうなことは？"
+          },
+          "options": [
+            { "id": "a", "text": { "zh": "自动压缩上下文后继续", "en": "Automatically compress context and continue", "ja": "自動的にコンテキストを圧縮して続ける" } },
+            { "id": "b", "text": { "zh": "触发退避重试机制", "en": "Trigger the backoff retry mechanism", "ja": "バックオフリトライメカニズムをトリガーする" } },
+            { "id": "c", "text": { "zh": "重新生成整个内容或重复已有部分内容", "en": "Regenerate the entire content or repeat part of the existing content", "ja": "コンテンツ全体を再生成するか、既存のコンテンツの一部を繰り返す" } },
+            { "id": "d", "text": { "zh": "拒绝执行，返回错误信息", "en": "Refuse to execute and return an error message", "ja": "実行を拒否してエラーメッセージを返す" } }
+          ],
+          "answer": "c",
+          "explanation": {
+            "zh": "续写提示必须明确说不要重复已有内容。如果缺少这条指令，模型很可能重新生成整个内容或重复已有部分，导致输出混乱。三条指令（不重复、不重来、从断点接着写）缺一不可。",
+            "en": "A continuation prompt must explicitly say not to repeat existing content. Without this instruction, the model may regenerate everything or repeat parts of existing content, leading to garbled output. All three instructions are required.",
+            "ja": "継続プロンプトは既存のコンテンツを繰り返さないことを明示する必要があります。この指示がなければ、モデルはコンテンツ全体を再生成するか既存部分を繰り返す可能性があります。"
+          },
+          "reward_card": "card_s11_002"
+        },
+        {
+          "id": "q_s11_012",
+          "type": "choice",
+          "difficulty": 1,
+          "stem": {
+            "zh": "重试预算（retry budget）的作用是什么？",
+            "en": "What is the purpose of a retry budget?",
+            "ja": "リトライ予算の目的は何ですか？"
+          },
+          "options": [
+            { "id": "a", "text": { "zh": "限制每次重试之间的等待时间", "en": "Limit the waiting time between retries", "ja": "リトライ間の待機時間を制限する" } },
+            { "id": "b", "text": { "zh": "为恢复路径设置上限，防止主循环永远卡在重试中", "en": "Set an upper limit on the recovery path to prevent the main loop from getting stuck retrying forever", "ja": "回復パスに上限を設定し、メインループがリトライで永遠にスタックするのを防ぐ" } },
+            { "id": "c", "text": { "zh": "决定何时将对话历史压缩为摘要", "en": "Determine when to compress conversation history into a summary", "ja": "会話履歴を要約に圧縮するタイミングを決定する" } },
+            { "id": "d", "text": { "zh": "计算续写提示中断点的精确位置", "en": "Calculate the exact breakpoint position in the continuation prompt", "ja": "継続プロンプトのブレークポイントの正確な位置を計算する" } }
+          ],
+          "answer": "b",
+          "explanation": {
+            "zh": "重试预算为每条恢复路径设置最大尝试次数上限。没有预算限制，主循环可能因网络持续不通或其他问题永远卡在重试循环里，无法向前推进任务。",
+            "en": "A retry budget sets a maximum attempt count for each recovery path. Without a budget limit, the main loop may get stuck retrying forever due to persistent network issues or other problems, unable to advance the task.",
+            "ja": "リトライ予算は各回復パスの最大試行回数の上限を設定します。予算制限がないと、ネットワークの継続的な問題などでメインループが永遠にリトライループにスタックします。"
+          },
+          "reward_card": "card_s11_004"
+        },
+        {
+          "id": "q_s11_013",
+          "type": "choice",
+          "difficulty": 2,
+          "stem": {
+            "zh": "以下哪种行为是压缩（compaction）而非删除？",
+            "en": "Which of the following describes compaction rather than deletion?",
+            "ja": "次のうち削除ではなく圧縮（compaction）を説明しているのはどれですか？"
+          },
+          "options": [
+            { "id": "a", "text": { "zh": "将旧对话提炼为能反映当前任务进展的摘要，作为新的起始上下文", "en": "Distill old conversations into a summary reflecting current task progress, used as the new starting context", "ja": "古い会話を現在のタスクの進捗を反映した要約に蒸留し、新しい開始コンテキストとして使用する" } },
+            { "id": "b", "text": { "zh": "清空所有历史消息，只保留当前用户请求", "en": "Clear all history messages, keeping only the current user request", "ja": "すべての履歴メッセージをクリアし、現在のユーザーリクエストのみを保持する" } },
+            { "id": "c", "text": { "zh": "删除最旧的 50% 消息以释放 token 空间", "en": "Delete the oldest 50% of messages to free up token space", "ja": "トークンスペースを確保するために最古の50%のメッセージを削除する" } },
+            { "id": "d", "text": { "zh": "对每条历史消息单独调用 API 进行摘要，逐条替换", "en": "Call the API to summarize each history message individually and replace them one by one", "ja": "各履歴メッセージを個別に API で要約し、1件ずつ置き換える" } }
+          ],
+          "answer": "a",
+          "explanation": {
+            "zh": "压缩（compaction）的核心是把旧对话提炼为能反映当前任务进展的摘要，用作新的起始上下文。它保留了继续工作所需的关键信息，而不是简单地删除或清空历史。",
+            "en": "Compaction distills old conversations into a summary reflecting current task progress, used as the new starting context. It retains key information needed to continue work, rather than simply deleting or clearing history.",
+            "ja": "圧縮（compaction）の核心は、古い会話を現在のタスクの進捗を反映した要約に蒸留し、新しい開始コンテキストとして使用することです。単純に削除やクリアするのではなく、作業継続に必要な重要情報を保持します。"
+          },
+          "reward_card": "card_s11_003"
+        },
+        {
+          "id": "q_s11_014",
+          "type": "choice",
+          "difficulty": 3,
+          "stem": {
+            "zh": "Agent 主循环在遇到上下文溢出时，如果错误地用退避重试来处理，结果会怎样？",
+            "en": "If the agent main loop handles context overflow by mistakenly using backoff retry, what happens?",
+            "ja": "エージェントのメインループがコンテキストオーバーフローを誤ってバックオフリトライで処理した場合、どうなりますか？"
+          },
+          "options": [
+            { "id": "a", "text": { "zh": "上下文会被自动压缩为摘要", "en": "The context will be automatically compressed into a summary", "ja": "コンテキストが自動的に要約に圧縮される" } },
+            { "id": "b", "text": { "zh": "重试会成功，因为等待后上下文会自动缩短", "en": "Retry will succeed because the context automatically shortens after waiting", "ja": "待機後にコンテキストが自動的に短くなるのでリトライは成功する" } },
+            { "id": "c", "text": { "zh": "每次重试都会遇到同样的溢出错误，最终耗尽重试预算仍未解决", "en": "Every retry will encounter the same overflow error, eventually exhausting the retry budget without resolution", "ja": "毎回のリトライで同じオーバーフローエラーが発生し、最終的にリトライ予算を使い果たしても解決されない" } },
+            { "id": "d", "text": { "zh": "模型会自动切换到续写模式", "en": "The model will automatically switch to continuation mode", "ja": "モデルが自動的に継続モードに切り替わる" } }
+          ],
+          "answer": "c",
+          "explanation": {
+            "zh": "上下文溢出的根因是消息总长度超限，退避重试无法缩短消息长度，所以每次重试都会遇到同样的溢出错误，最终耗尽重试预算仍无法解决。正确做法是压缩上下文，而不是重试。",
+            "en": "Context overflow is caused by message total length exceeding the limit. Backoff retry cannot shorten message length, so every retry hits the same overflow error and the retry budget is exhausted without resolution. Correct approach is compaction, not retry.",
+            "ja": "コンテキストオーバーフローの根本原因はメッセージの総長が上限を超えることです。バックオフリトライはメッセージ長を短縮できないため、毎回同じオーバーフローエラーが発生し、リトライ予算を使い果たしても解決できません。"
+          },
+          "reward_card": "card_s11_001"
+        },
+        {
+          "id": "q_s11_015",
+          "type": "choice",
+          "difficulty": 1,
+          "stem": {
+            "zh": "以下哪种错误应该用续写提示处理？",
+            "en": "Which of the following errors should be handled with a continuation prompt?",
+            "ja": "次のうち継続プロンプトで処理すべきエラーはどれですか？"
+          },
+          "options": [
+            { "id": "a", "text": { "zh": "HTTP 503 服务不可用", "en": "HTTP 503 Service Unavailable", "ja": "HTTP 503 サービス利用不可" } },
+            { "id": "b", "text": { "zh": "连接超时，请求未到达服务器", "en": "Connection timeout, request did not reach the server", "ja": "接続タイムアウト、リクエストがサーバーに届かなかった" } },
+            { "id": "c", "text": { "zh": "消息历史累积过长，超过模型上下文窗口", "en": "Message history accumulated too long, exceeding the model context window", "ja": "メッセージ履歴が蓄積されすぎてモデルのコンテキストウィンドウを超えた" } },
+            { "id": "d", "text": { "zh": "模型在生成代码时中途停止，输出只完成了一半", "en": "Model stopped midway while generating code, output is only half complete", "ja": "モデルがコード生成中に途中で止まり、出力が半分しか完成していない" } }
+          ],
+          "answer": "d",
+          "explanation": {
+            "zh": "续写提示处理的是输出截断——模型在生成内容时中途停止。HTTP 503 和连接超时是网络/API 错误，用退避重试；消息历史过长是上下文溢出，用压缩。",
+            "en": "Continuation prompts handle output truncation — the model stopping midway during generation. HTTP 503 and connection timeout are network/API errors handled with backoff retry; message history too long is context overflow handled with compaction.",
+            "ja": "継続プロンプトは出力切り捨て（生成中にモデルが途中で止まること）を処理します。HTTP 503と接続タイムアウトはバックオフリトライで処理するネットワーク/API エラー、メッセージ履歴が長すぎるのは圧縮で処理するコンテキストオーバーフローです。"
+          },
+          "reward_card": "card_s11_002"
+        },
+        {
+          "id": "q_s11_016",
+          "type": "choice",
+          "difficulty": 2,
+          "stem": {
+            "zh": "以下关于三类错误与恢复路径的对应关系，哪项是正确的？",
+            "en": "Which of the following correctly matches the three error types with their recovery paths?",
+            "ja": "次のうち、3種類のエラーとその回復パスの対応として正しいのはどれですか？"
+          },
+          "options": [
+            { "id": "a", "text": { "zh": "截断→压缩，溢出→续写提示，网络错误→退避重试", "en": "Truncation to compaction, overflow to continuation prompt, network error to backoff retry", "ja": "切り捨て→圧縮、オーバーフロー→継続プロンプト、ネットワークエラー→バックオフリトライ" } },
+            { "id": "b", "text": { "zh": "截断→续写提示，溢出→压缩，网络错误→退避重试", "en": "Truncation to continuation prompt, overflow to compaction, network error to backoff retry", "ja": "切り捨て→継続プロンプト、オーバーフロー→圧縮、ネットワークエラー→バックオフリトライ" } },
+            { "id": "c", "text": { "zh": "截断→退避重试，溢出→续写提示，网络错误→压缩", "en": "Truncation to backoff retry, overflow to continuation prompt, network error to compaction", "ja": "切り捨て→バックオフリトライ、オーバーフロー→継続プロンプト、ネットワークエラー→圧縮" } },
+            { "id": "d", "text": { "zh": "截断→续写提示，溢出→退避重试，网络错误→压缩", "en": "Truncation to continuation prompt, overflow to backoff retry, network error to compaction", "ja": "切り捨て→継続プロンプト、オーバーフロー→バックオフリトライ、ネットワークエラー→圧縮" } }
+          ],
+          "answer": "b",
+          "explanation": {
+            "zh": "正确对应：输出截断→续写提示（告知不重复、不重来、从断点接着写），上下文溢出→压缩（旧对话变摘要），网络/API 错误→指数退避重试（带预算）。其他选项混淆了三类错误的处理方式。",
+            "en": "Correct mapping: output truncation to continuation prompt (don't repeat, don't restart, continue from breakpoint), context overflow to compaction (old conversation to summary), network/API error to exponential backoff retry (with budget). Other options mix up the recovery strategies.",
+            "ja": "正しい対応：出力切り捨て→継続プロンプト（繰り返さない、やり直さない、ブレークポイントから続ける）、コンテキストオーバーフロー→圧縮（古い会話を要約に）、ネットワーク/API エラー→指数バックオフリトライ（予算付き）。"
+          },
+          "reward_card": "card_s11_001"
+        },
+        {
+          "id": "q_s11_017",
+          "type": "choice",
+          "difficulty": 3,
+          "stem": {
+            "zh": "一个 Agent 在执行长任务时遇到连续网络错误，已重试 10 次仍未成功。此时正确的做法是？",
+            "en": "An agent encounters consecutive network errors during a long task and has retried 10 times without success. What is the correct action?",
+            "ja": "エージェントが長いタスク実行中に連続ネットワークエラーに遭遇し、10回リトライしても成功しない。正しい対応は？"
+          },
+          "options": [
+            { "id": "a", "text": { "zh": "重试预算已耗尽，应停止并向上层报告失败，而不是继续卡在重试中", "en": "The retry budget is exhausted; stop and report failure to the upper layer rather than continuing to retry", "ja": "リトライ予算が尽きたので、リトライし続けるのではなく停止して上位層に失敗を報告する" } },
+            { "id": "b", "text": { "zh": "继续无限重试，直到网络恢复", "en": "Continue retrying indefinitely until the network recovers", "ja": "ネットワークが回復するまで無限にリトライし続ける" } },
+            { "id": "c", "text": { "zh": "改用续写提示，要求模型从最后一个断点继续", "en": "Switch to a continuation prompt asking the model to continue from the last breakpoint", "ja": "最後のブレークポイントから続けるよう継続プロンプトに切り替える" } },
+            { "id": "d", "text": { "zh": "压缩所有对话历史，然后重新发起整个任务", "en": "Compress all conversation history and restart the entire task", "ja": "すべての会話履歴を圧縮してタスク全体を再開する" } }
+          ],
+          "answer": "a",
+          "explanation": {
+            "zh": "重试预算耗尽意味着恢复路径已到达上限，此时应停止并向上层报告失败，而不是继续卡在重试循环中。这是设置重试预算的意义——保证主循环能感知到无法恢复的状态并做出下一步决策。",
+            "en": "When the retry budget is exhausted, the recovery path has reached its limit. Stop and report failure to the upper layer rather than continuing in the retry loop. This is the purpose of a retry budget — ensuring the main loop can detect an unrecoverable state and make the next decision.",
+            "ja": "リトライ予算が尽きたとき、回復パスは上限に達しています。リトライループを続けるのではなく、停止して上位層に失敗を報告します。これがリトライ予算を設定する目的です——メインループが回復不能な状態を検知して次の判断を下せるようにすること。"
+          },
+          "reward_card": "card_s11_004"
+        },
+        {
+          "id": "q_s11_018",
+          "type": "choice",
+          "difficulty": 2,
+          "stem": {
+            "zh": "在错误恢复设计中，每条恢复路径都要有预算这一原则适用于哪些路径？",
+            "en": "In error recovery design, which recovery paths does the principle every recovery path needs a budget apply to?",
+            "ja": "エラー回復設計において、すべての回復パスには予算が必要という原則はどのパスに適用されますか？"
+          },
+          "options": [
+            { "id": "a", "text": { "zh": "只适用于网络/API 错误的退避重试路径", "en": "Only applies to the backoff retry path for network/API errors", "ja": "ネットワーク/API エラーのバックオフリトライパスにのみ適用される" } },
+            { "id": "b", "text": { "zh": "只适用于上下文压缩路径", "en": "Only applies to the context compaction path", "ja": "コンテキスト圧縮パスにのみ適用される" } },
+            { "id": "c", "text": { "zh": "只适用于截断续写路径", "en": "Only applies to the truncation continuation path", "ja": "切り捨て継続パスにのみ適用される" } },
+            { "id": "d", "text": { "zh": "三条恢复路径都需要预算，否则任何一条都可能让主循环卡住", "en": "All three recovery paths need a budget; otherwise any one of them could cause the main loop to hang", "ja": "3つの回復パスすべてに予算が必要です。そうでないとどれかがメインループをハングさせる可能性があります" } }
+          ],
+          "answer": "d",
+          "explanation": {
+            "zh": "每条恢复路径都要有预算的每条指的是全部三条路径：截断续写、上下文压缩、退避重试。任何一条路径如果没有预算限制，都可能在极端情况下导致主循环永远卡住。",
+            "en": "The every in every recovery path needs a budget means all three paths: truncation continuation, context compaction, and backoff retry. Any path without a budget limit could cause the main loop to hang indefinitely in extreme cases.",
+            "ja": "すべての回復パスには予算が必要のすべてのは3つのパスすべてを指します：切り捨て継続、コンテキスト圧縮、バックオフリトライ。いずれかのパスに予算制限がなければ、極端な場合にメインループが永遠にハングする可能性があります。"
+          },
+          "reward_card": "card_s11_002"
         }
       ],
       "star_thresholds": [
