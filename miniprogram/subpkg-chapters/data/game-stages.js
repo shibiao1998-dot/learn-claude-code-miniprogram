@@ -13,51 +13,51 @@ module.exports = {
         {
           "id": "q_s01_001",
           "type": "choice",
-          "difficulty": 2,
+          "difficulty": 1,
           "stem": {
-            "zh": "在 Claude Code 中，关于「这一章要解决什么问题」的正确理解是？",
-            "en": "What is the correct understanding of \"What You'll Learn\" in Claude Code?",
-            "ja": "Claude Code における「この章が解く問題」の正しい理解はどれですか？"
+            "zh": "模型本身能做什么？它不能做什么？",
+            "en": "What can the model itself do, and what can it NOT do on its own?",
+            "ja": "モデル自体にできることとできないことは何ですか？"
           },
           "options": [
             {
               "id": "a",
               "text": {
-                "zh": "这一章要解决什么问题",
-                "en": "What You'll Learn",
-                "ja": "この章が解く問題"
+                "zh": "模型能生成内容，但不能自己执行动作",
+                "en": "The model can generate content but cannot execute actions on its own",
+                "ja": "モデルはコンテンツを生成できるが、自分でアクションを実行できない"
               }
             },
             {
               "id": "b",
               "text": {
-                "zh": "第四步：把 `todo` 接成一个工具",
-                "en": "第四步：把 `todo` 接成一个工具",
-                "ja": "第 4 段階: `todo` を 1 つの tool として loop へ接ぐ"
+                "zh": "模型能直接调用工具，但不能生成文本",
+                "en": "The model can call tools directly but cannot generate text",
+                "ja": "モデルは直接ツールを呼び出せるが、テキストを生成できない"
               }
             },
             {
               "id": "c",
               "text": {
-                "zh": "版本 3：加入最大轮数和失败保护",
-                "en": "版本 3：加入最大轮数和失败保护",
-                "ja": "Version 3: safety bound を足す"
+                "zh": "模型既能生成内容，也能自己把工具结果写回 messages",
+                "en": "The model can both generate content and write tool results back to messages",
+                "ja": "モデルはコンテンツを生成し、ツール結果を messages に書き戻すこともできる"
               }
             },
             {
               "id": "d",
               "text": {
-                "zh": "5. 以为 reminder 是可有可无的小装饰",
-                "en": "5. 以为 reminder 是可有可无的小装饰",
-                "ja": "5. session plan と durable task graph を同一視する"
+                "zh": "模型能管理 Turn 的四步，无需外部循环",
+                "en": "The model can manage the four steps of a Turn without an external loop",
+                "ja": "モデルは外部ループなしに Turn の 4 ステップを管理できる"
               }
             }
           ],
           "answer": "a",
           "explanation": {
-            "zh": "把“模型 + 工具”连接成一个能持续推进任务的主循环。",
-            "en": "What You'll Learn",
-            "ja": "model と tool を閉ループに接続し、仕事を継続的に前へ進める最小 agent を作ること"
+            "zh": "模型只负责生成内容，执行动作需要 Agent Loop 这层外部代码来驱动。没有 Loop，模型只是会说话，不会干活。",
+            "en": "The model only generates content. Executing actions requires the Agent Loop as an outer code layer. Without the Loop, the model can talk but cannot act.",
+            "ja": "モデルはコンテンツを生成するだけです。アクションの実行には外部コードレイヤーとしての Agent Loop が必要です。"
           },
           "reward_card": "card_s01_001"
         },
@@ -66,202 +66,1069 @@ module.exports = {
           "type": "choice",
           "difficulty": 1,
           "stem": {
-            "zh": "以下哪个概念与「先解释几个名词」直接相关？",
-            "en": "Which concept is directly related to \"The Problem\"?",
-            "ja": "「先に言葉をそろえる」に直接関連する概念はどれですか？"
+            "zh": "Agent Loop 的核心作用是什么？",
+            "en": "What is the core role of the Agent Loop?",
+            "ja": "Agent Loop の核心的な役割は何ですか？"
           },
           "options": [
             {
               "id": "a",
               "text": {
-                "zh": "先解释几个名词",
-                "en": "The Problem",
-                "ja": "先に言葉をそろえる"
+                "zh": "将模型输出路由到工具，把工具结果回写，逐轮推进任务",
+                "en": "Route model output to tools, feed results back, and drive the task forward turn by turn",
+                "ja": "モデル出力をツールにルーティングし、結果を戻し、ターンごとにタスクを前進させる"
               }
             },
             {
               "id": "b",
               "text": {
-                "zh": "坑 1：把子智能体当成“为了炫技的并发”",
-                "en": "坑 1：把子智能体当成“为了炫技的并发”",
-                "ja": "1. subagent を「並列アピール機能」だと思う"
-              }
-            },
-            {
-              "id": "d",
-              "text": {
-                "zh": "它如何接到主循环里",
-                "en": "它如何接到主循环里",
-                "ja": "它如何接到主循环里"
+                "zh": "存储用户和助手之间的聊天记录供展示",
+                "en": "Store chat history between user and assistant for display",
+                "ja": "ユーザーとアシスタント間のチャット履歴を表示用に保存する"
               }
             },
             {
               "id": "c",
               "text": {
-                "zh": "1. PlanItem",
-                "en": "1. PlanItem",
-                "ja": "1. PlanItem"
+                "zh": "直接替代模型，在本地执行所有推理",
+                "en": "Directly replace the model and execute all reasoning locally",
+                "ja": "モデルを直接置き換え、すべての推論をローカルで実行する"
+              }
+            },
+            {
+              "id": "d",
+              "text": {
+                "zh": "把多轮对话合并成一条消息发给模型",
+                "en": "Merge multiple turns into one message to send to the model",
+                "ja": "複数のターンを 1 つのメッセージにまとめてモデルに送る"
               }
             }
           ],
           "answer": "a",
           "explanation": {
-            "zh": "先解释几个名词",
-            "en": "The Problem",
-            "ja": "先に言葉をそろえる"
+            "zh": "Agent Loop 是包裹在模型外的代码层：模型输出→工具执行→结果写回→下一轮模型调用，如此循环推进任务。",
+            "en": "The Agent Loop wraps the model: model output -> tool execution -> results written back -> next model call, cycling to push the task forward.",
+            "ja": "Agent Loop はモデルを包むコードレイヤーです: モデル出力→ツール実行→結果書き戻し→次のモデル呼び出し。"
           },
-          "reward_card": "card_s01_002"
+          "reward_card": "card_s01_001"
         },
         {
           "id": "q_s01_003",
           "type": "choice",
-          "difficulty": 1,
+          "difficulty": 2,
           "stem": {
-            "zh": "以下哪个概念与「什么是 loop」直接相关？",
-            "en": "Which concept is directly related to \"The Solution\"?",
-            "ja": "「loop とは何か」に直接関連する概念はどれですか？"
+            "zh": "Agent Loop 的核心伪代码中，当 stop_reason 不是 tool_use 时应该执行什么？",
+            "en": "In the Agent Loop pseudocode, what should happen when stop_reason is not tool_use?",
+            "ja": "Agent Loop の擬似コードで、stop_reason が tool_use でない場合何をすべきですか？"
           },
           "options": [
             {
-              "id": "b",
+              "id": "a",
               "text": {
-                "zh": "1. 以为压缩等于删除",
-                "en": "1. 以为压缩等于删除",
-                "ja": "1. 以为压缩等于删除"
+                "zh": "continue（跳到下一轮）",
+                "en": "continue (skip to next iteration)",
+                "ja": "continue（次のイテレーションへスキップ）"
               }
             },
             {
-              "id": "a",
+              "id": "b",
               "text": {
-                "zh": "什么是 loop",
-                "en": "The Solution",
-                "ja": "loop とは何か"
+                "zh": "break（退出循环）",
+                "en": "break (exit the loop)",
+                "ja": "break（ループを抜ける）"
               }
             },
             {
               "id": "c",
               "text": {
-                "zh": "1. 把计划写得过长",
-                "en": "1. 把计划写得过长",
-                "ja": "1. plan を model の頭の中だけに置く"
+                "zh": "messages.clear()（清空消息历史）",
+                "en": "messages.clear() (clear message history)",
+                "ja": "messages.clear()（メッセージ履歴をクリア）"
               }
             },
             {
               "id": "d",
               "text": {
-                "zh": "为什么它真的有用",
-                "en": "为什么它真的有用",
-                "ja": "なぜ本当に useful なのか"
+                "zh": "raise Exception（抛出异常）",
+                "en": "raise Exception (throw an exception)",
+                "ja": "raise Exception（例外を投げる）"
               }
             }
           ],
-          "answer": "a",
+          "answer": "b",
           "explanation": {
-            "zh": "什么是 loop",
-            "en": "The Solution",
-            "ja": "loop とは何か"
+            "zh": "当 stop_reason 不是 tool_use 时，模型已完成任务，应 break 退出循环。continue 会跳过工具执行继续循环，逻辑错误。",
+            "en": "When stop_reason is not tool_use, the model has finished and the loop should break. Using continue would skip tool execution and loop incorrectly.",
+            "ja": "stop_reason が tool_use でない場合、モデルはタスクを完了しており、ループを break すべきです。"
           },
-          "reward_card": "card_s01_003"
+          "reward_card": "card_s01_001"
         },
         {
           "id": "q_s01_004",
           "type": "choice",
           "difficulty": 1,
           "stem": {
-            "zh": "以下哪个概念与「什么是 turn」直接相关？",
-            "en": "Which concept is directly related to \"How It Works\"?",
-            "ja": "「turn とは何か」に直接関連する概念はどれですか？"
+            "zh": "Turn 是 Agent Loop 的最小执行单元，它包含哪四步？",
+            "en": "A Turn is the smallest execution unit of the Agent Loop. What are its four steps?",
+            "ja": "Turn は Agent Loop の最小実行単位です。4 つのステップは何ですか？"
           },
           "options": [
             {
-              "id": "d",
-              "text": {
-                "zh": "它如何接进整个系统",
-                "en": "它如何接进整个系统",
-                "ja": "この章でわざと単純化していること"
-              }
-            },
-            {
-              "id": "c",
-              "text": {
-                "zh": "2. Tool Result Block",
-                "en": "2. Tool Result Block",
-                "ja": "2. Tool Result Block"
-              }
-            },
-            {
               "id": "a",
               "text": {
-                "zh": "什么是 turn",
-                "en": "How It Works",
-                "ja": "turn とは何か"
+                "zh": "发消息→等待→显示结果→重置状态",
+                "en": "send message -> wait -> display result -> reset state",
+                "ja": "メッセージ送信→待機→結果表示→状態リセット"
               }
             },
             {
               "id": "b",
               "text": {
-                "zh": "这一章最关键的数据结构",
-                "en": "这一章最关键的数据结构",
-                "ja": "この章の核になるデータ構造"
+                "zh": "初始化模型→加载工具→调用 API→记录日志",
+                "en": "initialize model -> load tools -> call API -> log output",
+                "ja": "モデル初期化→ツール読み込み→API 呼び出し→ログ記録"
+              }
+            },
+            {
+              "id": "c",
+              "text": {
+                "zh": "发消息给模型→读回复→执行工具调用→把工具结果写回消息历史",
+                "en": "send to model -> read reply -> execute tool calls -> write tool results back to message history",
+                "ja": "モデルへ送信→返信読み取り→ツール呼び出し実行→ツール結果をメッセージ履歴に書き戻す"
+              }
+            },
+            {
+              "id": "d",
+              "text": {
+                "zh": "压缩历史→发消息→解析工具调用→刷新 LoopState",
+                "en": "compress history -> send message -> parse tool call -> refresh LoopState",
+                "ja": "履歴圧縮→メッセージ送信→ツール呼び出し解析→LoopState 更新"
               }
             }
           ],
-          "answer": "a",
+          "answer": "c",
           "explanation": {
-            "zh": "什么是 turn",
-            "en": "Step 1.",
-            "ja": "turn とは何か"
+            "zh": "每个 Turn 必须完整走完四步：发消息给模型、读回复、执行工具调用、把工具结果写回消息历史。四步全部完成才能进入下一轮。",
+            "en": "Each Turn must complete all four steps: send to model, read reply, execute tool calls, write tool results back to message history. All four must finish before the next Turn.",
+            "ja": "各 Turn はすべての 4 ステップを完了する必要があります。すべて終わってから次の Turn に進みます。"
           },
-          "reward_card": "card_s01_004"
+          "reward_card": "card_s01_002"
         },
         {
           "id": "q_s01_005",
           "type": "choice",
-          "difficulty": 1,
+          "difficulty": 2,
           "stem": {
-            "zh": "以下哪个概念与「什么是 tool_result」直接相关？",
-            "en": "Which concept is directly related to \"What Changed\"?",
-            "ja": "「tool_result とは何か」に直接関連する概念はどれですか？"
+            "zh": "一个 Turn 的第四步「把工具结果写回消息历史」可以省略吗？",
+            "en": "Can the fourth step of a Turn -- writing tool results back to message history -- be skipped?",
+            "ja": "Turn の第 4 ステップ（ツール結果をメッセージ履歴に書き戻す）は省略できますか？"
           },
           "options": [
             {
+              "id": "a",
+              "text": {
+                "zh": "不能省略，否则模型下一轮看不到执行结果，任务无法推进",
+                "en": "No, otherwise the model cannot see execution results next turn and the task stalls",
+                "ja": "省略不可、そうしないと次のターンでモデルが実行結果を見られず、タスクが止まる"
+              }
+            },
+            {
               "id": "b",
               "text": {
-                "zh": "第三步：把 skill 目录放进 system prompt",
-                "en": "第三步：把 skill 目录放进 system prompt",
-                "ja": "第三步：把 skill 目录放进 system prompt"
+                "zh": "可以省略，只要把工具结果打印到终端即可",
+                "en": "Yes, as long as the tool result is printed to the terminal",
+                "ja": "省略可能、ツール結果をターミナルに出力するだけで十分"
               }
             },
             {
               "id": "c",
               "text": {
-                "zh": "为什么这章故意不讲成任务图",
-                "en": "为什么这章故意不讲成任务图",
-                "ja": "なぜここで task graph まで教えないのか"
-              }
-            },
-            {
-              "id": "a",
-              "text": {
-                "zh": "什么是 tool_result",
-                "en": "What Changed",
-                "ja": "tool_result とは何か"
+                "zh": "可以省略，模型已经知道自己调了哪些工具",
+                "en": "Yes, the model already knows which tools it called",
+                "ja": "省略可能、モデルはどのツールを呼び出したか既に知っている"
               }
             },
             {
               "id": "d",
               "text": {
-                "zh": "它如何接到主循环里",
-                "en": "它如何接到主循环里",
-                "ja": "它如何接到主循环里"
+                "zh": "可以省略，模型下一轮会自动从工具系统拉取结果",
+                "en": "Yes, the model will automatically pull results from the tool system next turn",
+                "ja": "省略可能、モデルは次のターンにツールシステムから自動的に結果を取得する"
               }
             }
           ],
           "answer": "a",
           "explanation": {
-            "zh": "什么是 tool_result",
-            "en": "What Changed",
-            "ja": "tool_result とは何か"
+            "zh": "tool_result 不是终端日志，是必须写回 messages 的结构化数据块。少了这步，模型下一轮的输入里没有工具执行结果，任务会在原地打转。",
+            "en": "tool_result is not a terminal log but a structured data block that must be written back to messages. Without this step, the model's next input lacks execution results and the task spins in place.",
+            "ja": "tool_result はターミナルログではなく、messages に書き戻さなければならない構造化データブロックです。このステップがないと、次のターンでモデルが実行結果を見られずタスクが止まります。"
+          },
+          "reward_card": "card_s01_002"
+        },
+        {
+          "id": "q_s01_006",
+          "type": "choice",
+          "difficulty": 2,
+          "stem": {
+            "zh": "Turn 的四步中，哪一步最容易被开发者遗漏？",
+            "en": "Which of the four Turn steps is most often missed by developers?",
+            "ja": "Turn の 4 ステップのうち、開発者が最も見落としやすいのはどれですか？"
+          },
+          "options": [
+            {
+              "id": "a",
+              "text": {
+                "zh": "第一步：发消息给模型",
+                "en": "Step 1: send message to model",
+                "ja": "第 1 ステップ: モデルへのメッセージ送信"
+              }
+            },
+            {
+              "id": "b",
+              "text": {
+                "zh": "第二步：读模型回复",
+                "en": "Step 2: read model reply",
+                "ja": "第 2 ステップ: モデルの返信を読む"
+              }
+            },
+            {
+              "id": "c",
+              "text": {
+                "zh": "第三步：执行工具调用",
+                "en": "Step 3: execute tool calls",
+                "ja": "第 3 ステップ: ツール呼び出しを実行する"
+              }
+            },
+            {
+              "id": "d",
+              "text": {
+                "zh": "第四步：把工具结果写回消息历史",
+                "en": "Step 4: write tool results back to message history",
+                "ja": "第 4 ステップ: ツール結果をメッセージ履歴に書き戻す"
+              }
+            }
+          ],
+          "answer": "d",
+          "explanation": {
+            "zh": "第四步最容易被忽略。开发者有时只打印工具结果到终端，忘记写回 messages，导致模型下一轮看不见，任务在原地打转。",
+            "en": "Step 4 is most often missed. Developers sometimes only print tool results to the terminal and forget to append them to messages, leaving the model blind next turn.",
+            "ja": "第 4 ステップが最も見落とされやすいです。ツール結果をターミナルに出力するだけで messages に追加するのを忘れ、次のターンでモデルが見えなくなります。"
+          },
+          "reward_card": "card_s01_002"
+        },
+        {
+          "id": "q_s01_007",
+          "type": "choice",
+          "difficulty": 1,
+          "stem": {
+            "zh": "tool_result 是什么？它应该放在哪里？",
+            "en": "What is a tool_result, and where should it go?",
+            "ja": "tool_result とは何ですか？どこに置くべきですか？"
+          },
+          "options": [
+            {
+              "id": "a",
+              "text": {
+                "zh": "终端日志，打印到控制台供开发者查看",
+                "en": "A terminal log printed to the console for developers to review",
+                "ja": "開発者が確認するためにコンソールに出力されるターミナルログ"
+              }
+            },
+            {
+              "id": "b",
+              "text": {
+                "zh": "临时缓存，存在内存中，Turn 结束后自动清理",
+                "en": "A temporary cache stored in memory that is auto-cleared after a Turn",
+                "ja": "ターン終了後に自動クリアされるメモリ内の一時キャッシュ"
+              }
+            },
+            {
+              "id": "c",
+              "text": {
+                "zh": "结构化数据块，必须写回 messages 供模型下一轮读取",
+                "en": "A structured data block that must be written back to messages for the model to read next turn",
+                "ja": "次のターンにモデルが読み取るために messages に書き戻さなければならない構造化データブロック"
+              }
+            },
+            {
+              "id": "d",
+              "text": {
+                "zh": "元数据，附加在下一次 API 请求的 header 中",
+                "en": "Metadata attached in the header of the next API request",
+                "ja": "次の API リクエストのヘッダーに付加されるメタデータ"
+              }
+            }
+          ],
+          "answer": "c",
+          "explanation": {
+            "zh": "tool_result 是结构化数据块，必须 append 进 messages。模型下一轮调用时会读取整个 messages 列表，如果工具结果不在里面，模型就看不到执行情况。",
+            "en": "tool_result is a structured data block that must be appended to messages. The model reads the full messages list each call, so if results are missing the model cannot see what happened.",
+            "ja": "tool_result は messages に追加しなければならない構造化データブロックです。モデルは各呼び出しで完全な messages リストを読み取るため、結果がなければ何が起きたか分かりません。"
+          },
+          "reward_card": "card_s01_003"
+        },
+        {
+          "id": "q_s01_008",
+          "type": "choice",
+          "difficulty": 2,
+          "stem": {
+            "zh": "工具执行成功，但开发者只把结果存进本地变量，没有 append 进 messages。下一轮会发生什么？",
+            "en": "A tool executes successfully but the developer only stores the result in a local variable without appending to messages. What happens next turn?",
+            "ja": "ツールが正常に実行されたが、開発者が結果をローカル変数にのみ保存して messages に追加しなかった場合、次のターンはどうなりますか？"
+          },
+          "options": [
+            {
+              "id": "a",
+              "text": {
+                "zh": "模型会从工具缓存里恢复结果，正常继续",
+                "en": "The model will recover the result from tool cache and continue normally",
+                "ja": "モデルはツールキャッシュから結果を回復して正常に続行する"
+              }
+            },
+            {
+              "id": "b",
+              "text": {
+                "zh": "Loop 会自动检测遗漏并补写 tool_result",
+                "en": "The Loop will automatically detect the omission and append tool_result",
+                "ja": "Loop が自動的に欠落を検出して tool_result を追加する"
+              }
+            },
+            {
+              "id": "c",
+              "text": {
+                "zh": "Turn 计数器报错并中断循环",
+                "en": "The Turn counter throws an error and interrupts the loop",
+                "ja": "Turn カウンターがエラーを投げてループを中断する"
+              }
+            },
+            {
+              "id": "d",
+              "text": {
+                "zh": "模型不知道工具执行了什么，可能重复调用或产生错误推断",
+                "en": "The model will not know what the tool did and may repeat the call or make incorrect inferences",
+                "ja": "モデルはツールが何をしたか分からず、呼び出しを繰り返すか誤った推論をする可能性がある"
+              }
+            }
+          ],
+          "answer": "d",
+          "explanation": {
+            "zh": "messages 是模型下一轮的全部工作输入。工具结果不进 messages，模型等于在黑暗中工作，可能重复调用同一工具或基于空白信息产生错误推断。",
+            "en": "messages is the model's entire input for the next turn. Without tool results in messages, the model works in the dark, possibly repeating calls or making wrong inferences.",
+            "ja": "messages は次のターンのモデルへの全入力です。messages にツール結果がなければ、モデルは暗闇の中で動作し、同じツールを繰り返し呼び出すか誤った推論をします。"
+          },
+          "reward_card": "card_s01_003"
+        },
+        {
+          "id": "q_s01_009",
+          "type": "choice",
+          "difficulty": 3,
+          "stem": {
+            "zh": "哪个场景最准确地说明了「不把 tool_result 写回 messages 的后果」？",
+            "en": "Which scenario most accurately illustrates the consequence of not writing tool_result back to messages?",
+            "ja": "tool_result を messages に書き戻さない結果を最も正確に示しているシナリオはどれですか？"
+          },
+          "options": [
+            {
+              "id": "a",
+              "text": {
+                "zh": "工具报错，Loop 立即中断并向用户报告",
+                "en": "The tool errors out and the Loop immediately stops and reports to the user",
+                "ja": "ツールがエラーになり、Loop が即座に停止してユーザーに報告する"
+              }
+            },
+            {
+              "id": "b",
+              "text": {
+                "zh": "LoopState 的 turn 计数不增加，停在第一轮",
+                "en": "The LoopState turn counter does not increment and stays at turn one",
+                "ja": "LoopState のターンカウンターが増加せず、最初のターンに留まる"
+              }
+            },
+            {
+              "id": "c",
+              "text": {
+                "zh": "Agent 读取文件成功，但模型下一轮重新发出同样的读文件请求",
+                "en": "Agent reads a file successfully, but the model re-issues the same read request next turn",
+                "ja": "Agent がファイルの読み取りに成功したが、次のターンでモデルが同じ読み取りリクエストを再発行する"
+              }
+            },
+            {
+              "id": "d",
+              "text": {
+                "zh": "模型因为缺少 system prompt 而拒绝继续回复",
+                "en": "The model refuses to continue replying due to missing system prompt",
+                "ja": "system prompt がないためモデルが応答を続けることを拒否する"
+              }
+            }
+          ],
+          "answer": "c",
+          "explanation": {
+            "zh": "工具结果未进 messages，模型不知道文件已被读取，因此下一轮再次推断需要读文件并重复调用。这是典型的「模型在原地打转」症状。",
+            "en": "Without the tool result in messages, the model does not know the file was read and infers it needs to read again next turn, repeating the same call. This is the classic sign of the model spinning in place.",
+            "ja": "messages にツール結果がなければ、モデルはファイルが読まれたことを知らず、次のターンで再び読む必要があると推論して同じ呼び出しを繰り返します。"
+          },
+          "reward_card": "card_s01_003"
+        },
+        {
+          "id": "q_s01_010",
+          "type": "choice",
+          "difficulty": 1,
+          "stem": {
+            "zh": "messages 列表的本质是什么？",
+            "en": "What is the true nature of the messages list?",
+            "ja": "messages リストの本質は何ですか？"
+          },
+          "options": [
+            {
+              "id": "a",
+              "text": {
+                "zh": "模型下一轮工作要读取的工作上下文输入",
+                "en": "The working context input the model reads at the start of each turn",
+                "ja": "各ターンの開始時にモデルが読み取る作業コンテキスト入力"
+              }
+            },
+            {
+              "id": "b",
+              "text": {
+                "zh": "给用户看的聊天展示层，用于渲染对话界面",
+                "en": "The display layer for users to render a chat UI",
+                "ja": "チャット UI をレンダリングするためのユーザー向け表示レイヤー"
+              }
+            },
+            {
+              "id": "c",
+              "text": {
+                "zh": "系统日志，仅用于调试和审计",
+                "en": "A system log used only for debugging and auditing",
+                "ja": "デバッグと監査のためだけに使うシステムログ"
+              }
+            },
+            {
+              "id": "d",
+              "text": {
+                "zh": "LoopState 内部的临时缓冲区，每轮清空",
+                "en": "An internal temporary buffer inside LoopState that clears each turn",
+                "ja": "毎ターンクリアされる LoopState 内部の一時バッファ"
+              }
+            }
+          ],
+          "answer": "a",
+          "explanation": {
+            "zh": "messages 不是给用户看的聊天记录，而是模型下一轮调用时的全部工作输入。每条消息（user、assistant、tool_result）都是模型推理的原料。",
+            "en": "messages is not a chat display for users. It is the model's complete working input for the next call. Every message -- user, assistant, tool_result -- is raw material for model reasoning.",
+            "ja": "messages はユーザー向けのチャット表示ではありません。次の呼び出しのためのモデルの完全な作業入力です。すべてのメッセージがモデルの推論の材料です。"
+          },
+          "reward_card": "card_s01_004"
+        },
+        {
+          "id": "q_s01_011",
+          "type": "choice",
+          "difficulty": 2,
+          "stem": {
+            "zh": "assistant 的回复是否需要写回 messages？",
+            "en": "Does the assistant reply need to be written back to messages?",
+            "ja": "assistant の返信を messages に書き戻す必要がありますか？"
+          },
+          "options": [
+            {
+              "id": "a",
+              "text": {
+                "zh": "不需要，模型内部会自动记住自己的回复",
+                "en": "No, the model automatically remembers its own replies internally",
+                "ja": "不要、モデルは内部で自分の返信を自動的に覚えている"
+              }
+            },
+            {
+              "id": "b",
+              "text": {
+                "zh": "只有包含工具调用的回复才需要写回",
+                "en": "Only replies that contain tool calls need to be written back",
+                "ja": "ツール呼び出しを含む返信のみ書き戻す必要がある"
+              }
+            },
+            {
+              "id": "c",
+              "text": {
+                "zh": "不需要，assistant 回复不算工具结果，不在 Loop 范围内",
+                "en": "No, assistant replies are not tool results and are outside Loop scope",
+                "ja": "不要、assistant の返信は tool_result ではなく Loop の範囲外"
+              }
+            },
+            {
+              "id": "d",
+              "text": {
+                "zh": "需要，模型是无状态的，每轮推理都从 messages 开始，必须看到自己上一轮说了什么",
+                "en": "Yes, the model is stateless and reasons from messages each call, so it must see what it said last turn",
+                "ja": "必要、モデルはステートレスで毎回 messages から推論するため、前のターンで何を言ったか見る必要がある"
+              }
+            }
+          ],
+          "answer": "d",
+          "explanation": {
+            "zh": "模型是无状态的，每次调用都从 messages 开始推理。不写回 assistant 回复，模型下一轮就不知道自己上一轮说了什么，工作上下文断裂。",
+            "en": "The model is stateless and reasons from messages fresh each call. Without writing back the assistant reply, the model loses track of what it said last turn and the working context breaks.",
+            "ja": "モデルはステートレスで、毎回 messages から新たに推論します。assistant の返信を書き戻さないと、前のターンで何を言ったか分からなくなり、作業コンテキストが途切れます。"
+          },
+          "reward_card": "card_s01_004"
+        },
+        {
+          "id": "q_s01_012",
+          "type": "choice",
+          "difficulty": 2,
+          "stem": {
+            "zh": "下列关于 messages 的说法，哪一条是错误的？",
+            "en": "Which of the following statements about messages is INCORRECT?",
+            "ja": "messages についての次の記述のうち、誤っているものはどれですか？"
+          },
+          "options": [
+            {
+              "id": "a",
+              "text": {
+                "zh": "messages 是模型每轮推理的完整输入",
+                "en": "messages is the complete input for the model each turn",
+                "ja": "messages は各ターンのモデルの完全な入力である"
+              }
+            },
+            {
+              "id": "b",
+              "text": {
+                "zh": "messages 的主要用途是在前端渲染聊天气泡",
+                "en": "The primary purpose of messages is to render chat bubbles on the frontend",
+                "ja": "messages の主な用途はフロントエンドでチャットバブルをレンダリングすることである"
+              }
+            },
+            {
+              "id": "c",
+              "text": {
+                "zh": "assistant 的每条回复都必须写回 messages",
+                "en": "Every assistant reply must be written back to messages",
+                "ja": "すべての assistant の返信を messages に書き戻す必要がある"
+              }
+            },
+            {
+              "id": "d",
+              "text": {
+                "zh": "tool_result 必须进 messages，否则模型看不到工具执行结果",
+                "en": "tool_result must be in messages or the model cannot see tool execution results",
+                "ja": "tool_result は messages に入れなければモデルがツール実行結果を見られない"
+              }
+            }
+          ],
+          "answer": "b",
+          "explanation": {
+            "zh": "messages 的用途是作为模型下一轮推理的工作上下文输入，而不是给前端渲染用的聊天展示层。把它当聊天记录来看是常见误解。",
+            "en": "messages is for the model's working context, not for rendering a chat UI. Treating it as a display record is a common mistake.",
+            "ja": "messages はモデルの作業コンテキストのためのものであり、チャット UI のレンダリングのためではありません。表示レコードとして扱うのは一般的な誤解です。"
+          },
+          "reward_card": "card_s01_004"
+        },
+        {
+          "id": "q_s01_013",
+          "type": "choice",
+          "difficulty": 3,
+          "stem": {
+            "zh": "某开发者实现 messages 时，只追加用户消息和 tool_result，不追加 assistant 回复。以下哪个问题最可能出现？",
+            "en": "A developer implements messages to append only user messages and tool_results, not assistant replies. Which problem is most likely to occur?",
+            "ja": "ある開発者が messages にユーザーメッセージと tool_result のみを追加し、assistant の返信を追加しない実装をした。最も起こりやすい問題はどれですか？"
+          },
+          "options": [
+            {
+              "id": "a",
+              "text": {
+                "zh": "API 会因为消息顺序不合规而返回 400 错误",
+                "en": "The API will return a 400 error because message order is non-compliant",
+                "ja": "メッセージの順序が規定外のため API が 400 エラーを返す"
+              }
+            },
+            {
+              "id": "b",
+              "text": {
+                "zh": "工具无法执行，因为 tool_use block 不在 messages 里",
+                "en": "Tools cannot execute because the tool_use block is not in messages",
+                "ja": "tool_use ブロックが messages にないためツールを実行できない"
+              }
+            },
+            {
+              "id": "c",
+              "text": {
+                "zh": "模型无法看到自己之前的推理和工具调用，无法维持连贯的任务执行",
+                "en": "The model cannot see its prior reasoning and tool calls and cannot maintain coherent task execution",
+                "ja": "モデルは以前の推論とツール呼び出しを見ることができず、一貫したタスク実行を維持できない"
+              }
+            },
+            {
+              "id": "d",
+              "text": {
+                "zh": "LoopState 的 transition_reason 字段会记录错误",
+                "en": "The transition_reason field in LoopState will record an error",
+                "ja": "LoopState の transition_reason フィールドにエラーが記録される"
+              }
+            }
+          ],
+          "answer": "c",
+          "explanation": {
+            "zh": "assistant 回复中包含模型的推理过程和 tool_use 声明。不写回 messages，模型下一轮就像失忆了一样，无法连贯地推进任务。",
+            "en": "The assistant reply contains the model's reasoning and tool_use declarations. Without it in messages, the model next turn is effectively amnesiac and cannot coherently continue the task.",
+            "ja": "assistant の返信にはモデルの推論と tool_use の宣言が含まれています。messages に書き戻さなければ、次のターンのモデルは実質的に記憶喪失になります。"
+          },
+          "reward_card": "card_s01_004"
+        },
+        {
+          "id": "q_s01_014",
+          "type": "choice",
+          "difficulty": 1,
+          "stem": {
+            "zh": "LoopState 的作用是什么？",
+            "en": "What is the purpose of LoopState?",
+            "ja": "LoopState の目的は何ですか？"
+          },
+          "options": [
+            {
+              "id": "a",
+              "text": {
+                "zh": "替代 messages 存储对话历史，减少 API 调用量",
+                "en": "Replace messages to store conversation history and reduce API calls",
+                "ja": "messages を置き換えて会話履歴を保存し、API 呼び出しを減らす"
+              }
+            },
+            {
+              "id": "b",
+              "text": {
+                "zh": "管理工具注册和权限，控制哪些工具可以被调用",
+                "en": "Manage tool registration and permissions, controlling which tools can be called",
+                "ja": "ツールの登録と権限を管理し、どのツールを呼び出せるかを制御する"
+              }
+            },
+            {
+              "id": "c",
+              "text": {
+                "zh": "把 messages、轮数、transition_reason 等循环状态显式收拢进一个对象",
+                "en": "Explicitly consolidate loop state such as messages, turn count, and transition_reason into one object",
+                "ja": "messages、ターン数、transition_reason などのループ状態を 1 つのオブジェクトに明示的に集約する"
+              }
+            },
+            {
+              "id": "d",
+              "text": {
+                "zh": "缓存模型响应，避免重复调用相同提示",
+                "en": "Cache model responses to avoid repeated calls with identical prompts",
+                "ja": "モデルの応答をキャッシュして、同じプロンプトでの繰り返し呼び出しを避ける"
+              }
+            }
+          ],
+          "answer": "c",
+          "explanation": {
+            "zh": "LoopState 是一个显式的状态对象，将循环运行所需的 messages、轮数、transition_reason 等字段收拢在一起，比零散的局部变量更清晰，也为后续扩展打好基础。",
+            "en": "LoopState is an explicit state object that consolidates fields like messages, turn count, and transition_reason into one place, cleaner than scattered local variables and ready for future extension.",
+            "ja": "LoopState は、messages、ターン数、transition_reason などのフィールドを一か所に集約する明示的な状態オブジェクトです。散在するローカル変数より明確で、将来の拡張に備えられます。"
+          },
+          "reward_card": "card_s01_005"
+        },
+        {
+          "id": "q_s01_015",
+          "type": "choice",
+          "difficulty": 2,
+          "stem": {
+            "zh": "LoopState 中的 transition_reason 字段用来记录什么？",
+            "en": "What does the transition_reason field in LoopState record?",
+            "ja": "LoopState の transition_reason フィールドは何を記録しますか？"
+          },
+          "options": [
+            {
+              "id": "a",
+              "text": {
+                "zh": "每轮模型调用的延迟时间（毫秒）",
+                "en": "The latency of each model call in milliseconds",
+                "ja": "各モデル呼び出しのレイテンシ（ミリ秒）"
+              }
+            },
+            {
+              "id": "b",
+              "text": {
+                "zh": "循环退出或状态切换的原因（如完成、超限、报错）",
+                "en": "The reason the loop exited or transitioned state, such as completion, limit exceeded, or error",
+                "ja": "ループが終了または状態遷移した理由（完了、制限超過、エラーなど）"
+              }
+            },
+            {
+              "id": "c",
+              "text": {
+                "zh": "当前 Turn 中 messages 的字节数",
+                "en": "The byte size of messages in the current Turn",
+                "ja": "現在の Turn における messages のバイトサイズ"
+              }
+            },
+            {
+              "id": "d",
+              "text": {
+                "zh": "已注册的工具名称列表",
+                "en": "The list of registered tool names",
+                "ja": "登録済みツール名のリスト"
+              }
+            }
+          ],
+          "answer": "b",
+          "explanation": {
+            "zh": "transition_reason 记录循环退出或状态切换的原因，例如任务完成、达到最大轮数或发生错误。这是调试和监控 Agent 行为的重要字段。",
+            "en": "transition_reason records why the loop exited or changed state, such as task completion, max turns reached, or error. It is key for debugging and monitoring agent behavior.",
+            "ja": "transition_reason は、タスク完了、最大ターン数到達、エラーなど、ループが終了または状態を変えた理由を記録します。"
+          },
+          "reward_card": "card_s01_005"
+        },
+        {
+          "id": "q_s01_016",
+          "type": "choice",
+          "difficulty": 2,
+          "stem": {
+            "zh": "为什么要把循环状态收拢进显式的 state 对象，而不是用多个零散局部变量？",
+            "en": "Why consolidate loop state into an explicit state object rather than scattered local variables?",
+            "ja": "なぜ散在するローカル変数ではなく、明示的な state オブジェクトにループ状態を集約するのですか？"
+          },
+          "options": [
+            {
+              "id": "a",
+              "text": {
+                "zh": "可以减少 API 调用次数，降低费用",
+                "en": "Can reduce the number of API calls and lower costs",
+                "ja": "API 呼び出し回数を減らしてコストを下げられる"
+              }
+            },
+            {
+              "id": "b",
+              "text": {
+                "zh": "state 对象会自动同步到 messages，省去手动写回的步骤",
+                "en": "The state object auto-syncs to messages, removing the need to manually write back",
+                "ja": "state オブジェクトが messages に自動同期され、手動書き戻しが不要になる"
+              }
+            },
+            {
+              "id": "c",
+              "text": {
+                "zh": "更清晰、便于调试，同时为后续扩展（如持久化、监控）打好基础",
+                "en": "Clearer, easier to debug, and lays the groundwork for future extensions such as persistence and monitoring",
+                "ja": "より明確でデバッグしやすく、永続化やモニタリングなどの将来の拡張に備えられる"
+              }
+            },
+            {
+              "id": "d",
+              "text": {
+                "zh": "避免 JavaScript 的变量作用域问题",
+                "en": "Avoid JavaScript variable scoping issues",
+                "ja": "JavaScript の変数スコープの問題を避ける"
+              }
+            }
+          ],
+          "answer": "c",
+          "explanation": {
+            "zh": "显式 state 对象让循环的所有关键状态一目了然，方便 debug 和日志记录。更重要的是，它为后续扩展（持久化、断点续跑、可观测性）预留了挂载点。",
+            "en": "An explicit state object makes all key loop state visible at a glance, simplifying debug and logging. More importantly, it creates hooks for future extensions like persistence, resume-from-checkpoint, and observability.",
+            "ja": "明示的な state オブジェクトはすべての重要なループ状態を一目で見えるようにします。また、永続化、チェックポイントからの再開、可観測性などの将来の拡張のためのフックを作ります。"
+          },
+          "reward_card": "card_s01_005"
+        },
+        {
+          "id": "q_s01_017",
+          "type": "choice",
+          "difficulty": 3,
+          "stem": {
+            "zh": "下列哪种 LoopState 设计最合理？",
+            "en": "Which LoopState design is most reasonable?",
+            "ja": "次の LoopState 設計のうち、最も合理的なものはどれですか？"
+          },
+          "options": [
+            {
+              "id": "a",
+              "text": {
+                "zh": "把 messages 单独存放，turn 和 transition_reason 分别作为全局变量",
+                "en": "Store messages separately, with turn and transition_reason as separate global variables",
+                "ja": "messages を別に保存し、turn と transition_reason を別々のグローバル変数として扱う"
+              }
+            },
+            {
+              "id": "b",
+              "text": {
+                "zh": "{ messages: [], turn: 0, transition_reason: null }",
+                "en": "{ messages: [], turn: 0, transition_reason: null }",
+                "ja": "{ messages: [], turn: 0, transition_reason: null }"
+              }
+            },
+            {
+              "id": "c",
+              "text": {
+                "zh": "只存储 tool_result，messages 每轮清空重新填充",
+                "en": "Store only tool_result and clear and refill messages each turn",
+                "ja": "tool_result のみ保存し、毎ターン messages をクリアして再入力する"
+              }
+            },
+            {
+              "id": "d",
+              "text": {
+                "zh": "完全省略 state 对象，所有状态用函数参数传递",
+                "en": "Omit the state object entirely and pass all state as function arguments",
+                "ja": "state オブジェクトを完全に省略し、すべての状態を関数の引数として渡す"
+              }
+            }
+          ],
+          "answer": "b",
+          "explanation": {
+            "zh": "将 messages、turn、transition_reason 三个核心字段收拢在同一个对象里，既清晰又便于扩展。零散全局变量、逐轮清空 messages 或纯参数传递都会导致状态管理混乱。",
+            "en": "Consolidating messages, turn, and transition_reason in one object is clear and extensible. Scattered globals, clearing messages each turn, or pure argument passing all lead to messy state management.",
+            "ja": "messages、turn、transition_reason を 1 つのオブジェクトにまとめることで、明確で拡張しやすくなります。"
+          },
+          "reward_card": "card_s01_005"
+        },
+        {
+          "id": "q_s01_018",
+          "type": "choice",
+          "difficulty": 3,
+          "stem": {
+            "zh": "没有 Agent Loop，一个语言模型能不能完成「写文件并运行测试」这样的多步任务？",
+            "en": "Without an Agent Loop, can a language model complete a multi-step task like writing a file and running tests?",
+            "ja": "Agent Loop がなければ、言語モデルはファイルを書いてテストを実行するような複数ステップのタスクを完了できますか？"
+          },
+          "options": [
+            {
+              "id": "a",
+              "text": {
+                "zh": "不能，模型只能生成文字描述，没有 Loop 就无法执行工具和回写结果",
+                "en": "No, the model can only generate text descriptions and without the Loop cannot execute tools or write results back",
+                "ja": "いいえ、モデルはテキストの説明を生成するだけで、Loop がなければツールを実行したり結果を書き戻したりできない"
+              }
+            },
+            {
+              "id": "b",
+              "text": {
+                "zh": "能，只要 system prompt 足够详细就行",
+                "en": "Yes, as long as the system prompt is detailed enough",
+                "ja": "はい、system prompt が十分に詳細であれば可能"
+              }
+            },
+            {
+              "id": "c",
+              "text": {
+                "zh": "能，Turn 机制不需要 Loop 也可以独立运作",
+                "en": "Yes, the Turn mechanism can operate independently without a Loop",
+                "ja": "はい、Turn の仕組みは Loop なしでも独立して動作できる"
+              }
+            },
+            {
+              "id": "d",
+              "text": {
+                "zh": "能，模型内部有持久化机制可以自己维持状态",
+                "en": "Yes, the model has an internal persistence mechanism to maintain its own state",
+                "ja": "はい、モデルには内部の永続化メカニズムがあり自分で状態を維持できる"
+              }
+            }
+          ],
+          "answer": "a",
+          "explanation": {
+            "zh": "没有 Loop，模型只能产生调用工具的文字描述，但没有代码去真正执行工具、拿到结果、写回 messages 再触发下一步。Loop 是让模型从「会说」变成「会干」的关键。",
+            "en": "Without the Loop, the model can only produce text describing a tool call, but there is no code to actually execute the tool, get the result, write it back, and trigger the next step. The Loop is what turns the model from talking to doing.",
+            "ja": "Loop がなければ、モデルはツール呼び出しを記述するテキストを生成するだけで、実際にツールを実行し、結果を取得し、書き戻して次のステップをトリガーするコードがありません。"
+          },
+          "reward_card": "card_s01_001"
+        },
+        {
+          "id": "q_s01_019",
+          "type": "choice",
+          "difficulty": 3,
+          "stem": {
+            "zh": "Agent Loop、Turn、messages、LoopState 四个概念的关系，哪种描述最准确？",
+            "en": "Which description best captures the relationship among Agent Loop, Turn, messages, and LoopState?",
+            "ja": "Agent Loop、Turn、messages、LoopState の 4 概念の関係を最も正確に表しているのはどれですか？"
+          },
+          "options": [
+            {
+              "id": "a",
+              "text": {
+                "zh": "LoopState 是主循环；Turn 是工具执行器；messages 是日志；Agent Loop 是 UI 层",
+                "en": "LoopState is the main loop; Turn is the tool executor; messages is the log; Agent Loop is the UI layer",
+                "ja": "LoopState がメインループ、Turn がツール実行器、messages がログ、Agent Loop が UI レイヤー"
+              }
+            },
+            {
+              "id": "b",
+              "text": {
+                "zh": "Turn 是主循环；Agent Loop 是单轮步骤；messages 是工具调用缓存；LoopState 是结果展示层",
+                "en": "Turn is the main loop; Agent Loop is a single-turn step; messages is tool call cache; LoopState is the result display layer",
+                "ja": "Turn がメインループ、Agent Loop が単一ターンのステップ、messages がツール呼び出しキャッシュ、LoopState が結果表示レイヤー"
+              }
+            },
+            {
+              "id": "c",
+              "text": {
+                "zh": "Agent Loop 是整体主循环；Turn 是它的最小执行单元；messages 是每轮共享的工作上下文；LoopState 收拢 messages 和循环元数据",
+                "en": "Agent Loop is the overall main loop; Turn is its smallest execution unit; messages is the shared working context each turn; LoopState consolidates messages and loop metadata",
+                "ja": "Agent Loop は全体的なメインループ、Turn はその最小実行単位、messages は各ターンの共有作業コンテキスト、LoopState は messages とループメタデータを集約する"
+              }
+            },
+            {
+              "id": "d",
+              "text": {
+                "zh": "四个概念是平级的，可以互相替代使用",
+                "en": "The four concepts are at the same level and can be used interchangeably",
+                "ja": "4 つの概念は同レベルで互いに置き換えて使用できる"
+              }
+            }
+          ],
+          "answer": "c",
+          "explanation": {
+            "zh": "Agent Loop 是整体主循环框架；Turn 是每次迭代的最小四步单元；messages 是模型每轮读取的工作上下文；LoopState 则显式收拢 messages、轮数、退出原因等元数据。",
+            "en": "Agent Loop is the overall framework; Turn is the minimal four-step iteration unit; messages is the model's per-turn working context; LoopState explicitly consolidates messages, turn count, and exit reason.",
+            "ja": "Agent Loop は全体的なフレームワーク、Turn は最小の 4 ステップ反復単位、messages はモデルの各ターン作業コンテキスト、LoopState は messages、ターン数、終了理由などを明示的に集約します。"
+          },
+          "reward_card": "card_s01_001"
+        },
+        {
+          "id": "q_s01_020",
+          "type": "choice",
+          "difficulty": 3,
+          "stem": {
+            "zh": "Agent 调用 read_file 工具成功，但下一轮模型重复发出同一个 read_file 请求。最可能的原因是？",
+            "en": "An Agent calls read_file successfully, but the model issues the same read_file request again next turn. What is the most likely cause?",
+            "ja": "Agent が read_file ツールを正常に呼び出したが、次のターンでモデルが同じ read_file リクエストを再発行した。最も可能性の高い原因は？"
+          },
+          "options": [
+            {
+              "id": "a",
+              "text": {
+                "zh": "tool_result 没有写回 messages，模型下一轮不知道文件已被读取",
+                "en": "tool_result was not written back to messages, so the model does not know the file was read",
+                "ja": "tool_result が messages に書き戻されなかったため、モデルがファイルが読まれたことを知らない"
+              }
+            },
+            {
+              "id": "b",
+              "text": {
+                "zh": "LoopState 的 turn 计数器溢出，导致 Loop 重置",
+                "en": "The LoopState turn counter overflowed, causing the Loop to reset",
+                "ja": "LoopState のターンカウンターがオーバーフローして Loop がリセットされた"
+              }
+            },
+            {
+              "id": "c",
+              "text": {
+                "zh": "模型被设计成每个 Turn 都必须至少调用一次工具",
+                "en": "The model is designed to call at least one tool per Turn",
+                "ja": "モデルは各 Turn で少なくとも 1 回ツールを呼び出すよう設計されている"
+              }
+            },
+            {
+              "id": "d",
+              "text": {
+                "zh": "文件系统工具有幂等保护，重复调用是预期行为",
+                "en": "The file system tool has idempotency protection and repeated calls are expected behavior",
+                "ja": "ファイルシステムツールは冪等保護があり、繰り返し呼び出しは期待された動作"
+              }
+            }
+          ],
+          "answer": "a",
+          "explanation": {
+            "zh": "这是 tool_result 未写回 messages 的经典症状。模型每轮从 messages 推理，不知道上一轮已读取文件，因此重新推断需要读文件并再次调用。",
+            "en": "This is the classic symptom of tool_result not being written back to messages. The model reasons from messages each turn, unaware the file was already read, and infers again that a read is needed.",
+            "ja": "これは tool_result が messages に書き戻されない古典的な症状です。モデルは毎ターン messages から推論し、ファイルがすでに読まれたことを知らないため、再び読む必要があると推論します。"
+          },
+          "reward_card": "card_s01_003"
+        },
+        {
+          "id": "q_s01_021",
+          "type": "choice",
+          "difficulty": 2,
+          "stem": {
+            "zh": "下列哪种做法最符合 Agent Loop 的正确实现？",
+            "en": "Which practice best matches a correct Agent Loop implementation?",
+            "ja": "次のどの実践が正しい Agent Loop 実装に最も合致しますか？"
+          },
+          "options": [
+            {
+              "id": "a",
+              "text": {
+                "zh": "每轮完整走完发消息→读回复→执行工具→写回结果四步，把 assistant 回复和 tool_result 都追加进 messages",
+                "en": "Complete all four steps each turn -- send, read, execute, write back -- appending both assistant reply and tool_result to messages",
+                "ja": "毎ターン送信→読み取り→実行→書き戻しの 4 ステップをすべて完了し、assistant の返信と tool_result の両方を messages に追加する"
+              }
+            },
+            {
+              "id": "b",
+              "text": {
+                "zh": "每轮清空 messages，只保留最新一条用户消息",
+                "en": "Clear messages each turn and keep only the latest user message",
+                "ja": "毎ターン messages をクリアして最新のユーザーメッセージのみ残す"
+              }
+            },
+            {
+              "id": "c",
+              "text": {
+                "zh": "只在最后一轮把所有 tool_result 批量写入 messages",
+                "en": "Batch-write all tool_results to messages only at the final turn",
+                "ja": "最終ターンにのみすべての tool_result を一括で messages に書き込む"
+              }
+            },
+            {
+              "id": "d",
+              "text": {
+                "zh": "每轮把工具结果打印到终端，不写回 messages",
+                "en": "Print tool results to the terminal each turn without writing them back to messages",
+                "ja": "毎ターンツール結果をターミナルに出力し、messages には書き戻さない"
+              }
+            }
+          ],
+          "answer": "a",
+          "explanation": {
+            "zh": "正确实现要求每轮完整执行四步，且 assistant 回复和 tool_result 都必须及时追加进 messages，确保模型下一轮拥有完整的工作上下文。",
+            "en": "A correct implementation requires all four steps every turn, with both the assistant reply and tool_result appended to messages promptly so the model has full working context next turn.",
+            "ja": "正しい実装は毎ターンすべての 4 ステップを必要とし、assistant の返信と tool_result の両方を即座に messages に追加して、次のターンでモデルが完全な作業コンテキストを持てるようにします。"
+          },
+          "reward_card": "card_s01_002"
+        },
+        {
+          "id": "q_s01_022",
+          "type": "choice",
+          "difficulty": 2,
+          "stem": {
+            "zh": "下列关于 Agent Loop、Turn、messages、LoopState 的说法，哪一条正确？",
+            "en": "Which of the following statements about Agent Loop, Turn, messages, and LoopState is correct?",
+            "ja": "Agent Loop、Turn、messages、LoopState についての次の記述のうち、正しいものはどれですか？"
+          },
+          "options": [
+            {
+              "id": "a",
+              "text": {
+                "zh": "Agent Loop 内置在语言模型里，开发者无需自己实现",
+                "en": "Agent Loop is built into the language model and developers do not need to implement it themselves",
+                "ja": "Agent Loop は言語モデルに組み込まれており、開発者が自分で実装する必要はない"
+              }
+            },
+            {
+              "id": "b",
+              "text": {
+                "zh": "messages 是给用户看的聊天气泡，不影响模型推理",
+                "en": "messages is a chat bubble display for users and does not affect model reasoning",
+                "ja": "messages はユーザー向けのチャットバブル表示でモデルの推論に影響しない"
+              }
+            },
+            {
+              "id": "c",
+              "text": {
+                "zh": "Turn 的步骤可以跳过第四步，只要工具执行不报错",
+                "en": "Turn steps can skip the fourth step as long as the tool does not error out",
+                "ja": "ツールがエラーにならない限り、Turn のステップは第 4 ステップをスキップできる"
+              }
+            },
+            {
+              "id": "d",
+              "text": {
+                "zh": "LoopState 把 messages、turn 计数、transition_reason 收拢在一个显式对象里，是组织循环状态的推荐做法",
+                "en": "LoopState consolidates messages, turn count, and transition_reason into an explicit object, which is the recommended way to organize loop state",
+                "ja": "LoopState は messages、ターン数、transition_reason を明示的なオブジェクトに集約し、ループ状態を整理する推奨方法である"
+              }
+            }
+          ],
+          "answer": "d",
+          "explanation": {
+            "zh": "LoopState 的核心价值是把循环状态显式收拢在一起。Agent Loop 需要开发者实现，messages 是模型推理输入，Turn 四步缺一不可。",
+            "en": "LoopState's value is consolidating all loop state explicitly in one place. The Agent Loop is developer-implemented, messages is model input not display, and all four Turn steps are required.",
+            "ja": "LoopState の価値は、すべてのループ状態を明示的に 1 か所に集約することです。Agent Loop は開発者が実装し、messages はモデル入力であり、Turn の 4 ステップはすべて必要です。"
           },
           "reward_card": "card_s01_005"
         }
