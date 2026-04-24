@@ -4413,51 +4413,51 @@ module.exports = {
         {
           "id": "q_s06_001",
           "type": "choice",
-          "difficulty": 1,
+          "difficulty": 2,
           "stem": {
-            "zh": "以下哪个概念与「这一章要解决什么问题」直接相关？",
-            "en": "Which concept is directly related to \"What You'll Learn\"?",
-            "ja": "「問題」に直接関連する概念はどれですか？"
+            "zh": "context window 装的是模型「这一轮」能看到的全部内容。下面哪项描述最准确？",
+            "en": "The context window holds everything the model can see in one turn. Which statement is most accurate?",
+            "ja": "context window はモデルが 1 ターンで見られる全内容を保持します。最も正確な説明はどれですか？"
           },
           "options": [
             {
-              "id": "d",
-              "text": {
-                "zh": "最小实现",
-                "en": "最小实现",
-                "ja": "最小实现"
-              }
-            },
-            {
-              "id": "c",
-              "text": {
-                "zh": "第一步：准备初始消息",
-                "en": "第一步：准备初始消息",
-                "ja": "第 1 段階: 初期 message を作る"
-              }
-            },
-            {
               "id": "a",
               "text": {
-                "zh": "这一章要解决什么问题",
-                "en": "What You'll Learn",
-                "ja": "問題"
+                "zh": "context window 有固定上限，大输出和多轮历史会快速填满它",
+                "en": "The context window has a fixed limit; large outputs and multi-turn history fill it quickly",
+                "ja": "context window には上限があり、大きな出力と多ターンの履歴ですぐ埋まる"
               }
             },
             {
               "id": "b",
               "text": {
-                "zh": "3. 把 skill 当成“绝对规则”",
-                "en": "3. 把 skill 当成“绝对规则”",
-                "ja": "3. 把 skill 当成“绝对规则”"
+                "zh": "context window 是无限的，模型可以看到所有历史消息",
+                "en": "The context window is unlimited; the model can see all history",
+                "ja": "context window は無制限で、全履歴が見える"
+              }
+            },
+            {
+              "id": "c",
+              "text": {
+                "zh": "context window 只存储用户消息，不存储工具输出",
+                "en": "The context window only stores user messages, not tool outputs",
+                "ja": "context window はユーザーメッセージのみ保存し、tool output は含まない"
+              }
+            },
+            {
+              "id": "d",
+              "text": {
+                "zh": "context window 越大越好，装的内容越多模型性能越高",
+                "en": "The larger the context window the better; more content means higher performance",
+                "ja": "context window は大きければ大きいほど良く、内容が多いほどモデル性能が高い"
               }
             }
           ],
           "answer": "a",
           "explanation": {
-            "zh": "怎样在不丢掉主线连续性的前提下，把活跃上下文重新腾出空间。",
-            "en": "What You'll Learn",
-            "ja": "問題"
+            "zh": "context window 有固定容量上限，不是无限的。大输出、多轮对话历史都会占用容量，活跃有用的内容才是真正重要的部分，而不是越多越好。",
+            "en": "The context window has a fixed capacity limit. Large outputs and multi-turn history consume space. What matters is keeping the actively useful content, not maximizing total content.",
+            "ja": "context window には固定の容量上限があります。大きな出力と多ターンの履歴はスペースを消費します。重要なのは有用なコンテンツを保持することであり、量を最大化することではありません。"
           },
           "reward_card": "card_s06_001"
         },
@@ -4466,206 +4466,1074 @@ module.exports = {
           "type": "choice",
           "difficulty": 1,
           "stem": {
-            "zh": "以下哪个概念与「先解释几个名词」直接相关？",
-            "en": "Which concept is directly related to \"The Problem\"?",
-            "ja": "「解決策」に直接関連する概念はどれですか？"
+            "zh": "context window 管理的核心原则是什么？",
+            "en": "What is the core principle of context window management?",
+            "ja": "context window 管理の核心原則は何ですか？"
           },
           "options": [
             {
-              "id": "c",
-              "text": {
-                "zh": "组合成一个完整循环",
-                "en": "组合成一个完整循环",
-                "ja": "全体を 1 つの loop にまとめる"
-              }
-            },
-            {
               "id": "a",
               "text": {
-                "zh": "先解释几个名词",
-                "en": "The Problem",
-                "ja": "解決策"
+                "zh": "尽量保留所有历史消息，确保信息完整",
+                "en": "Keep all history to ensure completeness",
+                "ja": "情報の完全性を確保するため全履歴を保持する"
               }
             },
             {
               "id": "b",
               "text": {
-                "zh": "什么是 discovery",
-                "en": "How It Works",
-                "ja": "s04からの変更点"
+                "zh": "定期清空 context window，从头开始新会话",
+                "en": "Periodically clear the context window and start fresh",
+                "ja": "定期的に context window をクリアして新セッションを開始する"
+              }
+            },
+            {
+              "id": "c",
+              "text": {
+                "zh": "活跃有用的内容才重要，context 不是越多越好",
+                "en": "Actively useful content matters; more context is not always better",
+                "ja": "有用なコンテンツが重要。context は多ければ良いというわけではない"
               }
             },
             {
               "id": "d",
               "text": {
-                "zh": "第三步：整体历史过长时，做一次完整压缩",
-                "en": "Key Takeaway",
-                "ja": "第三步：整体历史过长时，做一次完整压缩"
+                "zh": "把所有工具输出写入磁盘后直接从 messages 中删除",
+                "en": "Write all tool outputs to disk and delete them from messages",
+                "ja": "全 tool output をディスクに書き込み messages から削除する"
               }
             }
           ],
-          "answer": "a",
+          "answer": "c",
           "explanation": {
-            "zh": "先解释几个名词",
-            "en": "The Problem",
-            "ja": "解決策"
+            "zh": "context window 管理的核心是保持活跃有用的内容，而不是单纯追求容量更大或保留更多。无关的历史内容占用空间，反而降低质量。",
+            "en": "The core of context management is keeping actively useful content, not simply maximizing capacity or retention. Irrelevant history wastes space and reduces quality.",
+            "ja": "context 管理の核心は有用なコンテンツを保持することです。容量最大化や履歴保持を追い求めるのではなく、不要な履歴はスペースを無駄にし品質を下げます。"
           },
-          "reward_card": "card_s06_002"
+          "reward_card": "card_s06_001"
         },
         {
           "id": "q_s06_003",
           "type": "choice",
-          "difficulty": 1,
+          "difficulty": 3,
           "stem": {
-            "zh": "以下哪个概念与「什么是上下文窗口」直接相关？",
-            "en": "Which concept is directly related to \"The Solution\"?",
-            "ja": "「仕組み」に直接関連する概念はどれですか？"
+            "zh": "什么情况最能说明「context window 需要主动管理」这一问题？",
+            "en": "Which scenario best illustrates why the context window needs active management?",
+            "ja": "context window の積極的な管理が必要な理由を最もよく示すシナリオはどれですか？"
           },
           "options": [
             {
               "id": "d",
               "text": {
-                "zh": "消息规范化",
-                "en": "How It Works",
-                "ja": "s01からの変更点"
-              }
-            },
-            {
-              "id": "b",
-              "text": {
-                "zh": "为什么它真的有用",
-                "en": "为什么它真的有用",
-                "ja": "なぜ本当に useful なのか"
-              }
-            },
-            {
-              "id": "c",
-              "text": {
-                "zh": "第五步：让 skill 正文只在当前需要时进入上下文",
-                "en": "第五步：让 skill 正文只在当前需要时进入上下文",
-                "ja": "第五步：让 skill 正文只在当前需要时进入上下文"
+                "zh": "用户只发了一条短消息，模型直接回复",
+                "en": "The user sends one short message and the model replies directly",
+                "ja": "ユーザーが短いメッセージを 1 件送り、モデルが直接返答する"
               }
             },
             {
               "id": "a",
               "text": {
-                "zh": "什么是上下文窗口",
-                "en": "The Solution",
-                "ja": "仕組み"
+                "zh": "多轮对话加上大量工具调用后，模型开始遗忘早期任务目标",
+                "en": "After many turns and tool calls, the model starts forgetting early task goals",
+                "ja": "多ターンと多くのツール呼び出しの後、モデルが初期のタスク目標を忘れ始める"
+              }
+            },
+            {
+              "id": "b",
+              "text": {
+                "zh": "工具调用失败，需要重试",
+                "en": "A tool call fails and needs to be retried",
+                "ja": "ツール呼び出しが失敗し、再試行が必要になる"
+              }
+            },
+            {
+              "id": "c",
+              "text": {
+                "zh": "模型需要访问网络获取实时数据",
+                "en": "The model needs to access the network for real-time data",
+                "ja": "モデルがリアルタイムデータのためにネットワークにアクセスする必要がある"
               }
             }
           ],
           "answer": "a",
           "explanation": {
-            "zh": "什么是上下文窗口",
-            "en": "The Solution",
-            "ja": "レバー 0 -- persisted-output"
+            "zh": "多轮对话加上大量工具调用会快速填满 context window，导致早期的任务目标被挤出有效范围。这正是需要主动管理、进行压缩的典型场景。",
+            "en": "Multi-turn conversations combined with many tool calls rapidly fill the context window, pushing early task goals out of effective range. This is the classic scenario requiring active management and compaction.",
+            "ja": "多ターンの会話と多くのツール呼び出しはすぐに context window を満たし、初期のタスク目標を有効範囲から押し出します。これが積極的な管理と圧縮が必要な典型的なシナリオです。"
           },
-          "reward_card": "card_s06_003"
+          "reward_card": "card_s06_001"
         },
         {
           "id": "q_s06_004",
           "type": "choice",
-          "difficulty": 1,
+          "difficulty": 2,
           "stem": {
-            "zh": "以下哪个概念与「什么是活跃上下文」直接相关？",
-            "en": "Which concept is directly related to \"How It Works\"?",
-            "ja": "「s05からの変更点」に直接関連する概念はどれですか？"
+            "zh": "工具输出太大时，「大输出持久化」策略要求怎么做？",
+            "en": "When tool output is too large, what does the large output persistence strategy require?",
+            "ja": "tool output が大きすぎる場合、大出力の永続化戦略では何をすべきですか？"
           },
           "options": [
             {
-              "id": "d",
+              "id": "b",
               "text": {
-                "zh": "什么是 fork，为什么它是“下一步”，不是“起步”",
-                "en": "什么是 fork，为什么它是“下一步”，不是“起步”",
-                "ja": "fork とは何か、なぜ「次の段階」なのか"
-              }
-            },
-            {
-              "id": "c",
-              "text": {
-                "zh": "3. SkillRegistry",
-                "en": "3. SkillRegistry",
-                "ja": "3. SkillRegistry"
+                "zh": "把完整内容写入磁盘，messages 中只保留预览和文件路径",
+                "en": "Write the full content to disk; keep only a preview and file path in messages",
+                "ja": "完全な内容をディスクに書き込み、messages にはプレビューとファイルパスのみ保持する"
               }
             },
             {
               "id": "a",
               "text": {
-                "zh": "什么是活跃上下文",
-                "en": "How It Works",
-                "ja": "s05からの変更点"
+                "zh": "把完整内容保留在 messages 中，同时写一份到磁盘作为备份",
+                "en": "Keep the full content in messages and write a backup copy to disk",
+                "ja": "完全な内容を messages に保持しながら、バックアップをディスクに書き込む"
               }
             },
             {
-              "id": "b",
+              "id": "c",
               "text": {
-                "zh": "1. Message",
-                "en": "Key Takeaway",
-                "ja": "1. Message"
+                "zh": "把旧的工具结果替换为占位提示，节省空间",
+                "en": "Replace old tool results with placeholder text to save space",
+                "ja": "古い tool result をプレースホルダーに置き換えてスペースを節約する"
+              }
+            },
+            {
+              "id": "d",
+              "text": {
+                "zh": "把历史对话压缩成摘要，替换原始 messages",
+                "en": "Compress the conversation history into a summary to replace original messages",
+                "ja": "会話履歴を要約に圧縮して元の messages を置き換える"
               }
             }
           ],
-          "answer": "a",
+          "answer": "b",
           "explanation": {
-            "zh": "什么是活跃上下文",
-            "en": "How It Works",
-            "ja": "s05からの変更点"
+            "zh": "大输出持久化的做法是：写磁盘存全文 + messages 里只留预览和文件路径。这样模型还能找到完整内容，但 context window 不被大块数据占满。选项 c 是微压缩，选项 d 是完整压缩，都是不同层次的策略。",
+            "en": "Large output persistence means writing the full content to disk while keeping only a preview and file path in messages. The model can still locate the full content without the context window being filled by bulk data. Options c and d describe different compression strategies.",
+            "ja": "大出力の永続化とは、完全な内容をディスクに書き込み、messages にはプレビューとファイルパスのみ保持することです。モデルは完全な内容を参照できますが、context window は大量データで埋まりません。"
           },
-          "reward_card": "card_s06_004"
+          "reward_card": "card_s06_002"
         },
         {
           "id": "q_s06_005",
           "type": "choice",
           "difficulty": 1,
           "stem": {
-            "zh": "以下哪个概念与「什么是压缩」直接相关？",
-            "en": "Which concept is directly related to \"Step 1: Lever 0 -- Persisted Output\"?",
-            "ja": "「試してみる」に直接関連する概念はどれですか？"
+            "zh": "「大输出写磁盘留预览」这一做法解决的核心问题是什么？",
+            "en": "What core problem does writing large output to disk while keeping a preview solve?",
+            "ja": "大出力をディスクに書き込みプレビューを残す手法が解決する核心的な問題は何ですか？"
           },
           "options": [
             {
               "id": "c",
               "text": {
-                "zh": "CLAUDE.md",
-                "en": "CLAUDE.md",
-                "ja": "CLAUDE.md"
+                "zh": "防止大块 tool_result 占满 context window，同时保留访问完整内容的能力",
+                "en": "Prevent large tool_result blocks from filling the context window while retaining access to full content",
+                "ja": "大きな tool_result ブロックが context window を埋めるのを防ぎつつ、完全な内容へのアクセスを保持する"
               }
             },
             {
               "id": "a",
               "text": {
-                "zh": "什么是压缩",
-                "en": "Step 1: Lever 0 -- Persisted Output",
-                "ja": "試してみる"
+                "zh": "加速工具调用的响应速度",
+                "en": "Speed up tool call response time",
+                "ja": "ツール呼び出しの応答速度を上げる"
               }
             },
             {
               "id": "b",
               "text": {
-                "zh": "最小心智模型",
-                "en": "What You've Mastered",
-                "ja": "最小心智モデル"
+                "zh": "把旧的历史对话生成摘要，减少 token 用量",
+                "en": "Generate summaries of old conversation history to reduce token usage",
+                "ja": "古い会話履歴の要約を生成して token 使用量を削減する"
               }
             },
             {
               "id": "d",
               "text": {
-                "zh": "问题",
-                "en": "What You'll Learn",
-                "ja": "問題"
+                "zh": "用占位提示替换不重要的旧工具结果",
+                "en": "Replace unimportant old tool results with placeholder text",
+                "ja": "重要でない古い tool result をプレースホルダーに置き換える"
+              }
+            }
+          ],
+          "answer": "c",
+          "explanation": {
+            "zh": "大输出写磁盘留预览的目的是防止 tool_result 把 context window 塞满，同时文件路径让模型随时可以读回完整内容。选项 b 是完整压缩，选项 d 是微压缩，属于其他层次的策略。",
+            "en": "Writing large output to disk with a preview prevents tool_result from filling the context window, while the file path lets the model read back the full content at any time. Options b and d describe other compression layers.",
+            "ja": "大出力をディスクに書き込みプレビューを残すことで、tool_result が context window を埋めるのを防ぎ、ファイルパスでモデルはいつでも完全な内容を読み返せます。"
+          },
+          "reward_card": "card_s06_002"
+        },
+        {
+          "id": "q_s06_006",
+          "type": "choice",
+          "difficulty": 3,
+          "stem": {
+            "zh": "以下哪个场景最适合用「大输出写磁盘留预览」而不是其他压缩策略？",
+            "en": "Which scenario best calls for writing large output to disk with a preview rather than other compression strategies?",
+            "ja": "他の圧縮戦略ではなく大出力をディスクに書き込みプレビューを残す方法が最も適しているシナリオはどれですか？"
+          },
+          "options": [
+            {
+              "id": "a",
+              "text": {
+                "zh": "单次工具调用返回了 50000 字符的 JSON 数据",
+                "en": "A single tool call returns 50,000 characters of JSON data",
+                "ja": "単一のツール呼び出しが 50,000 文字の JSON データを返す"
+              }
+            },
+            {
+              "id": "b",
+              "text": {
+                "zh": "10 轮前的一条工具结果已经不再相关",
+                "en": "A tool result from 10 turns ago is no longer relevant",
+                "ja": "10 ターン前の tool result がもはや関係ない"
+              }
+            },
+            {
+              "id": "c",
+              "text": {
+                "zh": "整体对话历史超过了 context window 的 80%",
+                "en": "The overall conversation history exceeds 80% of the context window",
+                "ja": "全体の会話履歴が context window の 80% を超えている"
+              }
+            },
+            {
+              "id": "d",
+              "text": {
+                "zh": "用户要求模型记住所有历史步骤",
+                "en": "The user wants the model to remember all historical steps",
+                "ja": "ユーザーがモデルに全ての履歴ステップを記憶させたい"
               }
             }
           ],
           "answer": "a",
           "explanation": {
-            "zh": "什么是压缩",
-            "en": "Step 1: Lever 0 -- Persisted Output",
-            "ja": "試してみる"
+            "zh": "单次工具调用产生超大输出，适合立即写磁盘留预览。选项 b（旧结果不相关）对应微压缩（占位替换），选项 c（历史过长）对应完整压缩（生成摘要）。",
+            "en": "A single tool call producing an oversized output is best handled by immediately writing to disk with a preview. Option b calls for micro-compaction; option c calls for full compaction.",
+            "ja": "単一のツール呼び出しで超大出力が生じる場合は、すぐにディスクに書き込みプレビューを残すのが最適です。選択肢 b は微圧縮、選択肢 c は完全圧縮に対応します。"
+          },
+          "reward_card": "card_s06_002"
+        },
+        {
+          "id": "q_s06_007",
+          "type": "choice",
+          "difficulty": 2,
+          "stem": {
+            "zh": "「微压缩」策略对旧工具结果的处理方式是什么？",
+            "en": "How does the micro-compaction strategy handle old tool results?",
+            "ja": "微圧縮戦略は古い tool result をどのように処理しますか？"
+          },
+          "options": [
+            {
+              "id": "d",
+              "text": {
+                "zh": "把旧工具结果替换为占位提示，只保留最近几个完整内容",
+                "en": "Replace old tool results with placeholders; keep only the most recent ones intact",
+                "ja": "古い tool result をプレースホルダーに置き換え、最近のものだけ完全に保持する"
+              }
+            },
+            {
+              "id": "a",
+              "text": {
+                "zh": "把所有工具结果写入磁盘，messages 中保留预览",
+                "en": "Write all tool results to disk and keep previews in messages",
+                "ja": "全 tool result をディスクに書き込み、messages にプレビューを保持する"
+              }
+            },
+            {
+              "id": "b",
+              "text": {
+                "zh": "把整段对话历史压缩成一段摘要文字",
+                "en": "Compress the entire conversation history into a single summary",
+                "ja": "会話履歴全体を 1 つの要約に圧縮する"
+              }
+            },
+            {
+              "id": "c",
+              "text": {
+                "zh": "删除所有工具调用记录，只保留用户和助手的文字消息",
+                "en": "Delete all tool call records; keep only user and assistant text messages",
+                "ja": "全ツール呼び出し記録を削除し、ユーザーとアシスタントのテキストメッセージのみ保持する"
+              }
+            }
+          ],
+          "answer": "d",
+          "explanation": {
+            "zh": "微压缩是：只保留最近几个工具结果的完整内容，更旧的替换为占位提示。旧结果不必永远原样保留，占位提示已经足够提示模型。选项 a 是第一层大输出策略，选项 b 是完整压缩。",
+            "en": "Micro-compaction means keeping the most recent tool results intact and replacing older ones with placeholders. Old results do not need to be retained verbatim; placeholders give the model sufficient context. Option a is the first-layer strategy; option b is full compaction.",
+            "ja": "微圧縮とは、最近の tool result の完全な内容のみ保持し、古いものをプレースホルダーに置き換えることです。古い結果は逐語的に保持する必要はなく、プレースホルダーで十分です。"
+          },
+          "reward_card": "card_s06_003"
+        },
+        {
+          "id": "q_s06_008",
+          "type": "choice",
+          "difficulty": 1,
+          "stem": {
+            "zh": "微压缩策略的核心假设是什么？",
+            "en": "What is the core assumption behind micro-compaction?",
+            "ja": "微圧縮戦略の核心的な前提は何ですか？"
+          },
+          "options": [
+            {
+              "id": "a",
+              "text": {
+                "zh": "旧工具结果用占位提示替换就足够了，不需要保留原始内容",
+                "en": "Replacing old tool results with a placeholder is sufficient; original content is not needed",
+                "ja": "古い tool result をプレースホルダーに置き換えるだけで十分で、元の内容は不要"
+              }
+            },
+            {
+              "id": "b",
+              "text": {
+                "zh": "旧工具结果原样保留才能保证上下文完整性",
+                "en": "Old tool results must be kept verbatim to ensure context completeness",
+                "ja": "古い tool result は逐語的に保持しなければ context の完全性が保てない"
+              }
+            },
+            {
+              "id": "c",
+              "text": {
+                "zh": "工具结果必须全部写入磁盘才算完整管理",
+                "en": "All tool results must be written to disk for proper management",
+                "ja": "全 tool result をディスクに書き込まなければ適切な管理とは言えない"
+              }
+            },
+            {
+              "id": "d",
+              "text": {
+                "zh": "只要生成摘要，旧工具结果就可以直接丢弃",
+                "en": "As long as a summary is generated, old tool results can be discarded entirely",
+                "ja": "要約を生成すれば古い tool result はそのまま廃棄できる"
+              }
+            }
+          ],
+          "answer": "a",
+          "explanation": {
+            "zh": "微压缩的核心假设是：旧工具结果已不再直接相关，用占位提示替换已经足够让模型理解发生了什么。不需要写磁盘（那是第一层策略），也不需要生成摘要（那是第三层策略）。",
+            "en": "The core assumption of micro-compaction is that old tool results are no longer directly relevant; a placeholder is sufficient for the model to understand what happened. Writing to disk or generating summaries are not needed here.",
+            "ja": "微圧縮の核心的な前提は、古い tool result はもはや直接関係なく、プレースホルダーでモデルが何が起きたかを理解するのに十分という点です。"
+          },
+          "reward_card": "card_s06_003"
+        },
+        {
+          "id": "q_s06_009",
+          "type": "choice",
+          "difficulty": 3,
+          "stem": {
+            "zh": "以下哪种情况最适合使用微压缩（占位替换），而不是大输出写磁盘或完整压缩？",
+            "en": "Which situation best calls for micro-compaction rather than large-output disk persistence or full compaction?",
+            "ja": "大出力のディスク永続化や完全圧縮ではなく、微圧縮が最も適している状況はどれですか？"
+          },
+          "options": [
+            {
+              "id": "c",
+              "text": {
+                "zh": "5 轮前调用 grep 返回了中等大小的结果，现在任务已进展到下一步",
+                "en": "A grep call 5 turns ago returned a medium-sized result; the task has moved to the next step",
+                "ja": "5 ターン前に grep が中程度のサイズの結果を返したが、タスクは次のステップに進んでいる"
+              }
+            },
+            {
+              "id": "a",
+              "text": {
+                "zh": "单次工具调用返回了 100KB 的文件内容",
+                "en": "A single tool call returned 100KB of file content",
+                "ja": "単一のツール呼び出しが 100KB のファイル内容を返した"
+              }
+            },
+            {
+              "id": "b",
+              "text": {
+                "zh": "整体 context 已经超过 90%，继续工作会触发截断",
+                "en": "The overall context is over 90% full; continuing would trigger truncation",
+                "ja": "全体の context が 90% を超えており、続けると切り捨てが発生する"
+              }
+            },
+            {
+              "id": "d",
+              "text": {
+                "zh": "用户希望模型总结这次会话并保存到文件",
+                "en": "The user wants the model to summarize the session and save it to a file",
+                "ja": "ユーザーがモデルにセッションを要約してファイルに保存させたい"
+              }
+            }
+          ],
+          "answer": "c",
+          "explanation": {
+            "zh": "5 轮前的中等输出已不再直接相关，用占位替换就足够了——这是微压缩的典型场景。选项 a（100KB 大输出）适合第一层写磁盘，选项 b（整体过长）适合第三层完整压缩。",
+            "en": "A medium-sized result from 5 turns ago that is no longer relevant is the ideal case for micro-compaction with a placeholder. Option a calls for layer-1 disk persistence; option b calls for layer-3 full compaction.",
+            "ja": "5 ターン前の中程度の結果でもはや関係ない場合は、プレースホルダーによる微圧縮の典型的なシナリオです。選択肢 a は第 1 層のディスク永続化、選択肢 b は第 3 層の完全圧縮に適しています。"
+          },
+          "reward_card": "card_s06_003"
+        },
+        {
+          "id": "q_s06_010",
+          "type": "choice",
+          "difficulty": 2,
+          "stem": {
+            "zh": "「完整压缩」策略会把历史压缩成摘要。以下哪些内容应该被保留在摘要中？",
+            "en": "The full compaction strategy compresses history into a summary. Which of the following should be retained in the summary?",
+            "ja": "完全圧縮戦略は履歴を要約に圧縮します。要約に保持すべき内容はどれですか？"
+          },
+          "options": [
+            {
+              "id": "a",
+              "text": {
+                "zh": "所有原始工具输出的完整文本",
+                "en": "Complete text of all original tool outputs",
+                "ja": "全ての元の tool output の完全なテキスト"
+              }
+            },
+            {
+              "id": "b",
+              "text": {
+                "zh": "目标、已完成动作、改过的文件、关键决定、未完成事项",
+                "en": "Goals, completed actions, modified files, key decisions, and pending items",
+                "ja": "目標、完了したアクション、変更したファイル、重要な決定、未完了の事項"
+              }
+            },
+            {
+              "id": "c",
+              "text": {
+                "zh": "只需要保留最终目标，中间过程可以全部丢弃",
+                "en": "Only the final goal needs to be kept; intermediate steps can all be discarded",
+                "ja": "最終目標だけを保持すれば良く、中間ステップはすべて破棄できる"
+              }
+            },
+            {
+              "id": "d",
+              "text": {
+                "zh": "用户消息的原文，助手回复可以省略",
+                "en": "Original user messages; assistant replies can be omitted",
+                "ja": "ユーザーメッセージの原文のみ; アシスタントの返答は省略できる"
+              }
+            }
+          ],
+          "answer": "b",
+          "explanation": {
+            "zh": "完整压缩的摘要需要涵盖：目标、已完成动作、改过的文件、关键决定、未完成事项。这五类信息保证了模型能从摘要继续工作，而不是丢失上下文。仅保留目标或仅保留用户消息都不够。",
+            "en": "A full compaction summary must cover: goals, completed actions, modified files, key decisions, and pending items. These five categories ensure the model can resume work from the summary without losing context.",
+            "ja": "完全圧縮の要約には、目標、完了したアクション、変更したファイル、重要な決定、未完了の事項を含める必要があります。これら 5 つのカテゴリがモデルが要約から作業を再開できることを保証します。"
+          },
+          "reward_card": "card_s06_004"
+        },
+        {
+          "id": "q_s06_011",
+          "type": "choice",
+          "difficulty": 1,
+          "stem": {
+            "zh": "完整压缩（把历史变成摘要）的触发时机是什么？",
+            "en": "When should full compaction be triggered?",
+            "ja": "完全圧縮はいつトリガーすべきですか？"
+          },
+          "options": [
+            {
+              "id": "c",
+              "text": {
+                "zh": "整体上下文太长，继续工作有截断主线目标的风险时",
+                "en": "When the overall context is too long and continuing risks truncating the main task goal",
+                "ja": "全体的なコンテキストが長すぎて、続けるとメインタスク目標が切り捨てられるリスクがある時"
+              }
+            },
+            {
+              "id": "a",
+              "text": {
+                "zh": "每次工具调用之后都应该做一次完整压缩",
+                "en": "Full compaction should be done after every tool call",
+                "ja": "全てのツール呼び出しの後に完全圧縮を行うべき"
+              }
+            },
+            {
+              "id": "b",
+              "text": {
+                "zh": "单条工具返回了超大输出时",
+                "en": "When a single tool call returns an oversized output",
+                "ja": "単一のツール呼び出しが超大出力を返す時"
+              }
+            },
+            {
+              "id": "d",
+              "text": {
+                "zh": "旧工具结果不再相关，需要腾出空间时",
+                "en": "When old tool results are no longer relevant and space needs to be freed",
+                "ja": "古い tool result がもはや関係なく、スペースを空ける必要がある時"
+              }
+            }
+          ],
+          "answer": "c",
+          "explanation": {
+            "zh": "完整压缩是最重量级的策略，只在整体 context 过长、继续下去会截断主线目标时才使用。选项 b（超大单次输出）对应第一层写磁盘，选项 d（旧结果不相关）对应微压缩。",
+            "en": "Full compaction is the heaviest strategy and is used only when the overall context is too long and continuing would truncate the main task goal. Option b calls for layer-1 disk persistence; option d calls for micro-compaction.",
+            "ja": "完全圧縮は最も重いレイヤーの戦略であり、全体的なコンテキストが長すぎて継続するとメインタスク目標が切り捨てられる場合にのみ使用します。"
+          },
+          "reward_card": "card_s06_004"
+        },
+        {
+          "id": "q_s06_012",
+          "type": "choice",
+          "difficulty": 3,
+          "stem": {
+            "zh": "完整压缩「不是丢失信息，而是保留继续工作真正需要的部分」。以下哪项最能体现这一思想？",
+            "en": "Full compaction is not losing information but retaining what is truly needed to continue working. Which option best reflects this idea?",
+            "ja": "完全圧縮は情報を失うのではなく、作業を継続するために本当に必要な部分を保持することです。どの選択肢がこの考えを最もよく反映していますか？"
+          },
+          "options": [
+            {
+              "id": "a",
+              "text": {
+                "zh": "摘要应包含所有原始工具输出的逐字记录",
+                "en": "The summary should include verbatim records of all original tool outputs",
+                "ja": "要約には全ての元の tool output の逐語記録を含めるべき"
+              }
+            },
+            {
+              "id": "b",
+              "text": {
+                "zh": "摘要只需包含用户的最终指令，其他内容都是噪声",
+                "en": "The summary only needs the user's final instruction; everything else is noise",
+                "ja": "要約にはユーザーの最終指示のみが必要で、他は全てノイズ"
+              }
+            },
+            {
+              "id": "d",
+              "text": {
+                "zh": "摘要保留目标和关键决定，让模型可以从摘要出发继续完成任务",
+                "en": "The summary retains goals and key decisions so the model can continue the task from the summary",
+                "ja": "要約は目標と重要な決定を保持し、モデルが要約からタスクを継続できるようにする"
+              }
+            },
+            {
+              "id": "c",
+              "text": {
+                "zh": "压缩后应重新调用所有工具来恢复状态",
+                "en": "After compaction, all tools should be recalled to restore state",
+                "ja": "圧縮後は全ツールを再呼び出しして状態を復元すべき"
+              }
+            }
+          ],
+          "answer": "d",
+          "explanation": {
+            "zh": "完整压缩的精髓是摘要保留「继续工作真正需要的」内容——目标、关键决定、已完成事项等。这样模型能从摘要直接继续，而不是从头再来。逐字保留原始内容违背了压缩的目的。",
+            "en": "The essence of full compaction is that the summary retains what is truly needed to continue: goals, key decisions, completed items. The model can resume directly from the summary rather than starting over. Verbatim retention defeats the purpose.",
+            "ja": "完全圧縮の本質は、要約が継続に本当に必要な内容（目標、重要な決定、完了した事項）を保持することです。モデルは要約から直接作業を再開できます。"
+          },
+          "reward_card": "card_s06_004"
+        },
+        {
+          "id": "q_s06_013",
+          "type": "choice",
+          "difficulty": 2,
+          "stem": {
+            "zh": "三层压缩策略的正确顺序（从局部到整体）是什么？",
+            "en": "What is the correct order of the three-layer compression strategy from local to global?",
+            "ja": "3 層圧縮戦略の正しい順序（局所から全体へ）は何ですか？"
+          },
+          "options": [
+            {
+              "id": "a",
+              "text": {
+                "zh": "①大输出写磁盘留预览 → ②旧结果占位替换 → ③历史生成摘要",
+                "en": "1. Write large output to disk with preview -> 2. Replace old results with placeholders -> 3. Generate summary of history",
+                "ja": "1. 大出力をディスクに書き込みプレビューを残す -> 2. 古い結果をプレースホルダーに置き換える -> 3. 履歴の要約を生成する"
+              }
+            },
+            {
+              "id": "b",
+              "text": {
+                "zh": "①历史生成摘要 → ②旧结果占位替换 → ③大输出写磁盘留预览",
+                "en": "1. Generate summary of history -> 2. Replace old results with placeholders -> 3. Write large output to disk with preview",
+                "ja": "1. 履歴の要約を生成 -> 2. 古い結果をプレースホルダーに置き換える -> 3. 大出力をディスクに書き込みプレビューを残す"
+              }
+            },
+            {
+              "id": "c",
+              "text": {
+                "zh": "①旧结果占位替换 → ②大输出写磁盘留预览 → ③历史生成摘要",
+                "en": "1. Replace old results with placeholders -> 2. Write large output to disk with preview -> 3. Generate summary of history",
+                "ja": "1. 古い結果をプレースホルダーに置き換える -> 2. 大出力をディスクに書き込みプレビューを残す -> 3. 履歴の要約を生成する"
+              }
+            },
+            {
+              "id": "d",
+              "text": {
+                "zh": "①大输出写磁盘留预览 → ②历史生成摘要 → ③旧结果占位替换",
+                "en": "1. Write large output to disk with preview -> 2. Generate summary of history -> 3. Replace old results with placeholders",
+                "ja": "1. 大出力をディスクに書き込みプレビューを残す -> 2. 履歴の要約を生成 -> 3. 古い結果をプレースホルダーに置き換える"
+              }
+            }
+          ],
+          "answer": "a",
+          "explanation": {
+            "zh": "三层顺序从局部到整体：第一层处理单次大输出（写磁盘留预览），第二层处理旧工具结果（占位替换），第三层处理整体 context 过长（生成摘要）。由浅入深，按需组合。",
+            "en": "The three layers go from local to global: layer 1 handles single large outputs, layer 2 handles old tool results, layer 3 handles overall context length. Applied incrementally as needed.",
+            "ja": "3 層は局所から全体へ: 第 1 層は単一の大出力、第 2 層は古い tool result、第 3 層は全体の context 長を処理します。"
+          },
+          "reward_card": "card_s06_005"
+        },
+        {
+          "id": "q_s06_014",
+          "type": "choice",
+          "difficulty": 1,
+          "stem": {
+            "zh": "三层压缩策略的设计思路是什么？",
+            "en": "What is the design philosophy behind the three-layer compression strategy?",
+            "ja": "3 層圧縮戦略の設計思想は何ですか？"
+          },
+          "options": [
+            {
+              "id": "d",
+              "text": {
+                "zh": "由浅入深，按需组合，共同保持 context 健康",
+                "en": "From shallow to deep, combine as needed, collectively keep context healthy",
+                "ja": "浅いものから深いものへ、必要に応じて組み合わせ、共に context を健全に保つ"
+              }
+            },
+            {
+              "id": "a",
+              "text": {
+                "zh": "三层必须同时使用，单独使用任何一层都无效",
+                "en": "All three layers must be used simultaneously; using any one alone is ineffective",
+                "ja": "3 層は同時に使用しなければならず、単独では効果がない"
+              }
+            },
+            {
+              "id": "b",
+              "text": {
+                "zh": "第三层（摘要）是唯一真正有效的策略，前两层只是辅助",
+                "en": "The third layer is the only truly effective strategy; the first two are auxiliary",
+                "ja": "第 3 層だけが真に効果的な戦略で、前の 2 層は補助的なもの"
+              }
+            },
+            {
+              "id": "c",
+              "text": {
+                "zh": "每次会话开始时先做完整压缩，再逐步添加新内容",
+                "en": "Perform full compaction at the start of each session before adding new content",
+                "ja": "各セッションの開始時に完全圧縮を行ってから新しいコンテンツを追加する"
+              }
+            }
+          ],
+          "answer": "d",
+          "explanation": {
+            "zh": "三层压缩由浅入深：第一层针对单次大输出，第二层针对旧工具结果，第三层针对整体历史过长。三者可按需独立或组合使用，共同维护 context 健康，不需要全部同时启用。",
+            "en": "The three layers range from shallow to deep: layer 1 for single large outputs, layer 2 for old tool results, layer 3 for overall history length. They can be used independently or combined as needed to maintain context health.",
+            "ja": "3 層は浅いものから深いものへ。必要に応じて単独または組み合わせて使用でき、context を健全に保ちます。"
+          },
+          "reward_card": "card_s06_005"
+        },
+        {
+          "id": "q_s06_015",
+          "type": "choice",
+          "difficulty": 2,
+          "stem": {
+            "zh": "同时面对「单次工具返回大输出」和「整体 context 接近上限」两个问题，应该怎么处理？",
+            "en": "When facing both a single tool returning large output and overall context near the limit, what should you do?",
+            "ja": "単一ツールが大出力を返した場合と全体の context が上限に近い場合に同時に直面したとき、どうすべきですか？"
+          },
+          "options": [
+            {
+              "id": "a",
+              "text": {
+                "zh": "只做完整压缩（摘要），忽略大输出问题",
+                "en": "Only do full compaction, ignore the large output issue",
+                "ja": "完全圧縮のみを行い、大出力の問題は無視する"
+              }
+            },
+            {
+              "id": "b",
+              "text": {
+                "zh": "先把大输出写磁盘留预览（第一层），同时或随后做完整压缩（第三层）",
+                "en": "First write large output to disk with preview (layer 1), then also apply full compaction (layer 3)",
+                "ja": "まず大出力をディスクに書き込みプレビューを残し（第 1 層）、次に完全圧縮も適用する（第 3 層）"
+              }
+            },
+            {
+              "id": "c",
+              "text": {
+                "zh": "只做微压缩（占位替换），两个问题都可以解决",
+                "en": "Only do micro-compaction; it solves both problems",
+                "ja": "微圧縮のみ行えば両方の問題が解決できる"
+              }
+            },
+            {
+              "id": "d",
+              "text": {
+                "zh": "这种情况无法处理，只能重启会话",
+                "en": "This situation cannot be handled; you can only restart the session",
+                "ja": "この状況は処理できず、セッションを再起動するしかない"
+              }
+            }
+          ],
+          "answer": "b",
+          "explanation": {
+            "zh": "三层策略可以按需组合：大输出问题用第一层（写磁盘留预览），整体 context 过长用第三层（生成摘要）。两者可以同时或先后应用，这正是「按需组合」的设计意图。",
+            "en": "The three layers can be combined as needed: large output calls for layer 1; overall context length calls for layer 3. Both can be applied simultaneously or in sequence, which is the intent of combining as needed.",
+            "ja": "3 層は必要に応じて組み合わせられます。大出力には第 1 層、全体の context 長には第 3 層を適用できます。"
+          },
+          "reward_card": "card_s06_005"
+        },
+        {
+          "id": "q_s06_016",
+          "type": "choice",
+          "difficulty": 2,
+          "stem": {
+            "zh": "以下哪个说法正确描述了三层压缩策略中「预览」的作用？",
+            "en": "Which statement correctly describes the role of a preview in the three-layer compression strategy?",
+            "ja": "3 層圧縮戦略におけるプレビューの役割を正しく説明しているのはどれですか？"
+          },
+          "options": [
+            {
+              "id": "d",
+              "text": {
+                "zh": "预览让模型知道磁盘上有完整内容可以读取，而不必把大块数据放进 messages",
+                "en": "The preview lets the model know full content is available on disk without putting bulk data in messages",
+                "ja": "プレビューにより、モデルはメッセージに大量データを入れることなく、ディスクに完全なコンテンツがあることを知れる"
+              }
+            },
+            {
+              "id": "a",
+              "text": {
+                "zh": "预览是整个输出的等价替代，不需要再读磁盘文件",
+                "en": "The preview is an equivalent substitute for the full output; no need to read the disk file",
+                "ja": "プレビューは完全な出力の等価な代替であり、ディスクファイルを読む必要はない"
+              }
+            },
+            {
+              "id": "b",
+              "text": {
+                "zh": "预览只是装饰性的，不影响模型的理解",
+                "en": "The preview is decorative and does not affect model understanding",
+                "ja": "プレビューは装飾的なものでモデルの理解に影響しない"
+              }
+            },
+            {
+              "id": "c",
+              "text": {
+                "zh": "预览就是占位提示，和微压缩中的占位符功能相同",
+                "en": "The preview is the same as a placeholder; it has the same function as micro-compaction placeholders",
+                "ja": "プレビューはプレースホルダーと同じで、微圧縮のプレースホルダーと同じ機能を持つ"
+              }
+            }
+          ],
+          "answer": "d",
+          "explanation": {
+            "zh": "预览的作用是在 messages 中给出一个简短提示（包含文件路径），让模型知道完整内容在磁盘上，需要时可以读取。这样 context window 不被大块数据占满，同时完整内容也没有丢失。",
+            "en": "The preview provides a brief notice in messages including the file path, so the model knows the full content is on disk and can retrieve it when needed. This prevents the context window from being filled while preserving full content.",
+            "ja": "プレビューの役割は、messages に簡潔な通知（ファイルパスを含む）を提供し、完全なコンテンツがディスク上にあることをモデルが知り、必要時に取得できるようにすることです。"
+          },
+          "reward_card": "card_s06_002"
+        },
+        {
+          "id": "q_s06_017",
+          "type": "choice",
+          "difficulty": 1,
+          "stem": {
+            "zh": "「活跃上下文」和「context window 总容量」有什么区别？",
+            "en": "What is the difference between active context and total context window capacity?",
+            "ja": "アクティブコンテキストと context window の総容量の違いは何ですか？"
+          },
+          "options": [
+            {
+              "id": "b",
+              "text": {
+                "zh": "总容量是硬件上限，活跃上下文是其中真正影响当前工作的有用部分",
+                "en": "Total capacity is the hard limit; active context is the useful portion that truly affects current work",
+                "ja": "総容量はハード上限、アクティブコンテキストはその中で現在の作業に真に影響する有用な部分"
+              }
+            },
+            {
+              "id": "a",
+              "text": {
+                "zh": "两者完全相同，活跃上下文就是 context window 的全部内容",
+                "en": "They are identical; active context is all the content in the context window",
+                "ja": "両者は同一で、アクティブコンテキストは context window の全内容"
+              }
+            },
+            {
+              "id": "c",
+              "text": {
+                "zh": "活跃上下文是用户当前正在输入的消息，总容量包含历史",
+                "en": "Active context is the user's current input; total capacity includes history",
+                "ja": "アクティブコンテキストはユーザーが現在入力しているメッセージ、総容量は履歴を含む"
+              }
+            },
+            {
+              "id": "d",
+              "text": {
+                "zh": "活跃上下文是压缩后的摘要，总容量是压缩前的原始内容",
+                "en": "Active context is the compressed summary; total capacity is the original pre-compression content",
+                "ja": "アクティブコンテキストは圧縮後の要約、総容量は圧縮前の元のコンテンツ"
+              }
+            }
+          ],
+          "answer": "b",
+          "explanation": {
+            "zh": "context window 总容量是模型能处理的硬性上限，活跃上下文是其中真正有用、真正影响当前工作的部分。好的 context 管理就是让活跃有用的比例更高，而不是盲目追求填满总容量。",
+            "en": "The total context window capacity is the hard limit of what the model can process. Active context is the useful portion that truly affects current work. Good context management maximizes the ratio of actively useful content.",
+            "ja": "context window の総容量はモデルが処理できるハード上限です。アクティブコンテキストはその中で現在の作業に真に影響する有用な部分です。"
+          },
+          "reward_card": "card_s06_001"
+        },
+        {
+          "id": "q_s06_018",
+          "type": "choice",
+          "difficulty": 3,
+          "stem": {
+            "zh": "完整压缩生成的摘要里没有包含「已修改的文件列表」。这会带来什么风险？",
+            "en": "A full compaction summary omits the list of modified files. What risk does this create?",
+            "ja": "完全圧縮の要約に変更されたファイルのリストが含まれていない場合、どのようなリスクが生じますか？"
+          },
+          "options": [
+            {
+              "id": "a",
+              "text": {
+                "zh": "没有风险，摘要只需要目标和决定，文件列表不重要",
+                "en": "No risk; a summary only needs goals and decisions; the file list is not important",
+                "ja": "リスクなし。要約には目標と決定だけが必要で、ファイルリストは重要でない"
+              }
+            },
+            {
+              "id": "c",
+              "text": {
+                "zh": "模型可能重复修改同一文件，或不知道哪些文件已经改过，导致工作出错",
+                "en": "The model may re-modify the same files or not know which files were already changed, causing errors",
+                "ja": "モデルが同じファイルを再修正したり、どのファイルが既に変更されたか分からなくなり、エラーが発生する可能性がある"
+              }
+            },
+            {
+              "id": "b",
+              "text": {
+                "zh": "摘要会自动从磁盘读取文件列表，不需要手动包含",
+                "en": "The summary will automatically read the file list from disk; no need to include it manually",
+                "ja": "要約は自動的にディスクからファイルリストを読み取るため、手動で含める必要はない"
+              }
+            },
+            {
+              "id": "d",
+              "text": {
+                "zh": "context window 会因此更快被填满",
+                "en": "The context window will fill up faster as a result",
+                "ja": "その結果、context window がより早く埋まる"
+              }
+            }
+          ],
+          "answer": "c",
+          "explanation": {
+            "zh": "已修改的文件列表是完整压缩摘要中的关键信息。缺少它，模型在后续步骤中无法判断哪些文件已经改过，可能重复修改或遗漏，导致任务出错。这也正是五类摘要要素缺一不可的原因。",
+            "en": "The list of modified files is essential in a full compaction summary. Without it, the model cannot determine which files have been changed in subsequent steps, potentially causing duplicate modifications or omissions.",
+            "ja": "変更されたファイルのリストは完全圧縮の要約において重要な情報です。それがないと、モデルは後続のステップでどのファイルが変更されたか判断できず、重複修正や見落としが発生する可能性があります。"
+          },
+          "reward_card": "card_s06_004"
+        },
+        {
+          "id": "q_s06_019",
+          "type": "choice",
+          "difficulty": 2,
+          "stem": {
+            "zh": "以下哪项对三层压缩策略的描述是错误的？",
+            "en": "Which of the following descriptions of the three-layer compression strategy is INCORRECT?",
+            "ja": "3 層圧縮戦略の説明として誤っているのはどれですか？"
+          },
+          "options": [
+            {
+              "id": "a",
+              "text": {
+                "zh": "第一层处理单次工具产生的大输出，做法是写磁盘留预览",
+                "en": "Layer 1 handles large output from a single tool call by writing to disk with a preview",
+                "ja": "第 1 層は単一ツール呼び出しの大出力をディスクへの書き込みとプレビュー保持で処理する"
+              }
+            },
+            {
+              "id": "b",
+              "text": {
+                "zh": "第二层对旧工具结果做占位替换，节省 context 空间",
+                "en": "Layer 2 replaces old tool results with placeholders to save context space",
+                "ja": "第 2 層は古い tool result をプレースホルダーに置き換えて context スペースを節約する"
+              }
+            },
+            {
+              "id": "d",
+              "text": {
+                "zh": "三层策略必须按顺序全部执行，不能单独使用其中一层",
+                "en": "All three layers must be executed in order; no single layer can be used alone",
+                "ja": "3 層は順番通りに全て実行しなければならず、単独で 1 層だけ使用することはできない"
+              }
+            },
+            {
+              "id": "c",
+              "text": {
+                "zh": "第三层对整体历史过长时生成摘要，作为新起点",
+                "en": "Layer 3 generates a summary when overall history is too long, serving as a new starting point",
+                "ja": "第 3 層は全体的な履歴が長すぎる場合に要約を生成し、新しい出発点とする"
+              }
+            }
+          ],
+          "answer": "d",
+          "explanation": {
+            "zh": "三层压缩策略的设计理念是「按需组合」，不要求全部执行。可以只用第一层，也可以只用第三层，或根据实际情况组合使用。说「必须全部执行」是错误的。",
+            "en": "The three-layer compression strategy is designed to be combined as needed, not executed in full every time. Any single layer can be used independently, or they can be combined based on the situation.",
+            "ja": "3 層圧縮戦略は必要に応じて組み合わせるよう設計されており、全てを実行することは必須ではありません。"
+          },
+          "reward_card": "card_s06_005"
+        },
+        {
+          "id": "q_s06_020",
+          "type": "choice",
+          "difficulty": 1,
+          "stem": {
+            "zh": "完整压缩（第三层）与微压缩（第二层）最本质的区别是什么？",
+            "en": "What is the most fundamental difference between full compaction and micro-compaction?",
+            "ja": "完全圧縮と微圧縮の最も本質的な違いは何ですか？"
+          },
+          "options": [
+            {
+              "id": "b",
+              "text": {
+                "zh": "微压缩只替换个别旧工具结果；完整压缩对整段历史生成摘要作为新起点",
+                "en": "Micro-compaction only replaces individual old tool results; full compaction generates a summary of the entire history as a new starting point",
+                "ja": "微圧縮は個々の古い tool result を置き換えるだけ; 完全圧縮は履歴全体の要約を新しい出発点として生成する"
+              }
+            },
+            {
+              "id": "a",
+              "text": {
+                "zh": "微压缩是写磁盘，完整压缩是占位替换",
+                "en": "Micro-compaction writes to disk; full compaction uses placeholder replacement",
+                "ja": "微圧縮はディスクへの書き込み; 完全圧縮はプレースホルダー置き換え"
+              }
+            },
+            {
+              "id": "c",
+              "text": {
+                "zh": "完整压缩比微压缩消耗更多 context，不建议频繁使用",
+                "en": "Full compaction consumes more context than micro-compaction and should not be used frequently",
+                "ja": "完全圧縮は微圧縮より多くの context を消費し、頻繁に使用すべきでない"
+              }
+            },
+            {
+              "id": "d",
+              "text": {
+                "zh": "两者效果完全相同，只是操作方式不同",
+                "en": "Both have identical effects; only the operation method differs",
+                "ja": "両者の効果は全く同じで、操作方法が異なるだけ"
+              }
+            }
+          ],
+          "answer": "b",
+          "explanation": {
+            "zh": "微压缩（第二层）是局部操作：只替换个别旧工具结果为占位提示。完整压缩（第三层）是全局操作：把整段历史压缩成摘要，作为继续工作的新起点。两者作用范围和机制都不同。",
+            "en": "Micro-compaction is a local operation replacing individual old tool results with placeholders. Full compaction is a global operation compressing the entire history into a summary as a new starting point. They differ in both scope and mechanism.",
+            "ja": "微圧縮は局所的な操作で、個々の古い tool result をプレースホルダーに置き換えます。完全圧縮はグローバルな操作で、履歴全体を要約に圧縮して新しい出発点とします。"
+          },
+          "reward_card": "card_s06_003"
+        },
+        {
+          "id": "q_s06_021",
+          "type": "choice",
+          "difficulty": 3,
+          "stem": {
+            "zh": "一个 agent 正在做大型代码重构任务，已经执行了 30 轮工具调用。context 用量达到 85%，最近 5 轮有 3 个超大文件读取结果。应该优先选择哪个策略组合？",
+            "en": "An agent doing large code refactoring has executed 30 tool calls. Context usage is at 85% and 3 of the last 5 turns had oversized file read results. Which strategy combination should be prioritized?",
+            "ja": "大規模なコードリファクタリングを行うエージェントが 30 ターンのツール呼び出しを実行しました。context 使用量は 85% で、直近 5 ターンのうち 3 つで超大ファイル読み取り結果がありました。どの戦略の組み合わせを優先すべきですか？"
+          },
+          "options": [
+            {
+              "id": "a",
+              "text": {
+                "zh": "只用微压缩，把 30 轮的工具结果全部占位替换",
+                "en": "Use only micro-compaction to replace all 30 turns of tool results with placeholders",
+                "ja": "微圧縮のみを使用して、30 ターン全ての tool result をプレースホルダーに置き換える"
+              }
+            },
+            {
+              "id": "b",
+              "text": {
+                "zh": "先把 3 个超大文件结果写磁盘留预览（第一层），再对整段历史做完整压缩（第三层）",
+                "en": "First write the 3 oversized file results to disk with previews (layer 1), then apply full compaction to the entire history (layer 3)",
+                "ja": "まず 3 つの超大ファイル結果をディスクに書き込みプレビューを残し（第 1 層）、次に履歴全体に完全圧縮を適用する（第 3 層）"
+              }
+            },
+            {
+              "id": "c",
+              "text": {
+                "zh": "重启会话，重新开始任务",
+                "en": "Restart the session and redo the task from scratch",
+                "ja": "セッションを再起動してタスクを最初からやり直す"
+              }
+            },
+            {
+              "id": "d",
+              "text": {
+                "zh": "只做完整压缩（第三层），不需要单独处理超大文件",
+                "en": "Only apply full compaction; no need to handle oversized files separately",
+                "ja": "完全圧縮のみ適用し、超大ファイルは個別に処理する必要はない"
+              }
+            }
+          ],
+          "answer": "b",
+          "explanation": {
+            "zh": "这个场景同时有两个问题：3 个超大文件读取结果（第一层问题）+ 整体 context 85% 将满（第三层问题）。正确做法是组合：先用第一层（写磁盘留预览）处理超大输出，再用第三层（完整压缩）处理整体过长。",
+            "en": "This scenario has two problems: 3 oversized file read results (a layer-1 problem) and overall context at 85% (a layer-3 problem). The correct approach combines layer 1 for oversized outputs then layer 3 for overall length.",
+            "ja": "このシナリオには 2 つの問題があります: 3 つの超大ファイル読み取り結果（第 1 層の問題）と全体の context が 85%（第 3 層の問題）。第 1 層と第 3 層を組み合わせて対処します。"
+          },
+          "reward_card": "card_s06_005"
+        },
+        {
+          "id": "q_s06_022",
+          "type": "choice",
+          "difficulty": 2,
+          "stem": {
+            "zh": "以下对「压缩」的理解，哪项是正确的？",
+            "en": "Which of the following understandings of compaction is correct?",
+            "ja": "圧縮についての以下の理解のうち、正しいのはどれですか？"
+          },
+          "options": [
+            {
+              "id": "a",
+              "text": {
+                "zh": "压缩等于删除，丢掉的信息以后无法恢复",
+                "en": "Compaction equals deletion; lost information cannot be recovered",
+                "ja": "圧縮は削除と同じで、失われた情報は復元できない"
+              }
+            },
+            {
+              "id": "b",
+              "text": {
+                "zh": "压缩只适用于文本内容，代码和工具输出不能压缩",
+                "en": "Compaction only applies to text content; code and tool outputs cannot be compacted",
+                "ja": "圧縮はテキストコンテンツにのみ適用され、コードと tool output は圧縮できない"
+              }
+            },
+            {
+              "id": "d",
+              "text": {
+                "zh": "压缩是保留继续工作真正需要的部分，而不是简单丢弃信息",
+                "en": "Compaction retains what is truly needed to continue working, rather than simply discarding information",
+                "ja": "圧縮は単に情報を廃棄するのではなく、作業を継続するために本当に必要な部分を保持すること"
+              }
+            },
+            {
+              "id": "c",
+              "text": {
+                "zh": "压缩后 context window 会被完全清空，从全新状态开始",
+                "en": "After compaction the context window is completely cleared and starts from a blank state",
+                "ja": "圧縮後は context window が完全にクリアされ、白紙の状態から始まる"
+              }
+            }
+          ],
+          "answer": "d",
+          "explanation": {
+            "zh": "压缩的本质不是丢弃信息，而是保留「继续工作真正需要的部分」：目标、决定、已完成事项等。无论是写磁盘留预览（第一层）、占位替换（第二层）还是摘要（第三层），都是在保留有用信息的前提下节省 context 空间。",
+            "en": "Compaction is not about discarding information but about retaining what is truly needed to continue: goals, decisions, completed items. All three layers preserve useful information while saving context space.",
+            "ja": "圧縮の本質は情報を廃棄することではなく、継続に本当に必要な部分（目標、決定、完了した事項など）を保持することです。3 層全てが有用な情報を保持しながら context スペースを節約します。"
           },
           "reward_card": "card_s06_005"
         }
-      ],
+      ]
+,
       "star_thresholds": [
         0.4,
         0.7,
