@@ -7440,100 +7440,100 @@ module.exports = {
           "type": "choice",
           "difficulty": 1,
           "stem": {
-            "zh": "以下哪个概念与「这一章在解决什么问题」直接相关？",
-            "en": "Which concept is directly related to \"What You'll Learn\"?",
-            "ja": "「この章が解決する問題」に直接関連する概念はどれですか？"
+            "zh": "Memory 系统存储信息的核心标准是什么？",
+            "en": "What is the core criterion for storing information in Memory?",
+            "ja": "Memory システムに情報を保存する核心基準は何ですか？"
           },
           "options": [
             {
-              "id": "b",
-              "text": {
-                "zh": "最小实现",
-                "en": "Key Takeaway",
-                "ja": "最小実装を段階で追う"
-              }
-            },
-            {
               "id": "a",
               "text": {
-                "zh": "这一章在解决什么问题",
-                "en": "What You'll Learn",
-                "ja": "この章が解決する問題"
+                "zh": "只要是重要信息就存入 memory",
+                "en": "Store anything that seems important",
+                "ja": "重要そうな情報はすべて保存する"
               }
             },
             {
-              "id": "d",
+              "id": "b",
               "text": {
-                "zh": "什么是权限系统",
-                "en": "Read Together",
-                "ja": "permission system とは何か"
+                "zh": "跨会话仍有价值且不能轻易从代码推出来的信息",
+                "en": "Information valuable across sessions and not easily derived from code",
+                "ja": "セッションをまたいで価値があり、コードから推測できない情報"
               }
             },
             {
               "id": "c",
               "text": {
-                "zh": "初学者最容易犯的错",
-                "en": "初学者最容易犯的错",
-                "ja": "2. Hook ごとに別のデータ形を渡す"
+                "zh": "当前任务中用得上的所有背景信息",
+                "en": "All context needed for the current task",
+                "ja": "現在のタスクに必要なすべてのコンテキスト"
+              }
+            },
+            {
+              "id": "d",
+              "text": {
+                "zh": "用户说过的每一句话",
+                "en": "Every statement made by the user",
+                "ja": "ユーザーが言ったすべてのこと"
               }
             }
           ],
-          "answer": "a",
+          "answer": "b",
           "explanation": {
-            "zh": "这一章在解决什么问题",
-            "en": "What You'll Learn",
-            "ja": "この章が解決する問題"
+            "zh": "Memory 只保存「以后还可能有价值、但代码里不容易直接看出来」的信息。不是什么都存——能从代码读到的、当前任务才用的、很快过时的，都不该进 memory。",
+            "en": "Memory stores only information that remains valuable across sessions and cannot be easily derived from the current codebase. Not everything belongs in memory.",
+            "ja": "Memory は将来も価値があり、コードから推測しにくい情報のみを保存します。すべてを保存するわけではありません。"
           },
           "reward_card": "card_s09_001"
         },
         {
           "id": "q_s09_002",
           "type": "choice",
-          "difficulty": 1,
+          "difficulty": 2,
           "stem": {
-            "zh": "以下哪个概念与「但先立一个边界：memory 不是什么都存」直接相关？",
-            "en": "Which concept is directly related to \"The Problem\"?",
-            "ja": "「最初に立てるべき境界」に直接関連する概念はどれですか？"
+            "zh": "用户提到「我的代码风格偏向函数式编程，尽量避免 class」。这条信息属于哪类 memory？",
+            "en": "A user says 'I prefer functional programming style, avoid classes'. Which memory type is this?",
+            "ja": "ユーザーが『関数型プログラミングスタイルが好き、classは避けて』と言いました。これはどの memory タイプですか？"
           },
           "options": [
             {
+              "id": "a",
+              "text": {
+                "zh": "feedback",
+                "en": "feedback",
+                "ja": "feedback"
+              }
+            },
+            {
               "id": "b",
               "text": {
-                "zh": "CLAUDE.md 为什么要单独一段",
-                "en": "CLAUDE.md 为什么要单独一段",
-                "ja": "CLAUDE.md 为什么要单独一段"
+                "zh": "project",
+                "en": "project",
+                "ja": "project"
               }
             },
             {
               "id": "c",
               "text": {
-                "zh": "错误 3：把 memory 当成绝对真相",
-                "en": "错误 3：把 memory 当成绝对真相",
-                "ja": "错误 3：把 memory 当成绝对真相"
+                "zh": "reference",
+                "en": "reference",
+                "ja": "reference"
               }
             },
             {
               "id": "d",
               "text": {
-                "zh": "2. 权限模式",
-                "en": "2. 权限模式",
-                "ja": "2. Permission Mode"
-              }
-            },
-            {
-              "id": "a",
-              "text": {
-                "zh": "但先立一个边界：memory 不是什么都存",
-                "en": "The Problem",
-                "ja": "最初に立てるべき境界"
+                "zh": "user",
+                "en": "user",
+                "ja": "user"
               }
             }
           ],
-          "answer": "a",
+          "answer": "d",
           "explanation": {
-            "zh": "只有那些跨会话仍然有价值，而且不能轻易从当前仓库状态直接推出来的信息，才适合进入 memory。",
-            "en": "The Problem",
-            "ja": "何でも memory に入れない"
+            "zh": "user 类型记录用户本人的信息——偏好、背景、习惯。函数式风格是用户个人的编码偏好，属于 user 类，而非 feedback（对 AI 输出的指导）或 project（项目动态）。",
+            "en": "The user type records personal user information — preferences, background, habits. A coding style preference belongs to user, not feedback or project.",
+            "ja": "user タイプはユーザー自身の情報（好み、背景、習慣）を記録します。コーディングスタイルの好みは user に属します。"
           },
           "reward_card": "card_s09_002"
         },
@@ -7542,153 +7542,1020 @@ module.exports = {
           "type": "choice",
           "difficulty": 1,
           "stem": {
-            "zh": "以下哪个概念与「建议联读」直接相关？",
-            "en": "Which concept is directly related to \"The Solution\"?",
-            "ja": "「主線とどう併読するか」に直接関連する概念はどれですか？"
+            "zh": "Memory 系统的文件结构是怎样的？",
+            "en": "What is the file structure of the Memory system?",
+            "ja": "Memory システムのファイル構造はどうなっていますか？"
           },
           "options": [
             {
-              "id": "c",
-              "text": {
-                "zh": "2. 权限模式",
-                "en": "2. 权限模式",
-                "ja": "2. Permission Mode"
-              }
-            },
-            {
               "id": "a",
               "text": {
-                "zh": "建议联读",
-                "en": "The Solution",
-                "ja": "主線とどう併読するか"
-              }
-            },
-            {
-              "id": "d",
-              "text": {
-                "zh": "这一章最关键的结构化边界",
-                "en": "这一章最关键的结构化边界",
-                "ja": "2. 毎回変わる情報も全部同じ塊に入れる"
+                "zh": "所有 memory 写进一个大的 JSON 文件",
+                "en": "All memories written into one large JSON file",
+                "ja": "すべての memory を一つの大きな JSON ファイルに書く"
               }
             },
             {
               "id": "b",
               "text": {
-                "zh": "1. 不好维护",
-                "en": "What You've Mastered",
-                "ja": "3. 安定部分と動的部分を分けて育てられる"
+                "zh": "每类 memory 对应一个文件夹，无索引文件",
+                "en": "One folder per memory type, no index file",
+                "ja": "memory タイプごとにフォルダを作り、インデックスファイルなし"
+              }
+            },
+            {
+              "id": "c",
+              "text": {
+                "zh": "一条 memory 一个 .md 文件（frontmatter + content），加一个 MEMORY.md 索引",
+                "en": "One .md file per memory (frontmatter + content), plus a MEMORY.md index",
+                "ja": "memory 1 件につき .md ファイル 1 つ（frontmatter + content）、MEMORY.md インデックスを追加"
+              }
+            },
+            {
+              "id": "d",
+              "text": {
+                "zh": "memory 直接写进 CLAUDE.md，不需要单独文件",
+                "en": "Memory written directly into CLAUDE.md, no separate files needed",
+                "ja": "memory は CLAUDE.md に直接書き、別ファイル不要"
               }
             }
           ],
-          "answer": "a",
+          "answer": "c",
           "explanation": {
-            "zh": "建议联读",
-            "en": "The Solution",
-            "ja": "主線とどう併読するか"
+            "zh": "一条 memory 对应一个 .md 文件，文件包含 frontmatter 元信息和正文内容，另有一个 MEMORY.md 作为索引文件。这种结构简单，易于单独更新或删除某条 memory。",
+            "en": "One .md file per memory entry with frontmatter metadata and content, plus a MEMORY.md index file. This structure makes individual memory entries easy to update or remove.",
+            "ja": "memory 1 件につき frontmatter と内容を持つ .md ファイル 1 つ、さらに MEMORY.md インデックスファイルがあります。"
           },
           "reward_card": "card_s09_003"
         },
         {
           "id": "q_s09_004",
           "type": "choice",
-          "difficulty": 1,
+          "difficulty": 2,
           "stem": {
-            "zh": "以下哪个概念与「先解释几个名词」直接相关？",
-            "en": "Which concept is directly related to \"Read Together\"?",
-            "ja": "「初学者向けの 4 分類」に直接関連する概念はどれですか？"
+            "zh": "AI 在某次对话中给了一个建议，用户回复「以后生成代码时先列出测试用例再写实现」。这属于哪类 memory？",
+            "en": "The user tells the AI: 'Next time, list test cases before writing implementation'. Which memory type is this?",
+            "ja": "ユーザーが『次回は実装前にテストケースを列挙して』と言いました。これはどの memory タイプですか？"
           },
           "options": [
             {
-              "id": "c",
+              "id": "a",
               "text": {
-                "zh": "task",
-                "en": "task",
-                "ja": "task"
-              }
-            },
-            {
-              "id": "d",
-              "text": {
-                "zh": "2. 把所有变化信息都塞进 system prompt",
-                "en": "2. 把所有变化信息都塞进 system prompt",
-                "ja": "2. 把所有变化信息都塞进 system prompt"
+                "zh": "feedback",
+                "en": "feedback",
+                "ja": "feedback"
               }
             },
             {
               "id": "b",
               "text": {
-                "zh": "第 1 步先看 deny rules",
-                "en": "What's Next",
-                "ja": "1. deny を先に見る理由"
+                "zh": "user",
+                "en": "user",
+                "ja": "user"
               }
             },
             {
-              "id": "a",
+              "id": "c",
               "text": {
-                "zh": "先解释几个名词",
-                "en": "Read Together",
-                "ja": "初学者向けの 4 分類"
+                "zh": "project",
+                "en": "project",
+                "ja": "project"
+              }
+            },
+            {
+              "id": "d",
+              "text": {
+                "zh": "reference",
+                "en": "reference",
+                "ja": "reference"
               }
             }
           ],
           "answer": "a",
           "explanation": {
-            "zh": "先解释几个名词",
-            "en": "Read Together",
-            "ja": "初学者向けの 4 分類"
+            "zh": "feedback 类型记录用户对 AI 输出风格和行为的指导意见——「下次怎么做」「这种风格不喜欢」等。这条「先列测试再写实现」是对 AI 行为的反馈指导，不是用户个人信息，也不是项目状态。",
+            "en": "The feedback type records guidance about how the AI should behave — 'next time do X'. This instruction about test-first is feedback guidance, not user background or project state.",
+            "ja": "feedback タイプは AI の行動に関する指導（『次回は X して』）を記録します。これはフィードバック指導であり、ユーザー情報やプロジェクト状態ではありません。"
           },
-          "reward_card": "card_s09_004"
+          "reward_card": "card_s09_002"
         },
         {
           "id": "q_s09_005",
           "type": "choice",
           "difficulty": 1,
           "stem": {
-            "zh": "以下哪个概念与「什么是“跨会话”」直接相关？",
-            "en": "Which concept is directly related to \"How It Works\"?",
-            "ja": "「1. `user`」に直接関連する概念はどれですか？"
+            "zh": "下面哪种信息「不该」存入 memory？",
+            "en": "Which of the following should NOT be stored in memory?",
+            "ja": "次のうち memory に保存すべきでないのはどれですか？"
           },
           "options": [
             {
-              "id": "c",
-              "text": {
-                "zh": "1. 不好维护",
-                "en": "What You've Mastered",
-                "ja": "3. 安定部分と動的部分を分けて育てられる"
-              }
-            },
-            {
               "id": "a",
               "text": {
-                "zh": "什么是“跨会话”",
-                "en": "How It Works",
-                "ja": "1. `user`"
+                "zh": "用户常用的 API 文档地址",
+                "en": "A frequently referenced API documentation URL",
+                "ja": "よく参照する API ドキュメントの URL"
               }
             },
             {
               "id": "b",
               "text": {
-                "zh": "5. 恢复过程完全没有日志",
-                "en": "5. 恢复过程完全没有日志",
-                "ja": "4. continuation message を曖昧にする"
+                "zh": "用户反复强调「不要使用 any 类型」",
+                "en": "User repeatedly emphasizes 'never use any type'",
+                "ja": "ユーザーが繰り返し強調する『any 型を使わないで』"
+              }
+            },
+            {
+              "id": "c",
+              "text": {
+                "zh": "用户的工作时区（每次对话都要问）",
+                "en": "The user's timezone (asked every session)",
+                "ja": "毎回確認が必要なユーザーのタイムゾーン"
               }
             },
             {
               "id": "d",
               "text": {
-                "zh": "学完这一章，你应该真正掌握什么",
-                "en": "学完这一章，你应该真正掌握什么",
-                "ja": "学完这一章，你应该真正掌握什么"
+                "zh": "项目采用的数据库类型（从 package.json 可以直接读出来）",
+                "en": "The database type used in the project (readable from package.json)",
+                "ja": "プロジェクトのデータベース種別（package.json から読み取れる）"
+              }
+            }
+          ],
+          "answer": "d",
+          "explanation": {
+            "zh": "能从代码（如 package.json）直接读到的信息不该进 memory——memory 的价值在于补充代码里看不出来的东西。数据库类型在项目文件里就有，不需要 memory 重复记录。",
+            "en": "Information that can be directly read from code (like package.json) should not go into memory. Memory's value is supplementing what cannot be derived from the codebase.",
+            "ja": "コード（package.json など）から直接読み取れる情報は memory に入れるべきではありません。memory の価値はコードから推測できないことを補うことにあります。"
+          },
+          "reward_card": "card_s09_001"
+        },
+        {
+          "id": "q_s09_006",
+          "type": "choice",
+          "difficulty": 2,
+          "stem": {
+            "zh": "「这个项目目前正在从 REST API 迁移到 GraphQL，预计下周完成」属于哪类 memory？",
+            "en": "'This project is migrating from REST to GraphQL, expected done next week.' Which memory type?",
+            "ja": "『このプロジェクトは REST から GraphQL に移行中、来週完了予定』はどの memory タイプですか？"
+          },
+          "options": [
+            {
+              "id": "a",
+              "text": {
+                "zh": "user",
+                "en": "user",
+                "ja": "user"
+              }
+            },
+            {
+              "id": "b",
+              "text": {
+                "zh": "reference",
+                "en": "reference",
+                "ja": "reference"
+              }
+            },
+            {
+              "id": "c",
+              "text": {
+                "zh": "feedback",
+                "en": "feedback",
+                "ja": "feedback"
+              }
+            },
+            {
+              "id": "d",
+              "text": {
+                "zh": "project",
+                "en": "project",
+                "ja": "project"
+              }
+            }
+          ],
+          "answer": "d",
+          "explanation": {
+            "zh": "project 类型记录项目的动态状态——当前进展、架构决策、阶段性目标等。正在进行的迁移工作是项目动态，不是用户个人信息，也不是外部资源指针。",
+            "en": "The project type records the project's dynamic state — current progress, architectural decisions, phase goals. An ongoing migration is project state, not user info or an external resource.",
+            "ja": "project タイプはプロジェクトの動的状態（現在の進捗、アーキテクチャ決定、フェーズ目標）を記録します。進行中の移行作業はプロジェクト状態です。"
+          },
+          "reward_card": "card_s09_002"
+        },
+        {
+          "id": "q_s09_007",
+          "type": "choice",
+          "difficulty": 3,
+          "stem": {
+            "zh": "某条 memory 记录「用户偏好 TypeScript」，但代码库里 tsconfig.json 和所有源文件已经清楚说明项目是 TypeScript。这条 memory 有什么问题？",
+            "en": "A memory records 'user prefers TypeScript', but tsconfig.json and all source files already show this. What is the problem?",
+            "ja": "memory に『TypeScript を好む』と記録されていますが、tsconfig.json と全ソースが既にそれを示しています。この memory の問題は？"
+          },
+          "options": [
+            {
+              "id": "a",
+              "text": {
+                "zh": "违反了「不存能从代码读到的信息」原则，属于冗余 memory",
+                "en": "Violates the 'don't store what code already shows' principle; redundant memory",
+                "ja": "「コードから読み取れる情報は保存しない」原則に違反しており、冗長な memory"
+              }
+            },
+            {
+              "id": "b",
+              "text": {
+                "zh": "应该改为 feedback 类型",
+                "en": "It should be reclassified as feedback type",
+                "ja": "feedback タイプに再分類すべき"
+              }
+            },
+            {
+              "id": "c",
+              "text": {
+                "zh": "memory 文件应该用 JSON 格式而非 .md 格式",
+                "en": "Memory files should use JSON format, not .md format",
+                "ja": "memory ファイルは .md ではなく JSON 形式を使うべき"
+              }
+            },
+            {
+              "id": "d",
+              "text": {
+                "zh": "这条信息应该写进 CLAUDE.md 而非 memory",
+                "en": "This info should go into CLAUDE.md, not memory",
+                "ja": "この情報は memory ではなく CLAUDE.md に書くべき"
               }
             }
           ],
           "answer": "a",
           "explanation": {
-            "zh": "什么是“跨会话”",
-            "en": "Step 1.",
-            "ja": "1. `user`"
+            "zh": "Memory 的核心原则之一是：能从代码重新读到的信息不应该进 memory。代码库已经清楚表明项目是 TypeScript，再存一条「用户偏好 TypeScript」就是冗余——浪费存储，也可能与代码实际状态脱节。",
+            "en": "One of memory's core principles: don't store what can be re-derived from code. The codebase already shows TypeScript; storing 'user prefers TypeScript' is redundant and may drift from reality.",
+            "ja": "memory の核心原則の一つ：コードから再導出できる情報は保存しない。コードベースがすでに TypeScript であることを示しているため、保存は冗長です。"
           },
-          "reward_card": "card_s09_005"
+          "reward_card": "card_s09_001"
+        },
+        {
+          "id": "q_s09_008",
+          "type": "choice",
+          "difficulty": 1,
+          "stem": {
+            "zh": "MEMORY.md 文件在 memory 系统中的作用是什么？",
+            "en": "What role does the MEMORY.md file play in the memory system?",
+            "ja": "MEMORY.md ファイルは memory システムでどんな役割を果たしますか？"
+          },
+          "options": [
+            {
+              "id": "a",
+              "text": {
+                "zh": "作为索引文件，指向各条 memory 的 .md 文件",
+                "en": "Acts as an index file pointing to individual memory .md files",
+                "ja": "各 memory の .md ファイルを指すインデックスファイルとして機能する"
+              }
+            },
+            {
+              "id": "b",
+              "text": {
+                "zh": "存储所有 memory 的完整内容",
+                "en": "Stores the full content of all memories",
+                "ja": "すべての memory の完全なコンテンツを格納する"
+              }
+            },
+            {
+              "id": "c",
+              "text": {
+                "zh": "替代 CLAUDE.md 管理长期规则",
+                "en": "Replaces CLAUDE.md for managing long-term rules",
+                "ja": "CLAUDE.md に代わって長期ルールを管理する"
+              }
+            },
+            {
+              "id": "d",
+              "text": {
+                "zh": "记录当前任务的执行计划",
+                "en": "Records the execution plan for the current task",
+                "ja": "現在のタスクの実行計画を記録する"
+              }
+            }
+          ],
+          "answer": "a",
+          "explanation": {
+            "zh": "MEMORY.md 是索引文件，列出所有 memory 条目的指针，方便快速定位。每条具体的 memory 内容存在独立的 .md 文件中。这种分离让更新和删除单条 memory 变得简单。",
+            "en": "MEMORY.md is the index file listing pointers to all memory entries for quick lookup. Each actual memory entry lives in its own .md file. This separation makes updating or deleting individual entries simple.",
+            "ja": "MEMORY.md はすべての memory エントリへのポインタを列挙するインデックスファイルです。各 memory の内容は独自の .md ファイルに格納されます。"
+          },
+          "reward_card": "card_s09_003"
+        },
+        {
+          "id": "q_s09_009",
+          "type": "choice",
+          "difficulty": 2,
+          "stem": {
+            "zh": "「内部 Wiki 的地址是 https://wiki.internal/arch」属于哪类 memory？",
+            "en": "'The internal Wiki URL is https://wiki.internal/arch'. Which memory type?",
+            "ja": "『社内 Wiki の URL は https://wiki.internal/arch』はどの memory タイプですか？"
+          },
+          "options": [
+            {
+              "id": "a",
+              "text": {
+                "zh": "project",
+                "en": "project",
+                "ja": "project"
+              }
+            },
+            {
+              "id": "b",
+              "text": {
+                "zh": "user",
+                "en": "user",
+                "ja": "user"
+              }
+            },
+            {
+              "id": "c",
+              "text": {
+                "zh": "feedback",
+                "en": "feedback",
+                "ja": "feedback"
+              }
+            },
+            {
+              "id": "d",
+              "text": {
+                "zh": "reference",
+                "en": "reference",
+                "ja": "reference"
+              }
+            }
+          ],
+          "answer": "d",
+          "explanation": {
+            "zh": "reference 类型保存外部资源的指针——URL、文档链接、工具地址等。内部 Wiki 地址是一个外部资源指针，不是项目动态（project），也不是用户个人信息（user）。",
+            "en": "The reference type stores pointers to external resources — URLs, documentation links, tool addresses. An internal Wiki URL is an external resource pointer, not project state or user info.",
+            "ja": "reference タイプは外部リソースへのポインタ（URL、ドキュメントリンク、ツールアドレス）を保存します。社内 Wiki の URL は外部リソースポインタです。"
+          },
+          "reward_card": "card_s09_002"
+        },
+        {
+          "id": "q_s09_010",
+          "type": "choice",
+          "difficulty": 3,
+          "stem": {
+            "zh": "一条 memory 记录「本周正在修复登录 bug」。两周后这条 memory 还在。有什么问题？",
+            "en": "A memory records 'fixing login bug this week'. Two weeks later it is still there. What is the problem?",
+            "ja": "memory に『今週はログインバグを修正中』と記録されています。2 週間後もまだ残っています。問題は何ですか？"
+          },
+          "options": [
+            {
+              "id": "a",
+              "text": {
+                "zh": "违反了「很快过时的信息不该进 memory」原则，属于应该及时清理的临时信息",
+                "en": "Violates 'don't store rapidly-expiring info', this is temporary info that should be cleaned up",
+                "ja": "『すぐに古くなる情報は保存しない』原則に違反しており、適時削除すべき一時的な情報"
+              }
+            },
+            {
+              "id": "b",
+              "text": {
+                "zh": "应该把这条记录从 project 类改为 feedback 类",
+                "en": "Should reclassify from project to feedback type",
+                "ja": "project タイプから feedback タイプに再分類すべき"
+              }
+            },
+            {
+              "id": "c",
+              "text": {
+                "zh": "这条信息应该写进 CLAUDE.md",
+                "en": "This info should go into CLAUDE.md",
+                "ja": "この情報は CLAUDE.md に書くべき"
+              }
+            },
+            {
+              "id": "d",
+              "text": {
+                "zh": "memory 文件 frontmatter 缺少过期时间字段",
+                "en": "The memory file frontmatter is missing an expiration field",
+                "ja": "memory ファイルの frontmatter に有効期限フィールドがない"
+              }
+            }
+          ],
+          "answer": "a",
+          "explanation": {
+            "zh": "「很快过时的信息」不该进 memory，「本周修复 bug」是典型的临时性、任务级信息。这类信息属于 task/plan 管辖，任务结束就该清除，留在 memory 里只会产生噪音和误导。",
+            "en": "Rapidly-expiring information should not go into memory. 'Fixing a bug this week' is typical temporary task-level info that belongs in task/plan and should be removed when done.",
+            "ja": "すぐに古くなる情報は memory に入れるべきではありません。『今週バグ修正中』は task/plan が管轄する一時的なタスクレベル情報です。"
+          },
+          "reward_card": "card_s09_001"
+        },
+        {
+          "id": "q_s09_011",
+          "type": "choice",
+          "difficulty": 1,
+          "stem": {
+            "zh": "memory 系统、task/plan 系统、CLAUDE.md 三者各自负责什么？",
+            "en": "What do the memory system, task/plan system, and CLAUDE.md each manage?",
+            "ja": "memory システム、task/plan システム、CLAUDE.md はそれぞれ何を管理しますか？"
+          },
+          "options": [
+            {
+              "id": "a",
+              "text": {
+                "zh": "三者都管跨会话的长期信息",
+                "en": "All three manage long-term cross-session information",
+                "ja": "三つともセッションをまたぐ長期情報を管理する"
+              }
+            },
+            {
+              "id": "b",
+              "text": {
+                "zh": "task/plan 管当前任务，memory 管跨会话价值，CLAUDE.md 管长期规则",
+                "en": "task/plan manages current tasks, memory manages cross-session value, CLAUDE.md manages long-term rules",
+                "ja": "task/plan は現在のタスク、memory はセッションをまたぐ価値、CLAUDE.md は長期ルールを管理する"
+              }
+            },
+            {
+              "id": "c",
+              "text": {
+                "zh": "memory 管所有信息，task/plan 和 CLAUDE.md 只是格式变体",
+                "en": "Memory manages everything; task/plan and CLAUDE.md are just format variants",
+                "ja": "memory がすべてを管理し、task/plan と CLAUDE.md は形式のバリエーション"
+              }
+            },
+            {
+              "id": "d",
+              "text": {
+                "zh": "CLAUDE.md 管当前任务，memory 管规则，task/plan 管历史记录",
+                "en": "CLAUDE.md manages current tasks, memory manages rules, task/plan manages history",
+                "ja": "CLAUDE.md が現在のタスク、memory がルール、task/plan が履歴を管理する"
+              }
+            }
+          ],
+          "answer": "b",
+          "explanation": {
+            "zh": "三者有清晰边界：task/plan 管当前任务的执行与追踪，memory 管跨会话仍有价值的信息，CLAUDE.md 管长期稳定的项目规则和约定。混用会导致信息噪音和维护困难。",
+            "en": "The three have clear boundaries: task/plan tracks current task execution, memory preserves cross-session value, CLAUDE.md holds long-term stable project rules. Mixing them creates noise.",
+            "ja": "三つには明確な境界があります。task/plan は現在のタスク実行、memory はセッションをまたぐ価値、CLAUDE.md は長期安定したプロジェクトルールを管理します。"
+          },
+          "reward_card": "card_s09_003"
+        },
+        {
+          "id": "q_s09_012",
+          "type": "choice",
+          "difficulty": 2,
+          "stem": {
+            "zh": "以下哪项操作违反了 memory 使用规范？",
+            "en": "Which of the following actions violates memory usage principles?",
+            "ja": "次のうち memory の使用規則に違反するのはどれですか？"
+          },
+          "options": [
+            {
+              "id": "a",
+              "text": {
+                "zh": "将用户在多次会话中都提到的沟通风格偏好存入 user 类 memory",
+                "en": "Storing a communication style preference the user mentions repeatedly into user memory",
+                "ja": "複数のセッションで繰り返し言及するコミュニケーションスタイルの好みを user memory に保存する"
+              }
+            },
+            {
+              "id": "b",
+              "text": {
+                "zh": "把内部文档 URL 存入 reference 类 memory",
+                "en": "Storing an internal documentation URL into reference memory",
+                "ja": "社内ドキュメントの URL を reference memory に保存する"
+              }
+            },
+            {
+              "id": "c",
+              "text": {
+                "zh": "把「今天下午要开会」存入 memory",
+                "en": "Storing 'meeting this afternoon' into memory",
+                "ja": "『今日の午後に会議がある』を memory に保存する"
+              }
+            },
+            {
+              "id": "d",
+              "text": {
+                "zh": "把用户对代码审查风格的持续反馈存入 feedback 类 memory",
+                "en": "Storing ongoing user feedback about code review style into feedback memory",
+                "ja": "コードレビュースタイルに関する継続的なユーザーフィードバックを feedback memory に保存する"
+              }
+            }
+          ],
+          "answer": "c",
+          "explanation": {
+            "zh": "「今天下午要开会」是典型的属于当前任务/当前时刻的临时信息，跨会话后毫无价值。这类即时性信息不该进 memory——memory 保存的是跨会话仍有价值的信息。",
+            "en": "Meeting this afternoon is purely temporary, time-bound information with no cross-session value. Such immediate contextual information should not go into memory.",
+            "ja": "『今日の午後の会議』は純粋に一時的で時間に縛られた情報であり、セッションをまたぐ価値がありません。memory に入れるべきではありません。"
+          },
+          "reward_card": "card_s09_001"
+        },
+        {
+          "id": "q_s09_013",
+          "type": "choice",
+          "difficulty": 3,
+          "stem": {
+            "zh": "一个团队决定把「所有代码规范」都写进 memory 而不是 CLAUDE.md。这样做的主要问题是什么？",
+            "en": "A team puts 'all coding standards' into memory instead of CLAUDE.md. What is the main problem?",
+            "ja": "チームがすべてのコーディング規約を CLAUDE.md ではなく memory に書いています。主な問題は何ですか？"
+          },
+          "options": [
+            {
+              "id": "a",
+              "text": {
+                "zh": "memory 文件大小有限制，会超出容量",
+                "en": "Memory files have size limits that will be exceeded",
+                "ja": "memory ファイルにはサイズ制限があり、容量を超えてしまう"
+              }
+            },
+            {
+              "id": "b",
+              "text": {
+                "zh": "memory 的 frontmatter 不支持存储规则类内容",
+                "en": "Memory frontmatter does not support rule-type content",
+                "ja": "memory の frontmatter はルール系コンテンツの保存をサポートしていない"
+              }
+            },
+            {
+              "id": "c",
+              "text": {
+                "zh": "混淆了 memory 与 CLAUDE.md 的边界——长期稳定规则属于 CLAUDE.md，memory 管的是动态的跨会话价值信息",
+                "en": "Blurs the boundary: long-term stable rules belong in CLAUDE.md; memory handles dynamic cross-session value info",
+                "ja": "境界を混同している。長期安定ルールは CLAUDE.md に属し、memory は動的なセッションをまたぐ価値情報を管理する"
+              }
+            },
+            {
+              "id": "d",
+              "text": {
+                "zh": "代码规范应该存入 reference 类 memory，不是普通 memory",
+                "en": "Coding standards should go into reference memory, not general memory",
+                "ja": "コーディング規約は一般 memory ではなく reference memory に入れるべき"
+              }
+            }
+          ],
+          "answer": "c",
+          "explanation": {
+            "zh": "CLAUDE.md 专门负责长期稳定的项目规则和约定——代码风格、架构约束、开发流程等。把这类信息放进 memory 是边界混淆，会让两个系统都难以维护，也让 AI 不清楚信息的权威性。",
+            "en": "CLAUDE.md is specifically for long-term stable project rules and conventions. Putting them in memory blurs the boundary between the two systems and makes it unclear which source is authoritative.",
+            "ja": "CLAUDE.md は長期安定したプロジェクトルールと規約専用です。それを memory に入れると二つのシステムの境界が曖昧になり、どちらが権威あるソースか不明確になります。"
+          },
+          "reward_card": "card_s09_003"
+        },
+        {
+          "id": "q_s09_014",
+          "type": "choice",
+          "difficulty": 1,
+          "stem": {
+            "zh": "memory 文件的 .md 格式中，frontmatter 的作用是什么？",
+            "en": "In a memory .md file, what is the purpose of the frontmatter?",
+            "ja": "memory の .md ファイルにおける frontmatter の目的は何ですか？"
+          },
+          "options": [
+            {
+              "id": "c",
+              "text": {
+                "zh": "存储 memory 的正文内容",
+                "en": "Stores the main body content of the memory",
+                "ja": "memory の本文コンテンツを格納する"
+              }
+            },
+            {
+              "id": "b",
+              "text": {
+                "zh": "作为 MEMORY.md 的替代索引",
+                "en": "Serves as an alternative index replacing MEMORY.md",
+                "ja": "MEMORY.md に代わる代替インデックスとして機能する"
+              }
+            },
+            {
+              "id": "a",
+              "text": {
+                "zh": "存储该条 memory 的元信息，如类型、创建时间、标签等",
+                "en": "Stores metadata for the memory entry such as type, creation time, tags",
+                "ja": "memory エントリのメタ情報（タイプ、作成日時、タグなど）を格納する"
+              }
+            },
+            {
+              "id": "d",
+              "text": {
+                "zh": "标记该文件是构建产物，不可手动编辑",
+                "en": "Marks the file as a build artifact that should not be edited manually",
+                "ja": "このファイルが手動編集不可のビルド成果物であることをマークする"
+              }
+            }
+          ],
+          "answer": "a",
+          "explanation": {
+            "zh": "frontmatter 是 .md 文件顶部用 --- 分隔的 YAML 区块，用于存储元信息：memory 的类型（user/feedback/project/reference）、创建时间、相关标签等。正文内容在 frontmatter 下方。",
+            "en": "The frontmatter is the YAML block at the top of a .md file (delimited by ---) that stores metadata: memory type, creation time, tags. The actual content follows below.",
+            "ja": "frontmatter は .md ファイルの先頭の --- で区切られた YAML ブロックで、メタ情報（memory タイプ、作成日時、タグ）を格納します。"
+          },
+          "reward_card": "card_s09_003"
+        },
+        {
+          "id": "q_s09_015",
+          "type": "choice",
+          "difficulty": 2,
+          "stem": {
+            "zh": "以下哪个场景最适合使用 memory？",
+            "en": "Which scenario is most suitable for using memory?",
+            "ja": "次のうち memory を使うのに最も適したシナリオはどれですか？"
+          },
+          "options": [
+            {
+              "id": "a",
+              "text": {
+                "zh": "记录「当前 PR #456 正在 review 中」",
+                "en": "Recording 'PR #456 is currently under review'",
+                "ja": "『現在 PR #456 がレビュー中』を記録する"
+              }
+            },
+            {
+              "id": "b",
+              "text": {
+                "zh": "记录项目的 lint 规则（已在 .eslintrc 中定义）",
+                "en": "Recording the project's lint rules (already defined in .eslintrc)",
+                "ja": "プロジェクトの lint ルールを記録する（すでに .eslintrc に定義済み）"
+              }
+            },
+            {
+              "id": "c",
+              "text": {
+                "zh": "记录用户多次强调「提交信息要遵循 Conventional Commits」",
+                "en": "Recording that the user repeatedly emphasizes 'commit messages must follow Conventional Commits'",
+                "ja": "ユーザーが繰り返し強調する『コミットメッセージは Conventional Commits に従う』を記録する"
+              }
+            },
+            {
+              "id": "d",
+              "text": {
+                "zh": "记录「今天要实现登录功能」",
+                "en": "Recording 'implement login feature today'",
+                "ja": "『今日はログイン機能を実装する』を記録する"
+              }
+            }
+          ],
+          "answer": "c",
+          "explanation": {
+            "zh": "用户反复强调的提交规范是典型的 feedback 类 memory：跨会话有价值（每次提交都需要），代码里看不出来，不会很快过时。其他选项要么是临时任务信息，要么能从配置文件直接读取。",
+            "en": "A repeatedly-emphasized commit convention is ideal feedback memory: valuable across sessions, not derivable from code, and not rapidly expiring. The other options are temporary tasks or info already in config files.",
+            "ja": "繰り返し強調されるコミット規約は理想的な feedback memory です。セッションをまたいで価値があり、コードから導出できず、すぐに古くなりません。"
+          },
+          "reward_card": "card_s09_002"
+        },
+        {
+          "id": "q_s09_016",
+          "type": "choice",
+          "difficulty": 3,
+          "stem": {
+            "zh": "同一条信息，既可以归入 project memory，也可以写进 CLAUDE.md。应该怎么判断放哪里？",
+            "en": "The same information could go into project memory or CLAUDE.md. How do you decide?",
+            "ja": "同じ情報が project memory にも CLAUDE.md にも入れられます。どちらに入れるか、どう判断しますか？"
+          },
+          "options": [
+            {
+              "id": "a",
+              "text": {
+                "zh": "先写进 memory，等稳定了再移到 CLAUDE.md",
+                "en": "Start in memory, move to CLAUDE.md once it stabilizes",
+                "ja": "まず memory に書き、安定したら CLAUDE.md に移す"
+              }
+            },
+            {
+              "id": "b",
+              "text": {
+                "zh": "两处都写，保证任一系统都能查到",
+                "en": "Write in both places to ensure either system can find it",
+                "ja": "両方に書いて、どちらのシステムでも見つけられるようにする"
+              }
+            },
+            {
+              "id": "c",
+              "text": {
+                "zh": "只看文字长短，短的放 CLAUDE.md，长的放 memory",
+                "en": "Based on length: short text in CLAUDE.md, long text in memory",
+                "ja": "長さで判断：短い文章は CLAUDE.md、長い文章は memory に"
+              }
+            },
+            {
+              "id": "d",
+              "text": {
+                "zh": "动态变化的项目状态放 memory，长期稳定的规则放 CLAUDE.md",
+                "en": "Dynamic changing project state goes in memory; long-term stable rules go in CLAUDE.md",
+                "ja": "動的に変化するプロジェクト状態は memory に、長期安定ルールは CLAUDE.md に入れる"
+              }
+            }
+          ],
+          "answer": "d",
+          "explanation": {
+            "zh": "判断标准是信息的稳定性：「当前架构决策处于讨论阶段」是动态 project memory；「所有 API 必须有文档注释」是稳定规则，属于 CLAUDE.md。两处都写会造成重复和不一致，应该避免。",
+            "en": "The criterion is stability: 'current architecture is under discussion' is dynamic project memory; 'all APIs must have doc comments' is a stable rule for CLAUDE.md. Writing in both creates duplication and inconsistency.",
+            "ja": "判断基準は安定性です。『現在のアーキテクチャは議論中』は動的な project memory、『すべての API にドキュメントコメントが必要』は CLAUDE.md の安定ルールです。"
+          },
+          "reward_card": "card_s09_003"
+        },
+        {
+          "id": "q_s09_017",
+          "type": "choice",
+          "difficulty": 1,
+          "stem": {
+            "zh": "「跨会话」在 memory 系统中的含义是什么？",
+            "en": "What does 'cross-session' mean in the context of the memory system?",
+            "ja": "memory システムにおける『セッションをまたぐ』とはどういう意味ですか？"
+          },
+          "options": [
+            {
+              "id": "a",
+              "text": {
+                "zh": "在同一次对话中多次使用的信息",
+                "en": "Information used multiple times within the same conversation",
+                "ja": "同じ会話の中で複数回使われる情報"
+              }
+            },
+            {
+              "id": "b",
+              "text": {
+                "zh": "在不同设备之间同步的信息",
+                "en": "Information synchronized across different devices",
+                "ja": "異なるデバイス間で同期される情報"
+              }
+            },
+            {
+              "id": "c",
+              "text": {
+                "zh": "在多次独立的 AI 对话中仍然有参考价值的信息",
+                "en": "Information that retains value across multiple independent AI conversations",
+                "ja": "複数の独立した AI 会話をまたいで参照価値を持つ情報"
+              }
+            },
+            {
+              "id": "d",
+              "text": {
+                "zh": "跨越不同代码仓库的信息",
+                "en": "Information spanning across different code repositories",
+                "ja": "異なるコードリポジトリをまたぐ情報"
+              }
+            }
+          ],
+          "answer": "c",
+          "explanation": {
+            "zh": "「跨会话」指的是跨越多次独立的 AI 对话。每次新对话，AI 没有上次的记忆，memory 文件的存在让 AI 能在每次会话中读取历史积累的重要信息，保持连续性。",
+            "en": "Cross-session means across multiple independent AI conversations. Each new conversation starts fresh; memory files let the AI access historically accumulated important information and maintain continuity.",
+            "ja": "セッションをまたぐとは、複数の独立した AI 会話をまたぐことを意味します。新しい会話のたびに AI には記憶がなく、memory ファイルにより過去の重要情報にアクセスできます。"
+          },
+          "reward_card": "card_s09_001"
+        },
+        {
+          "id": "q_s09_018",
+          "type": "choice",
+          "difficulty": 2,
+          "stem": {
+            "zh": "以下哪种做法正确描述了 feedback 类 memory 与 user 类 memory 的区别？",
+            "en": "Which statement correctly describes the difference between feedback and user memory types?",
+            "ja": "feedback と user の memory タイプの違いを正しく説明しているのはどれですか？"
+          },
+          "options": [
+            {
+              "id": "a",
+              "text": {
+                "zh": "feedback 记录 AI 对用户的建议；user 记录用户对 AI 的反馈",
+                "en": "feedback records AI suggestions to user; user records user feedback to AI",
+                "ja": "feedback は AI からユーザーへの提案を記録し、user はユーザーから AI へのフィードバックを記録する"
+              }
+            },
+            {
+              "id": "b",
+              "text": {
+                "zh": "feedback 记录用户对 AI 输出风格和行为的指导；user 记录用户自身的背景、偏好、身份信息",
+                "en": "feedback records guidance on AI output style and behavior; user records the user's own background, preferences, identity",
+                "ja": "feedback は AI の出力スタイルと行動に関する指導を記録し、user はユーザー自身の背景、好み、身元を記録する"
+              }
+            },
+            {
+              "id": "c",
+              "text": {
+                "zh": "两者没有区别，都记录用户相关信息",
+                "en": "No difference, both record user-related information",
+                "ja": "違いはなく、どちらもユーザー関連情報を記録する"
+              }
+            },
+            {
+              "id": "d",
+              "text": {
+                "zh": "feedback 是临时的，user 是永久的",
+                "en": "feedback is temporary; user is permanent",
+                "ja": "feedback は一時的で、user は永続的"
+              }
+            }
+          ],
+          "answer": "b",
+          "explanation": {
+            "zh": "区别在于信息指向：feedback 指向 AI 的行为——「生成代码时用这种格式」「这类建议不要给」；user 指向用户本人——「用户是后端工程师」「偏好简洁代码」。两类有清晰边界，不要混用。",
+            "en": "The distinction is about what the info describes: feedback is about how the AI should behave; user is about who the user is. Clear boundaries help the AI apply the right information in the right context.",
+            "ja": "区別は情報が何を説明するかにあります。feedback は AI がどう振る舞うべきか、user はユーザーが誰であるかを説明します。"
+          },
+          "reward_card": "card_s09_002"
+        },
+        {
+          "id": "q_s09_019",
+          "type": "choice",
+          "difficulty": 3,
+          "stem": {
+            "zh": "用户要求 AI「把我们讨论的所有内容都记进 memory」。这个请求有什么潜在风险？",
+            "en": "A user asks the AI to 'save everything we discussed into memory'. What is the potential risk?",
+            "ja": "ユーザーが AI に『話し合ったことをすべて memory に保存して』と頼んでいます。潜在的なリスクは何ですか？"
+          },
+          "options": [
+            {
+              "id": "a",
+              "text": {
+                "zh": "memory 的文件数量有上限，超过后系统崩溃",
+                "en": "There is a file count limit on memory; exceeding it crashes the system",
+                "ja": "memory のファイル数には上限があり、超えるとシステムがクラッシュする"
+              }
+            },
+            {
+              "id": "b",
+              "text": {
+                "zh": "违反 memory 核心原则——把大量不符合标准的信息（临时、可从代码读到、很快过时）存入 memory，导致 memory 质量下降、噪音增加",
+                "en": "Violates memory's core principle — storing large amounts of non-qualifying info (temporary, code-derivable, rapidly expiring), degrading memory quality with noise",
+                "ja": "memory の核心原則に違反する。大量の基準を満たさない情報（一時的、コードから導出可能、すぐに古くなる）を保存し、memory の品質を低下させノイズを増やす"
+              }
+            },
+            {
+              "id": "c",
+              "text": {
+                "zh": "MEMORY.md 索引文件会损坏",
+                "en": "The MEMORY.md index file will become corrupted",
+                "ja": "MEMORY.md インデックスファイルが破損する"
+              }
+            },
+            {
+              "id": "d",
+              "text": {
+                "zh": "只有 project 类 memory 有容量限制",
+                "en": "Only project memory type has a capacity limit",
+                "ja": "project memory タイプのみ容量制限がある"
+              }
+            }
+          ],
+          "answer": "b",
+          "explanation": {
+            "zh": "Memory 不是对话记录，不是什么都存。大量存入临时信息、可从代码读到的信息、很快过时的信息，会让 memory 质量急剧下降。未来 AI 读取 memory 时，噪音淹没真正有价值的信息，反而降低了系统有效性。",
+            "en": "Memory is not a conversation log. Storing temporary, code-derivable, or rapidly-expiring information degrades memory quality. Future sessions load noisy memory, drowning out genuinely valuable entries and reducing system effectiveness.",
+            "ja": "memory は会話ログではありません。一時的な情報、コードから導出可能な情報、すぐに古くなる情報を大量に保存すると、memory の品質が急速に低下します。"
+          },
+          "reward_card": "card_s09_001"
+        },
+        {
+          "id": "q_s09_020",
+          "type": "choice",
+          "difficulty": 2,
+          "stem": {
+            "zh": "在 memory 的四个类型中，哪个类型最容易与 CLAUDE.md 的内容重叠，需要特别注意边界？",
+            "en": "Among the four memory types, which one most easily overlaps with CLAUDE.md content and requires careful boundary management?",
+            "ja": "memory の 4 つのタイプのうち、CLAUDE.md のコンテンツと最も重複しやすく、境界管理に特別な注意が必要なのはどれですか？"
+          },
+          "options": [
+            {
+              "id": "a",
+              "text": {
+                "zh": "reference",
+                "en": "reference",
+                "ja": "reference"
+              }
+            },
+            {
+              "id": "b",
+              "text": {
+                "zh": "user",
+                "en": "user",
+                "ja": "user"
+              }
+            },
+            {
+              "id": "c",
+              "text": {
+                "zh": "feedback",
+                "en": "feedback",
+                "ja": "feedback"
+              }
+            },
+            {
+              "id": "d",
+              "text": {
+                "zh": "project",
+                "en": "project",
+                "ja": "project"
+              }
+            }
+          ],
+          "answer": "c",
+          "explanation": {
+            "zh": "feedback 类 memory 记录对 AI 行为的持续指导，而 CLAUDE.md 也包含 AI 应遵循的规则和约定。两者最容易重叠：短期反馈放 feedback memory，当反馈变成长期稳定规则时，应迁移到 CLAUDE.md。",
+            "en": "Feedback memory records ongoing AI behavior guidance, and CLAUDE.md also contains rules for AI behavior. These two overlap most easily. Short-term feedback stays in feedback memory; when it stabilizes into a long-term rule, migrate it to CLAUDE.md.",
+            "ja": "feedback memory は AI 行動への継続的な指導を記録し、CLAUDE.md も AI が従うべきルールを含みます。この二つが最も重複しやすいです。"
+          },
+          "reward_card": "card_s09_003"
+        },
+        {
+          "id": "q_s09_021",
+          "type": "choice",
+          "difficulty": 1,
+          "stem": {
+            "zh": "memory 系统的四个类型是哪些？",
+            "en": "What are the four types in the memory system?",
+            "ja": "memory システムの 4 つのタイプは何ですか？"
+          },
+          "options": [
+            {
+              "id": "a",
+              "text": {
+                "zh": "user、feedback、project、reference",
+                "en": "user, feedback, project, reference",
+                "ja": "user、feedback、project、reference"
+              }
+            },
+            {
+              "id": "b",
+              "text": {
+                "zh": "task、plan、memory、context",
+                "en": "task, plan, memory, context",
+                "ja": "task、plan、memory、context"
+              }
+            },
+            {
+              "id": "c",
+              "text": {
+                "zh": "short-term、long-term、session、global",
+                "en": "short-term, long-term, session, global",
+                "ja": "short-term、long-term、session、global"
+              }
+            },
+            {
+              "id": "d",
+              "text": {
+                "zh": "code、config、doc、log",
+                "en": "code, config, doc, log",
+                "ja": "code、config、doc、log"
+              }
+            }
+          ],
+          "answer": "a",
+          "explanation": {
+            "zh": "memory 系统的四个类型是：user（用户信息）、feedback（反馈指导）、project（项目动态）、reference（外部资源指针）。四类各有清晰边界，不应混用。",
+            "en": "The four memory types are: user (user information), feedback (guidance on AI behavior), project (project dynamics), reference (external resource pointers). Each has clear boundaries.",
+            "ja": "memory システムの 4 つのタイプは：user（ユーザー情報）、feedback（フィードバック指導）、project（プロジェクト動態）、reference（外部リソースポインタ）です。"
+          },
+          "reward_card": "card_s09_002"
+        },
+        {
+          "id": "q_s09_022",
+          "type": "choice",
+          "difficulty": 3,
+          "stem": {
+            "zh": "一个项目决定不使用 memory 系统，而是把所有持久化信息全部写进 CLAUDE.md。这会带来什么核心问题？",
+            "en": "A project decides to skip memory and write all persistent info into CLAUDE.md. What is the core problem?",
+            "ja": "プロジェクトが memory システムを使わず、すべての永続情報を CLAUDE.md に書くことにしました。核心的な問題は何ですか？"
+          },
+          "options": [
+            {
+              "id": "a",
+              "text": {
+                "zh": "CLAUDE.md 不支持 frontmatter 格式",
+                "en": "CLAUDE.md does not support frontmatter format",
+                "ja": "CLAUDE.md は frontmatter 形式をサポートしていない"
+              }
+            },
+            {
+              "id": "b",
+              "text": {
+                "zh": "CLAUDE.md 文件会变得臃肿、难以维护，把动态项目状态和长期规则混在一起，降低了两类信息的可读性和可维护性",
+                "en": "CLAUDE.md becomes bloated and hard to maintain, mixing dynamic state with long-term rules, reducing readability and maintainability of both",
+                "ja": "CLAUDE.md が肥大化して維持困難になり、動的状態と長期ルールが混在して、両方の情報の可読性と保守性が低下する"
+              }
+            },
+            {
+              "id": "c",
+              "text": {
+                "zh": "CLAUDE.md 只能被 AI 读取，无法存储用户信息",
+                "en": "CLAUDE.md can only be read by AI and cannot store user information",
+                "ja": "CLAUDE.md は AI しか読めず、ユーザー情報を格納できない"
+              }
+            },
+            {
+              "id": "d",
+              "text": {
+                "zh": "CLAUDE.md 在项目开始时就固定不变，不能动态更新",
+                "en": "CLAUDE.md is fixed at project start and cannot be dynamically updated",
+                "ja": "CLAUDE.md はプロジェクト開始時に固定され、動的に更新できない"
+              }
+            }
+          ],
+          "answer": "b",
+          "explanation": {
+            "zh": "CLAUDE.md 的设计初衷是存放长期稳定的规则，如果把动态的 project/feedback/user 信息也塞进去，文件会快速膨胀，规则和状态信息混杂在一起，让 AI 和开发者都难以分辨哪些是稳定约定、哪些是当前状态。",
+            "en": "CLAUDE.md is designed for long-term stable rules. Mixing in dynamic project/feedback/user info causes it to bloat quickly, making it hard for both AI and developers to distinguish stable conventions from current state.",
+            "ja": "CLAUDE.md は長期安定ルール用に設計されています。動的な project/feedback/user 情報も詰め込むと、ファイルが急速に肥大化し、安定した規約と現在の状態の区別が困難になります。"
+          },
+          "reward_card": "card_s09_003"
         }
       ],
       "star_thresholds": [
