@@ -10394,51 +10394,51 @@ module.exports = {
         {
           "id": "q_s13_001",
           "type": "choice",
-          "difficulty": 2,
+          "difficulty": 1,
           "stem": {
-            "zh": "在 Claude Code 中，关于「这一章要解决什么问题」的正确理解是？",
-            "en": "What is the correct understanding of \"What You'll Learn\" in Claude Code?",
-            "ja": "Claude Code における「この章が解く問題」の正しい理解はどれですか？"
+            "zh": "Claude Code 的后台任务机制中，主循环（main loop）的数量是多少？",
+            "en": "In Claude Code's background task mechanism, how many main loops are there?",
+            "ja": "Claude Code のバックグラウンドタスク機構において、メインループは何本ありますか？"
           },
           "options": [
             {
               "id": "a",
               "text": {
-                "zh": "这一章要解决什么问题",
-                "en": "What You'll Learn",
-                "ja": "この章が解く問題"
-              }
-            },
-            {
-              "id": "d",
-              "text": {
-                "zh": "第三步：完成后写通知",
-                "en": "第三步：完成后写通知",
-                "ja": "第 3 段階: subprocess が終わったら notification を積む"
-              }
-            },
-            {
-              "id": "c",
-              "text": {
-                "zh": "什么是 cron 表达式",
-                "en": "Read Together",
-                "ja": "重要なデータ構造"
+                "zh": "有多条，每个后台任务一条",
+                "en": "Multiple, one per background task",
+                "ja": "複数本、後台タスクごとに1本"
               }
             },
             {
               "id": "b",
               "text": {
-                "zh": "先解释几个名词",
-                "en": "The Solution",
-                "ja": "主線とどう併読するか"
+                "zh": "有两条，一条前台一条后台",
+                "en": "Two, one foreground and one background",
+                "ja": "2本、フォアグラウンドとバックグラウンドそれぞれ1本"
+              }
+            },
+            {
+              "id": "c",
+              "text": {
+                "zh": "始终只有一条",
+                "en": "Always exactly one",
+                "ja": "常に1本だけ"
+              }
+            },
+            {
+              "id": "d",
+              "text": {
+                "zh": "取决于并发任务数量",
+                "en": "Depends on the number of concurrent tasks",
+                "ja": "並行タスクの数による"
               }
             }
           ],
-          "answer": "a",
+          "answer": "c",
           "explanation": {
-            "zh": "把“慢执行”移到后台，让主循环继续推进别的事情。",
-            "en": "What You'll Learn",
-            "ja": "遅い実行を background へ逃がし、main loop は次の仕事へ進めるようにすること"
+            "zh": "主循环只有一条。后台任务并行的是「等待」，而不是主循环本身。慢命令在另一条执行线上跑，主循环继续推进其他工作。",
+            "en": "There is always exactly one main loop. What runs in parallel is the waiting, not the loop itself. Slow commands run on a separate execution thread while the main loop continues other work.",
+            "ja": "メインループは常に1本だけです。並行するのは「待機」であり、ループ自体ではありません。遅いコマンドは別の実行スレッドで動き、メインループは他の作業を進め続けます。"
           },
           "reward_card": "card_s13_001"
         },
@@ -10447,49 +10447,49 @@ module.exports = {
           "type": "choice",
           "difficulty": 1,
           "stem": {
-            "zh": "以下哪个概念与「建议联读」直接相关？",
-            "en": "Which concept is directly related to \"The Problem\"?",
-            "ja": "「併読すると楽になる資料」に直接関連する概念はどれですか？"
+            "zh": "background_run 被调用后，主循环会怎样处理？",
+            "en": "After background_run is called, what does the main loop do?",
+            "ja": "background_run が呼ばれた後、メインループはどうなりますか？"
           },
           "options": [
             {
-              "id": "b",
-              "text": {
-                "zh": "第四步：把任务工具接给模型",
-                "en": "第四步：把任务工具接给模型",
-                "ja": "第四步：把任务工具接给模型"
-              }
-            },
-            {
-              "id": "d",
-              "text": {
-                "zh": "2. 调度通知",
-                "en": "Key Takeaway",
-                "ja": "なぜ `s13` の後なのか"
-              }
-            },
-            {
               "id": "a",
               "text": {
-                "zh": "建议联读",
-                "en": "The Problem",
-                "ja": "併読すると楽になる資料"
+                "zh": "阻塞等待后台命令执行完毕",
+                "en": "Block and wait for the background command to finish",
+                "ja": "バックグラウンドコマンドが終わるまでブロックして待つ"
+              }
+            },
+            {
+              "id": "b",
+              "text": {
+                "zh": "立即返回 task_id，继续推进其他工作",
+                "en": "Return a task_id immediately and continue other work",
+                "ja": "すぐに task_id を返し、他の作業を続ける"
               }
             },
             {
               "id": "c",
               "text": {
-                "zh": "什么是持久化调度",
-                "en": "What Changed",
-                "ja": "1. schedule record"
+                "zh": "创建一条新的主循环来处理后台任务",
+                "en": "Create a new main loop to handle the background task",
+                "ja": "バックグラウンドタスク用の新しいメインループを作成する"
+              }
+            },
+            {
+              "id": "d",
+              "text": {
+                "zh": "挂起当前工作，优先处理后台结果",
+                "en": "Suspend current work and prioritize background results",
+                "ja": "現在の作業を中断し、バックグラウンド結果を優先処理する"
               }
             }
           ],
-          "answer": "a",
+          "answer": "b",
           "explanation": {
-            "zh": "建议联读",
-            "en": "The Problem",
-            "ja": "併読すると楽になる資料"
+            "zh": "background_run 的关键设计是调用后立即返回一个 task_id，不阻塞主循环。模型拿到 task_id 后可以继续推进其他工作，真正的命令在后台线程里执行。",
+            "en": "The key design of background_run is that it returns a task_id immediately without blocking the main loop. The model can continue other work with the task_id, while the actual command runs on a background thread.",
+            "ja": "background_run の核心的な設計は、呼び出し後すぐに task_id を返し、メインループをブロックしないことです。モデルは task_id を受け取って他の作業を続けられ、実際のコマンドはバックグラウンドスレッドで実行されます。"
           },
           "reward_card": "card_s13_002"
         },
@@ -10498,153 +10498,816 @@ module.exports = {
           "type": "choice",
           "difficulty": 1,
           "stem": {
-            "zh": "以下哪个概念与「先把几个词讲明白」直接相关？",
-            "en": "Which concept is directly related to \"The Solution\"?",
-            "ja": "「先に言葉をそろえる」に直接関連する概念はどれですか？"
+            "zh": "在后台任务设计中，「并行的是等待，不是主循环本身」这句话的含义是什么？",
+            "en": "In background task design, what does 'what runs in parallel is the waiting, not the main loop itself' mean?",
+            "ja": "バックグラウンドタスク設計において、「並行するのは待機であり、メインループ自体ではない」という意味は何ですか？"
           },
           "options": [
             {
               "id": "b",
               "text": {
-                "zh": "这一章要解决什么问题",
-                "en": "What You'll Learn",
-                "ja": "問題"
-              }
-            },
-            {
-              "id": "d",
-              "text": {
-                "zh": "最小心智模型",
-                "en": "What You've Mastered",
-                "ja": "最小心智模型"
+                "zh": "主循环停止运行，只有等待逻辑在运行",
+                "en": "The main loop stops and only waiting logic runs",
+                "ja": "メインループが停止し、待機ロジックだけが動く"
               }
             },
             {
               "id": "a",
               "text": {
-                "zh": "先把几个词讲明白",
-                "en": "The Solution",
-                "ja": "先に言葉をそろえる"
+                "zh": "主循环和后台命令同时运行，主循环不会因等待而暂停",
+                "en": "The main loop and background command run simultaneously; the loop doesn't pause to wait",
+                "ja": "メインループとバックグラウンドコマンドが同時に動き、ループは待機で止まらない"
               }
             },
             {
               "id": "c",
               "text": {
-                "zh": "`s13` 的 background task 是什么",
-                "en": "`s13` 的 background task 是什么",
-                "ja": "初学者が混ぜやすいポイント"
+                "zh": "等待是串行的，主循环是并行的",
+                "en": "Waiting is serial while the main loop is parallel",
+                "ja": "待機は直列で、メインループは並列"
+              }
+            },
+            {
+              "id": "d",
+              "text": {
+                "zh": "后台任务完成前主循环不会收到任何通知",
+                "en": "The main loop receives no notifications until the background task completes",
+                "ja": "バックグラウンドタスクが完了するまでメインループは通知を受けない"
               }
             }
           ],
           "answer": "a",
           "explanation": {
-            "zh": "先把几个词讲明白",
-            "en": "The Solution",
-            "ja": "先に言葉をそろえる"
+            "zh": "慢命令在另一条执行线上跑，主循环先去做别的事。两者同时推进，只是结果稍后通过通知回来。主循环不等待，所以并行的是「等待行为」而非循环本体。",
+            "en": "Slow commands run on a separate execution thread while the main loop does other things. Both advance simultaneously; results come back later via notifications. The loop doesn't wait, so what's parallel is the 'waiting behavior', not the loop itself.",
+            "ja": "遅いコマンドは別の実行スレッドで動き、メインループは他の作業をします。両者が同時に進み、結果は後で通知で届きます。ループは待機しないので、並行するのは「待機の動作」であってループ本体ではありません。"
           },
-          "reward_card": "card_s13_003"
+          "reward_card": "card_s13_001"
         },
         {
           "id": "q_s13_004",
           "type": "choice",
-          "difficulty": 1,
+          "difficulty": 2,
           "stem": {
-            "zh": "以下哪个概念与「什么叫前台」直接相关？",
-            "en": "Which concept is directly related to \"How It Works\"?",
-            "ja": "「foreground とは何か」に直接関連する概念はどれですか？"
+            "zh": "background_run 返回的 task_id 的主要用途是什么？",
+            "en": "What is the primary use of the task_id returned by background_run?",
+            "ja": "background_run が返す task_id の主な用途は何ですか？"
           },
           "options": [
             {
               "id": "a",
               "text": {
-                "zh": "什么叫前台",
-                "en": "How It Works",
-                "ja": "foreground とは何か"
-              }
-            },
-            {
-              "id": "c",
-              "text": {
-                "zh": "什么是持久化调度",
-                "en": "What Changed",
-                "ja": "1. schedule record"
-              }
-            },
-            {
-              "id": "d",
-              "text": {
-                "zh": "这一章要解决什么问题",
-                "en": "What You'll Learn",
-                "ja": "この章が解く問題"
+                "zh": "作为日志文件的文件名",
+                "en": "As the filename for the log file",
+                "ja": "ログファイルのファイル名として使う"
               }
             },
             {
               "id": "b",
               "text": {
-                "zh": "关键数据结构",
-                "en": "What You've Mastered",
-                "ja": "3. check interval"
+                "zh": "用于直接中止后台任务",
+                "en": "To directly terminate the background task",
+                "ja": "バックグラウンドタスクを直接終了させるため"
+              }
+            },
+            {
+              "id": "c",
+              "text": {
+                "zh": "让模型能够在稍后识别和追踪该后台任务的结果",
+                "en": "Allow the model to identify and track the result of that background task later",
+                "ja": "後でそのバックグラウンドタスクの結果を識別・追跡できるようにする"
+              }
+            },
+            {
+              "id": "d",
+              "text": {
+                "zh": "决定后台任务的执行优先级",
+                "en": "Determine the execution priority of the background task",
+                "ja": "バックグラウンドタスクの実行優先度を決める"
               }
             }
           ],
-          "answer": "a",
+          "answer": "c",
           "explanation": {
-            "zh": "什么叫前台",
-            "en": "Step 1.",
-            "ja": "foreground とは何か"
+            "zh": "模型拿到 task_id 后可以继续做其他工作。当后台通知到来时，task_id 让模型能够识别是哪个任务完成了，从而正确处理结果。",
+            "en": "With the task_id, the model can continue other work. When a background notification arrives, the task_id lets the model identify which task completed, enabling proper result handling.",
+            "ja": "task_id を受け取ったモデルは他の作業を続けられます。バックグラウンド通知が届いたとき、task_id によってどのタスクが完了したか識別でき、結果を適切に処理できます。"
           },
-          "reward_card": "card_s13_004"
+          "reward_card": "card_s13_002"
         },
         {
           "id": "q_s13_005",
           "type": "choice",
-          "difficulty": 1,
+          "difficulty": 2,
           "stem": {
-            "zh": "以下哪个概念与「什么叫后台」直接相关？",
-            "en": "Which concept is directly related to \"Read Together\"?",
-            "ja": "「background とは何か」に直接関連する概念はどれですか？"
+            "zh": "如果 background_run 像普通工具调用一样阻塞等待，会带来什么问题？",
+            "en": "What problem would occur if background_run blocked and waited like a regular tool call?",
+            "ja": "background_run が通常のツール呼び出しのようにブロックして待機したら、どんな問題が起きますか？"
           },
           "options": [
             {
-              "id": "b",
-              "text": {
-                "zh": "和 `s03` 的区别",
-                "en": "和 `s03` 的区别",
-                "ja": "和 `s03` 的区别"
-              }
-            },
-            {
-              "id": "d",
-              "text": {
-                "zh": "4. 把调度触发结果直接在后台默默执行",
-                "en": "4. 把调度触发结果直接在后台默默执行",
-                "ja": "4. 把调度触发结果直接在后台默默执行"
-              }
-            },
-            {
               "id": "a",
               "text": {
-                "zh": "什么叫后台",
-                "en": "Read Together",
-                "ja": "background とは何か"
+                "zh": "task_id 会变得不稳定",
+                "en": "The task_id would become unstable",
+                "ja": "task_id が不安定になる"
+              }
+            },
+            {
+              "id": "b",
+              "text": {
+                "zh": "后台日志会写入失败",
+                "en": "Background logs would fail to write",
+                "ja": "バックグラウンドログの書き込みが失敗する"
               }
             },
             {
               "id": "c",
               "text": {
-                "zh": "`s13` 的 background task 是什么",
-                "en": "`s13` 的 background task 是什么",
-                "ja": "初学者が混ぜやすいポイント"
+                "zh": "通知队列会被清空",
+                "en": "The notification queue would be emptied",
+                "ja": "通知キューが空になる"
+              }
+            },
+            {
+              "id": "d",
+              "text": {
+                "zh": "主循环在慢命令执行期间无法推进其他工作，失去并发优势",
+                "en": "The main loop could not advance other work during slow command execution, losing concurrency benefits",
+                "ja": "遅いコマンドの実行中にメインループが他の作業を進められず、並行処理の利点が失われる"
+              }
+            }
+          ],
+          "answer": "d",
+          "explanation": {
+            "zh": "background_run 的核心价值在于「不阻塞主循环」。如果改成阻塞等待，主循环就得等慢命令跑完才能继续，和普通同步调用没有区别，后台任务的意义就消失了。",
+            "en": "The core value of background_run is 'not blocking the main loop'. If it blocked instead, the main loop would have to wait for slow commands to finish before continuing, making it no different from synchronous calls and eliminating the purpose of background tasks.",
+            "ja": "background_run の核心的な価値は「メインループをブロックしない」ことです。もしブロックに変わると、遅いコマンドが終わるまでメインループが待機せざるを得なくなり、同期呼び出しと変わらなくなって、バックグラウンドタスクの意味がなくなります。"
+          },
+          "reward_card": "card_s13_002"
+        },
+        {
+          "id": "q_s13_006",
+          "type": "choice",
+          "difficulty": 1,
+          "stem": {
+            "zh": "后台任务完成后，完整的输出应该存放在哪里？",
+            "en": "After a background task completes, where should the full output be stored?",
+            "ja": "バックグラウンドタスク完了後、完全な出力はどこに保存すべきですか？"
+          },
+          "options": [
+            {
+              "id": "b",
+              "text": {
+                "zh": "直接放入上下文窗口",
+                "en": "Directly in the context window",
+                "ja": "直接コンテキストウィンドウに入れる"
+              }
+            },
+            {
+              "id": "a",
+              "text": {
+                "zh": "写入磁盘文件",
+                "en": "Written to a disk file",
+                "ja": "ディスクファイルに書き込む"
+              }
+            },
+            {
+              "id": "c",
+              "text": {
+                "zh": "存入通知队列",
+                "en": "Stored in the notification queue",
+                "ja": "通知キューに格納する"
+              }
+            },
+            {
+              "id": "d",
+              "text": {
+                "zh": "发送给用户界面展示",
+                "en": "Sent to the user interface for display",
+                "ja": "ユーザーインターフェースに送って表示する"
               }
             }
           ],
           "answer": "a",
           "explanation": {
-            "zh": "什么叫后台",
-            "en": "Read Together",
-            "ja": "background とは何か"
+            "zh": "完整输出写磁盘，通知里只放简短摘要。几万行日志会撑爆上下文窗口，模型真的需要全文时再调 read_file 读取。",
+            "en": "The full output is written to disk, and the notification contains only a short summary. Tens of thousands of log lines would overflow the context window; the model calls read_file only when it actually needs the full content.",
+            "ja": "完全な出力はディスクに書き込み、通知には短い要約だけを入れます。数万行のログはコンテキストウィンドウを溢れさせるため、モデルが本当に全文が必要なときだけ read_file を呼びます。"
           },
-          "reward_card": "card_s13_005"
+          "reward_card": "card_s13_003"
+        },
+        {
+          "id": "q_s13_007",
+          "type": "choice",
+          "difficulty": 1,
+          "stem": {
+            "zh": "后台任务完成的通知中应该包含什么内容？",
+            "en": "What should a background task completion notification contain?",
+            "ja": "バックグラウンドタスク完了通知には何を入れるべきですか？"
+          },
+          "options": [
+            {
+              "id": "a",
+              "text": {
+                "zh": "任务产生的全部日志输出",
+                "en": "All log output produced by the task",
+                "ja": "タスクが生成したすべてのログ出力"
+              }
+            },
+            {
+              "id": "b",
+              "text": {
+                "zh": "任务的源代码",
+                "en": "The source code of the task",
+                "ja": "タスクのソースコード"
+              }
+            },
+            {
+              "id": "c",
+              "text": {
+                "zh": "下一个要执行的任务指令",
+                "en": "Instructions for the next task to execute",
+                "ja": "次に実行するタスクの指示"
+              }
+            },
+            {
+              "id": "d",
+              "text": {
+                "zh": "简短摘要（成功/失败 + 关键信息）",
+                "en": "A short summary (success/failure + key info)",
+                "ja": "短い要約（成功/失敗 + 重要情報）"
+              }
+            }
+          ],
+          "answer": "d",
+          "explanation": {
+            "zh": "通知负责提醒，文件负责存原文。通知里只放简短摘要，让模型知道任务完成了、是成功还是失败，完整内容需要时再调 read_file。",
+            "en": "Notifications handle alerting; files store the original content. Notifications contain only a short summary so the model knows the task completed and whether it succeeded or failed. Full content is fetched via read_file when needed.",
+            "ja": "通知は知らせる役割、ファイルは原文を保存する役割です。通知には短い要約だけを入れ、タスクが完了して成功か失敗かをモデルに伝えます。全内容が必要なときは read_file で取得します。"
+          },
+          "reward_card": "card_s13_003"
+        },
+        {
+          "id": "q_s13_008",
+          "type": "choice",
+          "difficulty": 2,
+          "stem": {
+            "zh": "为什么不能把几万行日志直接塞入上下文窗口？",
+            "en": "Why can't tens of thousands of log lines be stuffed directly into the context window?",
+            "ja": "なぜ数万行のログを直接コンテキストウィンドウに詰め込めないのですか？"
+          },
+          "options": [
+            {
+              "id": "a",
+              "text": {
+                "zh": "因为日志文件格式不被上下文窗口支持",
+                "en": "Because log file formats are not supported by the context window",
+                "ja": "ログファイル形式がコンテキストウィンドウでサポートされていないから"
+              }
+            },
+            {
+              "id": "b",
+              "text": {
+                "zh": "因为会超出窗口容量限制，挤占宝贵的上下文空间",
+                "en": "Because it would exceed window capacity limits and crowd out valuable context space",
+                "ja": "ウィンドウの容量制限を超え、貴重なコンテキスト空間を圧迫するから"
+              }
+            },
+            {
+              "id": "c",
+              "text": {
+                "zh": "因为模型读取速度太慢",
+                "en": "Because the model reads too slowly",
+                "ja": "モデルの読み取り速度が遅すぎるから"
+              }
+            },
+            {
+              "id": "d",
+              "text": {
+                "zh": "因为日志内容通常是加密的",
+                "en": "Because log content is usually encrypted",
+                "ja": "ログの内容は通常暗号化されているから"
+              }
+            }
+          ],
+          "answer": "b",
+          "explanation": {
+            "zh": "几万行日志会「撑爆」上下文窗口。上下文空间有限且宝贵，应该只存放模型当前决策所需的关键信息，完整日志按需用 read_file 获取。",
+            "en": "Tens of thousands of log lines would 'overflow' the context window. Context space is limited and valuable; it should only hold key information needed for the model's current decisions. Full logs are fetched with read_file as needed.",
+            "ja": "数万行のログはコンテキストウィンドウを「溢れさせ」ます。コンテキスト空間は限られた貴重なものであり、モデルの現在の判断に必要な重要情報だけを保持すべきです。全ログは必要に応じて read_file で取得します。"
+          },
+          "reward_card": "card_s13_003"
+        },
+        {
+          "id": "q_s13_009",
+          "type": "choice",
+          "difficulty": 2,
+          "stem": {
+            "zh": "「通知负责提醒，文件负责存原文」这个设计原则解决了什么核心问题？",
+            "en": "What core problem does the design principle 'notifications for alerting, files for storing content' solve?",
+            "ja": "「通知は知らせる役割、ファイルは原文を保存する役割」という設計原則はどんな核心問題を解決しますか？"
+          },
+          "options": [
+            {
+              "id": "a",
+              "text": {
+                "zh": "上下文窗口被长日志撑爆与信息可获取性之间的矛盾",
+                "en": "The conflict between context window overflow from long logs and information accessibility",
+                "ja": "長いログによるコンテキストウィンドウのオーバーフローと情報アクセス可能性の矛盾"
+              }
+            },
+            {
+              "id": "b",
+              "text": {
+                "zh": "磁盘 I/O 速度慢的问题",
+                "en": "The problem of slow disk I/O",
+                "ja": "ディスク I/O が遅い問題"
+              }
+            },
+            {
+              "id": "c",
+              "text": {
+                "zh": "多个后台任务的调度顺序问题",
+                "en": "The scheduling order of multiple background tasks",
+                "ja": "複数バックグラウンドタスクのスケジューリング順序の問題"
+              }
+            },
+            {
+              "id": "d",
+              "text": {
+                "zh": "任务结果的加密传输问题",
+                "en": "The encrypted transmission of task results",
+                "ja": "タスク結果の暗号化転送の問題"
+              }
+            }
+          ],
+          "answer": "a",
+          "explanation": {
+            "zh": "如果把全部日志塞进上下文，窗口会撑爆；如果什么都不传，模型又无法感知任务状态。通知+文件的分离设计解决了这个矛盾：摘要保持上下文简洁，完整内容按需读取。",
+            "en": "Putting all logs into context overflows the window; putting nothing leaves the model unable to sense task state. The notification+file separation solves this: summaries keep context concise, full content is read on demand.",
+            "ja": "全ログをコンテキストに入れるとウィンドウが溢れ、何も入れないとモデルがタスク状態を把握できません。通知+ファイルの分離設計がこの矛盾を解決します：要約でコンテキストを簡潔に保ち、全内容は必要時に読み取ります。"
+          },
+          "reward_card": "card_s13_003"
+        },
+        {
+          "id": "q_s13_010",
+          "type": "choice",
+          "difficulty": 1,
+          "stem": {
+            "zh": "每次调用模型之前，应该对通知队列做什么操作？",
+            "en": "Before each model call, what operation should be performed on the notification queue?",
+            "ja": "モデルを呼び出す前に、通知キューに対してどんな操作をすべきですか？"
+          },
+          "options": [
+            {
+              "id": "a",
+              "text": {
+                "zh": "清空通知队列，不向模型注入任何信息",
+                "en": "Empty the notification queue without injecting any information into the model",
+                "ja": "通知キューを空にし、モデルには何も注入しない"
+              }
+            },
+            {
+              "id": "d",
+              "text": {
+                "zh": "排空通知队列，将后台结果摘要注入 messages",
+                "en": "Drain the notification queue and inject background result summaries into messages",
+                "ja": "通知キューを排空し、バックグラウンド結果の要約を messages に注入する"
+              }
+            },
+            {
+              "id": "c",
+              "text": {
+                "zh": "保留通知队列，等待所有后台任务完成",
+                "en": "Keep the notification queue and wait for all background tasks to finish",
+                "ja": "通知キューを保持し、すべてのバックグラウンドタスクの完了を待つ"
+              }
+            },
+            {
+              "id": "b",
+              "text": {
+                "zh": "将通知队列中的全部原始输出追加到 messages",
+                "en": "Append all raw output from the notification queue to messages",
+                "ja": "通知キューのすべての生出力を messages に追記する"
+              }
+            }
+          ],
+          "answer": "d",
+          "explanation": {
+            "zh": "每次调模型之前，先把通知队列排空，将后台结果摘要注入 messages。这样模型在下一轮就会知道哪个任务完成了、是成功还是失败，这是主循环多出的一个标准前置步骤。",
+            "en": "Before each model call, drain the notification queue and inject background result summaries into messages. This way the model knows in the next round which task completed and whether it succeeded or failed. This is an extra standard pre-step added to the main loop.",
+            "ja": "モデルを呼び出す前に、通知キューを排空し、バックグラウンド結果の要約を messages に注入します。これでモデルは次のラウンドでどのタスクが完了し、成功か失敗かを知れます。これがメインループに追加された標準的な前置ステップです。"
+          },
+          "reward_card": "card_s13_004"
+        },
+        {
+          "id": "q_s13_011",
+          "type": "choice",
+          "difficulty": 2,
+          "stem": {
+            "zh": "如果调用模型前不排空通知队列，会发生什么？",
+            "en": "What happens if the notification queue is not drained before calling the model?",
+            "ja": "モデルを呼び出す前に通知キューを排空しないとどうなりますか？"
+          },
+          "options": [
+            {
+              "id": "a",
+              "text": {
+                "zh": "模型无法感知后台任务已完成，可能重复启动同一任务",
+                "en": "The model cannot sense that background tasks completed, possibly restarting the same tasks",
+                "ja": "モデルがバックグラウンドタスクの完了を感知できず、同じタスクを再起動する可能性がある"
+              }
+            },
+            {
+              "id": "b",
+              "text": {
+                "zh": "通知队列会自动清空",
+                "en": "The notification queue will automatically empty",
+                "ja": "通知キューが自動的に空になる"
+              }
+            },
+            {
+              "id": "c",
+              "text": {
+                "zh": "后台任务会被强制中止",
+                "en": "Background tasks will be forcefully terminated",
+                "ja": "バックグラウンドタスクが強制終了される"
+              }
+            },
+            {
+              "id": "d",
+              "text": {
+                "zh": "模型调用会报错失败",
+                "en": "The model call will fail with an error",
+                "ja": "モデル呼び出しがエラーで失敗する"
+              }
+            }
+          ],
+          "answer": "a",
+          "explanation": {
+            "zh": "通知队列是模型了解后台状态的唯一渠道。不排空就调模型，模型就看不到已完成的任务结果，可能做出错误决策（比如重启已完成的任务或忽略失败）。",
+            "en": "The notification queue is the only channel for the model to learn about background state. If not drained before calling the model, the model won't see completed task results and may make wrong decisions (like restarting completed tasks or ignoring failures).",
+            "ja": "通知キューはモデルがバックグラウンド状態を知る唯一のチャネルです。排空せずにモデルを呼び出すと、完了したタスクの結果が見えず、誤った判断（完了したタスクの再起動や失敗の無視など）をする可能性があります。"
+          },
+          "reward_card": "card_s13_004"
+        },
+        {
+          "id": "q_s13_012",
+          "type": "choice",
+          "difficulty": 2,
+          "stem": {
+            "zh": "「排空通知队列」在主循环中处于什么位置？",
+            "en": "Where does 'draining the notification queue' appear in the main loop?",
+            "ja": "「通知キューの排空」はメインループのどの位置にありますか？"
+          },
+          "options": [
+            {
+              "id": "a",
+              "text": {
+                "zh": "调用模型之后，作为后处理步骤",
+                "en": "After calling the model, as a post-processing step",
+                "ja": "モデル呼び出し後、後処理ステップとして"
+              }
+            },
+            {
+              "id": "b",
+              "text": {
+                "zh": "只在后台任务失败时触发",
+                "en": "Only triggered when a background task fails",
+                "ja": "バックグラウンドタスクが失敗したときだけ発動する"
+              }
+            },
+            {
+              "id": "c",
+              "text": {
+                "zh": "调用模型之前，作为标准前置步骤",
+                "en": "Before calling the model, as a standard pre-step",
+                "ja": "モデル呼び出し前、標準的な前置ステップとして"
+              }
+            },
+            {
+              "id": "d",
+              "text": {
+                "zh": "在工具调用完成后立即触发",
+                "en": "Triggered immediately after a tool call completes",
+                "ja": "ツール呼び出し完了直後に発動する"
+              }
+            }
+          ],
+          "answer": "c",
+          "explanation": {
+            "zh": "每次调模型之前，先把通知队列排空，将后台结果摘要注入 messages。这是主循环在引入后台任务后多出的一个标准前置步骤。",
+            "en": "Before each model call, the notification queue is drained and background result summaries are injected into messages. This is a standard pre-step added to the main loop after introducing background tasks.",
+            "ja": "モデルを呼び出す前に、毎回通知キューを排空し、バックグラウンド結果の要約を messages に注入します。これはバックグラウンドタスクを導入したことでメインループに追加された標準的な前置ステップです。"
+          },
+          "reward_card": "card_s13_004"
+        },
+        {
+          "id": "q_s13_013",
+          "type": "choice",
+          "difficulty": 3,
+          "stem": {
+            "zh": "一个耗时 30 秒的测试命令，用后台任务机制运行时，主循环在这 30 秒内能做什么？",
+            "en": "When a 30-second test command runs as a background task, what can the main loop do during those 30 seconds?",
+            "ja": "30秒かかるテストコマンドをバックグラウンドタスクとして実行した場合、メインループはその30秒間に何ができますか？"
+          },
+          "options": [
+            {
+              "id": "a",
+              "text": {
+                "zh": "什么也不能做，只能等待测试结果",
+                "en": "Nothing; it can only wait for test results",
+                "ja": "何もできず、テスト結果を待つだけ"
+              }
+            },
+            {
+              "id": "d",
+              "text": {
+                "zh": "继续处理其他工作，等测试完成的通知到来再处理结果",
+                "en": "Continue other work and process results when the test completion notification arrives",
+                "ja": "他の作業を続け、テスト完了通知が届いたら結果を処理する"
+              }
+            },
+            {
+              "id": "c",
+              "text": {
+                "zh": "只能轮询检查测试是否完成",
+                "en": "Only poll to check if the test has finished",
+                "ja": "テストが終了したかどうかをポーリングするだけ"
+              }
+            },
+            {
+              "id": "b",
+              "text": {
+                "zh": "自动创建另一条主循环来处理其他工作",
+                "en": "Automatically create another main loop to handle other work",
+                "ja": "他の作業を処理するために別のメインループを自動的に作成する"
+              }
+            }
+          ],
+          "answer": "d",
+          "explanation": {
+            "zh": "这正是后台任务的核心价值。测试命令在后台线程执行，主循环立即去处理其他工作。测试完成后通知写入队列，下一次调模型前排空队列时，模型就能知道测试结果了。",
+            "en": "This is exactly the core value of background tasks. The test command runs on a background thread; the main loop immediately proceeds with other work. When the test completes, a notification is queued; when the queue is drained before the next model call, the model learns the test result.",
+            "ja": "これがバックグラウンドタスクの核心的な価値です。テストコマンドはバックグラウンドスレッドで実行され、メインループはすぐに他の作業を処理します。テストが完了すると通知がキューに入り、次のモデル呼び出し前にキューを排空したとき、モデルはテスト結果を知れます。"
+          },
+          "reward_card": "card_s13_001"
+        },
+        {
+          "id": "q_s13_014",
+          "type": "choice",
+          "difficulty": 3,
+          "stem": {
+            "zh": "模型通过 background_run 启动了一个构建任务，然后继续做代码分析。构建完成后，模型如何得知构建结果？",
+            "en": "A model starts a build task via background_run, then continues code analysis. How does the model learn the build result after it completes?",
+            "ja": "モデルが background_run でビルドタスクを起動して、その後コード分析を続けた場合、ビルド完了後にモデルはどうやって結果を知りますか？"
+          },
+          "options": [
+            {
+              "id": "a",
+              "text": {
+                "zh": "构建系统主动推送结果到模型",
+                "en": "The build system actively pushes results to the model",
+                "ja": "ビルドシステムが積極的にモデルに結果をプッシュする"
+              }
+            },
+            {
+              "id": "b",
+              "text": {
+                "zh": "模型在调用前主动轮询构建状态",
+                "en": "The model actively polls build status before each call",
+                "ja": "モデルが呼び出し前に積極的にビルド状態をポーリングする"
+              }
+            },
+            {
+              "id": "c",
+              "text": {
+                "zh": "下一次调用模型前，排空通知队列时将构建结果摘要注入 messages",
+                "en": "When draining the notification queue before the next model call, the build result summary is injected into messages",
+                "ja": "次のモデル呼び出し前に通知キューを排空する際、ビルド結果の要約が messages に注入される"
+              }
+            },
+            {
+              "id": "d",
+              "text": {
+                "zh": "构建结果被直接追加到当前对话的末尾",
+                "en": "Build results are directly appended to the end of the current conversation",
+                "ja": "ビルド結果が現在の会話の末尾に直接追記される"
+              }
+            }
+          ],
+          "answer": "c",
+          "explanation": {
+            "zh": "构建完成时通知写入队列，构建的完整输出写磁盘文件。下一次调模型前，排空队列时将摘要注入 messages，模型就知道了构建状态。如需详细日志，再调 read_file 读磁盘文件。",
+            "en": "When the build completes, a notification is queued and full output is written to disk. Before the next model call, the queue is drained and the summary is injected into messages, so the model knows the build status. For detailed logs, read_file is called to read the disk file.",
+            "ja": "ビルドが完了すると通知がキューに入り、完全な出力がディスクファイルに書かれます。次のモデル呼び出し前にキューを排空して要約が messages に注入され、モデルはビルド状態を知ります。詳細なログが必要なら read_file でディスクファイルを読みます。"
+          },
+          "reward_card": "card_s13_004"
+        },
+        {
+          "id": "q_s13_015",
+          "type": "choice",
+          "difficulty": 3,
+          "stem": {
+            "zh": "下列哪个场景最能体现「后台任务机制」的设计价值？",
+            "en": "Which scenario best demonstrates the design value of the 'background task mechanism'?",
+            "ja": "次のどのシナリオが「バックグラウンドタスク機構」の設計価値を最もよく示していますか？"
+          },
+          "options": [
+            {
+              "id": "a",
+              "text": {
+                "zh": "用户输入一条简单指令，模型立刻给出回答",
+                "en": "User inputs a simple command, model responds immediately",
+                "ja": "ユーザーが簡単な指示を入力し、モデルがすぐに応答する"
+              }
+            },
+            {
+              "id": "b",
+              "text": {
+                "zh": "运行单元测试（5 分钟）的同时，模型继续分析其他文件并生成报告",
+                "en": "Running unit tests (5 minutes) while the model continues analyzing other files and generating reports",
+                "ja": "単体テスト（5分）を実行しながら、モデルが他のファイルの分析とレポート生成を続ける"
+              }
+            },
+            {
+              "id": "c",
+              "text": {
+                "zh": "模型顺序执行三个 API 调用",
+                "en": "Model executes three API calls sequentially",
+                "ja": "モデルが3つのAPI呼び出しを順番に実行する"
+              }
+            },
+            {
+              "id": "d",
+              "text": {
+                "zh": "用户手动终止模型当前的任务",
+                "en": "User manually terminates the model's current task",
+                "ja": "ユーザーがモデルの現在のタスクを手動で終了する"
+              }
+            }
+          ],
+          "answer": "b",
+          "explanation": {
+            "zh": "这个场景完美体现了后台任务的价值：把耗时 5 分钟的测试移到后台，主循环继续分析文件、生成报告，两件事同时推进，整体效率大幅提升。",
+            "en": "This scenario perfectly demonstrates the value of background tasks: the 5-minute test runs in the background while the main loop continues analyzing files and generating reports, advancing both simultaneously for greatly improved overall efficiency.",
+            "ja": "このシナリオはバックグラウンドタスクの価値を完璧に体現しています：5分かかるテストをバックグラウンドで実行しながら、メインループはファイル分析とレポート生成を続け、両方が同時に進んで全体的な効率が大幅に向上します。"
+          },
+          "reward_card": "card_s13_001"
+        },
+        {
+          "id": "q_s13_016",
+          "type": "choice",
+          "difficulty": 3,
+          "stem": {
+            "zh": "某工程师设计了一个系统：后台任务完成后，直接将完整日志（50000 行）注入 messages。这个设计的主要问题是什么？",
+            "en": "An engineer designs a system where background tasks inject their full logs (50,000 lines) directly into messages upon completion. What is the main problem with this design?",
+            "ja": "あるエンジニアが、バックグラウンドタスク完了後に完全なログ（50,000行）を直接 messages に注入するシステムを設計しました。この設計の主な問題は何ですか？"
+          },
+          "options": [
+            {
+              "id": "a",
+              "text": {
+                "zh": "日志格式不被 messages 字段支持",
+                "en": "Log format is not supported by the messages field",
+                "ja": "ログ形式が messages フィールドでサポートされていない"
+              }
+            },
+            {
+              "id": "b",
+              "text": {
+                "zh": "注入操作会阻塞后台线程",
+                "en": "The injection operation blocks the background thread",
+                "ja": "注入操作がバックグラウンドスレッドをブロックする"
+              }
+            },
+            {
+              "id": "c",
+              "text": {
+                "zh": "超大日志会撑爆上下文窗口，关键信息反而被淹没",
+                "en": "Oversized logs will overflow the context window, drowning out critical information",
+                "ja": "巨大なログがコンテキストウィンドウを溢れさせ、重要な情報がかえって埋もれる"
+              }
+            },
+            {
+              "id": "d",
+              "text": {
+                "zh": "模型无法处理超过 1000 行的输入",
+                "en": "The model cannot handle inputs exceeding 1000 lines",
+                "ja": "モデルは1000行を超える入力を処理できない"
+              }
+            }
+          ],
+          "answer": "c",
+          "explanation": {
+            "zh": "5 万行日志会撑爆上下文窗口，挤掉其他重要的对话历史和指令。正确做法是：完整日志写磁盘，messages 里只注入简短摘要，真正需要时再 read_file。",
+            "en": "50,000 log lines would overflow the context window, pushing out other important conversation history and instructions. The correct approach: write full logs to disk, inject only a short summary into messages, and call read_file only when the full content is actually needed.",
+            "ja": "5万行のログはコンテキストウィンドウを溢れさせ、他の重要な会話履歴や指示を押し出します。正しいアプローチ：完全なログをディスクに書き、messages には短い要約だけを注入し、全内容が本当に必要なときだけ read_file を呼びます。"
+          },
+          "reward_card": "card_s13_003"
+        },
+        {
+          "id": "q_s13_017",
+          "type": "choice",
+          "difficulty": 3,
+          "stem": {
+            "zh": "主循环中「调用模型前排空通知队列」这一步骤，与「主循环只有一条」这一约束之间是什么关系？",
+            "en": "What is the relationship between the main loop step 'drain notification queue before calling model' and the constraint 'there is only one main loop'?",
+            "ja": "メインループの「モデル呼び出し前に通知キューを排空する」ステップと「メインループは1本だけ」という制約はどんな関係ですか？"
+          },
+          "options": [
+            {
+              "id": "a",
+              "text": {
+                "zh": "两者没有直接关系，是独立的设计决策",
+                "en": "They have no direct relationship; they are independent design decisions",
+                "ja": "両者は直接の関係がなく、独立した設計判断"
+              }
+            },
+            {
+              "id": "b",
+              "text": {
+                "zh": "正是因为只有一条主循环，后台结果无法自动传入，必须在调模型前主动注入",
+                "en": "Precisely because there is only one main loop, background results cannot flow in automatically, so they must be actively injected before calling the model",
+                "ja": "まさにメインループが1本だけだからこそ、バックグラウンド結果は自動的に流れ込まず、モデル呼び出し前に能動的に注入しなければならない"
+              }
+            },
+            {
+              "id": "c",
+              "text": {
+                "zh": "排空通知队列会临时增加主循环的数量",
+                "en": "Draining the notification queue temporarily increases the number of main loops",
+                "ja": "通知キューの排空は一時的にメインループの数を増やす"
+              }
+            },
+            {
+              "id": "d",
+              "text": {
+                "zh": "多条主循环才需要通知队列，单条主循环不需要",
+                "en": "Notification queues are only needed with multiple main loops, not with a single one",
+                "ja": "通知キューは複数のメインループがある場合だけ必要で、1本だけなら不要"
+              }
+            }
+          ],
+          "answer": "b",
+          "explanation": {
+            "zh": "因为只有一条主循环，它不会自动「看到」后台线程的结果。通知队列是桥梁：后台线程把结果摘要写入队列，主循环在调模型前主动排空队列、注入 messages，这才完成了后台结果到模型的传递。",
+            "en": "Because there is only one main loop, it does not automatically 'see' results from background threads. The notification queue is the bridge: background threads write result summaries to the queue; the main loop actively drains the queue and injects messages before calling the model, completing the transfer of background results to the model.",
+            "ja": "メインループが1本だけだから、バックグラウンドスレッドの結果を自動的に「見る」ことができません。通知キューが橋渡し役です：バックグラウンドスレッドが結果の要約をキューに書き込み、メインループがモデル呼び出し前に能動的にキューを排空して messages に注入することで、バックグラウンド結果がモデルに届きます。"
+          },
+          "reward_card": "card_s13_004"
+        },
+        {
+          "id": "q_s13_018",
+          "type": "choice",
+          "difficulty": 3,
+          "stem": {
+            "zh": "如果要为后台任务系统添加「任务超时自动取消」功能，最合适的实现位置是哪里？",
+            "en": "To add an 'automatic cancellation on timeout' feature to the background task system, where is the most appropriate place to implement it?",
+            "ja": "バックグラウンドタスクシステムに「タイムアウト時の自動キャンセル」機能を追加する場合、最も適切な実装場所はどこですか？"
+          },
+          "options": [
+            {
+              "id": "a",
+              "text": {
+                "zh": "在后台执行线程内部，到时自动终止命令并向通知队列写入超时通知",
+                "en": "Inside the background execution thread, which automatically terminates the command and writes a timeout notification to the queue",
+                "ja": "バックグラウンド実行スレッド内部で、時間になったら自動的にコマンドを終了し、通知キューにタイムアウト通知を書き込む"
+              }
+            },
+            {
+              "id": "b",
+              "text": {
+                "zh": "在主循环调模型之后，检查是否有超时任务",
+                "en": "After the main loop calls the model, check for timed-out tasks",
+                "ja": "メインループがモデルを呼び出した後に、タイムアウトしたタスクを確認する"
+              }
+            },
+            {
+              "id": "c",
+              "text": {
+                "zh": "在用户界面层添加超时提示",
+                "en": "Add timeout prompts at the user interface layer",
+                "ja": "ユーザーインターフェース層にタイムアウトのプロンプトを追加する"
+              }
+            },
+            {
+              "id": "d",
+              "text": {
+                "zh": "在 background_run 调用处增加同步等待",
+                "en": "Add synchronous waiting at the background_run call site",
+                "ja": "background_run の呼び出し箇所に同期待機を追加する"
+              }
+            }
+          ],
+          "answer": "a",
+          "explanation": {
+            "zh": "超时逻辑应在后台执行线程内处理：到时自动终止命令，然后将超时通知（失败摘要）写入通知队列。下次主循环排空队列时，模型就能知道任务超时了。这样既不阻塞主循环，又保持了通知驱动的信息流。",
+            "en": "Timeout logic should be handled inside the background execution thread: automatically terminate the command when time is up, then write a timeout notification (failure summary) to the notification queue. The next time the main loop drains the queue, the model learns the task timed out. This neither blocks the main loop nor disrupts the notification-driven information flow.",
+            "ja": "タイムアウトロジックはバックグラウンド実行スレッド内で処理すべきです：時間になったら自動的にコマンドを終了し、タイムアウト通知（失敗の要約）を通知キューに書き込みます。次回メインループがキューを排空したとき、モデルはタスクがタイムアウトしたことを知ります。これによりメインループをブロックせず、通知駆動の情報フローも維持されます。"
+          },
+          "reward_card": "card_s13_001"
         }
       ],
       "star_thresholds": [
