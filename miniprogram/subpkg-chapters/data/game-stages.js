@@ -17547,49 +17547,21 @@ module.exports = {
           "type": "choice",
           "difficulty": 1,
           "stem": {
-            "zh": "以下哪个概念与「这一章到底在讲什么」直接相关？",
-            "en": "Which concept is directly related to \"What You'll Learn\"?",
-            "ja": "「この章が本当に教えるもの」に直接関連する概念はどれですか？"
+            "zh": "MCP 出现之前，Claude Code 的工具来源是什么形式？",
+            "en": "Before MCP, how were tools sourced in Claude Code?",
+            "ja": "MCP 以前、Claude Code のツールはどのように提供されていましたか？"
           },
           "options": [
-            {
-              "id": "c",
-              "text": {
-                "zh": "建议联读",
-                "en": "The Problem",
-                "ja": "併読すると楽になる資料"
-              }
-            },
-            {
-              "id": "a",
-              "text": {
-                "zh": "这一章到底在讲什么",
-                "en": "What You'll Learn",
-                "ja": "この章が本当に教えるもの"
-              }
-            },
-            {
-              "id": "d",
-              "text": {
-                "zh": "1. server 配置",
-                "en": "1. server 配置",
-                "ja": "2. MCP を別世界だと思う"
-              }
-            },
-            {
-              "id": "b",
-              "text": {
-                "zh": "4. 没有邮箱，靠共享变量直接喊话",
-                "en": "4. 没有邮箱，靠共享变量直接喊话",
-                "ja": "3. roster を durable にしない"
-              }
-            }
+            { "id": "a", "text": { "zh": "通过网络动态下载", "en": "Downloaded dynamically from the network", "ja": "ネットワークから動的にダウンロード" } },
+            { "id": "b", "text": { "zh": "本地硬编码，固定内置", "en": "Hardcoded locally, fixed built-in", "ja": "ローカルにハードコードされ、固定内蔵" } },
+            { "id": "c", "text": { "zh": "用户每次手动注册", "en": "Manually registered by user each time", "ja": "ユーザーが毎回手動登録" } },
+            { "id": "d", "text": { "zh": "通过插件市场自动发现", "en": "Auto-discovered from a plugin marketplace", "ja": "プラグインマーケットから自動検出" } }
           ],
-          "answer": "a",
+          "answer": "b",
           "explanation": {
-            "zh": "这一章到底在讲什么",
-            "en": "What You'll Learn",
-            "ja": "この章が本当に教えるもの"
+            "zh": "MCP 之前，工具来源是「本地硬编码」——种类固定、无法在运行时扩展。MCP 把这个升级为「外部可插拔」。",
+            "en": "Before MCP, tools were hardcoded locally with a fixed set. MCP upgrades this to externally pluggable.",
+            "ja": "MCP 以前、ツールはローカルにハードコードされ種類は固定でした。MCP がこれを外部プラグイン可能に昇格させました。"
           },
           "reward_card": "card_s19_001"
         },
@@ -17598,204 +17570,391 @@ module.exports = {
           "type": "choice",
           "difficulty": 1,
           "stem": {
-            "zh": "以下哪个概念与「先用最简单的话解释 MCP」直接相关？",
-            "en": "Which concept is directly related to \"The Problem\"?",
-            "ja": "「MCP を一番簡単に言うと」に直接関連する概念はどれですか？"
+            "zh": "MCP 最简洁的一句话描述是什么？",
+            "en": "What is the most concise one-sentence description of MCP?",
+            "ja": "MCP を一番簡潔に表す一文はどれですか？"
           },
           "options": [
-            {
-              "id": "a",
-              "text": {
-                "zh": "先用最简单的话解释 MCP",
-                "en": "The Problem",
-                "ja": "MCP を一番簡単に言うと"
-              }
-            },
-            {
-              "id": "b",
-              "text": {
-                "zh": "如何接到前面章节里",
-                "en": "如何接到前面章节里",
-                "ja": "前の章とどうつながるか"
-              }
-            },
-            {
-              "id": "d",
-              "text": {
-                "zh": "3. MessageEnvelope",
-                "en": "What's Next",
-                "ja": "`TeamConfig`"
-              }
-            },
-            {
-              "id": "c",
-              "text": {
-                "zh": "什么叫自治",
-                "en": "How It Works",
-                "ja": "自治とは何か"
-              }
-            }
+            { "id": "a", "text": { "zh": "agent 和外部工具程序对话的统一协议", "en": "A unified protocol for agents to talk to external tools", "ja": "agent が外部ツールと会話する統一プロトコル" } },
+            { "id": "b", "text": { "zh": "微信小程序的插件分发平台", "en": "A plugin distribution platform for WeChat Mini Programs", "ja": "WeChat ミニプログラムのプラグイン配布基盤" } },
+            { "id": "c", "text": { "zh": "Claude 模型之间通信的内部消息队列", "en": "An internal message queue between Claude models", "ja": "Claude モデル間の内部メッセージキュー" } },
+            { "id": "d", "text": { "zh": "对话历史的压缩与存储方案", "en": "A compression and storage scheme for conversation history", "ja": "会話履歴の圧縮・保存スキーム" } }
           ],
           "answer": "a",
           "explanation": {
-            "zh": "一套让 agent 和外部工具程序对话的统一协议。",
-            "en": "The Problem",
-            "ja": "agent が外部 capability server と会話するための標準的な方法"
+            "zh": "MCP（Model Context Protocol）就是一套让 agent 和外部工具程序对话的统一协议，解决工具来源固定的问题。",
+            "en": "MCP (Model Context Protocol) is a unified protocol for agents to talk to external tool programs, solving the fixed-tool-source problem.",
+            "ja": "MCP（Model Context Protocol）は agent が外部ツールプログラムと会話するための統一プロトコルで、ツール来源が固定されている問題を解決します。"
           },
-          "reward_card": "card_s19_002"
+          "reward_card": "card_s19_001"
         },
         {
           "id": "q_s19_003",
           "type": "choice",
           "difficulty": 1,
           "stem": {
-            "zh": "以下哪个概念与「为什么这一章放在最后」直接相关？",
-            "en": "Which concept is directly related to \"The Solution\"?",
-            "ja": "「なぜ最後の章なのか」に直接関連する概念はどれですか？"
+            "zh": "MCP 将工具来源从哪个模式升级到哪个模式？",
+            "en": "MCP upgrades the tool source from which mode to which mode?",
+            "ja": "MCP はツール来源をどのモードからどのモードに昇格させますか？"
           },
           "options": [
-            {
-              "id": "d",
-              "text": {
-                "zh": "身份重注入为什么重要",
-                "en": "身份重注入为什么重要",
-                "ja": "identity 再注入が重要な理由"
-              }
-            },
-            {
-              "id": "c",
-              "text": {
-                "zh": "3. MessageEnvelope",
-                "en": "What's Next",
-                "ja": "`TeamConfig`"
-              }
-            },
-            {
-              "id": "b",
-              "text": {
-                "zh": "这一章要解决什么问题",
-                "en": "What You'll Learn",
-                "ja": "この章が解く問題"
-              }
-            },
-            {
-              "id": "a",
-              "text": {
-                "zh": "为什么这一章放在最后",
-                "en": "The Solution",
-                "ja": "なぜ最後の章なのか"
-              }
-            }
+            { "id": "c", "text": { "zh": "从「云端存储」到「本地缓存」", "en": "From 'cloud storage' to 'local cache'", "ja": "「クラウドストレージ」から「ローカルキャッシュ」へ" } },
+            { "id": "a", "text": { "zh": "从「外部可插拔」到「本地硬编码」", "en": "From 'externally pluggable' to 'hardcoded locally'", "ja": "「外部プラグイン可能」から「ローカルハードコード」へ" } },
+            { "id": "d", "text": { "zh": "从「本地硬编码」到「外部可插拔」", "en": "From 'hardcoded locally' to 'externally pluggable'", "ja": "「ローカルハードコード」から「外部プラグイン可能」へ" } },
+            { "id": "b", "text": { "zh": "从「动态加载」到「静态编译」", "en": "From 'dynamic loading' to 'static compilation'", "ja": "「動的ロード」から「静的コンパイル」へ" } }
           ],
-          "answer": "a",
+          "answer": "d",
           "explanation": {
-            "zh": "把“工具来源”从“本地硬编码”升级成“外部可插拔”。",
-            "en": "The Solution",
-            "ja": "新しい capability source"
+            "zh": "MCP 的核心贡献：把「本地硬编码」工具升级成「外部可插拔」，让 Claude Code 可以在运行时接入任意外部 server。",
+            "en": "MCP's core contribution: upgrading 'hardcoded local' tools to 'externally pluggable', allowing Claude Code to connect to any external server at runtime.",
+            "ja": "MCP の核心的貢献：「ローカルハードコード」ツールを「外部プラグイン可能」に昇格させ、Claude Code が実行時に任意の外部サーバーに接続できるようにしました。"
           },
-          "reward_card": "card_s19_003"
+          "reward_card": "card_s19_001"
         },
         {
           "id": "q_s19_004",
           "type": "choice",
-          "difficulty": 1,
+          "difficulty": 2,
           "stem": {
-            "zh": "以下哪个概念与「建议联读」直接相关？",
-            "en": "Which concept is directly related to \"Read Together\"?",
-            "ja": "「主線とどう併読するか」に直接関連する概念はどれですか？"
+            "zh": "MCP 的引入，对 Claude Code 工具系统最本质的改变是什么？",
+            "en": "What is the most fundamental change MCP brings to Claude Code's tool system?",
+            "ja": "MCP の導入が Claude Code のツールシステムにもたらす最も本質的な変化は何ですか？"
           },
           "options": [
-            {
-              "id": "b",
-              "text": {
-                "zh": "7. 没有事件日志",
-                "en": "7. 没有事件日志",
-                "ja": "7. event log を持たない"
-              }
-            },
-            {
-              "id": "a",
-              "text": {
-                "zh": "建议联读",
-                "en": "Read Together",
-                "ja": "主線とどう併読するか"
-              }
-            },
-            {
-              "id": "c",
-              "text": {
-                "zh": "第一步：先有一份队伍名册",
-                "en": "第一步：先有一份队伍名册",
-                "ja": "最小実装の進め方"
-              }
-            },
-            {
-              "id": "d",
-              "text": {
-                "zh": "这一章要解决什么问题",
-                "en": "What You'll Learn",
-                "ja": "この章が解く問題"
-              }
-            }
+            { "id": "b", "text": { "zh": "工具调用速度提升了 10 倍", "en": "Tool invocation speed increased 10x", "ja": "ツール呼び出し速度が 10 倍向上" } },
+            { "id": "a", "text": { "zh": "工具数量从无限变为有限", "en": "Tool count changed from unlimited to limited", "ja": "ツール数が無制限から有限に変化" } },
+            { "id": "c", "text": { "zh": "工具注册表从静态转变为运行时可扩展", "en": "Tool registry changed from static to runtime-extensible", "ja": "ツールレジストリが静的から実行時拡張可能に変化" } },
+            { "id": "d", "text": { "zh": "工具调用不再需要权限检查", "en": "Tool invocation no longer requires permission checks", "ja": "ツール呼び出しに権限チェックが不要になった" } }
           ],
-          "answer": "a",
+          "answer": "c",
           "explanation": {
-            "zh": "建议联读",
-            "en": "Read Together",
-            "ja": "主線とどう併読するか"
+            "zh": "MCP 最本质的改变是：工具注册表从「编译期静态」变成了「运行时动态可扩展」，外部 server 可以在不修改 Claude Code 源码的情况下贡献新工具。",
+            "en": "MCP's most fundamental change: the tool registry went from 'compile-time static' to 'runtime dynamically extensible', allowing external servers to contribute new tools without modifying Claude Code source.",
+            "ja": "MCP の最も本質的な変化：ツールレジストリが「コンパイル時静的」から「実行時動的拡張可能」になり、Claude Code のソースを変更せずに外部サーバーが新しいツールを提供できるようになりました。"
           },
-          "reward_card": "card_s19_004"
+          "reward_card": "card_s19_001"
         },
         {
           "id": "q_s19_005",
           "type": "choice",
-          "difficulty": 2,
+          "difficulty": 1,
           "stem": {
-            "zh": "在 Claude Code 中，关于「最小心智模型」的正确理解是？",
-            "en": "What is the correct understanding of \"How It Works\" in Claude Code?",
-            "ja": "Claude Code における「最小の心智モデル」の正しい理解はどれですか？"
+            "zh": "MCP 工具在 Claude Code 中的命名格式是什么？",
+            "en": "What is the naming format for MCP tools in Claude Code?",
+            "ja": "Claude Code における MCP ツールの命名形式は何ですか？"
           },
           "options": [
-            {
-              "id": "b",
-              "text": {
-                "zh": "这一章要解决什么问题",
-                "en": "What You'll Learn",
-                "ja": "この章が本当に解きたい問題"
-              }
-            },
-            {
-              "id": "a",
-              "text": {
-                "zh": "最小心智模型",
-                "en": "How It Works",
-                "ja": "最小の心智モデル"
-              }
-            },
-            {
-              "id": "c",
-              "text": {
-                "zh": "建议联读",
-                "en": "The Problem",
-                "ja": "併読すると楽になる資料"
-              }
-            },
-            {
-              "id": "d",
-              "text": {
-                "zh": "第三步：如果邮箱没消息，再按“当前角色”扫描可认领任务",
-                "en": "第三步：如果邮箱没消息，再按“当前角色”扫描可认领任务",
-                "ja": "第 3 段階: inbox が空なら role 付きで task board を走査する"
-              }
-            }
+            { "id": "a", "text": { "zh": "tool__server__name", "en": "tool__server__name", "ja": "tool__server__name" } },
+            { "id": "b", "text": { "zh": "mcp__server__tool", "en": "mcp__server__tool", "ja": "mcp__server__tool" } },
+            { "id": "c", "text": { "zh": "server.tool.mcp", "en": "server.tool.mcp", "ja": "server.tool.mcp" } },
+            { "id": "d", "text": { "zh": "plugin/server/tool", "en": "plugin/server/tool", "ja": "plugin/server/tool" } }
+          ],
+          "answer": "b",
+          "explanation": {
+            "zh": "MCP 工具使用 mcp__server__tool 前缀命名，双下划线分隔三段：协议前缀 mcp、server 名称、工具名称。",
+            "en": "MCP tools use the mcp__server__tool prefix format with double underscores separating three segments: protocol prefix mcp, server name, and tool name.",
+            "ja": "MCP ツールは mcp__server__tool 形式を使い、ダブルアンダースコアで 3 つのセグメント（プロトコルプレフィックス mcp、サーバー名、ツール名）を区切ります。"
+          },
+          "reward_card": "card_s19_002"
+        },
+        {
+          "id": "q_s19_006",
+          "type": "choice",
+          "difficulty": 1,
+          "stem": {
+            "zh": "以下哪个工具名符合 MCP 工具命名规范？",
+            "en": "Which tool name follows the MCP tool naming convention?",
+            "ja": "次のどのツール名が MCP ツール命名規則に従っていますか？"
+          },
+          "options": [
+            { "id": "d", "text": { "zh": "github-search-repos", "en": "github-search-repos", "ja": "github-search-repos" } },
+            { "id": "a", "text": { "zh": "mcp__github__search_repos", "en": "mcp__github__search_repos", "ja": "mcp__github__search_repos" } },
+            { "id": "c", "text": { "zh": "external.github.search_repos", "en": "external.github.search_repos", "ja": "external.github.search_repos" } },
+            { "id": "b", "text": { "zh": "plugin_github_search_repos", "en": "plugin_github_search_repos", "ja": "plugin_github_search_repos" } }
           ],
           "answer": "a",
           "explanation": {
-            "zh": "最小心智模型",
-            "en": "Step 1.",
-            "ja": "最小の心智モデル"
+            "zh": "标准命名是 mcp__server__tool，此处 mcp__github__search_repos 表示来自 github server 的 search_repos 工具，符合规范。",
+            "en": "The standard format is mcp__server__tool. Here mcp__github__search_repos means the search_repos tool from the github server, which follows the convention.",
+            "ja": "標準形式は mcp__server__tool です。mcp__github__search_repos は github サーバーの search_repos ツールを意味し、規則に従っています。"
           },
-          "reward_card": "card_s19_005"
+          "reward_card": "card_s19_002"
+        },
+        {
+          "id": "q_s19_007",
+          "type": "choice",
+          "difficulty": 2,
+          "stem": {
+            "zh": "mcp__server__tool 前缀命名规则的主要作用是什么？",
+            "en": "What is the primary purpose of the mcp__server__tool prefix naming rule?",
+            "ja": "mcp__server__tool プレフィックス命名規則の主な目的は何ですか？"
+          },
+          "options": [
+            { "id": "a", "text": { "zh": "限制每个 server 的工具数量上限", "en": "Limit the maximum number of tools per server", "ja": "各サーバーのツール数の上限を制限" } },
+            { "id": "c", "text": { "zh": "让系统一眼区分本地工具和外部工具", "en": "Let the system distinguish local tools from external tools at a glance", "ja": "システムがローカルツールと外部ツールを一目で区別できるようにする" } },
+            { "id": "d", "text": { "zh": "强制加密所有 MCP 通信", "en": "Enforce encryption for all MCP communication", "ja": "すべての MCP 通信を強制暗号化" } },
+            { "id": "b", "text": { "zh": "防止同名工具之间的调用循环", "en": "Prevent call cycles between same-named tools", "ja": "同名ツール間の呼び出しループを防止" } }
+          ],
+          "answer": "c",
+          "explanation": {
+            "zh": "前缀 mcp__ 让运行时一眼看出这是外部工具而非内置本地工具，方便路由、权限判断和调试。",
+            "en": "The mcp__ prefix lets the runtime immediately identify this as an external tool rather than a built-in local tool, facilitating routing, permission decisions, and debugging.",
+            "ja": "mcp__ プレフィックスにより、ランタイムはこれが組み込みローカルツールではなく外部ツールであることを即座に識別でき、ルーティング・権限判断・デバッグが容易になります。"
+          },
+          "reward_card": "card_s19_002"
+        },
+        {
+          "id": "q_s19_008",
+          "type": "choice",
+          "difficulty": 2,
+          "stem": {
+            "zh": "如果一个工具名是 mcp__filesystem__read_file，可以推断出什么信息？",
+            "en": "If a tool is named mcp__filesystem__read_file, what can be inferred?",
+            "ja": "ツール名が mcp__filesystem__read_file の場合、何が推測できますか？"
+          },
+          "options": [
+            { "id": "b", "text": { "zh": "这是一个来自 filesystem server 的外部工具，名称是 read_file", "en": "This is an external tool from the filesystem server, named read_file", "ja": "これは filesystem サーバーの外部ツールで、名前は read_file" } },
+            { "id": "d", "text": { "zh": "这是一个读取 MCP 配置文件的本地工具", "en": "This is a local tool for reading MCP configuration files", "ja": "MCP 設定ファイルを読み込むローカルツール" } },
+            { "id": "a", "text": { "zh": "这个工具只能在 filesystem 目录下运行", "en": "This tool can only run under the filesystem directory", "ja": "このツールは filesystem ディレクトリ配下でのみ動作" } },
+            { "id": "c", "text": { "zh": "这是 Claude Code 的内置文件读取工具", "en": "This is Claude Code's built-in file reading tool", "ja": "Claude Code の組み込みファイル読み込みツール" } }
+          ],
+          "answer": "b",
+          "explanation": {
+            "zh": "按 mcp__server__tool 命名规范，mcp__ 说明是外部工具，filesystem 是 server 名称，read_file 是具体工具名称。",
+            "en": "Following the mcp__server__tool convention: mcp__ indicates an external tool, filesystem is the server name, read_file is the specific tool name.",
+            "ja": "mcp__server__tool 規則に従うと：mcp__ は外部ツールを示し、filesystem はサーバー名、read_file は具体的なツール名です。"
+          },
+          "reward_card": "card_s19_002"
+        },
+        {
+          "id": "q_s19_009",
+          "type": "choice",
+          "difficulty": 1,
+          "stem": {
+            "zh": "Plugin manifest 在 MCP 架构中的核心作用是什么？",
+            "en": "What is the core role of Plugin manifest in MCP architecture?",
+            "ja": "MCP アーキテクチャにおける Plugin manifest の核心的な役割は何ですか？"
+          },
+          "options": [
+            { "id": "b", "text": { "zh": "存储工具调用的历史日志", "en": "Store historical logs of tool calls", "ja": "ツール呼び出しの履歴ログを保存" } },
+            { "id": "c", "text": { "zh": "告诉主程序有哪些外部 server 可以接入、怎么启动", "en": "Tell the main program which external servers can connect and how to start them", "ja": "メインプログラムにどの外部サーバーが接続可能で起動方法を伝える" } },
+            { "id": "a", "text": { "zh": "加密 MCP 通信的密钥管理", "en": "Key management for encrypting MCP communication", "ja": "MCP 通信を暗号化するための鍵管理" } },
+            { "id": "d", "text": { "zh": "限制单个 agent 可用的工具数量", "en": "Limit the number of tools available to a single agent", "ja": "単一 agent が使用できるツール数を制限" } }
+          ],
+          "answer": "c",
+          "explanation": {
+            "zh": "Plugin manifest 是服务发现的入口：它告诉主程序「有哪些外部 server 可以接入」以及「怎么启动这些 server」。",
+            "en": "Plugin manifest is the entry point for service discovery: it tells the main program which external servers can connect and how to start those servers.",
+            "ja": "Plugin manifest はサービス発見のエントリーポイントです：どの外部サーバーが接続可能か、そのサーバーをどう起動するかをメインプログラムに伝えます。"
+          },
+          "reward_card": "card_s19_003"
+        },
+        {
+          "id": "q_s19_010",
+          "type": "choice",
+          "difficulty": 2,
+          "stem": {
+            "zh": "如果没有 Plugin manifest，Claude Code 会遇到什么问题？",
+            "en": "Without Plugin manifest, what problem would Claude Code face?",
+            "ja": "Plugin manifest がなければ、Claude Code はどんな問題に直面しますか？"
+          },
+          "options": [
+            { "id": "d", "text": { "zh": "无法发现和启动外部 MCP server", "en": "Unable to discover and start external MCP servers", "ja": "外部 MCP サーバーを発見・起動できない" } },
+            { "id": "b", "text": { "zh": "工具调用延迟会增加 100 倍", "en": "Tool call latency would increase 100x", "ja": "ツール呼び出し遅延が 100 倍になる" } },
+            { "id": "a", "text": { "zh": "本地内置工具全部失效", "en": "All local built-in tools would stop working", "ja": "すべてのローカル組み込みツールが無効になる" } },
+            { "id": "c", "text": { "zh": "agent 之间无法互相通信", "en": "Agents would be unable to communicate with each other", "ja": "agent 同士が通信できなくなる" } }
+          ],
+          "answer": "d",
+          "explanation": {
+            "zh": "Plugin manifest 是外部 server 的「服务目录」，缺少它主程序就不知道有哪些 server 存在，也不知道如何启动它们。",
+            "en": "Plugin manifest is the 'service directory' for external servers. Without it, the main program doesn't know which servers exist or how to start them.",
+            "ja": "Plugin manifest は外部サーバーの「サービスカタログ」です。それがなければ、メインプログラムはどのサーバーが存在するか、またどう起動するかを知ることができません。"
+          },
+          "reward_card": "card_s19_003"
+        },
+        {
+          "id": "q_s19_011",
+          "type": "choice",
+          "difficulty": 2,
+          "stem": {
+            "zh": "Plugin manifest 通常包含哪些关键信息？",
+            "en": "What key information does a Plugin manifest typically contain?",
+            "ja": "Plugin manifest には通常どのような重要情報が含まれていますか？"
+          },
+          "options": [
+            { "id": "a", "text": { "zh": "可接入的 server 列表及其启动命令", "en": "List of connectable servers and their startup commands", "ja": "接続可能なサーバーのリストとその起動コマンド" } },
+            { "id": "c", "text": { "zh": "每次工具调用的费用账单", "en": "Billing for each tool call", "ja": "各ツール呼び出しの料金請求" } },
+            { "id": "b", "text": { "zh": "用户的 API 密钥和认证凭证", "en": "User API keys and authentication credentials", "ja": "ユーザーの API キーと認証資格情報" } },
+            { "id": "d", "text": { "zh": "工具执行结果的缓存策略", "en": "Caching strategy for tool execution results", "ja": "ツール実行結果のキャッシュ戦略" } }
+          ],
+          "answer": "a",
+          "explanation": {
+            "zh": "Plugin manifest 的核心内容是：有哪些外部 server、每个 server 怎么启动（命令、参数、环境变量等），这是服务发现的必要信息。",
+            "en": "The core content of Plugin manifest: which external servers exist and how each server starts (commands, arguments, environment variables, etc.) — essential information for service discovery.",
+            "ja": "Plugin manifest の核心内容は：どの外部サーバーが存在し、各サーバーをどう起動するか（コマンド・引数・環境変数など）です。サービス発見に必要な情報です。"
+          },
+          "reward_card": "card_s19_003"
+        },
+        {
+          "id": "q_s19_012",
+          "type": "choice",
+          "difficulty": 3,
+          "stem": {
+            "zh": "在 MCP 架构中，Plugin manifest 与工具命名规则（mcp__server__tool）之间的关系是什么？",
+            "en": "In MCP architecture, what is the relationship between Plugin manifest and tool naming (mcp__server__tool)?",
+            "ja": "MCP アーキテクチャにおいて、Plugin manifest とツール命名規則（mcp__server__tool）の関係は何ですか？"
+          },
+          "options": [
+            { "id": "c", "text": { "zh": "manifest 定义 server 如何接入，命名规则让运行时能识别来自哪个 server 的工具", "en": "Manifest defines how servers connect; naming rule lets runtime identify which server a tool comes from", "ja": "manifest がサーバーの接続方法を定義し、命名規則によりランタイムがどのサーバーのツールかを識別できる" } },
+            { "id": "a", "text": { "zh": "manifest 生成工具名称，命名规则负责安全加密", "en": "Manifest generates tool names; naming rule handles security encryption", "ja": "manifest がツール名を生成し、命名規則がセキュリティ暗号化を担当" } },
+            { "id": "d", "text": { "zh": "两者互相独立，没有关联", "en": "They are independent with no connection", "ja": "両者は独立しており関係がない" } },
+            { "id": "b", "text": { "zh": "命名规则决定 manifest 的文件格式", "en": "Naming rule determines the manifest file format", "ja": "命名規則が manifest のファイル形式を決める" } }
+          ],
+          "answer": "c",
+          "explanation": {
+            "zh": "两者协同：manifest 解决「有哪些 server、怎么启动」（发现问题），命名规则 mcp__server__tool 解决「这个工具来自哪个 server」（路由问题）。",
+            "en": "They work together: manifest solves 'which servers exist and how to start them' (discovery), while mcp__server__tool naming solves 'which server this tool comes from' (routing).",
+            "ja": "両者は協調して動作します：manifest は「どのサーバーが存在しどう起動するか」（発見の問題）を解決し、mcp__server__tool 命名は「このツールがどのサーバーから来たか」（ルーティングの問題）を解決します。"
+          },
+          "reward_card": "card_s19_003"
+        },
+        {
+          "id": "q_s19_013",
+          "type": "choice",
+          "difficulty": 2,
+          "stem": {
+            "zh": "本地工具和 MCP 外部工具在权限管道上的关系是什么？",
+            "en": "What is the relationship between local tools and MCP external tools regarding the permission pipeline?",
+            "ja": "ローカルツールと MCP 外部ツールの権限パイプラインの関係は何ですか？"
+          },
+          "options": [
+            { "id": "a", "text": { "zh": "走同一条权限管道，外部工具不能绕开安全检查", "en": "They share the same permission pipeline; external tools cannot bypass security checks", "ja": "同じ権限パイプラインを通り、外部ツールはセキュリティチェックを回避できない" } },
+            { "id": "c", "text": { "zh": "MCP 工具走独立的快速通道，不需要权限检查", "en": "MCP tools use a separate fast lane without permission checks", "ja": "MCP ツールは独立した高速レーンを使い権限チェック不要" } },
+            { "id": "b", "text": { "zh": "本地工具比 MCP 工具拥有更高权限", "en": "Local tools have higher permissions than MCP tools", "ja": "ローカルツールは MCP ツールより高い権限を持つ" } },
+            { "id": "d", "text": { "zh": "MCP 工具有专属权限管道，更安全", "en": "MCP tools have a dedicated permission pipeline that is more secure", "ja": "MCP ツールには専用の権限パイプラインがあり、より安全" } }
+          ],
+          "answer": "a",
+          "explanation": {
+            "zh": "统一权限管道是关键安全设计：本地工具和 MCP 工具都走同一条权限检查路径，外部 server 无法绕开系统安全策略。",
+            "en": "The unified permission pipeline is a key security design: both local and MCP tools go through the same permission check path, so external servers cannot bypass system security policies.",
+            "ja": "統一権限パイプラインは重要なセキュリティ設計です：ローカルツールと MCP ツールは同じ権限チェックパスを通り、外部サーバーはシステムのセキュリティポリシーを回避できません。"
+          },
+          "reward_card": "card_s19_004"
+        },
+        {
+          "id": "q_s19_014",
+          "type": "choice",
+          "difficulty": 2,
+          "stem": {
+            "zh": "为什么 MCP 工具必须走与本地工具相同的权限管道？",
+            "en": "Why must MCP tools go through the same permission pipeline as local tools?",
+            "ja": "MCP ツールがローカルツールと同じ権限パイプラインを通らなければならない理由は何ですか？"
+          },
+          "options": [
+            { "id": "d", "text": { "zh": "防止外部 server 绕开安全策略获取未授权权限", "en": "Prevent external servers from bypassing security policies to gain unauthorized permissions", "ja": "外部サーバーがセキュリティポリシーを回避して未承認の権限を取得するのを防ぐ" } },
+            { "id": "b", "text": { "zh": "简化代码实现，减少维护成本", "en": "Simplify code implementation and reduce maintenance costs", "ja": "コード実装を簡略化し、メンテナンスコストを削減" } },
+            { "id": "a", "text": { "zh": "提高工具调用的执行速度", "en": "Improve the execution speed of tool calls", "ja": "ツール呼び出しの実行速度を向上" } },
+            { "id": "c", "text": { "zh": "统一日志格式方便调试", "en": "Unify log format for easier debugging", "ja": "ログ形式を統一してデバッグを容易にする" } }
+          ],
+          "answer": "d",
+          "explanation": {
+            "zh": "如果 MCP 工具走独立管道，外部 server 就可能规避权限检查，危及整个系统安全。统一管道确保安全边界不被外部扩展所突破。",
+            "en": "If MCP tools had a separate pipeline, external servers could potentially evade permission checks, compromising overall system security. A unified pipeline ensures security boundaries aren't broken by external extensions.",
+            "ja": "MCP ツールが独立したパイプラインを持つと、外部サーバーが権限チェックを回避してシステム全体のセキュリティを脅かす可能性があります。統一パイプラインにより、外部拡張によってセキュリティ境界が破られないことが保証されます。"
+          },
+          "reward_card": "card_s19_004"
+        },
+        {
+          "id": "q_s19_015",
+          "type": "choice",
+          "difficulty": 3,
+          "stem": {
+            "zh": "统一权限管道对 MCP 架构的「可插拔性」有什么影响？",
+            "en": "How does the unified permission pipeline affect the 'pluggability' of MCP architecture?",
+            "ja": "統一権限パイプラインは MCP アーキテクチャの「プラグイン可能性」にどのような影響を与えますか？"
+          },
+          "options": [
+            { "id": "b", "text": { "zh": "在不降低安全性的前提下，实现了工具来源的可插拔扩展", "en": "Achieves pluggable tool-source extension without reducing security", "ja": "セキュリティを損なわずにツール来源のプラグイン可能な拡張を実現" } },
+            { "id": "a", "text": { "zh": "完全阻止了第三方 server 接入", "en": "Completely prevents third-party servers from connecting", "ja": "サードパーティサーバーの接続を完全に阻止" } },
+            { "id": "d", "text": { "zh": "要求每个 server 自己实现权限检查逻辑", "en": "Requires each server to implement its own permission checking logic", "ja": "各サーバーが独自の権限チェックロジックを実装することを要求" } },
+            { "id": "c", "text": { "zh": "使可插拔成为不可能，因为权限太严格", "en": "Makes pluggability impossible because permissions are too strict", "ja": "権限が厳しすぎてプラグイン可能性が不可能になる" } }
+          ],
+          "answer": "b",
+          "explanation": {
+            "zh": "统一权限管道巧妙地平衡了两个目标：外部工具可以自由接入（可插拔），但必须通过同一套安全检查（不降低安全性），实现了「开放但可控」的架构。",
+            "en": "The unified permission pipeline cleverly balances two goals: external tools can connect freely (pluggable), but must pass the same security checks (no security reduction), achieving an 'open but controlled' architecture.",
+            "ja": "統一権限パイプラインは 2 つの目標を巧みにバランスします：外部ツールは自由に接続できる（プラグイン可能）が、同じセキュリティチェックを通らなければならない（セキュリティ低下なし）、「オープンだが制御可能」なアーキテクチャを実現。"
+          },
+          "reward_card": "card_s19_004"
+        },
+        {
+          "id": "q_s19_016",
+          "type": "choice",
+          "difficulty": 3,
+          "stem": {
+            "zh": "将 MCP 的四个设计要素（统一协议、命名规则、manifest、统一权限管道）按系统职责正确匹配，哪个选项描述准确？",
+            "en": "Matching MCP's four design elements (unified protocol, naming rule, manifest, unified permission pipeline) to system responsibilities, which description is accurate?",
+            "ja": "MCP の 4 つの設計要素（統一プロトコル・命名規則・manifest・統一権限パイプライン）をシステム職責に正確に対応させた場合、正しい説明はどれですか？"
+          },
+          "options": [
+            { "id": "c", "text": { "zh": "协议=通信规范，命名=工具来源识别，manifest=服务发现，权限管道=安全保障", "en": "Protocol=communication spec, naming=tool source identification, manifest=service discovery, permission pipeline=security guarantee", "ja": "プロトコル=通信仕様、命名=ツール来源識別、manifest=サービス発見、権限パイプライン=セキュリティ保証" } },
+            { "id": "a", "text": { "zh": "协议=安全保障，命名=服务发现，manifest=工具来源识别，权限管道=通信规范", "en": "Protocol=security guarantee, naming=service discovery, manifest=tool source identification, permission pipeline=communication spec", "ja": "プロトコル=セキュリティ保証、命名=サービス発見、manifest=ツール来源識別、権限パイプライン=通信仕様" } },
+            { "id": "d", "text": { "zh": "协议=服务发现，命名=安全保障，manifest=通信规范，权限管道=工具来源识别", "en": "Protocol=service discovery, naming=security guarantee, manifest=communication spec, permission pipeline=tool source identification", "ja": "プロトコル=サービス発見、命名=セキュリティ保証、manifest=通信仕様、権限パイプライン=ツール来源識別" } },
+            { "id": "b", "text": { "zh": "协议=工具来源识别，命名=通信规范，manifest=安全保障，权限管道=服务发现", "en": "Protocol=tool source identification, naming=communication spec, manifest=security guarantee, permission pipeline=service discovery", "ja": "プロトコル=ツール来源識別、命名=通信仕様、manifest=セキュリティ保証、権限パイプライン=サービス発見" } }
+          ],
+          "answer": "c",
+          "explanation": {
+            "zh": "四要素各司其职：统一协议规范 agent 与外部工具的通信方式，命名规则（mcp__server__tool）标识工具来源，manifest 实现服务发现，统一权限管道保障安全。",
+            "en": "Each element has its role: the unified protocol specifies communication between agents and external tools; naming rule (mcp__server__tool) identifies tool source; manifest enables service discovery; unified permission pipeline ensures security.",
+            "ja": "4 要素はそれぞれ役割を持ちます：統一プロトコルが agent と外部ツールの通信方式を規定し、命名規則（mcp__server__tool）がツール来源を識別し、manifest がサービス発見を実現し、統一権限パイプラインがセキュリティを保証します。"
+          },
+          "reward_card": "card_s19_004"
+        },
+        {
+          "id": "q_s19_017",
+          "type": "choice",
+          "difficulty": 3,
+          "stem": {
+            "zh": "在 s19 的架构视角中，MCP 为什么被称为「外部能力总线」？",
+            "en": "From the architectural perspective of s19, why is MCP called the 'External Capability Bus'?",
+            "ja": "s19 のアーキテクチャ視点で、MCP が「外部 capability bus」と呼ばれる理由は何ですか？"
+          },
+          "options": [
+            { "id": "a", "text": { "zh": "它像总线一样为所有外部 server 提供统一接入通道和规范", "en": "Like a bus, it provides a unified access channel and standard for all external servers", "ja": "バスのように、すべての外部サーバーに統一されたアクセスチャンネルと規格を提供" } },
+            { "id": "b", "text": { "zh": "它只能连接「能力」型 server，不能连接数据型 server", "en": "It can only connect 'capability' servers, not data servers", "ja": "「capability」型サーバーのみ接続可能で、データ型サーバーには接続できない" } },
+            { "id": "d", "text": { "zh": "它使用总线协议（如 USB、PCIe）作为底层传输", "en": "It uses bus protocols (like USB, PCIe) as the underlying transport", "ja": "USB や PCIe などのバスプロトコルを基盤トランスポートとして使用" } },
+            { "id": "c", "text": { "zh": "它负责调度 agent 之间的任务分配", "en": "It handles task distribution between agents", "ja": "agent 間のタスク配分を調整する役割を担う" } }
+          ],
+          "answer": "a",
+          "explanation": {
+            "zh": "「总线」比喻强调了 MCP 的统一性：就像计算机总线让各种外设通过统一接口接入 CPU，MCP 让各种外部 server 通过统一协议接入 Claude Code，因此称为「外部能力总线」。",
+            "en": "The 'bus' metaphor emphasizes MCP's unifying nature: just as a computer bus lets various peripherals connect to the CPU through a unified interface, MCP lets various external servers connect to Claude Code through a unified protocol — hence 'External Capability Bus'.",
+            "ja": "「バス」の比喩は MCP の統一性を強調します：コンピュータのバスが様々な周辺機器を統一インターフェイスで CPU に接続するように、MCP は様々な外部サーバーを統一プロトコルで Claude Code に接続します。だから「外部 capability bus」と呼ばれます。"
+          },
+          "reward_card": "card_s19_001"
+        },
+        {
+          "id": "q_s19_018",
+          "type": "choice",
+          "difficulty": 3,
+          "stem": {
+            "zh": "以下哪种场景最能体现 MCP「外部可插拔」的价值？",
+            "en": "Which scenario best demonstrates the value of MCP's 'externally pluggable' design?",
+            "ja": "次のどのシナリオが MCP の「外部プラグイン可能」設計の価値を最もよく示していますか？"
+          },
+          "options": [
+            { "id": "d", "text": { "zh": "第三方公司开发自己的代码审查 server，Claude Code 无需更新即可接入使用", "en": "A third-party company develops their own code review server and Claude Code can connect without updates", "ja": "サードパーティ企業が独自のコードレビューサーバーを開発し、Claude Code は更新なしで接続して使用できる" } },
+            { "id": "b", "text": { "zh": "Claude Code 每次启动时重新编译所有工具", "en": "Claude Code recompiles all tools on every startup", "ja": "Claude Code が起動のたびにすべてのツールを再コンパイル" } },
+            { "id": "a", "text": { "zh": "用户必须卸载再重装 Claude Code 才能添加新工具", "en": "Users must uninstall and reinstall Claude Code to add new tools", "ja": "新しいツールを追加するにはユーザーが Claude Code をアンインストールして再インストールする必要がある" } },
+            { "id": "c", "text": { "zh": "系统每隔一小时自动扫描并禁用未使用的工具", "en": "The system automatically scans and disables unused tools every hour", "ja": "システムが 1 時間ごとに未使用ツールを自動スキャンして無効化" } }
+          ],
+          "answer": "d",
+          "explanation": {
+            "zh": "这正是「外部可插拔」的核心价值：外部生态（第三方公司）可以独立开发能力，Claude Code 主程序不需要修改或重新发布，就能通过 MCP 接入这些新能力。",
+            "en": "This is the core value of 'externally pluggable': external ecosystem (third-party companies) can independently develop capabilities, and Claude Code's main program doesn't need to be modified or re-released to access these new capabilities via MCP.",
+            "ja": "これが「外部プラグイン可能」の核心的な価値です：外部エコシステム（サードパーティ企業）が独立して能力を開発でき、Claude Code のメインプログラムを変更や再リリースなしに MCP を通じてこれらの新しい能力にアクセスできます。"
+          },
+          "reward_card": "card_s19_001"
         }
       ],
       "star_thresholds": [
