@@ -840,261 +840,924 @@ module.exports = {
         "en": "Fresh Context per Subtask",
         "ja": "サブタスクごとに新しい文脈を使う"
       },
-      "questions": [
+            "questions": [
         {
           "id": "q_s04_001",
           "type": "choice",
           "difficulty": 1,
           "stem": {
-            "zh": "以下哪个概念与「这一章到底要解决什么问题」直接相关？",
-            "en": "Which concept is directly related to \"What You'll Learn\"?",
-            "ja": "「この章が解く問題」に直接関連する概念はどれですか？"
+            "zh": "子智能体的核心价值是什么？",
+            "en": "What is the core value of a subagent?",
+            "ja": "subagent の核心的な価値は何ですか？"
           },
           "options": [
             {
+              "id": "a",
+              "text": {
+                "zh": "给局部任务一个干净的独立上下文",
+                "en": "A clean, isolated context for a local task",
+                "ja": "局所タスクにクリーンな独立した context を与える"
+              }
+            },
+            {
               "id": "b",
               "text": {
-                "zh": "3. SkillRegistry",
-                "en": "3. SkillRegistry",
-                "ja": "3. SkillRegistry"
+                "zh": "提供更多算力，让任务跑得更快",
+                "en": "More compute power to run tasks faster",
+                "ja": "より多くの計算能力でタスクを速く処理する"
               }
             },
             {
               "id": "c",
               "text": {
-                "zh": "5. 一上来就给初学者讲过多产品化层级",
-                "en": "5. 一上来就给初学者讲过多产品化层级",
-                "ja": "5. 一上来就给初学者讲过多产品化层级"
-              }
-            },
-            {
-              "id": "a",
-              "text": {
-                "zh": "这一章到底要解决什么问题",
-                "en": "What You'll Learn",
-                "ja": "この章が解く問題"
+                "zh": "允许子任务直接修改父智能体的 messages",
+                "en": "Let subtasks directly modify the parent messages",
+                "ja": "子タスクが親の messages を直接変更できるようにする"
               }
             },
             {
               "id": "d",
               "text": {
-                "zh": "什么是“父智能体”",
-                "en": "The Solution",
-                "ja": "親 agent とは何か"
+                "zh": "通过 fork 继承完整父历史来节省 token",
+                "en": "Save tokens by forking the full parent history",
+                "ja": "完全な親の履歴を fork して token を節約する"
               }
             }
           ],
           "answer": "a",
           "explanation": {
-            "zh": "把局部任务放进独立上下文里做，做完只把必要结果带回来。",
-            "en": "What You'll Learn",
-            "ja": "局所 task を別 context に閉じ込め、親には必要な summary だけを持ち帰る"
+            "zh": "子智能体的核心价值是干净上下文，不是更多算力。把局部任务放进独立 context 里做，完成后只把摘要带回父智能体，主对话保持整洁。",
+            "en": "The core value of a subagent is a clean context, not more compute. Local tasks run in isolation and only a summary returns to the parent, keeping the main conversation clean.",
+            "ja": "subagent の核心価値はクリーンな context であり、計算能力ではありません。局所タスクは隔離された context で実行され、完了後は summary だけが親に返ります。"
           },
           "reward_card": "card_s04_001"
         },
         {
           "id": "q_s04_002",
           "type": "choice",
-          "difficulty": 1,
+          "difficulty": 2,
           "stem": {
-            "zh": "以下哪个概念与「先解释几个名词」直接相关？",
-            "en": "Which concept is directly related to \"The Problem\"?",
-            "ja": "「先に言葉をそろえる」に直接関連する概念はどれですか？"
+            "zh": "子智能体执行完任务后，哪些内容会自动流回父智能体？",
+            "en": "After a subagent completes its task, what automatically flows back to the parent?",
+            "ja": "subagent がタスクを完了した後、何が自動的に親に戻りますか？"
           },
           "options": [
             {
-              "id": "d",
-              "text": {
-                "zh": "什么是压缩",
-                "en": "Step 1: Lever 0 -- Persisted Output",
-                "ja": "試してみる"
-              }
-            },
-            {
-              "id": "c",
-              "text": {
-                "zh": "用处 3：让后面的多 agent 协作有基础",
-                "en": "用处 3：让后面的多 agent 协作有基础",
-                "ja": "3. 後の multi-agent chapter の準備になる"
-              }
-            },
-            {
               "id": "a",
               "text": {
-                "zh": "先解释几个名词",
-                "en": "The Problem",
-                "ja": "先に言葉をそろえる"
+                "zh": "子智能体的完整 messages 列表",
+                "en": "The subagent's full messages list",
+                "ja": "subagent の完全な messages リスト"
               }
             },
             {
               "id": "b",
               "text": {
-                "zh": "5. 以为 reminder 是可有可无的小装饰",
-                "en": "5. 以为 reminder 是可有可无的小装饰",
-                "ja": "5. session plan と durable task graph を同一視する"
+                "zh": "所有工具调用结果和中间步骤",
+                "en": "All tool call results and intermediate steps",
+                "ja": "すべてのツール呼び出し結果と中間ステップ"
+              }
+            },
+            {
+              "id": "c",
+              "text": {
+                "zh": "父智能体发起时设定的 max_turns 执行记录",
+                "en": "The execution log bounded by max_turns",
+                "ja": "max_turns で制限された実行ログ"
+              }
+            },
+            {
+              "id": "d",
+              "text": {
+                "zh": "没有任何内容会自动流回，中间过程对父智能体不可见",
+                "en": "Nothing flows back automatically; intermediate steps are invisible to the parent",
+                "ja": "何も自動的に戻らず、中間プロセスは親には見えない"
               }
             }
           ],
-          "answer": "a",
+          "answer": "d",
           "explanation": {
-            "zh": "先解释几个名词",
-            "en": "The Problem",
-            "ja": "先に言葉をそろえる"
+            "zh": "父智能体和子智能体的 messages 完全独立。子智能体的中间过程不会自动写回父智能体，只有父智能体主动收取的摘要才能带回来，子任务噪声不污染主对话。",
+            "en": "Parent and subagent each maintain completely independent messages. Intermediate steps never auto-flow back to the parent — only a summary the parent explicitly receives returns. This keeps the main conversation clean.",
+            "ja": "親と subagent の messages は完全に独立しています。中間プロセスは自動的に親に戻らず、親が明示的に受け取る summary だけが返ります。"
           },
           "reward_card": "card_s04_002"
         },
         {
           "id": "q_s04_003",
           "type": "choice",
-          "difficulty": 1,
+          "difficulty": 2,
           "stem": {
-            "zh": "以下哪个概念与「什么是“父智能体”」直接相关？",
-            "en": "Which concept is directly related to \"The Solution\"?",
-            "ja": "「親 agent とは何か」に直接関連する概念はどれですか？"
+            "zh": "子智能体默认继承父智能体的 messages 历史吗？",
+            "en": "Does a subagent inherit the parent's messages history by default?",
+            "ja": "subagent はデフォルトで親の messages 履歴を継承しますか？"
           },
           "options": [
             {
-              "id": "c",
-              "text": {
-                "zh": "这一章要解决什么问题",
-                "en": "What You'll Learn",
-                "ja": "この章が解く問題"
-              }
-            },
-            {
               "id": "a",
               "text": {
-                "zh": "什么是“父智能体”",
-                "en": "The Solution",
-                "ja": "親 agent とは何か"
-              }
-            },
-            {
-              "id": "d",
-              "text": {
-                "zh": "坑 2：把父历史全部原样灌回去",
-                "en": "坑 2：把父历史全部原样灌回去",
-                "ja": "2. 子の history を全部親へ戻してしまう"
+                "zh": "是，子智能体总是继承完整父历史",
+                "en": "Yes, a subagent always inherits the full parent history",
+                "ja": "はい、subagent は常に完全な親の履歴を継承します"
               }
             },
             {
               "id": "b",
               "text": {
-                "zh": "初学者最容易犯的错",
-                "en": "初学者最容易犯的错",
-                "ja": "初学者最容易犯的错"
+                "zh": "是，但只继承最近 10 轮",
+                "en": "Yes, but only the last 10 turns",
+                "ja": "はい、ただし直近 10 ターンのみ"
+              }
+            },
+            {
+              "id": "c",
+              "text": {
+                "zh": "否，除非显式 fork，否则子智能体从空白上下文开始",
+                "en": "No, unless explicitly forked, the subagent starts with a clean context",
+                "ja": "いいえ、明示的に fork しない限り、subagent はクリーンな context から始まります"
+              }
+            },
+            {
+              "id": "d",
+              "text": {
+                "zh": "否，子智能体只继承 system prompt，不继承 messages",
+                "en": "No, the subagent only inherits the system prompt, not messages",
+                "ja": "いいえ、subagent は system prompt のみ継承し、messages は継承しません"
               }
             }
           ],
-          "answer": "a",
+          "answer": "c",
           "explanation": {
-            "zh": "什么是“父智能体”",
-            "en": "The Solution",
-            "ja": "親 agent とは何か"
+            "zh": "子智能体不继承父历史，除非显式 fork。默认从空白上下文开始，是上下文隔离的基础。这样子任务的中间噪声不会污染父智能体的主对话。",
+            "en": "Subagents do not inherit parent history unless explicitly forked. They start from a clean context by default, which is the foundation of context isolation and prevents subtask noise from polluting the parent.",
+            "ja": "subagent は明示的に fork しない限り親の履歴を継承しません。デフォルトでクリーンな context から始まり、これが context isolation の基盤です。"
           },
-          "reward_card": "card_s04_003"
+          "reward_card": "card_s04_002"
         },
         {
           "id": "q_s04_004",
           "type": "choice",
-          "difficulty": 1,
+          "difficulty": 3,
           "stem": {
-            "zh": "以下哪个概念与「什么是“子智能体”」直接相关？",
-            "en": "Which concept is directly related to \"How It Works\"?",
-            "ja": "「子 agent とは何か」に直接関連する概念はどれですか？"
+            "zh": "下面哪个场景最能体现上下文隔离的价值？",
+            "en": "Which scenario best demonstrates the value of context isolation?",
+            "ja": "context isolation の価値を最もよく示すシナリオはどれですか？"
           },
           "options": [
             {
-              "id": "c",
+              "id": "a",
               "text": {
-                "zh": "第二步：从 `SKILL.md` 里读取最小元信息",
-                "en": "第二步：从 `SKILL.md` 里读取最小元信息",
-                "ja": "第二步：从 `SKILL.md` 里读取最小元信息"
-              }
-            },
-            {
-              "id": "d",
-              "text": {
-                "zh": "最小实现",
-                "en": "Try It",
-                "ja": "最小实现"
+                "zh": "子智能体执行 500 步文件扫描，只把找到了哪些文件的摘要带回父智能体",
+                "en": "Subagent runs a 500-step file scan and returns only a summary of files found to parent",
+                "ja": "subagent が 500 ステップのファイルスキャンを実行し、見つかったファイルの summary だけを親に返す"
               }
             },
             {
               "id": "b",
               "text": {
-                "zh": "坑 1：把子智能体当成“为了炫技的并发”",
-                "en": "坑 1：把子智能体当成“为了炫技的并发”",
-                "ja": "1. subagent を「並列アピール機能」だと思う"
+                "zh": "父智能体把所有历史 messages 传给子智能体，让子智能体了解完整背景",
+                "en": "Parent passes all history to the subagent so it understands full context",
+                "ja": "親がすべての履歴を subagent に渡し、完全な背景を理解させる"
               }
             },
             {
-              "id": "a",
+              "id": "c",
               "text": {
-                "zh": "什么是“子智能体”",
-                "en": "How It Works",
-                "ja": "子 agent とは何か"
+                "zh": "子智能体完成后把自己的全部 messages 合并进父智能体的历史",
+                "en": "Subagent merges all its messages into the parent history after completion",
+                "ja": "subagent が完了後にすべての messages を親の履歴にマージする"
+              }
+            },
+            {
+              "id": "d",
+              "text": {
+                "zh": "子智能体设置 max_turns=1 确保只执行一步",
+                "en": "Subagent sets max_turns=1 to ensure only one step",
+                "ja": "subagent が max_turns=1 を設定して 1 ステップのみ実行する"
               }
             }
           ],
           "answer": "a",
           "explanation": {
-            "zh": "什么是“子智能体”",
-            "en": "Step 1.",
-            "ja": "子 agent とは何か"
+            "zh": "上下文隔离的价值在于：把大量中间步骤封闭在子智能体内，父智能体只收到精炼的摘要。500 步扫描只带回文件列表，父 messages 保持整洁，正是这一价值的典型体现。",
+            "en": "Context isolation shines when a subagent runs many intermediate steps and only returns a concise summary. A 500-step scan returning just a file list keeps the parent messages clean, the classic demonstration of this value.",
+            "ja": "context isolation の価値は、大量の中間ステップを subagent 内に閉じ込め、親には精炼された summary だけを返すことにあります。500 ステップのスキャンがファイルリストだけを返すのがその典型例です。"
           },
-          "reward_card": "card_s04_004"
+          "reward_card": "card_s04_001"
         },
         {
           "id": "q_s04_005",
           "type": "choice",
           "difficulty": 1,
           "stem": {
-            "zh": "以下哪个概念与「什么叫“上下文隔离”」直接相关？",
-            "en": "Which concept is directly related to \"What Changed From s03\"?",
-            "ja": "「context isolation とは何か」に直接関連する概念はどれですか？"
+            "zh": "为什么必须给子智能体设置 max_turns 限制？",
+            "en": "Why must a subagent have a max_turns limit?",
+            "ja": "subagent に max_turns 制限を設定しなければならないのはなぜですか？"
           },
           "options": [
             {
-              "id": "d",
-              "text": {
-                "zh": "第五步：让 skill 正文只在当前需要时进入上下文",
-                "en": "第五步：让 skill 正文只在当前需要时进入上下文",
-                "ja": "第五步：让 skill 正文只在当前需要时进入上下文"
-              }
-            },
-            {
               "id": "a",
               "text": {
-                "zh": "什么叫“上下文隔离”",
-                "en": "What Changed From s03",
-                "ja": "context isolation とは何か"
+                "zh": "防止子智能体消耗过多 token，节省 API 费用",
+                "en": "Prevent excessive token use and save API costs",
+                "ja": "token の過剰消費を防ぎ、API コストを節約するため"
               }
             },
             {
               "id": "b",
               "text": {
-                "zh": "1. 把所有 skill 正文永远塞进 system prompt",
-                "en": "1. 把所有 skill 正文永远塞进 system prompt",
-                "ja": "1. 把所有 skill 正文永远塞进 system prompt"
+                "zh": "确保子智能体的 messages 能正确同步回父智能体",
+                "en": "Ensure subagent messages sync correctly back to parent",
+                "ja": "subagent の messages が正しく親に同期されるようにするため"
               }
             },
             {
               "id": "c",
               "text": {
-                "zh": "初学者最容易犯的错",
-                "en": "初学者最容易犯的错",
-                "ja": "この章を読み終えたら何が言えるべきか"
+                "zh": "防止子智能体无限运行，给它一个必须完成的边界",
+                "en": "Prevent infinite running and give the subagent a hard boundary to finish within",
+                "ja": "無限実行を防ぎ、subagent に終了すべき境界を与えるため"
+              }
+            },
+            {
+              "id": "d",
+              "text": {
+                "zh": "让父智能体可以在每一轮检查子智能体的进度",
+                "en": "Let the parent check the subagent's progress every turn",
+                "ja": "親が毎ターン subagent の進捗を確認できるようにするため"
+              }
+            }
+          ],
+          "answer": "c",
+          "explanation": {
+            "zh": "max_turns 是子智能体必须有的边界。没有它，子智能体可能无限循环运行。结合受限工具集（通常不允许再派生子智能体），可以防止无限递归。",
+            "en": "max_turns is a mandatory boundary for subagents. Without it, a subagent could run indefinitely. Combined with a restricted tool set (typically no further subagent spawning), this prevents infinite recursion.",
+            "ja": "max_turns は subagent に不可欠な境界です。それがなければ subagent は無限にループする可能性があります。制限されたツールセットと組み合わせることで無限再帰を防ぎます。"
+          },
+          "reward_card": "card_s04_003"
+        },
+        {
+          "id": "q_s04_006",
+          "type": "choice",
+          "difficulty": 2,
+          "stem": {
+            "zh": "除了设置 max_turns，通常还需要对子智能体做哪项限制？",
+            "en": "Besides max_turns, what other restriction is typically applied to a subagent?",
+            "ja": "max_turns に加えて、subagent に通常適用されるもう一つの制限は何ですか？"
+          },
+          "options": [
+            {
+              "id": "a",
+              "text": {
+                "zh": "限制子智能体只能读文件，不能写文件",
+                "en": "Restrict the subagent to reading files only, no writing",
+                "ja": "subagent をファイルの読み取りのみに制限し、書き込みを禁止する"
+              }
+            },
+            {
+              "id": "b",
+              "text": {
+                "zh": "强制子智能体在完成时主动 fork 父上下文",
+                "en": "Force the subagent to fork the parent context on completion",
+                "ja": "完了時に subagent に親の context を強制的に fork させる"
+              }
+            },
+            {
+              "id": "c",
+              "text": {
+                "zh": "要求子智能体每轮都把 messages 同步给父智能体",
+                "en": "Require the subagent to sync messages to parent every turn",
+                "ja": "subagent が毎ターン messages を親に同期することを要求する"
+              }
+            },
+            {
+              "id": "d",
+              "text": {
+                "zh": "限制工具集，通常不允许再派生子智能体",
+                "en": "Restrict the tool set, typically disallow spawning further subagents",
+                "ja": "ツールセットを制限し、通常はさらなる subagent の生成を禁止する"
+              }
+            }
+          ],
+          "answer": "d",
+          "explanation": {
+            "zh": "子智能体必须有两道边界：max_turns 防止无限运行，受限工具集（不允许再派生子智能体）防止无限递归。两者结合才能完整控制子智能体的行为范围。",
+            "en": "Subagents need two boundaries: max_turns prevents infinite running, and a restricted tool set (no spawning further subagents) prevents infinite recursion. Both together fully control the subagent's scope.",
+            "ja": "subagent には 2 つの境界が必要です。max_turns は無限実行を防ぎ、制限されたツールセット（subagent のさらなる生成禁止）は無限再帰を防ぎます。"
+          },
+          "reward_card": "card_s04_003"
+        },
+        {
+          "id": "q_s04_007",
+          "type": "choice",
+          "difficulty": 2,
+          "stem": {
+            "zh": "如果子智能体没有 max_turns 限制且工具集不受限，最可能出现什么问题？",
+            "en": "If a subagent has no max_turns limit and unrestricted tools, what is most likely to happen?",
+            "ja": "subagent に max_turns 制限がなくツールセットも無制限な場合、最も起こりやすい問題は何ですか？"
+          },
+          "options": [
+            {
+              "id": "a",
+              "text": {
+                "zh": "子智能体的 messages 会自动合并到父智能体，导致上下文污染",
+                "en": "Subagent messages auto-merge into parent, causing context pollution",
+                "ja": "subagent の messages が自動的に親にマージされ、context が汚染される"
+              }
+            },
+            {
+              "id": "b",
+              "text": {
+                "zh": "子智能体无法正确继承父历史，导致任务失败",
+                "en": "Subagent fails to inherit parent history correctly, causing task failure",
+                "ja": "subagent が親の履歴を正しく継承できず、タスクが失敗する"
+              }
+            },
+            {
+              "id": "c",
+              "text": {
+                "zh": "可能无限递归派生新的子智能体，系统失控",
+                "en": "May spawn new subagents infinitely in a recursive loop, losing control",
+                "ja": "再帰的に新しい subagent を無限に生成し、システムが制御不能になる"
+              }
+            },
+            {
+              "id": "d",
+              "text": {
+                "zh": "fork 操作会失败，因为父上下文已经过大",
+                "en": "Fork operation fails because the parent context is too large",
+                "ja": "親 context が大きすぎて fork 操作が失敗する"
+              }
+            }
+          ],
+          "answer": "c",
+          "explanation": {
+            "zh": "没有 max_turns 且工具不受限时，子智能体可以继续派生新的子智能体，形成无限递归。这就是为什么子智能体必须同时具备 max_turns + 受限工具集这两道防线。",
+            "en": "Without max_turns and with unrestricted tools, a subagent can spawn more subagents indefinitely, creating infinite recursion. This is why both max_turns and a restricted tool set are required as two lines of defense.",
+            "ja": "max_turns がなくツールが無制限な場合、subagent はさらに subagent を生成し続け、無限再帰を引き起こします。だからこそ max_turns とツール制限の両方が必要です。"
+          },
+          "reward_card": "card_s04_003"
+        },
+        {
+          "id": "q_s04_008",
+          "type": "choice",
+          "difficulty": 3,
+          "stem": {
+            "zh": "以下哪种说法正确描述了子智能体 max_turns 的作用？",
+            "en": "Which statement correctly describes the role of max_turns for a subagent?",
+            "ja": "subagent の max_turns の役割を正しく説明しているのはどれですか？"
+          },
+          "options": [
+            {
+              "id": "a",
+              "text": {
+                "zh": "max_turns 控制父智能体最多等待子智能体多少秒",
+                "en": "max_turns controls how many seconds the parent waits for the subagent",
+                "ja": "max_turns は親が subagent を最大何秒待つかを制御する"
+              }
+            },
+            {
+              "id": "b",
+              "text": {
+                "zh": "max_turns 决定子智能体的 messages 列表最多保留多少条",
+                "en": "max_turns sets the maximum number of messages in the subagent's list",
+                "ja": "max_turns は subagent の messages リストの最大数を設定する"
+              }
+            },
+            {
+              "id": "c",
+              "text": {
+                "zh": "max_turns 是 fork 上下文时需要指定的历史窗口大小",
+                "en": "max_turns is the history window size to specify when forking context",
+                "ja": "max_turns は context を fork するときに指定する履歴ウィンドウのサイズ"
+              }
+            },
+            {
+              "id": "d",
+              "text": {
+                "zh": "max_turns 设定子智能体在被强制停止前最多能执行多少个 agent 循环",
+                "en": "max_turns sets the maximum agent loop iterations before forced stop",
+                "ja": "max_turns は強制停止前の最大 agent ループ回数を設定する"
+              }
+            }
+          ],
+          "answer": "d",
+          "explanation": {
+            "zh": "max_turns 限制的是 agent 循环的执行轮数，即子智能体最多跑多少轮 think-act 循环就必须停下来，防止无限运行。它与 messages 数量、等待时间和 fork 无关。",
+            "en": "max_turns limits the number of agent loop iterations, how many think-act cycles the subagent can run before being forced to stop. It is unrelated to message count, wait time, or forking.",
+            "ja": "max_turns は agent ループの実行回数を制限します。subagent が強制停止される前に実行できる think-act サイクルの最大数です。messages 数、待機時間、fork とは無関係です。"
+          },
+          "reward_card": "card_s04_003"
+        },
+        {
+          "id": "q_s04_009",
+          "type": "choice",
+          "difficulty": 1,
+          "stem": {
+            "zh": "什么是 fork 上下文？",
+            "en": "What is a fork context?",
+            "ja": "fork context とは何ですか？"
+          },
+          "options": [
+            {
+              "id": "a",
+              "text": {
+                "zh": "父智能体把自己的 messages 历史复制给子智能体作为起点",
+                "en": "Parent copies its messages history to the subagent as a starting point",
+                "ja": "親が自分の messages 履歴を subagent に出発点としてコピーする"
+              }
+            },
+            {
+              "id": "b",
+              "text": {
+                "zh": "子智能体从空白状态开始，不带任何父历史",
+                "en": "Subagent starts from scratch with no parent history",
+                "ja": "subagent が親の履歴なしにゼロから始まる"
+              }
+            },
+            {
+              "id": "c",
+              "text": {
+                "zh": "子智能体完成任务后将结果 merge 回父智能体",
+                "en": "Subagent merges results back into parent after task completion",
+                "ja": "subagent がタスク完了後に結果を親にマージする"
+              }
+            },
+            {
+              "id": "d",
+              "text": {
+                "zh": "父智能体暂停自身执行，等待子智能体完成",
+                "en": "Parent pauses its own execution waiting for subagent to finish",
+                "ja": "親が subagent の完了を待ちながら自身の実行を一時停止する"
               }
             }
           ],
           "answer": "a",
           "explanation": {
-            "zh": "什么叫“上下文隔离”",
-            "en": "What Changed From s03",
-            "ja": "context isolation とは何か"
+            "zh": "fork 上下文是指子智能体继承父智能体已有的 messages 历史再追加新的子任务，适合基于之前讨论继续的场景。与之相对的是空白上下文，从零开始。",
+            "en": "A fork context means the subagent inherits the parent's existing messages history as its starting point, then adds the new subtask. This suits continuing from previous discussion scenarios, in contrast to a clean context that starts from scratch.",
+            "ja": "fork context とは、subagent が親の既存の messages 履歴を出発点として継承し、新しいサブタスクを追加することです。前の議論を続けるシナリオに適しており、ゼロから始まるクリーンな context とは対照的です。"
           },
-          "reward_card": "card_s04_005"
+          "reward_card": "card_s04_001"
+        },
+        {
+          "id": "q_s04_010",
+          "type": "choice",
+          "difficulty": 2,
+          "stem": {
+            "zh": "空白上下文和 fork 上下文最主要的区别是什么？",
+            "en": "What is the main difference between a clean context and a fork context?",
+            "ja": "クリーンな context と fork context の主な違いは何ですか？"
+          },
+          "options": [
+            {
+              "id": "a",
+              "text": {
+                "zh": "空白上下文不允许使用工具，fork 上下文可以使用工具",
+                "en": "Clean context disallows tool use; fork context allows it",
+                "ja": "クリーンな context はツール使用を禁止し、fork context は許可する"
+              }
+            },
+            {
+              "id": "b",
+              "text": {
+                "zh": "空白上下文从零开始，fork 上下文继承父智能体的 messages 历史",
+                "en": "Clean context starts from zero; fork context inherits parent messages history",
+                "ja": "クリーンな context はゼロから始まり、fork context は親の messages 履歴を継承する"
+              }
+            },
+            {
+              "id": "c",
+              "text": {
+                "zh": "空白上下文必须设置 max_turns，fork 上下文不需要",
+                "en": "Clean context requires max_turns; fork context does not",
+                "ja": "クリーンな context は max_turns が必要で、fork context は不要"
+              }
+            },
+            {
+              "id": "d",
+              "text": {
+                "zh": "空白上下文只能执行读操作，fork 上下文可以执行写操作",
+                "en": "Clean context can only read; fork context can also write",
+                "ja": "クリーンな context は読み取りのみ、fork context は書き込みも可能"
+              }
+            }
+          ],
+          "answer": "b",
+          "explanation": {
+            "zh": "空白上下文从零开始，适合完全独立的局部任务；fork 上下文继承父智能体已有 messages，适合基于之前讨论继续。两种方式各有适用场景，与工具权限和 max_turns 无关。",
+            "en": "A clean context starts from scratch for fully independent subtasks; a fork context inherits parent messages for continuing from prior discussion. Each has its place, unrelated to tool permissions or max_turns.",
+            "ja": "クリーンな context は完全に独立した局所タスクのためにゼロから始まり、fork context は前の議論を継続するために親の messages を継承します。それぞれ適切なシナリオがあります。"
+          },
+          "reward_card": "card_s04_001"
+        },
+        {
+          "id": "q_s04_011",
+          "type": "choice",
+          "difficulty": 2,
+          "stem": {
+            "zh": "下列哪个任务更适合用空白上下文而非 fork 上下文？",
+            "en": "Which task is better suited for a clean context rather than a fork context?",
+            "ja": "fork context ではなくクリーンな context の方が適しているタスクはどれですか？"
+          },
+          "options": [
+            {
+              "id": "a",
+              "text": {
+                "zh": "根据用户刚才提出的修改意见继续优化代码",
+                "en": "Continue refining code based on the user's just-given feedback",
+                "ja": "ユーザーが直前に提供したフィードバックに基づいてコードを改善し続ける"
+              }
+            },
+            {
+              "id": "b",
+              "text": {
+                "zh": "延续上下文中已经建立的代码风格进行新模块开发",
+                "en": "Develop a new module continuing the coding style established in context",
+                "ja": "context で確立されたコードスタイルを継続して新しいモジュールを開発する"
+              }
+            },
+            {
+              "id": "c",
+              "text": {
+                "zh": "基于之前讨论的架构方案生成实现代码",
+                "en": "Generate implementation code based on the architecture discussed before",
+                "ja": "以前に議論したアーキテクチャに基づいて実装コードを生成する"
+              }
+            },
+            {
+              "id": "d",
+              "text": {
+                "zh": "扫描整个仓库的依赖关系，与主对话完全无关",
+                "en": "Scan all repo dependencies, completely unrelated to the main conversation",
+                "ja": "リポジトリ全体の依存関係をスキャンする、メイン会話とは全く無関係"
+              }
+            }
+          ],
+          "answer": "d",
+          "explanation": {
+            "zh": "扫描整个仓库依赖是完全独立的局部任务，不需要主对话的历史背景，用空白上下文从零开始最合适。其他三个选项都需要依赖之前的对话内容，更适合 fork 上下文。",
+            "en": "Scanning repo dependencies is a fully independent local task that needs no context from the main conversation, a clean context is ideal. The other options all depend on prior conversation content, making fork context more appropriate.",
+            "ja": "リポジトリの依存関係スキャンはメイン会話の背景が不要な完全独立タスクで、クリーンな context が最適です。他の選択肢はすべて以前の会話内容に依存するため、fork context が適切です。"
+          },
+          "reward_card": "card_s04_001"
+        },
+        {
+          "id": "q_s04_012",
+          "type": "choice",
+          "difficulty": 3,
+          "stem": {
+            "zh": "fork 上下文相比空白上下文的主要代价是什么？",
+            "en": "What is the main cost of a fork context compared to a clean context?",
+            "ja": "クリーンな context と比較した fork context の主なコストは何ですか？"
+          },
+          "options": [
+            {
+              "id": "a",
+              "text": {
+                "zh": "fork 上下文携带了父历史，子任务的起始 token 消耗更多",
+                "en": "Fork context carries parent history, so the subagent starts with more tokens consumed",
+                "ja": "fork context は親の履歴を持ち、subagent の開始時に消費 token が多い"
+              }
+            },
+            {
+              "id": "b",
+              "text": {
+                "zh": "fork 上下文无法设置 max_turns，有无限运行风险",
+                "en": "Fork context cannot set max_turns, risking infinite runs",
+                "ja": "fork context は max_turns を設定できず、無限実行のリスクがある"
+              }
+            },
+            {
+              "id": "c",
+              "text": {
+                "zh": "fork 上下文会导致子智能体的 messages 自动写回父智能体",
+                "en": "Fork context causes subagent messages to auto-write back to parent",
+                "ja": "fork context は subagent の messages が自動的に親に書き戻される"
+              }
+            },
+            {
+              "id": "d",
+              "text": {
+                "zh": "fork 上下文不支持工具调用，只能做纯文本推理",
+                "en": "Fork context does not support tool calls, only pure text reasoning",
+                "ja": "fork context はツール呼び出しをサポートせず、純粋なテキスト推論のみ"
+              }
+            }
+          ],
+          "answer": "a",
+          "explanation": {
+            "zh": "fork 上下文继承了父历史，子智能体一开始就消耗了更多 token。对于完全独立的任务，空白上下文更高效。fork 的优势是子智能体能看到之前的讨论，适合需要上下文背景的任务。",
+            "en": "A fork context inherits parent history, so the subagent starts with more tokens already consumed. For fully independent tasks, a clean context is more efficient. The advantage of fork is the subagent can see prior discussion, suited for context-dependent tasks.",
+            "ja": "fork context は親の履歴を継承するため、subagent は最初から多くの token を消費します。完全独立タスクにはクリーンな context が効率的です。fork の利点は subagent が以前の議論を参照できることです。"
+          },
+          "reward_card": "card_s04_001"
+        },
+        {
+          "id": "q_s04_013",
+          "type": "choice",
+          "difficulty": 2,
+          "stem": {
+            "zh": "父智能体和子智能体各自维护独立 messages 列表，这直接带来哪个好处？",
+            "en": "Parent and subagent each maintain independent messages lists. What is the direct benefit?",
+            "ja": "親と subagent がそれぞれ独立した messages リストを維持することの直接的なメリットは何ですか？"
+          },
+          "options": [
+            {
+              "id": "a",
+              "text": {
+                "zh": "子智能体执行速度更快，因为没有父历史要处理",
+                "en": "Subagent runs faster because it has no parent history to process",
+                "ja": "subagent は処理すべき親の履歴がないので、より速く実行される"
+              }
+            },
+            {
+              "id": "b",
+              "text": {
+                "zh": "父智能体可以并行启动多个子智能体而不冲突",
+                "en": "Parent can start multiple subagents in parallel without conflict",
+                "ja": "親が競合なしに複数の subagent を並列起動できる"
+              }
+            },
+            {
+              "id": "c",
+              "text": {
+                "zh": "子任务的中间过程噪声不会污染父智能体的主对话",
+                "en": "Subtask intermediate noise does not pollute the parent's main conversation",
+                "ja": "サブタスクの中間プロセスのノイズが親のメイン会話を汚染しない"
+              }
+            },
+            {
+              "id": "d",
+              "text": {
+                "zh": "子智能体可以访问所有工具，因为父历史不需要传递",
+                "en": "Subagent can access all tools because parent history need not be passed",
+                "ja": "親の履歴を渡す必要がないため、subagent はすべてのツールにアクセスできる"
+              }
+            }
+          ],
+          "answer": "c",
+          "explanation": {
+            "zh": "父子 messages 完全独立的核心好处：子任务在执行期间产生大量中间步骤，这些噪声全部留在子智能体自己的 messages 里，不会流入父智能体，主对话始终保持整洁清晰。",
+            "en": "The core benefit of fully independent messages: all the intermediate steps and noise from the subtask stay in the subagent's own messages and never flow into the parent, keeping the main conversation clean and clear.",
+            "ja": "完全独立 messages の核心的メリット：サブタスク実行中の大量の中間ステップはすべて subagent 自身の messages に留まり、親に流れ込まないため、メイン会話は常にクリーンです。"
+          },
+          "reward_card": "card_s04_002"
+        },
+        {
+          "id": "q_s04_014",
+          "type": "choice",
+          "difficulty": 3,
+          "stem": {
+            "zh": "如果开发者错误地把子智能体的完整 messages 写回父智能体，会出现什么问题？",
+            "en": "If a developer mistakenly writes the subagent's full messages back to the parent, what goes wrong?",
+            "ja": "開発者が誤って subagent の完全な messages を親に書き戻した場合、何が問題になりますか？"
+          },
+          "options": [
+            {
+              "id": "a",
+              "text": {
+                "zh": "父智能体的 max_turns 会被子智能体的轮数重置",
+                "en": "The parent's max_turns gets reset by the subagent's turn count",
+                "ja": "親の max_turns が subagent のターン数でリセットされる"
+              }
+            },
+            {
+              "id": "b",
+              "text": {
+                "zh": "父智能体上下文被子任务大量中间步骤撑大，主对话被噪声淹没",
+                "en": "Parent context bloats with subtask intermediate steps, drowning the main conversation in noise",
+                "ja": "親 context がサブタスクの大量の中間ステップで肥大化し、メイン会話がノイズに溺れる"
+              }
+            },
+            {
+              "id": "c",
+              "text": {
+                "zh": "fork 操作会失败，因为出现循环引用",
+                "en": "Fork operation fails due to circular reference",
+                "ja": "循環参照により fork 操作が失敗する"
+              }
+            },
+            {
+              "id": "d",
+              "text": {
+                "zh": "子智能体的工具调用权限会被父智能体继承，造成安全问题",
+                "en": "Subagent tool permissions get inherited by parent, causing security issues",
+                "ja": "subagent のツール権限が親に継承され、セキュリティ問題が発生する"
+              }
+            }
+          ],
+          "answer": "b",
+          "explanation": {
+            "zh": "父子 messages 隔离的价值正在于此：子智能体可能产生数百步中间结果，一旦全写回父智能体，父上下文急剧膨胀，主对话的信噪比极速下降，这正是上下文隔离要避免的问题。",
+            "en": "This is exactly what context isolation prevents: a subagent may produce hundreds of intermediate steps; writing them all back to the parent bloats the parent context and destroys the signal-to-noise ratio of the main conversation.",
+            "ja": "これはまさに context isolation が防ぐ問題です：subagent は数百の中間ステップを生成する可能性があり、それらを全て親に書き戻すと親 context が急激に膨張し、メイン会話の信号対雑音比が急低下します。"
+          },
+          "reward_card": "card_s04_002"
+        },
+        {
+          "id": "q_s04_015",
+          "type": "choice",
+          "difficulty": 1,
+          "stem": {
+            "zh": "子任务噪声不污染主对话这一特性，依赖的核心机制是什么？",
+            "en": "What core mechanism enables subtask noise not polluting the main conversation?",
+            "ja": "サブタスクのノイズがメイン会話を汚染しないという特性の核心メカニズムは何ですか？"
+          },
+          "options": [
+            {
+              "id": "a",
+              "text": {
+                "zh": "子智能体设置了 max_turns，完成后强制停止",
+                "en": "Subagent has max_turns and stops when the limit is reached",
+                "ja": "subagent が max_turns を設定し、上限に達すると強制停止する"
+              }
+            },
+            {
+              "id": "b",
+              "text": {
+                "zh": "父子智能体各自维护独立的 messages 列表",
+                "en": "Parent and subagent maintain independent messages lists",
+                "ja": "親と subagent がそれぞれ独立した messages リストを維持する"
+              }
+            },
+            {
+              "id": "c",
+              "text": {
+                "zh": "子智能体默认使用 fork 上下文而非空白上下文",
+                "en": "Subagent uses fork context by default rather than clean context",
+                "ja": "subagent はデフォルトでクリーンな context ではなく fork context を使用する"
+              }
+            },
+            {
+              "id": "d",
+              "text": {
+                "zh": "子智能体的工具集受到严格限制，无法写入父上下文",
+                "en": "Subagent tool set is strictly restricted to prevent writing to parent context",
+                "ja": "subagent のツールセットが厳しく制限され、親 context への書き込みができない"
+              }
+            }
+          ],
+          "answer": "b",
+          "explanation": {
+            "zh": "父子 messages 完全独立是上下文隔离的核心机制。子智能体的所有中间步骤都记录在自己的 messages 里，不会流入父智能体，主对话始终保持整洁。",
+            "en": "Fully independent messages between parent and subagent is the core mechanism of context isolation. All intermediate steps are recorded in the subagent's own messages and never flow into the parent, keeping the main conversation clean.",
+            "ja": "親と subagent の messages が完全に独立していることが context isolation の核心メカニズムです。すべての中間ステップは subagent 自身の messages に記録され、親に流れ込まず、メイン会話はクリーンです。"
+          },
+          "reward_card": "card_s04_002"
+        },
+        {
+          "id": "q_s04_016",
+          "type": "choice",
+          "difficulty": 2,
+          "stem": {
+            "zh": "以下哪种说法错误地理解了子智能体的价值？",
+            "en": "Which statement incorrectly understands the value of a subagent?",
+            "ja": "subagent の価値を誤って理解しているのはどれですか？"
+          },
+          "options": [
+            {
+              "id": "a",
+              "text": {
+                "zh": "子智能体让局部任务在独立上下文中运行，不污染主对话",
+                "en": "Subagent runs local tasks in isolated context without polluting main conversation",
+                "ja": "subagent は局所タスクを独立した context で実行し、メイン会話を汚染しない"
+              }
+            },
+            {
+              "id": "b",
+              "text": {
+                "zh": "子智能体完成后只把摘要带回父智能体，保持主对话整洁",
+                "en": "Subagent returns only a summary to parent after completion, keeping main conversation clean",
+                "ja": "subagent は完了後に summary だけを親に返し、メイン会話をクリーンに保つ"
+              }
+            },
+            {
+              "id": "c",
+              "text": {
+                "zh": "子智能体为需要大量中间步骤的任务提供了干净的隔离空间",
+                "en": "Subagent provides clean isolation for tasks needing many intermediate steps",
+                "ja": "subagent は多くの中間ステップが必要なタスクにクリーンな隔離空間を提供する"
+              }
+            },
+            {
+              "id": "d",
+              "text": {
+                "zh": "子智能体的核心价值是提供额外的模型算力，让任务并行执行更快",
+                "en": "The core value of subagents is extra model compute, making parallel tasks run faster",
+                "ja": "subagent の核心価値は追加の計算能力を提供し、並列タスクをより速く実行すること"
+              }
+            }
+          ],
+          "answer": "d",
+          "explanation": {
+            "zh": "子智能体的核心价值是干净上下文而非更多算力。误以为子智能体主要用于并行提速是常见误解，实际上它的关键在于上下文隔离，让局部任务在独立空间中完成而不污染主对话。",
+            "en": "The core value of subagents is clean context, not more compute. Thinking subagents are mainly for parallel speed is a common misconception, the key is context isolation, letting local tasks run in isolation without polluting the main conversation.",
+            "ja": "subagent の核心価値はクリーンな context であり、より多くの計算能力ではありません。subagent が主に並列化による高速化のためだと思うのは一般的な誤解で、重要なのは context isolation です。"
+          },
+          "reward_card": "card_s04_001"
+        },
+        {
+          "id": "q_s04_017",
+          "type": "choice",
+          "difficulty": 3,
+          "stem": {
+            "zh": "一个子智能体需要基于上周与用户的设计讨论来生成文档，应该用哪种上下文启动方式？",
+            "en": "A subagent needs to generate docs based on a design discussion from last week. Which context startup mode should it use?",
+            "ja": "subagent が先週のユーザーとの設計議論に基づいてドキュメントを生成する必要があります。どの context 起動方式を使うべきですか？"
+          },
+          "options": [
+            {
+              "id": "a",
+              "text": {
+                "zh": "空白上下文，从零开始，避免消耗不必要的 token",
+                "en": "Clean context, starting from scratch to avoid unnecessary token use",
+                "ja": "クリーンな context、不必要な token 消費を避けてゼロから始める"
+              }
+            },
+            {
+              "id": "b",
+              "text": {
+                "zh": "fork 上下文，继承包含设计讨论的父历史作为起点",
+                "en": "Fork context, inheriting parent history that includes the design discussion",
+                "ja": "fork context、設計議論を含む親の履歴を継承して出発点とする"
+              }
+            },
+            {
+              "id": "c",
+              "text": {
+                "zh": "先设置 max_turns=1，再决定用哪种上下文",
+                "en": "Set max_turns=1 first, then decide which context type to use",
+                "ja": "まず max_turns=1 を設定してから、どの context タイプを使うか決める"
+              }
+            },
+            {
+              "id": "d",
+              "text": {
+                "zh": "让子智能体自动检测父历史是否有用，再决定是否 fork",
+                "en": "Let the subagent auto-detect if parent history is useful, then decide to fork",
+                "ja": "subagent が親の履歴が有用かどうかを自動検出してから fork を決定する"
+              }
+            }
+          ],
+          "answer": "b",
+          "explanation": {
+            "zh": "任务需要依赖上周的设计讨论，这部分内容在父智能体的 messages 里。使用 fork 上下文继承父历史，子智能体才能看到那次讨论的内容。空白上下文从零开始，子智能体看不到任何历史背景。",
+            "en": "The task depends on last week's design discussion which is in the parent's messages. Using fork context lets the subagent see that discussion. A clean context starts from zero and the subagent would have no access to that background.",
+            "ja": "タスクは先週の設計議論に依存しており、それは親の messages にあります。fork context を使うことで subagent がその議論を参照できます。クリーンな context ではゼロから始まり、その背景にアクセスできません。"
+          },
+          "reward_card": "card_s04_001"
+        },
+        {
+          "id": "q_s04_018",
+          "type": "choice",
+          "difficulty": 3,
+          "stem": {
+            "zh": "下列哪个选项正确描述了子智能体边界的完整定义？",
+            "en": "Which option correctly describes the complete definition of a subagent's boundaries?",
+            "ja": "subagent の境界の完全な定義を正しく説明しているのはどれですか？"
+          },
+          "options": [
+            {
+              "id": "a",
+              "text": {
+                "zh": "只需要 max_turns，确保子智能体在有限轮内完成",
+                "en": "Only max_turns is needed to ensure the subagent finishes within limited turns",
+                "ja": "subagent が制限されたターン内に完了することを確保するために max_turns だけが必要"
+              }
+            },
+            {
+              "id": "b",
+              "text": {
+                "zh": "只需要受限工具集，防止子智能体执行危险操作",
+                "en": "Only a restricted tool set is needed to prevent subagent from dangerous operations",
+                "ja": "subagent が危険な操作を実行しないようにするためにツールセットの制限だけが必要"
+              }
+            },
+            {
+              "id": "c",
+              "text": {
+                "zh": "max_turns + 受限工具集，两者缺一不可",
+                "en": "max_turns plus a restricted tool set, both are required",
+                "ja": "max_turns と制限されたツールセットの両方が必要で、どちらも欠かせない"
+              }
+            },
+            {
+              "id": "d",
+              "text": {
+                "zh": "max_turns + fork 上下文，确保子智能体有足够的历史背景",
+                "en": "max_turns plus fork context to ensure subagent has enough history",
+                "ja": "subagent が十分な履歴を持つよう max_turns と fork context が必要"
+              }
+            }
+          ],
+          "answer": "c",
+          "explanation": {
+            "zh": "子智能体的完整边界由两部分构成：max_turns 防止无限运行，受限工具集（通常不允许再派生子智能体）防止无限递归。两者缺一不可，fork 与否是上下文继承方式的选择，与边界控制无关。",
+            "en": "A subagent's complete boundary has two parts: max_turns prevents infinite running, and a restricted tool set (typically no spawning further subagents) prevents infinite recursion. Both are required. Fork vs clean context is a context inheritance choice, unrelated to boundary control.",
+            "ja": "subagent の完全な境界は 2 つの部分から構成されます：max_turns は無限実行を防ぎ、制限されたツールセットは無限再帰を防ぎます。両方が必要です。fork かどうかは context 継承の選択であり、境界制御とは無関係です。"
+          },
+          "reward_card": "card_s04_003"
         }
       ],
       "star_thresholds": [
