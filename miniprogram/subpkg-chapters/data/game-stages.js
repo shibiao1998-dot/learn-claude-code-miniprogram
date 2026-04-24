@@ -18918,160 +18918,925 @@ module.exports = {
         "ja": "スラッシュコマンド実践"
       },
       "questions": [
-        {
-          "id": "q_bp02_001",
-          "type": "choice",
-          "difficulty": 1,
-          "stem": {
-            "zh": "以下哪个概念与「Frontmatter 字段（13 个）」直接相关？",
-            "en": "Which concept is directly related to \"Frontmatter Fields (13)\"?",
-            "ja": "「Frontmatter Fields (13)」に直接関連する概念はどれですか？"
+          {
+            "id": "q_bp02_001",
+            "type": "choice",
+            "difficulty": 1,
+            "stem": {
+              "zh": "Claude Code 中的「Command（命令）」在文件层面是什么格式？",
+              "en": "In Claude Code, what file format does a \"Command\" use?",
+              "ja": "Claude Code における「Command（コマンド）」のファイル形式は何ですか？"
+            },
+            "options": [
+              {
+                "id": "a",
+                "text": {
+                  "zh": "带 frontmatter 的 Markdown 文件，正文即 prompt 内容",
+                  "en": "A Markdown file with frontmatter; the body is the prompt",
+                  "ja": "frontmatter 付きの Markdown ファイル（本文が prompt）"
+                }
+              },
+              {
+                "id": "b",
+                "text": {
+                  "zh": "JSON 配置文件，通过 key-value 定义参数和指令",
+                  "en": "A JSON config file defining parameters and instructions",
+                  "ja": "パラメータと指示を定義する JSON 設定ファイル"
+                }
+              },
+              {
+                "id": "c",
+                "text": {
+                  "zh": "Shell 脚本文件，直接执行系统命令",
+                  "en": "A shell script that executes system commands",
+                  "ja": "システムコマンドを実行するシェルスクリプト"
+                }
+              },
+              {
+                "id": "d",
+                "text": {
+                  "zh": "TypeScript 模块，导出一个 handler 函数",
+                  "en": "A TypeScript module exporting a handler function",
+                  "ja": "handler 関数をエクスポートする TypeScript モジュール"
+                }
+              }
+            ],
+            "answer": "a",
+            "explanation": {
+              "zh": "Command 就是一个 Markdown 文件：顶部 frontmatter 定义元数据（名称、描述、工具权限等），正文就是发给模型的 prompt。",
+              "en": "A Command is a Markdown file: the frontmatter at the top defines metadata (name, description, allowed tools, etc.) and the body is the prompt sent to the model.",
+              "ja": "Command は Markdown ファイルです。上部の frontmatter がメタデータ（名前・説明・ツール権限など）を定義し、本文がモデルへの prompt になります。"
+            },
+            "reward_card": "card_bp02_001"
           },
-          "options": [
-            {
-              "id": "d",
-              "text": {
-                "zh": "模型环境变量",
-                "en": "Permissions",
-                "ja": "Permissions"
-              }
+          {
+            "id": "q_bp02_002",
+            "type": "choice",
+            "difficulty": 1,
+            "stem": {
+              "zh": "Command 文件中的 frontmatter 与正文分别承担什么职责？",
+              "en": "What are the respective roles of frontmatter and body in a Command file?",
+              "ja": "Command ファイルにおける frontmatter と本文の役割はそれぞれ何ですか？"
             },
-            {
-              "id": "a",
-              "text": {
-                "zh": "Frontmatter 字段（13 个）",
-                "en": "Frontmatter Fields (13)",
-                "ja": "Frontmatter Fields (13)"
+            "options": [
+              {
+                "id": "a",
+                "text": {
+                  "zh": "frontmatter 负责日志，正文负责安全检查",
+                  "en": "frontmatter handles logging, body handles security checks",
+                  "ja": "frontmatter はログ、本文はセキュリティチェック"
+                }
+              },
+              {
+                "id": "b",
+                "text": {
+                  "zh": "frontmatter 定义元数据与执行约束，正文是 prompt 指令",
+                  "en": "frontmatter defines metadata and execution constraints; body is the prompt instruction",
+                  "ja": "frontmatter はメタデータと実行制約を定義し、本文が prompt 指示"
+                }
+              },
+              {
+                "id": "c",
+                "text": {
+                  "zh": "frontmatter 是注释说明，正文是 JSON 配置",
+                  "en": "frontmatter is documentation comments, body is JSON config",
+                  "ja": "frontmatter はコメント説明、本文は JSON 設定"
+                }
+              },
+              {
+                "id": "d",
+                "text": {
+                  "zh": "frontmatter 存储历史记录，正文是测试用例",
+                  "en": "frontmatter stores history, body is test cases",
+                  "ja": "frontmatter は履歴を保存し、本文はテストケース"
+                }
               }
+            ],
+            "answer": "b",
+            "explanation": {
+              "zh": "frontmatter 承担元数据定义（name、description）和执行约束（allowed-tools、model 等），正文则是直接发送给模型的 prompt 文本。",
+              "en": "The frontmatter carries metadata (name, description) and execution constraints (allowed-tools, model, etc.); the body is the raw prompt text sent to the model.",
+              "ja": "frontmatter はメタデータ（name、description）と実行制約（allowed-tools、model など）を担い、本文はモデルに直接送られる prompt テキストです。"
             },
-            {
-              "id": "c",
-              "text": {
-                "zh": "6. 决策控制模式总结",
-                "en": "Model Environment Variables",
-                "ja": "Model Environment Variables"
-              }
-            },
-            {
-              "id": "b",
-              "text": {
-                "zh": "最佳实践",
-                "en": "Best Practices",
-                "ja": "Best Practices"
-              }
-            }
-          ],
-          "answer": "a",
-          "explanation": {
-            "zh": "Frontmatter 字段（13 个）",
-            "en": "Frontmatter Fields (13)",
-            "ja": "Frontmatter Fields (13)"
+            "reward_card": "card_bp02_001"
           },
-          "reward_card": "card_bp02_001"
-        },
-        {
-          "id": "q_bp02_002",
-          "type": "choice",
-          "difficulty": 1,
-          "stem": {
-            "zh": "以下哪个概念与「官方内置命令（69 个）」直接相关？",
-            "en": "Which concept is directly related to \"![Official](../!/tags/official.svg) **(69)**\"?",
-            "ja": "「![Official](../!/tags/official.svg) **(69)**」に直接関連する概念はどれですか？"
+          {
+            "id": "q_bp02_003",
+            "type": "choice",
+            "difficulty": 2,
+            "stem": {
+              "zh": "以下哪个 frontmatter 字段用于限制命令可调用的工具范围？",
+              "en": "Which frontmatter field restricts the tools a command can invoke?",
+              "ja": "コマンドが呼び出せるツールを制限する frontmatter フィールドはどれですか？"
+            },
+            "options": [
+              {
+                "id": "a",
+                "text": {
+                  "zh": "model",
+                  "en": "model",
+                  "ja": "model"
+                }
+              },
+              {
+                "id": "b",
+                "text": {
+                  "zh": "description",
+                  "en": "description",
+                  "ja": "description"
+                }
+              },
+              {
+                "id": "c",
+                "text": {
+                  "zh": "allowed-tools",
+                  "en": "allowed-tools",
+                  "ja": "allowed-tools"
+                }
+              },
+              {
+                "id": "d",
+                "text": {
+                  "zh": "context",
+                  "en": "context",
+                  "ja": "context"
+                }
+              }
+            ],
+            "answer": "c",
+            "explanation": {
+              "zh": "`allowed-tools` 字段列出命令执行期间允许使用的工具列表，起到最小权限约束的作用，是 13 个 frontmatter 字段中最重要的安全字段之一。",
+              "en": "`allowed-tools` lists which tools the command may use during execution, enforcing the principle of least privilege. It is one of the most important security fields among the 13 frontmatter fields.",
+              "ja": "`allowed-tools` はコマンド実行中に使用できるツールのリストを定義し、最小権限の原則を実現します。13 個の frontmatter フィールドの中で最も重要なセキュリティフィールドの一つです。"
+            },
+            "reward_card": "card_bp02_001"
           },
-          "options": [
-            {
-              "id": "d",
-              "text": {
-                "zh": "12. 常用命令速查",
-                "en": "Table of Contents",
-                "ja": "Table of Contents"
-              }
+          {
+            "id": "q_bp02_004",
+            "type": "choice",
+            "difficulty": 2,
+            "stem": {
+              "zh": "Command 文件中的正文（body）支持哪种内容形式？",
+              "en": "What content form does the body of a Command file support?",
+              "ja": "Command ファイルの本文（body）はどのような内容形式をサポートしますか？"
             },
-            {
-              "id": "b",
-              "text": {
-                "zh": "WorktreeCreate / WorktreeRemove",
-                "en": "Effort Level",
-                "ja": "Effort Level"
+            "options": [
+              {
+                "id": "a",
+                "text": {
+                  "zh": "仅支持纯文本，不支持任何动态内容",
+                  "en": "Plain text only, no dynamic content",
+                  "ja": "プレーンテキストのみ、動的コンテンツ不可"
+                }
+              },
+              {
+                "id": "b",
+                "text": {
+                  "zh": "仅支持 Python 代码块，用于执行脚本",
+                  "en": "Python code blocks only, for script execution",
+                  "ja": "スクリプト実行用の Python コードブロックのみ"
+                }
+              },
+              {
+                "id": "c",
+                "text": {
+                  "zh": "XML 格式，需要严格的标签结构",
+                  "en": "XML format requiring strict tag structure",
+                  "ja": "厳格なタグ構造が必要な XML 形式"
+                }
+              },
+              {
+                "id": "d",
+                "text": {
+                  "zh": "Markdown 格式的 prompt，可嵌入 $ARGUMENTS 等变量占位符",
+                  "en": "Markdown-formatted prompt that can embed variable placeholders like $ARGUMENTS",
+                  "ja": "$ARGUMENTS などの変数プレースホルダーを埋め込める Markdown 形式の prompt"
+                }
               }
+            ],
+            "answer": "d",
+            "explanation": {
+              "zh": "Command 正文是 Markdown 格式的 prompt，可以自由编写任意 prompt 内容，并通过 `$ARGUMENTS` 等占位符接收用户运行命令时传入的参数。",
+              "en": "The command body is a Markdown-formatted prompt. You can write any prompt content freely and use placeholders like `$ARGUMENTS` to receive arguments passed by the user when invoking the command.",
+              "ja": "Command の本文は Markdown 形式の prompt で、任意の prompt を自由に記述でき、コマンド実行時にユーザーが渡す引数を `$ARGUMENTS` などのプレースホルダーで受け取れます。"
             },
-            {
-              "id": "c",
-              "text": {
-                "zh": "2. 配置格式",
-                "en": "Settings Hierarchy",
-                "ja": "Settings Hierarchy"
-              }
-            },
-            {
-              "id": "a",
-              "text": {
-                "zh": "官方内置命令（69 个）",
-                "en": "![Official](../!/tags/official.svg) **(69)**",
-                "ja": "![Official](../!/tags/official.svg) **(69)**"
-              }
-            }
-          ],
-          "answer": "a",
-          "explanation": {
-            "zh": "官方内置命令（69 个）",
-            "en": "![Official](../!/tags/official.svg) **(69)**",
-            "ja": "![Official](../!/tags/official.svg) **(69)**"
+            "reward_card": "card_bp02_001"
           },
-          "reward_card": "card_bp02_002"
-        },
-        {
-          "id": "q_bp02_003",
-          "type": "choice",
-          "difficulty": 1,
-          "stem": {
-            "zh": "以下哪个概念与「参考来源」直接相关？",
-            "en": "Which concept is directly related to \"Sources\"?",
-            "ja": "「Sources」に直接関連する概念はどれですか？"
+          {
+            "id": "q_bp02_005",
+            "type": "choice",
+            "difficulty": 3,
+            "stem": {
+              "zh": "要将一个 Command 设定为使用 claude-opus-4 模型执行，应在 frontmatter 中写什么？",
+              "en": "To make a Command execute using the claude-opus-4 model, what should you write in the frontmatter?",
+              "ja": "Command を claude-opus-4 モデルで実行させるには、frontmatter に何を書くべきですか？"
+            },
+            "options": [
+              {
+                "id": "a",
+                "text": {
+                  "zh": "model: claude-opus-4",
+                  "en": "model: claude-opus-4",
+                  "ja": "model: claude-opus-4"
+                }
+              },
+              {
+                "id": "b",
+                "text": {
+                  "zh": "engine: claude-opus-4",
+                  "en": "engine: claude-opus-4",
+                  "ja": "engine: claude-opus-4"
+                }
+              },
+              {
+                "id": "c",
+                "text": {
+                  "zh": "llm: claude-opus-4",
+                  "en": "llm: claude-opus-4",
+                  "ja": "llm: claude-opus-4"
+                }
+              },
+              {
+                "id": "d",
+                "text": {
+                  "zh": "runtime: claude-opus-4",
+                  "en": "runtime: claude-opus-4",
+                  "ja": "runtime: claude-opus-4"
+                }
+              }
+            ],
+            "answer": "a",
+            "explanation": {
+              "zh": "frontmatter 的 `model` 字段直接指定该 Command 使用的模型，例如 `model: claude-opus-4`，覆盖全局默认设置。",
+              "en": "The `model` field in frontmatter directly specifies the model used by this Command, e.g. `model: claude-opus-4`, overriding the global default.",
+              "ja": "frontmatter の `model` フィールドでこの Command が使用するモデルを直接指定します（例: `model: claude-opus-4`）。グローバルのデフォルト設定を上書きします。"
+            },
+            "reward_card": "card_bp02_001"
           },
-          "options": [
-            {
-              "id": "c",
-              "text": {
-                "zh": "调试与诊断",
-                "en": "Usage",
-                "ja": "Usage"
-              }
+          {
+            "id": "q_bp02_006",
+            "type": "choice",
+            "difficulty": 3,
+            "stem": {
+              "zh": "一个 Command 文件的 frontmatter `context` 字段主要用来做什么？",
+              "en": "What is the primary purpose of the `context` field in a Command's frontmatter?",
+              "ja": "Command の frontmatter における `context` フィールドの主な用途は何ですか？"
             },
-            {
-              "id": "a",
-              "text": {
-                "zh": "参考来源",
-                "en": "Sources",
-                "ja": "Sources"
+            "options": [
+              {
+                "id": "a",
+                "text": {
+                  "zh": "设置运行时的日志级别",
+                  "en": "Set the logging level at runtime",
+                  "ja": "実行時のログレベルを設定する"
+                }
+              },
+              {
+                "id": "b",
+                "text": {
+                  "zh": "定义命令的分类标签，用于界面分组显示",
+                  "en": "Define category tags for UI grouping",
+                  "ja": "UI グループ表示のためのカテゴリタグを定義する"
+                }
+              },
+              {
+                "id": "c",
+                "text": {
+                  "zh": "指定命令执行时自动注入的上下文文件或内容",
+                  "en": "Specify context files or content automatically injected when the command runs",
+                  "ja": "コマンド実行時に自動注入されるコンテキストファイルや内容を指定する"
+                }
+              },
+              {
+                "id": "d",
+                "text": {
+                  "zh": "配置命令执行后自动清理的临时文件路径",
+                  "en": "Configure temporary file paths auto-cleaned after execution",
+                  "ja": "実行後に自動クリーンアップされる一時ファイルパスを設定する"
+                }
               }
+            ],
+            "answer": "c",
+            "explanation": {
+              "zh": "`context` 字段指定执行命令时自动注入到对话上下文的文件或内容，使模型在处理 prompt 前就掌握必要的背景信息。",
+              "en": "The `context` field specifies files or content that are automatically injected into the conversation context when the command runs, giving the model necessary background before processing the prompt.",
+              "ja": "`context` フィールドはコマンド実行時に対話コンテキストへ自動注入されるファイルや内容を指定し、モデルが prompt を処理する前に必要な背景情報を持てるようにします。"
             },
-            {
-              "id": "b",
-              "text": {
-                "zh": "FileChanged",
-                "en": "Model Overrides",
-                "ja": "Model Overrides"
-              }
-            },
-            {
-              "id": "d",
-              "text": {
-                "zh": "工具权限语法",
-                "en": "Plans & Memory Directories",
-                "ja": "Plans & Memory Directories"
-              }
-            }
-          ],
-          "answer": "a",
-          "explanation": {
-            "zh": "参考来源",
-            "en": "Command → Agent → Skill",
-            "ja": "Command → Agent → Skill"
+            "reward_card": "card_bp02_001"
           },
-          "reward_card": "card_bp02_003"
-        }
-      ],
+          {
+            "id": "q_bp02_007",
+            "type": "choice",
+            "difficulty": 1,
+            "stem": {
+              "zh": "Claude Code Command 的 frontmatter 共有多少个关键字段？",
+              "en": "How many key fields does a Claude Code Command frontmatter have?",
+              "ja": "Claude Code Command の frontmatter には何個のキーフィールドがありますか？"
+            },
+            "options": [
+              {
+                "id": "a",
+                "text": {
+                  "zh": "5 个",
+                  "en": "5",
+                  "ja": "5 個"
+                }
+              },
+              {
+                "id": "b",
+                "text": {
+                  "zh": "13 个",
+                  "en": "13",
+                  "ja": "13 個"
+                }
+              },
+              {
+                "id": "c",
+                "text": {
+                  "zh": "20 个",
+                  "en": "20",
+                  "ja": "20 個"
+                }
+              },
+              {
+                "id": "d",
+                "text": {
+                  "zh": "8 个",
+                  "en": "8",
+                  "ja": "8 個"
+                }
+              }
+            ],
+            "answer": "b",
+            "explanation": {
+              "zh": "Command frontmatter 共定义了 13 个关键字段，其中最常用的是 name、description、allowed-tools、model 和 context。",
+              "en": "Command frontmatter defines 13 key fields. The most commonly used are name, description, allowed-tools, model, and context.",
+              "ja": "Command frontmatter には 13 個のキーフィールドがあります。最もよく使われるのは name、description、allowed-tools、model、context です。"
+            },
+            "reward_card": "card_bp02_002"
+          },
+          {
+            "id": "q_bp02_008",
+            "type": "choice",
+            "difficulty": 1,
+            "stem": {
+              "zh": "以下哪组字段是 Command frontmatter 中最常用的五个字段？",
+              "en": "Which set of fields are the five most commonly used in Command frontmatter?",
+              "ja": "Command frontmatter で最もよく使われる 5 つのフィールドはどれですか？"
+            },
+            "options": [
+              {
+                "id": "a",
+                "text": {
+                  "zh": "name、description、allowed-tools、model、context",
+                  "en": "name, description, allowed-tools, model, context",
+                  "ja": "name、description、allowed-tools、model、context"
+                }
+              },
+              {
+                "id": "b",
+                "text": {
+                  "zh": "version、author、license、tags、timeout",
+                  "en": "version, author, license, tags, timeout",
+                  "ja": "version、author、license、tags、timeout"
+                }
+              },
+              {
+                "id": "c",
+                "text": {
+                  "zh": "input、output、schema、validation、retry",
+                  "en": "input, output, schema, validation, retry",
+                  "ja": "input、output、schema、validation、retry"
+                }
+              },
+              {
+                "id": "d",
+                "text": {
+                  "zh": "env、path、shell、cwd、user",
+                  "en": "env, path, shell, cwd, user",
+                  "ja": "env、path、shell、cwd、user"
+                }
+              }
+            ],
+            "answer": "a",
+            "explanation": {
+              "zh": "13 个字段中，name（命令名称）、description（描述）、allowed-tools（工具权限）、model（模型选择）、context（上下文注入）是最核心的五个，日常编写命令最常用到。",
+              "en": "Among the 13 fields, name (command name), description, allowed-tools (tool permissions), model (model selection), and context (context injection) are the five most essential, used most often in day-to-day command writing.",
+              "ja": "13 個のフィールドの中で、name（コマンド名）、description（説明）、allowed-tools（ツール権限）、model（モデル選択）、context（コンテキスト注入）が最も重要な 5 つで、日常的なコマンド作成で最も使われます。"
+            },
+            "reward_card": "card_bp02_002"
+          },
+          {
+            "id": "q_bp02_009",
+            "type": "choice",
+            "difficulty": 2,
+            "stem": {
+              "zh": "`description` 字段在 Command 中的作用是什么？",
+              "en": "What is the role of the `description` field in a Command?",
+              "ja": "Command における `description` フィールドの役割は何ですか？"
+            },
+            "options": [
+              {
+                "id": "a",
+                "text": {
+                  "zh": "仅作为代码注释，对运行无任何影响",
+                  "en": "Only a code comment with no effect on execution",
+                  "ja": "コード注釈のみで実行には影響しない"
+                }
+              },
+              {
+                "id": "b",
+                "text": {
+                  "zh": "控制命令执行时的并发数量",
+                  "en": "Controls the concurrency level during execution",
+                  "ja": "実行時の並行数を制御する"
+                }
+              },
+              {
+                "id": "c",
+                "text": {
+                  "zh": "指定命令执行前需验证的前置条件",
+                  "en": "Specifies preconditions to verify before execution",
+                  "ja": "実行前に検証すべき前提条件を指定する"
+                }
+              },
+              {
+                "id": "d",
+                "text": {
+                  "zh": "向用户和模型说明命令用途，出现在命令列表和帮助提示中",
+                  "en": "Explains the command's purpose to users and the model; shown in command lists and help prompts",
+                  "ja": "ユーザーとモデルにコマンドの目的を説明し、コマンド一覧やヘルプに表示される"
+                }
+              }
+            ],
+            "answer": "d",
+            "explanation": {
+              "zh": "`description` 向用户（显示在 `/` 命令列表中）和模型（作为命令用途的上下文）说明该命令的功能，是提升命令可发现性的重要字段。",
+              "en": "`description` explains what the command does—to the user (shown in the `/` command list) and to the model (as context about the command's purpose). It is a key field for improving command discoverability.",
+              "ja": "`description` はコマンドの機能をユーザー（`/` コマンドリストに表示）とモデル（コマンドの目的のコンテキストとして）に説明します。コマンドの発見しやすさを高める重要なフィールドです。"
+            },
+            "reward_card": "card_bp02_002"
+          },
+          {
+            "id": "q_bp02_010",
+            "type": "choice",
+            "difficulty": 2,
+            "stem": {
+              "zh": "如果不设置 `allowed-tools` 字段，Command 执行时工具访问权限是什么？",
+              "en": "If `allowed-tools` is not set, what tool access does the command have during execution?",
+              "ja": "`allowed-tools` を設定しない場合、Command 実行時のツールアクセス権限はどうなりますか？"
+            },
+            "options": [
+              {
+                "id": "a",
+                "text": {
+                  "zh": "继承当前会话的全局工具权限设置",
+                  "en": "Inherits the global tool permission settings of the current session",
+                  "ja": "現在のセッションのグローバルツール権限設定を継承する"
+                }
+              },
+              {
+                "id": "b",
+                "text": {
+                  "zh": "完全禁止工具调用",
+                  "en": "Tool calls are completely disabled",
+                  "ja": "ツール呼び出しが完全に無効化される"
+                }
+              },
+              {
+                "id": "c",
+                "text": {
+                  "zh": "仅允许读文件操作",
+                  "en": "Only file read operations are allowed",
+                  "ja": "ファイル読み取り操作のみ許可される"
+                }
+              },
+              {
+                "id": "d",
+                "text": {
+                  "zh": "自动授予所有工具的最高权限",
+                  "en": "All tools are automatically granted maximum permissions",
+                  "ja": "すべてのツールに最高権限が自動付与される"
+                }
+              }
+            ],
+            "answer": "a",
+            "explanation": {
+              "zh": "未设置 `allowed-tools` 时，命令继承当前 Claude Code 会话的全局工具权限设置，不会自动提升或降低权限。",
+              "en": "When `allowed-tools` is not set, the command inherits the global tool permission settings of the current Claude Code session—permissions are neither elevated nor reduced automatically.",
+              "ja": "`allowed-tools` が設定されていない場合、コマンドは現在の Claude Code セッションのグローバルツール権限設定を継承します。権限は自動的に昇格も降格もされません。"
+            },
+            "reward_card": "card_bp02_002"
+          },
+          {
+            "id": "q_bp02_011",
+            "type": "choice",
+            "difficulty": 2,
+            "stem": {
+              "zh": "frontmatter 字段中，`name` 字段的值决定了什么？",
+              "en": "What does the value of the `name` field in frontmatter determine?",
+              "ja": "frontmatter の `name` フィールドの値は何を決定しますか？"
+            },
+            "options": [
+              {
+                "id": "a",
+                "text": {
+                  "zh": "命令文件保存在磁盘上的目录路径",
+                  "en": "The directory path where the command file is saved on disk",
+                  "ja": "コマンドファイルがディスク上に保存されるディレクトリパス"
+                }
+              },
+              {
+                "id": "b",
+                "text": {
+                  "zh": "该命令在执行日志中的唯一 ID",
+                  "en": "The unique ID of this command in execution logs",
+                  "ja": "実行ログにおけるこのコマンドの一意の ID"
+                }
+              },
+              {
+                "id": "c",
+                "text": {
+                  "zh": "用户通过 / 前缀调用命令时使用的命令名称",
+                  "en": "The command name users type after the / prefix to invoke it",
+                  "ja": "ユーザーが / プレフィックスに続けて入力するコマンド名"
+                }
+              },
+              {
+                "id": "d",
+                "text": {
+                  "zh": "模型选择的别名映射",
+                  "en": "An alias mapping for model selection",
+                  "ja": "モデル選択のエイリアスマッピング"
+                }
+              }
+            ],
+            "answer": "c",
+            "explanation": {
+              "zh": "`name` 字段定义命令的调用名称，用户在输入 `/` 后跟随该名称来触发命令，例如 `name: review-pr` 对应 `/review-pr`。",
+              "en": "The `name` field defines the invocation name of the command. Users type `/` followed by this name to trigger it—e.g., `name: review-pr` corresponds to invoking `/review-pr`.",
+              "ja": "`name` フィールドはコマンドの呼び出し名を定義します。ユーザーは `/` の後にこの名前を入力してコマンドを起動します。例: `name: review-pr` は `/review-pr` に対応します。"
+            },
+            "reward_card": "card_bp02_002"
+          },
+          {
+            "id": "q_bp02_012",
+            "type": "choice",
+            "difficulty": 3,
+            "stem": {
+              "zh": "以下哪种场景最能体现 frontmatter 中同时使用 `model` 和 `allowed-tools` 的价值？",
+              "en": "Which scenario best illustrates the value of combining `model` and `allowed-tools` in frontmatter?",
+              "ja": "frontmatter で `model` と `allowed-tools` を組み合わせる価値を最も体現するシナリオはどれですか？"
+            },
+            "options": [
+              {
+                "id": "a",
+                "text": {
+                  "zh": "model 字段会自动推导 allowed-tools，无需手动配置",
+                  "en": "The model field auto-derives allowed-tools, no manual config needed",
+                  "ja": "model フィールドが allowed-tools を自動推論するため、手動設定は不要"
+                }
+              },
+              {
+                "id": "b",
+                "text": {
+                  "zh": "模型字段只影响 UI 显示颜色，与工具权限无关",
+                  "en": "The model field only affects UI display color and is unrelated to tool permissions",
+                  "ja": "model フィールドは UI の表示色にのみ影響し、ツール権限とは無関係"
+                }
+              },
+              {
+                "id": "c",
+                "text": {
+                  "zh": "两个字段功能相同，设置一个即可",
+                  "en": "Both fields have the same function; setting one is sufficient",
+                  "ja": "両フィールドは同じ機能を持つため、一方だけ設定すれば十分"
+                }
+              },
+              {
+                "id": "d",
+                "text": {
+                  "zh": "用轻量模型加只读工具做代码审查，速度快且安全",
+                  "en": "Using a lightweight model with read-only tools for code review — fast and safe",
+                  "ja": "軽量モデルと読み取り専用ツールでコードレビューを行う — 高速かつ安全"
+                }
+              }
+            ],
+            "answer": "d",
+            "explanation": {
+              "zh": "将 `model` 设为快速轻量模型、`allowed-tools` 限定为只读工具，既降低成本、提高速度，又防止命令意外修改文件，这正是两字段协同的典型价值。",
+              "en": "Setting `model` to a fast, lightweight model and restricting `allowed-tools` to read-only tools reduces cost, increases speed, and prevents accidental file modifications — the archetypal value of combining both fields.",
+              "ja": "`model` を高速な軽量モデルに設定し、`allowed-tools` を読み取り専用ツールに制限することで、コストを下げ速度を上げつつ、誤ったファイル変更も防げます。これが両フィールドを組み合わせる典型的な価値です。"
+            },
+            "reward_card": "card_bp02_002"
+          },
+          {
+            "id": "q_bp02_013",
+            "type": "choice",
+            "difficulty": 1,
+            "stem": {
+              "zh": "Claude Code 官方提供了多少个内置命令？",
+              "en": "How many built-in commands does Claude Code officially provide?",
+              "ja": "Claude Code が公式に提供する組み込みコマンドは何個ですか？"
+            },
+            "options": [
+              {
+                "id": "a",
+                "text": {
+                  "zh": "25 个",
+                  "en": "25",
+                  "ja": "25 個"
+                }
+              },
+              {
+                "id": "b",
+                "text": {
+                  "zh": "42 个",
+                  "en": "42",
+                  "ja": "42 個"
+                }
+              },
+              {
+                "id": "c",
+                "text": {
+                  "zh": "100 个以上",
+                  "en": "100+",
+                  "ja": "100 個以上"
+                }
+              },
+              {
+                "id": "d",
+                "text": {
+                  "zh": "69 个",
+                  "en": "69",
+                  "ja": "69 個"
+                }
+              }
+            ],
+            "answer": "d",
+            "explanation": {
+              "zh": "Claude Code 官方共内置 69 个命令，分为 8 个功能类别，覆盖从登录认证到多代理编排的完整工作流。",
+              "en": "Claude Code officially provides 69 built-in commands, organized into 8 functional categories covering the full workflow from login authentication to multi-agent orchestration.",
+              "ja": "Claude Code は公式に 69 個の組み込みコマンドを提供しており、ログイン認証からマルチエージェント編成まで完全なワークフローをカバーする 8 つの機能カテゴリに分類されています。"
+            },
+            "reward_card": "card_bp02_003"
+          },
+          {
+            "id": "q_bp02_014",
+            "type": "choice",
+            "difficulty": 1,
+            "stem": {
+              "zh": "Claude Code 的 69 个内置命令被划分为几个类别？",
+              "en": "How many categories are the 69 built-in Claude Code commands divided into?",
+              "ja": "Claude Code の 69 個の組み込みコマンドは何個のカテゴリに分類されていますか？"
+            },
+            "options": [
+              {
+                "id": "a",
+                "text": {
+                  "zh": "4 类",
+                  "en": "4 categories",
+                  "ja": "4 カテゴリ"
+                }
+              },
+              {
+                "id": "b",
+                "text": {
+                  "zh": "6 类",
+                  "en": "6 categories",
+                  "ja": "6 カテゴリ"
+                }
+              },
+              {
+                "id": "c",
+                "text": {
+                  "zh": "8 类",
+                  "en": "8 categories",
+                  "ja": "8 カテゴリ"
+                }
+              },
+              {
+                "id": "d",
+                "text": {
+                  "zh": "12 类",
+                  "en": "12 categories",
+                  "ja": "12 カテゴリ"
+                }
+              }
+            ],
+            "answer": "c",
+            "explanation": {
+              "zh": "69 个内置命令按功能划分为 8 类，从登录认证到代理编排全面覆盖，方便用户根据使用场景快速找到合适的命令。",
+              "en": "The 69 built-in commands are divided into 8 categories by function, covering everything from login/auth to agent orchestration, making it easy to find the right command for each use case.",
+              "ja": "69 個の組み込みコマンドは機能別に 8 カテゴリに分類されており、ログイン認証からエージェント編成まで幅広くカバーし、用途に合ったコマンドをすばやく見つけられます。"
+            },
+            "reward_card": "card_bp02_003"
+          },
+          {
+            "id": "q_bp02_015",
+            "type": "choice",
+            "difficulty": 2,
+            "stem": {
+              "zh": "下列哪项描述最准确地说明了内置命令与用户自定义命令的关系？",
+              "en": "Which statement most accurately describes the relationship between built-in commands and user-defined commands?",
+              "ja": "組み込みコマンドとユーザー定義コマンドの関係を最も正確に説明しているのはどれですか？"
+            },
+            "options": [
+              {
+                "id": "a",
+                "text": {
+                  "zh": "内置命令不可使用 frontmatter，只有自定义命令才能配置 frontmatter",
+                  "en": "Built-in commands cannot use frontmatter; only custom commands can configure it",
+                  "ja": "組み込みコマンドは frontmatter を使えず、カスタムコマンドのみ設定可能"
+                }
+              },
+              {
+                "id": "b",
+                "text": {
+                  "zh": "自定义命令与内置命令使用相同的 Markdown+frontmatter 格式，两者平等共存",
+                  "en": "Custom commands use the same Markdown+frontmatter format as built-ins and coexist as equals",
+                  "ja": "カスタムコマンドは組み込みコマンドと同じ Markdown+frontmatter 形式を使用し、対等に共存する"
+                }
+              },
+              {
+                "id": "c",
+                "text": {
+                  "zh": "自定义命令只能覆盖内置命令，不能新增独立命令",
+                  "en": "Custom commands can only override built-ins, not add independent new commands",
+                  "ja": "カスタムコマンドは組み込みコマンドを上書きするだけで、独立した新しいコマンドは追加できない"
+                }
+              },
+              {
+                "id": "d",
+                "text": {
+                  "zh": "每个项目最多允许 10 个自定义命令",
+                  "en": "Each project allows a maximum of 10 custom commands",
+                  "ja": "各プロジェクトで許可されるカスタムコマンドは最大 10 個"
+                }
+              }
+            ],
+            "answer": "b",
+            "explanation": {
+              "zh": "用户自定义命令与官方内置命令使用完全相同的 Markdown+frontmatter 格式，可以自由新增，两者在运行时平等对待，都通过 `/` 前缀调用。",
+              "en": "User-defined commands use the exact same Markdown+frontmatter format as official built-ins. They can be added freely, and both are treated equally at runtime—both invoked with the `/` prefix.",
+              "ja": "ユーザー定義コマンドは公式の組み込みコマンドとまったく同じ Markdown+frontmatter 形式を使用します。自由に追加でき、実行時には同等に扱われ、どちらも `/` プレフィックスで呼び出されます。"
+            },
+            "reward_card": "card_bp02_003"
+          },
+          {
+            "id": "q_bp02_016",
+            "type": "choice",
+            "difficulty": 2,
+            "stem": {
+              "zh": "在 Claude Code 的 8 类命令中，「代理编排」类命令主要用于什么场景？",
+              "en": "In Claude Code's 8 command categories, what are \"agent orchestration\" commands primarily used for?",
+              "ja": "Claude Code の 8 カテゴリのコマンドのうち、「エージェント編成」コマンドは主にどのような場面で使いますか？"
+            },
+            "options": [
+              {
+                "id": "a",
+                "text": {
+                  "zh": "管理多个并发 Claude 代理的协作与任务分配",
+                  "en": "Managing collaboration and task assignment across multiple concurrent Claude agents",
+                  "ja": "複数の並行 Claude エージェントの協働とタスク割り当てを管理する"
+                }
+              },
+              {
+                "id": "b",
+                "text": {
+                  "zh": "用户界面主题切换和字体调整",
+                  "en": "UI theme switching and font adjustment",
+                  "ja": "UI テーマの切り替えとフォント調整"
+                }
+              },
+              {
+                "id": "c",
+                "text": {
+                  "zh": "管理用户账号的登录和权限",
+                  "en": "Managing user account login and permissions",
+                  "ja": "ユーザーアカウントのログインと権限を管理する"
+                }
+              },
+              {
+                "id": "d",
+                "text": {
+                  "zh": "构建和压缩静态资源",
+                  "en": "Building and compressing static assets",
+                  "ja": "静的アセットのビルドと圧縮"
+                }
+              }
+            ],
+            "answer": "a",
+            "explanation": {
+              "zh": "「代理编排」类命令用于启动、管理和协调多个并行运行的 Claude 代理，支持复杂任务的分工协作，是高级工作流的核心工具类别。",
+              "en": "\"Agent orchestration\" commands are used to start, manage, and coordinate multiple Claude agents running in parallel, enabling task division for complex workflows. They are a core category for advanced use cases.",
+              "ja": "「エージェント編成」コマンドは、複数の Claude エージェントを並行して起動・管理・調整するために使用し、複雑なタスクの分業協働を可能にします。高度なワークフローの中核カテゴリです。"
+            },
+            "reward_card": "card_bp02_003"
+          },
+          {
+            "id": "q_bp02_017",
+            "type": "choice",
+            "difficulty": 3,
+            "stem": {
+              "zh": "以下哪种做法能最大化 69 个内置命令的实用价值？",
+              "en": "Which practice best maximizes the practical value of the 69 built-in commands?",
+              "ja": "69 個の組み込みコマンドの実用的な価値を最大化する方法はどれですか？"
+            },
+            "options": [
+              {
+                "id": "a",
+                "text": {
+                  "zh": "只使用自定义命令，完全忽略内置命令",
+                  "en": "Use only custom commands and ignore built-ins entirely",
+                  "ja": "カスタムコマンドのみを使用し、組み込みコマンドを完全に無視する"
+                }
+              },
+              {
+                "id": "b",
+                "text": {
+                  "zh": "了解 8 类分类结构，按场景选用合适类别的命令，再用自定义命令补充项目特有需求",
+                  "en": "Learn the 8-category structure, select commands from the right category per scenario, then use custom commands to supplement project-specific needs",
+                  "ja": "8 カテゴリ構造を理解し、シナリオに応じた適切なカテゴリのコマンドを選択し、プロジェクト固有のニーズをカスタムコマンドで補完する"
+                }
+              },
+              {
+                "id": "c",
+                "text": {
+                  "zh": "将全部 69 个命令的内容背诵下来",
+                  "en": "Memorize the content of all 69 commands",
+                  "ja": "69 個すべてのコマンドの内容を暗記する"
+                }
+              },
+              {
+                "id": "d",
+                "text": {
+                  "zh": "只使用登录认证类命令，其他类别用 bash 脚本替代",
+                  "en": "Only use login/auth commands; replace all other categories with bash scripts",
+                  "ja": "ログイン認証コマンドのみ使用し、他のカテゴリはすべて bash スクリプトで代替する"
+                }
+              }
+            ],
+            "answer": "b",
+            "explanation": {
+              "zh": "理解 8 类分类结构让你能按场景快速定位内置命令，然后针对项目特定需求创建自定义命令作为补充，内置命令与自定义命令形成互补。",
+              "en": "Understanding the 8-category structure lets you quickly locate built-in commands by scenario. Creating custom commands for project-specific needs then forms a complementary pair with the built-ins.",
+              "ja": "8 カテゴリ構造を理解することで、シナリオに応じて組み込みコマンドをすばやく見つけられます。その後、プロジェクト固有のニーズに合わせてカスタムコマンドを作成し、組み込みコマンドと補完関係を形成します。"
+            },
+            "reward_card": "card_bp02_003"
+          },
+          {
+            "id": "q_bp02_018",
+            "type": "choice",
+            "difficulty": 3,
+            "stem": {
+              "zh": "如果要把 69 个内置命令中「登录认证」类之外的全部命令都用自定义命令替代，这种做法有什么主要缺陷？",
+              "en": "What is the main drawback of replacing all built-in commands (except login/auth) with custom commands?",
+              "ja": "「ログイン認証」以外の組み込みコマンドをすべてカスタムコマンドで置き換えた場合の主な欠点は何ですか？"
+            },
+            "options": [
+              {
+                "id": "a",
+                "text": {
+                  "zh": "自定义命令数量不能超过 5 个",
+                  "en": "Custom commands cannot exceed 5",
+                  "ja": "カスタムコマンドは 5 個を超えられない"
+                }
+              },
+              {
+                "id": "b",
+                "text": {
+                  "zh": "自定义命令不支持 frontmatter，无法设置工具权限",
+                  "en": "Custom commands do not support frontmatter, so tool permissions cannot be set",
+                  "ja": "カスタムコマンドは frontmatter をサポートしないため、ツール権限を設定できない"
+                }
+              },
+              {
+                "id": "c",
+                "text": {
+                  "zh": "维护成本极高，且内置命令随版本更新会自动改进，自己重写则无法获益",
+                  "en": "Maintenance cost is very high, and built-in commands automatically improve with version updates — rewrites lose that benefit",
+                  "ja": "メンテナンスコストが非常に高く、組み込みコマンドはバージョン更新で自動改善されるが、自分で書き直すとそのメリットを得られない"
+                }
+              },
+              {
+                "id": "d",
+                "text": {
+                  "zh": "自定义命令只能在 Linux 上运行，Windows/macOS 不支持",
+                  "en": "Custom commands only run on Linux; Windows/macOS are not supported",
+                  "ja": "カスタムコマンドは Linux でのみ実行可能で、Windows/macOS はサポートされていない"
+                }
+              }
+            ],
+            "answer": "c",
+            "explanation": {
+              "zh": "内置命令会随 Claude Code 版本迭代而自动更新和优化，无需用户维护。若全部替换为自定义命令，维护成本极高，且失去版本升级带来的自动改进，得不偿失。",
+              "en": "Built-in commands are automatically updated and optimized with each Claude Code version release at no maintenance cost to users. Replacing them all with custom commands creates enormous maintenance burden and loses the automatic improvements that come with version upgrades.",
+              "ja": "組み込みコマンドは Claude Code のバージョンアップに伴って自動的に更新・最適化されるため、ユーザーのメンテナンスコストはゼロです。すべてカスタムコマンドに置き換えると、莫大なメンテナンス負担が生じ、バージョンアップによる自動改善の恩恵も失われます。"
+            },
+            "reward_card": "card_bp02_003"
+          }
+        ],
       "star_thresholds": [
         0.4,
         0.7,
