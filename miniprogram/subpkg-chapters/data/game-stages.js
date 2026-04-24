@@ -8584,255 +8584,414 @@ module.exports = {
           "type": "choice",
           "difficulty": 1,
           "stem": {
-            "zh": "以下哪个概念与「这一章为什么重要」直接相关？",
-            "en": "Which concept is directly related to \"What You'll Learn\"?",
-            "ja": "「なぜこの章が必要か」に直接関連する概念はどれですか？"
+            "zh": "构建 system prompt 的核心思路是什么？",
+            "en": "What is the core idea behind building a system prompt?",
+            "ja": "system prompt を構築する際の核心的な考え方は何ですか？"
           },
           "options": [
-            {
-              "id": "b",
-              "text": {
-                "zh": "这一章和前后章节怎么衔接",
-                "en": "这一章和前后章节怎么衔接",
-                "ja": "5. なぜ続行しているのかを state に残さない"
-              }
-            },
-            {
-              "id": "d",
-              "text": {
-                "zh": "建议联读",
-                "en": "The Problem",
-                "ja": "主線とどう併読するか"
-              }
-            },
-            {
-              "id": "c",
-              "text": {
-                "zh": "3. 续写提示",
-                "en": "Stage 2 Complete",
-                "ja": "3. Continuation Message"
-              }
-            },
-            {
-              "id": "a",
-              "text": {
-                "zh": "这一章为什么重要",
-                "en": "What You'll Learn",
-                "ja": "なぜこの章が必要か"
-              }
-            }
+            { "id": "a", "text": { "zh": "把所有说明写成一段超长的自然语言文本", "en": "Write all instructions as one long natural-language paragraph", "ja": "すべての指示を一つの長い自然言語テキストにまとめる" } },
+            { "id": "b", "text": { "zh": "把不同来源按清晰边界组装成一条流水线", "en": "Assemble different sources with clear boundaries into a pipeline", "ja": "異なるソースを明確な境界で組み立ててパイプラインにする" } },
+            { "id": "c", "text": { "zh": "只保留核心指令，其余来源在对话轮次中动态追加", "en": "Keep only core instructions and append other sources per turn", "ja": "コア指示のみを保持し、他のソースはターンごとに動的に追加する" } },
+            { "id": "d", "text": { "zh": "每次调用都随机打乱各段的顺序", "en": "Randomly shuffle the order of segments each time", "ja": "毎回呼び出すたびに各セグメントの順序をランダムにシャッフルする" } }
           ],
-          "answer": "a",
+          "answer": "b",
           "explanation": {
-            "zh": "由多个来源共同组装出来的一条流水线。",
-            "en": "What You'll Learn",
-            "ja": "なぜこの章が必要か"
+            "zh": "Prompt 的关键不是写一段很长的话，而是把不同来源按清晰边界组装。这样每个部分各司其职，便于维护和调试。",
+            "en": "The key to a good system prompt is not writing one long text, but assembling different sources with clear boundaries so each part has a defined role.",
+            "ja": "system prompt の要点は長い文章を書くことではなく、異なるソースを明確な境界で組み立てることです。各パートが役割を持ち、保守しやすくなります。"
           },
           "reward_card": "card_s10_001"
         },
         {
           "id": "q_s10_002",
           "type": "choice",
-          "difficulty": 1,
+          "difficulty": 2,
           "stem": {
-            "zh": "以下哪个概念与「建议联读」直接相关？",
-            "en": "Which concept is directly related to \"The Problem\"?",
-            "ja": "「主線とどう併読するか」に直接関連する概念はどれですか？"
+            "zh": "六段组装结构中，负责存放项目级别工作指令的是哪一段？",
+            "en": "In the six-segment assembly structure, which segment holds project-level working instructions?",
+            "ja": "六段組み立て構造において、プロジェクトレベルの作業指示を格納するのはどのセグメントですか？"
           },
           "options": [
-            {
-              "id": "b",
-              "text": {
-                "zh": "memory 为什么要和 system prompt 有关系",
-                "en": "memory 为什么要和 system prompt 有关系",
-                "ja": "memory 为什么要和 system prompt 有关系"
-              }
-            },
-            {
-              "id": "c",
-              "text": {
-                "zh": "什么叫恢复",
-                "en": "How It Works",
-                "ja": "recovery とは何か"
-              }
-            },
-            {
-              "id": "a",
-              "text": {
-                "zh": "建议联读",
-                "en": "The Problem",
-                "ja": "主線とどう併読するか"
-              }
-            },
-            {
-              "id": "d",
-              "text": {
-                "zh": "学完这章后，你应该能回答",
-                "en": "学完这章后，你应该能回答",
-                "ja": "5. decision に reason を残さない"
-              }
-            }
+            { "id": "a", "text": { "zh": "core（核心指令）", "en": "core (core instructions)", "ja": "core（コア指示）" } },
+            { "id": "b", "text": { "zh": "skills（技能目录）", "en": "skills (skill catalog)", "ja": "skills（スキルカタログ）" } },
+            { "id": "c", "text": { "zh": "memory（记忆）", "en": "memory (memory)", "ja": "memory（メモリ）" } },
+            { "id": "d", "text": { "zh": "claude_md（项目指令）", "en": "claude_md (project instructions)", "ja": "claude_md（プロジェクト指示）" } }
           ],
-          "answer": "a",
+          "answer": "d",
           "explanation": {
-            "zh": "建议联读",
-            "en": "The Problem",
-            "ja": "主線とどう併読するか"
+            "zh": "六段中 claude_md 专门负责项目指令，对应 CLAUDE.md 文件的内容。core 放核心系统行为，不是项目级说明。",
+            "en": "In the six segments, claude_md is dedicated to project instructions from CLAUDE.md files. The core segment holds system-level behavior, not project-specific guidance.",
+            "ja": "六段の中で claude_md はプロジェクト指示（CLAUDE.md の内容）を担当します。core はシステムレベルの動作を保持し、プロジェクト固有の説明ではありません。"
           },
           "reward_card": "card_s10_002"
         },
         {
           "id": "q_s10_003",
           "type": "choice",
-          "difficulty": 1,
+          "difficulty": 2,
           "stem": {
-            "zh": "以下哪个概念与「先解释几个名词」直接相关？",
-            "en": "Which concept is directly related to \"The Solution\"?",
-            "ja": "「最小の心智モデル」に直接関連する概念はどれですか？"
+            "zh": "system prompt 和 system reminder 最根本的区别是什么？",
+            "en": "What is the fundamental difference between a system prompt and a system reminder?",
+            "ja": "system prompt と system reminder の最も根本的な違いは何ですか？"
           },
           "options": [
-            {
-              "id": "a",
-              "text": {
-                "zh": "先解释几个名词",
-                "en": "The Solution",
-                "ja": "最小の心智モデル"
-              }
-            },
-            {
-              "id": "d",
-              "text": {
-                "zh": "初学者最容易犯的错",
-                "en": "初学者最容易犯的错",
-                "ja": "2. Hook ごとに別のデータ形を渡す"
-              }
-            },
-            {
-              "id": "c",
-              "text": {
-                "zh": "1. `user`",
-                "en": "3. `project` -- Durable project facts not obvious from the repo",
-                "ja": "4. `reference`"
-              }
-            },
-            {
-              "id": "b",
-              "text": {
-                "zh": "plan",
-                "en": "plan",
-                "ja": "plan"
-              }
-            }
+            { "id": "a", "text": { "zh": "system prompt 比 system reminder 长得多", "en": "A system prompt is much longer than a system reminder", "ja": "system prompt は system reminder よりもはるかに長い" } },
+            { "id": "b", "text": { "zh": "system prompt 只在首次对话时发送，system reminder 每轮必发", "en": "system prompt is sent only on the first turn; system reminder is sent every turn", "ja": "system prompt は最初のターンのみ送信され、system reminder は毎ターン送信される" } },
+            { "id": "c", "text": { "zh": "稳定说明很少变（system prompt），动态提醒每轮都可能变（system reminder）", "en": "Stable instructions rarely change (system prompt); dynamic reminders may change every turn (system reminder)", "ja": "安定した説明はほとんど変わらず（system prompt）、動的なリマインダーは毎ターン変わる可能性がある（system reminder）" } },
+            { "id": "d", "text": { "zh": "system reminder 只用于工具调用，system prompt 只用于文本生成", "en": "system reminder is only for tool calls; system prompt is only for text generation", "ja": "system reminder はツール呼び出しのみ、system prompt はテキスト生成のみに使用される" } }
           ],
-          "answer": "a",
+          "answer": "c",
           "explanation": {
-            "zh": "先解释几个名词",
-            "en": "The Solution",
-            "ja": "最小の心智モデル"
+            "zh": "稳定说明很少变（system prompt），动态提醒每轮都可能变（system reminder）。两者分开管理让变化集中在 reminder 侧，降低维护成本。",
+            "en": "Stable instructions rarely change (system prompt) while dynamic reminders may change every turn (system reminder). Separating them keeps changes isolated to the reminder side.",
+            "ja": "安定した説明はほとんど変わりませんが（system prompt）、動的なリマインダーは毎ターン変わる可能性があります（system reminder）。分離することで変更を reminder 側に集中させ、保守コストを下げます。"
           },
           "reward_card": "card_s10_003"
         },
         {
           "id": "q_s10_004",
           "type": "choice",
-          "difficulty": 1,
+          "difficulty": 2,
           "stem": {
-            "zh": "以下哪个概念与「什么是 system prompt」直接相关？",
-            "en": "Which concept is directly related to \"How It Works\"?",
-            "ja": "「最も重要な境界」に直接関連する概念はどれですか？"
+            "zh": "以下哪种做法违反了 system prompt 组装的「清晰边界」原则？",
+            "en": "Which practice violates the 'clear boundary' principle of system prompt assembly?",
+            "ja": "次のうち、system prompt 組み立ての「明確な境界」原則に違反しているのはどれですか？"
           },
           "options": [
-            {
-              "id": "b",
-              "text": {
-                "zh": "2. 把所有变化信息都塞进 system prompt",
-                "en": "2. 把所有变化信息都塞进 system prompt",
-                "ja": "2. 把所有变化信息都塞进 system prompt"
-              }
-            },
-            {
-              "id": "d",
-              "text": {
-                "zh": "这一章为什么重要",
-                "en": "What You'll Learn",
-                "ja": "なぜこの章が必要か"
-              }
-            },
-            {
-              "id": "a",
-              "text": {
-                "zh": "什么是 system prompt",
-                "en": "How It Works",
-                "ja": "最も重要な境界"
-              }
-            },
-            {
-              "id": "c",
-              "text": {
-                "zh": "1. 把 hook 当成“到处插 if”",
-                "en": "1. 把 hook 当成“到处插 if”",
-                "ja": "3. 何でも Hook に入れようとする"
-              }
-            }
+            { "id": "a", "text": { "zh": "将 tools、skills 和 memory 分段拼接，每段有独立标签", "en": "Concatenate tools, skills, and memory in separate sections with distinct labels", "ja": "tools、skills、memory を独立したラベル付きで別々に結合する" } },
+            { "id": "b", "text": { "zh": "把 CLAUDE.md 内容和 core 指令直接混写在一个段落里", "en": "Merge CLAUDE.md content and core instructions into a single paragraph", "ja": "CLAUDE.md の内容とコア指示を一つの段落に混在させる" } },
+            { "id": "c", "text": { "zh": "dynamic 提醒只写当前轮次需要的临时信息", "en": "dynamic reminders contain only temporary info needed for the current turn", "ja": "dynamic リマインダーには現在のターンに必要な一時的な情報のみを記述する" } },
+            { "id": "d", "text": { "zh": "core 段只放极少变化的核心行为规则", "en": "core segment contains only rarely-changing core behavior rules", "ja": "core セグメントにはほとんど変化しないコアの動作ルールのみを配置する" } }
           ],
-          "answer": "a",
+          "answer": "b",
           "explanation": {
-            "zh": "什么是 system prompt",
-            "en": "Step 1. Define the builder.",
-            "ja": "最も重要な境界"
+            "zh": "把 CLAUDE.md 内容和 core 指令混写在一起破坏了边界，导致来源不清晰，难以单独更新某一部分。六段结构正是为了避免这种混淆。",
+            "en": "Merging CLAUDE.md content with core instructions destroys segment boundaries, making it unclear which source a rule comes from and harder to update individually.",
+            "ja": "CLAUDE.md の内容とコア指示を混在させるとセグメントの境界が壊れ、どのソースからのルールか不明になり、個別の更新が困難になります。"
           },
-          "reward_card": "card_s10_004"
+          "reward_card": "card_s10_001"
         },
         {
           "id": "q_s10_005",
           "type": "choice",
           "difficulty": 1,
           "stem": {
-            "zh": "以下哪个概念与「什么是“组装流水线”」直接相关？",
-            "en": "Which concept is directly related to \"What Changed from s09\"?",
-            "ja": "「最小 builder」に直接関連する概念はどれですか？"
+            "zh": "六段结构中，「tools」段的作用是什么？",
+            "en": "What is the role of the 'tools' segment in the six-segment structure?",
+            "ja": "六段構造において「tools」セグメントの役割は何ですか？"
           },
           "options": [
-            {
-              "id": "b",
-              "text": {
-                "zh": "位置 1：模型调用外层",
-                "en": "位置 1：模型调用外层",
-                "ja": "3. backoff"
-              }
-            },
-            {
-              "id": "a",
-              "text": {
-                "zh": "什么是“组装流水线”",
-                "en": "What Changed from s09",
-                "ja": "最小 builder"
-              }
-            },
-            {
-              "id": "c",
-              "text": {
-                "zh": "这章不应该讲太多什么",
-                "en": "这章不应该讲太多什么",
-                "ja": "3. `bash` を普通の string と同じ感覚で通す"
-              }
-            },
-            {
-              "id": "d",
-              "text": {
-                "zh": "最小心智模型",
-                "en": "Read Together",
-                "ja": "最小の心智モデル"
-              }
-            }
+            { "id": "a", "text": { "zh": "存放模型可调用的工具描述", "en": "Hold descriptions of tools the model can invoke", "ja": "モデルが呼び出せるツールの説明を格納する" } },
+            { "id": "b", "text": { "zh": "存放当前任务的动态上下文提醒", "en": "Hold dynamic context reminders for the current task", "ja": "現在のタスクの動的なコンテキストリマインダーを格納する" } },
+            { "id": "c", "text": { "zh": "存放项目级别的 CLAUDE.md 内容", "en": "Hold project-level CLAUDE.md content", "ja": "プロジェクトレベルの CLAUDE.md コンテンツを格納する" } },
+            { "id": "d", "text": { "zh": "存放跨会话持久化的记忆片段", "en": "Hold cross-session persistent memory snippets", "ja": "セッションをまたぐ永続的なメモリスニペットを格納する" } }
           ],
           "answer": "a",
           "explanation": {
-            "zh": "什么是“组装流水线”",
-            "en": "What Changed from s09",
-            "ja": "最小 builder"
+            "zh": "tools 段专门放工具描述，让模型知道有哪些工具可用及其调用方式。这与 memory（记忆）和 claude_md（项目指令）是独立的来源。",
+            "en": "The tools segment holds descriptions of callable tools so the model knows what is available. This is separate from memory and claude_md which serve different purposes.",
+            "ja": "tools セグメントは呼び出し可能なツールの説明を格納し、モデルが利用可能なものを把握できるようにします。これは memory や claude_md とは独立したソースです。"
           },
-          "reward_card": "card_s10_005"
+          "reward_card": "card_s10_002"
+        },
+        {
+          "id": "q_s10_006",
+          "type": "choice",
+          "difficulty": 2,
+          "stem": {
+            "zh": "CLAUDE.md 分层叠加时，下列哪个描述是正确的？",
+            "en": "Which statement correctly describes CLAUDE.md layered stacking?",
+            "ja": "CLAUDE.md の階層的な積み重ねについて、正しい説明はどれですか？"
+          },
+          "options": [
+            { "id": "a", "text": { "zh": "子目录的 CLAUDE.md 会覆盖项目根目录的同名规则", "en": "A subdirectory CLAUDE.md overrides same-named rules from the project root", "ja": "サブディレクトリの CLAUDE.md はプロジェクトルートの同名ルールを上書きする" } },
+            { "id": "b", "text": { "zh": "只有根目录的 CLAUDE.md 会被加载，子目录的会被忽略", "en": "Only the root CLAUDE.md is loaded; subdirectory files are ignored", "ja": "ルートの CLAUDE.md のみが読み込まれ、サブディレクトリのファイルは無視される" } },
+            { "id": "c", "text": { "zh": "全局、项目、子目录的 CLAUDE.md 全部拼进去，不互相覆盖", "en": "Global, project, and subdirectory CLAUDE.md files are all concatenated without overriding each other", "ja": "グローバル、プロジェクト、サブディレクトリの CLAUDE.md はすべて結合され、互いに上書きしない" } },
+            { "id": "d", "text": { "zh": "全局 CLAUDE.md 优先级最低，会被项目级覆盖", "en": "The global CLAUDE.md has lowest priority and is overridden by the project level", "ja": "グローバル CLAUDE.md は優先度が最も低く、プロジェクトレベルに上書きされる" } }
+          ],
+          "answer": "c",
+          "explanation": {
+            "zh": "CLAUDE.md 分层叠加：全局（~/.claude/CLAUDE.md）→ 项目根目录 → 子目录，全部拼进去不互相覆盖。每层都可以补充说明，而不是替换上层。",
+            "en": "CLAUDE.md stacks from global to project to subdirectory, all concatenated without overriding each other. Each layer adds to, rather than replacing, the layers above.",
+            "ja": "CLAUDE.md はグローバルからプロジェクト、サブディレクトリへと積み重なり、互いに上書きせずにすべて結合されます。各層は上位層を置き換えるのではなく補足します。"
+          },
+          "reward_card": "card_s10_003"
+        },
+        {
+          "id": "q_s10_007",
+          "type": "choice",
+          "difficulty": 2,
+          "stem": {
+            "zh": "如果每轮对话都需要传入当前时间、当前任务状态等信息，应该放在哪一段？",
+            "en": "If you need to pass current time and task status on every conversation turn, where should it go?",
+            "ja": "毎ターンの会話で現在時刻やタスク状態を渡す必要がある場合、どのセグメントに入れるべきですか？"
+          },
+          "options": [
+            { "id": "a", "text": { "zh": "core（核心指令）", "en": "core (core instructions)", "ja": "core（コア指示）" } },
+            { "id": "b", "text": { "zh": "memory（记忆）", "en": "memory (memory)", "ja": "memory（メモリ）" } },
+            { "id": "c", "text": { "zh": "skills（技能目录）", "en": "skills (skill catalog)", "ja": "skills（スキルカタログ）" } },
+            { "id": "d", "text": { "zh": "dynamic（动态提醒）", "en": "dynamic (dynamic reminders)", "ja": "dynamic（動的リマインダー）" } }
+          ],
+          "answer": "d",
+          "explanation": {
+            "zh": "动态信息（每轮都可能变化的内容，如当前时间、任务状态）属于 system reminder 的 dynamic 段。把它放进 core 或 memory 会让稳定内容变得嘈杂。",
+            "en": "Dynamic information that changes each turn (like current time or task status) belongs in the dynamic segment of the system reminder. Putting it in core or memory pollutes stable content.",
+            "ja": "毎ターン変化する動的情報（現在時刻、タスク状態など）は system reminder の dynamic セグメントに属します。core や memory に入れると安定したコンテンツが乱れます。"
+          },
+          "reward_card": "card_s10_003"
+        },
+        {
+          "id": "q_s10_008",
+          "type": "choice",
+          "difficulty": 3,
+          "stem": {
+            "zh": "某团队把全局 CLAUDE.md、项目 CLAUDE.md 和子目录 CLAUDE.md 都加载进来，结果三者内容有重复。正确的处理方式是什么？",
+            "en": "A team loads global, project, and subdirectory CLAUDE.md files and finds duplicate content. What is the correct approach?",
+            "ja": "チームがグローバル、プロジェクト、サブディレクトリの CLAUDE.md をすべて読み込んだところ、内容が重複していました。正しい対処法は何ですか？"
+          },
+          "options": [
+            { "id": "a", "text": { "zh": "这是正常行为，全部拼进去不覆盖，重复说明无害", "en": "This is normal; all files are concatenated without override, and duplicate instructions are harmless", "ja": "これは正常な動作で、すべて上書きなしに結合され、重複指示は無害です" } },
+            { "id": "b", "text": { "zh": "只保留子目录的 CLAUDE.md，删除另外两个", "en": "Keep only the subdirectory CLAUDE.md and delete the other two", "ja": "サブディレクトリの CLAUDE.md のみ残し、他の2つを削除する" } },
+            { "id": "c", "text": { "zh": "必须让三个文件内容完全相同才能正常工作", "en": "All three files must have identical content for the system to work properly", "ja": "システムが正常に動作するには、3つのファイルの内容がまったく同じでなければならない" } },
+            { "id": "d", "text": { "zh": "子目录 CLAUDE.md 会自动合并去重，不必担心", "en": "The subdirectory CLAUDE.md auto-deduplicates on merge, no action needed", "ja": "サブディレクトリの CLAUDE.md は自動的に重複を除去するので対処不要です" } }
+          ],
+          "answer": "a",
+          "explanation": {
+            "zh": "CLAUDE.md 分层叠加是追加拼接而非覆盖，所以重复出现是可接受的——内容不会因重复而矛盾，只是稍显冗余。更整洁的做法是精简各层的说明，但并非必须。",
+            "en": "CLAUDE.md layering is additive concatenation, not override. Duplicate entries are acceptable though slightly redundant. The cleaner practice is to keep each layer focused, but it is not required.",
+            "ja": "CLAUDE.md の階層化は追加的な結合であり、上書きではありません。重複エントリは許容されますが若干冗長です。各層を簡潔に保つのがより整然としていますが、必須ではありません。"
+          },
+          "reward_card": "card_s10_003"
+        },
+        {
+          "id": "q_s10_009",
+          "type": "choice",
+          "difficulty": 1,
+          "stem": {
+            "zh": "六段组装结构中，「memory」段存放的是什么？",
+            "en": "What does the 'memory' segment hold in the six-segment assembly structure?",
+            "ja": "六段組み立て構造において「memory」セグメントには何が格納されますか？"
+          },
+          "options": [
+            { "id": "a", "text": { "zh": "每轮对话生成的临时缓存", "en": "Temporary cache generated each conversation turn", "ja": "各会話ターンで生成される一時的なキャッシュ" } },
+            { "id": "b", "text": { "zh": "CLAUDE.md 文件的完整副本", "en": "A full copy of the CLAUDE.md file", "ja": "CLAUDE.md ファイルの完全なコピー" } },
+            { "id": "c", "text": { "zh": "工具调用的返回结果", "en": "Return values from tool calls", "ja": "ツール呼び出しの戻り値" } },
+            { "id": "d", "text": { "zh": "跨会话需要持续可见的记忆内容", "en": "Memory content that needs to stay visible across sessions", "ja": "セッションをまたいで見えている必要があるメモリコンテンツ" } }
+          ],
+          "answer": "d",
+          "explanation": {
+            "zh": "memory 段存放跨会话需要持续可见的记忆内容，比如用户偏好或已确认的决策。它与 dynamic（每轮临时信息）是不同的概念。",
+            "en": "The memory segment holds content that needs to persist across sessions, such as user preferences or confirmed decisions. This is distinct from dynamic which holds per-turn temporary info.",
+            "ja": "memory セグメントはセッションをまたいで持続する必要があるコンテンツ（ユーザーの好みや確認済みの決定など）を格納します。毎ターンの一時情報を持つ dynamic とは異なります。"
+          },
+          "reward_card": "card_s10_001"
+        },
+        {
+          "id": "q_s10_010",
+          "type": "choice",
+          "difficulty": 2,
+          "stem": {
+            "zh": "把「每轮任务提醒」和「核心系统规则」放进同一个段有什么问题？",
+            "en": "What is the problem with putting per-turn task reminders and core system rules in the same segment?",
+            "ja": "毎ターンのタスクリマインダーとコアシステムルールを同じセグメントに入れると何が問題ですか？"
+          },
+          "options": [
+            { "id": "a", "text": { "zh": "没有问题，混在一起也能正常运行", "en": "No problem; mixing them still works fine", "ja": "問題なし。混在していても正常に動作します" } },
+            { "id": "b", "text": { "zh": "稳定内容会随动态内容频繁刷新，增加维护难度和出错风险", "en": "Stable content gets refreshed frequently with dynamic content, increasing maintenance burden and error risk", "ja": "安定したコンテンツが動的コンテンツと一緒に頻繁に更新され、保守負担とエラーリスクが増大する" } },
+            { "id": "c", "text": { "zh": "模型无法同时理解两种类型的内容", "en": "The model cannot understand two types of content simultaneously", "ja": "モデルは2種類のコンテンツを同時に理解できない" } },
+            { "id": "d", "text": { "zh": "会超出 token 限制导致截断", "en": "It exceeds the token limit and causes truncation", "ja": "トークン制限を超えて切り捨てが発生する" } }
+          ],
+          "answer": "b",
+          "explanation": {
+            "zh": "稳定说明和动态提醒分开管理的原因正是：把每轮都变的内容混进稳定段，会让该段变得频繁修改，增加引入错误的风险，同时让调试更困难。",
+            "en": "The reason for separating stable and dynamic content is that mixing per-turn reminders into the stable segment forces frequent updates there, increasing error risk and making debugging harder.",
+            "ja": "安定したコンテンツと動的コンテンツを分離する理由は、毎ターンのリマインダーを安定したセグメントに混在させると頻繁な更新が必要になり、エラーリスクが増加してデバッグが困難になるからです。"
+          },
+          "reward_card": "card_s10_003"
+        },
+        {
+          "id": "q_s10_011",
+          "type": "choice",
+          "difficulty": 3,
+          "stem": {
+            "zh": "项目根目录有一个 CLAUDE.md，src/api/ 子目录下也有一个 CLAUDE.md。Claude 在处理 src/api/ 下的文件时，会加载哪些 CLAUDE.md？",
+            "en": "There is a CLAUDE.md at the project root and another under src/api/. When Claude works on files under src/api/, which CLAUDE.md files are loaded?",
+            "ja": "プロジェクトルートに CLAUDE.md があり、src/api/ サブディレクトリにも CLAUDE.md があります。Claude が src/api/ 下のファイルを処理する際、どの CLAUDE.md が読み込まれますか？"
+          },
+          "options": [
+            { "id": "a", "text": { "zh": "只加载 src/api/ 下的 CLAUDE.md", "en": "Only the CLAUDE.md under src/api/ is loaded", "ja": "src/api/ 下の CLAUDE.md のみが読み込まれる" } },
+            { "id": "b", "text": { "zh": "只加载项目根目录的 CLAUDE.md", "en": "Only the project root CLAUDE.md is loaded", "ja": "プロジェクトルートの CLAUDE.md のみが読み込まれる" } },
+            { "id": "c", "text": { "zh": "全局 + 项目根 + src/api/ 三层全部加载并拼接", "en": "Global + project root + src/api/ all three layers are loaded and concatenated", "ja": "グローバル + プロジェクトルート + src/api/ の3層すべてが読み込まれ結合される" } },
+            { "id": "d", "text": { "zh": "只有全局 CLAUDE.md 会被加载", "en": "Only the global CLAUDE.md is loaded", "ja": "グローバル CLAUDE.md のみが読み込まれる" } }
+          ],
+          "answer": "c",
+          "explanation": {
+            "zh": "CLAUDE.md 分层叠加：全局（~/.claude/CLAUDE.md）→ 项目根目录 → 子目录，全部拼进去不互相覆盖。所以三层全会被加载和拼接。",
+            "en": "CLAUDE.md stacks all layers: global, project root, and subdirectory are all loaded and concatenated without overriding each other.",
+            "ja": "CLAUDE.md はすべての層を積み重ねます：グローバル、プロジェクトルート、サブディレクトリはすべて読み込まれ、互いに上書きせずに結合されます。"
+          },
+          "reward_card": "card_s10_003"
+        },
+        {
+          "id": "q_s10_012",
+          "type": "choice",
+          "difficulty": 1,
+          "stem": {
+            "zh": "「skills（技能目录）」段在六段结构中负责描述什么？",
+            "en": "What does the 'skills (skill catalog)' segment describe in the six-segment structure?",
+            "ja": "六段構造において「skills（スキルカタログ）」セグメントは何を説明しますか？"
+          },
+          "options": [
+            { "id": "a", "text": { "zh": "Claude 可以使用的、已注册的技能列表", "en": "The catalog of registered skills that Claude can invoke", "ja": "Claude が呼び出せる登録済みスキルのカタログ" } },
+            { "id": "b", "text": { "zh": "模型支持的所有工具函数签名", "en": "All tool function signatures supported by the model", "ja": "モデルがサポートするすべてのツール関数シグネチャ" } },
+            { "id": "c", "text": { "zh": "用户历史对话中涉及的技术栈信息", "en": "Tech stack information from the user's conversation history", "ja": "ユーザーの会話履歴に含まれる技術スタック情報" } },
+            { "id": "d", "text": { "zh": "项目代码的架构说明", "en": "Architecture description of the project codebase", "ja": "プロジェクトコードベースのアーキテクチャ説明" } }
+          ],
+          "answer": "a",
+          "explanation": {
+            "zh": "skills 段存放已注册技能的目录，让模型知道可以调用哪些高层能力。这与 tools（底层工具函数）在粒度上是不同的。",
+            "en": "The skills segment holds a catalog of registered higher-level skills Claude can invoke, distinct from tools which are lower-level function signatures.",
+            "ja": "skills セグメントは Claude が呼び出せる登録済みの高レベルスキルのカタログを格納します。これは低レベルの関数シグネチャである tools とは粒度が異なります。"
+          },
+          "reward_card": "card_s10_002"
+        },
+        {
+          "id": "q_s10_013",
+          "type": "choice",
+          "difficulty": 3,
+          "stem": {
+            "zh": "一个新手开发者把当前日期、用户姓名、任务目标和核心行为准则全部写进了 system prompt 的 core 段。这样做有什么潜在问题？",
+            "en": "A developer puts current date, user name, task goal, and core behavior rules all in the core segment. What is the potential issue?",
+            "ja": "開発者が現在の日付、ユーザー名、タスク目標、コアの動作ルールをすべて core セグメントに入れました。潜在的な問題は何ですか？"
+          },
+          "options": [
+            { "id": "a", "text": { "zh": "没有问题，core 段没有内容限制", "en": "No issue; the core segment has no content restrictions", "ja": "問題なし。core セグメントにはコンテンツ制限がありません" } },
+            { "id": "b", "text": { "zh": "只有 memory 段才允许放用户信息", "en": "Only the memory segment is allowed to contain user information", "ja": "ユーザー情報は memory セグメントのみに入れることが許可されている" } },
+            { "id": "c", "text": { "zh": "模型会优先忽略 core 段中的动态信息", "en": "The model will preferentially ignore dynamic info in the core segment", "ja": "モデルは core セグメントの動的情報を優先的に無視する" } },
+            { "id": "d", "text": { "zh": "会让 core 段变成动态内容，需要每轮重建，失去稳定性优势", "en": "It turns core into dynamic content that must be rebuilt each turn, losing its stability benefit", "ja": "core を毎ターン再構築が必要な動的コンテンツにしてしまい、安定性の利点が失われる" } }
+          ],
+          "answer": "d",
+          "explanation": {
+            "zh": "稳定说明（core）和动态提醒（dynamic）分开管理的核心原因：把动态信息（如当前日期）放进 core 会使 core 每轮都需要重建，破坏其应有的稳定性。",
+            "en": "The core reason for separating stable and dynamic content is that placing dynamic info like the current date in core forces it to be rebuilt every turn, undermining its stability.",
+            "ja": "安定したコンテンツと動的コンテンツを分離する核心的な理由は、現在の日付などの動的情報を core に入れると毎ターン再構築が必要になり、安定性が損なわれるからです。"
+          },
+          "reward_card": "card_s10_003"
+        },
+        {
+          "id": "q_s10_014",
+          "type": "choice",
+          "difficulty": 2,
+          "stem": {
+            "zh": "六段结构中，「core（核心指令）」段最应该放哪类内容？",
+            "en": "In the six-segment structure, what type of content belongs best in the 'core' segment?",
+            "ja": "六段構造において「core（コア指示）」セグメントに最も適したコンテンツの種類は何ですか？"
+          },
+          "options": [
+            { "id": "a", "text": { "zh": "每次对话开始前需要刷新的用户状态", "en": "User state that needs refreshing before each conversation", "ja": "各会話の前にリフレッシュが必要なユーザー状態" } },
+            { "id": "b", "text": { "zh": "模型的基础行为准则（极少改变）", "en": "Fundamental behavior rules for the model (rarely changes)", "ja": "モデルの基本的な動作ルール（めったに変わらない）" } },
+            { "id": "c", "text": { "zh": "CLAUDE.md 中的项目说明", "en": "Project descriptions from CLAUDE.md", "ja": "CLAUDE.md のプロジェクト説明" } },
+            { "id": "d", "text": { "zh": "可供调用的外部 API 接口目录", "en": "Catalog of external API endpoints available to call", "ja": "呼び出し可能な外部 API エンドポイントのカタログ" } }
+          ],
+          "answer": "b",
+          "explanation": {
+            "zh": "core 段存放极少变化的基础行为准则，例如回答风格、安全边界等。项目说明属于 claude_md，动态状态属于 dynamic，两者都不应进入 core。",
+            "en": "The core segment holds rarely-changing fundamental behavior rules like response style and safety boundaries. Project instructions go in claude_md and dynamic state in dynamic, neither belongs in core.",
+            "ja": "core セグメントには応答スタイルや安全境界などのめったに変わらない基本的な動作ルールを格納します。プロジェクト指示は claude_md、動的状態は dynamic に属し、どちらも core に入れるべきではありません。"
+          },
+          "reward_card": "card_s10_002"
+        },
+        {
+          "id": "q_s10_015",
+          "type": "choice",
+          "difficulty": 1,
+          "stem": {
+            "zh": "CLAUDE.md 的加载顺序（从外到内）是什么？",
+            "en": "What is the loading order of CLAUDE.md files (from outer to inner)?",
+            "ja": "CLAUDE.md ファイルの読み込み順序（外から内へ）はどれですか？"
+          },
+          "options": [
+            { "id": "a", "text": { "zh": "子目录 → 项目根目录 → 全局", "en": "Subdirectory → project root → global", "ja": "サブディレクトリ → プロジェクトルート → グローバル" } },
+            { "id": "b", "text": { "zh": "项目根目录 → 全局 → 子目录", "en": "Project root → global → subdirectory", "ja": "プロジェクトルート → グローバル → サブディレクトリ" } },
+            { "id": "c", "text": { "zh": "全局（~/.claude/CLAUDE.md）→ 项目根目录 → 子目录", "en": "Global (~/.claude/CLAUDE.md) → project root → subdirectory", "ja": "グローバル（~/.claude/CLAUDE.md）→ プロジェクトルート → サブディレクトリ" } },
+            { "id": "d", "text": { "zh": "只有一个 CLAUDE.md 会被使用，其余自动忽略", "en": "Only one CLAUDE.md is used; the rest are automatically ignored", "ja": "CLAUDE.md は1つだけ使用され、残りは自動的に無視される" } }
+          ],
+          "answer": "c",
+          "explanation": {
+            "zh": "CLAUDE.md 分层叠加：全局（~/.claude/CLAUDE.md）→ 项目根目录 → 子目录，全部拼进去不互相覆盖。",
+            "en": "CLAUDE.md stacks in this order: global (~/.claude/CLAUDE.md) → project root → subdirectory, all concatenated without overriding each other.",
+            "ja": "CLAUDE.md の積み重ね順：グローバル（~/.claude/CLAUDE.md）→ プロジェクトルート → サブディレクトリで、すべて互いに上書きせずに結合されます。"
+          },
+          "reward_card": "card_s10_003"
+        },
+        {
+          "id": "q_s10_016",
+          "type": "choice",
+          "difficulty": 3,
+          "stem": {
+            "zh": "以下哪种场景最能体现「system prompt 是组装流水线」的优势？",
+            "en": "Which scenario best demonstrates the advantage of treating the system prompt as an assembly pipeline?",
+            "ja": "次のどのシナリオが「system prompt は組み立てパイプライン」の利点を最もよく示していますか？"
+          },
+          "options": [
+            { "id": "a", "text": { "zh": "想更新工具描述时，只需修改 tools 段，不影响其他段", "en": "To update tool descriptions, only the tools segment needs changing without affecting other segments", "ja": "ツールの説明を更新する際、tools セグメントのみ変更すればよく、他のセグメントに影響しない" } },
+            { "id": "b", "text": { "zh": "把所有内容写成一段文字，修改时直接全文替换", "en": "Write everything as one block and replace the whole text when updating", "ja": "すべてを1つのブロックにまとめ、更新時は全文を置き換える" } },
+            { "id": "c", "text": { "zh": "只用一个来源（core）就足够处理所有情况", "en": "Using only one source (core) is sufficient for all cases", "ja": "1つのソース（core）だけですべてのケースを処理するのに十分" } },
+            { "id": "d", "text": { "zh": "动态内容和稳定内容混在一起，统一管理更方便", "en": "Mixing dynamic and stable content together is more convenient to manage", "ja": "動的コンテンツと安定したコンテンツを混在させると管理がより便利" } }
+          ],
+          "answer": "a",
+          "explanation": {
+            "zh": "把不同来源按清晰边界组装的最大优势就是：修改某一来源时只影响对应段，其余段不受影响。这使得维护和调试更精确。",
+            "en": "The main advantage of assembling different sources with clear boundaries is that modifying one source only affects its corresponding segment, leaving others untouched, making maintenance and debugging precise.",
+            "ja": "異なるソースを明確な境界で組み立てる最大の利点は、あるソースを変更しても対応するセグメントのみに影響し、他のセグメントはそのままです。これにより保守とデバッグが精確になります。"
+          },
+          "reward_card": "card_s10_001"
+        },
+        {
+          "id": "q_s10_017",
+          "type": "choice",
+          "difficulty": 2,
+          "stem": {
+            "zh": "如果把 CLAUDE.md 的内容和 memory 的内容放进同一段，会造成什么混淆？",
+            "en": "What confusion arises from putting CLAUDE.md content and memory content in the same segment?",
+            "ja": "CLAUDE.md のコンテンツと memory のコンテンツを同じセグメントに入れると、どのような混乱が生じますか？"
+          },
+          "options": [
+            { "id": "a", "text": { "zh": "项目级指令会被当作跨会话记忆来持久化，或记忆会被当作项目规则来遵循", "en": "Project instructions may be persisted as cross-session memory, or memory treated as project rules", "ja": "プロジェクト指示がセッションをまたぐメモリとして永続化されたり、メモリがプロジェクトルールとして扱われたりする可能性がある" } },
+            { "id": "b", "text": { "zh": "会导致 token 数量超标", "en": "It causes the token count to exceed limits", "ja": "トークン数が制限を超える原因となる" } },
+            { "id": "c", "text": { "zh": "模型无法同时处理两种类型的内容", "en": "The model cannot process two types of content simultaneously", "ja": "モデルは2種類のコンテンツを同時に処理できない" } },
+            { "id": "d", "text": { "zh": "不会有任何问题，因为它们最终都是文字", "en": "No issue since both are ultimately text", "ja": "どちらも最終的にはテキストなので問題ない" } }
+          ],
+          "answer": "a",
+          "explanation": {
+            "zh": "claude_md 和 memory 职责不同：claude_md 是项目规则（来自 CLAUDE.md），memory 是跨会话持久化的记忆。混淆会导致系统错误地管理它们的生命周期。",
+            "en": "claude_md holds project rules from CLAUDE.md while memory holds cross-session persistent content. Mixing them causes the system to mismanage their lifecycle and update frequency.",
+            "ja": "claude_md はプロジェクトルール（CLAUDE.md から）を保持し、memory はセッションをまたぐ永続的なコンテンツを保持します。混在させるとシステムがライフサイクルや更新頻度を誤って管理します。"
+          },
+          "reward_card": "card_s10_002"
+        },
+        {
+          "id": "q_s10_018",
+          "type": "choice",
+          "difficulty": 3,
+          "stem": {
+            "zh": "以下对六段组装结构的理解，哪个是错误的？",
+            "en": "Which of the following understandings of the six-segment assembly structure is incorrect?",
+            "ja": "六段組み立て構造についての以下の理解のうち、誤っているのはどれですか？"
+          },
+          "options": [
+            { "id": "a", "text": { "zh": "每段各管一种来源，职责明确", "en": "Each segment manages one source with a clear responsibility", "ja": "各セグメントは1つのソースを管理し、責任が明確" } },
+            { "id": "b", "text": { "zh": "dynamic 段的内容每轮都可以不同", "en": "The dynamic segment's content can differ each turn", "ja": "dynamic セグメントのコンテンツは毎ターン異なる可能性がある" } },
+            { "id": "c", "text": { "zh": "claude_md 段的内容等于当前项目目录下所有文件的汇总", "en": "The claude_md segment equals a summary of all files in the current project directory", "ja": "claude_md セグメントはカレントプロジェクトディレクトリ内のすべてのファイルの要約に等しい" } },
+            { "id": "d", "text": { "zh": "core 段存放极少变化的基础行为准则", "en": "The core segment holds rarely-changing fundamental behavior rules", "ja": "core セグメントにはめったに変わらない基本的な動作ルールが格納される" } }
+          ],
+          "answer": "c",
+          "explanation": {
+            "zh": "claude_md 段存放的是 CLAUDE.md 文件中的项目指令内容，而不是项目目录下所有文件的汇总。混淆两者会误解这一段的来源和范围。",
+            "en": "The claude_md segment holds project instructions from CLAUDE.md files, not a summary of all project files. Confusing the two misrepresents the source and scope of this segment.",
+            "ja": "claude_md セグメントは CLAUDE.md ファイルのプロジェクト指示を格納するものであり、プロジェクトファイルすべての要約ではありません。両者を混同するとこのセグメントのソースと範囲を誤解させます。"
+          },
+          "reward_card": "card_s10_001"
         }
       ],
       "star_thresholds": [
