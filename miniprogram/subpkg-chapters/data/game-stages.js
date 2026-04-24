@@ -15665,51 +15665,51 @@ module.exports = {
         {
           "id": "q_s17_001",
           "type": "choice",
-          "difficulty": 2,
+          "difficulty": 1,
           "stem": {
-            "zh": "在 Claude Code 中，关于「这一章要解决什么问题」的正确理解是？",
-            "en": "What is the correct understanding of \"What You'll Learn\" in Claude Code?",
-            "ja": "Claude Code における「この章が解く問題」の正しい理解はどれですか？"
+            "zh": "在自治 agent 的设计中，「自治」的核心含义是什么？",
+            "en": "In autonomous agent design, what does 'autonomy' fundamentally mean?",
+            "ja": "自律 agent 設計において、「自律」の核心的な意味は何ですか？"
           },
           "options": [
             {
-              "id": "d",
+              "id": "a",
               "text": {
-                "zh": "为什么这一章放在最后",
-                "en": "The Solution",
-                "ja": "なぜ最後の章なのか"
+                "zh": "agent 在 WORK 和 IDLE 两个阶段之间有序切换，不需要外部每次手动调度",
+                "en": "The agent switches orderly between WORK and IDLE phases without needing manual scheduling each time",
+                "ja": "agent が WORK と IDLE の 2 フェーズ間を秩序立てて切り替え、外部の手動スケジューリングが不要になること"
               }
             },
             {
               "id": "b",
               "text": {
-                "zh": "2. 收到请求以后只回一句自然语言",
-                "en": "2. 收到请求以后只回一句自然语言",
-                "ja": "4. approved / rejected を曖昧な文章だけで表す"
+                "zh": "agent 可以无限制地并行执行所有任务，不需要等待",
+                "en": "The agent can execute all tasks in parallel without any limits or waiting",
+                "ja": "agent がすべてのタスクを制限なく並列実行できること"
               }
             },
             {
               "id": "c",
               "text": {
-                "zh": "1. TaskRecord 不再只记录 `worktree`",
-                "en": "What's Next",
-                "ja": "1. TaskRecord 側の lane 情報"
+                "zh": "agent 完全脱离 lead 的控制，独立做所有决策",
+                "en": "The agent is completely free from lead control and makes all decisions independently",
+                "ja": "agent が lead の制御を完全に離れ、すべての決定を独自に行うこと"
               }
             },
             {
-              "id": "a",
+              "id": "d",
               "text": {
-                "zh": "这一章要解决什么问题",
-                "en": "What You'll Learn",
-                "ja": "この章が解く問題"
+                "zh": "agent 只能执行 lead 明确分配的任务，不会自己认领",
+                "en": "The agent can only execute tasks explicitly assigned by the lead and never self-claims",
+                "ja": "agent は lead が明示的に割り当てたタスクしか実行できないこと"
               }
             }
           ],
           "answer": "a",
           "explanation": {
-            "zh": "很多事情仍然要靠 lead 手动分配。",
-            "en": "What You'll Learn",
-            "ja": "仕事の割り振りが lead に集中しすぎることです。"
+            "zh": "自治不是让 agent 乱跑，而是让它在 WORK 和 IDLE 两个阶段之间有序切换。WORK 阶段执行任务，IDLE 阶段等待新工作或检查邮箱，整个循环不需要外部每轮手动触发。",
+            "en": "Autonomy means orderly switching between WORK and IDLE phases, not uncontrolled execution. WORK phase executes tasks; IDLE phase waits for new work or checks the mailbox — the entire loop needs no external manual triggering each round.",
+            "ja": "自律とは agent を自由に動かすことではなく、WORK と IDLE の間を秩序立てて切り替えることです。WORK フェーズではタスクを実行し、IDLE フェーズでは新しい作業の待機またはメールボックスの確認を行います。"
           },
           "reward_card": "card_s17_001"
         },
@@ -15718,204 +15718,867 @@ module.exports = {
           "type": "choice",
           "difficulty": 1,
           "stem": {
-            "zh": "以下哪个概念与「建议联读」直接相关？",
-            "en": "Which concept is directly related to \"The Problem\"?",
-            "ja": "「併読すると楽になる資料」に直接関連する概念はどれですか？"
+            "zh": "WORK↔IDLE 双阶段循环中，agent 在 IDLE 阶段的正确行为是？",
+            "en": "In the WORK↔IDLE two-phase loop, what is the correct behavior for an agent in the IDLE phase?",
+            "ja": "WORK↔IDLE の 2 フェーズループにおいて、IDLE フェーズでの agent の正しい行動はどれですか？"
           },
           "options": [
             {
-              "id": "c",
+              "id": "b",
               "text": {
-                "zh": "这一章要解决什么问题",
-                "en": "What You'll Learn",
-                "ja": "この章が解く問題"
+                "zh": "检查邮箱是否有新指令，然后决定是否认领新任务",
+                "en": "Check the mailbox for new instructions, then decide whether to claim new tasks",
+                "ja": "メールボックスに新しい指示がないか確認し、新しいタスクを引き受けるかどうかを決める"
               }
             },
             {
               "id": "a",
               "text": {
-                "zh": "建议联读",
-                "en": "The Problem",
-                "ja": "併読すると楽になる資料"
+                "zh": "立即开始执行任务板上第一个未认领的任务",
+                "en": "Immediately start executing the first unclaimed task on the task board",
+                "ja": "タスクボードの最初の未請求タスクをすぐに実行し始める"
+              }
+            },
+            {
+              "id": "c",
+              "text": {
+                "zh": "向 lead 发送报告，等待 lead 手动分配下一个任务",
+                "en": "Send a report to the lead and wait for the lead to manually assign the next task",
+                "ja": "lead に報告を送り、lead が次のタスクを手動で割り当てるのを待つ"
               }
             },
             {
               "id": "d",
               "text": {
-                "zh": "2. 协议消息",
-                "en": "2. 协议消息",
-                "ja": "`s15` から何が増えたか"
-              }
-            },
-            {
-              "id": "b",
-              "text": {
-                "zh": "Teammate、Subagent、Runtime Task 到底怎么区分",
-                "en": "Teammate、Subagent、Runtime Task 到底怎么区分",
-                "ja": "Teammate / Subagent / Runtime Slot をどう分けるか"
+                "zh": "进入休眠，直到 lead 发送唤醒消息",
+                "en": "Go to sleep until the lead sends a wake-up message",
+                "ja": "lead がウェイクアップメッセージを送るまでスリープ状態になる"
               }
             }
           ],
-          "answer": "a",
+          "answer": "b",
           "explanation": {
-            "zh": "建议联读",
-            "en": "The Problem",
-            "ja": "併読すると楽になる資料"
+            "zh": "IDLE 阶段的标准行为是：先检查邮箱（mailbox）看是否有 lead 或其他 teammate 的新指令，然后再决定是否认领新任务。邮箱优先于任务板，确保明确指令不被自动行为覆盖。",
+            "en": "The standard IDLE phase behavior is: first check the mailbox for new instructions from the lead or other teammates, then decide whether to claim new tasks. Mailbox takes priority over the task board, ensuring explicit instructions aren't overridden by automated behavior.",
+            "ja": "IDLE フェーズの標準動作は、まずメールボックスを確認して lead や他の teammate からの新しい指示がないかチェックし、その後新しいタスクを引き受けるかどうかを決めることです。"
           },
-          "reward_card": "card_s17_002"
+          "reward_card": "card_s17_001"
         },
         {
           "id": "q_s17_003",
           "type": "choice",
           "difficulty": 1,
           "stem": {
-            "zh": "以下哪个概念与「先解释几个名词」直接相关？",
-            "en": "Which concept is directly related to \"The Solution\"?",
-            "ja": "「先に言葉をそろえる」に直接関連する概念はどれですか？"
+            "zh": "以下关于 WORK↔IDLE 双阶段循环的说法，哪个是错误的？",
+            "en": "Which of the following statements about the WORK↔IDLE two-phase loop is INCORRECT?",
+            "ja": "WORK↔IDLE の 2 フェーズループについて、誤っている説明はどれですか？"
           },
           "options": [
             {
+              "id": "c",
+              "text": {
+                "zh": "WORK 阶段负责执行已认领的任务",
+                "en": "The WORK phase is responsible for executing claimed tasks",
+                "ja": "WORK フェーズは引き受けたタスクの実行を担当する"
+              }
+            },
+            {
               "id": "b",
               "text": {
-                "zh": "第四步：队友每轮先看邮箱，再继续工作",
-                "en": "第四步：队友每轮先看邮箱，再继续工作",
-                "ja": "Step 3: 各 teammate に mailbox を持たせる"
+                "zh": "IDLE 阶段会先检查邮箱再考虑认领任务",
+                "en": "The IDLE phase checks the mailbox before considering task claiming",
+                "ja": "IDLE フェーズはタスクの引き受けを検討する前にメールボックスを確認する"
               }
             },
             {
               "id": "a",
               "text": {
-                "zh": "先解释几个名词",
-                "en": "The Solution",
-                "ja": "先に言葉をそろえる"
-              }
-            },
-            {
-              "id": "c",
-              "text": {
-                "zh": "如何接到前面章节的系统里",
-                "en": "如何接到前面章节的系统里",
-                "ja": "Step 4: teammate は毎ラウンド mailbox を先に確認する"
+                "zh": "agent 在每个 IDLE 阶段都必须认领至少一个新任务，否则循环会终止",
+                "en": "The agent must claim at least one new task in each IDLE phase, otherwise the loop terminates",
+                "ja": "agent は各 IDLE フェーズで少なくとも 1 つの新しいタスクを引き受けなければならず、そうしないとループが終了する"
               }
             },
             {
               "id": "d",
               "text": {
-                "zh": "什么是协议",
-                "en": "How It Works",
-                "ja": "protocol とは何か"
+                "zh": "整个 WORK↔IDLE 循环不需要外部每轮手动触发",
+                "en": "The entire WORK↔IDLE loop does not require external manual triggering each round",
+                "ja": "WORK↔IDLE ループ全体は外部からの手動トリガーを毎ラウンド必要としない"
               }
             }
           ],
           "answer": "a",
           "explanation": {
-            "zh": "先解释几个名词",
-            "en": "The Solution",
-            "ja": "先に言葉をそろえる"
+            "zh": "IDLE 阶段没有强制认领的要求。如果没有符合条件的任务（无阻塞、无主、角色匹配），agent 可以保持 IDLE 状态等待，而不是强行认领或终止循环。",
+            "en": "There is no mandatory claiming requirement in the IDLE phase. If no eligible tasks exist (unblocked, unclaimed, role-matching), the agent can remain IDLE and wait, rather than forcibly claiming or terminating the loop.",
+            "ja": "IDLE フェーズに強制的な引き受け要件はありません。適格なタスク（ブロックなし、未請求、役割一致）がない場合、agent は強制的に引き受けたりループを終了したりせず、IDLE 状態のまま待機できます。"
           },
-          "reward_card": "card_s17_003"
+          "reward_card": "card_s17_001"
         },
         {
           "id": "q_s17_004",
           "type": "choice",
-          "difficulty": 1,
+          "difficulty": 2,
           "stem": {
-            "zh": "以下哪个概念与「什么叫自治」直接相关？",
-            "en": "Which concept is directly related to \"How It Works\"?",
-            "ja": "「自治とは何か」に直接関連する概念はどれですか？"
+            "zh": "在 WORK↔IDLE 双阶段循环中，以下哪种情形会让 agent 从 IDLE 切换回 WORK？",
+            "en": "In the WORK↔IDLE two-phase loop, which situation causes the agent to switch from IDLE back to WORK?",
+            "ja": "WORK↔IDLE の 2 フェーズループで、agent が IDLE から WORK に切り替わる状況はどれですか？"
           },
           "options": [
             {
-              "id": "c",
-              "text": {
-                "zh": "第三步：同时更新任务记录，不只是写一个 `worktree`",
-                "en": "第三步：同时更新任务记录，不只是写一个 `worktree`",
-                "ja": "第 3 段階: task record 側も同時に更新する"
-              }
-            },
-            {
               "id": "a",
               "text": {
-                "zh": "什么叫自治",
-                "en": "How It Works",
-                "ja": "自治とは何か"
-              }
-            },
-            {
-              "id": "d",
-              "text": {
-                "zh": "关键数据结构",
-                "en": "What You've Mastered",
-                "ja": "この章の核になるデータ構造"
+                "zh": "收到 lead 的 shutdown_request 消息",
+                "en": "Receiving a shutdown_request message from the lead",
+                "ja": "lead から shutdown_request メッセージを受け取った場合"
               }
             },
             {
               "id": "b",
               "text": {
-                "zh": "身份重注入为什么重要",
-                "en": "身份重注入为什么重要",
-                "ja": "identity 再注入が重要な理由"
+                "zh": "邮箱中有尚未读取的消息",
+                "en": "There are unread messages in the mailbox",
+                "ja": "メールボックスに未読メッセージがある場合"
+              }
+            },
+            {
+              "id": "c",
+              "text": {
+                "zh": "定时器到期，无论是否有任务",
+                "en": "A timer expires, regardless of whether there are tasks",
+                "ja": "タイマーが期限切れになった場合（タスクの有無に関わらず）"
+              }
+            },
+            {
+              "id": "d",
+              "text": {
+                "zh": "agent 成功认领了一个新任务，进入执行阶段",
+                "en": "The agent successfully claims a new task and enters the execution phase",
+                "ja": "agent が新しいタスクの引き受けに成功し、実行フェーズに入った場合"
               }
             }
           ],
-          "answer": "a",
+          "answer": "d",
           "explanation": {
-            "zh": "什么叫自治",
-            "en": "Step 1.",
-            "ja": "規則付きの自律再開"
+            "zh": "IDLE → WORK 的切换触发条件是 agent 成功认领了一个任务。认领成功后 agent 进入 WORK 阶段执行该任务。收到 shutdown_request 会终止循环，收到邮箱消息会处理消息但不一定切换到 WORK，定时器本身不是切换的触发条件。",
+            "en": "The trigger for IDLE → WORK transition is the agent successfully claiming a task. After successful claiming, the agent enters WORK phase to execute it. Receiving shutdown_request terminates the loop; mailbox messages are processed but don't necessarily trigger WORK; timers alone don't trigger the switch.",
+            "ja": "IDLE → WORK への切り替えのトリガーは、agent がタスクの引き受けに成功することです。引き受け成功後、agent は WORK フェーズに入り、そのタスクを実行します。"
           },
-          "reward_card": "card_s17_004"
+          "reward_card": "card_s17_001"
         },
         {
           "id": "q_s17_005",
           "type": "choice",
           "difficulty": 1,
           "stem": {
-            "zh": "以下哪个概念与「什么叫认领」直接相关？",
-            "en": "Which concept is directly related to \"Read Together\"?",
-            "ja": "「claim とは何か」に直接関連する概念はどれですか？"
+            "zh": "在自治 agent 的 IDLE 阶段，「先邮箱再任务板」的设计原则是为了解决什么问题？",
+            "en": "In the IDLE phase of autonomous agents, why is the 'mailbox first, task board second' principle designed?",
+            "ja": "自律 agent の IDLE フェーズにおいて、「まずメールボックス、次にタスクボード」の設計原則はどの問題を解決するためのものですか？"
           },
           "options": [
             {
-              "id": "b",
-              "text": {
-                "zh": "3. Claim Event Log",
-                "en": "3. Claim Event Log",
-                "ja": "3. Claim Event Log"
-              }
-            },
-            {
               "id": "a",
               "text": {
-                "zh": "什么叫认领",
-                "en": "Read Together",
-                "ja": "claim とは何か"
+                "zh": "防止 agent 认领被其他 agent 已锁定的任务",
+                "en": "Prevent agents from claiming tasks already locked by other agents",
+                "ja": "他の agent がすでにロックしているタスクを引き受けないようにする"
               }
             },
             {
-              "id": "c",
+              "id": "b",
               "text": {
-                "zh": "初学者最容易犯的错",
-                "en": "初学者最容易犯的错",
-                "ja": "2. request_id を持たせない"
+                "zh": "减少任务板的读取次数，降低系统开销",
+                "en": "Reduce the number of task board reads to lower system overhead",
+                "ja": "タスクボードの読み取り回数を減らしてシステムオーバーヘッドを削減する"
               }
             },
             {
               "id": "d",
               "text": {
-                "zh": "自治的是“长期队友”，不是“一次性 subagent”",
-                "en": "自治的是“长期队友”，不是“一次性 subagent”",
-                "ja": "自治するのは long-lived teammate であって subagent ではない"
+                "zh": "确保 lead 的明确指令优先于 agent 的自动认领行为，避免指令被忽略",
+                "en": "Ensure that explicit instructions from the lead take priority over the agent's automatic claiming, preventing instructions from being ignored",
+                "ja": "lead からの明示的な指示が agent の自動引き受け行動より優先されるようにし、指示が無視されないようにする"
+              }
+            },
+            {
+              "id": "c",
+              "text": {
+                "zh": "让 agent 能够批量处理多个邮件，提高效率",
+                "en": "Allow agents to batch-process multiple emails for efficiency",
+                "ja": "agent が複数のメールをバッチ処理して効率を上げられるようにする"
+              }
+            }
+          ],
+          "answer": "d",
+          "explanation": {
+            "zh": "先检查邮箱是为了确保明确指令（来自 lead 或其他 teammate 的消息）优先于自动认领行为。如果 agent 先看任务板就认领了任务，可能会错过 lead 发来的优先级更高的指令或方向调整。",
+            "en": "Checking the mailbox first ensures explicit instructions (messages from the lead or other teammates) take priority over automatic claiming. If the agent checks the task board first and claims a task, it might miss higher-priority instructions or direction changes from the lead.",
+            "ja": "まずメールボックスを確認するのは、明示的な指示（lead や他の teammate からのメッセージ）が自動引き受け行動より優先されるようにするためです。"
+          },
+          "reward_card": "card_s17_002"
+        },
+        {
+          "id": "q_s17_006",
+          "type": "choice",
+          "difficulty": 1,
+          "stem": {
+            "zh": "关于 agent 邮箱（mailbox）的作用，以下说法正确的是？",
+            "en": "Which of the following correctly describes the role of an agent's mailbox?",
+            "ja": "agent のメールボックスの役割について、正しい説明はどれですか？"
+          },
+          "options": [
+            {
+              "id": "b",
+              "text": {
+                "zh": "邮箱用于接收来自 lead 或其他 teammate 的消息，agent 每轮 IDLE 时优先处理",
+                "en": "The mailbox receives messages from the lead or other teammates, and the agent processes it with priority during each IDLE round",
+                "ja": "メールボックスは lead や他の teammate からのメッセージを受け取り、agent は各 IDLE ラウンドで優先的に処理する"
+              }
+            },
+            {
+              "id": "a",
+              "text": {
+                "zh": "邮箱是任务板的备份，存储已完成任务的历史记录",
+                "en": "The mailbox is a backup of the task board, storing the history of completed tasks",
+                "ja": "メールボックスはタスクボードのバックアップで、完了したタスクの履歴を保存する"
+              }
+            },
+            {
+              "id": "c",
+              "text": {
+                "zh": "邮箱只用于 agent 向 lead 汇报进度，不接收外部消息",
+                "en": "The mailbox is only used for agents to report progress to the lead, not for receiving external messages",
+                "ja": "メールボックスは agent が lead に進捗を報告するためだけのもので、外部メッセージを受け取らない"
+              }
+            },
+            {
+              "id": "d",
+              "text": {
+                "zh": "邮箱和任务板是同一个数据结构，只是命名不同",
+                "en": "The mailbox and task board are the same data structure with different names",
+                "ja": "メールボックスとタスクボードは名前が違うだけの同じデータ構造である"
+              }
+            }
+          ],
+          "answer": "b",
+          "explanation": {
+            "zh": "邮箱是 agent 接收来自 lead 或其他 teammate 消息的渠道，与任务板（记录待完成任务）是独立的两个概念。agent 在 IDLE 阶段优先处理邮箱，确保重要指令不被遗漏。",
+            "en": "The mailbox is the channel for agents to receive messages from the lead or other teammates, separate from the task board (which records tasks to be completed). Agents prioritize the mailbox during IDLE phase to ensure important instructions are not missed.",
+            "ja": "メールボックスは agent が lead や他の teammate からのメッセージを受け取るためのチャネルで、タスクボード（完了すべきタスクを記録）とは独立した概念です。"
+          },
+          "reward_card": "card_s17_002"
+        },
+        {
+          "id": "q_s17_007",
+          "type": "choice",
+          "difficulty": 2,
+          "stem": {
+            "zh": "如果 agent 在 IDLE 阶段发现邮箱中有一条来自 lead 的「暂停所有任务」指令，同时任务板上有一个符合认领条件的任务，agent 应该怎么做？",
+            "en": "If an agent in IDLE phase finds a 'pause all tasks' instruction from the lead in the mailbox, and there is an eligible task on the task board, what should the agent do?",
+            "ja": "IDLE フェーズの agent がメールボックスに lead からの「すべてのタスクを一時停止」という指示を見つけ、タスクボードに適格なタスクがある場合、agent はどうすべきですか？"
+          },
+          "options": [
+            {
+              "id": "a",
+              "text": {
+                "zh": "先认领任务板上的任务，完成后再处理邮箱指令",
+                "en": "First claim the task from the task board, then process the mailbox instruction after completion",
+                "ja": "まずタスクボードからタスクを引き受け、完了後にメールボックスの指示を処理する"
+              }
+            },
+            {
+              "id": "b",
+              "text": {
+                "zh": "同时处理邮件和任务，不应该让 lead 等待",
+                "en": "Handle both the email and task simultaneously, the lead shouldn't be kept waiting",
+                "ja": "メールとタスクを同時に処理する、lead を待たせるべきではない"
+              }
+            },
+            {
+              "id": "c",
+              "text": {
+                "zh": "优先处理邮箱中的「暂停」指令，不认领任务，等待进一步指示",
+                "en": "Prioritize the 'pause' instruction in the mailbox, do not claim the task, and wait for further instructions",
+                "ja": "メールボックスの「一時停止」指示を優先し、タスクを引き受けず、さらなる指示を待つ"
+              }
+            },
+            {
+              "id": "d",
+              "text": {
+                "zh": "忽略邮箱指令，因为任务板的优先级更高",
+                "en": "Ignore the mailbox instruction because the task board has higher priority",
+                "ja": "タスクボードの優先度が高いため、メールボックスの指示を無視する"
+              }
+            }
+          ],
+          "answer": "c",
+          "explanation": {
+            "zh": "先邮箱再任务板的原则决定了 agent 必须优先处理邮箱中的明确指令。lead 的「暂停所有任务」指令优先于自动认领逻辑，agent 应停止认领并等待进一步指示。",
+            "en": "The 'mailbox first, task board second' principle means the agent must prioritize explicit instructions in the mailbox. The lead's 'pause all tasks' instruction takes priority over automatic claiming logic; the agent should stop claiming and wait for further instructions.",
+            "ja": "「まずメールボックス」の原則により、agent はメールボックス内の明示的な指示を優先しなければなりません。lead の「すべてのタスクを一時停止」という指示は自動引き受けロジックより優先されます。"
+          },
+          "reward_card": "card_s17_002"
+        },
+        {
+          "id": "q_s17_008",
+          "type": "choice",
+          "difficulty": 2,
+          "stem": {
+            "zh": "在多 agent 系统中，「安全认领」（safe claim）需要满足哪几个条件？",
+            "en": "In a multi-agent system, what conditions must be met for a 'safe claim'?",
+            "ja": "マルチエージェントシステムにおいて、「安全な引き受け」に必要な条件はどれですか？"
+          },
+          "options": [
+            {
+              "id": "a",
+              "text": {
+                "zh": "任务状态为 done，且已通过所有验证",
+                "en": "Task status is done and has passed all validations",
+                "ja": "タスクのステータスが done であり、すべての検証をパスしている"
+              }
+            },
+            {
+              "id": "b",
+              "text": {
+                "zh": "任务为 pending 状态、无主、无阻塞依赖、角色匹配，且写入时需加锁",
+                "en": "Task is pending, unowned, has no blocking dependencies, role matches, and requires a lock when writing",
+                "ja": "タスクが pending 状態、オーナーなし、ブロッキング依存なし、役割一致、書き込み時にロックが必要"
+              }
+            },
+            {
+              "id": "c",
+              "text": {
+                "zh": "任务 ID 最小，且 lead 已明确批准认领",
+                "en": "Task has the lowest ID and has been explicitly approved by the lead",
+                "ja": "タスク ID が最小であり、lead が明示的に承認している"
+              }
+            },
+            {
+              "id": "d",
+              "text": {
+                "zh": "任务创建时间最早，且已在邮箱中通知所有 teammate",
+                "en": "Task was created earliest and all teammates have been notified via mailbox",
+                "ja": "タスクが最も早く作成され、メールボックスですべての teammate に通知済み"
+              }
+            }
+          ],
+          "answer": "b",
+          "explanation": {
+            "zh": "安全认领需要满足 5 个条件：① 任务状态为 pending（未开始）；② 无主（owner 为空）；③ 无阻塞（所有依赖已完成）；④ 角色匹配（agent 的角色能处理该类任务）；⑤ 加锁写入（防止并发认领竞态）。",
+            "en": "Safe claiming requires 5 conditions: ① Task status is pending (not started); ② No owner (owner is empty); ③ No blocking (all dependencies completed); ④ Role matches (agent's role can handle this task type); ⑤ Lock when writing (prevent concurrent claiming race conditions).",
+            "ja": "安全な引き受けには 5 つの条件が必要です：① タスクのステータスが pending；② オーナーなし；③ ブロックなし（すべての依存が完了）；④ 役割一致；⑤ ロックして書き込み（並行引き受けの競合を防止）。"
+          },
+          "reward_card": "card_s17_003"
+        },
+        {
+          "id": "q_s17_009",
+          "type": "choice",
+          "difficulty": 1,
+          "stem": {
+            "zh": "在多 agent 并发认领任务时，为什么需要「加锁」机制？",
+            "en": "Why is a 'locking' mechanism needed when multiple agents claim tasks concurrently?",
+            "ja": "複数の agent が同時にタスクを引き受けようとする場合、なぜ「ロック」機構が必要ですか？"
+          },
+          "options": [
+            {
+              "id": "a",
+              "text": {
+                "zh": "防止两个 agent 同时认领同一个任务，导致重复执行",
+                "en": "Prevent two agents from claiming the same task simultaneously, causing duplicate execution",
+                "ja": "2 つの agent が同じタスクを同時に引き受けて二重実行が発生するのを防ぐ"
+              }
+            },
+            {
+              "id": "b",
+              "text": {
+                "zh": "加快任务分配速度，让所有 agent 更快得到工作",
+                "en": "Speed up task distribution so all agents get work faster",
+                "ja": "タスク配分を高速化して、すべての agent がより早く作業を得られるようにする"
+              }
+            },
+            {
+              "id": "c",
+              "text": {
+                "zh": "确保 lead 能实时监控哪些任务被认领了",
+                "en": "Ensure the lead can monitor in real-time which tasks have been claimed",
+                "ja": "lead がどのタスクが引き受けられたかをリアルタイムで監視できるようにする"
+              }
+            },
+            {
+              "id": "d",
+              "text": {
+                "zh": "记录每个 agent 的工作历史，方便后续审计",
+                "en": "Record the work history of each agent for later auditing",
+                "ja": "後の監査のために各 agent の作業履歴を記録する"
               }
             }
           ],
           "answer": "a",
           "explanation": {
-            "zh": "什么叫认领",
-            "en": "Read Together",
-            "ja": "owner を書き込み、他の teammate が同じ task を取らないようにする"
+            "zh": "在多 agent 并发环境下，多个 agent 可能同时看到同一个符合条件的任务并尝试认领。没有加锁机制会导致「竞态条件」（race condition）——两个 agent 都读到任务为无主状态，都写入自己的 owner，导致重复执行。",
+            "en": "In a multi-agent concurrent environment, multiple agents may simultaneously see the same eligible task and try to claim it. Without a locking mechanism, a race condition occurs — two agents both read the task as unowned and both write their owner, causing duplicate execution.",
+            "ja": "マルチエージェントの並行環境では、複数の agent が同じ適格タスクを同時に見て引き受けようとする可能性があります。ロック機構がないと競合状態が発生し、2 つの agent が両方ともタスクを未請求と読んで自分の owner を書き込み、二重実行が起こります。"
           },
-          "reward_card": "card_s17_005"
+          "reward_card": "card_s17_003"
+        },
+        {
+          "id": "q_s17_010",
+          "type": "choice",
+          "difficulty": 2,
+          "stem": {
+            "zh": "以下哪种任务不满足「安全认领」条件，因此不应该被认领？",
+            "en": "Which of the following tasks does NOT meet the 'safe claim' conditions and therefore should not be claimed?",
+            "ja": "次のうち、「安全な引き受け」の条件を満たさず、引き受けるべきでないタスクはどれですか？"
+          },
+          "options": [
+            {
+              "id": "b",
+              "text": {
+                "zh": "状态为 pending，owner 为空，但依赖任务 task-A 还未完成",
+                "en": "Status is pending, owner is empty, but dependent task task-A has not been completed yet",
+                "ja": "ステータスが pending、オーナーが空だが、依存タスク task-A がまだ完了していない"
+              }
+            },
+            {
+              "id": "a",
+              "text": {
+                "zh": "状态为 pending，owner 为空，无依赖，角色匹配",
+                "en": "Status is pending, owner is empty, no dependencies, role matches",
+                "ja": "ステータスが pending、オーナーが空、依存なし、役割一致"
+              }
+            },
+            {
+              "id": "c",
+              "text": {
+                "zh": "状态为 pending，owner 为空，依赖已全部完成，角色匹配",
+                "en": "Status is pending, owner is empty, all dependencies completed, role matches",
+                "ja": "ステータスが pending、オーナーが空、依存がすべて完了、役割一致"
+              }
+            },
+            {
+              "id": "d",
+              "text": {
+                "zh": "lead 发送消息确认可以认领，且状态为 pending",
+                "en": "The lead sent a message confirming it can be claimed, and status is pending",
+                "ja": "lead がメッセージで引き受け可能と確認し、ステータスが pending"
+              }
+            }
+          ],
+          "answer": "b",
+          "explanation": {
+            "zh": "安全认领要求任务的所有阻塞依赖都已完成（无阻塞）。选项 b 中依赖任务 task-A 还未完成，这意味着该任务被阻塞，即使状态是 pending 且无主也不能认领。",
+            "en": "Safe claiming requires all blocking dependencies to be completed (no blocking). In option b, the dependent task task-A has not been completed, meaning this task is blocked — it cannot be claimed even if status is pending and there's no owner.",
+            "ja": "安全な引き受けは、すべてのブロッキング依存が完了していること（ブロックなし）を要求します。選択肢 b では依存タスク task-A がまだ完了しておらず、タスクがブロックされているため、pending かつオーナーなしでも引き受けられません。"
+          },
+          "reward_card": "card_s17_003"
+        },
+        {
+          "id": "q_s17_011",
+          "type": "choice",
+          "difficulty": 3,
+          "stem": {
+            "zh": "在高并发场景下，两个 agent 同时通过了「状态为 pending 且 owner 为空」的检查，都准备写入自己为 owner。以下哪种机制能正确解决这个竞态问题？",
+            "en": "In a high-concurrency scenario, two agents simultaneously pass the 'status is pending and owner is empty' check and both prepare to write themselves as owner. Which mechanism correctly resolves this race condition?",
+            "ja": "高並行シナリオで、2 つの agent が同時に「ステータスが pending かつオーナーが空」のチェックをパスし、両方が自分を owner として書き込もうとしています。この競合状態を正しく解決するメカニズムはどれですか？"
+          },
+          "options": [
+            {
+              "id": "a",
+              "text": {
+                "zh": "让两个 agent 都写入成功，然后由系统决定谁的认领有效",
+                "en": "Allow both agents to write successfully, then let the system decide whose claim is valid",
+                "ja": "両方の agent の書き込みを成功させ、システムがどちらの引き受けが有効かを決める"
+              }
+            },
+            {
+              "id": "b",
+              "text": {
+                "zh": "使用时间戳决定优先级，时间戳更早的 agent 获得任务",
+                "en": "Use timestamps to determine priority, the agent with an earlier timestamp gets the task",
+                "ja": "タイムスタンプで優先度を決め、タイムスタンプが早い agent がタスクを得る"
+              }
+            },
+            {
+              "id": "c",
+              "text": {
+                "zh": "通过乐观锁（版本号比对）或文件锁确保只有一个 agent 能写入成功",
+                "en": "Use optimistic locking (version number comparison) or file locks to ensure only one agent can write successfully",
+                "ja": "楽観的ロック（バージョン番号比較）またはファイルロックを使用して、1 つの agent だけが書き込みを成功できるようにする"
+              }
+            },
+            {
+              "id": "d",
+              "text": {
+                "zh": "由 lead 仲裁，两个 agent 都向 lead 发送认领请求，lead 决定谁得到任务",
+                "en": "Have the lead arbitrate: both agents send claim requests to the lead, and the lead decides who gets the task",
+                "ja": "lead が仲裁する：両方の agent が lead に引き受けリクエストを送り、lead がどちらにタスクが行くかを決める"
+              }
+            }
+          ],
+          "answer": "c",
+          "explanation": {
+            "zh": "解决并发认领竞态的标准方法是使用锁机制：乐观锁通过版本号比对（CAS 操作）确保只有版本匹配的写入成功；文件锁直接阻止并发写入。时间戳方法不可靠（时钟偏斜），让 lead 仲裁会引入额外延迟和单点瓶颈。",
+            "en": "The standard solution for concurrent claiming race conditions is using lock mechanisms: optimistic locking uses version number comparison (CAS operations) to ensure only version-matching writes succeed; file locks directly prevent concurrent writes. Timestamp methods are unreliable (clock skew), and lead arbitration introduces extra latency and a single-point bottleneck.",
+            "ja": "並行引き受けの競合状態を解決する標準的な方法はロック機構の使用です：楽観的ロックはバージョン番号比較（CAS 操作）を使い、バージョンが一致する書き込みのみ成功させます。"
+          },
+          "reward_card": "card_s17_003"
+        },
+        {
+          "id": "q_s17_012",
+          "type": "choice",
+          "difficulty": 3,
+          "stem": {
+            "zh": "一个多 agent 系统中，agent B 认领了一个任务但在执行到一半时崩溃了，owner 字段依然是 B 的名字。其他 agent 应该如何处理这个任务？",
+            "en": "In a multi-agent system, agent B claimed a task but crashed halfway through execution, and the owner field still shows B's name. How should other agents handle this task?",
+            "ja": "マルチエージェントシステムで、agent B がタスクを引き受けたが実行途中でクラッシュし、owner フィールドにはまだ B の名前があります。他の agent はこのタスクをどう処理すべきですか？"
+          },
+          "options": [
+            {
+              "id": "d",
+              "text": {
+                "zh": "系统需要心跳检测或超时机制释放锁，其他 agent 才能安全认领",
+                "en": "The system needs heartbeat detection or timeout mechanisms to release the lock before other agents can safely claim it",
+                "ja": "システムはハートビート検出またはタイムアウト機構でロックを解放する必要があり、その後で他の agent が安全に引き受けられる"
+              }
+            },
+            {
+              "id": "a",
+              "text": {
+                "zh": "直接忽略 owner 字段，立即认领该任务",
+                "en": "Ignore the owner field directly and immediately claim the task",
+                "ja": "owner フィールドを無視して、すぐにタスクを引き受ける"
+              }
+            },
+            {
+              "id": "b",
+              "text": {
+                "zh": "检测到任务状态为 in_progress 就跳过，永远不能被重新认领",
+                "en": "Skip when the task status is detected as in_progress; it can never be re-claimed",
+                "ja": "タスクのステータスが in_progress と検出されたらスキップし、永遠に再引き受けできない"
+              }
+            },
+            {
+              "id": "c",
+              "text": {
+                "zh": "向 lead 报告任务可能卡住，等待 lead 手动清除 owner",
+                "en": "Report to the lead that the task may be stuck and wait for the lead to manually clear the owner",
+                "ja": "lead にタスクが詰まっている可能性を報告し、lead が手動で owner をクリアするのを待つ"
+              }
+            }
+          ],
+          "answer": "d",
+          "explanation": {
+            "zh": "崩溃的 agent 留下了「幽灵 owner」（ghost owner），导致任务被锁死。正确的解决方案是系统级的心跳检测（agent 定期续约）或超时机制（超过阈值自动释放 owner），这样其他 agent 才能安全接手。直接忽略 owner 会破坏互斥保证；永不重认领会导致任务丢失；手动清除依赖 lead 干预，无法自动恢复。",
+            "en": "A crashed agent leaves a 'ghost owner', causing the task to be locked. The correct solution is system-level heartbeat detection (agent periodically renews) or timeout mechanism (automatically releases owner after threshold), allowing other agents to safely take over. Ignoring owner breaks mutual exclusion; never re-claiming causes task loss; manual clearing requires lead intervention.",
+            "ja": "クラッシュした agent は「ゴーストオーナー」を残し、タスクをロックします。正しい解決策はシステムレベルのハートビート検出（agent が定期的に更新）またはタイムアウト機構（閾値を超えると自動で owner を解放）で、他の agent が安全に引き継げるようにすることです。"
+          },
+          "reward_card": "card_s17_003"
+        },
+        {
+          "id": "q_s17_013",
+          "type": "choice",
+          "difficulty": 2,
+          "stem": {
+            "zh": "在自治 agent 系统中，「身份重注入」（identity re-injection）是为了解决什么问题？",
+            "en": "In autonomous agent systems, what problem does 'identity re-injection' solve?",
+            "ja": "自律エージェントシステムにおいて、「アイデンティティ再注入」はどの問題を解決するためのものですか？"
+          },
+          "options": [
+            {
+              "id": "a",
+              "text": {
+                "zh": "agent 认领了不属于自己角色的任务，需要重新验证身份",
+                "en": "An agent claimed a task not belonging to its role and needs to re-verify identity",
+                "ja": "agent が自分の役割に属さないタスクを引き受け、アイデンティティの再検証が必要になった"
+              }
+            },
+            {
+              "id": "c",
+              "text": {
+                "zh": "上下文压缩后 agent 可能忘记自己是谁和应该遵守哪些规则，需要在恢复前重新注入身份块",
+                "en": "After context compression, the agent may forget who it is and what rules to follow, requiring identity block re-injection before resuming",
+                "ja": "コンテキスト圧縮後に agent が自分が誰で、どのルールに従うべきかを忘れる可能性があり、再開前にアイデンティティブロックの再注入が必要"
+              }
+            },
+            {
+              "id": "b",
+              "text": {
+                "zh": "每次新建 agent 实例时都需要分配唯一 ID，防止 ID 冲突",
+                "en": "Every time a new agent instance is created, a unique ID must be assigned to prevent ID conflicts",
+                "ja": "新しい agent インスタンスを作成するたびに一意の ID を割り当てて ID の競合を防ぐ必要がある"
+              }
+            },
+            {
+              "id": "d",
+              "text": {
+                "zh": "多个 agent 同时在线时需要广播各自身份，让其他 agent 知道谁在系统中",
+                "en": "When multiple agents are online simultaneously, they need to broadcast their identities so other agents know who is in the system",
+                "ja": "複数の agent が同時にオンラインの場合、それぞれのアイデンティティをブロードキャストして他の agent が誰がシステムにいるかを知れるようにする必要がある"
+              }
+            }
+          ],
+          "answer": "c",
+          "explanation": {
+            "zh": "长时间运行的 agent 会经历上下文压缩（context compression），压缩会截断早期的系统提示，导致 agent 可能「忘记」自己的角色、规则和限制。身份重注入是在恢复工作（从 IDLE 切换回 WORK）前，将包含角色、规则等关键信息的身份块重新插入上下文的做法。",
+            "en": "Long-running agents experience context compression, which truncates early system prompts, causing the agent to potentially 'forget' its role, rules, and constraints. Identity re-injection is the practice of re-inserting the identity block (containing role, rules, and key information) into context before resuming work (switching from IDLE back to WORK).",
+            "ja": "長時間動作する agent はコンテキスト圧縮を経験し、初期のシステムプロンプトが切り詰められて、agent が自分の役割、ルール、制約を「忘れる」可能性があります。アイデンティティ再注入は、作業再開前（IDLE から WORK に切り替える前）に、役割やルールなどの重要情報を含むアイデンティティブロックをコンテキストに再挿入する実践です。"
+          },
+          "reward_card": "card_s17_004"
+        },
+        {
+          "id": "q_s17_014",
+          "type": "choice",
+          "difficulty": 2,
+          "stem": {
+            "zh": "身份重注入中的「身份块」通常包含哪些内容？",
+            "en": "What does the 'identity block' in identity re-injection typically contain?",
+            "ja": "アイデンティティ再注入の「アイデンティティブロック」には通常何が含まれますか？"
+          },
+          "options": [
+            {
+              "id": "b",
+              "text": {
+                "zh": "agent 的任务历史记录和已完成的工作列表",
+                "en": "The agent's task history and list of completed work",
+                "ja": "agent のタスク履歴と完了した作業のリスト"
+              }
+            },
+            {
+              "id": "a",
+              "text": {
+                "zh": "当前任务的详细描述和预期输出",
+                "en": "Detailed description of the current task and expected output",
+                "ja": "現在のタスクの詳細な説明と期待される出力"
+              }
+            },
+            {
+              "id": "d",
+              "text": {
+                "zh": "agent 的角色定义、行为规则、权限边界等关键约束信息",
+                "en": "Key constraint information including agent's role definition, behavioral rules, and permission boundaries",
+                "ja": "agent の役割定義、行動ルール、権限境界などの重要な制約情報"
+              }
+            },
+            {
+              "id": "c",
+              "text": {
+                "zh": "系统中所有其他 agent 的 ID 和联系方式",
+                "en": "IDs and contact information of all other agents in the system",
+                "ja": "システム内の他のすべての agent の ID と連絡先情報"
+              }
+            }
+          ],
+          "answer": "d",
+          "explanation": {
+            "zh": "身份块（identity block）是一段固定的提示文本，包含 agent 的角色定义（我是谁）、行为规则（我应该做什么/不做什么）、权限边界（我能访问哪些工具/数据）等关键约束。这些是最容易在上下文压缩中被截断的早期系统提示内容。",
+            "en": "The identity block is a fixed prompt text containing the agent's role definition (who I am), behavioral rules (what I should/shouldn't do), permission boundaries (what tools/data I can access), and other key constraints. These are the early system prompt contents most likely to be truncated during context compression.",
+            "ja": "アイデンティティブロックは、agent の役割定義（私は誰か）、行動ルール（何をすべき・すべきでないか）、権限境界（どのツール・データにアクセスできるか）などの重要な制約を含む固定のプロンプトテキストです。"
+          },
+          "reward_card": "card_s17_004"
+        },
+        {
+          "id": "q_s17_015",
+          "type": "choice",
+          "difficulty": 2,
+          "stem": {
+            "zh": "为什么身份重注入需要在 agent 恢复工作（从 IDLE 切换回 WORK）之前进行，而不是在 WORK 阶段中途进行？",
+            "en": "Why does identity re-injection need to happen before the agent resumes work (switching from IDLE back to WORK), rather than in the middle of the WORK phase?",
+            "ja": "なぜアイデンティティ再注入は、エージェントが作業を再開する前（IDLE から WORK に切り替える前）に行う必要があり、WORK フェーズの途中ではないのですか？"
+          },
+          "options": [
+            {
+              "id": "a",
+              "text": {
+                "zh": "WORK 阶段中途无法修改上下文，技术上不可实现",
+                "en": "Context cannot be modified in the middle of the WORK phase, technically infeasible",
+                "ja": "WORK フェーズの途中ではコンテキストを変更できず、技術的に実現不可能"
+              }
+            },
+            {
+              "id": "b",
+              "text": {
+                "zh": "中途注入会导致 agent 忘记当前任务的进度",
+                "en": "Mid-phase injection would cause the agent to forget the current task's progress",
+                "ja": "途中で注入すると agent が現在のタスクの進捗を忘れる"
+              }
+            },
+            {
+              "id": "c",
+              "text": {
+                "zh": "防止 agent 在身份缺失状态下开始执行，避免因「忘记规则」而产生越权行为",
+                "en": "Prevent the agent from starting execution in an identity-absent state, avoiding unauthorized behavior from 'forgetting rules'",
+                "ja": "アイデンティティが欠如した状態で実行が開始されるのを防ぎ、「ルールを忘れる」ことによる権限外の行動を回避する"
+              }
+            },
+            {
+              "id": "d",
+              "text": {
+                "zh": "IDLE 阶段的计算资源更充足，适合进行身份注入操作",
+                "en": "The IDLE phase has more computational resources, making it suitable for identity injection operations",
+                "ja": "IDLE フェーズは計算リソースが豊富で、アイデンティティ注入操作に適している"
+              }
+            }
+          ],
+          "answer": "c",
+          "explanation": {
+            "zh": "身份重注入要在开始执行前完成，是为了防止 agent 在「身份缺失」状态下工作。如果先开始执行再注入，agent 可能在缺失关键约束（如权限边界、行为规则）的情况下操作，产生越权或错误行为。预先注入确保 agent 从一开始就在正确的约束下工作。",
+            "en": "Identity re-injection must complete before execution begins to prevent the agent from working in an 'identity-absent' state. If execution starts before injection, the agent may operate without key constraints (such as permission boundaries and behavioral rules), causing unauthorized or erroneous behavior. Pre-injection ensures the agent works under correct constraints from the start.",
+            "ja": "アイデンティティ再注入は実行開始前に完了する必要があります。これは agent が「アイデンティティ欠如」状態で作業するのを防ぐためです。先に実行を開始してから注入すると、重要な制約（権限境界、行動ルールなど）なしに操作が行われ、権限外または誤った行動が発生する可能性があります。"
+          },
+          "reward_card": "card_s17_004"
+        },
+        {
+          "id": "q_s17_016",
+          "type": "choice",
+          "difficulty": 3,
+          "stem": {
+            "zh": "一个 agent 在长时间运行后，被要求执行一个超出其权限的操作，但它并没有拒绝，而是直接执行了。最可能的根本原因是？",
+            "en": "After running for a long time, an agent is asked to perform an operation beyond its permissions but doesn't refuse and executes it directly. What is the most likely root cause?",
+            "ja": "長時間動作した後、agent が権限を超えた操作を実行するよう求められたが、拒否せずに直接実行しました。最も可能性の高い根本原因はどれですか？"
+          },
+          "options": [
+            {
+              "id": "a",
+              "text": {
+                "zh": "任务板数据损坏，导致权限检查失败",
+                "en": "Task board data corruption caused permission check failure",
+                "ja": "タスクボードのデータが破損して権限チェックが失敗した"
+              }
+            },
+            {
+              "id": "b",
+              "text": {
+                "zh": "lead 在运行时偷偷修改了该 agent 的权限",
+                "en": "The lead secretly modified this agent's permissions at runtime",
+                "ja": "lead が実行時にこの agent の権限をひそかに変更した"
+              }
+            },
+            {
+              "id": "c",
+              "text": {
+                "zh": "邮箱消息积压过多，导致系统超载",
+                "en": "Too many mailbox messages backed up, causing system overload",
+                "ja": "メールボックスのメッセージが溜まりすぎてシステムが過負荷になった"
+              }
+            },
+            {
+              "id": "d",
+              "text": {
+                "zh": "上下文压缩截断了包含权限约束的系统提示，身份块未重新注入",
+                "en": "Context compression truncated the system prompt containing permission constraints, and the identity block was not re-injected",
+                "ja": "コンテキスト圧縮が権限制約を含むシステムプロンプトを切り詰め、アイデンティティブロックが再注入されなかった"
+              }
+            }
+          ],
+          "answer": "d",
+          "explanation": {
+            "zh": "这是身份重注入缺失的典型症状。长时间运行导致上下文压缩，截断了早期的权限约束和角色边界定义。由于没有进行身份重注入，agent 在缺失这些关键约束的情况下运行，导致越权行为。这强调了每次从 IDLE 恢复 WORK 时都必须进行身份重注入的重要性。",
+            "en": "This is a typical symptom of missing identity re-injection. Long runtime causes context compression, truncating early permission constraints and role boundary definitions. Without identity re-injection, the agent runs without these key constraints, leading to unauthorized behavior. This underscores the importance of identity re-injection every time resuming WORK from IDLE.",
+            "ja": "これはアイデンティティ再注入が欠如している典型的な症状です。長時間の動作によりコンテキスト圧縮が起こり、初期の権限制約と役割境界定義が切り詰められます。アイデンティティ再注入なしに実行すると、これらの重要な制約なしに agent が動作し、権限外の行動につながります。"
+          },
+          "reward_card": "card_s17_004"
+        },
+        {
+          "id": "q_s17_017",
+          "type": "choice",
+          "difficulty": 3,
+          "stem": {
+            "zh": "在完整的自治 agent 循环中，以下事件的正确执行顺序是？\n① 执行任务\n② 检查邮箱\n③ 身份重注入\n④ 认领任务",
+            "en": "In a complete autonomous agent loop, what is the correct execution order of the following events?\n① Execute task\n② Check mailbox\n③ Identity re-injection\n④ Claim task",
+            "ja": "完全な自律エージェントループにおいて、以下のイベントの正しい実行順序はどれですか？\n① タスクを実行する\n② メールボックスを確認する\n③ アイデンティティを再注入する\n④ タスクを引き受ける"
+          },
+          "options": [
+            {
+              "id": "a",
+              "text": {
+                "zh": "② → ④ → ③ → ①",
+                "en": "② → ④ → ③ → ①",
+                "ja": "② → ④ → ③ → ①"
+              }
+            },
+            {
+              "id": "b",
+              "text": {
+                "zh": "③ → ② → ④ → ①",
+                "en": "③ → ② → ④ → ①",
+                "ja": "③ → ② → ④ → ①"
+              }
+            },
+            {
+              "id": "c",
+              "text": {
+                "zh": "① → ② → ③ → ④",
+                "en": "① → ② → ③ → ④",
+                "ja": "① → ② → ③ → ④"
+              }
+            },
+            {
+              "id": "d",
+              "text": {
+                "zh": "④ → ② → ③ → ①",
+                "en": "④ → ② → ③ → ①",
+                "ja": "④ → ② → ③ → ①"
+              }
+            }
+          ],
+          "answer": "a",
+          "explanation": {
+            "zh": "正确顺序是 ② → ④ → ③ → ①：先检查邮箱（获取明确指令，可能改变后续决策），再认领任务（从任务板选择合适任务），然后身份重注入（确保在正确约束下执行），最后执行任务。这对应了「先邮箱再任务板」和「恢复前重注入身份」两个核心原则。",
+            "en": "The correct order is ② → ④ → ③ → ①: First check mailbox (get explicit instructions that may change subsequent decisions), then claim task (select appropriate task from task board), then identity re-injection (ensure execution under correct constraints), finally execute task. This corresponds to the two core principles: 'mailbox first, task board second' and 'inject identity before resuming'.",
+            "ja": "正しい順序は ② → ④ → ③ → ① です：まずメールボックスを確認し（後続の決定を変える可能性のある明示的な指示を取得）、次にタスクを引き受け（タスクボードから適切なタスクを選択）、次にアイデンティティを再注入し（正しい制約のもとで実行を確保）、最後にタスクを実行します。"
+          },
+          "reward_card": "card_s17_004"
+        },
+        {
+          "id": "q_s17_018",
+          "type": "choice",
+          "difficulty": 3,
+          "stem": {
+            "zh": "综合来看，s17 章节描述的自治 agent 系统与传统「lead 手动分配任务」模式相比，核心改进是什么？",
+            "en": "Overall, what is the core improvement of the autonomous agent system described in chapter s17 compared to the traditional 'lead manually assigns tasks' model?",
+            "ja": "総合的に見て、s17 章で説明されている自律エージェントシステムの従来の「lead が手動でタスクを割り当てる」モデルと比較した中心的な改善点は何ですか？"
+          },
+          "options": [
+            {
+              "id": "c",
+              "text": {
+                "zh": "减少了需要的 agent 数量，让一个 agent 就能完成所有工作",
+                "en": "Reduced the number of agents needed, allowing one agent to complete all work",
+                "ja": "必要な agent の数を減らして、1 つの agent がすべての作業を完了できるようにした"
+              }
+            },
+            {
+              "id": "b",
+              "text": {
+                "zh": "消除了任务板，改用纯消息传递来协调工作",
+                "en": "Eliminated the task board, using pure message passing to coordinate work",
+                "ja": "タスクボードを廃止し、純粋なメッセージパッシングで作業を調整するようにした"
+              }
+            },
+            {
+              "id": "a",
+              "text": {
+                "zh": "通过 WORK↔IDLE 循环、邮箱优先、安全认领和身份重注入，让 agent 能在不依赖 lead 每次手动分配的情况下持续自主运转",
+                "en": "Through WORK↔IDLE loop, mailbox priority, safe claiming, and identity re-injection, agents can continuously and autonomously operate without depending on the lead to manually assign tasks each time",
+                "ja": "WORK↔IDLE ループ、メールボックス優先、安全な引き受け、アイデンティティ再注入により、lead がその都度手動でタスクを割り当てることなく、agent が継続的に自律的に動作できるようにした"
+              }
+            },
+            {
+              "id": "d",
+              "text": {
+                "zh": "将所有协调逻辑移到云端，agent 本身不再需要任何决策能力",
+                "en": "Moved all coordination logic to the cloud, agents no longer need any decision-making capability",
+                "ja": "すべての調整ロジックをクラウドに移し、agent 自体はもはや意思決定能力を必要としない"
+              }
+            }
+          ],
+          "answer": "a",
+          "explanation": {
+            "zh": "s17 的核心贡献是将分散的 agent 协调机制（WORK↔IDLE 双阶段循环、邮箱优先处理、五条件安全认领、恢复前身份重注入）组合成一套完整的自治框架，使得 agent 能在无需 lead 持续干预的情况下有序自主运转，从而解放 lead 的精力。",
+            "en": "The core contribution of s17 is combining distributed agent coordination mechanisms (WORK↔IDLE two-phase loop, mailbox-first processing, five-condition safe claiming, pre-resume identity re-injection) into a complete autonomous framework, enabling agents to operate orderly and autonomously without continuous lead intervention, thus freeing the lead's attention.",
+            "ja": "s17 の中心的な貢献は、分散したエージェント調整メカニズム（WORK↔IDLE 2 フェーズループ、メールボックス優先処理、5 条件安全引き受け、再開前アイデンティティ再注入）を完全な自律フレームワークに組み合わせることで、lead の継続的な介入なしに agent が秩序立って自律的に動作できるようにしたことです。"
+          },
+          "reward_card": "card_s17_004"
         }
       ],
       "star_thresholds": [
