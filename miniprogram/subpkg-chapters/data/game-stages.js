@@ -16607,49 +16607,49 @@ module.exports = {
           "type": "choice",
           "difficulty": 1,
           "stem": {
-            "zh": "以下哪个概念与「这一章要解决什么问题」直接相关？",
-            "en": "Which concept is directly related to \"What You'll Learn\"?",
-            "ja": "「この章が解く問題」に直接関連する概念はどれですか？"
+            "zh": "Task 记录与 Worktree 记录各自描述什么信息？",
+            "en": "What does each of Task record and Worktree record describe?",
+            "ja": "Task レコードと Worktree レコードはそれぞれ何を記述しますか？"
           },
           "options": [
             {
-              "id": "b",
-              "text": {
-                "zh": "关键数据结构",
-                "en": "What You've Mastered",
-                "ja": "この章の核になるデータ構造"
-              }
-            },
-            {
               "id": "a",
               "text": {
-                "zh": "这一章要解决什么问题",
-                "en": "What You'll Learn",
-                "ja": "この章が解く問題"
+                "zh": "Task 记录「在哪做」，Worktree 记录「做什么」",
+                "en": "Task records 'where', Worktree records 'what'",
+                "ja": "Task が「どこで」、Worktree が「何を」記述する"
               }
             },
             {
-              "id": "d",
+              "id": "b",
               "text": {
-                "zh": "这一章和全仓库的关系",
-                "en": "这一章和全仓库的关系",
-                "ja": "这一章和全仓库的关系"
+                "zh": "Task 记录「做什么」，Worktree 记录「在哪做」",
+                "en": "Task records 'what', Worktree records 'where'",
+                "ja": "Task が「何を」、Worktree が「どこで」記述する"
               }
             },
             {
               "id": "c",
               "text": {
-                "zh": "2. 队友之间共用同一份 messages",
-                "en": "2. 队友之间共用同一份 messages",
-                "ja": "1. teammate を「名前付き subagent」にする"
+                "zh": "两者都记录「做什么」，通过 task_id 去重",
+                "en": "Both record 'what', deduplicated by task_id",
+                "ja": "どちらも「何を」を記述し、task_id で重複排除する"
+              }
+            },
+            {
+              "id": "d",
+              "text": {
+                "zh": "两者都记录「在哪做」，通过分支名区分",
+                "en": "Both record 'where', distinguished by branch name",
+                "ja": "どちらも「どこで」を記録し、ブランチ名で区別する"
               }
             }
           ],
-          "answer": "a",
+          "answer": "b",
           "explanation": {
-            "zh": "每个任务应该在哪个独立工作空间里执行。",
-            "en": "What You'll Learn",
-            "ja": "誰が何をやるか"
+            "zh": "Task 记录「做什么」（内容、状态、优先级），Worktree 记录「在哪做」（路径、分支），两者通过 task_id 关联。",
+            "en": "Task records 'what to do' (content, status, priority), Worktree records 'where to do it' (path, branch), linked by task_id.",
+            "ja": "Task が「何をするか」（内容・状態・優先度）、Worktree が「どこでするか」（パス・ブランチ）を記述し、task_id で関連付けられる。"
           },
           "reward_card": "card_s18_001"
         },
@@ -16658,204 +16658,867 @@ module.exports = {
           "type": "choice",
           "difficulty": 1,
           "stem": {
-            "zh": "以下哪个概念与「建议联读」直接相关？",
-            "en": "Which concept is directly related to \"The Problem\"?",
-            "ja": "「併読すると楽になる資料」に直接関連する概念はどれですか？"
+            "zh": "Task 和 Worktree 之间通过什么字段相互关联？",
+            "en": "What field links a Task and its Worktree together?",
+            "ja": "Task と Worktree はどのフィールドで関連付けられますか？"
           },
           "options": [
             {
-              "id": "d",
+              "id": "a",
               "text": {
-                "zh": "1. TeamMember",
-                "en": "Try It",
-                "ja": "主要データ構造"
+                "zh": "branch_name",
+                "en": "branch_name",
+                "ja": "branch_name"
               }
             },
             {
               "id": "b",
               "text": {
-                "zh": "6. 把 worktree 当成长期垃圾堆",
-                "en": "6. 把 worktree 当成长期垃圾堆",
-                "ja": "6. lane を増やすだけで掃除しない"
+                "zh": "worktree_path",
+                "en": "worktree_path",
+                "ja": "worktree_path"
               }
             },
             {
               "id": "c",
               "text": {
-                "zh": "关键数据结构",
-                "en": "What You've Mastered",
-                "ja": "この章の核になるデータ構造"
+                "zh": "task_id",
+                "en": "task_id",
+                "ja": "task_id"
               }
             },
             {
-              "id": "a",
+              "id": "d",
               "text": {
-                "zh": "建议联读",
-                "en": "The Problem",
-                "ja": "併読すると楽になる資料"
+                "zh": "agent_name",
+                "en": "agent_name",
+                "ja": "agent_name"
               }
             }
           ],
-          "answer": "a",
+          "answer": "c",
           "explanation": {
-            "zh": "建议联读",
-            "en": "The Problem",
-            "ja": "併読すると楽になる資料"
+            "zh": "task_id 是 Task 和 Worktree 之间的关联键。Worktree 记录中保存该 task_id，任务记录也可反查对应的 worktree。",
+            "en": "task_id is the linking key between a Task and its Worktree. The WorktreeRecord stores this task_id, enabling bidirectional lookup.",
+            "ja": "task_id が Task と Worktree を結ぶキーで、WorktreeRecord にこの値が保存され双方向で参照できる。"
           },
-          "reward_card": "card_s18_002"
+          "reward_card": "card_s18_001"
         },
         {
           "id": "q_s18_003",
           "type": "choice",
-          "difficulty": 1,
+          "difficulty": 2,
           "stem": {
-            "zh": "以下哪个概念与「先解释几个名词」直接相关？",
-            "en": "Which concept is directly related to \"Read Together\"?",
-            "ja": "「先に言葉をそろえる」に直接関連する概念はどれですか？"
+            "zh": "多个 Agent 同时处理不同任务时，「做什么」和「在哪做」分开记录的最主要好处是什么？",
+            "en": "When multiple agents handle different tasks concurrently, what is the main benefit of separating 'what' from 'where'?",
+            "ja": "複数 Agent が別タスクを並行処理する際、「何を」と「どこで」を分けて記録する主なメリットは？"
           },
           "options": [
             {
-              "id": "c",
-              "text": {
-                "zh": "为什么这一章放在最后",
-                "en": "The Solution",
-                "ja": "なぜ最後の章なのか"
-              }
-            },
-            {
-              "id": "b",
-              "text": {
-                "zh": "什么是队友",
-                "en": "How It Works",
-                "ja": "teammate とは何か"
-              }
-            },
-            {
               "id": "a",
               "text": {
-                "zh": "先解释几个名词",
-                "en": "Read Together",
-                "ja": "先に言葉をそろえる"
+                "zh": "可以减少 git commit 的数量",
+                "en": "Reduces the number of git commits",
+                "ja": "git commit 数を減らせる"
               }
             },
             {
               "id": "d",
               "text": {
-                "zh": "Teammate、Subagent、Runtime Task 到底怎么区分",
-                "en": "Teammate、Subagent、Runtime Task 到底怎么区分",
-                "ja": "Teammate / Subagent / Runtime Slot をどう分けるか"
+                "zh": "任务逻辑不依赖具体路径，可以灵活调度到不同 worktree",
+                "en": "Task logic is path-independent, allowing flexible scheduling to different worktrees",
+                "ja": "タスクロジックがパスに依存しないため、異なる worktree へ柔軟にスケジュールできる"
+              }
+            },
+            {
+              "id": "b",
+              "text": {
+                "zh": "避免两个 Agent 同时读取同一个文件",
+                "en": "Prevents two agents from reading the same file simultaneously",
+                "ja": "2 つの Agent が同じファイルを同時に読むのを防ぐ"
+              }
+            },
+            {
+              "id": "c",
+              "text": {
+                "zh": "让所有 Agent 共享同一个工作目录",
+                "en": "Lets all agents share one working directory",
+                "ja": "全 Agent が同一作業ディレクトリを共有できる"
               }
             }
           ],
-          "answer": "a",
+          "answer": "d",
           "explanation": {
-            "zh": "先解释几个名词",
-            "en": "Read Together",
-            "ja": "先に言葉をそろえる"
+            "zh": "将「做什么」与「在哪做」分离，使任务记录不依赖路径，可将同一任务重新派发到任意空闲的 worktree，提升调度灵活性。",
+            "en": "Separating 'what' from 'where' makes task records path-independent, so a task can be reassigned to any idle worktree, increasing scheduling flexibility.",
+            "ja": "「何を」と「どこで」を分離することで、タスクレコードがパスに依存しなくなり、空きの worktree へ再割り当てが可能になる。"
           },
-          "reward_card": "card_s18_003"
+          "reward_card": "card_s18_001"
         },
         {
           "id": "q_s18_004",
           "type": "choice",
-          "difficulty": 1,
+          "difficulty": 2,
           "stem": {
-            "zh": "以下哪个概念与「什么是 worktree」直接相关？",
-            "en": "Which concept is directly related to \"The Solution\"?",
-            "ja": "「worktree とは何か」に直接関連する概念はどれですか？"
+            "zh": "下列哪种情况属于「Task 和 Worktree 信息脱节」？",
+            "en": "Which scenario represents a 'Task and Worktree out of sync' situation?",
+            "ja": "次のどれが「Task と Worktree 情報のズレ」に当たりますか？"
           },
           "options": [
             {
               "id": "b",
               "text": {
-                "zh": "3. Claim Event Log",
-                "en": "3. Claim Event Log",
-                "ja": "3. Claim Event Log"
+                "zh": "Worktree 目录已创建但注册表中没有对应记录",
+                "en": "Worktree directory exists but has no entry in the registry",
+                "ja": "Worktree ディレクトリは作成済みだがレジストリに対応エントリがない"
               }
             },
             {
               "id": "a",
               "text": {
-                "zh": "什么是 worktree",
-                "en": "The Solution",
-                "ja": "worktree とは何か"
-              }
-            },
-            {
-              "id": "d",
-              "text": {
-                "zh": "1. Claimable Predicate",
-                "en": "What's Next",
-                "ja": "1. Claimable Predicate"
+                "zh": "两个任务使用了不同的分支名",
+                "en": "Two tasks use different branch names",
+                "ja": "2 つのタスクが異なるブランチ名を使用している"
               }
             },
             {
               "id": "c",
               "text": {
-                "zh": "第二层：自治认领",
-                "en": "第二层：自治认领",
-                "ja": "1. protocol request layer"
+                "zh": "同一个 worktree 先后执行了两个任务",
+                "en": "The same worktree runs two tasks sequentially",
+                "ja": "同じ worktree で 2 つのタスクを順番に実行した"
+              }
+            },
+            {
+              "id": "d",
+              "text": {
+                "zh": "任务状态从 pending 变为 in_progress",
+                "en": "Task status changes from pending to in_progress",
+                "ja": "タスクステータスが pending から in_progress に変わる"
               }
             }
           ],
-          "answer": "a",
+          "answer": "b",
           "explanation": {
-            "zh": "什么是 worktree",
-            "en": "The Solution",
-            "ja": "worktree とは何か"
+            "zh": "脱节的典型场景：worktree 目录已存在但注册表没有记录，或任务记录里的 task_id 在注册表里找不到对应条目。只改一边就会出现这种脱节。",
+            "en": "A typical desync: the worktree directory exists but has no registry entry, or a task's task_id has no corresponding worktree record. Updating only one side causes this.",
+            "ja": "典型的なズレ：worktree ディレクトリが存在するがレジストリにエントリがない、またはタスクの task_id に対応する worktree レコードがない。片側だけ更新するとこのズレが生じる。"
           },
-          "reward_card": "card_s18_004"
+          "reward_card": "card_s18_002"
         },
         {
           "id": "q_s18_005",
           "type": "choice",
           "difficulty": 1,
           "stem": {
-            "zh": "以下哪个概念与「什么叫隔离执行」直接相关？",
-            "en": "Which concept is directly related to \"How It Works\"?",
-            "ja": "「isolation とは何か」に直接関連する概念はどれですか？"
+            "zh": "创建 worktree 时，为什么需要同时更新任务记录和注册表两个地方？",
+            "en": "When creating a worktree, why must both the task record and the registry be updated together?",
+            "ja": "Worktree を作成する際、タスクレコードとレジストリの両方を同時に更新する必要があるのはなぜですか？"
           },
           "options": [
             {
-              "id": "a",
-              "text": {
-                "zh": "什么叫隔离执行",
-                "en": "How It Works",
-                "ja": "isolation とは何か"
-              }
-            },
-            {
-              "id": "b",
-              "text": {
-                "zh": "3. client 注册表",
-                "en": "3. client 注册表",
-                "ja": "Try It"
-              }
-            },
-            {
               "id": "c",
               "text": {
-                "zh": "最小实现步骤",
-                "en": "What Changed From s18",
-                "ja": "システム全体へどう接続するか"
+                "zh": "因为注册表会自动更新任务记录，手动同步只是备用",
+                "en": "Because the registry auto-updates the task record; manual sync is a fallback",
+                "ja": "レジストリがタスクレコードを自動更新するため、手動同期は補完的なもの"
+              }
+            },
+            {
+              "id": "a",
+              "text": {
+                "zh": "因为微信小程序限制单文件写入，需要分两步完成",
+                "en": "Due to file write constraints, it must be done in two steps",
+                "ja": "ファイル書き込み制約により 2 ステップで行う必要がある"
               }
             },
             {
               "id": "d",
               "text": {
-                "zh": "第一步：让队友拥有 `WORK -> IDLE` 的循环",
-                "en": "第一步：让队友拥有 `WORK -> IDLE` 的循环",
-                "ja": "第 1 段階: WORK と IDLE を分ける"
+                "zh": "保持双向可查性：从任务能找到 worktree，从 worktree 也能找到任务",
+                "en": "To maintain bidirectional lookups: from task to worktree and vice versa",
+                "ja": "双方向参照を維持するため：タスクから worktree へ、worktree からタスクへ参照できる"
+              }
+            },
+            {
+              "id": "b",
+              "text": {
+                "zh": "只有注册表更新后，任务状态才会自动变为 in_progress",
+                "en": "Task status only changes to in_progress after registry is updated",
+                "ja": "レジストリ更新後にのみタスクステータスが in_progress に変わる"
+              }
+            }
+          ],
+          "answer": "d",
+          "explanation": {
+            "zh": "只改任务记录，不在注册表登记 worktree，后续无法通过注册表找到对应目录；只改注册表，任务记录里没有 worktree 引用，调度时同样找不到。双向更新才能保持一致性。",
+            "en": "Updating only the task record leaves the worktree unregistered; updating only the registry leaves no reference in the task. Both must be updated for consistency.",
+            "ja": "タスクレコードだけ更新すると worktree が未登録になり、レジストリだけ更新するとタスクに参照がない。一貫性のために両方の更新が必要。"
+          },
+          "reward_card": "card_s18_002"
+        },
+        {
+          "id": "q_s18_006",
+          "type": "choice",
+          "difficulty": 2,
+          "stem": {
+            "zh": "WorktreeRecord 中通常包含哪些核心字段？",
+            "en": "What core fields does a WorktreeRecord typically contain?",
+            "ja": "WorktreeRecord に通常含まれるコアフィールドは何ですか？"
+          },
+          "options": [
+            {
+              "id": "d",
+              "text": {
+                "zh": "messages、tool_calls、response_tokens",
+                "en": "messages, tool_calls, response_tokens",
+                "ja": "messages、tool_calls、response_tokens"
+              }
+            },
+            {
+              "id": "a",
+              "text": {
+                "zh": "task_id、worktree_path、branch_name",
+                "en": "task_id, worktree_path, branch_name",
+                "ja": "task_id、worktree_path、branch_name"
+              }
+            },
+            {
+              "id": "b",
+              "text": {
+                "zh": "priority、deadline、assignee",
+                "en": "priority, deadline, assignee",
+                "ja": "priority、deadline、assignee"
+              }
+            },
+            {
+              "id": "c",
+              "text": {
+                "zh": "token_budget、max_steps、timeout",
+                "en": "token_budget, max_steps, timeout",
+                "ja": "token_budget、max_steps、timeout"
               }
             }
           ],
           "answer": "a",
           "explanation": {
-            "zh": "什么叫隔离执行",
-            "en": "Step 1.",
-            "ja": "isolation とは何か"
+            "zh": "WorktreeRecord 的核心是：task_id（关联任务）、worktree_path（物理目录路径）、branch_name（对应的 git 分支）。其余字段是任务记录的职责。",
+            "en": "The core of WorktreeRecord is: task_id (links to task), worktree_path (physical directory), branch_name (git branch). Other fields belong to the task record.",
+            "ja": "WorktreeRecord の核心は task_id（タスク関連付け）、worktree_path（物理ディレクトリ）、branch_name（git ブランチ）。他のフィールドはタスクレコードの責務。"
           },
-          "reward_card": "card_s18_005"
+          "reward_card": "card_s18_002"
+        },
+        {
+          "id": "q_s18_007",
+          "type": "choice",
+          "difficulty": 1,
+          "stem": {
+            "zh": "「隔离执行」的核心机制是什么？",
+            "en": "What is the core mechanism of 'isolated execution'?",
+            "ja": "「隔離実行」のコアメカニズムは何ですか？"
+          },
+          "options": [
+            {
+              "id": "b",
+              "text": {
+                "zh": "为每个任务分配独立的 API token",
+                "en": "Assigning a separate API token to each task",
+                "ja": "各タスクに独立した API トークンを割り当てる"
+              }
+            },
+            {
+              "id": "a",
+              "text": {
+                "zh": "把每个命令的标准输出重定向到独立文件",
+                "en": "Redirecting each command's stdout to a separate file",
+                "ja": "各コマンドの標準出力を独立ファイルにリダイレクトする"
+              }
+            },
+            {
+              "id": "c",
+              "text": {
+                "zh": "执行命令前将 cwd 切换到该任务对应的 worktree 目录",
+                "en": "Switching cwd to the task's worktree directory before running commands",
+                "ja": "コマンド実行前にその タスクの worktree ディレクトリへ cwd を切り替える"
+              }
+            },
+            {
+              "id": "d",
+              "text": {
+                "zh": "在独立进程中运行，互不共享内存",
+                "en": "Running in separate processes with no shared memory",
+                "ja": "独立プロセスで実行し、メモリを共有しない"
+              }
+            }
+          ],
+          "answer": "c",
+          "explanation": {
+            "zh": "隔离的核心是 cwd 切换：同一条命令（例如 ls 或 git status）在不同目录执行，看到不同的文件树，互不干扰。这是 worktree 隔离的物理基础。",
+            "en": "The core of isolation is cwd switching: the same command (e.g. ls or git status) runs in different directories, seeing different file trees without interference.",
+            "ja": "隔離の核心は cwd の切り替え：同じコマンド（ls や git status など）が異なるディレクトリで実行され、互いに干渉しない異なるファイルツリーを参照する。"
+          },
+          "reward_card": "card_s18_003"
+        },
+        {
+          "id": "q_s18_008",
+          "type": "choice",
+          "difficulty": 2,
+          "stem": {
+            "zh": "Agent A 在 /worktrees/feat-a 中运行 git status，Agent B 在 /worktrees/feat-b 中运行相同命令，两者的输出为何不同？",
+            "en": "Agent A runs git status in /worktrees/feat-a and Agent B in /worktrees/feat-b. Why do they see different output?",
+            "ja": "Agent A が /worktrees/feat-a で、Agent B が /worktrees/feat-b で同じ git status を実行する。なぜ出力が異なるのですか？"
+          },
+          "options": [
+            {
+              "id": "a",
+              "text": {
+                "zh": "因为两个 Agent 使用了不同的 git 版本",
+                "en": "Because the two agents use different git versions",
+                "ja": "2 つの Agent が異なる git バージョンを使用しているため"
+              }
+            },
+            {
+              "id": "b",
+              "text": {
+                "zh": "因为两个目录的 inode 不同，操作系统返回不同结果",
+                "en": "Because the directories have different inodes, causing different OS responses",
+                "ja": "ディレクトリの inode が異なり、OS が異なる結果を返すため"
+              }
+            },
+            {
+              "id": "d",
+              "text": {
+                "zh": "因为 cwd 不同，git 读取的 .git 上下文不同，文件快照不同",
+                "en": "Because different cwds mean different .git contexts and file snapshots",
+                "ja": "cwd が異なるため、git が参照する .git コンテキストとファイルスナップショットが異なる"
+              }
+            },
+            {
+              "id": "c",
+              "text": {
+                "zh": "因为两个 Agent 的网络环境不同",
+                "en": "Because the agents have different network environments",
+                "ja": "2 つの Agent のネットワーク環境が異なるため"
+              }
+            }
+          ],
+          "answer": "d",
+          "explanation": {
+            "zh": "每个 worktree 对应独立的分支和文件快照。cwd 不同决定了 git 读取哪个 .git 目录，进而看到不同的暂存状态和工作区内容。这正是 cwd 切换实现隔离的原理。",
+            "en": "Each worktree corresponds to an independent branch and file snapshot. Different cwds determine which .git directory git reads, thus seeing different staging states.",
+            "ja": "各 worktree は独立したブランチとファイルスナップショットに対応する。cwd の違いが git が参照する .git ディレクトリを決定し、異なるステージング状態が見える。"
+          },
+          "reward_card": "card_s18_003"
+        },
+        {
+          "id": "q_s18_009",
+          "type": "choice",
+          "difficulty": 1,
+          "stem": {
+            "zh": "如果多个 Agent 不切换 cwd 而是都在主仓库目录执行命令，会产生什么问题？",
+            "en": "If multiple agents run commands in the main repo directory without switching cwd, what problem arises?",
+            "ja": "複数の Agent が cwd を切り替えずにメインリポジトリで命令を実行すると何が起きますか？"
+          },
+          "options": [
+            {
+              "id": "c",
+              "text": {
+                "zh": "Agent 的 token 消耗会增加",
+                "en": "Agent token consumption increases",
+                "ja": "Agent のトークン消費が増える"
+              }
+            },
+            {
+              "id": "b",
+              "text": {
+                "zh": "分支名会自动合并",
+                "en": "Branch names are automatically merged",
+                "ja": "ブランチ名が自動的にマージされる"
+              }
+            },
+            {
+              "id": "d",
+              "text": {
+                "zh": "任务优先级会被覆盖",
+                "en": "Task priorities are overwritten",
+                "ja": "タスクの優先度が上書きされる"
+              }
+            },
+            {
+              "id": "a",
+              "text": {
+                "zh": "不同任务的文件改动会互相污染，破坏隔离性",
+                "en": "File changes from different tasks contaminate each other, breaking isolation",
+                "ja": "異なるタスクのファイル変更が互いに汚染し、隔離が破壊される"
+              }
+            }
+          ],
+          "answer": "a",
+          "explanation": {
+            "zh": "所有 Agent 共用同一 cwd，意味着共用同一个文件树和 git 工作区，一个任务的改动会影响另一个任务看到的文件状态，隔离性彻底失效。",
+            "en": "All agents sharing the same cwd means sharing the same file tree and git workspace. One task's changes affect what another task sees, completely breaking isolation.",
+            "ja": "全 Agent が同じ cwd を共有すると、同じファイルツリーと git ワークスペースを共有することになり、あるタスクの変更が別のタスクに見えるファイル状態に影響し、隔離が完全に失われる。"
+          },
+          "reward_card": "card_s18_003"
+        },
+        {
+          "id": "q_s18_010",
+          "type": "choice",
+          "difficulty": 2,
+          "stem": {
+            "zh": "Agent 在 worktree 中完成任务后，下列哪种做法会破坏「隔离执行」的语义？",
+            "en": "After an agent finishes a task in a worktree, which action would break the 'isolated execution' semantics?",
+            "ja": "Agent が worktree でタスクを完了した後、「隔離実行」のセマンティクスを壊す行為はどれですか？"
+          },
+          "options": [
+            {
+              "id": "b",
+              "text": {
+                "zh": "在该 worktree 里提交 commit 然后退出",
+                "en": "Committing in the worktree then exiting",
+                "ja": "worktree 内でコミットして終了する"
+              }
+            },
+            {
+              "id": "d",
+              "text": {
+                "zh": "将 worktree 标记为 completed 后通知调度器",
+                "en": "Marking the worktree as completed then notifying the scheduler",
+                "ja": "worktree を completed とマークしてスケジューラに通知する"
+              }
+            },
+            {
+              "id": "c",
+              "text": {
+                "zh": "在完成后切换回主仓库目录再执行新任务相关命令",
+                "en": "Switching back to main repo then running commands for a new task",
+                "ja": "完了後にメインリポジトリに戻り、新タスクのコマンドを実行する"
+              }
+            },
+            {
+              "id": "a",
+              "text": {
+                "zh": "直接将改动 cp 到另一个 worktree 的目录",
+                "en": "Directly copying changes into another worktree directory",
+                "ja": "変更を別の worktree ディレクトリに直接 cp する"
+              }
+            }
+          ],
+          "answer": "a",
+          "explanation": {
+            "zh": "直接 cp 文件到另一个 worktree，绕过了该 worktree 对应任务的正常工作流，破坏了隔离边界。正确做法是通过 merge 或 PR 流程合并改动。",
+            "en": "Directly copying files to another worktree bypasses that worktree's normal task workflow, violating isolation boundaries. Changes should be merged via proper merge/PR flow.",
+            "ja": "別の worktree に直接ファイルをコピーすると、その worktree のタスクの通常ワークフローを迂回し、隔離境界を違反する。変更は merge/PR フローで統合すべき。"
+          },
+          "reward_card": "card_s18_003"
+        },
+        {
+          "id": "q_s18_011",
+          "type": "choice",
+          "difficulty": 3,
+          "stem": {
+            "zh": "以下哪种 cwd 切换策略最能保证多任务隔离？",
+            "en": "Which cwd-switching strategy best guarantees multi-task isolation?",
+            "ja": "次のどの cwd 切り替え戦略がマルチタスク隔離を最もよく保証しますか？"
+          },
+          "options": [
+            {
+              "id": "a",
+              "text": {
+                "zh": "所有 Agent 共享主仓库目录，用文件锁控制并发写",
+                "en": "All agents share the main repo dir, using file locks for concurrent writes",
+                "ja": "全 Agent がメインリポジトリを共有し、ファイルロックで並行書き込みを制御する"
+              }
+            },
+            {
+              "id": "b",
+              "text": {
+                "zh": "每次命令执行前随机选择一个可用目录",
+                "en": "Randomly select an available directory before each command",
+                "ja": "各コマンド実行前にランダムに利用可能なディレクトリを選択する"
+              }
+            },
+            {
+              "id": "d",
+              "text": {
+                "zh": "任务启动时为其分配专属 worktree，该任务的所有命令都在该目录执行",
+                "en": "Assign a dedicated worktree at task start; all commands for that task run in that dir",
+                "ja": "タスク開始時に専用 worktree を割り当て、そのタスクのすべてのコマンドをそのディレクトリで実行する"
+              }
+            },
+            {
+              "id": "c",
+              "text": {
+                "zh": "每次文件读写时动态切换 cwd，读写完立即恢复",
+                "en": "Dynamically switch cwd on each file read/write and restore immediately",
+                "ja": "ファイルの読み書き毎に動的に cwd を切り替え、即座に元に戻す"
+              }
+            }
+          ],
+          "answer": "d",
+          "explanation": {
+            "zh": "为每个任务分配专属 worktree 并贯穿整个任务生命周期，是最稳定的隔离方案。临时切换（选项 C）容易在异步场景下出错，共享目录（选项 D）根本不隔离。",
+            "en": "Assigning a dedicated worktree per task throughout its lifecycle is the most stable isolation strategy. Temporary switches (C) fail in async scenarios; sharing a dir (D) offers no isolation.",
+            "ja": "タスクごとに専用 worktree をライフサイクル全体で割り当てるのが最も安定した隔離戦略。一時的な切り替え（C）は非同期シナリオで失敗しやすく、共有ディレクトリ（D）は隔離を提供しない。"
+          },
+          "reward_card": "card_s18_003"
+        },
+        {
+          "id": "q_s18_012",
+          "type": "choice",
+          "difficulty": 1,
+          "stem": {
+            "zh": "Worktree 收尾时，必须显式选择哪两种处置方式之一？",
+            "en": "When closing out a worktree, which two explicit disposal options must be chosen?",
+            "ja": "Worktree のクローズアウト時に選ばなければならない 2 つの処置方法は何ですか？"
+          },
+          "options": [
+            {
+              "id": "c",
+              "text": {
+                "zh": "keep 或 remove",
+                "en": "keep or remove",
+                "ja": "keep または remove"
+              }
+            },
+            {
+              "id": "a",
+              "text": {
+                "zh": "merge 或 rebase",
+                "en": "merge or rebase",
+                "ja": "merge または rebase"
+              }
+            },
+            {
+              "id": "b",
+              "text": {
+                "zh": "push 或 archive",
+                "en": "push or archive",
+                "ja": "push または archive"
+              }
+            },
+            {
+              "id": "d",
+              "text": {
+                "zh": "commit 或 stash",
+                "en": "commit or stash",
+                "ja": "commit または stash"
+              }
+            }
+          ],
+          "answer": "c",
+          "explanation": {
+            "zh": "Worktree 收尾需显式选择 keep（保留目录和分支以备后续）或 remove（清理删除）。不显式选择会导致 worktree 残留积累，也无法明确该任务已「关闭」。",
+            "en": "Worktree closeout requires an explicit choice of keep (preserve dir and branch for later) or remove (clean up). No decision leads to accumulated stale worktrees and unclear task closure.",
+            "ja": "Worktree のクローズアウトには、keep（後で使うためにディレクトリとブランチを保持）または remove（削除）の明示的な選択が必要。選択しないと残骸が蓄積し、タスクの「終了」が不明確になる。"
+          },
+          "reward_card": "card_s18_004"
+        },
+        {
+          "id": "q_s18_013",
+          "type": "choice",
+          "difficulty": 2,
+          "stem": {
+            "zh": "执行 remove 操作删除 worktree 之前，必须先做什么检查？",
+            "en": "What check must be done before executing remove to delete a worktree?",
+            "ja": "worktree を削除する remove 操作を実行する前に、どのチェックが必要ですか？"
+          },
+          "options": [
+            {
+              "id": "a",
+              "text": {
+                "zh": "确认该 worktree 对应的 CI 流水线已通过",
+                "en": "Confirm the worktree's CI pipeline has passed",
+                "ja": "worktree の CI パイプラインが通過済みであることを確認する"
+              }
+            },
+            {
+              "id": "d",
+              "text": {
+                "zh": "确认远端已有该分支的副本",
+                "en": "Confirm the remote has a copy of this branch",
+                "ja": "リモートにこのブランチのコピーがあることを確認する"
+              }
+            },
+            {
+              "id": "b",
+              "text": {
+                "zh": "检查是否存在未提交的改动（uncommitted changes）",
+                "en": "Check for uncommitted changes",
+                "ja": "コミットされていない変更（uncommitted changes）がないか確認する"
+              }
+            },
+            {
+              "id": "c",
+              "text": {
+                "zh": "确认注册表中已删除该 worktree 的记录",
+                "en": "Confirm the worktree record has been removed from the registry",
+                "ja": "レジストリからその worktree レコードが削除済みであることを確認する"
+              }
+            }
+          ],
+          "answer": "b",
+          "explanation": {
+            "zh": "删除前必须检查未提交改动。如果有未提交内容直接删除，这些改动将永久丢失。只有在确认工作区干净（或已备份）后才能安全 remove。",
+            "en": "Must check for uncommitted changes before removal. Deleting with uncommitted work causes permanent data loss. Only safe to remove after confirming the workspace is clean (or backed up).",
+            "ja": "削除前に必ずコミットされていない変更を確認する。未コミットの状態で削除すると変更が永久に失われる。ワークスペースがクリーン（またはバックアップ済み）であることを確認してからのみ安全に remove できる。"
+          },
+          "reward_card": "card_s18_004"
+        },
+        {
+          "id": "q_s18_014",
+          "type": "choice",
+          "difficulty": 3,
+          "stem": {
+            "zh": "以下哪种场景最适合选择 keep 而非 remove？",
+            "en": "Which scenario best justifies choosing keep over remove?",
+            "ja": "次のどのシナリオが remove より keep を選ぶ根拠として最も適切ですか？"
+          },
+          "options": [
+            {
+              "id": "d",
+              "text": {
+                "zh": "任务已完成，改动已合并到主分支，无其他依赖",
+                "en": "Task is complete, changes are merged to main, with no other dependencies",
+                "ja": "タスクが完了し、変更が main にマージ済みで、他の依存関係がない"
+              }
+            },
+            {
+              "id": "b",
+              "text": {
+                "zh": "任务已完成，但 code review 尚未结束，可能需要修改",
+                "en": "Task is done but code review is ongoing and changes may be needed",
+                "ja": "タスクは完了したが、コードレビュー中で変更が必要になるかもしれない"
+              }
+            },
+            {
+              "id": "c",
+              "text": {
+                "zh": "任务刚开始，代码还没有任何修改",
+                "en": "Task just started with no code changes yet",
+                "ja": "タスクを開始したばかりでコード変更がまだない"
+              }
+            },
+            {
+              "id": "a",
+              "text": {
+                "zh": "主仓库磁盘空间不足，需要立即释放",
+                "en": "Main repo disk space is low and needs immediate freeing",
+                "ja": "メインリポジトリのディスクスペースが不足しており、即座に解放が必要"
+              }
+            }
+          ],
+          "answer": "b",
+          "explanation": {
+            "zh": "code review 尚未结束意味着可能还需要在该 worktree 里修改。keep 保留目录和分支，确保后续改动还在隔离环境里进行。任务完全收尾（合并、无依赖）才适合 remove。",
+            "en": "An ongoing code review means changes may still be needed in this worktree. Keep preserves the directory and branch for further isolated changes. Remove is appropriate only after full closure (merged, no dependencies).",
+            "ja": "コードレビュー中はこの worktree での変更がまだ必要かもしれない。keep はディレクトリとブランチを保持し、引き続き隔離環境での変更を可能にする。完全にクローズ（マージ済み、依存なし）してから remove が適切。"
+          },
+          "reward_card": "card_s18_004"
+        },
+        {
+          "id": "q_s18_015",
+          "type": "choice",
+          "difficulty": 3,
+          "stem": {
+            "zh": "如果忘记在 remove 之前检查未提交改动，最可能导致什么后果？",
+            "en": "If you forget to check for uncommitted changes before remove, what is the most likely consequence?",
+            "ja": "remove の前に未コミット変更を確認し忘れた場合、最も起こりやすい結果は何ですか？"
+          },
+          "options": [
+            {
+              "id": "a",
+              "text": {
+                "zh": "工作成果永久丢失，无法恢复",
+                "en": "Work is permanently lost and unrecoverable",
+                "ja": "成果が永久に失われ、回復不可能になる"
+              }
+            },
+            {
+              "id": "c",
+              "text": {
+                "zh": "系统自动将未提交内容存入 stash",
+                "en": "The system automatically stashes uncommitted changes",
+                "ja": "システムが自動的に未コミット変更を stash する"
+              }
+            },
+            {
+              "id": "b",
+              "text": {
+                "zh": "git 会弹出警告并拒绝删除",
+                "en": "git shows a warning and refuses to delete",
+                "ja": "git が警告を表示して削除を拒否する"
+              }
+            },
+            {
+              "id": "d",
+              "text": {
+                "zh": "未提交内容会自动合并到主分支",
+                "en": "Uncommitted changes are auto-merged into main",
+                "ja": "未コミット変更が自動的に main にマージされる"
+              }
+            }
+          ],
+          "answer": "a",
+          "explanation": {
+            "zh": "git worktree remove 会直接删除目录。未提交的改动没有被纳入任何 commit，删除后无法通过 git 历史恢复。这是 worktree 收尾中最危险的操作失误。",
+            "en": "git worktree remove deletes the directory directly. Uncommitted changes are not in any commit, so they cannot be recovered from git history. This is the most dangerous mistake in worktree closeout.",
+            "ja": "git worktree remove はディレクトリを直接削除する。未コミット変更はどのコミットにも含まれておらず、git 履歴から回復できない。これは worktree クローズアウトで最も危険なミス。"
+          },
+          "reward_card": "card_s18_004"
+        },
+        {
+          "id": "q_s18_016",
+          "type": "choice",
+          "difficulty": 3,
+          "stem": {
+            "zh": "系统中累积了大量未清理的 worktree，最可能带来哪种系统性问题？",
+            "en": "Accumulating many uncleaned worktrees most likely causes which systemic problem?",
+            "ja": "未クリーンな worktree が大量に蓄積すると、最も起こりやすいシステム上の問題は何ですか？"
+          },
+          "options": [
+            {
+              "id": "b",
+              "text": {
+                "zh": "分支数量超限导致 git 崩溃",
+                "en": "Exceeding branch limits causes git to crash",
+                "ja": "ブランチ数の上限超過で git がクラッシュする"
+              }
+            },
+            {
+              "id": "d",
+              "text": {
+                "zh": "任务调度器会自动合并所有 worktree",
+                "en": "The task scheduler auto-merges all worktrees",
+                "ja": "タスクスケジューラが自動的に全 worktree をマージする"
+              }
+            },
+            {
+              "id": "c",
+              "text": {
+                "zh": "磁盘空间耗尽，新 worktree 无法创建，且注册表膨胀影响调度性能",
+                "en": "Disk exhaustion prevents new worktree creation; registry bloat degrades scheduling performance",
+                "ja": "ディスクが枯渇して新 worktree を作れなくなり、レジストリ肥大がスケジューリング性能に影響する"
+              }
+            },
+            {
+              "id": "a",
+              "text": {
+                "zh": "API token 被耗尽无法继续调用",
+                "en": "API tokens are exhausted preventing further calls",
+                "ja": "API トークンが枯渇してこれ以上呼び出せなくなる"
+              }
+            }
+          ],
+          "answer": "c",
+          "explanation": {
+            "zh": "未清理的 worktree 持续占用磁盘空间，当空间不足时新 worktree 无法创建；同时注册表中的过期记录膨胀，调度器需要遍历更多无效条目，影响性能。这正是「不要把 worktree 当长期垃圾堆」的原因。",
+            "en": "Uncleaned worktrees keep consuming disk space, eventually preventing new ones from being created. Registry bloat with stale records forces the scheduler to scan more invalid entries, degrading performance.",
+            "ja": "未クリーンな worktree がディスクを占有し続け、最終的に新しい worktree を作れなくなる。レジストリの期限切れレコードの肥大によりスケジューラがより多くの無効エントリをスキャンすることになり、性能が低下する。"
+          },
+          "reward_card": "card_s18_004"
+        },
+        {
+          "id": "q_s18_017",
+          "type": "choice",
+          "difficulty": 2,
+          "stem": {
+            "zh": "以下哪个流程正确描述了「创建 worktree → 隔离执行 → 收尾」的完整生命周期？",
+            "en": "Which flow correctly describes the full lifecycle: 'create worktree → isolated execution → closeout'?",
+            "ja": "「worktree 作成 → 隔離実行 → クローズアウト」の完全なライフサイクルを正しく説明しているのはどれですか？"
+          },
+          "options": [
+            {
+              "id": "a",
+              "text": {
+                "zh": "分配路径 → 切换 cwd → 提交改动 → 选择 keep/remove → 同步更新任务记录和注册表",
+                "en": "Assign path → switch cwd → commit changes → choose keep/remove → sync update task record and registry",
+                "ja": "パス割り当て → cwd 切り替え → 変更コミット → keep/remove 選択 → タスクレコードとレジストリを同期更新"
+              }
+            },
+            {
+              "id": "b",
+              "text": {
+                "zh": "选择 keep/remove → 创建分支和目录 → 更新注册表 → 切换 cwd → 执行命令",
+                "en": "Choose keep/remove → create branch and dir → update registry → switch cwd → run commands",
+                "ja": "keep/remove 選択 → ブランチとディレクトリ作成 → レジストリ更新 → cwd 切り替え → コマンド実行"
+              }
+            },
+            {
+              "id": "d",
+              "text": {
+                "zh": "创建分支和目录 → 同步更新任务记录与注册表 → 切换 cwd 执行命令 → 检查未提交改动 → 选择 keep/remove",
+                "en": "Create branch and dir → sync-update task record and registry → switch cwd to run commands → check uncommitted changes → choose keep/remove",
+                "ja": "ブランチとディレクトリ作成 → タスクレコードとレジストリを同期更新 → cwd を切り替えてコマンド実行 → 未コミット変更を確認 → keep/remove を選択"
+              }
+            },
+            {
+              "id": "c",
+              "text": {
+                "zh": "切换 cwd → 创建分支和目录 → 选择 keep/remove → 更新注册表",
+                "en": "Switch cwd → create branch and dir → choose keep/remove → update registry",
+                "ja": "cwd 切り替え → ブランチとディレクトリ作成 → keep/remove 選択 → レジストリ更新"
+              }
+            }
+          ],
+          "answer": "d",
+          "explanation": {
+            "zh": "正确顺序：先创建分支和 worktree 目录，同时双向更新任务记录和注册表；然后 cwd 切换到该目录执行隔离命令；收尾时先检查未提交改动，再决定 keep 或 remove。",
+            "en": "Correct order: create branch and worktree dir while bidirectionally updating task record and registry; then switch cwd for isolated commands; at closeout check uncommitted changes before choosing keep or remove.",
+            "ja": "正しい順序：ブランチと worktree ディレクトリを作成しつつ、タスクレコードとレジストリを双方向更新する；次に cwd を切り替えて隔離コマンドを実行；クローズアウト時は未コミット変更を確認してから keep または remove を選択する。"
+          },
+          "reward_card": "card_s18_004"
+        },
+        {
+          "id": "q_s18_018",
+          "type": "choice",
+          "difficulty": 3,
+          "stem": {
+            "zh": "如果注册表记录已删除但 worktree 目录和分支仍然存在，最合适的处理方式是什么？",
+            "en": "If a registry entry is deleted but the worktree directory and branch still exist, what is the best remediation?",
+            "ja": "レジストリエントリが削除されたが worktree ディレクトリとブランチが残っている場合、最適な対処法は何ですか？"
+          },
+          "options": [
+            {
+              "id": "c",
+              "text": {
+                "zh": "检查目录中的未提交改动，决定是补录注册表记录还是安全删除目录",
+                "en": "Inspect for uncommitted changes in the directory, then decide to re-register or safely delete",
+                "ja": "ディレクトリ内の未コミット変更を確認し、レジストリに再登録するか安全に削除するかを決める"
+              }
+            },
+            {
+              "id": "a",
+              "text": {
+                "zh": "直接忽略，系统下次启动时会自动清理",
+                "en": "Ignore it; the system will auto-clean on next startup",
+                "ja": "無視する；次回起動時にシステムが自動クリーンアップする"
+              }
+            },
+            {
+              "id": "d",
+              "text": {
+                "zh": "立即强制删除目录，避免占用磁盘空间",
+                "en": "Immediately force-delete the directory to free disk space",
+                "ja": "即座にディレクトリを強制削除してディスクスペースを解放する"
+              }
+            },
+            {
+              "id": "b",
+              "text": {
+                "zh": "重新运行整个任务，从头创建新的 worktree",
+                "en": "Re-run the entire task and create a fresh worktree from scratch",
+                "ja": "タスク全体を再実行して新しい worktree を最初から作成する"
+              }
+            }
+          ],
+          "answer": "c",
+          "explanation": {
+            "zh": "注册表缺失是局部脱节。正确做法是先检查目录中有没有未提交的有价值改动，如有则补录注册表或提交后再删；如确认没有价值改动，再安全执行 remove。直接强制删除有丢失工作成果的风险。",
+            "en": "A missing registry entry is partial desync. The right approach is to first inspect for valuable uncommitted changes: if present, re-register or commit then delete; if nothing of value, safely remove. Force-deleting immediately risks losing work.",
+            "ja": "レジストリの欠落は部分的なデシンクである。正しいアプローチは、まず価値のある未コミット変更を確認することで、あれば再登録またはコミットしてから削除する；価値がなければ安全に remove する。即座に強制削除すると成果を失うリスクがある。"
+          },
+          "reward_card": "card_s18_004"
         }
       ],
       "star_thresholds": [
