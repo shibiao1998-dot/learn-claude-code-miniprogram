@@ -19857,55 +19857,55 @@ module.exports = {
         "en": "Skills System in Practice",
         "ja": "スキルシステム実践"
       },
-      "questions": [
+                              "questions": [
         {
           "id": "q_bp03_001",
           "type": "choice",
           "difficulty": 1,
           "stem": {
-            "zh": "以下哪个概念与「Frontmatter 字段（13 个）」直接相关？",
-            "en": "Which concept is directly related to \"Frontmatter Fields (13)\"?",
-            "ja": "「Frontmatter Fields (13)」に直接関連する概念はどれですか？"
+            "zh": "Skill 和 Command 最核心的区别是什么？",
+            "en": "What is the core difference between a Skill and a Command?",
+            "ja": "Skill と Command の最も核心的な違いは何ですか？"
           },
           "options": [
             {
-              "id": "b",
-              "text": {
-                "zh": "权限结构",
-                "en": "Core Configuration",
-                "ja": "Core Configuration"
-              }
-            },
-            {
               "id": "a",
               "text": {
-                "zh": "Frontmatter 字段（13 个）",
-                "en": "Frontmatter Fields (13)",
-                "ja": "Frontmatter Fields (13)"
+                "zh": "Command 需要手动触发，Skill 能被 Claude 自动发现和调用",
+                "en": "Commands require manual invocation; Skills can be auto-discovered and called by Claude",
+                "ja": "Command は手動トリガーが必要、Skill は Claude が自動検出・呼び出せる"
               }
             },
             {
-              "id": "d",
+              "id": "b",
               "text": {
-                "zh": "代理与子代理",
-                "en": "OpenTelemetry",
-                "ja": "OpenTelemetry"
+                "zh": "Skill 比 Command 运行速度更快",
+                "en": "Skills run faster than Commands",
+                "ja": "Skill は Command より実行が速い"
               }
             },
             {
               "id": "c",
               "text": {
-                "zh": "10. 来源",
-                "en": "10. 来源",
-                "ja": "10. 来源"
+                "zh": "Command 可以调用外部 API，Skill 不可以",
+                "en": "Commands can call external APIs; Skills cannot",
+                "ja": "Command は外部 API を呼び出せるが、Skill は呼び出せない"
+              }
+            },
+            {
+              "id": "d",
+              "text": {
+                "zh": "两者没有本质区别，只是命名不同",
+                "en": "There is no fundamental difference, just different naming",
+                "ja": "本質的な違いはなく、単に名前が違うだけ"
               }
             }
           ],
           "answer": "a",
           "explanation": {
-            "zh": "Frontmatter 字段（13 个）",
-            "en": "Frontmatter Fields (13)",
-            "ja": "Frontmatter Fields (13)"
+            "zh": "Command 要手动触发（用 / 前缀），而 Skill 能被 Claude 根据上下文自动发现并调用，这是两者最核心的区别。",
+            "en": "Commands require manual invocation with a / prefix, while Skills can be auto-discovered and called by Claude based on context — that is the core distinction.",
+            "ja": "Command は / プレフィックスで手動トリガーが必要ですが、Skill は Claude がコンテキストに基づいて自動検出・呼び出せます。これが最も核心的な違いです。"
           },
           "reward_card": "card_bp03_001"
         },
@@ -19914,100 +19914,865 @@ module.exports = {
           "type": "choice",
           "difficulty": 1,
           "stem": {
-            "zh": "以下哪个概念与「官方捆绑技能（5 个）」直接相关？",
-            "en": "Which concept is directly related to \"![Official](../!/tags/official.svg) **(5)**\"?",
-            "ja": "「![Official](../!/tags/official.svg) **(5)**」に直接関連する概念はどれですか？"
+            "zh": "Skill 文件存放在哪个目录下？",
+            "en": "In which directory are Skill files stored?",
+            "ja": "Skill ファイルはどのディレクトリに保存されますか？"
           },
           "options": [
             {
               "id": "a",
               "text": {
-                "zh": "官方捆绑技能（5 个）",
-                "en": "![Official](../!/tags/official.svg) **(5)**",
-                "ja": "![Official](../!/tags/official.svg) **(5)**"
-              }
-            },
-            {
-              "id": "c",
-              "text": {
-                "zh": "模型与配置",
-                "en": "Status Line Configuration",
-                "ja": "Status Line Configuration"
+                "zh": ".claude/commands/",
+                "en": ".claude/commands/",
+                "ja": ".claude/commands/"
               }
             },
             {
               "id": "b",
               "text": {
-                "zh": "MCP 与插件",
-                "en": "Environment Variables (via `env`)",
-                "ja": "Environment Variables (via `env`)"
+                "zh": ".claude/skills/",
+                "en": ".claude/skills/",
+                "ja": ".claude/skills/"
+              }
+            },
+            {
+              "id": "c",
+              "text": {
+                "zh": ".claude/agents/",
+                "en": ".claude/agents/",
+                "ja": ".claude/agents/"
               }
             },
             {
               "id": "d",
               "text": {
-                "zh": "代理与子代理",
-                "en": "OpenTelemetry",
-                "ja": "OpenTelemetry"
+                "zh": ".claude/plugins/",
+                "en": ".claude/plugins/",
+                "ja": ".claude/plugins/"
               }
             }
           ],
-          "answer": "a",
+          "answer": "c",
           "explanation": {
-            "zh": "官方捆绑技能（5 个）",
-            "en": "![Official](../!/tags/official.svg) **(5)**",
-            "ja": "![Official](../!/tags/official.svg) **(5)**"
+            "zh": "Skill 文件存放在 .claude/agents/ 目录下，与 Agent 共享同一目录结构。",
+            "en": "Skill files are stored in the .claude/agents/ directory, sharing the same directory structure as Agents.",
+            "ja": "Skill ファイルは .claude/agents/ ディレクトリに保存され、Agent と同じディレクトリ構造を共有します。"
           },
-          "reward_card": "card_bp03_002"
+          "reward_card": "card_bp03_001"
         },
         {
           "id": "q_bp03_003",
           "type": "choice",
           "difficulty": 1,
           "stem": {
-            "zh": "以下哪个概念与「参考来源」直接相关？",
-            "en": "Which concept is directly related to \"Sources\"?",
-            "ja": "「Sources」に直接関連する概念はどれですか？"
+            "zh": "以下哪个是官方捆绑的 Skill？",
+            "en": "Which of the following is an officially bundled Skill?",
+            "ja": "次のうち、公式バンドルの Skill はどれですか？"
           },
           "options": [
             {
-              "id": "b",
-              "text": {
-                "zh": "通用设置",
-                "en": "Plugins",
-                "ja": "Plugins"
-              }
-            },
-            {
-              "id": "d",
-              "text": {
-                "zh": "会话启动时加载项目上下文",
-                "en": "Status Line Configuration",
-                "ja": "Status Line Configuration"
-              }
-            },
-            {
               "id": "a",
               "text": {
-                "zh": "参考来源",
-                "en": "Sources",
-                "ja": "Sources"
+                "zh": "summarize",
+                "en": "summarize",
+                "ja": "summarize"
+              }
+            },
+            {
+              "id": "b",
+              "text": {
+                "zh": "refactor",
+                "en": "refactor",
+                "ja": "refactor"
               }
             },
             {
               "id": "c",
               "text": {
-                "zh": "3. 内置代理类型（5 个）",
-                "en": "Sources",
-                "ja": "Sources"
+                "zh": "simplify",
+                "en": "simplify",
+                "ja": "simplify"
+              }
+            },
+            {
+              "id": "d",
+              "text": {
+                "zh": "translate",
+                "en": "translate",
+                "ja": "translate"
+              }
+            }
+          ],
+          "answer": "c",
+          "explanation": {
+            "zh": "官方 5 个捆绑 Skill 是：simplify、batch、debug、loop、claude-api。其余选项不在官方列表中。",
+            "en": "The 5 official bundled Skills are: simplify, batch, debug, loop, and claude-api. The other options are not in the official list.",
+            "ja": "公式の 5 つのバンドル Skill は simplify、batch、debug、loop、claude-api です。他の選択肢は公式リストにありません。"
+          },
+          "reward_card": "card_bp03_003"
+        },
+        {
+          "id": "q_bp03_004",
+          "type": "choice",
+          "difficulty": 1,
+          "stem": {
+            "zh": "以下哪个 Skill 用于批量处理任务？",
+            "en": "Which official Skill is used for batch processing tasks?",
+            "ja": "バッチ処理タスクに使われる公式 Skill はどれですか？"
+          },
+          "options": [
+            {
+              "id": "a",
+              "text": {
+                "zh": "loop",
+                "en": "loop",
+                "ja": "loop"
+              }
+            },
+            {
+              "id": "b",
+              "text": {
+                "zh": "batch",
+                "en": "batch",
+                "ja": "batch"
+              }
+            },
+            {
+              "id": "c",
+              "text": {
+                "zh": "claude-api",
+                "en": "claude-api",
+                "ja": "claude-api"
+              }
+            },
+            {
+              "id": "d",
+              "text": {
+                "zh": "debug",
+                "en": "debug",
+                "ja": "debug"
+              }
+            }
+          ],
+          "answer": "b",
+          "explanation": {
+            "zh": "batch Skill 专门用于批量处理任务，是官方 5 个捆绑 Skill 之一。",
+            "en": "The batch Skill is specifically designed for batch processing tasks and is one of the 5 official bundled Skills.",
+            "ja": "batch Skill はバッチ処理タスク専用で、公式 5 つのバンドル Skill の一つです。"
+          },
+          "reward_card": "card_bp03_003"
+        },
+        {
+          "id": "q_bp03_005",
+          "type": "choice",
+          "difficulty": 1,
+          "stem": {
+            "zh": "Skill 的 description 字段主要用于什么目的？",
+            "en": "What is the main purpose of the description field in a Skill?",
+            "ja": "Skill の description フィールドの主な目的は何ですか？"
+          },
+          "options": [
+            {
+              "id": "a",
+              "text": {
+                "zh": "让用户在 UI 中看到 Skill 的说明文字",
+                "en": "Show skill description text to users in the UI",
+                "ja": "UI でユーザーに Skill の説明文を表示する"
+              }
+            },
+            {
+              "id": "b",
+              "text": {
+                "zh": "决定 Claude 何时自动激活该 Skill",
+                "en": "Determine when Claude should automatically activate the Skill",
+                "ja": "Claude がいつ自動的に Skill をアクティブにするかを決定する"
+              }
+            },
+            {
+              "id": "c",
+              "text": {
+                "zh": "设置 Skill 的执行权限",
+                "en": "Set execution permissions for the Skill",
+                "ja": "Skill の実行権限を設定する"
+              }
+            },
+            {
+              "id": "d",
+              "text": {
+                "zh": "定义 Skill 可以访问哪些工具",
+                "en": "Define which tools the Skill can access",
+                "ja": "Skill がアクセスできるツールを定義する"
+              }
+            }
+          ],
+          "answer": "b",
+          "explanation": {
+            "zh": "description 是 Claude 判断何时激活 Skill 的核心——写得精准才能在合适的时机触发对的 Skill。",
+            "en": "The description is the core signal Claude uses to decide when to activate the Skill — precise wording ensures the right Skill triggers at the right time.",
+            "ja": "description は Claude が Skill をいつアクティブにするかを判断するための核心です。正確な記述により、適切なタイミングで正しい Skill がトリガーされます。"
+          },
+          "reward_card": "card_bp03_002"
+        },
+        {
+          "id": "q_bp03_006",
+          "type": "choice",
+          "difficulty": 1,
+          "stem": {
+            "zh": "下列哪项是官方捆绑 Skill 中的「调试」技能？",
+            "en": "Which of the following is the debugging Skill among the official bundled Skills?",
+            "ja": "公式バンドル Skill の中で「デバッグ」Skill はどれですか？"
+          },
+          "options": [
+            {
+              "id": "a",
+              "text": {
+                "zh": "fix",
+                "en": "fix",
+                "ja": "fix"
+              }
+            },
+            {
+              "id": "b",
+              "text": {
+                "zh": "trace",
+                "en": "trace",
+                "ja": "trace"
+              }
+            },
+            {
+              "id": "c",
+              "text": {
+                "zh": "inspect",
+                "en": "inspect",
+                "ja": "inspect"
+              }
+            },
+            {
+              "id": "d",
+              "text": {
+                "zh": "debug",
+                "en": "debug",
+                "ja": "debug"
+              }
+            }
+          ],
+          "answer": "d",
+          "explanation": {
+            "zh": "官方 5 个捆绑 Skill 中，debug 是专门用于调试的技能，名称即功能。",
+            "en": "Among the 5 official bundled Skills, debug is the dedicated debugging skill — its name reflects its function.",
+            "ja": "公式 5 つのバンドル Skill の中で、debug が専用のデバッグ Skill です。名前が機能を反映しています。"
+          },
+          "reward_card": "card_bp03_003"
+        },
+        {
+          "id": "q_bp03_007",
+          "type": "choice",
+          "difficulty": 2,
+          "stem": {
+            "zh": "如果 Skill 的 description 写得过于宽泛，会导致什么问题？",
+            "en": "What problem arises if a Skill's description is written too broadly?",
+            "ja": "Skill の description が広すぎる場合、どのような問題が生じますか？"
+          },
+          "options": [
+            {
+              "id": "a",
+              "text": {
+                "zh": "Skill 会被频繁误触发，干扰正常工作流",
+                "en": "The Skill will be triggered too often, disrupting normal workflows",
+                "ja": "Skill が頻繁に誤トリガーされ、通常のワークフローを妨げる"
+              }
+            },
+            {
+              "id": "b",
+              "text": {
+                "zh": "Claude 无法识别该 Skill，导致永远不触发",
+                "en": "Claude cannot recognize the Skill, so it never triggers",
+                "ja": "Claude が Skill を認識できず、永遠にトリガーされない"
+              }
+            },
+            {
+              "id": "c",
+              "text": {
+                "zh": "Skill 的执行速度会变慢",
+                "en": "The Skill's execution speed will slow down",
+                "ja": "Skill の実行速度が遅くなる"
+              }
+            },
+            {
+              "id": "d",
+              "text": {
+                "zh": "系统会抛出配置错误",
+                "en": "The system will throw a configuration error",
+                "ja": "システムが設定エラーをスローする"
               }
             }
           ],
           "answer": "a",
           "explanation": {
-            "zh": "参考来源",
-            "en": "Command → Agent → Skill",
-            "ja": "Command → Agent → Skill"
+            "zh": "description 过于宽泛会导致 Claude 在不需要时也激活该 Skill，产生误触发干扰。精准的 description 才能确保 Skill 只在合适场景下启动。",
+            "en": "An overly broad description causes Claude to activate the Skill even when it is not needed, creating unwanted interference. A precise description ensures the Skill only activates in appropriate scenarios.",
+            "ja": "description が広すぎると、必要ない場面でも Claude が Skill をアクティブにし、誤トリガーが発生します。正確な description により、適切なシナリオでのみ Skill が起動します。"
+          },
+          "reward_card": "card_bp03_002"
+        },
+        {
+          "id": "q_bp03_008",
+          "type": "choice",
+          "difficulty": 2,
+          "stem": {
+            "zh": "Skill 与普通 Agent 的主要区别是什么？",
+            "en": "What is the main difference between a Skill and a regular Agent?",
+            "ja": "Skill と通常の Agent の主な違いは何ですか？"
+          },
+          "options": [
+            {
+              "id": "a",
+              "text": {
+                "zh": "Skill 专注于单一可复用任务，并能被 Claude 自动调用",
+                "en": "Skills focus on a single reusable task and can be called automatically by Claude",
+                "ja": "Skill は単一の再利用可能タスクに特化し、Claude から自動呼び出しができる"
+              }
+            },
+            {
+              "id": "b",
+              "text": {
+                "zh": "Skill 拥有更多权限，可以执行危险操作",
+                "en": "Skills have more permissions and can perform dangerous operations",
+                "ja": "Skill はより多くの権限を持ち、危険な操作を実行できる"
+              }
+            },
+            {
+              "id": "c",
+              "text": {
+                "zh": "Skill 只能在命令行中使用，Agent 可以在 UI 中使用",
+                "en": "Skills can only be used in the command line; Agents can be used in the UI",
+                "ja": "Skill はコマンドラインのみ、Agent は UI でも使用できる"
+              }
+            },
+            {
+              "id": "d",
+              "text": {
+                "zh": "Agent 是 Skill 的子集，功能更受限",
+                "en": "Agents are a subset of Skills with more limited functionality",
+                "ja": "Agent は Skill のサブセットで、機能がより制限されている"
+              }
+            }
+          ],
+          "answer": "a",
+          "explanation": {
+            "zh": "Skill 专注于单一可复用任务，并且可以被 Claude 根据上下文自动发现和调用，这是与普通 Agent 最关键的区别。",
+            "en": "Skills focus on a single reusable task and can be auto-discovered and called by Claude based on context — this is the key distinction from regular Agents.",
+            "ja": "Skill は単一の再利用可能タスクに特化し、コンテキストに基づいて Claude が自動検出・呼び出せます。これが通常の Agent との最も重要な違いです。"
+          },
+          "reward_card": "card_bp03_001"
+        },
+        {
+          "id": "q_bp03_009",
+          "type": "choice",
+          "difficulty": 2,
+          "stem": {
+            "zh": "官方 claude-api Skill 的主要用途是什么？",
+            "en": "What is the main use of the official claude-api Skill?",
+            "ja": "公式 claude-api Skill の主な用途は何ですか？"
+          },
+          "options": [
+            {
+              "id": "a",
+              "text": {
+                "zh": "管理 Claude 的 API 密钥和账单信息",
+                "en": "Manage Claude API keys and billing information",
+                "ja": "Claude の API キーと請求情報を管理する"
+              }
+            },
+            {
+              "id": "b",
+              "text": {
+                "zh": "在代码中构建、调试和优化 Claude API 应用",
+                "en": "Build, debug, and optimize Claude API applications in code",
+                "ja": "コード内で Claude API アプリを構築・デバッグ・最適化する"
+              }
+            },
+            {
+              "id": "c",
+              "text": {
+                "zh": "将 Claude 连接到外部 REST API 服务",
+                "en": "Connect Claude to external REST API services",
+                "ja": "Claude を外部 REST API サービスに接続する"
+              }
+            },
+            {
+              "id": "d",
+              "text": {
+                "zh": "监控 Claude API 的调用次数和响应时间",
+                "en": "Monitor Claude API call counts and response times",
+                "ja": "Claude API の呼び出し回数と応答時間を監視する"
+              }
+            }
+          ],
+          "answer": "b",
+          "explanation": {
+            "zh": "claude-api Skill 用于构建、调试和优化 Claude API / Anthropic SDK 应用，是官方 5 个捆绑 Skill 之一。",
+            "en": "The claude-api Skill is used to build, debug, and optimize Claude API / Anthropic SDK applications — it is one of the 5 official bundled Skills.",
+            "ja": "claude-api Skill は Claude API / Anthropic SDK アプリの構築・デバッグ・最適化に使用され、公式 5 つのバンドル Skill の一つです。"
+          },
+          "reward_card": "card_bp03_003"
+        },
+        {
+          "id": "q_bp03_010",
+          "type": "choice",
+          "difficulty": 2,
+          "stem": {
+            "zh": "编写 Skill 的 description 时，下列哪种做法最佳？",
+            "en": "When writing a Skill's description, which practice is best?",
+            "ja": "Skill の description を書く際、最も良い方法はどれですか？"
+          },
+          "options": [
+            {
+              "id": "a",
+              "text": {
+                "zh": "描述越详细越好，包含所有可能的使用场景",
+                "en": "The more detailed the better; include all possible use cases",
+                "ja": "詳細なほど良い。すべての可能なユースケースを含める"
+              }
+            },
+            {
+              "id": "b",
+              "text": {
+                "zh": "简短说明技能名称，不需要描述触发条件",
+                "en": "Briefly state the skill name without describing trigger conditions",
+                "ja": "スキル名を簡潔に述べるだけで、トリガー条件の説明は不要"
+              }
+            },
+            {
+              "id": "c",
+              "text": {
+                "zh": "精准描述该 Skill 应在什么情境下被触发",
+                "en": "Precisely describe the context in which this Skill should be triggered",
+                "ja": "この Skill がどのような文脈でトリガーされるべきかを正確に記述する"
+              }
+            },
+            {
+              "id": "d",
+              "text": {
+                "zh": "使用通用词汇，方便 Claude 在任何场景下调用",
+                "en": "Use generic vocabulary so Claude can invoke it in any scenario",
+                "ja": "汎用的な語彙を使い、Claude がどのシナリオでも呼び出せるようにする"
+              }
+            }
+          ],
+          "answer": "c",
+          "explanation": {
+            "zh": "description 应精准描述触发场景，既不能太宽泛（导致误触发），也不能太窄（导致遗漏）。精准的 description 是 Skill 正确激活的关键。",
+            "en": "The description should precisely describe the trigger scenario — neither too broad (causing false triggers) nor too narrow (causing misses). A precise description is key to correct Skill activation.",
+            "ja": "description はトリガーシナリオを正確に記述する必要があります。広すぎると誤トリガーが、狭すぎると見逃しが発生します。正確な description が Skill の正しいアクティベーションの鍵です。"
+          },
+          "reward_card": "card_bp03_002"
+        },
+        {
+          "id": "q_bp03_011",
+          "type": "choice",
+          "difficulty": 2,
+          "stem": {
+            "zh": "loop Skill 的主要应用场景是什么？",
+            "en": "What is the main use case for the loop Skill?",
+            "ja": "loop Skill の主な適用シナリオは何ですか？"
+          },
+          "options": [
+            {
+              "id": "a",
+              "text": {
+                "zh": "在代码中创建 for/while 循环结构",
+                "en": "Create for/while loop structures in code",
+                "ja": "コード内に for/while ループ構造を作成する"
+              }
+            },
+            {
+              "id": "b",
+              "text": {
+                "zh": "监控文件系统的循环变化",
+                "en": "Monitor cyclical changes in the file system",
+                "ja": "ファイルシステムの循環的な変化を監視する"
+              }
+            },
+            {
+              "id": "c",
+              "text": {
+                "zh": "按指定间隔重复执行某个提示词或任务",
+                "en": "Repeatedly execute a prompt or task at specified intervals",
+                "ja": "指定した間隔でプロンプトまたはタスクを繰り返し実行する"
+              }
+            },
+            {
+              "id": "d",
+              "text": {
+                "zh": "防止 Claude 陷入无限递归",
+                "en": "Prevent Claude from entering infinite recursion",
+                "ja": "Claude が無限再帰に陥るのを防ぐ"
+              }
+            }
+          ],
+          "answer": "c",
+          "explanation": {
+            "zh": "loop Skill 用于按指定间隔重复执行提示词或任务，是自动化工作流的重要工具，属于官方 5 个捆绑 Skill 之一。",
+            "en": "The loop Skill is used to repeatedly execute prompts or tasks at specified intervals, making it an important automation workflow tool and one of the 5 official bundled Skills.",
+            "ja": "loop Skill は指定した間隔でプロンプトやタスクを繰り返し実行するもので、自動化ワークフローの重要なツールであり、公式 5 つのバンドル Skill の一つです。"
+          },
+          "reward_card": "card_bp03_003"
+        },
+        {
+          "id": "q_bp03_012",
+          "type": "choice",
+          "difficulty": 2,
+          "stem": {
+            "zh": "以下哪个场景最适合创建自定义 Skill 而非直接使用 Command？",
+            "en": "Which scenario is most suitable for creating a custom Skill rather than using a Command directly?",
+            "ja": "次のどのシナリオで Command を直接使うより、カスタム Skill の作成が最も適切ですか？"
+          },
+          "options": [
+            {
+              "id": "a",
+              "text": {
+                "zh": "一次性的临时任务，不会重复使用",
+                "en": "A one-time temporary task that will not be reused",
+                "ja": "再利用されない一回限りの一時的なタスク"
+              }
+            },
+            {
+              "id": "b",
+              "text": {
+                "zh": "需要访问私密数据库的高权限操作",
+                "en": "A high-privilege operation that needs to access a private database",
+                "ja": "プライベートデータベースへのアクセスが必要な高権限操作"
+              }
+            },
+            {
+              "id": "c",
+              "text": {
+                "zh": "需要 Claude 在特定上下文中自动识别并处理的重复任务",
+                "en": "A repetitive task that Claude needs to automatically recognize and handle in specific contexts",
+                "ja": "特定のコンテキストで Claude が自動認識・処理する必要がある繰り返しタスク"
+              }
+            },
+            {
+              "id": "d",
+              "text": {
+                "zh": "只有开发者需要使用的底层调试工具",
+                "en": "Low-level debugging tools only developers need",
+                "ja": "開発者のみが必要とする低レベルのデバッグツール"
+              }
+            }
+          ],
+          "answer": "c",
+          "explanation": {
+            "zh": "Skill 最大的优势在于被 Claude 自动发现调用。当任务有明确的触发场景且会重复出现时，封装成 Skill 比手动输入 Command 更高效。",
+            "en": "The greatest advantage of a Skill is being auto-discovered and called by Claude. When a task has a clear trigger scenario and recurs, encapsulating it as a Skill is more efficient than manually typing a Command.",
+            "ja": "Skill の最大の利点は Claude による自動検出・呼び出しです。タスクに明確なトリガーシナリオがあり、繰り返し発生する場合、Skill としてカプセル化する方が手動 Command より効率的です。"
+          },
+          "reward_card": "card_bp03_001"
+        },
+        {
+          "id": "q_bp03_013",
+          "type": "choice",
+          "difficulty": 3,
+          "stem": {
+            "zh": "为什么 description 精准是 Skill 设计的核心挑战？",
+            "en": "Why is a precise description the core challenge in Skill design?",
+            "ja": "なぜ description の精度が Skill 設計の核心的な課題なのですか？"
+          },
+          "options": [
+            {
+              "id": "a",
+              "text": {
+                "zh": "Claude 完全依赖 description 来区分应该调用哪个 Skill，模糊描述会导致错误选择",
+                "en": "Claude relies entirely on description to decide which Skill to call; vague descriptions lead to wrong selections",
+                "ja": "Claude は description に完全に依存してどの Skill を呼び出すかを決定するため、曖昧な記述は誤った選択を招く"
+              }
+            },
+            {
+              "id": "b",
+              "text": {
+                "zh": "description 会直接影响 Skill 的执行速度和资源消耗",
+                "en": "The description directly affects the Skill's execution speed and resource consumption",
+                "ja": "description は Skill の実行速度とリソース消費に直接影響する"
+              }
+            },
+            {
+              "id": "c",
+              "text": {
+                "zh": "错误的 description 会导致系统崩溃",
+                "en": "An incorrect description will cause system crashes",
+                "ja": "誤った description はシステムクラッシュを引き起こす"
+              }
+            },
+            {
+              "id": "d",
+              "text": {
+                "zh": "description 必须符合特定的语法规范，否则 Skill 无法被加载",
+                "en": "The description must follow specific syntax rules, otherwise the Skill cannot be loaded",
+                "ja": "description は特定の構文規則に従う必要があり、そうでないと Skill を読み込めない"
+              }
+            }
+          ],
+          "answer": "a",
+          "explanation": {
+            "zh": "Claude 通过 description 来判断何时激活 Skill，这是唯一的触发信号。description 模糊会导致 Claude 错误选择或遗漏 Skill，影响整个工作流的准确性。",
+            "en": "Claude uses the description to decide when to activate a Skill — it is the only trigger signal. A vague description causes Claude to make wrong selections or miss Skills entirely, affecting the accuracy of the entire workflow.",
+            "ja": "Claude は description を使って Skill のアクティベーションタイミングを判断します。これが唯一のトリガーシグナルです。曖昧な description は Claude の誤選択や Skill の見逃しを引き起こし、ワークフロー全体の精度に影響します。"
+          },
+          "reward_card": "card_bp03_002"
+        },
+        {
+          "id": "q_bp03_014",
+          "type": "choice",
+          "difficulty": 3,
+          "stem": {
+            "zh": "如果你有两个 Skill，一个叫「代码审查」一个叫「代码优化」，但它们的 description 都写成「处理代码相关任务」，会产生什么问题？",
+            "en": "If you have two Skills, 'code review' and 'code optimization', but both have descriptions written as 'handle code-related tasks', what problem occurs?",
+            "ja": "「コードレビュー」と「コード最適化」の 2 つの Skill があるが、どちらの description も「コード関連タスクを処理する」と書かれている場合、どのような問題が発生しますか？"
+          },
+          "options": [
+            {
+              "id": "a",
+              "text": {
+                "zh": "两个 Skill 会同时激活，导致重复执行",
+                "en": "Both Skills will activate simultaneously, causing duplicate execution",
+                "ja": "両方の Skill が同時にアクティブになり、重複実行が発生する"
+              }
+            },
+            {
+              "id": "b",
+              "text": {
+                "zh": "Claude 无法区分应该调用哪个 Skill，会随机选一个或两个都不选",
+                "en": "Claude cannot distinguish which Skill to call and may randomly pick one or invoke neither",
+                "ja": "Claude はどちらの Skill を呼び出すか区別できず、ランダムに選ぶか、どちらも選ばない可能性がある"
+              }
+            },
+            {
+              "id": "c",
+              "text": {
+                "zh": "系统会报错，提示 description 重复",
+                "en": "The system will error, indicating duplicate descriptions",
+                "ja": "システムがエラーを報告し、description の重複を示す"
+              }
+            },
+            {
+              "id": "d",
+              "text": {
+                "zh": "后加载的 Skill 会覆盖先加载的 Skill",
+                "en": "The later-loaded Skill will override the earlier-loaded Skill",
+                "ja": "後から読み込まれた Skill が先に読み込まれた Skill を上書きする"
+              }
+            }
+          ],
+          "answer": "b",
+          "explanation": {
+            "zh": "两个 Skill 描述相同时，Claude 无法通过 description 区分它们的触发场景，导致调用时出现歧义——可能随机选一个，或因歧义而两个都不触发。这正是 description 精准的重要性所在。",
+            "en": "When two Skills have the same description, Claude cannot distinguish their trigger scenarios, leading to ambiguity — it may randomly pick one or invoke neither due to the ambiguity. This is exactly why description precision matters.",
+            "ja": "2 つの Skill の description が同じ場合、Claude はトリガーシナリオを区別できず、曖昧さが生じます。ランダムに 1 つを選ぶか、曖昧さのためにどちらもトリガーされない可能性があります。これが description の精度が重要な理由です。"
+          },
+          "reward_card": "card_bp03_002"
+        },
+        {
+          "id": "q_bp03_015",
+          "type": "choice",
+          "difficulty": 3,
+          "stem": {
+            "zh": "官方 simplify Skill 的核心设计理念最接近哪个描述？",
+            "en": "Which description best matches the core design philosophy of the official simplify Skill?",
+            "ja": "公式 simplify Skill の核心的な設計理念に最も近い説明はどれですか？"
+          },
+          "options": [
+            {
+              "id": "a",
+              "text": {
+                "zh": "审查变更的代码，寻找复用机会和质量问题并修复",
+                "en": "Review changed code for reuse opportunities and quality issues, then fix them",
+                "ja": "変更されたコードを審査し、再利用の機会と品質問題を見つけて修正する"
+              }
+            },
+            {
+              "id": "b",
+              "text": {
+                "zh": "将复杂代码转换为最简单的等价实现",
+                "en": "Transform complex code into the simplest equivalent implementation",
+                "ja": "複雑なコードを最もシンプルな等価実装に変換する"
+              }
+            },
+            {
+              "id": "c",
+              "text": {
+                "zh": "删除所有注释和空白，减少文件大小",
+                "en": "Remove all comments and whitespace to reduce file size",
+                "ja": "すべてのコメントと空白を削除してファイルサイズを縮小する"
+              }
+            },
+            {
+              "id": "d",
+              "text": {
+                "zh": "自动合并重复的函数，消除代码冗余",
+                "en": "Automatically merge duplicate functions to eliminate code redundancy",
+                "ja": "重複する関数を自動マージしてコードの冗長性を排除する"
+              }
+            }
+          ],
+          "answer": "a",
+          "explanation": {
+            "zh": "simplify Skill 的核心是「审查变更代码，寻找复用、质量和效率问题，并修复发现的问题」，不是简单的代码压缩，而是智能化的代码质量提升。",
+            "en": "The core of the simplify Skill is to 'review changed code for reuse, quality, and efficiency, then fix any issues found' — it is not simple code compression but intelligent code quality improvement.",
+            "ja": "simplify Skill の核心は「変更されたコードを審査し、再利用・品質・効率の問題を見つけて修正する」ことです。単純なコード圧縮ではなく、インテリジェントなコード品質向上です。"
+          },
+          "reward_card": "card_bp03_003"
+        },
+        {
+          "id": "q_bp03_016",
+          "type": "choice",
+          "difficulty": 3,
+          "stem": {
+            "zh": "在 Skill 的自动触发机制中，以下哪种情况能让 Claude 最准确地识别并调用对应 Skill？",
+            "en": "In Skill auto-trigger mechanics, which situation allows Claude to most accurately identify and invoke the right Skill?",
+            "ja": "Skill の自動トリガーメカニズムにおいて、どの状況が Claude に最も正確に対応する Skill を識別・呼び出しさせますか？"
+          },
+          "options": [
+            {
+              "id": "a",
+              "text": {
+                "zh": "用户明确说出 Skill 的名称",
+                "en": "The user explicitly states the Skill's name",
+                "ja": "ユーザーが Skill の名前を明示的に述べる"
+              }
+            },
+            {
+              "id": "b",
+              "text": {
+                "zh": "Skill 文件的体积尽量小",
+                "en": "The Skill file should be as small as possible",
+                "ja": "Skill ファイルはできるだけ小さくする"
+              }
+            },
+            {
+              "id": "c",
+              "text": {
+                "zh": "同时安装的 Skill 数量越少越好",
+                "en": "The fewer Skills installed simultaneously, the better",
+                "ja": "同時にインストールされる Skill の数は少ないほど良い"
+              }
+            },
+            {
+              "id": "d",
+              "text": {
+                "zh": "Skill 的 description 精准匹配用户意图和上下文",
+                "en": "The Skill's description precisely matches the user's intent and context",
+                "ja": "Skill の description がユーザーの意図とコンテキストに正確に一致する"
+              }
+            }
+          ],
+          "answer": "d",
+          "explanation": {
+            "zh": "Skill 的自动触发核心在于 description 与用户意图的精准匹配。即使用户没有明确说出 Skill 名称，只要 description 精准描述了触发场景，Claude 就能正确识别并调用。",
+            "en": "The core of Skill auto-triggering lies in the precise match between the description and user intent. Even if the user does not explicitly name the Skill, a precise description of the trigger scenario allows Claude to correctly identify and invoke it.",
+            "ja": "Skill 自動トリガーの核心は description とユーザー意図の精確なマッチングにあります。ユーザーが Skill 名を明示しなくても、description がトリガーシナリオを正確に記述していれば、Claude は正しく識別・呼び出せます。"
+          },
+          "reward_card": "card_bp03_002"
+        },
+        {
+          "id": "q_bp03_017",
+          "type": "choice",
+          "difficulty": 3,
+          "stem": {
+            "zh": "以下对 Command 和 Skill 协同使用的理解，哪个最正确？",
+            "en": "Which understanding of combining Commands and Skills is most accurate?",
+            "ja": "Command と Skill の組み合わせ使用についての理解で、最も正確なものはどれですか？"
+          },
+          "options": [
+            {
+              "id": "a",
+              "text": {
+                "zh": "Command 和 Skill 功能重叠，选其一使用即可",
+                "en": "Commands and Skills overlap in function; just pick one to use",
+                "ja": "Command と Skill は機能が重複するため、どちらか一方を使えばよい"
+              }
+            },
+            {
+              "id": "b",
+              "text": {
+                "zh": "Skill 是 Command 的高级版本，新项目应全面转向 Skill",
+                "en": "Skills are the advanced version of Commands; new projects should fully switch to Skills",
+                "ja": "Skill は Command の上位版であり、新しいプロジェクトは完全に Skill に移行すべき"
+              }
+            },
+            {
+              "id": "c",
+              "text": {
+                "zh": "应先用 Command 尝试，如果失败再用 Skill 兜底",
+                "en": "Try with a Command first; if it fails, use a Skill as fallback",
+                "ja": "まず Command で試み、失敗したら Skill をフォールバックとして使う"
+              }
+            },
+            {
+              "id": "d",
+              "text": {
+                "zh": "Command 适合明确意图的主动触发，Skill 适合基于上下文的自动化触发，两者互补",
+                "en": "Commands suit intentional manual triggers; Skills suit context-based automated triggers; they are complementary",
+                "ja": "Command は明確な意図を持った手動トリガーに、Skill はコンテキストベースの自動トリガーに適しており、両者は補完的"
+              }
+            }
+          ],
+          "answer": "d",
+          "explanation": {
+            "zh": "Command 需要手动触发（用户知道并主动调用），Skill 能被 Claude 自动发现调用（无需用户记住名称）。两者设计目标不同，场景互补，同时使用效果最佳。",
+            "en": "Commands require manual invocation (user knows and actively calls them), while Skills can be auto-discovered and called by Claude (user does not need to remember the name). They have different design goals and complementary scenarios — using both is optimal.",
+            "ja": "Command は手動トリガーが必要（ユーザーが知って積極的に呼び出す）ですが、Skill は Claude が自動検出・呼び出せます（ユーザーが名前を覚える必要なし）。設計目標が異なり、シナリオが補完的なため、両方を使うのが最適です。"
+          },
+          "reward_card": "card_bp03_001"
+        },
+        {
+          "id": "q_bp03_018",
+          "type": "choice",
+          "difficulty": 3,
+          "stem": {
+            "zh": "官方 5 个捆绑 Skill 的完整列表是哪个？",
+            "en": "What is the complete list of the 5 official bundled Skills?",
+            "ja": "公式 5 つのバンドル Skill の完全なリストはどれですか？"
+          },
+          "options": [
+            {
+              "id": "a",
+              "text": {
+                "zh": "optimize、batch、debug、loop、claude-api",
+                "en": "optimize, batch, debug, loop, claude-api",
+                "ja": "optimize、batch、debug、loop、claude-api"
+              }
+            },
+            {
+              "id": "b",
+              "text": {
+                "zh": "simplify、refactor、debug、loop、claude-api",
+                "en": "simplify, refactor, debug, loop, claude-api",
+                "ja": "simplify、refactor、debug、loop、claude-api"
+              }
+            },
+            {
+              "id": "c",
+              "text": {
+                "zh": "simplify、batch、fix、loop、claude-api",
+                "en": "simplify, batch, fix, loop, claude-api",
+                "ja": "simplify、batch、fix、loop、claude-api"
+              }
+            },
+            {
+              "id": "d",
+              "text": {
+                "zh": "simplify、batch、debug、loop、claude-api",
+                "en": "simplify, batch, debug, loop, claude-api",
+                "ja": "simplify、batch、debug、loop、claude-api"
+              }
+            }
+          ],
+          "answer": "d",
+          "explanation": {
+            "zh": "5 个官方捆绑 Skill 的完整列表是：simplify、batch、debug、loop、claude-api。其他选项均替换了其中一个为不存在的 Skill 名称。",
+            "en": "The complete list of 5 official bundled Skills is: simplify, batch, debug, loop, and claude-api. The other options each replace one with a non-existent Skill name.",
+            "ja": "5 つの公式バンドル Skill の完全なリストは simplify、batch、debug、loop、claude-api です。他の選択肢はそれぞれ 1 つを存在しない Skill 名に置き換えています。"
           },
           "reward_card": "card_bp03_003"
         }
