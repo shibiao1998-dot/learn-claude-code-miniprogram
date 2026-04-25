@@ -437,7 +437,8 @@ Page({
       currentQuestion: this._formatQuestion(q, locale),
       questionIndex: 1,
       totalQuestions: session.wrongIds.length,
-      progressPercent: Math.round(1 / session.wrongIds.length * 100)
+      progressPercent: Math.round(1 / session.wrongIds.length * 100),
+      comboCount: 0
     });
   },
 
