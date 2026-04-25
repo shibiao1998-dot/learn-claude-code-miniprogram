@@ -2,6 +2,29 @@
 var gameSave = require('./game-save');
 var gameReview = require('./game-review');
 
+// Combo thresholds — shared between getSessionResult() (EXP multiplier)
+// and chapter.js (milestone sound triggers). Keep the two-element pairs
+// ordered by threshold DESC so the first match wins.
+var COMBO_TIERS = [
+  { threshold: 8, multiplier: 2.0 },
+  { threshold: 5, multiplier: 1.5 },
+  { threshold: 3, multiplier: 1.2 }
+];
+
+function getComboMultiplier(combo) {
+  for (var i = 0; i < COMBO_TIERS.length; i++) {
+    if (combo >= COMBO_TIERS[i].threshold) return COMBO_TIERS[i].multiplier;
+  }
+  return 1.0;
+}
+
+function isComboMilestone(combo) {
+  for (var i = 0; i < COMBO_TIERS.length; i++) {
+    if (combo === COMBO_TIERS[i].threshold) return true;
+  }
+  return false;
+}
+
 // --- Stage Session ---
 function createSession(stage) {
   return {
@@ -127,10 +150,7 @@ function getSessionResult(session) {
 
   var baseExp = stars === 3 ? 100 : stars === 2 ? 60 : stars === 1 ? 30 : 10;
 
-  var comboMultiplier = 1.0;
-  if (session.maxCombo >= 8) comboMultiplier = 2.0;
-  else if (session.maxCombo >= 5) comboMultiplier = 1.5;
-  else if (session.maxCombo >= 3) comboMultiplier = 1.2;
+  var comboMultiplier = getComboMultiplier(session.maxCombo);
 
   var expReward = Math.round(baseExp * comboMultiplier);
 
@@ -252,5 +272,7 @@ module.exports = {
   saveStageResult: saveStageResult,
   getStageProgress: getStageProgress,
   getRegionProgress: getRegionProgress,
-  isRegionUnlocked: isRegionUnlocked
+  isRegionUnlocked: isRegionUnlocked,
+  getComboMultiplier: getComboMultiplier,
+  isComboMilestone: isComboMilestone
 };
