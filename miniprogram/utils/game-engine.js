@@ -16,7 +16,9 @@ function createSession(stage) {
     answers: {},
     wrongIds: [],
     confirmAnswers: {},
-    finished: false
+    finished: false,
+    combo: 0,
+    maxCombo: 0
   };
 }
 
@@ -52,10 +54,17 @@ function submitAnswer(session, questionId, chosenOptionId) {
   if (!question) return null;
 
   var isCorrect = chosenOptionId === question.answer;
+  var prevCombo = session.combo;
 
   if (session.phase === 1) {
     session.answers[questionId] = { chosen: chosenOptionId, correct: isCorrect };
-    if (!isCorrect) {
+    if (isCorrect) {
+      session.combo++;
+      if (session.combo > session.maxCombo) {
+        session.maxCombo = session.combo;
+      }
+    } else {
+      session.combo = 0;
       session.wrongIds.push(questionId);
     }
     session.currentIndex++;
@@ -76,7 +85,10 @@ function submitAnswer(session, questionId, chosenOptionId) {
   return {
     correct: isCorrect,
     answer: question.answer,
-    explanation: question.explanation
+    explanation: question.explanation,
+    combo: session.combo,
+    prevCombo: prevCombo,
+    maxCombo: session.maxCombo
   };
 }
 
@@ -113,7 +125,14 @@ function getSessionResult(session) {
   if (stars >= 2 && session.rewardCards.length > 1) earnedCards.push(session.rewardCards[1]);
   if (stars >= 3 && session.rewardCards.length > 2) earnedCards.push(session.rewardCards[2]);
 
-  var expReward = stars === 3 ? 100 : stars === 2 ? 60 : stars === 1 ? 30 : 10;
+  var baseExp = stars === 3 ? 100 : stars === 2 ? 60 : stars === 1 ? 30 : 10;
+
+  var comboMultiplier = 1.0;
+  if (session.maxCombo >= 8) comboMultiplier = 2.0;
+  else if (session.maxCombo >= 5) comboMultiplier = 1.5;
+  else if (session.maxCombo >= 3) comboMultiplier = 1.2;
+
+  var expReward = Math.round(baseExp * comboMultiplier);
 
   var reviewIds = [];
   for (var j = 0; j < session.wrongIds.length; j++) {
@@ -131,6 +150,9 @@ function getSessionResult(session) {
     ratio: ratio,
     earnedCards: earnedCards,
     expReward: expReward,
+    baseExp: baseExp,
+    comboMultiplier: comboMultiplier,
+    maxCombo: session.maxCombo,
     reviewIds: reviewIds
   };
 }
