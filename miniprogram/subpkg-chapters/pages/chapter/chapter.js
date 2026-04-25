@@ -78,8 +78,8 @@ Page({
 
     comboCount: 0,
     maxCombo: 0,
-    comboMultiplier: 1.0,
-    baseExp: 0
+    comboMultiplier: 1.0,  // populated by _showSettlement() in sub-plan 3
+    baseExp: 0             // populated by _showSettlement() in sub-plan 3
   },
 
   _session: null,
