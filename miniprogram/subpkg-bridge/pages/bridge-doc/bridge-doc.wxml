@@ -1,0 +1,143 @@
+<!-- subpkg-chapters/pages/bridge-doc/bridge-doc.wxml -->
+<view class="page">
+
+  <!-- 顶部 Header -->
+  <view class="bd-header" wx:if="{{!cardMode}}">
+    <view class="bd-header__meta">
+      <text class="bd-kind-badge bd-kind-badge--{{kind}}">{{kind === 'map' ? '地图' : '机制'}}</text>
+    </view>
+    <text class="bd-title">{{title}}</text>
+    <view class="bd-summary-block" wx:if="{{summary}}">
+      <view class="bd-summary-block__bar"></view>
+      <text class="bd-summary-block__text">{{summary}}</text>
+    </view>
+  </view>
+
+  <!-- ══════════ Card Detail Mode ══════════ -->
+  <block wx:if="{{cardMode && loaded && !notFound}}">
+    <view class="card-detail">
+      <view class="card-visual card-visual--{{cardData.rarity}}">
+        <view class="card-visual__header">
+          <text class="card-visual__rarity font-mono">{{cardData.rarity}}</text>
+          <text class="card-visual__region font-mono" style="color:{{cardData.regionColor}}">{{cardData.regionLabel}}</text>
+        </view>
+        <text class="card-visual__name">{{cardData.name}}</text>
+        <text class="card-visual__desc">{{cardData.desc}}</text>
+        <view class="card-visual__stats">
+          <text class="card-stat font-mono">PWR: {{cardData.power}}</text>
+          <text class="card-stat font-mono">DEF: {{cardData.defense}}</text>
+        </view>
+        <view class="card-visual__tags">
+          <text wx:for="{{cardData.tags}}" wx:key="*this" class="card-tag font-mono">#{{item}}</text>
+        </view>
+      </view>
+
+      <view class="card-meta">
+        <view class="card-meta__row">
+          <text class="card-meta__label font-mono">CHAPTER</text>
+          <text class="card-meta__value">{{cardData.chapter}}</text>
+        </view>
+        <view class="card-meta__row">
+          <text class="card-meta__label font-mono">STATUS</text>
+          <text class="card-meta__value" style="color:{{cardData.obtained ? 'var(--color-accent-green)' : 'var(--color-error)'}}">{{cardData.obtained ? '✓ 已获得' : '✗ 未获得'}}</text>
+        </view>
+      </view>
+
+      <view class="card-back-btn" bindtap="goBack">
+        <text class="card-back-btn__text">← 返回</text>
+      </view>
+    </view>
+  </block>
+
+  <block wx:if="{{!cardMode}}">
+
+  <!-- 加载中 -->
+  <view class="bd-loading" wx:if="{{!loaded}}">
+    <text class="bd-loading__text">加载中…</text>
+  </view>
+
+  <!-- 未找到 -->
+  <view class="bd-not-found" wx:elif="{{notFound}}">
+    <text class="bd-not-found__icon">📄</text>
+    <text class="bd-not-found__title">文档未找到</text>
+    <text class="bd-not-found__slug">{{slug}}</text>
+  </view>
+
+  <!-- 文档内容（复用 chapter 的 Markdown 渲染样式） -->
+  <view class="doc-content" wx:elif="{{loaded && !notFound}}">
+
+    <block wx:for="{{docNodes}}" wx:key="index">
+
+      <!-- h1 -->
+      <view wx:if="{{item.type === 'h1'}}" class="md-h1">
+        <text>{{item.content}}</text>
+      </view>
+
+      <!-- h2 -->
+      <view wx:elif="{{item.type === 'h2'}}" class="md-h2">
+        <view class="md-h2__bar"></view>
+        <text>{{item.content}}</text>
+      </view>
+
+      <!-- h3 -->
+      <view wx:elif="{{item.type === 'h3'}}" class="md-h3">
+        <text>{{item.content}}</text>
+      </view>
+
+      <!-- blockquote -->
+      <view wx:elif="{{item.type === 'blockquote'}}" class="md-blockquote">
+        <view class="md-blockquote__bar"></view>
+        <text class="md-blockquote__text">{{item.content}}</text>
+      </view>
+
+      <!-- hr -->
+      <view wx:elif="{{item.type === 'hr'}}" class="md-hr"></view>
+
+      <!-- list_item -->
+      <view wx:elif="{{item.type === 'list_item'}}" class="md-li">
+        <text class="md-li__dot">•</text>
+        <text class="md-li__text">{{item.content}}</text>
+      </view>
+
+      <!-- code_block -->
+      <view wx:elif="{{item.type === 'code_block'}}" class="md-code-block">
+        <view class="md-code-block__header">
+          <text class="md-code-block__lang">{{item.lang}}</text>
+        </view>
+        <scroll-view scroll-x class="md-code-block__scroll">
+          <text class="md-code-block__text" user-select="{{true}}">{{item.content}}</text>
+        </scroll-view>
+      </view>
+
+      <!-- table -->
+      <view wx:elif="{{item.type === 'table'}}" class="md-table-wrap">
+        <scroll-view scroll-x class="md-table-scroll">
+          <view class="md-table">
+            <view class="md-table__row md-table__row--header">
+              <view wx:for="{{item.headers}}" wx:for-item="cell" wx:key="index" class="md-table__cell md-table__cell--header">
+                <text>{{cell}}</text>
+              </view>
+            </view>
+            <view wx:for="{{item.rows}}" wx:for-item="row" wx:key="index" class="md-table__row">
+              <view wx:for="{{row}}" wx:for-item="cell" wx:key="index" class="md-table__cell">
+                <text>{{cell}}</text>
+              </view>
+            </view>
+          </view>
+        </scroll-view>
+      </view>
+
+      <!-- paragraph（默认） -->
+      <view wx:else class="md-paragraph">
+        <text class="md-paragraph__text">{{item.content}}</text>
+      </view>
+
+    </block>
+  </view>
+
+  </block>
+
+  <!-- 底部安全距离 -->
+  <view class="safe-bottom"></view>
+
+</view>

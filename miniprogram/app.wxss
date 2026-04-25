@@ -1,40 +1,62 @@
-/* app.wxss — V3 Design System */
+/* app.wxss — Bright Learning Theme */
 page {
   /* Background & Surface */
   --color-bg: #FFFFFF;
   --color-bg-card: #F8FAFC;
-  --color-bg-muted: #E2E8F0;
+  --color-bg-elevated: #FFFFFF;
+  --color-bg-muted: #F1F5F9;
 
   /* Text hierarchy */
-  --color-text-primary: #0F172A;
-  --color-text-secondary: #475569;
+  --color-text-primary: #1E293B;
+  --color-text-secondary: #64748B;
   --color-text-muted: #94A3B8;
   --color-text-faint: #CBD5E1;
 
-  /* Accent — editorial dark for main pages, blue for interactive elements */
-  --color-accent: #0F172A;
-  --color-accent-hover: #334155;
-  --color-accent-blue: #2563EB;
-  --color-accent-blue-hover: #1D4ED8;
+  /* Accent colors (bright palette) */
+  --color-accent-green: #10B981;
+  --color-accent-orange: #F59E0B;
+  --color-accent-red: #EF4444;
+  --color-accent-blue: #3B82F6;
+  --color-accent-purple: #8B5CF6;
+  --color-accent-gold: #F59E0B;
+  --color-accent-pink: #F43F5E;
 
-  /* Architecture layer colors — used sparingly */
-  --color-core: #059669;
-  --color-hardening: #2563EB;
-  --color-runtime: #7C3AED;
-  --color-platform: #DB2777;
+  /* Region colors */
+  --color-region-core: #10B981;
+  --color-region-tools: #3B82F6;
+  --color-region-runtime: #8B5CF6;
+  --color-region-network: #F43F5E;
+  --color-region-practice: #F59E0B;
+
+  /* Rarity colors */
+  --color-rarity-n: #94A3B8;
+  --color-rarity-r: #3B82F6;
+  --color-rarity-sr: #8B5CF6;
+  --color-rarity-ssr: #F59E0B;
 
   /* Borders */
   --color-border: #E2E8F0;
   --color-border-light: #F1F5F9;
 
   /* Semantic */
-  --color-warning: #D97706;
+  --color-success: #10B981;
+  --color-warning: #F59E0B;
+  --color-error: #EF4444;
+  --color-info: #3B82F6;
+  --color-exp: #8B5CF6;
+  --color-streak: #F59E0B;
+
+  /* Shadows (replacing dark borders) */
+  --shadow-sm: 0 2rpx 8rpx rgba(0,0,0,0.04);
+  --shadow-md: 0 4rpx 16rpx rgba(0,0,0,0.08);
+  --shadow-lg: 0 8rpx 32rpx rgba(0,0,0,0.12);
 
   /* Radius */
   --radius-xs: 4rpx;
-  --radius-sm: 12rpx;
+  --radius-sm: 8rpx;
   --radius-md: 16rpx;
   --radius-lg: 24rpx;
+  --radius-xl: 32rpx;
   --radius-pill: 200rpx;
 
   /* Spacing — 4px grid (8rpx = 4px) */
@@ -56,9 +78,13 @@ page {
   --font-2xl: 48rpx;
   --font-3xl: 56rpx;
 
+  /* Font families */
+  --font-mono: "SF Mono", Menlo, Consolas, monospace;
+  --font-body: -apple-system, BlinkMacSystemFont, "SF Pro Display", "PingFang SC", sans-serif;
+
   background-color: var(--color-bg);
   color: var(--color-text-primary);
-  font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'PingFang SC', 'Noto Sans SC', sans-serif;
+  font-family: var(--font-body);
   font-size: var(--font-base);
   box-sizing: border-box;
   -webkit-font-smoothing: antialiased;
@@ -68,14 +94,17 @@ page {
 .text-primary { color: var(--color-text-primary); }
 .text-secondary { color: var(--color-text-secondary); }
 .text-muted { color: var(--color-text-muted); }
-.text-faint { color: var(--color-text-faint); }
+.text-green { color: var(--color-accent-green); }
+.text-blue { color: var(--color-accent-blue); }
+.text-orange { color: var(--color-accent-orange); }
+.text-red { color: var(--color-accent-red); }
+.text-purple { color: var(--color-accent-purple); }
+.text-gold { color: var(--color-accent-gold); }
 
-.layer-core { color: var(--color-core); }
-.layer-hardening { color: var(--color-hardening); }
-.layer-runtime { color: var(--color-runtime); }
-.layer-platform { color: var(--color-platform); }
+.font-mono { font-family: var(--font-mono); }
 
-.layer-bg-core { background-color: rgba(5, 150, 105, 0.06); }
-.layer-bg-hardening { background-color: rgba(37, 99, 235, 0.06); }
-.layer-bg-runtime { background-color: rgba(124, 58, 237, 0.06); }
-.layer-bg-platform { background-color: rgba(219, 39, 119, 0.06); }
+.region-core { color: var(--color-region-core); }
+.region-tools { color: var(--color-region-tools); }
+.region-runtime { color: var(--color-region-runtime); }
+.region-network { color: var(--color-region-network); }
+.region-practice { color: var(--color-region-practice); }

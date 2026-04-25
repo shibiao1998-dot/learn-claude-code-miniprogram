@@ -1,62 +1,165 @@
 <!-- pages/reference/reference.wxml -->
-<scroll-view scroll-y class="page">
+<scroll-view scroll-y class="archive-page">
 
-  <!-- Page Header -->
-  <view class="page-header">
-    <view class="header-top">
-      <text class="page-title">{{t.reference.title}}</text>
-      <view class="lang-switcher">
-        <text class="lang-btn {{locale=='zh'?'active':''}}" bindtap="switchLocale" data-locale="zh">中</text>
-        <text class="lang-btn {{locale=='en'?'active':''}}" bindtap="switchLocale" data-locale="en">EN</text>
-        <text class="lang-btn {{locale=='ja'?'active':''}}" bindtap="switchLocale" data-locale="ja">日</text>
+  <!-- Player Stats Header -->
+  <view class="arc-header">
+    <text class="arc-header__title">📋 个人档案</text>
+    <view class="arc-stats-row">
+      <view class="arc-stat">
+        <text class="arc-stat__value">Lv.{{levelInfo.level}}</text>
+        <text class="arc-stat__label">{{levelInfo.title}}</text>
+      </view>
+      <view class="arc-stat">
+        <text class="arc-stat__value">{{levelInfo.exp}}</text>
+        <text class="arc-stat__label">EXP</text>
+      </view>
+      <view class="arc-stat">
+        <text class="arc-stat__value">{{streakInfo.current}}</text>
+        <text class="arc-stat__label">STREAK</text>
+      </view>
+      <view class="arc-stat">
+        <text class="arc-stat__value">{{collectionStats.obtained}}</text>
+        <text class="arc-stat__label">CARDS</text>
       </view>
     </view>
-    <text class="page-subtitle">{{t.reference.subtitle}}</text>
+    <!-- EXP progress bar -->
+    <view class="arc-exp-bar" wx:if="{{levelInfo.nextLevelExp}}">
+      <view class="arc-exp-bar__fill" style="width:{{levelInfo.progress * 100}}%"></view>
+    </view>
+    <text class="arc-exp-hint" wx:if="{{levelInfo.nextLevelExp}}">{{levelInfo.exp}}/{{levelInfo.nextLevelExp}} → Lv.{{levelInfo.level + 1}}</text>
+    <text class="arc-exp-hint" wx:else>MAX LEVEL</text>
   </view>
 
-  <!-- Foundation Docs (kind=map) -->
-  <view class="ref-section">
-    <view class="ref-section-header">
-      <view class="ref-indicator ref-indicator--map"></view>
-      <text class="ref-section-title">{{t.reference.foundation_title}}</text>
-      <text class="ref-section-count">{{foundationDocs.length}} {{locale == 'zh' ? '篇' : locale == 'ja' ? '件' : 'docs'}}</text>
-    </view>
-    <view class="ref-doc-list">
-      <view
-        wx:for="{{foundationDocs}}"
-        wx:key="slug"
-        class="ref-doc-row"
-        bindtap="openDoc"
-        data-slug="{{item.slug}}"
-        hover-class="doc-hover"
-      >
-        <text class="ref-doc-title">{{item.title}}</text>
-        <text class="ref-doc-summary">{{item.summary}}</text>
+  <!-- Achievement Summary -->
+  <view class="arc-summary">
+    <text class="arc-summary__title">🏆 成就</text>
+    <text class="arc-summary__count">{{achievementStats.unlocked}}/{{achievementStats.total}}</text>
+  </view>
+
+  <!-- Achievement Categories -->
+  <view class="arc-categories">
+    <view wx:for="{{categories}}" wx:key="id" class="arc-category">
+      <view class="arc-category__header">
+        <text class="arc-category__icon" style="color:{{item.color}}">{{item.icon}}</text>
+        <text class="arc-category__label" style="color:{{item.color}}">{{item.label}}</text>
+        <text class="arc-category__count">{{item.unlocked}}/{{item.total}}</text>
+      </view>
+      <view class="arc-badges">
+        <view wx:for="{{item.items}}" wx:for-item="ach" wx:key="id"
+              class="arc-badge {{ach.unlocked ? 'arc-badge--unlocked' : 'arc-badge--locked'}}">
+          <text class="arc-badge__icon">{{ach.unlocked ? ach.icon : '?'}}</text>
+          <view class="arc-badge__info">
+            <text class="arc-badge__name">{{ach.unlocked ? ach.name : '???'}}</text>
+            <text class="arc-badge__desc">{{ach.unlocked ? ach.desc : '未解锁'}}</text>
+          </view>
+        </view>
       </view>
     </view>
   </view>
 
-  <!-- Mechanism Docs -->
-  <view class="ref-section">
-    <view class="ref-section-header">
-      <view class="ref-indicator ref-indicator--mechanism"></view>
-      <text class="ref-section-title">{{t.reference.deep_dive_title}}</text>
-      <text class="ref-section-count">{{mechanismDocs.length}} {{locale == 'zh' ? '篇' : locale == 'ja' ? '件' : 'docs'}}</text>
+  <!-- Statistics Section -->
+  <view class="arc-stats-section" wx:if="{{stats}}">
+    <text class="arc-stats-section__title">📊 统计数据</text>
+
+    <!-- Overview -->
+    <view class="stats-overview">
+      <view class="stats-overview__row">
+        <text class="stats-kv">STAGES CLEARED:</text>
+        <text class="stats-kv__val">{{stats.clearedStages}}</text>
+      </view>
+      <view class="stats-overview__row">
+        <text class="stats-kv">TOTAL ATTEMPTS:</text>
+        <text class="stats-kv__val">{{stats.totalAnswered}}</text>
+      </view>
+      <view class="stats-overview__row">
+        <text class="stats-kv">TOTAL EXP:</text>
+        <text class="stats-kv__val">{{stats.totalExp}}</text>
+      </view>
     </view>
-    <view class="ref-doc-list">
-      <view
-        wx:for="{{mechanismDocs}}"
-        wx:key="slug"
-        class="ref-doc-row"
-        bindtap="openDoc"
-        data-slug="{{item.slug}}"
-        hover-class="doc-hover"
-      >
-        <text class="ref-doc-title">{{item.title}}</text>
-        <text class="ref-doc-summary">{{item.summary}}</text>
+
+    <!-- Region Progress -->
+    <view class="stats-regions">
+      <text class="stats-sub-title">区域进度</text>
+      <view wx:for="{{stats.regionStats}}" wx:key="id" class="stats-region-row">
+        <text class="stats-region__label" style="color:{{item.color}}">{{item.label}}</text>
+        <text class="stats-region__bar">{{item.bar}}</text>
+        <text class="stats-region__pct">{{item.pct}}%</text>
+        <text class="stats-region__stars" style="color:var(--color-accent-orange)">★{{item.stars}}/{{item.maxStars}}</text>
+      </view>
+    </view>
+
+    <!-- Streak -->
+    <view class="stats-streak">
+      <text class="stats-sub-title">连续学习</text>
+      <view class="stats-streak__row">
+        <view class="stats-streak__item">
+          <text class="stats-streak__val">{{stats.streak.current}}</text>
+          <text class="stats-streak__label">CURRENT</text>
+        </view>
+        <view class="stats-streak__item">
+          <text class="stats-streak__val">{{stats.streak.best}}</text>
+          <text class="stats-streak__label">BEST</text>
+        </view>
+        <view class="stats-streak__item">
+          <text class="stats-streak__val">{{stats.streak.shields}}</text>
+          <text class="stats-streak__label">SHIELDS</text>
+        </view>
+      </view>
+    </view>
+
+    <!-- Card Distribution -->
+    <view class="stats-cards">
+      <text class="stats-sub-title">卡片分布</text>
+      <view class="stats-cards__row">
+        <view class="stats-card-item">
+          <text class="stats-card-item__rarity" style="color:var(--color-rarity-n)">N</text>
+          <text class="stats-card-item__count">{{stats.cards.byRarity.N.obtained}}/{{stats.cards.byRarity.N.total}}</text>
+        </view>
+        <view class="stats-card-item">
+          <text class="stats-card-item__rarity" style="color:var(--color-rarity-r)">R</text>
+          <text class="stats-card-item__count">{{stats.cards.byRarity.R.obtained}}/{{stats.cards.byRarity.R.total}}</text>
+        </view>
+        <view class="stats-card-item">
+          <text class="stats-card-item__rarity" style="color:var(--color-rarity-sr)">SR</text>
+          <text class="stats-card-item__count">{{stats.cards.byRarity.SR.obtained}}/{{stats.cards.byRarity.SR.total}}</text>
+        </view>
+        <view class="stats-card-item">
+          <text class="stats-card-item__rarity" style="color:var(--color-rarity-ssr)">SSR</text>
+          <text class="stats-card-item__count">{{stats.cards.byRarity.SSR.obtained}}/{{stats.cards.byRarity.SSR.total}}</text>
+        </view>
       </view>
     </view>
   </view>
 
-  <view class="page-footer"></view>
+  <!-- Settings Section -->
+  <view class="arc-settings">
+    <text class="arc-settings__title">⚙️ 设置</text>
+
+    <!-- Language Switcher -->
+    <view class="arc-setting-row">
+      <text class="arc-setting-row__label">语言</text>
+      <view class="arc-lang-switcher">
+        <text class="arc-lang-btn {{locale=='zh'?'arc-lang-btn--active':''}}" bindtap="switchLocale" data-locale="zh">中</text>
+        <text class="arc-lang-btn {{locale=='en'?'arc-lang-btn--active':''}}" bindtap="switchLocale" data-locale="en">EN</text>
+        <text class="arc-lang-btn {{locale=='ja'?'arc-lang-btn--active':''}}" bindtap="switchLocale" data-locale="ja">日</text>
+      </view>
+    </view>
+
+    <!-- Reset Save -->
+    <view class="arc-setting-row">
+      <text class="arc-setting-row__label">重置数据</text>
+      <view class="arc-reset-btn" bindtap="showReset" wx:if="{{!showResetConfirm}}">
+        <text class="arc-reset-btn__text">RESET</text>
+      </view>
+      <view class="arc-reset-confirm" wx:else>
+        <text class="arc-reset-confirm__warn">确认重置所有进度？</text>
+        <view class="arc-reset-actions">
+          <text class="arc-reset-action arc-reset-action--cancel" bindtap="cancelReset">取消</text>
+          <text class="arc-reset-action arc-reset-action--confirm" bindtap="confirmReset">确认重置</text>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <view class="arc-footer"></view>
 </scroll-view>

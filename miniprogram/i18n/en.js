@@ -13,7 +13,9 @@ module.exports = {
     "title": "Reference",
     "subtitle": "Glossary, architecture maps, and deep dive companion docs.",
     "foundation_title": "Foundation Documents",
-    "deep_dive_title": "Deep Dive Documents"
+    "deep_dive_title": "Deep Dive Documents",
+    "tips_title": "Tips & Tricks",
+    "tips_subtitle": "Battle-tested tips from the Claude Code team"
   },
   "home": {
     "hero_title": "Learn Claude Code",
@@ -192,13 +194,21 @@ module.exports = {
     "s16": "Team Protocols",
     "s17": "Autonomous Agents",
     "s18": "Worktree Isolation",
-    "s19": "MCP & Plugin"
+    "s19": "MCP & Plugin",
+    "bp01": "CLAUDE.md & Memory",
+    "bp02": "Commands",
+    "bp03": "Skills",
+    "bp04": "Hooks",
+    "bp05": "Subagents",
+    "bp06": "MCP & Tools",
+    "bp07": "Settings & Workflows"
   },
   "layer_labels": {
     "core": "Core Loop",
     "hardening": "System Hardening",
     "runtime": "Task Runtime",
-    "platform": "Multi-Agent Platform"
+    "platform": "Multi-Agent Platform",
+    "best-practice": "Best Practice"
   },
   "viz": {
     "s01": "The Agent While-Loop",
@@ -221,5 +231,4 @@ module.exports = {
     "s18": "Worktree Task Isolation",
     "s19": "External Capability Bus"
   }
-}
-;
+};

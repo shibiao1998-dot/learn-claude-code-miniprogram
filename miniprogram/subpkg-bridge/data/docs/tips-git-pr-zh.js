@@ -1,0 +1,8 @@
+module.exports = {
+  "version": "tips",
+  "slug": "tips-git-pr",
+  "locale": "zh",
+  "title": "Git & PR 实用技巧",
+  "kind": "tips",
+  "content": "# Git & PR\n\n> 本分类共 6 条技巧\n\n## 1. 通过 MCP 让 Claude 使用你所有的工具\n\nClaude Code 可以使用你的所有工具。它经常搜索和发送 Slack 消息（通过 MCP 服务器），运行 BigQuery 查询来回答分析问题（使用 `bq` CLI），从 Sentry 获取错误日志等。Slack MCP 配置提交在 `.mcp.json` 中与团队共享。\n\n---\n\n## 2. 给 Claude 一种验证其工作的方式\n\n这可能是从 Claude Code 获得优秀结果的最重要的一点——给 Claude 一种验证其工作的方式。如果 Claude 拥有这个反馈闭环，最终结果的质量将提升 2-3 倍。\n\nBoris 提交的每一个更改都会经过 Claude 测试。\n\n\n\n## 来源: Boris Cherny 10 条技巧 (2026年2月1日)\n\nBoris 分享了直接来自 Claude Code 团队的使用技巧。团队的使用方式与 Boris 个人的使用方式有所不同。记住：使用 Claude Code 没有唯一正确的方式——每个人的设置都不一样。你应该多尝试，找到最适合自己的方式！\n\n---\n\n## 3. 自定义加载动画文字\n\n自定义加载动画的动词，用你自己的动词添加或替换默认列表。将 `settings.json` 提交到源代码管理中，与团队共享自定义动词。\n\n---\n\n## 4. 定制一切！\n\nClaude Code 开箱即用就很好用，但当你进行定制时，请将你的 `settings.json` 提交到 Git 中，让团队也能受益。配置支持多个层级：\n\n- 针对整个代码库\n- 针对子目录\n- 仅针对你自己\n- 通过企业级策略\n\n拥有 37 项设置和 84 个环境变量（使用 `settings.json` 中的 `\"env\"` 字段来避免包装脚本），你想要的几乎任何行为都是可配置的。\n\n\n\n## 来源: Boris Cherny 15 条隐藏功能 (2026年3月30日)\n\nBoris 分享了他最喜欢的 Claude Code 隐藏和被低估的功能，重点介绍了他最常使用的那些。\n\n---\n\n## 5. Claude Code 有移动端应用\n\n你知道 Claude Code 有移动端应用吗？Boris 经常在 iOS 应用上写代码——这是一种不用打开笔记本电脑就能进行修改的便捷方式。\n\n- 下载 iOS/Android 版 Claude 应用\n- 进入左侧的 **Code** 标签\n- 你可以直接在手机上审查更改、批准 PR 和编写代码\n\n---\n\n## 6. 一天 266 次贡献——始终使用 Squash 合并\n\nBoris 分享了他的 GitHub 贡献图，显示 **3 月 24 日有 266 次贡献**——来自 **141 个 PR，全部使用 squash 合并**，中位数为每个 PR **118 行**。\n\n- Squash 合并将分支上的所有提交合并为目标分支上的单个提交——保持历史记录干净和线性\n- 每个 PR = 一个提交，便于回滚整个功能，也简化了 `git bisect`\n- 在高速 AI 辅助工作流（每天 141 个 PR）中，squash 是务实的选择——分支内的\"修复 lint\"、\"试试这个\"等单独提交都是噪音\n\n---"
+};

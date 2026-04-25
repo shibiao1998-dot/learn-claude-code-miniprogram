@@ -1,7 +1,7 @@
 {
-  "navigationBarTitleText": "章节详情",
-  "navigationStyle": "default",
-  "backgroundColor": "#0F172A",
-  "backgroundTextStyle": "dark",
+  "navigationBarTitleText": "关卡",
+  "navigationBarBackgroundColor": "#FFFFFF",
+  "navigationBarTextStyle": "black",
+  "backgroundColor": "#FFFFFF",
   "usingComponents": {}
 }

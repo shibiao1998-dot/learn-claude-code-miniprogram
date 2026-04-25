@@ -234,4 +234,17 @@ Page({
     });
     this._calcCompare(bId, aId, this.data.locale, this.data.t);
   },
+
+  onShareAppMessage() {
+    return {
+      title: 'CC学习工具 - Claude Code 架构学习',
+      path: '/pages/home/home'
+    };
+  },
+
+  onShareTimeline() {
+    return {
+      title: 'CC学习工具 - Claude Code 架构学习'
+    };
+  },
 });

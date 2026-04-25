@@ -1,0 +1,237 @@
+// quiz-anim.wxs — WXS reactive animation module
+
+function springStep(current, target, velocity, stiffness, damping, mass) {
+  var force = -stiffness * (current - target);
+  var dampForce = -damping * velocity;
+  var accel = (force + dampForce) / mass;
+  velocity += accel * (1 / 60);
+  current += velocity * (1 / 60);
+  return { current: current, velocity: velocity };
+}
+
+var SPRING_STIFFNESS = 180;
+var SPRING_DAMPING = 12;
+var SPRING_MASS = 1;
+var SPRING_THRESHOLD = 0.01;
+
+function onComboUpdate(newVal, oldVal, ownerInstance, instance) {
+  if (!newVal || newVal === oldVal) return;
+  var el = instance;
+  if (!el) return;
+
+  var scale = 1.8;
+  var velocity = 0;
+  var target = 1.0;
+
+  function tick() {
+    var result = springStep(scale, target, velocity, SPRING_STIFFNESS, SPRING_DAMPING, SPRING_MASS);
+    scale = result.current;
+    velocity = result.velocity;
+    el.setStyle({ transform: 'scale(' + scale.toFixed(3) + ')' });
+    if (Math.abs(scale - target) > SPRING_THRESHOLD || Math.abs(velocity) > SPRING_THRESHOLD) {
+      ownerInstance.requestAnimationFrame(tick);
+    } else {
+      el.setStyle({ transform: 'scale(1)' });
+    }
+  }
+  ownerInstance.requestAnimationFrame(tick);
+}
+
+function onComboBreak(newVal, oldVal, ownerInstance, instance) {
+  if (!newVal || newVal === oldVal) return;
+  var breakEl = ownerInstance.selectComponent('.combo-break-text');
+  if (!breakEl) return;
+
+  var frame = 0;
+  var totalFrames = 60;
+  breakEl.setStyle({ opacity: '1', transform: 'scale(1.2)' });
+
+  function tick() {
+    frame++;
+    var progress = frame / totalFrames;
+    if (progress >= 1) {
+      breakEl.setStyle({ opacity: '0', transform: 'scale(1)' });
+      return;
+    }
+    var scaleVal = 1.2 - 0.2 * Math.min(progress * 3, 1);
+    var opacityVal = progress < 0.7 ? 1 : 1 - (progress - 0.7) / 0.3;
+    breakEl.setStyle({
+      opacity: '' + opacityVal.toFixed(3),
+      transform: 'scale(' + scaleVal.toFixed(3) + ')'
+    });
+    ownerInstance.requestAnimationFrame(tick);
+  }
+  ownerInstance.requestAnimationFrame(tick);
+}
+
+function onFeedbackShow(newVal, oldVal, ownerInstance, instance) {
+  if (!newVal || newVal === oldVal) return;
+  var floatEl = ownerInstance.selectComponent('.float-score');
+  if (!floatEl) return;
+
+  var frame = 0;
+  var totalFrames = 48;
+  floatEl.setStyle({ opacity: '1', transform: 'translateY(0rpx)' });
+
+  function tick() {
+    frame++;
+    var progress = frame / totalFrames;
+    if (progress >= 1) {
+      floatEl.setStyle({ opacity: '0', transform: 'translateY(-120rpx)' });
+      return;
+    }
+    var eased = 1 - (1 - progress) * (1 - progress) * (1 - progress);
+    var yVal = -120 * eased;
+    var opacityVal = progress < 0.6 ? 1 : 1 - (progress - 0.6) / 0.4;
+    floatEl.setStyle({
+      opacity: '' + opacityVal.toFixed(3),
+      transform: 'translateY(' + yVal.toFixed(1) + 'rpx)'
+    });
+    ownerInstance.requestAnimationFrame(tick);
+  }
+  ownerInstance.requestAnimationFrame(tick);
+}
+
+function onStarReveal(newVal, oldVal, ownerInstance, instance) {
+  if (!newVal || newVal === oldVal) return;
+  var parts = ('' + newVal).split('_');
+  var starIndex = parseInt(parts[0]) || 0;
+  var earned = parts[1] === '1';
+
+  var el = ownerInstance.selectComponent('.settle-star-' + starIndex);
+  if (!el) return;
+
+  var scale = 0;
+  var rotate = -180;
+  var sVel = 0;
+  var rVel = 0;
+
+  function tick() {
+    var sRes = springStep(scale, earned ? 1.0 : 0.8, sVel, SPRING_STIFFNESS, SPRING_DAMPING, SPRING_MASS);
+    scale = sRes.current;
+    sVel = sRes.velocity;
+    var rRes = springStep(rotate, 0, rVel, 120, 14, 1);
+    rotate = rRes.current;
+    rVel = rRes.velocity;
+
+    var styleObj = {
+      transform: 'scale(' + scale.toFixed(3) + ') rotate(' + rotate.toFixed(1) + 'deg)',
+      opacity: '1'
+    };
+    if (earned) {
+      var glowSize = Math.max(0, Math.round((scale - 0.8) * 80));
+      styleObj['boxShadow'] = '0 0 ' + glowSize + 'rpx rgba(234,179,8,0.5)';
+    }
+    el.setStyle(styleObj);
+
+    var sDone = Math.abs(scale - (earned ? 1.0 : 0.8)) < SPRING_THRESHOLD && Math.abs(sVel) < SPRING_THRESHOLD;
+    var rDone = Math.abs(rotate) < 0.5 && Math.abs(rVel) < 0.5;
+    if (!sDone || !rDone) {
+      ownerInstance.requestAnimationFrame(tick);
+    } else {
+      var finalStyle = {
+        transform: 'scale(' + (earned ? '1' : '0.8') + ') rotate(0deg)',
+        opacity: '1'
+      };
+      if (earned) {
+        finalStyle['boxShadow'] = '0 0 16rpx rgba(234,179,8,0.5)';
+      }
+      el.setStyle(finalStyle);
+    }
+  }
+  ownerInstance.requestAnimationFrame(tick);
+}
+
+function onScoreReveal(newVal, oldVal, ownerInstance, instance) {
+  if (!newVal || newVal === oldVal) return;
+  var parts = ('' + newVal).split('_');
+  var targetCorrect = parseInt(parts[0]) || 0;
+  var targetTotal = parseInt(parts[1]) || 0;
+  var targetRatio = parseInt(parts[2]) || 0;
+
+  var correctEl = ownerInstance.selectComponent('.score-correct-num');
+  var totalEl = ownerInstance.selectComponent('.score-total-num');
+  var ratioEl = ownerInstance.selectComponent('.score-ratio-num');
+
+  var frame = 0;
+  var totalFrames = 36;
+
+  function tick() {
+    frame++;
+    var progress = Math.min(frame / totalFrames, 1);
+    var eased = 1 - (1 - progress) * (1 - progress) * (1 - progress);
+    var curCorrect = Math.round(targetCorrect * eased);
+    var curTotal = Math.round(targetTotal * eased);
+    var curRatio = Math.round(targetRatio * eased);
+
+    if (correctEl) correctEl.setStyle({ content: '' + curCorrect });
+    if (totalEl) totalEl.setStyle({ content: '' + curTotal });
+    if (ratioEl) ratioEl.setStyle({ content: '' + curRatio });
+
+    if (progress < 1) {
+      ownerInstance.requestAnimationFrame(tick);
+    }
+  }
+  ownerInstance.requestAnimationFrame(tick);
+}
+
+function onExpReveal(newVal, oldVal, ownerInstance, instance) {
+  if (!newVal || newVal === oldVal) return;
+  var parts = ('' + newVal).split('_');
+  var targetExp = parseInt(parts[0]) || 0;
+  var multiplier = parseFloat(parts[1]) || 1.0;
+
+  var expEl = ownerInstance.selectComponent('.exp-value-num');
+  var multEl = ownerInstance.selectComponent('.exp-multiplier');
+
+  var frame = 0;
+  var totalFrames = 30;
+  var bouncePhase = 0;
+
+  function tick() {
+    if (bouncePhase > 0) {
+      bouncePhase++;
+      if (bouncePhase >= 9) {
+        if (expEl) expEl.setStyle({ transform: 'scale(1)' });
+        return;
+      }
+      ownerInstance.requestAnimationFrame(tick);
+      return;
+    }
+
+    frame++;
+    var progress = Math.min(frame / totalFrames, 1);
+    var eased = 1 - (1 - progress) * (1 - progress) * (1 - progress);
+    var curExp = Math.round(targetExp * eased);
+
+    if (expEl) expEl.setStyle({ content: '' + curExp });
+
+    if (multEl && multiplier > 1.0 && progress > 0.6) {
+      var multProgress = (progress - 0.6) / 0.4;
+      var multEased = 1 - (1 - multProgress) * (1 - multProgress) * (1 - multProgress);
+      multEl.setStyle({
+        opacity: '' + multEased.toFixed(3),
+        transform: 'translateX(' + ((1 - multEased) * 40).toFixed(1) + 'rpx)'
+      });
+    }
+
+    if (progress >= 1) {
+      if (expEl) expEl.setStyle({ transform: 'scale(1.15)' });
+      bouncePhase = 1;
+      ownerInstance.requestAnimationFrame(tick);
+      return;
+    }
+
+    ownerInstance.requestAnimationFrame(tick);
+  }
+  ownerInstance.requestAnimationFrame(tick);
+}
+
+module.exports = {
+  onComboUpdate: onComboUpdate,
+  onComboBreak: onComboBreak,
+  onFeedbackShow: onFeedbackShow,
+  onStarReveal: onStarReveal,
+  onScoreReveal: onScoreReveal,
+  onExpReveal: onExpReveal
+};

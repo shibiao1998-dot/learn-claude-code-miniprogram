@@ -67,6 +67,20 @@ module.exports = {
         "s18",
         "s19"
       ]
+    },
+    {
+      "id": "best-practice",
+      "label": "Best Practice",
+      "color": "#EA580C",
+      "versions": [
+        "bp01",
+        "bp02",
+        "bp03",
+        "bp04",
+        "bp05",
+        "bp06",
+        "bp07"
+      ]
     }
   ],
   "versions": {
@@ -2115,6 +2129,373 @@ module.exports = {
           "goal": "外部 capability を主システムへ接続しつつ、routing・permission・結果回流の一貫性を保つ。"
         }
       }
+    },
+    "bp01": {
+      "id": "bp01",
+      "title": "CLAUDE.md & Memory",
+      "layer": "best-practice",
+      "prevVersion": null,
+      "nextVersion": "bp02",
+      "loc": 0,
+      "tools": [],
+      "newTools": [],
+      "classes": [],
+      "functions": [],
+      "isBestPractice": true,
+      "configFields": 0,
+      "tipsCount": 5,
+      "relatedChapters": [
+        "s09"
+      ],
+      "content": {
+        "zh": {
+          "subtitle": "项目记忆体系",
+          "coreAddition": "CLAUDE.md 层级加载 + @path 导入",
+          "keyInsight": "CLAUDE.md 是你与 Claude Code 的\"团队约定\"，写好它比任何提示词技巧都重要。"
+        },
+        "en": {
+          "subtitle": "Project Memory System",
+          "coreAddition": "CLAUDE.md hierarchy loading + @path imports",
+          "keyInsight": "CLAUDE.md is your \"team agreement\" with Claude Code — writing it well matters more than any prompting trick."
+        },
+        "ja": {
+          "subtitle": "プロジェクトメモリシステム",
+          "coreAddition": "CLAUDE.md 階層読み込み + @path インポート",
+          "keyInsight": "CLAUDE.md は Claude Code との「チーム合意」です。上手に書くことが最も重要です。"
+        }
+      },
+      "guide": {
+        "zh": {
+          "focus": "理解 CLAUDE.md 的祖先加载（向上）和后代懒加载（向下）机制。",
+          "confusion": "不要把 CLAUDE.md 当成\"提示词模板\"，它是持久化的项目规则，不是每次对话的指令。",
+          "goal": "能为自己的项目写出结构清晰、团队共享的 CLAUDE.md。"
+        },
+        "en": {
+          "focus": "Understand ancestor loading (up) and descendant lazy loading (down) of CLAUDE.md.",
+          "confusion": "Do not treat CLAUDE.md as a \"prompt template\" — it is persistent project rules, not per-conversation instructions.",
+          "goal": "Write a well-structured, team-shared CLAUDE.md for your own project."
+        },
+        "ja": {
+          "focus": "CLAUDE.md の祖先ロード（上向き）と子孫遅延ロード（下向き）の仕組みを理解する。",
+          "confusion": "CLAUDE.md を「プロンプトテンプレート」と混同しない。永続的なプロジェクトルールです。",
+          "goal": "自分のプロジェクト用に構造化された CLAUDE.md を書けるようになる。"
+        }
+      }
+    },
+    "bp02": {
+      "id": "bp02",
+      "title": "Commands",
+      "layer": "best-practice",
+      "prevVersion": "bp01",
+      "nextVersion": "bp03",
+      "loc": 0,
+      "tools": [],
+      "newTools": [],
+      "classes": [],
+      "functions": [],
+      "isBestPractice": true,
+      "configFields": 13,
+      "tipsCount": 1,
+      "relatedChapters": [
+        "s05"
+      ],
+      "content": {
+        "zh": {
+          "subtitle": "斜杠命令实战",
+          "coreAddition": "13 个 frontmatter 字段 + 69 个内置命令",
+          "keyInsight": "斜杠命令是\"内循环\"工作流的固化——把你每天重复做的事变成一个命令。"
+        },
+        "en": {
+          "subtitle": "Slash Commands in Practice",
+          "coreAddition": "13 frontmatter fields + 69 built-in commands",
+          "keyInsight": "Slash commands crystallize your \"inner loop\" workflows — turn what you repeat daily into a command."
+        },
+        "ja": {
+          "subtitle": "スラッシュコマンド実践",
+          "coreAddition": "13 の frontmatter フィールド + 69 の組み込みコマンド",
+          "keyInsight": "スラッシュコマンドは「内部ループ」ワークフローの固定化です。"
+        }
+      },
+      "guide": {
+        "zh": {
+          "focus": "掌握 frontmatter 的 13 个字段各自的作用，特别是 context:fork 和 allowed-tools。",
+          "confusion": "命令不只是\"快捷输入\"——通过 context:fork 和 model 字段，它可以调度独立的子代理。",
+          "goal": "为自己的项目创建至少 3 个自定义命令（如 /commit-push-pr、/review、/test）。"
+        },
+        "en": {
+          "focus": "Master all 13 frontmatter fields, especially context:fork and allowed-tools.",
+          "confusion": "Commands are not just \"shortcut input\" — with context:fork and model fields, they can dispatch independent subagents.",
+          "goal": "Create at least 3 custom commands for your own project (e.g., /commit-push-pr, /review, /test)."
+        },
+        "ja": {
+          "focus": "13 の frontmatter フィールドを把握する。特に context:fork と allowed-tools。",
+          "confusion": "コマンドは単なる「ショートカット入力」ではなく、独立したサブエージェントを起動できます。",
+          "goal": "自分のプロジェクト用にカスタムコマンドを最低3つ作成する。"
+        }
+      }
+    },
+    "bp03": {
+      "id": "bp03",
+      "title": "Skills",
+      "layer": "best-practice",
+      "prevVersion": "bp02",
+      "nextVersion": "bp04",
+      "loc": 0,
+      "tools": [],
+      "newTools": [],
+      "classes": [],
+      "functions": [],
+      "isBestPractice": true,
+      "configFields": 13,
+      "tipsCount": 11,
+      "relatedChapters": [
+        "s05"
+      ],
+      "content": {
+        "zh": {
+          "subtitle": "技能系统实战",
+          "coreAddition": "13 个 frontmatter 字段 + 5 个内置技能",
+          "keyInsight": "Skill 是可复用的领域知识——让 Claude 在特定场景下自动变成\"专家\"。"
+        },
+        "en": {
+          "subtitle": "Skills System in Practice",
+          "coreAddition": "13 frontmatter fields + 5 built-in skills",
+          "keyInsight": "A Skill is reusable domain knowledge — it turns Claude into an \"expert\" for specific scenarios automatically."
+        },
+        "ja": {
+          "subtitle": "スキルシステム実践",
+          "coreAddition": "13 の frontmatter フィールド + 5 つの組み込みスキル",
+          "keyInsight": "Skill は再利用可能なドメイン知識です。Claude を特定シナリオの「エキスパート」にします。"
+        }
+      },
+      "guide": {
+        "zh": {
+          "focus": "理解 Skills 和 Commands 的区别——Skills 是知识（被调用），Commands 是动作（用户触发）。",
+          "confusion": "不要把 Skill 写成完整的指令流程。Skill 提供知识和模板，Claude 自行决定如何运用。",
+          "goal": "能为自己的项目创建一个领域 Skill（如代码审查标准、部署检查清单）。"
+        },
+        "en": {
+          "focus": "Understand the difference between Skills and Commands — Skills are knowledge (invoked), Commands are actions (user-triggered).",
+          "confusion": "Do not write a Skill as a complete instruction flow. Skills provide knowledge and templates; Claude decides how to use them.",
+          "goal": "Create a domain Skill for your own project (e.g., code review standards, deployment checklist)."
+        },
+        "ja": {
+          "focus": "Skills と Commands の違いを理解する。Skills は知識、Commands はアクション。",
+          "confusion": "Skill を完全な指示フローとして書かない。Skill は知識を提供し、Claude が活用方法を決めます。",
+          "goal": "自分のプロジェクト用にドメインスキルを1つ作成する。"
+        }
+      }
+    },
+    "bp04": {
+      "id": "bp04",
+      "title": "Hooks",
+      "layer": "best-practice",
+      "prevVersion": "bp03",
+      "nextVersion": "bp05",
+      "loc": 0,
+      "tools": [],
+      "newTools": [],
+      "classes": [],
+      "functions": [],
+      "isBestPractice": true,
+      "configFields": 0,
+      "tipsCount": 3,
+      "relatedChapters": [
+        "s08"
+      ],
+      "content": {
+        "zh": {
+          "subtitle": "钩子与自动化",
+          "coreAddition": "生命周期钩子 + 自动化工作流",
+          "keyInsight": "Hooks 让你在 Claude 的每个动作前后插入自定义逻辑——从音效提醒到自动代码检查。"
+        },
+        "en": {
+          "subtitle": "Hooks & Automation",
+          "coreAddition": "Lifecycle hooks + automated workflows",
+          "keyInsight": "Hooks let you insert custom logic before and after every Claude action — from sound alerts to automated code checks."
+        },
+        "ja": {
+          "subtitle": "フック＆自動化",
+          "coreAddition": "ライフサイクルフック + 自動化ワークフロー",
+          "keyInsight": "Hooks により Claude の各アクションの前後にカスタムロジックを挿入できます。"
+        }
+      },
+      "guide": {
+        "zh": {
+          "focus": "理解 PreToolUse 和 PostToolUse 两个核心钩子的触发时机和参数。",
+          "confusion": "钩子不是\"中间件\"——它们是同步执行的，长时间运行的钩子会阻塞 Claude 的响应。",
+          "goal": "配置一个实用的 PostToolUse 钩子（如：写文件后自动格式化）。"
+        },
+        "en": {
+          "focus": "Understand the timing and parameters of PreToolUse and PostToolUse hooks.",
+          "confusion": "Hooks are not \"middleware\" — they execute synchronously. Long-running hooks block Claude's response.",
+          "goal": "Configure a practical PostToolUse hook (e.g., auto-format after file write)."
+        },
+        "ja": {
+          "focus": "PreToolUse と PostToolUse の発火タイミングとパラメータを理解する。",
+          "confusion": "フックは「ミドルウェア」ではなく同期実行です。長時間実行のフックは応答をブロックします。",
+          "goal": "実用的な PostToolUse フックを設定する（例：ファイル書き込み後の自動フォーマット）。"
+        }
+      }
+    },
+    "bp05": {
+      "id": "bp05",
+      "title": "Subagents",
+      "layer": "best-practice",
+      "prevVersion": "bp04",
+      "nextVersion": "bp06",
+      "loc": 0,
+      "tools": [],
+      "newTools": [],
+      "classes": [],
+      "functions": [],
+      "isBestPractice": true,
+      "configFields": 16,
+      "tipsCount": 2,
+      "relatedChapters": [
+        "s04",
+        "s15",
+        "s16"
+      ],
+      "content": {
+        "zh": {
+          "subtitle": "子代理编排",
+          "coreAddition": "16 个 frontmatter 字段 + 5 种官方类型 + Agent Teams",
+          "keyInsight": "子代理是\"分身术\"——让多个 Claude 各司其职，比一个 Claude 做所有事高效得多。"
+        },
+        "en": {
+          "subtitle": "Subagent Orchestration",
+          "coreAddition": "16 frontmatter fields + 5 official types + Agent Teams",
+          "keyInsight": "Subagents are \"clones\" — having multiple Claudes each do one thing is far more efficient than one Claude doing everything."
+        },
+        "ja": {
+          "subtitle": "サブエージェント編成",
+          "coreAddition": "16 の frontmatter フィールド + 5 種の公式タイプ + Agent Teams",
+          "keyInsight": "サブエージェントは「分身」です。複数の Claude が分担する方が効率的です。"
+        }
+      },
+      "guide": {
+        "zh": {
+          "focus": "掌握 5 种官方子代理类型的适用场景：general-purpose / code-reviewer / code-simplifier 等。",
+          "confusion": "子代理之间不共享上下文——每个子代理从头开始，需要在 prompt 中提供完整背景。",
+          "goal": "设计一个包含 2-3 个专业子代理的工作流（如：研究→规划→实现）。"
+        },
+        "en": {
+          "focus": "Master the use cases for 5 official subagent types: general-purpose / code-reviewer / code-simplifier etc.",
+          "confusion": "Subagents do not share context — each starts fresh. Provide complete background in the prompt.",
+          "goal": "Design a workflow with 2-3 specialized subagents (e.g., research → plan → implement)."
+        },
+        "ja": {
+          "focus": "5 種の公式サブエージェントタイプの使い分けを把握する。",
+          "confusion": "サブエージェント間でコンテキストは共有されません。プロンプトに完全な背景を提供する必要があります。",
+          "goal": "2-3 の専門サブエージェントを含むワークフローを設計する。"
+        }
+      }
+    },
+    "bp06": {
+      "id": "bp06",
+      "title": "MCP & Tools",
+      "layer": "best-practice",
+      "prevVersion": "bp05",
+      "nextVersion": "bp07",
+      "loc": 0,
+      "tools": [],
+      "newTools": [],
+      "classes": [],
+      "functions": [],
+      "isBestPractice": true,
+      "configFields": 0,
+      "tipsCount": 3,
+      "relatedChapters": [
+        "s19"
+      ],
+      "content": {
+        "zh": {
+          "subtitle": "MCP 与工具集成",
+          "coreAddition": "5 个推荐 MCP + 配置模式",
+          "keyInsight": "MCP 是 Claude Code 的\"外接大脑\"——让它能访问浏览器、数据库、第三方 API 等外部世界。"
+        },
+        "en": {
+          "subtitle": "MCP & Tool Integration",
+          "coreAddition": "5 recommended MCPs + configuration patterns",
+          "keyInsight": "MCP is Claude Code's \"external brain\" — giving it access to browsers, databases, third-party APIs, and the outside world."
+        },
+        "ja": {
+          "subtitle": "MCP＆ツール統合",
+          "coreAddition": "5 つの推奨 MCP + 設定パターン",
+          "keyInsight": "MCP は Claude Code の「外部脳」です。ブラウザ、データベース、サードパーティ API へのアクセスを提供します。"
+        }
+      },
+      "guide": {
+        "zh": {
+          "focus": "理解 MCP 的配置方式（settings.json 中的 mcpServers 字段）和 5 个日常推荐 MCP。",
+          "confusion": "MCP 不是\"插件商店\"——每个 MCP Server 需要独立配置和运行，注意安全风险。",
+          "goal": "为自己的开发环境配置至少 2 个 MCP（如 Context7 + Playwright）。"
+        },
+        "en": {
+          "focus": "Understand MCP configuration (mcpServers field in settings.json) and the 5 recommended daily-use MCPs.",
+          "confusion": "MCP is not a \"plugin store\" — each MCP Server needs independent setup and has security implications.",
+          "goal": "Configure at least 2 MCPs for your dev environment (e.g., Context7 + Playwright)."
+        },
+        "ja": {
+          "focus": "MCP の設定方法（settings.json の mcpServers フィールド）と推奨 MCP を理解する。",
+          "confusion": "MCP は「プラグインストア」ではなく、各 MCP Server は個別に設定と運用が必要です。",
+          "goal": "自分の開発環境に最低 2 つの MCP を設定する。"
+        }
+      }
+    },
+    "bp07": {
+      "id": "bp07",
+      "title": "Settings & Workflows",
+      "layer": "best-practice",
+      "prevVersion": "bp06",
+      "nextVersion": null,
+      "loc": 0,
+      "tools": [],
+      "newTools": [],
+      "classes": [],
+      "functions": [],
+      "isBestPractice": true,
+      "configFields": 0,
+      "tipsCount": 0,
+      "relatedChapters": [
+        "s07",
+        "s10"
+      ],
+      "content": {
+        "zh": {
+          "subtitle": "配置与工作流",
+          "coreAddition": "Settings.json 全字段 + Power-ups + CLI 参数",
+          "keyInsight": "真正的高效不是打字更快，而是让 Claude Code 的默认行为完全符合你的团队习惯。"
+        },
+        "en": {
+          "subtitle": "Settings & Workflows",
+          "coreAddition": "Settings.json full fields + Power-ups + CLI flags",
+          "keyInsight": "True efficiency is not typing faster — it is making Claude Code's defaults match your team's habits perfectly."
+        },
+        "ja": {
+          "subtitle": "設定＆ワークフロー",
+          "coreAddition": "Settings.json 全フィールド + Power-ups + CLI フラグ",
+          "keyInsight": "本当の効率化はタイピングの速さではなく、Claude Code のデフォルト動作をチームの習慣に合わせることです。"
+        }
+      },
+      "guide": {
+        "zh": {
+          "focus": "了解 settings.json 的三级层次（全局 > 项目 > 本地）和关键配置项。",
+          "confusion": "不要把所有配置都放在全局——项目特定的规则放项目级，个人偏好放全局。",
+          "goal": "为自己的项目建立完整的 settings.json + CLAUDE.md + commands 三件套。"
+        },
+        "en": {
+          "focus": "Understand the three-tier hierarchy of settings.json (global > project > local) and key fields.",
+          "confusion": "Do not put everything in global settings — project-specific rules go in project settings, personal preferences go in global.",
+          "goal": "Set up a complete settings.json + CLAUDE.md + commands trio for your project."
+        },
+        "ja": {
+          "focus": "settings.json の三層構造（グローバル > プロジェクト > ローカル）と重要なフィールドを理解する。",
+          "confusion": "すべてをグローバル設定に入れない。プロジェクト固有のルールはプロジェクト設定に。",
+          "goal": "自分のプロジェクト用に settings.json + CLAUDE.md + commands の三点セットを整備する。"
+        }
+      }
     }
   },
   "stageCheckpoints": [
@@ -2196,6 +2577,26 @@ module.exports = {
         "zh": "一个拥有长期队友、共享协议、自治认领、隔离执行车道，并把原生工具与外部能力接回同一控制面的平台雏形。",
         "en": "An agent platform with persistent teammates, shared protocols, autonomous claiming, isolated execution lanes, and one control plane for native and external capabilities.",
         "ja": "永続 teammate、共有 protocol、自律 claim、分離 execution lane、そして native/external capability を 1 つの control plane へ戻したプラットフォームの骨格。"
+      }
+    },
+    {
+      "layer": "best-practice",
+      "entryVersion": "bp01",
+      "endVersion": "bp07",
+      "title": {
+        "zh": "掌握最佳实践",
+        "en": "Master Best Practices",
+        "ja": "ベストプラクティスを習得"
+      },
+      "body": {
+        "zh": "从理论到实战——学习如何配置 CLAUDE.md、Commands、Skills、Hooks、Subagents、MCP，打造属于你的 Claude Code 工作流。",
+        "en": "From theory to practice — learn to configure CLAUDE.md, Commands, Skills, Hooks, Subagents, MCP, and build your own Claude Code workflow.",
+        "ja": "理論から実践へ。CLAUDE.md、Commands、Skills、Hooks、Subagents、MCP を設定し、独自の Claude Code ワークフローを構築。"
+      },
+      "rebuild": {
+        "zh": "为自己的项目建立完整的 Claude Code 配置体系",
+        "en": "Build a complete Claude Code configuration system for your own project",
+        "ja": "自分のプロジェクト用の完全な Claude Code 設定体系を構築"
       }
     }
   ],
@@ -2507,5 +2908,14 @@ module.exports = {
       "newTools": [],
       "locDelta": -101
     }
+  ],
+  "bpOrder": [
+    "bp01",
+    "bp02",
+    "bp03",
+    "bp04",
+    "bp05",
+    "bp06",
+    "bp07"
   ]
 };

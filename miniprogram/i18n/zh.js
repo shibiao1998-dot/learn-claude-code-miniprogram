@@ -13,7 +13,9 @@ module.exports = {
     "title": "参考资料",
     "subtitle": "术语表、架构地图与深入阅读补充文档。",
     "foundation_title": "基础文档",
-    "deep_dive_title": "深入阅读"
+    "deep_dive_title": "深入阅读",
+    "tips_title": "实用技巧",
+    "tips_subtitle": "来自 Claude Code 团队的实战经验"
   },
   "home": {
     "hero_title": "Learn Claude Code",
@@ -192,13 +194,21 @@ module.exports = {
     "s16": "团队协议",
     "s17": "自主代理",
     "s18": "Worktree 隔离",
-    "s19": "MCP 与插件"
+    "s19": "MCP 与插件",
+    "bp01": "CLAUDE.md 与 Memory",
+    "bp02": "Commands 命令",
+    "bp03": "Skills 技能",
+    "bp04": "Hooks 钩子",
+    "bp05": "Subagents 子代理",
+    "bp06": "MCP 与工具",
+    "bp07": "Settings 与工作流"
   },
   "layer_labels": {
     "core": "核心闭环",
     "hardening": "系统加固",
     "runtime": "任务运行时",
-    "platform": "多 Agent 平台"
+    "platform": "多 Agent 平台",
+    "best-practice": "最佳实践"
   },
   "viz": {
     "s01": "Agent 主循环",
@@ -221,5 +231,4 @@ module.exports = {
     "s18": "Worktree 任务隔离",
     "s19": "外部能力总线"
   }
-}
-;
+};

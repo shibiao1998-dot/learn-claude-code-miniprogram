@@ -1,585 +1,728 @@
 // subpkg-chapters/pages/chapter/chapter.js
+var i18n = require('../../../utils/i18n');
+var gameEngine = require('../../../utils/game-engine');
+var gameCards = require('../../../utils/game-cards');
+var gameDaily = require('../../../utils/game-daily');
+var gameSave = require('../../../utils/game-save');
+var gameReview = require('../../../utils/game-review');
+var stageData = require('../../data/game-stages');
+var knowledgeCards = require('../../data/knowledge-cards');
+var sound = require('../../../utils/sound');
+var shareCard = require('../../../utils/share-card');
 
-const i18n = require('../../../utils/i18n');
-const progress = require('../../../utils/progress');
-const eventBus = require('../../../utils/event-bus');
-const highlight = require('../../../utils/highlight');
-const markdownParser = require('../../../utils/markdown-parser');
-const dataLoader = require('../../data-loader');
-const meta = require('../../../data/meta.js');
-
-// ─── Deep Dive：章节 → 关联 Bridge Docs 映射 ───────────────────────────────
-const CHAPTER_BRIDGE_DOCS = {
-  s01: ['s00-architecture-overview', 's00b-one-request-lifecycle', 'data-structures'],
-  s02: ['s02a-tool-control-plane', 's02b-tool-execution-runtime', 's00-architecture-overview'],
-  s03: ['data-structures', 'entity-map', 's00-architecture-overview'],
-  s04: ['data-structures', 's00-architecture-overview', 's00b-one-request-lifecycle'],
-  s05: ['data-structures', 's00-architecture-overview'],
-  s06: ['s00-architecture-overview', 's00b-one-request-lifecycle', 's00c-query-transition-model'],
-  s07: ['s02a-tool-control-plane', 's00a-query-control-plane', 'entity-map'],
-  s08: ['s02a-tool-control-plane', 's00a-query-control-plane', 'entity-map'],
-  s09: ['data-structures', 's00-architecture-overview', 'entity-map'],
-  s10: ['s10a-message-prompt-pipeline', 's00a-query-control-plane', 's00b-one-request-lifecycle'],
-  s11: ['s00c-query-transition-model', 's00b-one-request-lifecycle', 'data-structures'],
-  s12: ['data-structures', 's00-architecture-overview', 's00b-one-request-lifecycle'],
-  s13: ['s13a-runtime-task-model', 'data-structures', 'entity-map'],
-  s14: ['s13a-runtime-task-model', 's00-architecture-overview'],
-  s15: ['team-task-lane-model', 'entity-map', 's00-architecture-overview'],
-  s16: ['team-task-lane-model', 'data-structures'],
-  s17: ['team-task-lane-model', 's00-architecture-overview'],
-  s18: ['team-task-lane-model', 'data-structures'],
-  s19: ['s19a-mcp-capability-layers', 's02a-tool-control-plane', 's00-architecture-overview'],
-};
-
-// slice 名称 i18n
-const SLICE_LABELS = {
-  mainline: { zh: '主线流程', en: 'Mainline', ja: 'メインライン' },
-  control:  { zh: '控制层',   en: 'Control',  ja: 'コントロール' },
-  state:    { zh: '状态管理', en: 'State',     ja: '状態管理' },
-  lanes:    { zh: '执行车道', en: 'Lanes',     ja: 'レーン' },
-};
-
-// 模拟器步骤类型 → 人类可读标签
-const SIM_TYPE_LABELS = {
-  user_message: 'User',
-  assistant_text: 'Assistant',
-  tool_call: 'Tool Call',
-  tool_result: 'Tool Result',
-};
-
-function _getSliceLabel(sliceId, locale) {
-  const entry = SLICE_LABELS[sliceId];
-  if (!entry) return sliceId;
-  return entry[locale] || entry.en || sliceId;
+function _findStage(chapterId) {
+  var stageId = 'stage_' + chapterId;
+  var stages = stageData.stages;
+  for (var i = 0; i < stages.length; i++) {
+    if (stages[i].id === stageId) return stages[i];
+  }
+  return null;
 }
 
-// 将 flow nodes/edges 构建成顺序展示列表
-// 策略：拓扑排序 → 按 y 坐标排序后顺序展示，并附加出边 label
-function _buildFlowList(nodes, edges) {
-  if (!nodes || !nodes.length) return [];
-
-  // 以 y 坐标升序排列节点（流程图从上到下）
-  const sorted = nodes.slice().sort((a, b) => (a.y || 0) - (b.y || 0));
-
-  // 建立从 id → 出边 label 的映射
-  const outLabels = {};
-  (edges || []).forEach(e => {
-    if (e.label) {
-      if (!outLabels[e.from]) outLabels[e.from] = [];
-      outLabels[e.from].push({ to: e.to, label: e.label });
-    }
-  });
-
-  return sorted.map((node, idx) => {
-    const edgeLabels = outLabels[node.id] || [];
-    const edgeSummary = edgeLabels.map(e => e.label).join(' / ');
-    return {
-      id: node.id,
-      label: node.label.replace(/\n/g, ' '),
-      type: node.type,
-      edgeSummary,
-      isLast: idx === sorted.length - 1,
-    };
-  });
+function _findKnowledgeCards(stageId) {
+  var stages = knowledgeCards.stages;
+  for (var i = 0; i < stages.length; i++) {
+    if (stages[i].stage_id === stageId) return stages[i].cards;
+  }
+  return [];
 }
 
-// 图层颜色映射（覆盖 meta.json 中的颜色，使用设计系统色值）
-const LAYER_COLORS = {
-  core: '#059669',
-  hardening: '#2563EB',
-  runtime: '#7C3AED',
-  platform: '#DB2777',
+var REGION_COLORS = {
+  core: '#10B981',
+  tools: '#3B82F6',
+  runtime: '#8B5CF6',
+  network: '#F43F5E',
+  practice: '#F59E0B'
 };
-
-// 语法高亮 token 颜色映射（VS Code Dark+ 风格）
-const TOKEN_COLORS = {
-  comment: '#6A9955',
-  string: '#CE9178',
-  keyword: '#569CD6',
-  builtin: '#4EC9B0',
-  decorator: '#DCDCAA',
-  number: '#B5CEA8',
-  plain: '#D4D4D4',
-};
-
-// 最大渲染行数（避免 WXML 节点过多）
-const MAX_CODE_LINES = 300;
 
 Page({
   data: {
-    // 章节基本信息
-    id: '',
+    mode: 'stage',
     locale: 'zh',
-    t: {},
-    chapterId: '',
-    chapterTitle: '',
-    chapterSubtitle: '',
-    chapterKeyInsight: '',
-    chapterCoreAddition: '',
-    chapterLayer: '',
-    chapterLayerColor: '',
-    chapterLayerLabel: '',
-    chapterLoc: 0,
-    chapterTools: [],
-    chapterNewTools: [],
-    prevId: null,
-    nextId: null,
-    guide: null,
-    isGuideExpanded: false,
-    isRead: false,
+    stageTitle: '',
+    regionLabel: '',
+    regionColor: '#10B981',
 
-    // Tab 状态
-    activeTab: 'learn',
-    tabs: [],
+    phase: 0,
+    phaseLabel: '',
+    finished: false,
 
-    // Learn Tab
-    docNodes: [],
+    showLearn: false,
+    learnCards: [],
+    learnCardIndex: 0,
+    learnCardTotal: 0,
+    learnCompleted: false,
 
-    // Code Tab
-    codeLines: [],        // [[{color, value}], ...]
-    codeLoaded: false,
-    filename: '',
-    totalLoc: 0,
-    displayLoc: 0,        // 实际显示行数
-    isTruncated: false,   // 是否被截断
-    functions: [],        // [{name, signature, startLine}]
-    classes: [],          // [{name, startLine}]
+    currentQuestion: null,
+    questionIndex: 0,
+    totalQuestions: 0,
+    progressPercent: 0,
 
-    // diff 信息
-    diff: null,
+    showFeedback: false,
+    feedbackCorrect: false,
+    feedbackExplanation: '',
+    feedbackAnswer: '',
+    selectedOption: '',
 
-    // Deep Dive Tab
-    deepDiveLoaded: false,
-    flowItems: [],          // [{id, label, type, edgeSummary, isLast}]
-    blueprintData: null,    // {summary, slices, records, handoff}
-    simulatorSteps: [],     // [{type, content, toolName, annotation, index, isActive}]
-    simCurrentStep: 0,
-    simCurrentStepData: null,  // 当前步骤完整数据（含 typeLabel）
-    simPrevStep: null,         // 上一步摘要
-    simNextStep: null,         // 下一步摘要
-    simProgressPercent: 0,     // 进度百分比
-    bridgeDocLinks: [],     // [{slug, title, summary, kind}]
+    showReview: false,
+    reviewCards: [],
+
+    showSettlement: false,
+    result: null,
+    earnedCardDetails: [],
+    newLevel: null,
+    animStep: 0,
+    reviewMode: false,
+    reviewMastered: 0,
+    reviewRemaining: 0,
+
+    comboCount: 0,
+    comboAnimTrigger: 0,
+    comboBreakTrigger: 0,
+    comboBreakShow: false,
+    feedbackAnimTrigger: 0,
+    floatScoreText: '',
+    maxCombo: 0,
+    comboMultiplier: 1.0,
+    baseExp: 0,
+
+    starRevealTrigger0: '',
+    starRevealTrigger1: '',
+    starRevealTrigger2: '',
+    scoreRevealTrigger: '',
+    expRevealTrigger: ''
   },
 
-  onLoad(options) {
-    const id = options.id || 's01';
-    this._buildPageData(id);
+  _session: null,
 
-    // 监听语言切换事件
-    this._localeListener = () => {
-      this._buildPageData(this.data.id);
-    };
-    eventBus.on('locale:change', this._localeListener);
-  },
+  onLoad: function(options) {
+    var locale = i18n.getLocale();
+    this.setData({ locale: locale });
 
-  onUnload() {
-    if (this._localeListener) {
-      eventBus.off('locale:change', this._localeListener);
+    if (options.mode === 'review') {
+      this._startReview(locale);
+    } else if (options.mode === 'daily') {
+      this._startDaily(locale);
+    } else {
+      var chapterId = options.id || 's01';
+      this._startStage(chapterId, locale);
     }
   },
 
-  onShow() {
-    // 每次显示时刷新已读状态（可能在其他页面被修改）
-    const id = this.data.id;
-    if (id) {
-      this.setData({ isRead: progress.isRead(id) });
-    }
-  },
-
-  /**
-   * 根据 locale 静态加载 i18n 消息包（绕过动态 require 限制）
-   */
-  _getMessages(locale) {
-    // 微信小程序不支持动态 require，用 switch 静态映射
-    switch (locale) {
-      case 'en': return require('../../../i18n/en.js');
-      case 'ja': return require('../../../i18n/ja.js');
-      default:   return require('../../../i18n/zh.js');
-    }
-  },
-
-  /**
-   * 构建页面所有数据
-   */
-  _buildPageData(id) {
-    const locale = i18n.getLocale();
-    let messages = {};
-    try {
-      messages = this._getMessages(locale);
-    } catch (e) {
-      try { messages = require('../../../i18n/zh.js'); } catch (e2) { messages = {}; }
-    }
-
-    const v = meta.versions[id];
-    if (!v) {
-      console.error('[chapter] version not found:', id);
+  _startStage: function(chapterId, locale) {
+    var stage = _findStage(chapterId);
+    if (!stage) {
+      wx.showToast({ title: '关卡未找到', icon: 'none' });
+      wx.navigateBack();
       return;
     }
 
-    const content = v.content[locale] || v.content.zh || v.content.en || {};
-    const guide = v.guide[locale] || v.guide.zh || v.guide.en || {};
-    const diff = meta.diffs ? meta.diffs.find(d => d.to === id) || null : null;
+    var t = stage.title;
+    var title = t[locale] || t.zh || t.en || chapterId;
+    var regionLabels = { core: 'CORE/', tools: 'TOOLS/', runtime: 'RUNTIME/', network: 'NETWORK/', practice: 'PRACTICE/' };
 
-    // 章节标题（优先 i18n sessions）
-    const chapterTitle = (messages.sessions && messages.sessions[id]) || v.title;
-    const layerLabels = messages.layer_labels || {};
+    this._session = gameEngine.createSession(stage);
+    this._stageChapterId = chapterId;
 
-    // 加载 Markdown 文档并解析
-    let docNodes = [];
-    try {
-      const doc = dataLoader.loadChapterDoc(id, locale);
-      if (doc && doc.content) {
-        docNodes = markdownParser.parse(doc.content);
-      } else {
-        docNodes = [{ type: 'paragraph', content: '文档内容暂未加载。' }];
-      }
-    } catch (e) {
-      console.error('[chapter] doc load error:', e);
-      docNodes = [{ type: 'paragraph', content: '文档加载失败，请重试。' }];
-    }
-
-    // 对 paragraph / list_item / blockquote 添加行内格式 HTML
-    docNodes.forEach(function(node) {
-      if (node.type === 'paragraph' || node.type === 'list_item' || node.type === 'blockquote') {
-        node.htmlContent = markdownParser.inlineToHtml(node.content);
-      }
+    var cards = _findKnowledgeCards(stage.id);
+    var localizedCards = cards.map(function(card) {
+      return {
+        id: card.id,
+        title: card.title[locale] || card.title.zh || '',
+        icon: card.icon,
+        content: card.content[locale] || card.content.zh || '',
+        code_example: card.code_example || '',
+        key_point: card.key_point[locale] || card.key_point.zh || ''
+      };
     });
 
-    // 构建文件名
-    const safeTitle = v.title.toLowerCase().replace(/\s+/g, '_').replace(/[^a-z0-9_]/g, '');
-    const filename = `${id}_${safeTitle}.py`;
+    if (localizedCards.length > 0) {
+      this.setData({
+        mode: 'stage',
+        stageTitle: title,
+        regionLabel: regionLabels[stage.region] || '',
+        regionColor: REGION_COLORS[stage.region] || '#10B981',
+        phase: 0,
+        phaseLabel: 'LEARN',
+        showLearn: true,
+        learnCards: localizedCards,
+        learnCardIndex: 0,
+        learnCardTotal: localizedCards.length,
+        learnCompleted: false,
+        totalQuestions: stage.questions.length
+      });
+    } else {
+      this._enterQuizPhase(locale, stage);
+    }
+  },
 
-    // Tab 配置
-    const vt = messages.version || {};
-    const tabs = [
-      { id: 'learn', label: vt.tab_learn || '学习' },
-      { id: 'code', label: vt.tab_code || '源码' },
-      { id: 'deep-dive', label: vt.tab_deep_dive || '深入探索' },
-    ];
+  _enterQuizPhase: function(locale, stage) {
+    if (!stage) {
+      var chapterId = this._stageChapterId;
+      stage = _findStage(chapterId);
+    }
+    var q = gameEngine.getCurrentQuestion(this._session);
+    this.setData({
+      phase: 1,
+      phaseLabel: 'QUIZ',
+      showLearn: false,
+      learnCompleted: true,
+      currentQuestion: this._formatQuestion(q, locale),
+      questionIndex: 1,
+      totalQuestions: stage.questions.length,
+      progressPercent: Math.round(1 / stage.questions.length * 100)
+    });
+  },
+
+  _startDaily: function(locale) {
+    var questions = gameDaily.getDailyQuestions(stageData.stages);
+    if (!questions || questions.length === 0) {
+      wx.showToast({ title: '每日挑战加载失败', icon: 'none' });
+      wx.navigateBack();
+      return;
+    }
+
+    var fakeDailyStage = {
+      id: 'stage_daily',
+      chapter: 'daily',
+      region: 'core',
+      questions: questions,
+      star_thresholds: [0.4, 0.7, 1.0],
+      reward_cards: []
+    };
+
+    this._session = gameEngine.createSession(fakeDailyStage);
+
+    var q = gameEngine.getCurrentQuestion(this._session);
+    this.setData({
+      mode: 'daily',
+      stageTitle: '每日挑战',
+      regionLabel: 'DAILY/',
+      regionColor: '#F59E0B',
+      phase: 1,
+      phaseLabel: 'CHALLENGE',
+      currentQuestion: this._formatQuestion(q, locale),
+      questionIndex: 1,
+      totalQuestions: questions.length,
+      progressPercent: Math.round(1 / questions.length * 100)
+    });
+  },
+
+  _startReview: function(locale) {
+    var queue = gameReview.getReviewQueue();
+    if (!queue || queue.length === 0) {
+      wx.showToast({ title: '暂无待复习题目', icon: 'none' });
+      wx.navigateBack();
+      return;
+    }
+
+    var allStages = stageData.stages;
+    var questions = [];
+    for (var i = 0; i < queue.length; i++) {
+      var qId = queue[i].questionId;
+      var found = false;
+      for (var s = 0; s < allStages.length; s++) {
+        var qs = allStages[s].questions;
+        for (var q = 0; q < qs.length; q++) {
+          if (qs[q].id === qId) {
+            questions.push(qs[q]);
+            found = true;
+            break;
+          }
+        }
+        if (found) break;
+      }
+    }
+
+    if (questions.length === 0) {
+      wx.showToast({ title: '题目数据加载失败', icon: 'none' });
+      wx.navigateBack();
+      return;
+    }
+
+    var fakeReviewStage = {
+      id: 'stage_review',
+      chapter: 'review',
+      region: 'core',
+      questions: questions,
+      star_thresholds: [0.4, 0.7, 1.0],
+      reward_cards: []
+    };
+
+    this._session = gameEngine.createSession(fakeReviewStage);
+
+    var firstQ = gameEngine.getCurrentQuestion(this._session);
+    this.setData({
+      mode: 'review',
+      reviewMode: true,
+      stageTitle: '错题复习',
+      regionLabel: 'REVIEW/',
+      regionColor: '#F59E0B',
+      phase: 1,
+      phaseLabel: 'REVIEW',
+      currentQuestion: this._formatQuestion(firstQ, locale),
+      questionIndex: 1,
+      totalQuestions: questions.length,
+      progressPercent: Math.round(1 / questions.length * 100)
+    });
+  },
+
+  _formatQuestion: function(q, locale) {
+    if (!q) return null;
+    var stem = q.stem;
+    var stemText = stem[locale] || stem.zh || stem.en || '';
+    var options = q.options.map(function(opt) {
+      var text = opt.text;
+      return {
+        id: opt.id,
+        text: text[locale] || text.zh || text.en || ''
+      };
+    });
+    var diffLabels = { 1: '>_', 2: '>>', 3: '>>>' };
+    return {
+      id: q.id,
+      stem: stemText,
+      options: options,
+      difficulty: q.difficulty,
+      diffLabel: diffLabels[q.difficulty] || '>_'
+    };
+  },
+
+  onLearnCardChange: function(e) {
+    var current = e.detail.current;
+    this.setData({ learnCardIndex: current });
+  },
+
+  startQuizFromLearn: function() {
+    var locale = this.data.locale;
+    gameSave.addExp(5);
+    this._enterQuizPhase(locale, null);
+  },
+
+  selectOption: function(e) {
+    if (this.data.showFeedback) return;
+    var optionId = e.currentTarget.dataset.optionid;
+    this.setData({ selectedOption: optionId });
+  },
+
+  confirmAnswer: function() {
+    if (!this.data.selectedOption || this.data.showFeedback) return;
+
+    var session = this._session;
+    var q = this.data.currentQuestion;
+    var locale = this.data.locale;
+    var result = gameEngine.submitAnswer(session, q.id, this.data.selectedOption);
+
+    if (!result) return;
+
+    var explanation = result.explanation;
+    var explText = explanation[locale] || explanation.zh || explanation.en || '';
+
+    var updateData = {
+      showFeedback: true,
+      feedbackCorrect: result.correct,
+      feedbackExplanation: explText,
+      feedbackAnswer: result.answer
+    };
+
+    if (result.correct) {
+      updateData.comboCount = result.combo;
+      updateData.comboAnimTrigger = Date.now();
+
+      var multiplierLabel = '';
+      if (result.combo >= 8) multiplierLabel = ' ×2.0';
+      else if (result.combo >= 5) multiplierLabel = ' ×1.5';
+      else if (result.combo >= 3) multiplierLabel = ' ×1.2';
+      updateData.floatScoreText = '+1' + multiplierLabel;
+      updateData.feedbackAnimTrigger = Date.now();
+
+      wx.vibrateShort({ type: 'light' });
+      sound.play('correct');
+
+      if (result.combo === 3 || result.combo === 5 || result.combo === 8) {
+        sound.play('star');
+      }
+    } else {
+      var hadCombo = this.data.comboCount >= 2;
+      updateData.comboCount = 0;
+      updateData.floatScoreText = '';
+
+      if (hadCombo) {
+        updateData.comboBreakShow = true;
+        updateData.comboBreakTrigger = Date.now();
+      }
+
+      wx.vibrateShort({ type: 'heavy' });
+      sound.play('wrong');
+      gameReview.addToReview(q.id);
+    }
+
+    this.setData(updateData);
+  },
+
+  nextQuestion: function() {
+    var session = this._session;
+    var locale = this.data.locale;
+
+    // Review mode special handling (keep existing)
+    if (this.data.reviewMode && session.phase === 2) {
+      session.finished = true;
+      this._showSettlement();
+      return;
+    }
+
+    if (session.finished) {
+      this._showSettlement();
+      return;
+    }
+
+    var q = gameEngine.getCurrentQuestion(session);
+    if (!q) {
+      // Normal/daily mode: go directly to settlement
+      if (this.data.mode !== 'review') {
+        this._showSettlement();
+        return;
+      }
+      // Review mode: enter review phase
+      if (session.phase === 2) {
+        this._enterReviewPhase(locale);
+      } else {
+        this._showSettlement();
+      }
+      return;
+    }
+
+    var totalQ = this.data.phase === 3 ? session.wrongIds.length : session.questions.length;
+    var idx = session.currentIndex + 1;
 
     this.setData({
-      id,
-      locale,
-      t: messages,
-      chapterId: id,
-      chapterTitle,
-      chapterSubtitle: content.subtitle || '',
-      chapterKeyInsight: content.keyInsight || '',
-      chapterCoreAddition: content.coreAddition || '',
-      chapterLayer: v.layer || 'core',
-      chapterLayerColor: LAYER_COLORS[v.layer] || '#94A3B8',
-      chapterLayerLabel: layerLabels[v.layer] || v.layer,
-      chapterLoc: v.loc || 0,
-      chapterTools: v.tools || [],
-      chapterNewTools: v.newTools || [],
-      prevId: v.prevVersion || null,
-      nextId: v.nextVersion || null,
-      guide,
-      isGuideExpanded: false,
-      isRead: progress.isRead(id),
-      activeTab: 'learn',
-      tabs,
-      docNodes,
-      diff,
-      filename,
-      totalLoc: v.loc || 0,
-      displayLoc: 0,
-      functions: v.functions || [],
-      classes: v.classes || [],
-      codeLines: [],
-      codeLoaded: false,
-      // 重置 Deep Dive 状态
-      deepDiveLoaded: false,
-      flowItems: [],
-      blueprintData: null,
-      simulatorSteps: [],
-      simCurrentStep: 0,
-      simCurrentStepData: null,
-      simPrevStep: null,
-      simNextStep: null,
-      simProgressPercent: 0,
-      bridgeDocLinks: [],
+      currentQuestion: this._formatQuestion(q, locale),
+      showFeedback: false,
+      selectedOption: '',
+      feedbackCorrect: false,
+      feedbackExplanation: '',
+      feedbackAnswer: '',
+      comboBreakShow: false,
+      floatScoreText: '',
+      questionIndex: idx,
+      totalQuestions: totalQ,
+      progressPercent: Math.round(idx / totalQ * 100)
     });
-
-    // 标记已读
-    progress.markRead(id);
   },
 
-  /**
-   * 懒加载 Code Tab 的语法高亮数据
-   */
-  _loadCodeTab() {
-    if (this.data.codeLoaded) return;
-    const id = this.data.id;
+  _enterReviewPhase: function(locale) {
+    var session = this._session;
 
-    try {
-      const sources = require('../../../data/versions-source.js');
-      const source = sources[id] || '';
-      const allLines = source.split('\n');
-      const totalLoc = allLines.length;
-      const isTruncated = totalLoc > MAX_CODE_LINES;
-      const lines = allLines.slice(0, MAX_CODE_LINES);
+    var reviewCards = session.questions.map(function(q) {
+      var ans = session.answers[q.id];
+      if (!ans) return null;
+      var stemText = q.stem[locale] || q.stem.zh || q.stem.en || '';
+      var explText = q.explanation[locale] || q.explanation.zh || q.explanation.en || '';
+      var correctText = '';
+      for (var i = 0; i < q.options.length; i++) {
+        if (q.options[i].id === q.answer) {
+          var t = q.options[i].text;
+          correctText = t[locale] || t.zh || t.en || '';
+          break;
+        }
+      }
+      return {
+        stem: stemText,
+        correct: ans.correct,
+        correctAnswer: correctText,
+        explanation: explText
+      };
+    }).filter(Boolean);
 
-      const codeLines = lines.map((line) => {
-        // 空行给一个空格保持行高
-        const tokens = highlight.tokenize(line.length > 0 ? line : ' ');
-        return tokens.map(tk => ({
-          color: TOKEN_COLORS[tk.type] || TOKEN_COLORS.plain,
-          value: tk.value,
-        }));
-      });
+    this.setData({
+      phase: 2,
+      phaseLabel: 'REVIEW',
+      showReview: true,
+      showFeedback: false,
+      reviewCards: reviewCards,
+      currentQuestion: null
+    });
+  },
 
+  continueAfterReview: function() {
+    var session = this._session;
+    var locale = this.data.locale;
+    gameEngine.completeReviewPhase(session);
+
+    if (session.finished) {
+      this._showSettlement();
+      return;
+    }
+
+    var q = gameEngine.getCurrentQuestion(session);
+    this.setData({
+      phase: 3,
+      phaseLabel: 'CONFIRM',
+      showReview: false,
+      currentQuestion: this._formatQuestion(q, locale),
+      questionIndex: 1,
+      totalQuestions: session.wrongIds.length,
+      progressPercent: Math.round(1 / session.wrongIds.length * 100)
+    });
+  },
+
+  _showSettlement: function() {
+    var session = this._session;
+    var result = gameEngine.getSessionResult(session);
+    var locale = this.data.locale;
+    var prevLevel = gameSave.getLevelInfo();
+
+    if (this.data.mode === 'review') {
+      var session = this._session;
+      var mastered = 0;
+      for (var i = 0; i < session.questions.length; i++) {
+        var qId = session.questions[i].id;
+        var ans = session.answers[qId];
+        var correct = ans && ans.correct;
+        gameReview.completeReview(qId, correct);
+        if (correct) mastered++;
+      }
+      gameSave.addExp(result.correctCount * 10);
+      var reviewStats = gameReview.getReviewStats();
       this.setData({
-        codeLines,
-        totalLoc,
-        displayLoc: lines.length,
-        isTruncated,
-        codeLoaded: true,
+        reviewMastered: mastered,
+        reviewRemaining: reviewStats.pending
       });
-    } catch (e) {
-      console.error('[chapter] source load error:', e);
-      this.setData({
-        codeLines: [[{ color: TOKEN_COLORS.comment, value: '# 源码加载失败' }]],
-        codeLoaded: true,
+    } else if (this.data.mode === 'daily') {
+      gameDaily.completeDailyChallenge(result.correctCount);
+    } else {
+      gameEngine.saveStageResult(result);
+      if (result.earnedCards.length > 0) {
+        gameCards.obtainCards(result.earnedCards);
+      }
+    }
+
+    var newLevelInfo = gameSave.getLevelInfo();
+    var leveledUp = newLevelInfo.level > prevLevel.level;
+
+    var earnedCardDetails = result.earnedCards.map(function(cardId) {
+      var card = gameCards.getCard(cardId);
+      if (!card) return null;
+      var name = card.name;
+      return {
+        id: card.id,
+        name: name[locale] || name.zh || name.en || cardId,
+        rarity: card.rarity,
+        region: card.region
+      };
+    }).filter(Boolean);
+
+    this.setData({
+      finished: true,
+      showSettlement: true,
+      showReview: false,
+      showFeedback: false,
+      currentQuestion: null,
+      comboCount: 0,
+      comboBreakShow: false,
+      result: {
+        stars: result.stars,
+        correctCount: result.correctCount,
+        totalQuestions: result.totalQuestions,
+        expReward: result.expReward,
+        ratio: Math.round(result.ratio * 100)
+      },
+      maxCombo: result.maxCombo,
+      comboMultiplier: result.comboMultiplier,
+      baseExp: result.baseExp,
+      earnedCardDetails: earnedCardDetails,
+      newLevel: leveledUp ? newLevelInfo : null
+    });
+
+    this._playSettlementAnimation();
+  },
+
+  _playSettlementAnimation: function() {
+    var self = this;
+    var stars = self.data.result ? self.data.result.stars : 0;
+
+    setTimeout(function() { self.setData({ animStep: 1 }); }, 100);
+
+    setTimeout(function() { self.setData({ animStep: 2 }); }, 400);
+
+    var starDelay = 650;
+    for (var i = 1; i <= 3; i++) {
+      (function(idx) {
+        setTimeout(function() {
+          self.setData({ animStep: 2 + idx });
+          var earned = idx <= stars ? 1 : 0;
+          var triggerKey = 'starRevealTrigger' + (idx - 1);
+          var triggerData = {};
+          triggerData[triggerKey] = (idx - 1) + '_' + earned + '_' + Date.now();
+          self.setData(triggerData);
+          if (earned) {
+            wx.vibrateShort({ type: 'medium' });
+            sound.play('star');
+          }
+        }, starDelay + (idx - 1) * 250);
+      })(i);
+    }
+
+    setTimeout(function() {
+      self.setData({ animStep: 6 });
+      var r = self.data.result;
+      self.setData({
+        scoreRevealTrigger: r.correctCount + '_' + r.totalQuestions + '_' + r.ratio + '_' + Date.now()
       });
+    }, 1500);
+
+    setTimeout(function() {
+      self.setData({ animStep: 7 });
+      var r = self.data.result;
+      self.setData({
+        expRevealTrigger: r.expReward + '_' + self.data.comboMultiplier + '_' + Date.now()
+      });
+    }, 1800);
+
+    var comboDelay = 2000;
+    if (self.data.maxCombo >= 3) {
+      setTimeout(function() { self.setData({ animStep: 8 }); }, comboDelay);
+      comboDelay = 2200;
+    }
+
+    if (self.data.newLevel) {
+      setTimeout(function() {
+        self.setData({ animStep: 9 });
+        wx.vibrateLong();
+        sound.play('levelup');
+      }, comboDelay);
+      comboDelay += 200;
+    }
+
+    var cardStartDelay = comboDelay + 200;
+    var earnedCards = self.data.earnedCardDetails || [];
+    for (var j = 0; j < earnedCards.length; j++) {
+      (function(idx) {
+        setTimeout(function() {
+          self.setData({ animStep: 10 + idx });
+          sound.play('card');
+        }, cardStartDelay + idx * 200);
+      })(j);
     }
   },
 
-  // ─── Tab 切换 ───────────────────────────────────────────
-  switchTab(e) {
-    const tab = e.currentTarget.dataset.tab;
-    if (tab === this.data.activeTab) return;
-    this.setData({ activeTab: tab });
-    if (tab === 'code' && !this.data.codeLoaded) {
-      this._loadCodeTab();
-    }
-    if (tab === 'deep-dive' && !this.data.deepDiveLoaded) {
-      this._loadDeepDiveTab();
-    }
-  },
-
-  // ─── 导读折叠/展开 ──────────────────────────────────────
-  toggleGuide() {
-    this.setData({ isGuideExpanded: !this.data.isGuideExpanded });
-  },
-
-  // ─── 前后章节导航 ────────────────────────────────────────
-  goToPrev() {
-    const { prevId } = this.data;
-    if (!prevId) return;
-    wx.redirectTo({
-      url: `/subpkg-chapters/pages/chapter/chapter?id=${prevId}`,
-    });
-  },
-
-  goToNext() {
-    const { nextId } = this.data;
-    if (!nextId) return;
-    wx.redirectTo({
-      url: `/subpkg-chapters/pages/chapter/chapter?id=${nextId}`,
-    });
-  },
-
-  goBack() {
+  goBack: function() {
     wx.navigateBack({ delta: 1 });
   },
 
-  // ─── 复制源码 ────────────────────────────────────────────
-  copySource() {
-    try {
-      const sources = require('../../../data/versions-source.js');
-      const source = sources[this.data.id] || '';
-      wx.setClipboardData({
-        data: source,
-        success() {
-          wx.showToast({ title: '已复制源码', icon: 'success', duration: 1500 });
-        },
-        fail() {
-          wx.showToast({ title: '复制失败', icon: 'none' });
-        },
+  retryStage: function() {
+    if (this.data.mode === 'daily') {
+      wx.navigateBack();
+      return;
+    }
+    var session = this._session;
+    if (!session) return;
+    var stage = _findStage(session.chapter);
+    if (stage) {
+      this._startStage(session.chapter, this.data.locale);
+      this.setData({
+        finished: false,
+        showSettlement: false,
+        showReview: false,
+        showFeedback: false,
+        selectedOption: '',
+        animStep: 0,
+        comboCount: 0,
+        comboBreakShow: false,
+        floatScoreText: '',
+        maxCombo: 0,
+        comboMultiplier: 1.0,
+        baseExp: 0,
+        starRevealTrigger0: '',
+        starRevealTrigger1: '',
+        starRevealTrigger2: '',
+        scoreRevealTrigger: '',
+        expRevealTrigger: ''
       });
-    } catch (e) {
-      wx.showToast({ title: '获取源码失败', icon: 'none' });
     }
   },
 
-  // ─── 跳转到指定函数行（scroll-into-view） ────────────────
-  scrollToFunc(e) {
-    const lineIndex = e.currentTarget.dataset.line;
-    if (lineIndex === undefined) return;
-    // scroll-into-view 用 id="line-{index}"
-    this.setData({ scrollToLineId: `line-${lineIndex - 1}` });
+  goToMap: function() {
+    wx.switchTab({ url: '/pages/timeline/timeline' });
   },
 
-  // ─── Deep Dive Tab ──────────────────────────────────────
-  _loadDeepDiveTab() {
-    const id = this.data.id;
-    const locale = this.data.locale;
-    const pick = (obj) => (obj && (obj[locale] || obj.en || obj.zh)) || '';
+  shareResult: function() {
+    if (!this.data.result) return;
+    var self = this;
+    var levelInfo = gameSave.getLevelInfo();
+    var shareData = {
+      title: self.data.stageTitle,
+      stars: self.data.result.stars,
+      score: self.data.result.correctCount,
+      total: self.data.result.totalQuestions,
+      ratio: self.data.result.ratio,
+      exp: self.data.result.expReward,
+      level: levelInfo.title + ' Lv.' + levelInfo.level,
+      cards: self.data.earnedCardDetails.map(function(c) {
+        return { name: c.name, rarity: c.rarity };
+      })
+    };
 
-    // 流程图数据
-    let flowItems = [];
-    try {
-      const flows = require('../../../data/flows.js');
-      const flow = flows[id] || null;
-      if (flow) {
-        flowItems = _buildFlowList(flow.nodes, flow.edges);
+    wx.showLoading({ title: '生成中...' });
+    shareCard.generateShareImage(shareData, function(tempFilePath) {
+      wx.hideLoading();
+      if (!tempFilePath) {
+        wx.showToast({ title: '生成失败', icon: 'none' });
+        return;
       }
-    } catch (e) {
-      console.error('[deep-dive] flows load error:', e);
-    }
-
-    // 架构蓝图
-    let blueprintData = null;
-    try {
-      const blueprints = require('../../../data/blueprints.js');
-      const blueprint = blueprints[id] || null;
-      if (blueprint) {
-        blueprintData = {
-          summary: pick(blueprint.summary),
-          slices: Object.entries(blueprint.slices || {}).map(([sliceId, items]) => ({
-            id: sliceId,
-            label: _getSliceLabel(sliceId, locale),
-            items: (Array.isArray(items) ? items : []).map(item => ({
-              name: pick(item.name),
-              detail: pick(item.detail),
-              fresh: !!item.fresh,
-            })),
-          })),
-          records: (blueprint.records || []).map(r => ({
-            name: typeof r.name === 'object' ? pick(r.name) : (r.name || ''),
-            detail: typeof r.detail === 'object' ? pick(r.detail) : (r.detail || ''),
-            fresh: !!r.fresh,
-          })),
-          handoff: (blueprint.handoff || []).map(h => typeof h === 'object' ? pick(h) : h),
-        };
-      }
-    } catch (e) {
-      console.error('[deep-dive] blueprints load error:', e);
-    }
-
-    // 模拟器数据
-    let simulatorSteps = [];
-    try {
-      const scenarios = require('../../../data/scenarios-all.js');
-      const scenario = scenarios[id] || null;
-      if (scenario && scenario.steps) {
-        simulatorSteps = scenario.steps.map((s, i) => ({
-          type: s.type,
-          content: s.content || '',
-          toolName: s.toolName || '',
-          annotation: s.annotation || '',
-          index: i,
-          isActive: i === 0,
-        }));
-      }
-    } catch (e) {
-      console.error('[deep-dive] scenarios load error:', e);
-    }
-
-    // Bridge Doc 链接
-    let bridgeDocLinks = [];
-    try {
-      const bridgeDocsMeta = require('../../../data/bridge-docs-meta.js');
-      const slugs = CHAPTER_BRIDGE_DOCS[id] || ['data-structures', 'entity-map', 's00-architecture-overview'];
-      bridgeDocLinks = slugs
-        .filter(slug => bridgeDocsMeta[slug])
-        .map(slug => {
-          const m = bridgeDocsMeta[slug];
-          return {
-            slug,
-            title: pick(m.title),
-            summary: pick(m.summary),
-            kind: m.kind || 'map',
-          };
-        });
-    } catch (e) {
-      console.error('[deep-dive] bridge-docs-meta load error:', e);
-    }
-
-    this.setData({
-      flowItems,
-      blueprintData,
-      simulatorSteps,
-      simCurrentStep: 0,
-      bridgeDocLinks,
-      deepDiveLoaded: true,
-    });
-
-    // 初始化模拟器焦点数据
-    if (simulatorSteps.length > 0) {
-      this._computeSimData();
-    }
-  },
-
-  /**
-   * 计算模拟器聚焦模式的数据：当前步骤 + 前后预览
-   */
-  _computeSimData() {
-    var steps = this.data.simulatorSteps;
-    var idx = this.data.simCurrentStep;
-    if (!steps || steps.length === 0) return;
-
-    var current = steps[idx];
-    var prev = idx > 0 ? steps[idx - 1] : null;
-    var next = idx < steps.length - 1 ? steps[idx + 1] : null;
-
-    this.setData({
-      simCurrentStepData: Object.assign({}, current, {
-        typeLabel: SIM_TYPE_LABELS[current.type] || current.type
-      }),
-      simPrevStep: prev ? {
-        typeLabel: SIM_TYPE_LABELS[prev.type] || prev.type,
-        contentPreview: (prev.content || '').slice(0, 40) + (prev.content && prev.content.length > 40 ? '...' : '')
-      } : null,
-      simNextStep: next ? {
-        typeLabel: SIM_TYPE_LABELS[next.type] || next.type,
-        contentPreview: (next.content || '').slice(0, 40) + (next.content && next.content.length > 40 ? '...' : '')
-      } : null,
-      simProgressPercent: Math.round((idx + 1) / steps.length * 100)
+      self._shareImagePath = tempFilePath;
+      wx.showActionSheet({
+        itemList: ['分享给好友', '保存到相册'],
+        success: function(res) {
+          if (res.tapIndex === 0) {
+            wx.showToast({ title: '请点击右上角分享', icon: 'none' });
+          } else if (res.tapIndex === 1) {
+            self._saveToAlbum(tempFilePath);
+          }
+        }
+      });
     });
   },
 
-  simNext() {
-    var simCurrentStep = this.data.simCurrentStep;
-    var simulatorSteps = this.data.simulatorSteps;
-    if (simCurrentStep >= simulatorSteps.length - 1) return;
-    var next = simCurrentStep + 1;
-    var steps = simulatorSteps.map(function(s, i) { return Object.assign({}, s, { isActive: i === next }); });
-    this.setData({ simCurrentStep: next, simulatorSteps: steps });
-    this._computeSimData();
-  },
-
-  simPrev() {
-    var simCurrentStep = this.data.simCurrentStep;
-    var simulatorSteps = this.data.simulatorSteps;
-    if (simCurrentStep <= 0) return;
-    var prev = simCurrentStep - 1;
-    var steps = simulatorSteps.map(function(s, i) { return Object.assign({}, s, { isActive: i === prev }); });
-    this.setData({ simCurrentStep: prev, simulatorSteps: steps });
-    this._computeSimData();
-  },
-
-  simReset() {
-    var steps = this.data.simulatorSteps.map(function(s, i) { return Object.assign({}, s, { isActive: i === 0 }); });
-    this.setData({ simCurrentStep: 0, simulatorSteps: steps });
-    this._computeSimData();
-  },
-
-  // 跳转到 Bridge Doc 页面
-  openBridgeDoc(e) {
-    const slug = e.currentTarget.dataset.slug;
-    if (!slug) return;
-    wx.navigateTo({
-      url: `/subpkg-chapters/pages/bridge-doc/bridge-doc?slug=${slug}`,
+  _saveToAlbum: function(filePath) {
+    wx.saveImageToPhotosAlbum({
+      filePath: filePath,
+      success: function() {
+        wx.showToast({ title: '已保存到相册', icon: 'success' });
+      },
+      fail: function(err) {
+        if (err.errMsg && err.errMsg.indexOf('auth deny') !== -1) {
+          wx.showModal({
+            title: '需要相册权限',
+            content: '请在设置中开启相册访问权限',
+            confirmText: '去设置',
+            success: function(res) {
+              if (res.confirm) {
+                wx.openSetting();
+              }
+            }
+          });
+        } else {
+          wx.showToast({ title: '保存失败', icon: 'none' });
+        }
+      }
     });
   },
 
-  // ─── 跳转到指定函数行（scroll-into-view） ────────────────
-  scrollToFunc(e) {
-    const lineIndex = e.currentTarget.dataset.line;
-    if (lineIndex === undefined) return;
-    // scroll-into-view 用 id="line-{index}"
-    this.setData({ scrollToLineId: `line-${lineIndex - 1}` });
+  onShareAppMessage: function() {
+    var shareObj = {
+      title: 'Claude Code Terminal — 闯关',
+      path: '/pages/home/home'
+    };
+    if (this._shareImagePath) {
+      shareObj.imageUrl = this._shareImagePath;
+    }
+    return shareObj;
   },
+
+  onShareTimeline: function() {
+    return {
+      title: 'Claude Code Terminal — 闯关'
+    };
+  }
 });

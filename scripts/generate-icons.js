@@ -14,8 +14,8 @@ const SIZE = 81;
 const OUTPUT_DIR = path.join(__dirname, '..', 'miniprogram', 'assets', 'icons');
 
 // Colors
-const INACTIVE = { r: 148, g: 163, b: 184 }; // #94A3B8
-const ACTIVE = { r: 15, g: 23, b: 42 };       // #0F172A
+const INACTIVE = { r: 148, g: 163, b: 184 };  // #94A3B8
+const ACTIVE = { r: 30, g: 41, b: 59 };       // #1E293B
 
 /**
  * Create an 81x81 RGBA pixel buffer (transparent background)
