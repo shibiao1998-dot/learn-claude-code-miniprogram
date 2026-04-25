@@ -9,3 +9,6 @@ miniprogram/project.private.config.json
 
 # Node
 node_modules/
+
+# Git worktrees (superpowers isolation workspaces)
+.worktrees/
