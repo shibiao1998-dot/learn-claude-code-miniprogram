@@ -79,7 +79,13 @@ Page({
     comboCount: 0,
     maxCombo: 0,
     comboMultiplier: 1.0,  // populated by _showSettlement() in sub-plan 3
-    baseExp: 0             // populated by _showSettlement() in sub-plan 3
+    baseExp: 0,            // populated by _showSettlement() in sub-plan 3
+
+    comboAnimTrigger: 0,
+    comboBreakTrigger: 0,
+    comboBreakShow: false,
+    feedbackAnimTrigger: 0,
+    floatScoreText: ''
   },
 
   _session: null,
@@ -320,6 +326,20 @@ Page({
         updateData.maxCombo = result.combo;
       }
 
+      // Build float score label: base +1 with optional multiplier suffix
+      var multiplier = gameEngine.getComboMultiplier(result.combo);
+      var scoreLabel = '+1';
+      if (multiplier >= 2.0) {
+        scoreLabel = '+1 ×2.0';
+      } else if (multiplier >= 1.5) {
+        scoreLabel = '+1 ×1.5';
+      } else if (multiplier >= 1.2) {
+        scoreLabel = '+1 ×1.2';
+      }
+      updateData.floatScoreText = scoreLabel;
+      updateData.comboAnimTrigger = Date.now();
+      updateData.feedbackAnimTrigger = Date.now();
+
       wx.vibrateShort({ type: 'light' });
       sound.play('correct');
 
@@ -327,7 +347,13 @@ Page({
         sound.play('star');
       }
     } else {
+      // Combo break: show overlay only if there was a streak of 2+
+      if (this.data.comboCount >= 2) {
+        updateData.comboBreakShow = true;
+        updateData.comboBreakTrigger = Date.now();
+      }
       updateData.comboCount = 0;
+      updateData.floatScoreText = '';
 
       wx.vibrateShort({ type: 'heavy' });
       sound.play('wrong');
@@ -381,7 +407,9 @@ Page({
       feedbackAnswer: '',
       questionIndex: idx,
       totalQuestions: totalQ,
-      progressPercent: Math.round(idx / totalQ * 100)
+      progressPercent: Math.round(idx / totalQ * 100),
+      comboBreakShow: false,
+      floatScoreText: ''
     });
   },
 

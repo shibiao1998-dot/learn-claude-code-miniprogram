@@ -1,5 +1,6 @@
 <!-- subpkg-chapters/pages/chapter/chapter.wxml -->
 <view class="game-page">
+<wxs module="anim" src="./quiz-anim.wxs"></wxs>
 
   <!-- ══════════ Game Header ══════════ -->
   <view class="game-header" wx:if="{{!showSettlement && !showLearn}}">
@@ -9,7 +10,11 @@
         <text class="phase-badge font-mono" style="color:{{regionColor}}">{{phaseLabel}}</text>
         <text class="phase-counter font-mono">{{questionIndex}}/{{totalQuestions}}</text>
       </view>
-      <view class="combo-indicator {{comboCount >= 2 ? 'combo-indicator--show' : ''}}">
+      <view
+        class="combo-indicator {{comboCount >= 2 ? 'combo-indicator--show' : ''}}"
+        change:comboVal="{{anim.onComboUpdate}}"
+        comboVal="{{comboAnimTrigger}}"
+      >
         <text class="combo-number font-mono" style="color:{{regionColor}}">×{{comboCount}}</text>
         <text class="combo-fire">🔥</text>
       </view>
@@ -96,13 +101,30 @@
       <view
         wx:for="{{currentQuestion.options}}"
         wx:key="id"
-        class="option-item {{selectedOption === item.id ? 'option--selected' : ''}} {{showFeedback && item.id === feedbackAnswer ? 'option--correct' : ''}} {{showFeedback && selectedOption === item.id && !feedbackCorrect ? 'option--wrong' : ''}}"
+        class="option-item {{selectedOption === item.id ? 'option--selected' : ''}} {{showFeedback && item.id === feedbackAnswer ? 'option--correct option--correct-glow' : ''}} {{showFeedback && selectedOption === item.id && !feedbackCorrect ? 'option--wrong option--wrong-shake' : ''}} {{showFeedback && item.id !== feedbackAnswer && !(selectedOption === item.id && !feedbackCorrect) ? 'option--dimmed' : ''}}"
         bindtap="selectOption"
         data-optionid="{{item.id}}"
       >
         <text class="option-id">{{item.id}}</text>
         <text class="option-text">{{item.text}}</text>
+        <text class="option-check" wx:if="{{showFeedback && item.id === feedbackAnswer}}">✓</text>
       </view>
+    </view>
+
+    <!-- Float score (rises on correct answer) -->
+    <view class="float-score-container" wx:if="{{floatScoreText}}"
+      change:feedbackTrigger="{{anim.onFeedbackShow}}"
+      feedbackTrigger="{{feedbackAnimTrigger}}"
+    >
+      <text class="float-score" style="color:{{regionColor}}">{{floatScoreText}}</text>
+    </view>
+
+    <!-- Combo-break overlay (flash on streak loss) -->
+    <view class="combo-break-container" wx:if="{{comboBreakShow}}"
+      change:breakTrigger="{{anim.onComboBreak}}"
+      breakTrigger="{{comboBreakTrigger}}"
+    >
+      <text class="combo-break-text">连击中断!</text>
     </view>
 
     <!-- Confirm button (before feedback) -->
