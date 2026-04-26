@@ -144,55 +144,26 @@ function onStarReveal(newVal, oldVal, ownerInstance) {
   ownerInstance.requestAnimationFrame(tick);
 }
 
-// --- Score number scroll (correct/total/ratio counts up together) ---
-// Binding: change:scoreVal="{{anim.onScoreReveal}}" scoreVal="{{scoreRevealTrigger}}"
-// Trigger value format: "<correct>_<total>_<ratio>_<timestamp>" e.g. "5_5_100_1700000000000"
+// --- Score reveal (no-op: WXS setStyle can't change text node content).
+// Score numbers display their final value via WXML {{...}} binding.
+// Kept as stub so the WXML binding remains valid; may animate later via
+// setData-driven approach if count-up is desired.
 function onScoreReveal(newVal, oldVal, ownerInstance) {
-  if (!newVal || newVal === oldVal) return;
-
-  var parts = ('' + newVal).split('_');
-  var targetCorrect = parseInt(parts[0]) || 0;
-  var targetTotal = parseInt(parts[1]) || 0;
-  var targetRatio = parseInt(parts[2]) || 0;
-
-  var correctEl = ownerInstance.selectComponent('.score-correct-num');
-  var totalEl = ownerInstance.selectComponent('.score-total-num');
-  var ratioEl = ownerInstance.selectComponent('.score-ratio-num');
-
-  var startTime = Date.now();
-  var duration = 600;
-
-  function tick() {
-    var elapsed = Date.now() - startTime;
-    var progress = elapsed / duration;
-    if (progress > 1) progress = 1;
-    var eased = 1 - Math.pow(1 - progress, 3);
-
-    var curCorrect = Math.round(targetCorrect * eased);
-    var curTotal = Math.round(targetTotal * eased);
-    var curRatio = Math.round(targetRatio * eased);
-
-    if (correctEl) correctEl.setStyle({ content: '"' + curCorrect + '"' });
-    if (totalEl) totalEl.setStyle({ content: '"' + curTotal + '"' });
-    if (ratioEl) ratioEl.setStyle({ content: '"' + curRatio + '"' });
-
-    if (progress < 1) {
-      ownerInstance.requestAnimationFrame(tick);
-    }
-  }
-
-  ownerInstance.requestAnimationFrame(tick);
+  // intentional no-op — see comment above
+  return;
 }
 
-// --- EXP number scroll + multiplier slide-in + bounce finish ---
+// --- EXP reveal: multiplier slide-in + scale bounce on final value.
 // Binding: change:expVal="{{anim.onExpReveal}}" expVal="{{expRevealTrigger}}"
 // Trigger value format: "<exp>_<multiplier>_<timestamp>" e.g. "150_1.5_1700000000000"
-// NOTE: Uses requestAnimationFrame frame counter (not setTimeout) because WXS lacks setTimeout.
+// Note: The exp number itself displays its final value statically via WXML
+// {{...}} binding — WXS setStyle cannot change text node content. This
+// function animates only the multiplier slide-in and the final-value scale
+// bounce on the exp number element (transform works on text nodes).
 function onExpReveal(newVal, oldVal, ownerInstance) {
   if (!newVal || newVal === oldVal) return;
 
   var parts = ('' + newVal).split('_');
-  var targetExp = parseInt(parts[0]) || 0;
   var multiplier = parseFloat(parts[1]) || 1.0;
 
   var expEl = ownerInstance.selectComponent('.exp-value-num');
@@ -206,27 +177,21 @@ function onExpReveal(newVal, oldVal, ownerInstance) {
     var elapsed = Date.now() - startTime;
     var progress = elapsed / duration;
     if (progress > 1) progress = 1;
-    var eased = 1 - Math.pow(1 - progress, 3);
 
-    var curExp = Math.round(targetExp * eased);
-    if (expEl) expEl.setStyle({ content: '"' + curExp + '"' });
-
-    if (multEl && multiplier > 1.0) {
-      if (progress > 0.6) {
-        var multProgress = (progress - 0.6) / 0.4;
-        var multEased = 1 - Math.pow(1 - multProgress, 3);
-        multEl.setStyle({
-          opacity: '' + multEased.toFixed(3),
-          transform: 'translateX(' + ((1 - multEased) * 40).toFixed(1) + 'rpx)'
-        });
-      }
+    if (multEl && multiplier > 1.0 && progress > 0.6) {
+      var multProgress = (progress - 0.6) / 0.4;
+      var multEased = 1 - Math.pow(1 - multProgress, 3);
+      multEl.setStyle({
+        opacity: '' + multEased.toFixed(3),
+        transform: 'translateX(' + ((1 - multEased) * 40).toFixed(1) + 'rpx)'
+      });
     }
 
     if (progress < 1) {
       ownerInstance.requestAnimationFrame(tick);
     } else if (expEl) {
       expEl.setStyle({ transform: 'scale(1.15)' });
-      bounceFrames = 9;
+      bounceFrames = 10;
       ownerInstance.requestAnimationFrame(bounceTick);
     }
   }
