@@ -91,7 +91,13 @@ Page({
     starRevealTrigger1: '',
     starRevealTrigger2: '',
     scoreRevealTrigger: '',
-    expRevealTrigger: ''
+    expRevealTrigger: '',
+
+    displayScrollActive: false,
+    displayedCorrect: 0,
+    displayedTotal: 0,
+    displayedRatio: 0,
+    displayedExp: 0
   },
 
   _session: null,
