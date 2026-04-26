@@ -947,3 +947,85 @@
 .combo-fire {
   font-size: var(--font-md);
 }
+
+/* ══════════ Float Score ══════════ */
+.float-score-container {
+  position: relative;
+  height: 64rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  pointer-events: none;
+  overflow: visible;
+}
+
+.float-score {
+  font-size: var(--font-2xl);
+  font-weight: 800;
+  opacity: 1;
+  transform: translateY(0);
+  /* transition driven by WXS onFeedbackShow */
+}
+
+/* ══════════ Combo Break Overlay ══════════ */
+.combo-break-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(239, 68, 68, 0.15); /* --color-error at 15% opacity */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  pointer-events: none;
+  z-index: 100;
+  opacity: 0;
+  /* transition driven by WXS onComboBreak */
+}
+
+.combo-break-text {
+  font-size: var(--font-lg);
+  font-weight: 700;
+  color: var(--color-error);
+  letter-spacing: 4rpx;
+}
+
+/* ══════════ Option Enhanced States ══════════ */
+.option--correct-glow {
+  box-shadow: 0 0 0 4rpx var(--color-success);
+  background: rgba(16, 185, 129, 0.08); /* --color-success at 8% */
+}
+
+.option--wrong-shake {
+  animation: enhancedShake 0.45s ease-out;
+}
+
+@keyframes enhancedShake {
+  0%   { transform: translateX(0); }
+  15%  { transform: translateX(-12rpx); }
+  30%  { transform: translateX(10rpx); }
+  45%  { transform: translateX(-8rpx); }
+  60%  { transform: translateX(6rpx); }
+  75%  { transform: translateX(-4rpx); }
+  90%  { transform: translateX(2rpx); }
+  100% { transform: translateX(0); }
+}
+
+.option--dimmed {
+  opacity: 0.4;
+}
+
+/* ══════════ Option Checkmark Badge ══════════ */
+.option-check {
+  font-size: var(--font-md);
+  font-weight: 700;
+  color: var(--color-success);
+  margin-left: var(--spacing-xs);
+  animation: checkPop 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+@keyframes checkPop {
+  0%   { transform: scale(0); opacity: 0; }
+  100% { transform: scale(1); opacity: 1; }
+}
