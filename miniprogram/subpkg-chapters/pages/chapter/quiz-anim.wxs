@@ -25,7 +25,7 @@ function onComboUpdate(newVal, oldVal, ownerInstance) {
 
 /**
  * onComboBreak — brief translucent red overlay flash when a streak is broken.
- * Triggered by change:comboBreakVal binding; fires when comboBreakTrigger changes.
+ * Triggered by change:breakTrigger binding; fires when comboBreakTrigger changes.
  */
 function onComboBreak(newVal, oldVal, ownerInstance) {
   if (!newVal) return;
@@ -45,7 +45,7 @@ function onComboBreak(newVal, oldVal, ownerInstance) {
 
 /**
  * onFeedbackShow — float score text upward while fading to transparent.
- * Triggered by change:feedbackAnimTrigger binding.
+ * Triggered by change:feedbackTrigger binding; fires when feedbackAnimTrigger changes.
  */
 function onFeedbackShow(newVal, oldVal, ownerInstance) {
   if (!newVal) return;
