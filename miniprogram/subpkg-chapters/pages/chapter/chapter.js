@@ -553,15 +553,22 @@ Page({
 
   _playSettlementAnimation: function() {
     var self = this;
+    self._clearAnimTimers();
+    self._animTimers = [];
     var stars = self.data.result ? self.data.result.stars : 0;
 
-    setTimeout(function() { self.setData({ animStep: 1 }); }, 100);
-    setTimeout(function() { self.setData({ animStep: 2 }); }, 400);
+    function track(id, type) {
+      self._animTimers.push({ id: id, type: type });
+      return id;
+    }
+
+    track(setTimeout(function() { self.setData({ animStep: 1 }); }, 100), 'timeout');
+    track(setTimeout(function() { self.setData({ animStep: 2 }); }, 400), 'timeout');
 
     var starDelay = 650;
     for (var i = 1; i <= 3; i++) {
       (function(idx) {
-        setTimeout(function() {
+        track(setTimeout(function() {
           var patch = { animStep: 2 + idx };
           var earned = idx <= stars ? 1 : 0;
           patch['starRevealTrigger' + (idx - 1)] = (idx - 1) + '_' + earned + '_' + Date.now();
@@ -570,41 +577,51 @@ Page({
             wx.vibrateShort({ type: 'medium' });
             sound.play('star');
           }
-        }, starDelay + (idx - 1) * 250);
+        }, starDelay + (idx - 1) * 250), 'timeout');
       })(i);
     }
 
-    setTimeout(function() {
+    // Score scroll @ 1500ms (600ms duration)
+    track(setTimeout(function() {
       var r = self.data.result;
       if (!r) return;
       self.setData({
         animStep: 6,
-        scoreRevealTrigger: r.correctCount + '_' + r.totalQuestions + '_' + r.ratio + '_' + Date.now()
+        scoreRevealTrigger: r.correctCount + '_' + r.totalQuestions + '_' + r.ratio + '_' + Date.now(),
+        displayScrollActive: true,
+        displayedCorrect: 0,
+        displayedTotal: 0,
+        displayedRatio: 0,
+        displayedExp: 0
       });
-    }, 1500);
+      self._startScoreScroll(r.correctCount, r.totalQuestions, r.ratio, 600);
+    }, 1500), 'timeout');
 
-    setTimeout(function() {
+    // EXP scroll @ 1800ms (500ms duration)
+    track(setTimeout(function() {
       var r = self.data.result;
       if (!r) return;
+      var targetExp = self.data.reviewMode ? r.correctCount * 10 : r.expReward;
       self.setData({
         animStep: 7,
         expRevealTrigger: r.expReward + '_' + self.data.comboMultiplier + '_' + Date.now()
       });
-    }, 1800);
+      self._startExpScroll(targetExp, 500);
+    }, 1800), 'timeout');
 
     var tailDelay = 2000;
     if (self.data.maxCombo >= 3) {
-      setTimeout(function() { self.setData({ animStep: 8 }); }, tailDelay);
+      track(setTimeout(function() { self.setData({ animStep: 8 }); }, tailDelay), 'timeout');
       tailDelay = 2200;
     }
 
     if (self.data.newLevel) {
       (function(delay) {
-        setTimeout(function() {
+        track(setTimeout(function() {
           self.setData({ animStep: 9 });
           wx.vibrateLong();
           sound.play('levelup');
-        }, delay);
+        }, delay), 'timeout');
       })(tailDelay);
       tailDelay += 200;
     }
@@ -613,12 +630,54 @@ Page({
     var earnedCards = self.data.earnedCardDetails || [];
     for (var j = 0; j < earnedCards.length; j++) {
       (function(idx) {
-        setTimeout(function() {
+        track(setTimeout(function() {
           self.setData({ animStep: 10 + idx });
           sound.play('card');
-        }, cardStartDelay + idx * 200);
+        }, cardStartDelay + idx * 200), 'timeout');
       })(j);
     }
+  },
+
+  _startScoreScroll: function(targetCorrect, targetTotal, targetRatio, durationMs) {
+    var self = this;
+    var startTime = Date.now();
+    var id = setInterval(function() {
+      var elapsed = Date.now() - startTime;
+      var progress = elapsed / durationMs;
+      if (progress >= 1) {
+        self.setData({
+          displayedCorrect: targetCorrect,
+          displayedTotal: targetTotal,
+          displayedRatio: targetRatio
+        });
+        clearInterval(id);
+        return;
+      }
+      var eased = 1 - Math.pow(1 - progress, 3);
+      self.setData({
+        displayedCorrect: Math.round(targetCorrect * eased),
+        displayedTotal: Math.round(targetTotal * eased),
+        displayedRatio: Math.round(targetRatio * eased)
+      });
+    }, 16);
+    self._animTimers.push({ id: id, type: 'interval' });
+  },
+
+  _startExpScroll: function(targetExp, durationMs) {
+    var self = this;
+    var startTime = Date.now();
+    var id = setInterval(function() {
+      var elapsed = Date.now() - startTime;
+      var progress = elapsed / durationMs;
+      if (progress >= 1) {
+        self.setData({ displayedExp: targetExp });
+        clearInterval(id);
+        return;
+      }
+      var eased = 1 - Math.pow(1 - progress, 3);
+      self.setData({ displayedExp: Math.round(targetExp * eased) });
+    }, 16);
+    self._animTimers.push({ id: id, type: 'interval' });
   },
 
   _animTimers: null,
