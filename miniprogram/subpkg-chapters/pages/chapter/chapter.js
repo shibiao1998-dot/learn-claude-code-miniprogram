@@ -716,6 +716,7 @@ Page({
     if (!session) return;
     var stage = _findStage(session.chapter);
     if (stage) {
+      this._clearAnimTimers();
       this._startStage(session.chapter, this.data.locale);
       this.setData({
         finished: false,
@@ -734,7 +735,12 @@ Page({
         starRevealTrigger1: '',
         starRevealTrigger2: '',
         scoreRevealTrigger: '',
-        expRevealTrigger: ''
+        expRevealTrigger: '',
+        displayScrollActive: false,
+        displayedCorrect: 0,
+        displayedTotal: 0,
+        displayedRatio: 0,
+        displayedExp: 0
       });
     }
   },
