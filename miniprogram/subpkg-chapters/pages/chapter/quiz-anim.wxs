@@ -1,0 +1,75 @@
+// quiz-anim.wxs — answer-phase animation observers
+// WXS dialect: var only, no arrow functions, no setTimeout, no require.
+// Bound via change: observers in chapter.wxml.
+
+/**
+ * onComboUpdate — spring-bounce the combo indicator on every correct answer.
+ * Triggered by change:comboVal binding; fires when comboAnimTrigger changes.
+ */
+function onComboUpdate(newVal, oldVal, ownerInstance) {
+  if (!newVal) return;
+  var el = ownerInstance.selectComponent('.combo-indicator');
+  if (!el) return;
+
+  // Frame 0: snap to enlarged state
+  el.setStyle({ transform: 'scale(1.5)', transition: 'none' });
+
+  // Frame 1: spring back to normal
+  function springBack() {
+    el.setStyle({ transform: 'scale(1)', transition: 'transform 0.35s cubic-bezier(0.34,1.56,0.64,1)' });
+  }
+  requestAnimationFrame(function() {
+    requestAnimationFrame(springBack);
+  });
+}
+
+/**
+ * onComboBreak — brief translucent red overlay flash when a streak is broken.
+ * Triggered by change:comboBreakVal binding; fires when comboBreakTrigger changes.
+ */
+function onComboBreak(newVal, oldVal, ownerInstance) {
+  if (!newVal) return;
+  var el = ownerInstance.selectComponent('.combo-break-container');
+  if (!el) return;
+
+  // Show the overlay, then fade it out after 2 frames
+  el.setStyle({ opacity: '1', transition: 'none' });
+
+  function fadeOut() {
+    el.setStyle({ opacity: '0', transition: 'opacity 0.6s ease-out' });
+  }
+  requestAnimationFrame(function() {
+    requestAnimationFrame(fadeOut);
+  });
+}
+
+/**
+ * onFeedbackShow — float score text upward while fading to transparent.
+ * Triggered by change:feedbackAnimTrigger binding.
+ */
+function onFeedbackShow(newVal, oldVal, ownerInstance) {
+  if (!newVal) return;
+  var el = ownerInstance.selectComponent('.float-score');
+  if (!el) return;
+
+  // Reset to start position
+  el.setStyle({ opacity: '1', transform: 'translateY(0)', transition: 'none' });
+
+  // One rAF double-pump: commit reset, then start rise+fade
+  function startRise() {
+    el.setStyle({
+      opacity: '0',
+      transform: 'translateY(-80rpx)',
+      transition: 'opacity 0.8s ease-out, transform 0.8s ease-out'
+    });
+  }
+  requestAnimationFrame(function() {
+    requestAnimationFrame(startRise);
+  });
+}
+
+module.exports = {
+  onComboUpdate: onComboUpdate,
+  onComboBreak: onComboBreak,
+  onFeedbackShow: onFeedbackShow
+};
