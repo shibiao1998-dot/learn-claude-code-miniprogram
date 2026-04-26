@@ -2,6 +2,22 @@
 // WXS dialect: var only, no arrow functions, no setTimeout, no require.
 // Bound via change: observers in chapter.wxml.
 
+// --- Spring physics helper (shared by star/score reveals) ---
+var SPRING_STIFFNESS = 180;
+var SPRING_DAMPING = 16;
+var SPRING_MASS = 1;
+var SPRING_THRESHOLD = 0.001;
+var DT = 1 / 60;
+
+function springStep(current, target, velocity, stiffness, damping, mass) {
+  var force = -stiffness * (current - target);
+  var dampingForce = -damping * velocity;
+  var acceleration = (force + dampingForce) / mass;
+  var newVelocity = velocity + acceleration * DT;
+  var newCurrent = current + newVelocity * DT;
+  return { current: newCurrent, velocity: newVelocity };
+}
+
 /**
  * onComboUpdate — spring-bounce the combo indicator on every correct answer.
  * Triggered by change:comboVal binding; fires when comboAnimTrigger changes.
@@ -68,8 +84,170 @@ function onFeedbackShow(newVal, oldVal, ownerInstance) {
   });
 }
 
+// --- Settlement star spring + rotate reveal ---
+// Binding: change:starValN="{{anim.onStarReveal}}" starValN="{{starRevealTriggerN}}" (N = 0, 1, 2)
+// Trigger value format: "<index>_<earned>_<timestamp>" e.g. "0_1_1700000000000"
+function onStarReveal(newVal, oldVal, ownerInstance) {
+  if (!newVal || newVal === oldVal) return;
+
+  var parts = ('' + newVal).split('_');
+  var starIndex = parseInt(parts[0]) || 0;
+  var earned = parts[1] === '1';
+
+  var el = ownerInstance.selectComponent('.settle-star-' + starIndex);
+  if (!el) return;
+
+  var scale = 0;
+  var rotate = -180;
+  var velocity = 0;
+  var rotVelocity = 0;
+  var targetScale = earned ? 1.0 : 0.8;
+
+  function tick() {
+    var scaleResult = springStep(scale, targetScale, velocity, SPRING_STIFFNESS, SPRING_DAMPING, SPRING_MASS);
+    scale = scaleResult.current;
+    velocity = scaleResult.velocity;
+
+    var rotResult = springStep(rotate, 0, rotVelocity, 120, 14, 1);
+    rotate = rotResult.current;
+    rotVelocity = rotResult.velocity;
+
+    var style = {
+      transform: 'scale(' + scale.toFixed(3) + ') rotate(' + rotate.toFixed(1) + 'deg)',
+      opacity: '1'
+    };
+
+    if (earned) {
+      var glowSize = Math.max(0, (scale - 0.8) * 80);
+      style['box-shadow'] = '0 0 ' + glowSize.toFixed(0) + 'rpx rgba(234,179,8,0.5)';
+    }
+
+    el.setStyle(style);
+
+    var scaleSettled = Math.abs(scale - targetScale) <= SPRING_THRESHOLD && Math.abs(velocity) <= SPRING_THRESHOLD;
+    var rotSettled = Math.abs(rotate) <= 0.5 && Math.abs(rotVelocity) <= 0.5;
+
+    if (!scaleSettled || !rotSettled) {
+      ownerInstance.requestAnimationFrame(tick);
+    } else {
+      var finalStyle = {
+        transform: 'scale(' + (earned ? '1' : '0.8') + ') rotate(0deg)',
+        opacity: '1'
+      };
+      if (earned) {
+        finalStyle['box-shadow'] = '0 0 16rpx rgba(234,179,8,0.5)';
+      }
+      el.setStyle(finalStyle);
+    }
+  }
+
+  ownerInstance.requestAnimationFrame(tick);
+}
+
+// --- Score number scroll (correct/total/ratio counts up together) ---
+// Binding: change:scoreVal="{{anim.onScoreReveal}}" scoreVal="{{scoreRevealTrigger}}"
+// Trigger value format: "<correct>_<total>_<ratio>_<timestamp>" e.g. "5_5_100_1700000000000"
+function onScoreReveal(newVal, oldVal, ownerInstance) {
+  if (!newVal || newVal === oldVal) return;
+
+  var parts = ('' + newVal).split('_');
+  var targetCorrect = parseInt(parts[0]) || 0;
+  var targetTotal = parseInt(parts[1]) || 0;
+  var targetRatio = parseInt(parts[2]) || 0;
+
+  var correctEl = ownerInstance.selectComponent('.score-correct-num');
+  var totalEl = ownerInstance.selectComponent('.score-total-num');
+  var ratioEl = ownerInstance.selectComponent('.score-ratio-num');
+
+  var startTime = Date.now();
+  var duration = 600;
+
+  function tick() {
+    var elapsed = Date.now() - startTime;
+    var progress = elapsed / duration;
+    if (progress > 1) progress = 1;
+    var eased = 1 - Math.pow(1 - progress, 3);
+
+    var curCorrect = Math.round(targetCorrect * eased);
+    var curTotal = Math.round(targetTotal * eased);
+    var curRatio = Math.round(targetRatio * eased);
+
+    if (correctEl) correctEl.setStyle({ content: '"' + curCorrect + '"' });
+    if (totalEl) totalEl.setStyle({ content: '"' + curTotal + '"' });
+    if (ratioEl) ratioEl.setStyle({ content: '"' + curRatio + '"' });
+
+    if (progress < 1) {
+      ownerInstance.requestAnimationFrame(tick);
+    }
+  }
+
+  ownerInstance.requestAnimationFrame(tick);
+}
+
+// --- EXP number scroll + multiplier slide-in + bounce finish ---
+// Binding: change:expVal="{{anim.onExpReveal}}" expVal="{{expRevealTrigger}}"
+// Trigger value format: "<exp>_<multiplier>_<timestamp>" e.g. "150_1.5_1700000000000"
+// NOTE: Uses requestAnimationFrame frame counter (not setTimeout) because WXS lacks setTimeout.
+function onExpReveal(newVal, oldVal, ownerInstance) {
+  if (!newVal || newVal === oldVal) return;
+
+  var parts = ('' + newVal).split('_');
+  var targetExp = parseInt(parts[0]) || 0;
+  var multiplier = parseFloat(parts[1]) || 1.0;
+
+  var expEl = ownerInstance.selectComponent('.exp-value-num');
+  var multEl = ownerInstance.selectComponent('.exp-multiplier');
+
+  var startTime = Date.now();
+  var duration = 500;
+  var bounceFrames = 0;
+
+  function tick() {
+    var elapsed = Date.now() - startTime;
+    var progress = elapsed / duration;
+    if (progress > 1) progress = 1;
+    var eased = 1 - Math.pow(1 - progress, 3);
+
+    var curExp = Math.round(targetExp * eased);
+    if (expEl) expEl.setStyle({ content: '"' + curExp + '"' });
+
+    if (multEl && multiplier > 1.0) {
+      if (progress > 0.6) {
+        var multProgress = (progress - 0.6) / 0.4;
+        var multEased = 1 - Math.pow(1 - multProgress, 3);
+        multEl.setStyle({
+          opacity: '' + multEased.toFixed(3),
+          transform: 'translateX(' + ((1 - multEased) * 40).toFixed(1) + 'rpx)'
+        });
+      }
+    }
+
+    if (progress < 1) {
+      ownerInstance.requestAnimationFrame(tick);
+    } else if (expEl) {
+      expEl.setStyle({ transform: 'scale(1.15)' });
+      bounceFrames = 9;
+      ownerInstance.requestAnimationFrame(bounceTick);
+    }
+  }
+
+  function bounceTick() {
+    bounceFrames--;
+    if (bounceFrames <= 0) {
+      if (expEl) expEl.setStyle({ transform: 'scale(1)' });
+      return;
+    }
+    ownerInstance.requestAnimationFrame(bounceTick);
+  }
+
+  ownerInstance.requestAnimationFrame(tick);
+}
+
 module.exports = {
   onComboUpdate: onComboUpdate,
   onComboBreak: onComboBreak,
-  onFeedbackShow: onFeedbackShow
+  onFeedbackShow: onFeedbackShow,
+  onStarReveal: onStarReveal,
+  onScoreReveal: onScoreReveal,
+  onExpReveal: onExpReveal
 };
