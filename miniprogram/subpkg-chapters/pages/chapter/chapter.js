@@ -621,6 +621,29 @@ Page({
     }
   },
 
+  _animTimers: null,
+
+  _clearAnimTimers: function() {
+    if (!this._animTimers) return;
+    for (var i = 0; i < this._animTimers.length; i++) {
+      var t = this._animTimers[i];
+      if (t && t.type === 'timeout') {
+        clearTimeout(t.id);
+      } else if (t && t.type === 'interval') {
+        clearInterval(t.id);
+      }
+    }
+    this._animTimers = [];
+  },
+
+  onUnload: function() {
+    this._clearAnimTimers();
+  },
+
+  onHide: function() {
+    this._clearAnimTimers();
+  },
+
   goBack: function() {
     wx.navigateBack({ delta: 1 });
   },
