@@ -2,6 +2,29 @@
 var gameSave = require('./game-save');
 var gameReview = require('./game-review');
 
+// Combo thresholds — shared between getSessionResult() (EXP multiplier)
+// and chapter.js (milestone sound triggers). Keep the two-element pairs
+// ordered by threshold DESC so the first match wins.
+var COMBO_TIERS = [
+  { threshold: 8, multiplier: 2.0 },
+  { threshold: 5, multiplier: 1.5 },
+  { threshold: 3, multiplier: 1.2 }
+];
+
+function getComboMultiplier(combo) {
+  for (var i = 0; i < COMBO_TIERS.length; i++) {
+    if (combo >= COMBO_TIERS[i].threshold) return COMBO_TIERS[i].multiplier;
+  }
+  return 1.0;
+}
+
+function isComboMilestone(combo) {
+  for (var i = 0; i < COMBO_TIERS.length; i++) {
+    if (combo === COMBO_TIERS[i].threshold) return true;
+  }
+  return false;
+}
+
 // --- Stage Session ---
 function createSession(stage) {
   return {
@@ -16,7 +39,9 @@ function createSession(stage) {
     answers: {},
     wrongIds: [],
     confirmAnswers: {},
-    finished: false
+    finished: false,
+    combo: 0,
+    maxCombo: 0
   };
 }
 
@@ -52,10 +77,17 @@ function submitAnswer(session, questionId, chosenOptionId) {
   if (!question) return null;
 
   var isCorrect = chosenOptionId === question.answer;
+  var prevCombo = session.combo;
 
   if (session.phase === 1) {
     session.answers[questionId] = { chosen: chosenOptionId, correct: isCorrect };
-    if (!isCorrect) {
+    if (isCorrect) {
+      session.combo++;
+      if (session.combo > session.maxCombo) {
+        session.maxCombo = session.combo;
+      }
+    } else {
+      session.combo = 0;
       session.wrongIds.push(questionId);
     }
     session.currentIndex++;
@@ -76,7 +108,10 @@ function submitAnswer(session, questionId, chosenOptionId) {
   return {
     correct: isCorrect,
     answer: question.answer,
-    explanation: question.explanation
+    explanation: question.explanation,
+    combo: session.combo,
+    prevCombo: prevCombo,
+    maxCombo: session.maxCombo
   };
 }
 
@@ -113,7 +148,11 @@ function getSessionResult(session) {
   if (stars >= 2 && session.rewardCards.length > 1) earnedCards.push(session.rewardCards[1]);
   if (stars >= 3 && session.rewardCards.length > 2) earnedCards.push(session.rewardCards[2]);
 
-  var expReward = stars === 3 ? 100 : stars === 2 ? 60 : stars === 1 ? 30 : 10;
+  var baseExp = stars === 3 ? 100 : stars === 2 ? 60 : stars === 1 ? 30 : 10;
+
+  var comboMultiplier = getComboMultiplier(session.maxCombo);
+
+  var expReward = Math.round(baseExp * comboMultiplier);
 
   var reviewIds = [];
   for (var j = 0; j < session.wrongIds.length; j++) {
@@ -131,6 +170,9 @@ function getSessionResult(session) {
     ratio: ratio,
     earnedCards: earnedCards,
     expReward: expReward,
+    baseExp: baseExp,
+    comboMultiplier: comboMultiplier,
+    maxCombo: session.maxCombo,
     reviewIds: reviewIds
   };
 }
@@ -230,5 +272,7 @@ module.exports = {
   saveStageResult: saveStageResult,
   getStageProgress: getStageProgress,
   getRegionProgress: getRegionProgress,
-  isRegionUnlocked: isRegionUnlocked
+  isRegionUnlocked: isRegionUnlocked,
+  getComboMultiplier: getComboMultiplier,
+  isComboMilestone: isComboMilestone
 };

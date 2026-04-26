@@ -922,3 +922,28 @@
 .settle-exp__value {
   transition: all 0.8s ease-out;
 }
+
+/* ══════════ Combo Indicator ══════════ */
+.combo-indicator {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 4rpx;
+  opacity: 0;
+  transform: scale(0);
+  transition: opacity 0.2s, transform 0.2s;
+}
+
+.combo-indicator--show {
+  opacity: 1;
+  transform: scale(1);
+}
+
+.combo-number {
+  font-size: var(--font-md);
+  font-weight: 700;
+}
+
+.combo-fire {
+  font-size: var(--font-md);
+}

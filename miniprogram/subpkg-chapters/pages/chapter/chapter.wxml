@@ -9,6 +9,10 @@
         <text class="phase-badge font-mono" style="color:{{regionColor}}">{{phaseLabel}}</text>
         <text class="phase-counter font-mono">{{questionIndex}}/{{totalQuestions}}</text>
       </view>
+      <view class="combo-indicator {{comboCount >= 2 ? 'combo-indicator--show' : ''}}">
+        <text class="combo-number font-mono" style="color:{{regionColor}}">×{{comboCount}}</text>
+        <text class="combo-fire">🔥</text>
+      </view>
     </view>
     <text class="game-header__title">{{stageTitle}}</text>
     <view class="game-header__bar">

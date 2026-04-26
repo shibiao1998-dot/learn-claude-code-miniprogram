@@ -74,7 +74,12 @@ Page({
     animStep: 0,
     reviewMode: false,
     reviewMastered: 0,
-    reviewRemaining: 0
+    reviewRemaining: 0,
+
+    comboCount: 0,
+    maxCombo: 0,
+    comboMultiplier: 1.0,  // populated by _showSettlement() in sub-plan 3
+    baseExp: 0             // populated by _showSettlement() in sub-plan 3
   },
 
   _session: null,
@@ -302,21 +307,34 @@ Page({
     var explanation = result.explanation;
     var explText = explanation[locale] || explanation.zh || explanation.en || '';
 
-    this.setData({
+    var updateData = {
       showFeedback: true,
       feedbackCorrect: result.correct,
       feedbackExplanation: explText,
       feedbackAnswer: result.answer
-    });
+    };
 
     if (result.correct) {
+      updateData.comboCount = result.combo;
+      if (result.combo > this.data.maxCombo) {
+        updateData.maxCombo = result.combo;
+      }
+
       wx.vibrateShort({ type: 'light' });
       sound.play('correct');
+
+      if (gameEngine.isComboMilestone(result.combo)) {
+        sound.play('star');
+      }
     } else {
+      updateData.comboCount = 0;
+
       wx.vibrateShort({ type: 'heavy' });
       sound.play('wrong');
       gameReview.addToReview(q.id);
     }
+
+    this.setData(updateData);
   },
 
   nextQuestion: function() {
@@ -419,7 +437,8 @@ Page({
       currentQuestion: this._formatQuestion(q, locale),
       questionIndex: 1,
       totalQuestions: session.wrongIds.length,
-      progressPercent: Math.round(1 / session.wrongIds.length * 100)
+      progressPercent: Math.round(1 / session.wrongIds.length * 100),
+      comboCount: 0
     });
   },
 
