@@ -1029,3 +1029,94 @@
   0%   { transform: scale(0); opacity: 0; }
   100% { transform: scale(1); opacity: 1; }
 }
+
+/* ══════════ Enhanced Settlement Header (override .settle-anim-fadein for header) ══════════ */
+/* More specific than .settle-anim-fadein so this wins without !important. */
+.settle-header.settle-anim-fadein {
+  animation: settleHeaderIn 0.5s ease-out forwards;
+}
+
+@keyframes settleHeaderIn {
+  from {
+    opacity: 0;
+    transform: translateY(-30rpx) scale(1.1);
+    filter: blur(8rpx);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+    filter: blur(0);
+  }
+}
+
+/* ══════════ Settlement Score (inline number row) ══════════ */
+.settle-score {
+  display: flex;
+  flex-direction: row;
+  align-items: baseline;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.settle-score__num {
+  font-size: var(--font-md);
+  font-weight: 700;
+  color: var(--color-text-primary);
+}
+
+/* ══════════ Settlement EXP Multiplier (slides in from right) ══════════ */
+.settle-exp__multiplier {
+  font-size: var(--font-sm);
+  font-weight: 700;
+  margin-left: var(--spacing-xs);
+  opacity: 0;
+  transform: translateX(40rpx);
+}
+
+/* Level up glow enhancement (layers on existing .settle-anim-pulse) */
+.settle-levelup.settle-anim-pulse .settle-levelup__text {
+  text-shadow: 0 0 12rpx rgba(245, 158, 11, 0.5);
+}
+
+/* ══════════ Settlement Combo Stats Row ══════════ */
+.settle-combo {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  gap: var(--spacing-xs);
+  margin-bottom: var(--spacing-sm);
+}
+
+.settle-combo__label {
+  font-size: var(--font-sm);
+  color: var(--color-text-muted);
+  font-weight: 600;
+  letter-spacing: 1rpx;
+}
+
+.settle-combo__value {
+  font-size: var(--font-lg);
+  font-weight: 700;
+}
+
+/* ══════════ Settlement Card Flip Entry ══════════ */
+.settle-card-flip {
+  animation: cardFlipIn 0.5s ease-out forwards;
+  transform-origin: center center;
+}
+
+@keyframes cardFlipIn {
+  0% {
+    opacity: 0;
+    transform: perspective(800rpx) rotateY(180deg) translateY(20rpx);
+  }
+  50% {
+    opacity: 0.7;
+    transform: perspective(800rpx) rotateY(90deg) translateY(10rpx);
+  }
+  100% {
+    opacity: 1;
+    transform: perspective(800rpx) rotateY(0deg) translateY(0);
+  }
+}
