@@ -200,11 +200,11 @@
       <!-- Score -->
       <view class="settle-score {{animStep >= 6 ? 'settle-anim-fadein' : 'settle-anim-hidden'}}"
             change:scoreVal="{{anim.onScoreReveal}}" scoreVal="{{scoreRevealTrigger}}">
-        <text class="score-correct-num settle-score__num">{{result.correctCount}}</text>
+        <text class="score-correct-num settle-score__num">{{displayScrollActive ? displayedCorrect : result.correctCount}}</text>
         <text class="settle-score__text">/</text>
-        <text class="score-total-num settle-score__num">{{result.totalQuestions}}</text>
+        <text class="score-total-num settle-score__num">{{displayScrollActive ? displayedTotal : result.totalQuestions}}</text>
         <text class="settle-score__text"> correct (</text>
-        <text class="score-ratio-num settle-score__num">{{result.ratio}}</text>
+        <text class="score-ratio-num settle-score__num">{{displayScrollActive ? displayedRatio : result.ratio}}</text>
         <text class="settle-score__text">%)</text>
       </view>
 
@@ -212,7 +212,7 @@
       <view class="settle-exp {{animStep >= 7 ? 'settle-anim-slidein' : 'settle-anim-hidden'}}"
             change:expVal="{{anim.onExpReveal}}" expVal="{{expRevealTrigger}}">
         <text class="settle-exp__label">EXP +</text>
-        <text class="exp-value-num settle-exp__value" style="color:{{regionColor}}">{{reviewMode ? result.correctCount * 10 : result.expReward}}</text>
+        <text class="exp-value-num settle-exp__value" style="color:{{regionColor}}">{{displayScrollActive ? displayedExp : (reviewMode ? result.correctCount * 10 : result.expReward)}}</text>
         <text class="exp-multiplier settle-exp__multiplier" wx:if="{{comboMultiplier > 1}}" style="color:{{regionColor}}">×{{comboMultiplier}}</text>
       </view>
 
